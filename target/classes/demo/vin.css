@@ -1,0 +1,15 @@
+.vin-overlay {
+    position: absolute;
+    top: 8px;
+    color: grey;
+    left: 100px;
+    font-style: italic;
+}
+
+.vin {
+    position:relative;
+}
+
+.vin input[type=text] {
+    width:30%;
+}

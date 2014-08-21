@@ -1,0 +1,2096 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" readonly="true" id="96a2ad21-9abc-4d04-ae92-191cb4a46c47" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="C:\workspace\NexExchangeForms\tomcat\lib" afterPath="C:\workspace\NexExchangeForms\tomcat\lib" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/exceptions/unsecure/ExceptionPage.java" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/exceptions/unsecure/ExceptionPage.java" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/exceptions/unsecure/ExpiredPage.java" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/exceptions/unsecure/ExpiredPage.java" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/webapp/WEB-INF/application-context.xml" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/webapp/WEB-INF/application-context.xml" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms-assembly/assembly.xml" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms-assembly/assembly.xml" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/webapp/META-INF/context.xml" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/webapp/META-INF/context.xml" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms-home/shared/config/documentFactory.properties" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms-home/shared/config/documentFactory.properties" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/userprof/parkerg.properties" afterPath="C:/workspace/NexExchangeForms/userprof/parkerg.properties" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms-assembly/pom.xml" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms-assembly/pom.xml" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms-deploy/pom.xml" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms-deploy/pom.xml" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms-home/system/config/profiles.properties" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms-home/system/config/profiles.properties" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/tomcat/tomcat6x/conf/server.xml" afterPath="C:/workspace/NexExchangeForms/tomcat/tomcat6x/conf/server.xml" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms-home/system/config/system.properties" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms-home/system/config/system.properties" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/tomcat/tomcat6x/conf/tomcat-users.xml" afterPath="C:/workspace/NexExchangeForms/tomcat/tomcat6x/conf/tomcat-users.xml" />
+      <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/webapp/WEB-INF/web.xml" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/webapp/WEB-INF/web.xml" />
+    </list>
+    <ignored path="demo.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <file path="C:/workspace/NexExchangeInsurance/branches/3.8/atlassian-ide-plugin.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408375971662" ignored="false" />
+    <file path="$USER_HOME$/Documents/NetBeansProjects/Wicket6/atlassian-ide-plugin.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1406733247250" ignored="false" />
+    <file path="/a.dummy" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408544017046" ignored="false" />
+    <file path="/JodaTest.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1406730440700" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/artifacts/demo_war_exploded.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1406730378842" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1406733245668" ignored="false" />
+    <file path="/fragment.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408546923766" ignored="false" />
+    <file path="/WicketApplication.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407511995236" ignored="false" />
+    <file path="/NameResult.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1406897669249" ignored="false" />
+    <file path="/Tab.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407338060642" ignored="false" />
+    <file path="/GuavaTest.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407245343584" ignored="false" />
+    <file path="/HomePage.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408630850926" ignored="false" />
+    <file path="/HomePage.html" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408631413664" ignored="false" />
+    <file path="/DateLabel.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407246131410" ignored="false" />
+    <file path="/datelabel.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407246017425" ignored="false" />
+    <file path="/EasyTabbedPanel.html" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408560556506" ignored="false" />
+    <file path="/easyTabbedPanel.css" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408630721477" ignored="false" />
+    <file path="/vin.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407248025219" ignored="false" />
+    <file path="C:/workspace/NexExchangeInsurance/branches/3.8/InsuranceResources/src/main/java/com/brovada/nexexchange/insurance/insuranceresources/html/forms.css" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407777082361" ignored="false" />
+    <file path="/forms.css" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407250391738" ignored="false" />
+    <file path="/Question.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407250540946" ignored="false" />
+    <file path="/EasyFeedback.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408631867441" ignored="false" />
+    <file path="/EasyTabbedPanel.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408630578738" ignored="false" />
+    <file path="/package.properties" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407505363286" ignored="false" />
+    <file path="/EasyEmail.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407506538471" ignored="false" />
+    <file path="/Address.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407507994957" ignored="false" />
+    <file path="/GpsLocation.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407508057023" ignored="false" />
+    <file path="/feedback.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408631261693" ignored="false" />
+    <file path="C:/workspace/NexExchangeInsurance/branches/3.8/InsuranceFormsServer/src/main/java/com/brovada/nexexchange/insurance/formsserver/changesummarypage/policyChange.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407859350791" ignored="false" />
+    <file path="/policyChange.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407859287366" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/atlassian-ide-plugin.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780419817" ignored="false" />
+    <file path="C:/workspace/NexExchangeInsurance/branches/3.8/NexExchangeInsurance-policychange/src/main/java/com/brovada/nexexchange/insurance/policychange/formsserver/controls/EasyDataPointControlImpl.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407777082357" ignored="false" />
+    <file path="C:/workspace/NexExchangeInsurance/branches/3.8/InsuranceServicesSupport/src/main/java/com/brovada/nexexchange/insuranceservices/model/policychangesummary/PolicyChangeContainer.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407777082359" ignored="false" />
+    <file path="C:/workspace/NexExchangeInsurance/branches/3.8/InsuranceFormsServer/src/main/java/com/brovada/nexexchange/insurance/formsserver/changesummarypage/AdditionalSummaryPage.properties" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407777082365" ignored="false" />
+    <file path="C:/workspace/NexExchangeInsurance/branches/3.8/NexExchangeInsurance-policychange/src/main/java/com/brovada/nexexchange/insurance/policychange/formsserver/pages/PolicyChangeGroupPanel.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407777082371" ignored="false" />
+    <file path="C:/workspace/NexExchangeInsurance/branches/3.8/InsuranceFormsServer/src/main/java/com/brovada/nexexchange/insurance/formsserver/changesummarypage/SummaryPage.properties" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407777082374" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/trunk/atlassian-ide-plugin.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407850309616" ignored="false" />
+    <file path="/startup.bat" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407779025236" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/startup.bat" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407779031778" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/scripting/config/spring-lang-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236162" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/ehcache.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236165" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/scripting/config/spring-lang-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236166" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/scripting/config/spring-lang-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236168" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/scheduling/config/spring-task-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236171" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/scheduling/config/spring-task-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236173" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/dozer-bean-mappings.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236176" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/transaction/config/spring-tx-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236178" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/sgiservices/resources/CompanyList.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236181" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/transaction/config/spring-tx-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236185" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/transaction/config/spring-tx-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236187" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/transaction/config/spring-tx-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236189" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/POLICY_CHANGE_SUMMARY.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236192" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/persistence.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236194" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/jax-ws-catalog.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236197" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/wsdl/GISInternalInsuranceScore.wsdl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236199" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/model/common/bindings.xjb" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236201" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/model/common/nexexchange.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236202" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/model/common/csio-v4_3_0-nocodes-for-merged.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236204" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/model/common/PersAutoPolicyAddRq.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236205" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/maven/com.brovada/SGIServices/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236207" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/client/DocumentMap.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236208" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/services/WebServices.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236210" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/maven/com.brovada/SGIResources/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236211" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/services/NameAddressSupport.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236213" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/maven/com.brovada/InsuranceServices/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236214" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/Services.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236216" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/maven/com.brovada/InsuranceResources/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236218" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/Workflow.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236220" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/maven/com.brovada/InsuranceFormsServer/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236221" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/Runtime.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236223" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/maven/com.brovada/InsurancePersistence/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236224" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Remapping.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236225" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insurance/formsserver/InsuranceFormServer.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236226" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Document.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236227" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/maven/com.brovada/InsuranceServicesSupport/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236228" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/CoverageMapping.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236229" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Transform.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236231" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/maven/com.brovada/NexExchangeInsurance-policychange/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236234" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Routing.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236235" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Notifications.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236237" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/DataCollector.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236239" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Messaging.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236240" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/maven/org.springframework.data/spring-data-jpa/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236241" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Validation.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236245" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/META-INF/maven/org.springframework.data/spring-data-commons-core/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236246" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Persistence.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236248" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/transform/NormalizeTransforms.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236250" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/transform/PolicyInquiryTransforms.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236253" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/transform/BillingTransforms.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236255" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/transform/PartyTransforms.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236258" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/transform/ACORDTransforms.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236260" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/transform/AdditionalTransforms.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236262" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/services/transform/PolicyChangeTransforms.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236264" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/CancelPolicy.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236266" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/GetCSIO.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236271" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/GetPreValidations.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236273" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/SubmitParty.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236275" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/GetDocument.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236277" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/GetRating.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236280" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/PolicyAddRq.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236282" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/SubmitRating.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236285" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/GetConfirmation.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236287" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/ReferPolicy.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236289" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/BindPolicy.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236292" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/GetBilling.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236294" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/GetParty.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236296" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/SubmitAdditional.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236298" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/GetAdditional.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236300" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/addreplacemodrq/AddReplaceModRq.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236301" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/addreplacemodrq/SubmitChangeSummary.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236303" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/workflow/addreplacemodrq/GetChangeSummary.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236304" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/remapping/tools/csio.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236305" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/WarpHomePolicyQuoteInqRq_To_HomePolicyAddRq_4.3.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236306" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/HomePolicyAddRq_4.3_To_PembHomePolicyAddRq_4.3.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236307" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/WarpViewInqRq_To_NexExchangeViewInqRq.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236309" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/CSSIHomePolicyAddRq.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236310" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/SigXPHomePolicyAddRq.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236312" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/WarpPersAutoPolicyQuoteInqRq_To_PersAutoPolicyAddRq_4.3.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236314" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/HomePolicyModRq_Csio.xslt" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236316" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/PersAutoPolicyAddRq_4.3_To_PembPersAutoPolicyAddRq_4.3.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236318" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/date/date.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236319" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/utils/warp.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236321" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/utils/name_normalization.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236323" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/lookups/code_descriptions.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236324" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/validation/tools/ValidationContext.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236326" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/policychange/transform/xslt/PersAutoPolicyModRq_Remaps.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236328" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insuranceservices/policychange/transform/xslt/PersAutoPolicyModRq_GisToCsio.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236330" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insurance/formsserver/changesummarypage/test.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236332" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insurance/persistence/InsurancePersistence.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236334" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insurance/policychange/NexExchangeInsurance-policychange.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236336" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/aop/config/spring-aop-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236338" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insurance/sgiresources/xslt/pch/HomePolicyModRq_Remaps.xslt" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236340" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/aop/config/spring-aop-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236345" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insurance/sgiresources/xslt/pch/HomePolicyModRq_GisToCsio.xslt" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236347" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/aop/config/spring-aop-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236350" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insurance/sgiresources/xslt/pch/PersAutoPolicyModRq_Remaps.xslt" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236351" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/aop/config/spring-aop-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236353" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/com/brovada/nexexchange/insurance/sgiresources/xslt/pch/PersAutoPolicyModRq_GisToCsio.xslt" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236356" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/ejb/config/spring-jee-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236389" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/ejb/config/spring-jee-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236391" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/ejb/config/spring-jee-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236393" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/ejb/config/spring-jee-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236395" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/jca/context/ra.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236397" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/data/jpa/repository/config/spring-jpa-1.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236401" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/data/repository/config/spring-repository-1.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236404" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/beans/factory/xml/spring-tool-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236408" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/beans/factory/xml/spring-util-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236409" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/beans/factory/xml/spring-util-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236411" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/beans/factory/xml/spring-tool-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236413" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/beans/factory/xml/spring-tool-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236415" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/beans/factory/xml/spring-util-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236417" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/beans/factory/xml/spring-tool-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236419" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/beans/factory/xml/spring-util-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236421" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/beans/factory/xml/spring-beans-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236423" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/beans/factory/xml/spring-beans-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236425" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/beans/factory/xml/spring-beans-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236428" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/beans/factory/xml/spring-beans-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236430" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/cache/config/spring-cache-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236432" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/context/config/spring-context-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236434" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/context/config/spring-context-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236436" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/context/config/spring-context-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236438" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/remoting/rmi/RmiInvocationWrapperRTD.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236440" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/work/Catalina/localhost/SGIFormsServer/loader/org/springframework/scripting/config/spring-lang-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780236442" ignored="false" />
+    <file path="C:/workspace/SGI/trunk/bin/log4j.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780261373" ignored="false" />
+    <file path="/log4j.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407850341853" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/trunk/GWIHome/apps/formserver/implementation/forms/html/brand.css" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407781408630" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/trunk/bin/conf/server.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407781505932" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/trunk/GWINexExchange/GWI-soapui-project.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407781442942" ignored="false" />
+    <file path="/Dummy.txt" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408628239641" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/log4j.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407850341856" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/atlassian-ide-plugin.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407867264136" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/ehcache.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296125" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/POLICY_CHANGE_SUMMARY.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296126" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/aop/config/spring-aop-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296127" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/META-INF/persistence.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296128" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/META-INF/maven/org.springframework.data/spring-data-commons-core/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296129" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/META-INF/maven/com.brovada/NexExchangeInsurance-policychange/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296130" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/META-INF/maven/com.brovada/GWIResources/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296130" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/Workflow.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296131" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/services/WebServices.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296132" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/utils/name_normalization.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296133" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/client/Client.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296134" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/services/NameAddressSupport.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296135" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/policychange/transform/xslt/PersAutoPolicyModRq_GisToCsio.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296136" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/Services.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296137" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/model/common/bindings.xjb" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296138" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/lookups/code_descriptions.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296139" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/utils/warp.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296140" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/PersAutoPolicyAddRq_4.3_To_PembPersAutoPolicyAddRq_4.3.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296141" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/date/date.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296141" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/aop/config/spring-aop-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296142" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/scripting/config/spring-lang-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296143" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/transaction/config/spring-tx-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296144" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/Runtime.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296145" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/beans/factory/xml/spring-util-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296146" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/scripting/config/spring-lang-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296147" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/scheduling/config/spring-task-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296148" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/scripting/config/spring-lang-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296148" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/scripting/config/spring-lang-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296149" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/addreplacemodrq/AddReplaceModRq.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296150" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/jca/context/ra.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296151" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/WarpPersAutoPolicyQuoteInqRq_To_PersAutoPolicyAddRq_4.3.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296152" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/SubmitAdditional.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296153" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/beans/factory/xml/spring-tool-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296154" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/beans/factory/xml/spring-tool-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296155" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/scripting/config/spring-lang-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296156" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/beans/factory/xml/spring-util-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296156" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/aop/config/spring-aop-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296157" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/context/config/spring-context-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296158" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/ejb/config/spring-jee-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296159" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/beans/factory/xml/spring-tool-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296160" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/beans/factory/xml/spring-beans-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296161" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/META-INF/maven/com.brovada/NexExchangeInsurance-policychange/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296162" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/META-INF/maven/org.springframework.data/spring-data-jpa/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296163" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/cache/config/spring-cache-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296163" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/SOAPBCService_handler.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296164" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/dozer-bean-mappings.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296166" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/context/config/spring-context-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296167" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/beans/factory/xml/spring-util-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296168" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/beans/factory/xml/spring-tool-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296169" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/beans/factory/xml/spring-util-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296170" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/aop/config/spring-aop-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296171" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/apache/log4j/xml/log4j.dtd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296172" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/META-INF/maven/com.brovada/NexExchangePortal/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296173" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/cache/config/spring-cache-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296174" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/transaction/config/spring-tx-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296175" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/transaction/config/spring-tx-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296176" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/transaction/config/spring-tx-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296177" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/transaction/config/spring-tx-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296178" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/scheduling/config/spring-task-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296179" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/SOAPBC_handler.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296180" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/META-INF/maven/com.brovada/InsurancePersistence/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296180" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/scheduling/config/spring-task-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296181" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/services/CoverageMapping.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296182" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/model/common/PersAutoPolicyAddRq.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296183" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Document.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296184" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/runtime/inbound/SOAPEndPointHandler.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296185" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/aop/config/spring-aop-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296186" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/model/common/csio-v4_3_0-nocodes-for-merged.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296187" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Remapping.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296188" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insurance/WarpWS_handler.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296189" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/data/repository/config/spring-repository-1.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296190" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/META-INF/maven/com.brovada/InsuranceWebServices/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296191" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/META-INF/maven/org.springframework.data/spring-data-jpa/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296192" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/beans/factory/xml/spring-tool-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296193" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/beans/factory/xml/spring-util-3.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296194" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/beans/factory/xml/spring-beans-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296195" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/beans/factory/xml/spring-util-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296196" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insurance/WarpWSPortType_handler.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296197" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/data/jpa/repository/config/spring-jpa-1.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296197" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/META-INF/maven/com.brovada/InsuranceServices/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296198" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/META-INF/maven/com.brovada/NexExchangeRuntime/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296199" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/META-INF/maven/org.jasypt/jasypt-spring31/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296200" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/org/springframework/aop/config/spring-aop-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296201" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insurance/formsserver/InsuranceFormServer.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296202" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/beans/factory/xml/spring-tool-2.5.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296203" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/services/transform/PolicyInquiryTransforms.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296204" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/beans/factory/xml/spring-tool-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296204" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/services/transform/PolicyChangeTransforms.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296205" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/addreplacemodrq/GetChangeSummary.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296206" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/META-INF/maven/com.brovada/InsuranceFormsServer/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296207" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/HomePolicyAddRq_4.3_To_PembHomePolicyAddRq_4.3.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296208" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Transform.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296209" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/com/brovada/nexexchange/insurance/policychange/NexExchangeInsurance-policychange.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296210" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/services/transform/BillingTransforms.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296211" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Messaging.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296212" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/WarpViewInqRq_To_NexExchangeViewInqRq.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296212" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Persistence.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296213" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/com/brovada/nexexchange/insurance/nexexchangeportal/NexExchangePortal.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296214" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/GetCSIO.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296215" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/GetBilling.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296216" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/GetParty.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296217" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Validation.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296218" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/CancelPolicy.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296218" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/BindPolicy.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296219" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/GetDocument.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296220" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/policyaddrq/ReferPolicy.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296221" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/services/transform/PartyTransforms.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296222" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/log4j.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296223" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/POLICY_CHANGE_SUMMARY.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296224" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/SOAPBCService_handler.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296225" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/META-INF/maven/com.brovada/InsurancePersistence/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296226" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWIPortal/loader/com/brovada/nexexchange/insurance/persistence/InsurancePersistence.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296226" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/ejb/config/spring-jee-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296227" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/policychange/transform/xslt/PersAutoPolicyModRq_Remaps.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296228" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/transform/xslt/WarpHomePolicyQuoteInqRq_To_HomePolicyAddRq_4.3.xsl" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296229" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/ejb/config/spring-jee-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296230" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/jca/context/ra.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296231" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/META-INF/maven/com.brovada/InsuranceServicesSupport/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296232" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/data/repository/config/spring-repository-1.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296233" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/scripting/config/spring-lang-2.0.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296233" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/com/brovada/nexexchange/insuranceservices/workflow/services/Routing.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296234" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/org/springframework/scheduling/config/spring-task-3.1.xsd" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296235" ignored="false" />
+    <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/startup.bat" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407852052417" ignored="false" />
+    <file path="C:/workspace/NexExchangeInsurance/branches/3.8/InsuranceFormsServer/src/main/java/com/brovada/nexexchange/insurance/formsserver/client/AbstractDAO.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407867255385" ignored="false" />
+    <file path="/PhoneConverter.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408368630551" ignored="false" />
+    <file path="/EasyPhone.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408457436972" ignored="false" />
+    <file path="/easyPhone.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408383842031" ignored="false" />
+    <file path="/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408376833064" ignored="false" />
+    <file path="/easyTabbedPanel.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408630161004" ignored="false" />
+    <file path="/FeedbackListener.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408629244714" ignored="false" />
+    <file path="/FeedbackState.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408630551508" ignored="false" />
+    <file path="/EasyFeedback.html" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408631444262" ignored="false" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DatabaseView">
+    <flatten value="false" />
+    <groupTables value="false" />
+  </component>
+  <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/demo/Typeahead.java" line="54" class="demo.Typeahead$1" package="demo">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/demo/EasyPhone.java" line="12" class="EasyPhone.java" package="">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
+    <breakpoint_rules />
+    <ui_properties />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="demo" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="HomePage.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/HomePage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="85" column="53" selection-start="4729" selection-end="4729" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomePage.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/HomePage.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="69" column="27" selection-start="4935" selection-end="4935" vertical-scroll-proportion="-7.259259">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EasyFeedback.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyFeedback.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="124" column="50" selection-start="4668" selection-end="4668" vertical-scroll-proportion="0.031468533">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2524#2694#0" expanded="true" />
+                <element signature="e#2683#2684#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EasyAddress.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyAddress.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="664" vertical-scroll-proportion="-0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EasyFeedback.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyFeedback.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="0" selection-start="92" selection-end="92" vertical-scroll-proportion="-2.6666667">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="feedback.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/feedback.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="12" selection-start="586" selection-end="586" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="easyTabbedPanel.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="310" column="22" selection-start="7547" selection-end="7547" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="easyTabbedPanel.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="128" column="9" selection-start="4619" selection-end="4619" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EasyTabbedPanel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="318" column="13" selection-start="11439" selection-end="11439" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EasyTabbedPanel.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="11" selection-start="1090" selection-end="1090" vertical-scroll-proportion="-12.666667">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myStructureFilterPaths" />
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/easyPhone.js" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/EasyPhone.java" />
+        <option value="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/FormsPage.java" />
+        <option value="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/FormsPageFactory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.html" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/FeedbackListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.js" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/FeedbackState.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/HomePage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.css" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/feedback.js" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/HomePage.html" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/EasyFeedback.html" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/EasyFeedback.java" />
+      </list>
+    </option>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$USER_HOME$/apache-maven-3.2.1" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+        <option name="keepSourceFolders" value="false" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="DEMO" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>AOP</id>
+          </State>
+          <State>
+            <id>Abstraction issues</id>
+          </State>
+          <State>
+            <id>Android</id>
+          </State>
+          <State>
+            <id>Ant inspections</id>
+          </State>
+          <State>
+            <id>Assignment issues</id>
+          </State>
+          <State>
+            <id>Assignment issuesGroovy</id>
+          </State>
+          <State>
+            <id>Assignment issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Bitwise operation issues</id>
+          </State>
+          <State>
+            <id>Bitwise operation issuesJavaScript</id>
+          </State>
+          <State>
+            <id>CSS</id>
+          </State>
+          <State>
+            <id>Class structure</id>
+          </State>
+          <State>
+            <id>Code maturity issues</id>
+          </State>
+          <State>
+            <id>Code style issues</id>
+          </State>
+          <State>
+            <id>Code style issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Control FlowGroovy</id>
+          </State>
+          <State>
+            <id>Control flow issues</id>
+          </State>
+          <State>
+            <id>Control flow issuesJavaScript</id>
+          </State>
+          <State>
+            <id>CorrectnessLintAndroid</id>
+          </State>
+          <State>
+            <id>DOM issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Data flow issues</id>
+          </State>
+          <State>
+            <id>Declaration redundancy</id>
+          </State>
+          <State>
+            <id>GPath inspectionsGroovy</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>Groovy</id>
+          </State>
+          <State>
+            <id>Imports</id>
+          </State>
+          <State>
+            <id>Internationalization issues</id>
+          </State>
+          <State>
+            <id>J2ME issues</id>
+          </State>
+          <State>
+            <id>JSP Inspections</id>
+          </State>
+          <State>
+            <id>Java language level migration aids</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript function metricsJavaScript</id>
+          </State>
+          <State>
+            <id>Javadoc issues</id>
+          </State>
+          <State>
+            <id>LintAndroid</id>
+          </State>
+          <State>
+            <id>Memory issues</id>
+          </State>
+          <State>
+            <id>Method MetricsGroovy</id>
+          </State>
+          <State>
+            <id>Method metrics</id>
+          </State>
+          <State>
+            <id>Numeric issues</id>
+          </State>
+          <State>
+            <id>Performance issues</id>
+          </State>
+          <State>
+            <id>PerformanceLintAndroid</id>
+          </State>
+          <State>
+            <id>Play</id>
+          </State>
+          <State>
+            <id>Plugin DevKit</id>
+          </State>
+          <State>
+            <id>Portability issues</id>
+          </State>
+          <State>
+            <id>Potentially confusing code constructsGroovy</id>
+          </State>
+          <State>
+            <id>Potentially confusing code constructsJavaScript</id>
+          </State>
+          <State>
+            <id>Probable BugsJavaScript</id>
+          </State>
+          <State>
+            <id>Probable bugs</id>
+          </State>
+          <State>
+            <id>Probable bugsGroovy</id>
+          </State>
+          <State>
+            <id>Properties Files</id>
+          </State>
+          <State>
+            <id>Resource management issues</id>
+          </State>
+          <State>
+            <id>Security issues</id>
+          </State>
+          <State>
+            <id>SecurityLintAndroid</id>
+          </State>
+          <State>
+            <id>Spring Model</id>
+          </State>
+          <State>
+            <id>Threading issues</id>
+          </State>
+          <State>
+            <id>Threading issuesGroovy</id>
+          </State>
+          <State>
+            <id>UsabilityLintAndroid</id>
+          </State>
+          <State>
+            <id>Velocity inspections</id>
+          </State>
+          <State>
+            <id>Visibility issues</id>
+          </State>
+          <State>
+            <id>Web Services Inspections</id>
+          </State>
+          <State>
+            <id>XPath</id>
+          </State>
+          <State>
+            <id>XSLT</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Abstraction issues</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages Scope="false" />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource Scope="true" />
+      <autoscrollFromSource Scope="true" ProjectPane="true" />
+      <sortByType Scope="false" ProjectPane="false" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-core:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-core-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-core:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-core-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-core:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-core-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="session" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.6 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.6 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.6 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.6 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="net" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NexExchangeForms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NexExchangeForms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nexexchange-forms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NexExchangeForms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nexexchange-forms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NexExchangeForms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nexexchange-forms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brovada" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nexexchange" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="forms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NexExchangeForms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nexexchange-forms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brovada" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nexexchange" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="forms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.lastSelected" value="vcs.Git" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="DefaultHtmlFileTemplate" value="Html" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/demo/resources/jquery-ui-1.10.4.custom/plugins" />
+      <recent name="$PROJECT_DIR$/src/main/webapp" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\derek.dick\Downloads\demo\demo\src\main\java\demo\resources" />
+      <recent name="$PROJECT_DIR$/src/main/java/demo" />
+      <recent name="$PROJECT_DIR$/src/main/java/demo/resources/bootstrap-3.1.1-dist" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/css" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.local">
+    <configuration default="false" name="LambdaTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="demo" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="demo" />
+      <option name="MAIN_CLASS_NAME" value="demo.LambdaTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="LambdaTest.test_filter" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="demo" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="demo" />
+      <option name="MAIN_CLASS_NAME" value="demo.LambdaTest" />
+      <option name="METHOD_NAME" value="test_filter" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="JodaTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="demo" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="demo" />
+      <option name="MAIN_CLASS_NAME" value="demo.JodaTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="GuavaTest.test_reflection" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="demo" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="demo" />
+      <option name="MAIN_CLASS_NAME" value="demo.GuavaTest" />
+      <option name="METHOD_NAME" value="test_reflection" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="GuavaTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="demo" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="demo" />
+      <option name="MAIN_CLASS_NAME" value="demo.GuavaTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local">
+      <deployment />
+      <server-settings />
+      <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <method />
+    </configuration>
+    <configuration default="false" name="local" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0">
+      <option name="OPEN_IN_BROWSER" value="false" />
+      <deployment>
+        <artifact name="demo:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/demo" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_demo" />
+      </server-settings>
+      <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Cover" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="56576" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="demo:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.local" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.LambdaTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.LambdaTest.test_filter" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.JodaTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.GuavaTest.test_reflection" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.GuavaTest" />
+    </list>
+    <recent_temporary>
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.GuavaTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.GuavaTest.test_reflection" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.JodaTest" />
+      </list>
+    </recent_temporary>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <configuration useDefault="true">C:\Users\derek.dick\AppData\Roaming\Subversion</configuration>
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms-assembly" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms-deploy" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms-home" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms-home\apps\nexexchange-forms" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms\src\main\java\com\brovada\nexexchange\forms\exceptions" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms\src\main\java\com\brovada\nexexchange\forms\exceptions\unsecure" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms\src\main\resources\META-INF" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms\src\main\webapp" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\tomcat" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\userprof" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms-assembly" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms-deploy" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms-home" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms-home\apps\nexexchange-forms" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms\src\main\java\com\brovada\nexexchange\forms\exceptions" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms\src\main\java\com\brovada\nexexchange\forms\exceptions\unsecure" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms\src\main\resources\META-INF" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\nexexchange-forms\src\main\webapp" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\tomcat" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\workspace\NexExchangeForms" />
+          <option name="myCopyRoot" value="C:\workspace\NexExchangeForms\userprof" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="96a2ad21-9abc-4d04-ae92-191cb4a46c47" name="Default" comment="" />
+      <created>1400422942356</created>
+      <updated>1400422942356</updated>
+    </task>
+    <task id="LOCAL-00001">
+      <created>1403300208245</created>
+      <updated>1403300208245</updated>
+    </task>
+    <task id="LOCAL-00002">
+      <created>1403617844585</created>
+      <updated>1403617844585</updated>
+    </task>
+    <task id="LOCAL-00003">
+      <created>1404836946655</created>
+      <updated>1404836946655</updated>
+    </task>
+    <task id="LOCAL-00004">
+      <created>1405694225276</created>
+      <updated>1405694225276</updated>
+    </task>
+    <task id="LOCAL-00005">
+      <created>1406552266034</created>
+      <updated>1406552266034</updated>
+    </task>
+    <task id="LOCAL-00006">
+      <created>1406571082085</created>
+      <updated>1406571082085</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.51339287" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32589287" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24970132" sideWeight="0.76179427" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924107" sideWeight="0.9996022" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22991249" sideWeight="0.254447" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32589287" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32869297" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30416223" sideWeight="0.3762058" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3301282" sideWeight="0.6707589" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30341882" sideWeight="0.6707589" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946581" sideWeight="0.6707589" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32700893" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290461" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.76179427" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORIZONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="UPDATE_FILTER_SCOPE_NAME" />
+    <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
+    <option name="COMMIT_MESSAGE_MARGIN_SIZE" value="72" />
+    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="atlassian-ide-plugin-workspace">
+    <option name="bambooConfiguration">
+      <BambooWorkspaceConfiguration>
+        <option name="view">
+          <BambooViewConfigurationBean />
+        </option>
+      </BambooWorkspaceConfiguration>
+    </option>
+    <option name="defaultCredentials">
+      <UserCfgBean />
+    </option>
+  </component>
+  <component name="atlassian-ide-plugin-workspace-issues">
+    <option name="view">
+      <JiraViewConfigurationBean>
+        <option name="viewFilterId" value="" />
+      </JiraViewConfigurationBean>
+    </option>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyQuestion.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="0" selection-end="653" vertical-scroll-proportion="0.031468533" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/Tab.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="28" selection-start="745" selection-end="745" vertical-scroll-proportion="0.43356642">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_14/src.zip!/java/net/PlainSocketImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="673" column="24" selection-start="18221" selection-end="18221" vertical-scroll-proportion="0.33273703">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/6.15.0/wicket-core-6.15.0-sources.jar!/org/apache/wicket/MarkupContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="856" column="44" selection-start="24148" selection-end="24148" vertical-scroll-proportion="0.33274022">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/FeedbackListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="72" selection-start="224" selection-end="224" vertical-scroll-proportion="0.12456747">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="11" selection-start="1090" selection-end="1090" vertical-scroll-proportion="-12.666667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="318" column="13" selection-start="11439" selection-end="11439" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/FeedbackState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="12" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="128" column="9" selection-start="4619" selection-end="4619" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/HomePage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="53" selection-start="4729" selection-end="4729" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="310" column="22" selection-start="7547" selection-end="7547" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/feedback.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="12" selection-start="586" selection-end="586" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyAddress.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="664" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/HomePage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="27" selection-start="4935" selection-end="4935" vertical-scroll-proportion="-7.259259">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyFeedback.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="92" selection-end="92" vertical-scroll-proportion="-2.6666667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyFeedback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="124" column="50" selection-start="4668" selection-end="4668" vertical-scroll-proportion="0.031468533">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2524#2694#0" expanded="true" />
+            <element signature="e#2683#2684#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>demo:war exploded</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Web</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>demo</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: com.google.code.gson:gson:2.2.4</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
+

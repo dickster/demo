@@ -1,0 +1,332 @@
+body {
+    font-family: sans-serif;
+    color:#333;
+}
+
+.tab-row {
+    /*only have border when in expanded mode.*/
+    border-bottom:1px solid #ccc;
+    background: #f0f0f0;
+    width: 100%;
+    display: block;
+    height:40px;
+    line-height:38px;
+}
+
+
+.tab-row ul {
+    float:left;
+    display: block;
+    padding-left:0px;
+    list-style-type: none;
+    margin: 0;
+}
+
+.tab-row ul>li {
+    border-radius:4px 4px 0 0;
+    /*margin-top:1px;*/
+    height:100%;
+    position:relative;
+    display: inline-block;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding-left:5px;
+    padding-right:5px;
+}
+
+.tab-row>a {
+    text-decoration: none;
+    color:#333;
+}
+
+.tab-row ul .tab-name {
+    float:left;
+    max-width:90%;
+    width:95%;
+    text-decoration: none;
+    display:inline-block;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    color:#669;
+}
+.tab-row ul li:hover a {
+    margin-top:-1px;
+}
+
+.tab-row ul li:hover {
+    text-shadow: 0 0 2px #fea;
+    color:#33c;
+    border-top-width: 2px;
+    border-top-color: cornflowerblue;
+    /*background: -moz-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(224,224,224,1) 0%, rgba(242,242,242,1) 51%, rgba(254,254,254,1) 100%); *//* FF3.6+ */
+    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(226,226,226,1)), color-stop(0%,rgba(224,224,224,1)), color-stop(51%,rgba(242,242,242,1)), color-stop(100%,rgba(254,254,254,1))); *//* Chrome,Safari4+ */
+    /*background: -webkit-linear-gradient(top, rgba(226,226,226,1) 0%,rgba(224,224,224,1) 0%,rgba(242,242,242,1) 51%,rgba(254,254,254,1) 100%); *//* Chrome10+,Safari5.1+ */
+    /*background: -o-linear-gradient(top, rgba(226,226,226,1) 0%,rgba(224,224,224,1) 0%,rgba(242,242,242,1) 51%,rgba(254,254,254,1) 100%); *//* Opera 11.10+ */
+    /*background: -ms-linear-gradient(top, rgba(226,226,226,1) 0%,rgba(224,224,224,1) 0%,rgba(242,242,242,1) 51%,rgba(254,254,254,1) 100%); *//* IE10+ */
+    /*background: linear-gradient(to bottom, rgba(226,226,226,1) 0%,rgba(224,224,224,1) 0%,rgba(242,242,242,1) 51%,rgba(254,254,254,1) 100%); *//* W3C */
+}
+
+.tab-row ul>li.current {
+    /*same colour as background of panel below.*/
+    border-bottom:1px solid white;
+    background: -moz-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(224,224,224,1) 0%, rgba(242,242,242,1) 51%, rgba(254,254,254,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(226,226,226,1)), color-stop(0%,rgba(224,224,224,1)), color-stop(51%,rgba(242,242,242,1)), color-stop(100%,rgba(254,254,254,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(226,226,226,1) 0%,rgba(224,224,224,1) 0%,rgba(242,242,242,1) 51%,rgba(254,254,254,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(226,226,226,1) 0%,rgba(224,224,224,1) 0%,rgba(242,242,242,1) 51%,rgba(254,254,254,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(226,226,226,1) 0%,rgba(224,224,224,1) 0%,rgba(242,242,242,1) 51%,rgba(254,254,254,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(226,226,226,1) 0%,rgba(224,224,224,1) 0%,rgba(242,242,242,1) 51%,rgba(254,254,254,1) 100%); /* W3C */
+}
+.tab-row ul>li.current a {
+    color:#333;
+}
+
+.tab-row ul>li.tab-mandatory {
+    border:0px;
+}
+
+.tab-row ul>li.tab-mandatory a {
+    cursor:default;
+}
+
+.tab-row ul>li.tab-mandatory .tab-top {
+    display:none;
+}
+
+.tab-row .tab-add {
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    margin-top: 2px;
+    border-radius: 0 20px 0 0;
+    padding-right: 15px;
+    padding-left: 19px;
+    float: left;
+    color: #2c9361;
+    font-size:150%;
+}
+
+.tab-row .tab-add i {
+    margin-top:-5px;
+}
+
+.tab-row .tab-status {
+    float:right;
+    padding-right:10px;
+}
+
+
+.tab-row .tab-add:hover {
+    /*background: -moz-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(224,224,224,1) 0%, rgba(242,242,242,1) 51%, rgba(254,254,254,1) 100%); *//* FF3.6+ */
+    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(226,226,226,1)), color-stop(0%,rgba(224,224,224,1)), color-stop(51%,rgba(242,242,242,1)), color-stop(100%,rgba(254,254,254,1))); *//* Chrome,Safari4+ */
+    /*background: -webkit-linear-gradient(top, rgba(226,226,226,1) 0%,rgba(224,224,224,1) 0%,rgba(242,242,242,1) 51%,rgba(254,254,254,1) 100%); *//* Chrome10+,Safari5.1+ */
+    /*background: -o-linear-gradient(top, rgba(226,226,226,1) 0%,rgba(224,224,224,1) 0%,rgba(242,242,242,1) 51%,rgba(254,254,254,1) 100%); *//* Opera 11.10+ */
+    /*background: -ms-linear-gradient(top, rgba(226,226,226,1) 0%,rgba(224,224,224,1) 0%,rgba(242,242,242,1) 51%,rgba(254,254,254,1) 100%); *//* IE10+ */
+    /*background: linear-gradient(to bottom, rgba(226,226,226,1) 0%,rgba(224,224,224,1) 0%,rgba(242,242,242,1) 51%,rgba(254,254,254,1) 100%); *//* W3C */
+}
+
+.tab-row .tab-x a i {
+    display:inline-block;
+    font-size:8pt;
+    color:#aaa;
+    float:right;
+    margin-top:2px;
+}
+
+.tab-row .tab-x:hover a i {
+    color:#880000;
+}
+
+.tab-row.tab-fixed ul {
+    display : none;
+}
+
+/*.tab-row .tab-x:hover a i:before {*/
+    /*content: "\f09c";*/
+/*}*/
+
+div.content {
+    background: yellow;
+}
+
+.tab-row ul {
+    overflow: hidden;
+}
+.tab-row .tab-header {
+    font-size:18px;
+    float:left;
+    margin-left:10px;
+    color:#333;
+}
+
+.tab-row .tab-header p {
+    display:inline;
+}
+
+.tab-row .tab-header:hover {
+    color:darkslateblue;
+    text-decoration: underline;
+}
+
+.tab-row .tabs-expand-collapse {
+    padding-left:5px;
+    padding-right:5px;
+    float:left;
+}
+
+.tab-row .tabs-expand-collapse i {
+    line-height:2;
+}
+
+.tab-content {
+    padding:15px;
+    display:none;
+    top:0;
+    left:0;
+    width:100%;
+}
+
+.tab-content.blank-slate {
+    /* UGH: for demo purposes only.  developers should create their own blank slate panel with proper labels etc...*/
+    /*   ...OR modify javascript so that it can figure out height of panel based on non-blank heights.*/
+    height: 340px;
+}
+
+.tab-content.current {
+    display:block;
+}
+
+.tab-row li:first-of-type {
+    border-left:1px solid #ccc;
+}
+
+div.content {
+    clear: both;
+}
+.tab-panels {
+    position:relative;
+    width:100%;
+    overflow:inherit;
+}
+
+.tab-empty {
+    font-style:italic;
+    font-size: 12px;
+    color: lightslategray;
+}
+
+
+
+.tab-list .popover {
+    max-width: 650px;
+    word-wrap: break-word;
+    line-height: 18px;
+    font-size: 12px;
+    font-style: italic;
+    background: lightyellow;
+}
+
+.tab-status {
+    float:right;
+    padding-right:10px;
+}
+
+
+.popover.error {
+    background:pink;
+}
+
+.popover.error.left>.arrow:after {
+    border-left-color: pink;
+}
+
+
+
+
+/* page related....for demo purposes only.*/
+
+body {
+    font-size:14px;
+}
+
+
+
+.col1 {
+    float:left;
+    width:100px;
+}
+
+.col2 {
+    margin-left:100px;
+}
+
+.navbar-brand i {
+    font-size:22px;
+    color:#483d8b;
+    padding-right:8px;
+}
+
+li.active a span {
+    color:#333;
+    box-shadow: 0px 0px 5px #00c;
+}
+
+.nav-list li span.badge {
+    background:#ccc;
+}
+
+.nav-list li  {
+    position:relative;
+}
+.nav-list li.has-error .section-error {
+    display:block;
+}
+
+.nav-list li .section-error {
+    display:none;
+    position:absolute;
+    top:20px;
+    right:15px;
+    color: #c00;
+    margin-left:0px;
+}
+
+#nav .tooltip-arrow {
+    margin-top:-12px;
+    /*HACK: why doesn't this line up right????*/
+}
+
+/*.container .breadcrumb {*/
+    /*background:transparent;*/
+/*}*/
+
+.container label {
+    margin:5px 0 0 0;
+}
+
+body {
+    padding-top:50px;
+}
+
+.submenu {
+    position:relative;
+}
+
+.feedback {
+    position: fixed;
+    top: 1px;
+    font-size:24px;
+    right: 0;
+    z-index: 444449;
+    padding-right:25px;
+    padding-top:10px;
+}
+
+.red {
+    color:darkred;
+}
+.yellow {
+    color:#ffe45c;
+}
+.orange {
+    color:darkorange;
+}

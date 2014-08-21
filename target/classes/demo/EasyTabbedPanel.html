@@ -1,0 +1,21 @@
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+    <form wicket:id="form">
+        <div wicket:id="tabsContainer" class="tab-row">
+            <span class="tab-header"><span wicket:id="header"/><p>:</p></span>
+            <ul class="tab-list">
+                <li wicket:id="tabs">
+                    <a wicket:id="link" href="#" tab-index="-1" class="tab-name"><span wicket:id="title"/></a>
+                    <div class="tab-x"><a wicket:id="delete" href="#"><i class="fa fa-times"/></a></div>
+                </li>
+            </ul>
+            <div wicket:id="add" data-toggle="tooltip" title="add stuff" class="tab-add"><i class="fa fa-plus-circle"/></div>
+            <div class="tab-status"><i wicket:id="status"></i></div>
+        </div>
+        <div wicket:id="panelContainer" class="tab-panels">
+            <div wicket:id="panels">
+                <div wicket:id="panel" class="tab-content"><!-- hidden by default...only selected one shown --></div>
+            </div>
+            <div wicket:id="blankSlate" class="tab-content blank-slate"/>
+        </div>
+    </form>
+</wicket:panel>
