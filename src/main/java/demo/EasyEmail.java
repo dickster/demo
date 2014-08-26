@@ -29,6 +29,7 @@ public class EasyEmail extends EmailTextField {
         response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
     }
 
+
     protected EmailOptions getOptions() {
         return new EmailOptions();
     }

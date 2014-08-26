@@ -2,13 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="96a2ad21-9abc-4d04-ae92-191cb4a46c47" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/RightNavBar.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/RightNavBar.java" />
       <change type="MODIFICATION" beforePath="C:\workspace\NexExchangeForms\tomcat\lib" afterPath="C:\workspace\NexExchangeForms\tomcat\lib" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/EasyEmail.java" afterPath="$PROJECT_DIR$/src/main/java/demo/EasyEmail.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/EasyFeedback.html" afterPath="$PROJECT_DIR$/src/main/java/demo/EasyFeedback.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/EasyFeedback.java" afterPath="$PROJECT_DIR$/src/main/java/demo/EasyFeedback.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.java" afterPath="$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/EasyTextArea.java" afterPath="$PROJECT_DIR$/src/main/java/demo/EasyTextArea.java" />
       <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/exceptions/unsecure/ExceptionPage.java" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/exceptions/unsecure/ExceptionPage.java" />
       <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/exceptions/unsecure/ExpiredPage.java" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/exceptions/unsecure/ExpiredPage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/HomePage.html" afterPath="$PROJECT_DIR$/src/main/java/demo/HomePage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/HomePage.java" afterPath="$PROJECT_DIR$/src/main/java/demo/HomePage.java" />
       <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/webapp/WEB-INF/application-context.xml" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/webapp/WEB-INF/application-context.xml" />
       <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms-assembly/assembly.xml" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms-assembly/assembly.xml" />
       <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/webapp/META-INF/context.xml" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/webapp/META-INF/context.xml" />
       <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms-home/shared/config/documentFactory.properties" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms-home/shared/config/documentFactory.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.css" afterPath="$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.js" afterPath="$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/feedback.js" afterPath="$PROJECT_DIR$/src/main/java/demo/feedback.js" />
       <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/userprof/parkerg.properties" afterPath="C:/workspace/NexExchangeForms/userprof/parkerg.properties" />
       <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms-assembly/pom.xml" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms-assembly/pom.xml" />
       <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms-deploy/pom.xml" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms-deploy/pom.xml" />
@@ -17,37 +29,37 @@
       <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms-home/system/config/system.properties" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms-home/system/config/system.properties" />
       <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/tomcat/tomcat6x/conf/tomcat-users.xml" afterPath="C:/workspace/NexExchangeForms/tomcat/tomcat6x/conf/tomcat-users.xml" />
       <change type="MODIFICATION" beforePath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/webapp/WEB-INF/web.xml" afterPath="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/webapp/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="demo.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="C:/workspace/NexExchangeInsurance/branches/3.8/atlassian-ide-plugin.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408375971662" ignored="false" />
     <file path="$USER_HOME$/Documents/NetBeansProjects/Wicket6/atlassian-ide-plugin.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1406733247250" ignored="false" />
-    <file path="/a.dummy" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408544017046" ignored="false" />
+    <file path="/a.dummy" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408990345776" ignored="false" />
     <file path="/JodaTest.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1406730440700" ignored="false" />
     <file path="$PROJECT_DIR$/.idea/artifacts/demo_war_exploded.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1406730378842" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1406733245668" ignored="false" />
-    <file path="/fragment.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408546923766" ignored="false" />
+    <file path="/fragment.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408976926805" ignored="false" />
     <file path="/WicketApplication.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407511995236" ignored="false" />
     <file path="/NameResult.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1406897669249" ignored="false" />
     <file path="/Tab.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407338060642" ignored="false" />
     <file path="/GuavaTest.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407245343584" ignored="false" />
-    <file path="/HomePage.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408630850926" ignored="false" />
-    <file path="/HomePage.html" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408631413664" ignored="false" />
+    <file path="/HomePage.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408989870383" ignored="false" />
+    <file path="/HomePage.html" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408989689796" ignored="false" />
     <file path="/DateLabel.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407246131410" ignored="false" />
     <file path="/datelabel.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407246017425" ignored="false" />
     <file path="/EasyTabbedPanel.html" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408560556506" ignored="false" />
-    <file path="/easyTabbedPanel.css" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408630721477" ignored="false" />
+    <file path="/easyTabbedPanel.css" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408992005904" ignored="false" />
     <file path="/vin.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407248025219" ignored="false" />
     <file path="C:/workspace/NexExchangeInsurance/branches/3.8/InsuranceResources/src/main/java/com/brovada/nexexchange/insurance/insuranceresources/html/forms.css" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407777082361" ignored="false" />
     <file path="/forms.css" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407250391738" ignored="false" />
     <file path="/Question.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407250540946" ignored="false" />
-    <file path="/EasyFeedback.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408631867441" ignored="false" />
-    <file path="/EasyTabbedPanel.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408630578738" ignored="false" />
+    <file path="/EasyFeedback.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408992759206" ignored="false" />
+    <file path="/EasyTabbedPanel.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408980869175" ignored="false" />
     <file path="/package.properties" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407505363286" ignored="false" />
-    <file path="/EasyEmail.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407506538471" ignored="false" />
+    <file path="/EasyEmail.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408977959101" ignored="false" />
     <file path="/Address.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407507994957" ignored="false" />
     <file path="/GpsLocation.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407508057023" ignored="false" />
-    <file path="/feedback.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408631261693" ignored="false" />
+    <file path="/feedback.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408977753410" ignored="false" />
     <file path="C:/workspace/NexExchangeInsurance/branches/3.8/InsuranceFormsServer/src/main/java/com/brovada/nexexchange/insurance/formsserver/changesummarypage/policyChange.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407859350791" ignored="false" />
     <file path="/policyChange.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407859287366" ignored="false" />
     <file path="C:/workspace/SGI/trunk/atlassian-ide-plugin.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407780419817" ignored="false" />
@@ -188,7 +200,7 @@
     <file path="C:/workspace/GreatWhiteInsurance/trunk/GWIHome/apps/formserver/implementation/forms/html/brand.css" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407781408630" ignored="false" />
     <file path="C:/workspace/GreatWhiteInsurance/trunk/bin/conf/server.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407781505932" ignored="false" />
     <file path="C:/workspace/GreatWhiteInsurance/trunk/GWINexExchange/GWI-soapui-project.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407781442942" ignored="false" />
-    <file path="/Dummy.txt" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408628239641" ignored="false" />
+    <file path="/Dummy.txt" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1409075454884" ignored="false" />
     <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/log4j.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407850341856" ignored="false" />
     <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/atlassian-ide-plugin.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407867264136" ignored="false" />
     <file path="C:/workspace/GreatWhiteInsurance/branches/3.8/bin/work/Catalina/localhost/GWINexExchange/loader/ehcache.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1407851296125" ignored="false" />
@@ -319,10 +331,15 @@
     <file path="/EasyPhone.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408457436972" ignored="false" />
     <file path="/easyPhone.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408383842031" ignored="false" />
     <file path="/pom.xml" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408376833064" ignored="false" />
-    <file path="/easyTabbedPanel.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408630161004" ignored="false" />
+    <file path="/easyTabbedPanel.js" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1409059918881" ignored="false" />
     <file path="/FeedbackListener.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408629244714" ignored="false" />
     <file path="/FeedbackState.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408630551508" ignored="false" />
-    <file path="/EasyFeedback.html" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408631444262" ignored="false" />
+    <file path="/EasyFeedback.html" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408633126249" ignored="false" />
+    <file path="/EasyTextArea.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408640313143" ignored="false" />
+    <file path="/HasRightNavBar.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408646125699" ignored="false" />
+    <file path="/ISection.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408973673356" ignored="false" />
+    <file path="/RightNavBar.java" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408989950799" ignored="false" />
+    <file path="/RightNavBar.html" changelist="96a2ad21-9abc-4d04-ae92-191cb4a46c47" time="1408989741067" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -422,7 +439,7 @@
       <file leaf-file-name="HomePage.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/demo/HomePage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="53" selection-start="4729" selection-end="4729" vertical-scroll-proportion="0.0">
+            <state line="67" column="0" selection-start="3783" selection-end="3783" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -433,39 +450,11 @@
       <file leaf-file-name="HomePage.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/demo/HomePage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="27" selection-start="4935" selection-end="4935" vertical-scroll-proportion="-7.259259">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EasyFeedback.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyFeedback.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="124" column="50" selection-start="4668" selection-end="4668" vertical-scroll-proportion="0.031468533">
+            <state line="82" column="0" selection-start="5159" selection-end="5159" vertical-scroll-proportion="-15.888889">
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2524#2694#0" expanded="true" />
-                <element signature="e#2683#2684#0" expanded="true" />
+                <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#4;n#div#0;n#wicket:fragment#1;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EasyAddress.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyAddress.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="664" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EasyFeedback.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyFeedback.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="92" selection-end="92" vertical-scroll-proportion="-2.6666667">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -473,34 +462,25 @@
       <file leaf-file-name="feedback.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/demo/feedback.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="12" selection-start="586" selection-end="586" vertical-scroll-proportion="0.0">
+            <state line="22" column="70" selection-start="706" selection-end="706" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="easyTabbedPanel.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="310" column="22" selection-start="7547" selection-end="7547" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="easyTabbedPanel.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="easyTabbedPanel.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="128" column="9" selection-start="4619" selection-end="4619" vertical-scroll-proportion="0.0">
+            <state line="100" column="12" selection-start="3200" selection-end="3200" vertical-scroll-proportion="0.4712042">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EasyTabbedPanel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.java">
+      <file leaf-file-name="RightNavBar.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/RightNavBar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="318" column="13" selection-start="11439" selection-end="11439" vertical-scroll-proportion="0.0">
+            <state line="32" column="0" selection-start="1215" selection-end="1215" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -508,11 +488,73 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EasyTabbedPanel.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.html">
+      <file leaf-file-name="AttributeModifier.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/6.15.0/wicket-core-6.15.0-sources.jar!/org/apache/wicket/AttributeModifier.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="11" selection-start="1090" selection-end="1090" vertical-scroll-proportion="-12.666667">
+            <state line="124" column="40" selection-start="5110" selection-end="5110" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#12302#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="easyTabbedPanel.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="324" column="20" selection-start="7773" selection-end="7773" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RightNavBar.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/RightNavBar.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="34" selection-start="176" selection-end="176" vertical-scroll-proportion="-2.0">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#wicket:panel#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EasyFeedback.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyFeedback.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="77" selection-start="2488" selection-end="2488" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2631#2632#0" expanded="true" />
+                <element signature="e#2774#3090#0" expanded="true" />
+                <element signature="e#3075#3076#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FeedbackMessagesModel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/6.15.0/wicket-core-6.15.0-sources.jar!/org/apache/wicket/feedback/FeedbackMessagesModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="120" column="0" selection-start="3583" selection-end="3583" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#5251#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FeedbackMessage.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/6.15.0/wicket-core-6.15.0-sources.jar!/org/apache/wicket/feedback/FeedbackMessage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="169" column="0" selection-start="4351" selection-end="4351" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#6324#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#2003#2020#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -536,22 +578,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/easyPhone.js" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/EasyPhone.java" />
-        <option value="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/FormsPage.java" />
-        <option value="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/FormsPageFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.html" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/FeedbackListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.js" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/FeedbackState.java" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/HomePage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.css" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/feedback.js" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/HomePage.html" />
         <option value="$PROJECT_DIR$/src/main/java/demo/EasyFeedback.html" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/EasyTextArea.java" />
+        <option value="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/FormsRequestCycle.java" />
+        <option value="C:/workspace/NexExchangeForms/nexexchange-forms/src/main/java/com/brovada/nexexchange/forms/FormsWebApp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/HasRightNavBar.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/ISection.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/EasyEmail.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/feedback.js" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/HomePage.html" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/RightNavBar.html" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/HomePage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/RightNavBar.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.css" />
         <option value="$PROJECT_DIR$/src/main/java/demo/EasyFeedback.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.js" />
       </list>
     </option>
   </component>
@@ -847,6 +889,72 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-util:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-util-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-util:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-util-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="visit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-util:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-util-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Maven: org.apache.wicket:wicket-core:6.15.0" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
             </PATH_ELEMENT>
@@ -900,6 +1008,246 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="session" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-core:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-core-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="request" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-core:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-core-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="request" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="component" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-core:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-core-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="markup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-core:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-core-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="markup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-core:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-core-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="markup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="list" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-core:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-core-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="markup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="form" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-core:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-core-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="markup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="basic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Maven: org.apache.wicket:wicket-core:6.15.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket-core-6.15.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="feedback" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -988,134 +1336,6 @@
               <option name="myItemId" value="demo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NexExchangeForms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NexExchangeForms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nexexchange-forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NexExchangeForms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nexexchange-forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NexExchangeForms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nexexchange-forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brovada" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nexexchange" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NexExchangeForms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nexexchange-forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brovada" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nexexchange" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -1156,36 +1376,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1220,29 +1410,45 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/resources" />
     <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="253" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="263" />
     <property name="OverrideImplement.combined" value="true" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.lastSelected" value="vcs.Git" />
-    <property name="MemberChooser.sorted" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="255" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="271" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1054" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1055" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="270" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="263" />
     <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="restartRequiresConfirmation" value="true" />
-    <property name="FullScreen" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="options.lastSelected" value="vcs.Git" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="DefaultHtmlFileTemplate" value="Html" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -1743,7 +1949,7 @@
     <option name="localTasksCounter" value="7" />
     <servers />
   </component>
-  <component name="TodoView" selected-index="0">
+  <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
       <are-packages-shown value="false" />
       <are-modules-shown value="false" />
@@ -1765,7 +1971,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.51339287" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1775,20 +1981,20 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32589287" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24970132" sideWeight="0.76179427" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924107" sideWeight="0.9996022" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924107" sideWeight="0.9996022" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22991249" sideWeight="0.254447" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32589287" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32869297" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.328125" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30416223" sideWeight="0.3762058" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3301282" sideWeight="0.6707589" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30341882" sideWeight="0.6707589" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946581" sideWeight="0.6707589" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30341882" sideWeight="0.671875" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946581" sideWeight="0.67410713" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32700893" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290461" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.76179427" order="3" side_tool="false" content_ui="tabs" />
@@ -1802,7 +2008,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="true" />
     <option name="myTodoPanelSettings">
       <value>
@@ -1881,123 +2087,137 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyQuestion.js">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/6.15.0/wicket-core-6.15.0-sources.jar!/org/apache/wicket/Component.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="0" selection-end="653" vertical-scroll-proportion="0.031468533" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/Tab.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="28" selection-start="745" selection-end="745" vertical-scroll-proportion="0.43356642">
+        <state line="1557" column="0" selection-start="52750" selection-end="52750" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.6.0_14/src.zip!/java/net/PlainSocketImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/Question.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="673" column="24" selection-start="18221" selection-end="18221" vertical-scroll-proportion="0.33273703">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/6.15.0/wicket-core-6.15.0-sources.jar!/org/apache/wicket/MarkupContainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="856" column="44" selection-start="24148" selection-end="24148" vertical-scroll-proportion="0.33274022">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/FeedbackListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="72" selection-start="224" selection-end="224" vertical-scroll-proportion="0.12456747">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="11" selection-start="1090" selection-end="1090" vertical-scroll-proportion="-12.666667">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="318" column="13" selection-start="11439" selection-end="11439" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/FeedbackState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="12" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="9" selection-start="4619" selection-end="4619" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/HomePage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="53" selection-start="4729" selection-end="4729" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="310" column="22" selection-start="7547" selection-end="7547" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/feedback.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="12" selection-start="586" selection-end="586" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyAddress.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="664" vertical-scroll-proportion="-0.0">
+        <state line="0" column="0" selection-start="0" selection-end="169" vertical-scroll-proportion="-0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/demo/HomePage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="27" selection-start="4935" selection-end="4935" vertical-scroll-proportion="-7.259259">
+        <state line="82" column="0" selection-start="5159" selection-end="5159" vertical-scroll-proportion="-15.888889">
+          <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#4;n#div#0;n#wicket:fragment#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/6.15.0/wicket-core-6.15.0-sources.jar!/org/apache/wicket/MarkupContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="859" column="0" selection-start="24219" selection-end="24219" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyFeedback.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/FeedbackListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="92" selection-end="92" vertical-scroll-proportion="-2.6666667">
+        <state line="6" column="16" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/6.15.0/wicket-core-6.15.0-sources.jar!/org/apache/wicket/AttributeModifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="124" column="40" selection-start="5110" selection-end="5110" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#12302#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyTabbedPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="323" column="0" selection-start="11644" selection-end="11644" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-util/6.15.0/wicket-util-6.15.0-sources.jar!/org/apache/wicket/util/visit/Visits.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="123" column="0" selection-start="4471" selection-end="4471" vertical-scroll-proportion="0.33043477">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/RightNavBar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="34" selection-start="176" selection-end="176" vertical-scroll-proportion="-2.0">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#wicket:panel#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="324" column="20" selection-start="7773" selection-end="7773" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/RightNavBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="0" selection-start="1215" selection-end="1215" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/HomePage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="0" selection-start="3783" selection-end="3783" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/demo/EasyFeedback.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="50" selection-start="4668" selection-end="4668" vertical-scroll-proportion="0.031468533">
+        <state line="56" column="77" selection-start="2488" selection-end="2488" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2524#2694#0" expanded="true" />
-            <element signature="e#2683#2684#0" expanded="true" />
+            <element signature="e#2631#2632#0" expanded="true" />
+            <element signature="e#2774#3090#0" expanded="true" />
+            <element signature="e#3075#3076#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-core/6.15.0/wicket-core-6.15.0-sources.jar!/org/apache/wicket/feedback/FeedbackMessagesModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="0" selection-start="3583" selection-end="3583" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#5251#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/feedback.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="70" selection-start="706" selection-end="706" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/easyTabbedPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="12" selection-start="3200" selection-end="3200" vertical-scroll-proportion="0.4712042">
+          <folding />
         </state>
       </provider>
     </entry>

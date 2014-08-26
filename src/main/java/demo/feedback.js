@@ -7,20 +7,14 @@ easy.feedback = (function() {
 
     var update = function(data) {
         var $feedback = $('#'+data.id);
-        // remove errors from last time around....
+        // remove errors from last time around...
         $('.popover.error').each(function(index,popover) {
-            $(popover).prev().popover('hide');
+            $(popover).remove();
         });
         // ...add new errors.
         $.each(data.messages, function(index,value) {
             addFeedback(value);
         });
-
-        if (data.messages.length>0) {
-            $feedback.find('.message').val('').hide();
-        } else {
-            $feedback.find('.message').val('').hide();
-        }
     };
 
     function addFeedback(value) {

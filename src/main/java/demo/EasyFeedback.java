@@ -3,13 +3,11 @@ package demo;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.feedback.FeedbackMessage;
 import org.apache.wicket.feedback.FeedbackMessagesModel;
 import org.apache.wicket.feedback.IFeedback;
@@ -29,8 +27,6 @@ import org.apache.wicket.util.visit.IVisitor;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class EasyFeedback extends Panel implements IFeedback {
 
@@ -46,36 +42,32 @@ public class EasyFeedback extends Panel implements IFeedback {
         super(id);
         model = new FeedbackMessagesModel(this);
         model.setFilter(new EasyFeedbackFilter());
-        setOutputMarkupId(true);
-        add(new WebMarkupContainer("icon",new PropertyModel(this,"state.css")));
-        add(new Label("message",new PropertyModel(this,"msg")));
+        setOutputMarkupPlaceholderTag(true);
+        add(new WebMarkupContainer("icon").add(new AttributeAppender("class", new PropertyModel(this, "state.css"))));
+        add(new Label("message",new PropertyModel(this,"msg")) {
+            @Override public boolean isVisible() {
+                return anyErrorMessage();
+            }
+        });
         add(new AttributeModifier("class", Model.of("feedback")));
     }
 
     private void notifyErrorListeners(final AjaxRequestTarget target, Form<?> form) {
-        Map<FeedbackListener,List<FeedbackMessage>> hasErrors = Maps.newHashMap();
-        final Set<FeedbackListener> listeners = Sets.newHashSet();
-        form.visitChildren(FeedbackListener.class, new IVisitor() {
-            @Override public void component(Object o, IVisit iVisit) {
-                ((FeedbackListener)o).resetErrors(target);
+        model.detach();
+        form.getPage().visitChildren(FeedbackListener.class, new IVisitor() {
+            @Override public void component(Object o, IVisit visit) {
+                ((FeedbackListener) o).resetErrors(target);
             }
         });
 
-        for (FeedbackMessage msg:getCurrentMessages()) {
-            Component parent = msg.getReporter().getParent();
-            while (parent!=null) {
-                if (parent instanceof FeedbackListener) {
-                    FeedbackListener listener = (FeedbackListener) parent;
-                    listener.hasError(target, msg);
+        for (final FeedbackMessage msg:getCurrentMessages()) {
+            form.getPage().visitChildren(FeedbackListener.class, new IVisitor() {
+                @Override public void component(Object o, IVisit visit) {
+                    System.out.println("has error " + msg.getReporter().getMarkupId() + " --> " + o.getClass().getSimpleName());
+                    ((FeedbackListener)o).hasError(target, msg);
                 }
-                parent = parent.getParent();
-            }
+            });
         }
-    }
-
-    @Override
-    public boolean isVisible() {
-        return hasErrorMessage();
     }
 
     @Override
@@ -137,9 +129,8 @@ public class EasyFeedback extends Panel implements IFeedback {
     private void updateMessage() {
         List<FeedbackMessage> msgs = getCurrentMessages();
         if (msgs.size()==0) {
-            return;
-        }
-        if (msgs.size()==1) {
+            msg = "";
+        } else if (msgs.size()==1) {
             msg = msgs.get(0).getMessage().toString();
         } else {
             msg = "there are " + msgs.size() + " errors.";   // TODO : format this property with properties file.

@@ -19,6 +19,8 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
+import org.apache.wicket.util.visit.IVisit;
+import org.apache.wicket.util.visit.IVisitor;
 import org.apache.wicket.validation.validator.PatternValidator;
 
 import java.util.Date;
@@ -37,6 +39,7 @@ public class HomePage extends WebPage {
     private static final CssResourceReference TYPEAHEAD_CSS = new CssResourceReference(Resource.class,"bootstrap-3.1.1-dist/css/typeahead.bootstrap.css");
 
     private final EasyFeedback feedback;
+    private List<ISection> sections = Lists.newArrayList();
 
     // test data....
     List<InsuredTab> insured = Lists.newArrayList(
@@ -53,42 +56,72 @@ public class HomePage extends WebPage {
     public HomePage(final PageParameters parameters) {
 
         add(new Form("form")
-            .add(new AjaxSubmitLink("submit") {
-                @Override
-                protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                    super.onSubmit(target, form);
-                    feedback.update(target, form);
-                }
+                .add(new AjaxSubmitLink("submit") {
+                    @Override protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                        super.onSubmit(target, form);
+                        feedback.update(target, form);
+                    }
 
-                @Override
-                protected void onError(AjaxRequestTarget target, Form<?> form) {
-                    super.onError(target, form);
-                    feedback.update(target, form);
-                }
-            })
-            .add(new EasyTabbedPanel<InsuredTab>("insured", insured, Model.of("Insured")) {
-                @Override
-                protected InsuredTab createNewTab() {
-                    return new InsuredTab("New Person");
-                }
-            }.withAtLeastOne().withAddTooltip("Add Insured Person").setStatus(FeedbackState.HAS_ERROR))
-            .add(new EasyTabbedPanel<ContactTab>("contact", new ContactTab("New Contact"), Model.of("Contact")).withOnlyOne().withAddTooltip("Add Contact Information"))
-            .add(new EasyTabbedPanel<ConvictionTab>("convictions", convictions, Model.of("Convictions")) {
-                @Override
-                protected ConvictionTab createNewTab() {
-                    return new ConvictionTab("New Conviction");
-                }
+                    @Override protected void onError(AjaxRequestTarget target, Form<?> form) {
+                        super.onError(target, form);
+                        feedback.update(target, form);
+                    }
+                })
+                .add(new EasyTabbedPanel<InsuredTab>("insured", insured, Model.of("Insured")) {
+                    @Override protected InsuredTab createNewTab() {
+                        return new InsuredTab("New Person");
+                    }
 
-                @Override
-                protected EasyTabbedPanelOptions getOptions() {
-                    EasyTabbedPanelOptions options = super.getOptions();
-                    options.header.minWidth = "10em";
-                    options.header.maxWidth = "14em";
-                    return options;
-                }
-            }.withZeroOrMore().withAddTooltip("Add Conviction")));
+                    @Override public String getHref() {
+                        return "#one";
+                    }
+                }.withAtLeastOne().withAddTooltip("Add Insured Person").setStatus(FeedbackState.HAS_INFO))
+                .add(new EasyTabbedPanel<ContactTab>("contact", new ContactTab("New Contact"), Model.of("Contact")) {
+                    @Override public String getHref() {
+                        return "#two";
+                    }
+                }.withOnlyOne())
+                .add(new EasyTabbedPanel<ConvictionTab>("convictions", convictions, Model.of("Convictions")) {
+                    @Override
+                    protected ConvictionTab createNewTab() {
+                        return new ConvictionTab("New Conviction");
+                    }
+
+                    @Override
+                    public String getHref() {
+                        return "#three";
+                    }
+
+                    @Override
+                    protected EasyTabbedPanelOptions getOptions() {
+                        EasyTabbedPanelOptions options = super.getOptions();
+                        options.header.minWidth = "10em";
+                        options.header.maxWidth = "14em";
+                        return options;
+                    }
+                }.withZeroOrMore().withAddTooltip("Add Conviction"))
+                .add(new EasyTabbedPanel<BlahTab>("four", new BlahTab("blah"), Model.of("blah")).withOnlyOne())
+                .add(new EasyTabbedPanel<BlahTab>("five", new BlahTab("blah"), Model.of("blah")).withOnlyOne())
+                .add(new EasyTabbedPanel<BlahTab>("six", new BlahTab("blah"), Model.of("blah")).withOnlyOne())
+        );
 
         add(feedback = new EasyFeedback("feedback"));
+
+        add(new RightNavBar("sections", sections));
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
+        registerSections();
+    }
+
+    private void registerSections() {
+        visitChildren(ISection.class, new IVisitor<Component, Object>() {
+            @Override public void component(Component component, IVisit<Object> visit) {
+                sections.add((ISection)component);
+            }
+        });
     }
 
     @Override
@@ -132,6 +165,19 @@ public class HomePage extends WebPage {
 
     }
 
+
+    class BlahTab extends Tab<String> {
+        BlahTab(String value) {
+            super(value);
+        }
+
+        @Override
+        protected WebMarkupContainer createPanel(String id) {
+            Fragment c = new Fragment(id, "blahFragment", HomePage.this);
+            return c;
+        }
+    }
+
     class ContactTab extends Tab<String> {
 
         private String email;
@@ -146,7 +192,7 @@ public class HomePage extends WebPage {
         protected WebMarkupContainer createPanel(String id) {
             Fragment c = new Fragment(id, "contactFragment", HomePage.this);
             c.add(new Label("label","Email"));
-            c.add(usingAsTitle(new EasyEmail("email", new PropertyModel(this, "email"))));
+            c.add(usingAsTitle(new EasyEmail("email", new PropertyModel(this, "email")).setRequired(true)));
             c.add(new EasyPhone("phone",new PropertyModel(this,"phone")).add(new PatternValidator("416.*")).setOutputMarkupId(true));
             c.add(new DateLabel("date", new PropertyModel(this, "date")));
             return c;
@@ -160,7 +206,7 @@ public class HomePage extends WebPage {
         private Name name;
         private String car;
         private String description= "blah blah blah and then some";
-        private String comments= "enter your comments here....";
+        private String comments= "this is a comment about that.";
 
         public ConvictionTab(String value) {
             super(value);
@@ -172,9 +218,9 @@ public class HomePage extends WebPage {
             c.add(new Label("label","Conviction"));
             c.add(usingAsTitle(new TextField("conviction", model)).setRequired(true));
             c.add(new EasyName("name",new PropertyModel<Name>(this,"name")));
-            c.add(new Typeahead<String>("typeahead", new PropertyModel<String>(this, "car")).add(new PatternValidator("BMW.*")));
+            c.add(new Typeahead<String>("typeahead", new PropertyModel<String>(this, "car")));
             c.add(new EasyTextArea("description", new PropertyModel<String>(this, "description")));
-            c.add(new EasyTextArea("comments", new PropertyModel<String>(this, "comments")).floating().withRows(6));
+            c.add(new EasyTextArea("comments", new PropertyModel<String>(this, "comments")).floating().withRows(6).required());
             return c;
         }
 

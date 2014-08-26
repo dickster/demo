@@ -6,6 +6,7 @@ easy.tabPanel = (function() {
 
     var defaultOptions = {
         emptyText:'\u00a0',
+        expand : false,
         header : {
             minWidth : '7em',
             paddingRight: '50px',
@@ -54,6 +55,9 @@ easy.tabPanel = (function() {
 
         var setStatus = function(status) {
             $status.removeClass().addClass(status);
+            if (status) {
+                $panels.show();
+            }
         };
 
 
@@ -97,6 +101,10 @@ easy.tabPanel = (function() {
                 var $tabRow = $tabPanel.find('.tab-row');
                 $tabRow.addClass('tab-fixed');
             }
+            if (options.expand) {
+                $panels.show();
+            }
+
             $tabs.css({minWidth:size,maxWidth:size});
             // TODO : if > maxTabs, throw the excess in another <ul class="extra-tabs"><li>blah</li></ul>
             // have minTazbWidth option.
@@ -132,7 +140,6 @@ easy.tabPanel = (function() {
             $panels.hide();
         }
 
-        // need to deal with state of icon here.  triangle down/right etc...
         $header.click(function(e) {
             $panels.toggle();
         });

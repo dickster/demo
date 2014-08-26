@@ -1,7 +1,11 @@
 package demo;
 
 import com.google.gson.Gson;
-import org.apache.wicket.markup.head.*;
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -15,6 +19,7 @@ public class EasyTextArea extends Panel {
 
     private final JavaScriptHeaderItem JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(EasyTextArea.class, "easyTextArea.js"));
     private final CssHeaderItem CSS = CssHeaderItem.forReference(new CssResourceReference(EasyTextArea.class,"easyTextArea.css"));
+    private final TextArea text;
 
     private WebMarkupContainer container;
     private boolean floating;
@@ -22,7 +27,7 @@ public class EasyTextArea extends Panel {
 
     public EasyTextArea(String id, IModel<String> model) {
         super(id, model);
-        add(new TextArea("textarea", model));
+        add(text = new TextArea("textarea", model));
         setOutputMarkupId(true);
     }
 
@@ -46,6 +51,11 @@ public class EasyTextArea extends Panel {
 
     public EasyTextArea withRows(int rows) {
         this.rows = rows;
+        return this;
+    }
+
+    public EasyTextArea required() {
+        text.setRequired(true);
         return this;
     }
 

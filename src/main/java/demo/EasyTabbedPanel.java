@@ -1,6 +1,7 @@
 package demo;
 
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
@@ -35,7 +36,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 
-public class EasyTabbedPanel<T extends Tab<?>> extends Panel implements FeedbackListener {
+public class EasyTabbedPanel<T extends Tab<?>> extends Panel implements FeedbackListener, ISection {
 
     private static final String TAB_PANEL_ID = "panel";
     private static final String SELECT_LAST_TAB_JS = "$('#%s').tabPanel.selectLastTab()";
@@ -63,7 +64,7 @@ public class EasyTabbedPanel<T extends Tab<?>> extends Panel implements Feedback
         this.header = header;
         this.tabs = data;
         currentTab = tabs.size()==0 ? null: tabs.get(0);
-        add(new AttributeAppender("class",Model.of("tab-panel")));
+        add(new AttributeAppender("class", Model.of("tab-panel")));
     }
 
     public EasyTabbedPanel(final String id, T tab, Model<String> header) {
@@ -74,11 +75,13 @@ public class EasyTabbedPanel<T extends Tab<?>> extends Panel implements Feedback
         return new WebMarkupContainer(id);
     }
 
+
+
     public Enum<?> getStatus() {
         return status;
     }
 
-    public EasyTabbedPanel<T> setStatus(Enum<?> status) {
+    public EasyTabbedPanel<T> setStatus(Enum <?> status) {
         this.status = status;
         return this;
     }
@@ -153,6 +156,7 @@ public class EasyTabbedPanel<T extends Tab<?>> extends Panel implements Feedback
         });
 
         panelContainer.add(createBlankSlate(BLANK_SLATE_ID));
+
     }
 
     private IModel<String> getStatusModel() {
@@ -305,6 +309,7 @@ public class EasyTabbedPanel<T extends Tab<?>> extends Panel implements Feedback
     }
 
     public <T extends EasyTabbedPanel> T withAddTooltip(String tooltip) {
+        Preconditions.checkState(canAdd, "you must be able to add for this tooltip to show up.");
         addTooltip = tooltip;
         return (T) this;
     }
@@ -312,8 +317,10 @@ public class EasyTabbedPanel<T extends Tab<?>> extends Panel implements Feedback
     @Override
     public void hasError(AjaxRequestTarget target, FeedbackMessage msg) {
         // TODO : generate useful error message. put status on proper tab etc... give focus to that tab?
-        setStatus(FeedbackState.HAS_ERROR);
-        target.add(statusIcon);
+        if (contains(msg.getReporter(),true) ) {
+            setStatus(FeedbackState.HAS_ERROR);
+            target.add(statusIcon);
+        }
     }
 
     @Override
@@ -322,7 +329,29 @@ public class EasyTabbedPanel<T extends Tab<?>> extends Panel implements Feedback
         target.add(statusIcon);
     }
 
+    @Override
+    public String getTooltip() {
+        return getClass().getName();
+    }
 
+    @Override
+    public String getName() {
+        return getTooltip();
+    }
+
+    @Override
+    public String getIconCss() {
+        return "";
+    }
+
+    @Override
+    public Integer getOrdinal() {
+        return null;
+    }
+
+    public String getHref() {
+        return "#"+getId();
+    }
 
 
     // ---------------------------------------------------------------
