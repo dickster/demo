@@ -21,6 +21,11 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#nav li[title]').tooltip({placement:'left'});
+            $('.name-type input').change(function() {
+                var isPerson = !$(this).prop('checked');
+                if (isPerson) { $('.person-icon').show();$('.company-icon').hide(); }
+                else { $('.company-icon').show();$('.person-icon').hide(); };
+            });
         });
     </script>
 
@@ -118,8 +123,12 @@
 
 <wicket:fragment wicket:id="insuredFragment">
     <div class="form-group">
-    <label wicket:id="label"></label>
-        <input wicket:id="text" type="text" class="form-control" placeholder="Enter Name" required name="two">
+        <label wicket:id="label"></label> <i class="name-icon person-icon fa fa-user"/><i class="name-icon company-icon fa fa-briefcase" style="display:none;"/>
+        <div class="input-group">
+            <span class="input-group-addon"></span>
+            <input wicket:id="text" type="text" class="form-control" placeholder="Enter Name" required name="two">
+        </div>
+        <label class="name-type"><input type="checkbox">This is a company.</label>
         <label>Occupation</label>
         <input type="text" class="form-control" placeholder="What is your job?" >
         <label>Address</label>
@@ -187,29 +196,6 @@
     </p>
 </wicket:fragment>
 
-
-
-
-<!--
-<div class="container">
-
-
-   <p>
-            <a class="btn btn-lg btn-primary" role="button">Issue</a>
-            <a class="btn btn-lg btn-default" role="button">Cancel</a>
-        </p>
-
-    <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-            <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs »</a>
-        </p>
-    </div>
-
-</div>
--->
 
 </body></html>
 

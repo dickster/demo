@@ -5,7 +5,7 @@ public enum FeedbackState {
     LOADING("fa fa-refresh fa-spin"),
     HAS_ERROR("fa fa-times-circle red"),
     HAS_WARNING("fa fa-exclamation-circle orange"),
-    HAS_INFO("fa fa-info-circle yellow");
+    HAS_INFO("fa fa-info-circle orange");
 
     private String css;
 

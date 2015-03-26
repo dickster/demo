@@ -72,6 +72,7 @@ public class EasyTabbedPanel<T extends Tab<?>> extends Panel implements Feedback
     }
 
     protected WebMarkupContainer createBlankSlate(String id) {
+        // override to provide your own panel when you have no tabs.
         return new WebMarkupContainer(id);
     }
 
@@ -209,6 +210,14 @@ public class EasyTabbedPanel<T extends Tab<?>> extends Panel implements Feedback
         }
     }
 
+    public T getFirstTab() {
+        return getTab(0);
+    }
+
+    public T getTab(int index) {
+        return tabs.get(index);
+    }
+
     private Component newDeleteButton(String id, final int index) {
         return new AjaxLink(id) {
             @Override public boolean isVisible() {
@@ -293,17 +302,17 @@ public class EasyTabbedPanel<T extends Tab<?>> extends Panel implements Feedback
         };
     }
 
-    public <X extends EasyTabbedPanel> X withAtLeastOne() {
+    public <X extends EasyTabbedPanel> X allowingOneOrMore() {
         mandatory = true;
         return (X) this;
     }
 
-    public <X extends EasyTabbedPanel> X withZeroOrMore() {
+    public <X extends EasyTabbedPanel> X allowingZeroOrMore() {
         mandatory = false;
         return (X) this;
     }
 
-    public <X extends EasyTabbedPanel> X withOnlyOne() {
+    public <X extends EasyTabbedPanel> X allowingOnlyOne() {
         canAdd = false;
         return (X) this;
     }

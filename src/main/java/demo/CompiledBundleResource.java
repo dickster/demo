@@ -116,7 +116,7 @@ public class CompiledBundleResource extends AbstractResource implements IStaticC
         for (IReferenceHeaderItem curItem : providedResources) {
             Serializable curKey = ((IStaticCacheableResource)curItem.getReference().getResource()).getCacheKey();
             if (curKey == null) {
-                throw newExceptionFor("Unable to get cache key for ",curItem);
+                throw newExceptionFor("Unable to getTarget cache key for ",curItem);
             }
             key.add(curKey);
         }

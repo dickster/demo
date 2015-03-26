@@ -20,6 +20,14 @@ public class VIN implements Serializable {
         this.vin = vin;
     }
 
+    public VIN(VIN vin) {
+        this.formattedText = vin.getFormattedText();
+        this.year = vin.getYear();
+        this.manufacturer = vin.getManufacturer();
+        this.model = vin.getModel();
+        this.vin = vin.getVin();
+    }
+
     public String getFormattedText() {
         return formattedText;
     }

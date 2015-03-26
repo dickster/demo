@@ -343,8 +343,28 @@ body {
     color:darkred;
 }
 .yellow {
-    color:#ffe45c;
+    color:#ffff00;
 }
 .orange {
-    color:darkorange;
+    color:#c77405;
+}
+
+.name-icon {
+    float: left;
+    color: #77A;
+    position: absolute;
+    top: 50px;
+    z-index: 333434;
+    left: 22px;
+}
+
+.name-type {
+    display: block;
+    font-weight: normal;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.name-type input[type=checkbox] {
+    margin-right:10px;
 }

@@ -69,18 +69,18 @@ public class HomePage extends WebPage {
                 })
                 .add(new EasyTabbedPanel<InsuredTab>("insured", insured, Model.of("Insured")) {
                     @Override protected InsuredTab createNewTab() {
-                        return new InsuredTab("New Person");
+                        return new InsuredTab("New Person").withDefault(getTab(0));
                     }
 
                     @Override public String getHref() {
                         return "#one";
                     }
-                }.withAtLeastOne().withAddTooltip("Add Insured Person").setStatus(FeedbackState.HAS_INFO))
+                }.allowingOneOrMore().withAddTooltip("Add Insured Person").setStatus(FeedbackState.HAS_INFO))
                 .add(new EasyTabbedPanel<ContactTab>("contact", new ContactTab("New Contact"), Model.of("Contact")) {
                     @Override public String getHref() {
                         return "#two";
                     }
-                }.withOnlyOne())
+                }.allowingOnlyOne())
                 .add(new EasyTabbedPanel<ConvictionTab>("convictions", convictions, Model.of("Convictions")) {
                     @Override
                     protected ConvictionTab createNewTab() {
@@ -99,10 +99,10 @@ public class HomePage extends WebPage {
                         options.header.maxWidth = "14em";
                         return options;
                     }
-                }.withZeroOrMore().withAddTooltip("Add Conviction"))
-                .add(new EasyTabbedPanel<BlahTab>("four", new BlahTab("blah"), Model.of("blah")).withOnlyOne())
-                .add(new EasyTabbedPanel<BlahTab>("five", new BlahTab("blah"), Model.of("blah")).withOnlyOne())
-                .add(new EasyTabbedPanel<BlahTab>("six", new BlahTab("blah"), Model.of("blah")).withOnlyOne())
+                }.allowingZeroOrMore().withAddTooltip("Add Conviction"))
+                .add(new EasyTabbedPanel<BlahTab>("four", new BlahTab("blah"), Model.of("blah")).allowingOnlyOne())
+                .add(new EasyTabbedPanel<BlahTab>("five", new BlahTab("blah"), Model.of("blah")).allowingOnlyOne())
+                .add(new EasyTabbedPanel<BlahTab>("six", new BlahTab("blah"), Model.of("blah")).allowingOnlyOne())
         );
 
         add(feedback = new EasyFeedback("feedback"));
@@ -141,11 +141,20 @@ public class HomePage extends WebPage {
     class InsuredTab extends Tab<String> {
 
         private Address address = new Address();
-        private Component name;
         private VIN vin = new VIN();
 
         public InsuredTab(String value) {
             super(value);
+        }
+
+        public InsuredTab withDefault(InsuredTab defaultData) {
+            this.address = new Address(defaultData.address);
+            this.vin = new VIN(defaultData.vin);
+            return this;
+        }
+
+        public String getName() {
+            return getDefaultModelObjectAsString();
         }
 
         @Override

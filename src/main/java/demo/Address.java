@@ -22,6 +22,16 @@ public class Address implements Serializable {
 
     }
 
+    public Address(Address a) {
+        this.streetAddress = a.streetAddress;
+        this.city = a.city;
+        this.province = a.province;
+        this.country = a.country;
+        this.postalCode = a.postalCode;
+        this.gpsLocation = a.gpsLocation;
+        this.formattedAddress = a.formattedAddress;
+    }
+
     public String getStreetAddress() {
         return streetAddress;
     }

@@ -37,7 +37,7 @@ public class EasyTextArea extends Panel {
         response.render(JS);
         response.render(CSS);
         response.render(OnDomReadyHeaderItem.forScript(String.format(INIT_JS, new Gson().toJson(getOptions()))));
-//        response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
+//        response.render(JavaScriptHeaderItem.forReference(Application.getTarget().getJavaScriptLibrarySettings().getJQueryReference()));
     }
 
     protected EasyTextAreaOptions getOptions() {

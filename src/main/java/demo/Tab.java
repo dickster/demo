@@ -20,6 +20,10 @@ public abstract class Tab<T extends Serializable> implements Serializable {
         this.model = Model.of(value);
     }
 
+    public Tab<T> withDefault(T defaultData) {
+        return this;
+    }
+
     public String getTitle() {
         // not null safe. typically you will implement this yourself.
         return model.getObject().toString();

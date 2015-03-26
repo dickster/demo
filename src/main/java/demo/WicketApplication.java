@@ -38,6 +38,7 @@ public class WicketApplication extends WebApplication {
 
     @Override
     protected void init() {
+
         super.init();
 
         switch (this.getConfigurationType()) {
