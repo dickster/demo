@@ -33,13 +33,16 @@ public class HomePage extends WebPage {
     private static final JavaScriptResourceReference JQUERY_UI_JS = new JavaScriptResourceReference(Resource.class, "jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js");
     private static final JavaScriptResourceReference LIBPHONENUMBER_JS = new JavaScriptResourceReference(Resource.class, "libphonenumber.js");
     private static final CssResourceReference JQUERY_UI_CSS = new CssResourceReference(Resource.class, "jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css");
-    private static final JavaScriptResourceReference MULTISELECT_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-multiselect.js");
+    private static final JavaScriptResourceReference SELECT_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-multiselect.js");
+    private static final CssResourceReference SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-select.css");
+    private static final JavaScriptResourceReference MULTISELECT_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-select.js");
     private static final CssResourceReference MULTISELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-multiselect.css");
     private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/typeahead.bundle.js");
     private static final CssResourceReference TYPEAHEAD_CSS = new CssResourceReference(Resource.class,"bootstrap-3.1.1-dist/css/typeahead.bootstrap.css");
 
     private final EasyFeedback feedback;
     private List<ISection> sections = Lists.newArrayList();
+
 
     // test data....
     List<InsuredTab> insured = Lists.newArrayList(
@@ -56,53 +59,59 @@ public class HomePage extends WebPage {
     public HomePage(final PageParameters parameters) {
 
         add(new Form("form")
+                .add(new SkypeLink("skype"))
                 .add(new AjaxSubmitLink("submit") {
-                    @Override protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                    @Override
+                    protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                         super.onSubmit(target, form);
                         feedback.update(target, form);
                     }
 
-                    @Override protected void onError(AjaxRequestTarget target, Form<?> form) {
+                    @Override
+                    protected void onError(AjaxRequestTarget target, Form<?> form) {
                         super.onError(target, form);
                         feedback.update(target, form);
                     }
                 })
-                .add(new EasyTabbedPanel<InsuredTab>("insured", insured, Model.of("Insured")) {
+                .add(new EasyTabbedPanel<InsuredTab>("insureds", insured, Model.of("Insured")) {
                     @Override protected InsuredTab createNewTab() {
-                        return new InsuredTab("New Person").withDefault(getTab(0));
+                        return new InsuredTab("New Person")
+                                .withDefault(getTab(0));
                     }
 
                     @Override public String getHref() {
                         return "#one";
                     }
-                }.allowingOneOrMore().withAddTooltip("Add Insured Person").setStatus(FeedbackState.HAS_INFO))
-                .add(new EasyTabbedPanel<ContactTab>("contact", new ContactTab("New Contact"), Model.of("Contact")) {
-                    @Override public String getHref() {
-                        return "#two";
-                    }
-                }.allowingOnlyOne())
-                .add(new EasyTabbedPanel<ConvictionTab>("convictions", convictions, Model.of("Convictions")) {
-                    @Override
-                    protected ConvictionTab createNewTab() {
-                        return new ConvictionTab("New Conviction");
-                    }
-
-                    @Override
-                    public String getHref() {
-                        return "#three";
-                    }
-
-                    @Override
-                    protected EasyTabbedPanelOptions getOptions() {
-                        EasyTabbedPanelOptions options = super.getOptions();
-                        options.header.minWidth = "10em";
-                        options.header.maxWidth = "14em";
-                        return options;
-                    }
-                }.allowingZeroOrMore().withAddTooltip("Add Conviction"))
-                .add(new EasyTabbedPanel<BlahTab>("four", new BlahTab("blah"), Model.of("blah")).allowingOnlyOne())
-                .add(new EasyTabbedPanel<BlahTab>("five", new BlahTab("blah"), Model.of("blah")).allowingOnlyOne())
-                .add(new EasyTabbedPanel<BlahTab>("six", new BlahTab("blah"), Model.of("blah")).allowingOnlyOne())
+                }.allowingOneOrMore()
+                    .withAddTooltip("Add Insured Person")
+                    .setStatus(FeedbackState.HAS_INFO))
+//                .add(new EasyTabbedPanel<ContactTab>("contact", new ContactTab("New Contact"), Model.of("Contact")) {
+//                    @Override public String getHref() {
+//                        return "#two";
+//                    }
+//                }.allowingOnlyOne())
+//                .add(new EasyTabbedPanel<ConvictionTab>("convictions", convictions, Model.of("Convictions")) {
+//                    @Override
+//                    protected ConvictionTab createNewTab() {
+//                        return new ConvictionTab("New Conviction");
+//                    }
+//
+//                    @Override
+//                    public String getHref() {
+//                        return "#three";
+//                    }
+//
+//                    @Override
+//                    protected EasyTabbedPanelOptions getOptions() {
+//                        EasyTabbedPanelOptions options = super.getOptions();
+//                        options.header.minWidth = "10em";
+//                        options.header.maxWidth = "14em";
+//                        return options;
+//                    }
+//                }.allowingZeroOrMore().withAddTooltip("Add Conviction"))
+//                .add(new EasyTabbedPanel<BlahTab>("four", new BlahTab("blah"), Model.of("blah")).allowingOnlyOne())
+//                .add(new EasyTabbedPanel<BlahTab>("five", new BlahTab("blah"), Model.of("blah")).allowingOnlyOne())
+//                .add(new EasyTabbedPanel<BlahTab>("six", new BlahTab("blah"), Model.of("blah")).allowingOnlyOne())
         );
 
         add(feedback = new EasyFeedback("feedback"));
@@ -134,6 +143,8 @@ public class HomePage extends WebPage {
         response.render(CssHeaderItem.forReference(BOOTSTRAP_CSS));
         response.render(JavaScriptReferenceHeaderItem.forReference(MULTISELECT_JS));
         response.render(CssHeaderItem.forReference(MULTISELECT_CSS));
+        response.render(JavaScriptReferenceHeaderItem.forReference(SELECT_JS));
+        response.render(CssHeaderItem.forReference(SELECT_CSS));
         response.render(JavaScriptReferenceHeaderItem.forReference(TYPEAHEAD_JS));
         response.render(CssHeaderItem.forReference(TYPEAHEAD_CSS));
     }
@@ -142,6 +153,7 @@ public class HomePage extends WebPage {
 
         private Address address = new Address();
         private VIN vin = new VIN();
+        private String fruit;
 
         public InsuredTab(String value) {
             super(value);
@@ -163,6 +175,7 @@ public class HomePage extends WebPage {
             c.add(new Label("label","Name"));
             c.add(usingAsTitle(new TextField("text", model)));
             c.add(new EasyAddress("address", new PropertyModel<Address>(this, "address")));
+            c.add(new SelectPicker("fruits", new PropertyModel(this, "fruit")));
             c.add(new Question("q1", Model.of("have you had an accident in the last year")).withPrompt("describe the accident..."));
             c.add(new Question("q2", Model.of("where you on a farm?")).withPrompt("what type of farm?"));
             c.add(new Question("q3", Model.of("were you convicted?")).withPrompt("what was the sentence?."));

@@ -1,61 +1,40 @@
 package forms;
 
-import com.google.common.base.Preconditions;
-//import org.springframework.context.ApplicationContext;
-//import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import java.util.Map;
 
-public class WfFactory { //implements ApplicationContextAware {
 
-  //  private ApplicationContext applicationContext;
+public class WfFactory implements ApplicationContextAware {
 
-//    public Workflow createWorkflow(String wfName) {
+    // spring based WfFactory....
+    // WfFactory interface.
+    // defaultWfFactory creates unmanagedFormStates.  has reference to parent MarkupContainer.
+    // init method gets parent container. every time you show a new form, you replace the "form-panel widget.
 
-//    EventBus eventBus = new EventBus();
-//    PurchaseSubscriber purchaseSubscriber = new PurchaseSubscriber();
-//    eventBus.register(purchaseSubscriber);
+    private ApplicationContext context;
 
+    public Workflow create(String workflowType, Map<String, Object> context) {
 
-
-//        Preconditions.checkNotNull(wfName);
-//        Map<String, Workflow> workflows = applicationContext.getBeansOfType(Workflow.class);
-//        for (Workflow workflow: workflows.values()) {
-//            if (wfName.equals(getName(workflow))) {
-//                return workflow;
-//            }
-//        }
-//        throw new IllegalStateException("can't find workfow " + wfName
-//                    + " possible workflows are..." + getWorkflowsAsString(workflows));
-//    }
-
-    private Workflow find(String wfName) {
-        throw new IllegalArgumentException("can't find workflow " + wfName);
+        // default = new DefaultWorkflow().withValues(context).withContainer(
+        return new CommercialWorkflow().withValues(context);
+//        boolean isPrototype = context.isPrototype(workflowType);
+//        Preconditions.checkState(isPrototype, "workflow beans must be of PROTOTYPE scope.   see @org.springframework.beans.factory.config.Scope");
+//        return context.getBean(workflowType, Workflow.class);
     }
 
-    private String getWorkflowsAsString(Map<String, Workflow> workflows) {
-        StringBuilder s = new StringBuilder("{");
-        for (String type:workflows.keySet()) {
-            s.append(type);
-            s.append("-->");
-            s.append(workflows.get(type));
-            s.append(",");
-        }
-        s.append("}");
-        return s.toString();
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = context;
     }
-
-    private String getName(Workflow workflow) {
-        WfDef def = workflow.getClass().getAnnotation(WfDef.class);
-        if (def!=null) {
-            return def.name();
-        }
-        throw new IllegalArgumentException("workflow " + workflow.getClass().getSimpleName() + " has no @" + WfDef.class.getSimpleName() + " definition");
-    }
-
-//    @Override
-//    public void setApplicationContext(ApplicationContext applicationContext) {
-//        this.applicationContext = applicationContext;
-//    }
-
 }
+
+// easy for BA.  automatically created.
+// dev can add states easily
+// states can override handling of events.
+// (groovy states?)
+// events can have parameters.
+// states can be based on forms. (require container which should be in workflow itself)
+//

@@ -1,26 +1,19 @@
 package forms;
 
 import java.util.Locale;
-import java.util.Map;
 
-@WfDef(name="CommlPkgPolicyRq")  // or use actual class @WfDef(type=CommlPkgPolicyRq.class)
 public class CommercialWorkflow extends Workflow<String> {
 
-//    @Autowired a groovy bean.  need to make an interface for WfState & WfEvent.
-    private WfState testState;
+    private WfState startState = /*blah blah blah*/null;
 
     public CommercialWorkflow() {
         super();
-            withValue("defaultCountry", Locale.US).
-            withData("hello world");
+            withStartingState(startState)
+            .withValue("defaultCountry", Locale.US)
+            .withData(new String("hello world"));
     }
 
-    public CommercialWorkflow start() {
-        start(testState);
-        return this;
-    }
-
-    protected void intialize(Map<String, Object> context) {
+    protected void initialize() {
         ; //override if you want some workflow startup stuff to happen.
     }
 

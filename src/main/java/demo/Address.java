@@ -87,4 +87,9 @@ public class Address implements Serializable {
     public void setFormattedAddress(String formattedAddress) {
         this.formattedAddress = formattedAddress;
     }
+
+    @Override
+    public String toString() {
+        return formattedAddress;
+    }
 }

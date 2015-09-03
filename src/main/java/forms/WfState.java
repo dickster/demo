@@ -1,6 +1,7 @@
 package forms;
 
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.Serializable;
 
@@ -11,7 +12,18 @@ public class WfState implements Serializable /*, BeanNameAware*/ {
     public WfState() {
     }
 
-    void setBeanName(String name)  {
+    private WfState(String name) {
+        this.name = name;
+    }
+
+    // typically, should be created as spring beans.  but early in development cycle you can get away with these
+    //  skeleton classes.
+    public static WfState createUnmanagedState(@Nonnull String name) {
+        // TODO : make this state find a form of the same name.
+        return new WfState(name);
+    }
+
+    void setBeanName(String name) {
         this.name = name;
     }
 
@@ -19,23 +31,21 @@ public class WfState implements Serializable /*, BeanNameAware*/ {
         return name;
     }
 
-    public boolean isTransitive() {
-        // transitive states will always immediately jump to another state.  (as opposed to a state that would show a form and wait until an event happens, for example).
-        return getTransitionEvent()!=null;
+    public @Nullable String handleEvent(IWorkflowContext workflow, WfEvent event) {
+        // typically something like...
+        // switch ( Event.valueOf(event.getName()) ) {
+        //    case SUBMIT : doThis();
+        //    case BIND : doThat();
+        //    etc...
+        // }
+        // return  if null, workflow will just hang around and wait for next event.
+        return event.getOnSuccessState();
     }
 
-    public WfEvent getTransitionEvent() {
-        throw new UnsupportedOperationException("override this to implement your own");
-    }
-
-    public void leave(Workflow workflow, WfEvent event) throws WorkflowVetoException {
-        // if state wants to VETO event, then queue another event here!
-        // store in document cache here...
-    }
-
-    public @Nullable WfEvent enter(Workflow workflow, WfEvent event) {
+    public @Nullable String enter(IWorkflowContext workflow, WfEvent event) {
         // load from document cache here...
         // do stuff...
+        // get parameters & data from event if needed.
         // binder.doBind(workflow.getCurrentData());
         return null;
     }

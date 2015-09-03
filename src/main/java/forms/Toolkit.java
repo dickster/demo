@@ -1,12 +1,17 @@
 package forms;
 
 
+import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
+
+import javax.inject.Inject;
+
 public class Toolkit {
 
-    private Theme theme = new DefaultTheme();
+    private @Inject Theme theme;
 
-    public WidgetFactory getWidgetFactory() {
-        return new WidgetFactory();
+    public WidgetFactory createWidgetFactory() {
+        return new DefaultWidgetFactory();
     }
 
     public Theme getTheme() {

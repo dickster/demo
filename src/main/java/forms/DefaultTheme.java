@@ -3,10 +3,9 @@ package forms;
 
 import com.google.common.collect.Lists;
 import org.apache.wicket.Component;
-import org.apache.wicket.Page;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.head.CssHeaderItem;
-import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
@@ -17,15 +16,10 @@ import java.util.Locale;
 public class DefaultTheme implements Theme {
 
     // css references,
-    // css class
+    // css class,
     // javascript initialization?
     // name
     // default locale, settings.
-
-    @Override
-    public List<CssHeaderItem> getCss() {
-        return Lists.newArrayList();
-    }
 
     @Override
     public String getCssClass() {
@@ -58,10 +52,9 @@ public class DefaultTheme implements Theme {
         });
     }
 
-    @Override
-    public void renderHead(IHeaderResponse response) {
-        response.render(CssHeaderItem.forReference(null));
-        response.render(CssHeaderItem.forCSS("blah blah blah", "myCss"));
+    public List<? extends HeaderItem> getHeaderItems() {
+        return Lists.newArrayList(  /*CssHeaderItem.forReference(null-->put something here), */
+                                    CssHeaderItem.forCSS("blah blah blah", "myCss"));
     }
 
     public void apply(Component component) {
@@ -69,12 +62,14 @@ public class DefaultTheme implements Theme {
 
         // what about apply?() methods for each specific type of component?
         component.add(new AttributeAppender("class", "motif"));
-        if (component instanceof EasyWidget) {
-            EasyWidget ezWidget = (EasyWidget) component;
+        if (component instanceof HasWidgetOptions) {
+            HasWidgetOptions ezWidget = (HasWidgetOptions) component;
             ezWidget.getOptions()
-                    .withOption("color", "blue")
-                    .withOption("spacing", "large");
+                        .withOption("color", "blue")
+                        .withOption("spacing", "large");
         }
+        // typically add javascript to do layout, styling, adding classes, add attributes to widgets,
+        //   add listeners to facilitate overlays/dialogs/menus....whatever
     }
 
 }

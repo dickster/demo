@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
     <title>Brovada Demo</title>
 
     <style id="clearly_highlighting_css" type="text/css">
@@ -91,31 +91,38 @@
 
     <form wicket:id="form" role="form">
         <div id="one" class="form-group">
-            <span wicket:id="insured"></span>
+            <span wicket:id="insureds"></span>
         </div>
         <br>
-        <div id="two" class="form-group">
-            <span wicket:id="convictions"></span>
-        </div>
-        <div id="three" class="form-group">
-            <span wicket:id="contact"></span>
-        </div>
-        <div id="four" class="form-group">
-            <span wicket:id="four"></span>
-        </div>
-        <div id="five" class="form-group">
-            <span wicket:id="five"></span>
-        </div>
-        <div id="six" class="form-group">
-            <span wicket:id="six"></span>
-        </div>
+        <!--<div id="two" class="form-group">-->
+            <!--<span wicket:id="convictions"></span>-->
+        <!--</div>-->
+        <!--<div id="three" class="form-group">-->
+            <!--<span wicket:id="contact"></span>-->
+        <!--</div>-->
+        <!--<div id="four" class="form-group">-->
+            <!--<span wicket:id="four"></span>-->
+        <!--</div>-->
+        <!--<div id="five" class="form-group">-->
+            <!--<span wicket:id="five"></span>-->
+        <!--</div>-->
+        <!--<div id="six" class="form-group">-->
+            <!--<span wicket:id="six"></span>-->
+        <!--</div>-->
 
         <a wicket:id="submit" class="btn btn-danger">Press Here</a>
+        <div wicket:id="skype">skype button</div>
+
+        <select class="sp">
+            <option data-content="<span class='label label-warning'>Mustard</span>">Mustard</option>
+            <option data-content="<span class='label label-danger label-important'>Ketchup</span>">Ketchup</option>
+            <option data-content="<span class='label label-success'>Relish</span>">Relish</option>
+            <option data-content="<span class='label label-info'>Mayonnaise</span>">Mayonnaise</option>
+        </select>
 
     </form>
 
 </main> <!-- /container -->
-
 
 
 <!--  FRAGMENTS  -->
@@ -130,6 +137,13 @@
         </div>
         <label class="name-type"><input type="checkbox">This is a company.</label>
         <label>Occupation</label>
+        <label>Fruits</label>
+        <select wicket:id="fruits" class="selectpicker search-results">
+            <option>Apple</option>
+            <option>Orange</option>
+            <option>Strawberry</option>
+        </select>
+
         <input type="text" class="form-control" placeholder="What is your job?" >
         <label>Address</label>
         <div wicket:id="address" />

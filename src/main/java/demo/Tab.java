@@ -11,13 +11,14 @@ import java.io.Serializable;
 public abstract class Tab<T extends Serializable> implements Serializable {
 
     protected IModel<T> model;
-    protected WebMarkupContainer panel;
-    private transient boolean current = false;
-    private String panelId;
     private String titleInput;
 
     public Tab(T value) {
         this.model = Model.of(value);
+    }
+
+    public Tab(IModel<T> model) {
+        this.model = model;
     }
 
     public Tab<T> withDefault(T defaultData) {
@@ -39,5 +40,6 @@ public abstract class Tab<T extends Serializable> implements Serializable {
     public String getTitleInput() {
         return titleInput;
     }
+
 
 }

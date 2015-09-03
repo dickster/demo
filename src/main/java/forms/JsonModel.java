@@ -47,8 +47,8 @@ public class JsonModel extends NullSafeModel {
             } else if (isPrimitive(value.getClass())) {
                 Class<? extends Object> type = Primitives.wrap(value.getClass());
                 if (type.isAssignableFrom(Number.class)) {
-                    double dubble = ((Number) value).doubleValue();
-                    return new JsonPrimitive(new BigDecimal(dubble));
+                    double d = ((Number) value).doubleValue();
+                    return new JsonPrimitive(new BigDecimal(d));
                 } else if (type.equals(String.class)) {
                     return new JsonPrimitive((String)value);
                 }

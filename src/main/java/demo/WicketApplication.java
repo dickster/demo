@@ -33,7 +33,9 @@ public class WicketApplication extends WebApplication {
     }
 
     public Class getHomePage() {
-        return HomePage.class;
+        return SelectPickerPage.class;
+        //return HomePage.class;
+//        return ManagerPage.class;
     }
 
     @Override
@@ -45,8 +47,8 @@ public class WicketApplication extends WebApplication {
             case DEVELOPMENT :
                 this.getResourceSettings().setResourcePollFrequency(Duration.ONE_SECOND);
                 this.getDebugSettings().setComponentUseCheck(false);
-                //this.getMarkupSettings().setStripWicketTags(false);
-                this.getMarkupSettings().setStripWicketTags(true);
+//                this.getMarkupSettings().setStripWicketTags(false);
+this.getMarkupSettings().setStripWicketTags(true);
                 break;
 
             case DEPLOYMENT :

@@ -1,129 +1,97 @@
 package forms;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 
 import javax.annotation.Nonnull;
-import java.io.Serializable;
 import java.util.Map;
 import java.util.Map.Entry;
 
 // do this in subclasses....-->@WfDef("commercial")
-public abstract class Workflow<T extends Serializable> {
+public abstract class Workflow<C extends IWorkflowContext> {
 
-    private Map<String, Object> context = Maps.newHashMap();
+    private C context;
 
     private WfState currentState;
 
-    private transient WfEvent nextEvent;
-
-    // really, this should be in the context with convenience methods to access?
-    private T data; ///document? IModel?
-
-    public Workflow() {
+    public Workflow(WfState state, C context) {
+        withStartingState(state);
+        this.context = context;
     }
 
-    public Workflow start(WfEvent event) {
+    public Workflow start() {
+        Preconditions.checkState(currentState != null);
+        Preconditions.checkState(context != null);
+        initialize();
+        currentState.enter(context, new WfEvent("STARTING"));
+        return this;
+    }
+
+    public Workflow start(@Nonnull final WfState state) {
         Preconditions.checkState(currentState == null);
-        Preconditions.checkState(getModelObject() != null);
-        intialize(context);
-        fire(event);
+        withStartingState(state);
+        start();
         return this;
     }
 
-    public Workflow start(final WfState state) {
-        start(new WfEvent() {
-            @Override @Nonnull
-            public WfState getTransitionState() {
-                return state;
-            }
-        });
-        return this;
+    public void fire(Object event) {
+        // TODO : look up spring bean of class WfEvent & name = eventName.
+        // otherwise create wrapper..
+        fire(createEvent(event));
+    }
+
+    protected WfEvent createEvent(Object eventName) {
+        // you might want to override this to add parameters, lookup spring beans with given name, ???
+        return new WfEvent(eventName);
     }
 
     public void fire(@Nonnull WfEvent event) {
-        nextEvent = event;
-        doWorkflow();
-    }
-
-    private void doWorkflow() {
-        while (nextEvent != null) {
-            try {
-                doWorkflowEvent(nextEvent);
-                // if the state is temporary (i.e. it always jumps to another state after entering, then handle this otherwise just stay here.
-                if (currentState.isTransitive()) {
-                    nextEvent = currentState.getTransitionEvent();
-                } else {
-                    nextEvent = null;
-                }
-            } catch (WorkflowException e) {
-                // tried to switch to another state but failed...will remain in this state unless the exception gives us directions on where to go.
-                nextEvent = e.getTransitionEvent();  // <--nullable
-            }
-
+        String nextState = currentState.handleEvent(context, event);
+        while (nextState!=null) {
+            currentState = resolveEvent(nextState);
+            nextState = currentState.enter(context, event);
         }
     }
 
-    private void doWorkflowEvent(@Nonnull WfEvent event) throws WorkflowVetoException {
-        WfState transitionState = event.getTransitionState();
-        if (currentState!=null) {
-            currentState.leave(this, event);
-        }
-        // how to handle exceptions here???
-        transitionState.enter(this, event);
-        currentState = transitionState;
+    protected WfState resolveEvent(@Nonnull String e) {
+        return WfState.createUnmanagedState(e);
     }
 
-    protected T getModelObject() {
-        return data;
-    }
-
-    protected void intialize(Map<String, Object> context) {
-        ; //override if you want some workflow startup stuff to happen.
-    }
-
-    public void fire(@Nonnull String eventName) {
-        WfEvent event = getEventByName(eventName);
-        fire(event);
-    }
-
-//    public void queue(@Nonnull WfState nextState) {
-//        queue(new WfEventAdapter(nextState));
-//    }
-
-    private WfEvent getEventByName(String eventName) {
-        return null; // TODO
-    }
-
-    public WfState getCurrentState() {
-        return currentState;
-    }
+    protected void initialize() {}
 
     public Object get(String key) {
         return context.get(key);
     }
 
-    public Workflow withValue(String key, Object value) {
+    public <W extends Workflow> W withValue(String key, Object value) {
         context.put(key, value);
-        return this;
+        return (W) this;
     }
 
     public Workflow withValues(Entry<String, Object>... values) {
-        for (Entry<String, Object> value:values) {
-
-            context.put(value.getKey(), value.getValue());
+        for (Entry<String, Object> entry:values) {
+            withValue(entry.getKey(), entry.getValue());
         }
         return this;
     }
 
-    public Workflow withValues(Map<String, Object> values) {
-        context.putAll(values);
-        return this;
+    public <W extends Workflow> W withValues(Map<String, Object> values) {
+        for (String key:values.keySet()) {
+            withValue(key, values.get(key));
+        }
+        return (W) this;
     }
 
-    public Workflow withData(T data) {
-        this.data = data;
-        return this;
+    protected <T extends Workflow> T  withStartingState(WfState state) {
+        this.currentState = state;
+        return (T) this;
     }
 
+    public <T extends Workflow> T restoreContext(C context) {
+        this.context = context;
+        return (T) this;
+    }
+
+    public C getContext() {
+        return context;
+    }
 }
