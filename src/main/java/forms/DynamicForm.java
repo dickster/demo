@@ -5,6 +5,8 @@ import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
@@ -27,6 +29,9 @@ public class DynamicForm extends Form  {
 
     private @Inject Toolkit toolkit;
 
+    // needs access to workflow. (not necessarily though, just in typical case?)
+
+    private @Inject SubmissionHandler submissionHandler;
     private FormConfig formConfig;
     private IModel<?> formModel;
     private transient FormOptions formOptions = new FormOptions();
@@ -118,7 +123,15 @@ public class DynamicForm extends Form  {
         response.render(OnDomReadyHeaderItem.forScript(String.format(INIT_FORM, new Gson().toJson(formOptions))));
     }
 
+    @Override
+    protected void onSubmit() {
+        submissionHandler.onSubmit(this);
+    }
 
+    @Override
+    protected void onError() {
+        submissionHanlder.onError(this);
+    }
 
     class FormOptions {
         String id = getMarkupId();

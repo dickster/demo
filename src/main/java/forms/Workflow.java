@@ -46,10 +46,13 @@ public abstract class Workflow<C extends IWorkflowContext> {
 
     public void fire(@Nonnull WfEvent event) {
         String nextState = currentState.handleEvent(context, event);
-        while (nextState!=null) {
-            currentState = resolveEvent(nextState);
-            nextState = currentState.enter(context, event);
+        if (nextState!=null) {
+            changeState(resolveEvent(nextState));
         }
+    }
+
+    protected void changeState(WfState state) {
+        currentState = state;
     }
 
     protected WfState resolveEvent(@Nonnull String e) {
