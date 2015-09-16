@@ -1,17 +1,17 @@
 package forms;
 
 
-import org.apache.wicket.Component;
-import org.apache.wicket.model.IModel;
+import com.google.common.eventbus.EventBus;
 
 import javax.inject.Inject;
 
 public class Toolkit {
 
     private @Inject Theme theme;
+    private @Inject EventBus eventBus; /*prototype scoped */
 
     public WidgetFactory createWidgetFactory() {
-        return new DefaultWidgetFactory();
+        return new DefaultWidgetFactory().withEventBus(eventBus);
     }
 
     public Theme getTheme() {

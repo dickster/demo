@@ -1,20 +1,17 @@
 package forms;
 
-import com.google.common.base.Preconditions;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.TextField;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class WfFormState extends WfState {
+public class WfFormState extends WfState<FormBasedWorkflowContext> {
 
     @Nullable
     @Override
-    public String enter(IWorkflowContext context, WfEvent event) {
-        Preconditions.checkArgument(context instanceof FormBasedWorkflowContext);
-        FormBasedWorkflowContext c = (FormBasedWorkflowContext) context;
-        c.getContainer().replace(getFormForEvent(event));
+    public String enter(FormBasedWorkflowContext context, WfEvent event) {
+        context.getContainer().replace(getFormForEvent(event));
         return null;
     }
 
@@ -26,3 +23,9 @@ public class WfFormState extends WfState {
 
 // can forms be spring beans?  sure!
 // form factory.
+
+// BA - creates workflow with initial form.
+// write the test app.  new DefaultWorkflow(startingFormName);   == new WfFormState(x);   formDao.getFormConfig(x);
+
+// assume a DAO to get forms, states, workflows?
+//

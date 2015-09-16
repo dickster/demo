@@ -2,11 +2,12 @@ package forms;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.google.common.eventbus.DeadEvent;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import com.google.gson.Gson;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
@@ -16,7 +17,6 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.IModel;
 
-import javax.inject.Inject;
 import java.util.List;
 
 public class DynamicForm extends Form  {
@@ -27,11 +27,11 @@ public class DynamicForm extends Form  {
 
     enum EventPropogation { EVENT_STOP, EVENT_PROPOGATE };
 
-    private @Inject Toolkit toolkit;
+    private @SpringBean Toolkit toolkit;
+    private EventBus eventBus;
 
     // needs access to workflow. (not necessarily though, just in typical case?)
 
-    private @Inject SubmissionHandler submissionHandler;
     private FormConfig formConfig;
     private IModel<?> formModel;
     private transient FormOptions formOptions = new FormOptions();
@@ -74,6 +74,8 @@ public class DynamicForm extends Form  {
         setDefaultModel(getFormModel());
 
         final WidgetFactory factory = createWidgetFactory(toolkit);
+        eventBus = factory.getEventBus();
+
 
         add(new ListView<WidgetConfig>("widgets", formConfig.getWidgetConfigs()) {
             @Override
@@ -113,7 +115,6 @@ public class DynamicForm extends Form  {
         return (T) this;
     }
 
-
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
@@ -123,15 +124,18 @@ public class DynamicForm extends Form  {
         response.render(OnDomReadyHeaderItem.forScript(String.format(INIT_FORM, new Gson().toJson(formOptions))));
     }
 
-    @Override
-    protected void onSubmit() {
-        submissionHandler.onSubmit(this);
+    @Subscribe
+    public void handleEvent(Object event) {
+        // override this to get any events fired by contained widgets.
+        eventBus.post(event);
     }
 
-    @Override
-    protected void onError() {
-        submissionHanlder.onError(this);
+    @Subscribe
+    public void unhandledEvent(DeadEvent deadEvent) {
+        // good for debugging...may not necessarily be a bad thing if this happens but good to know.
+        System.out.println("WARNING : this event was not handled by any handlers. " + deadEvent);
     }
+
 
     class FormOptions {
         String id = getMarkupId();

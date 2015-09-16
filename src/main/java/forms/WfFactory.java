@@ -4,8 +4,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import java.util.Map;
-
 
 public class WfFactory implements ApplicationContextAware {
 
@@ -16,10 +14,9 @@ public class WfFactory implements ApplicationContextAware {
 
     private ApplicationContext context;
 
-    public Workflow create(String workflowType, Map<String, Object> context) {
+    public Workflow create(String workflowType, IWorkflowContext context) {
 
-        // default = new DefaultWorkflow().withValues(context).withContainer(
-        return new CommercialWorkflow().withValues(context);
+        return new CommercialWorkflow((FormBasedWorkflowContext) context);
 //        boolean isPrototype = context.isPrototype(workflowType);
 //        Preconditions.checkState(isPrototype, "workflow beans must be of PROTOTYPE scope.   see @org.springframework.beans.factory.config.Scope");
 //        return context.getBean(workflowType, Workflow.class);

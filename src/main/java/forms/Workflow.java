@@ -1,10 +1,21 @@
 package forms;
 
 import com.google.common.base.Preconditions;
+import com.google.common.eventbus.EventBus;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.inject.Inject;
+import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Stack;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 
 // do this in subclasses....-->@WfDef("commercial")
 public abstract class Workflow<C extends IWorkflowContext> {
@@ -13,9 +24,15 @@ public abstract class Workflow<C extends IWorkflowContext> {
 
     private WfState currentState;
 
-    public Workflow(WfState state, C context) {
-        withStartingState(state);
-        this.context = context;
+    private @Inject WfStateFactory stateFactory;
+    private @Inject /*prototype scope*/ EventBus eventBus;
+    private Stack<Date> timer;
+
+    private ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(5));
+
+    public Workflow(C context) {
+        this.context = (C) context;
+        eventBus.register(this);
     }
 
     public Workflow start() {
@@ -33,7 +50,7 @@ public abstract class Workflow<C extends IWorkflowContext> {
         return this;
     }
 
-    public void fire(Object event) {
+    public void fire(@Nonnull String event) {
         // TODO : look up spring bean of class WfEvent & name = eventName.
         // otherwise create wrapper..
         fire(createEvent(event));
@@ -47,19 +64,58 @@ public abstract class Workflow<C extends IWorkflowContext> {
     public void fire(@Nonnull WfEvent event) {
         String nextState = currentState.handleEvent(context, event);
         if (nextState!=null) {
-            changeState(resolveEvent(nextState));
+            changeState(resolveState(nextState), event);
         }
     }
 
-    protected void changeState(WfState state) {
+    private @Nonnull WfState resolveState(String nextState) {
+        return stateFactory.getState(nextState);
+    }
+
+    private final void changeState(WfState state, WfEvent event) {
+        if (currentState.isAsync()) {
+            changeAsyncState(state, event);
+        }
+        else {
+            state.enter(context, event);
+        }
         currentState = state;
     }
 
-    protected WfState resolveEvent(@Nonnull String e) {
-        return WfState.createUnmanagedState(e);
+    private final void changeAsyncState(final WfState state, final WfEvent event) {
+        enteringAsyncState(state);
+        Callable<String> asyncTask = new Callable<String>() {
+            @Override
+            public @Nullable String call() throws Exception {
+                return state.enter(context, event);
+            }
+        };
+        Futures.addCallback(executor.submit(asyncTask), new FutureCallback<String>() {
+            public void onSuccess(String result) {
+                currentState = state;
+                leavingAysncState(state);
+            }
+
+            public void onFailure(Throwable thrown) {
+                ; // hmmm...what to do here??? leave in old state.
+                System.out.println("couldn't enter state : " + state);
+            }
+        });
     }
 
-    protected void initialize() {}
+    protected void enteringAsyncState(WfState state) {
+        // override this to show progress bar, log, whatever...
+        timer.push(new Date());
+        System.out.println("starting state " + state);
+    }
+
+    private void leavingAysncState(WfState state) {
+        // override this to hide progress bar, log, whatever...
+        Date date = timer.pop();
+        System.out.println("ending state " + state + " after " + (new Date().getTime()-date.getTime()) + " millis");
+    }
+
+    protected void initialize() {/*override if you want to do some pre-flight checks before workflow starts*/}
 
     public Object get(String key) {
         return context.get(key);

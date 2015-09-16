@@ -2,15 +2,14 @@ package forms;
 
 import java.util.Locale;
 
-public class CommercialWorkflow extends Workflow<String> {
+public class CommercialWorkflow extends Workflow<FormBasedWorkflowContext> {
 
     private WfState startState = /*blah blah blah*/null;
 
-    public CommercialWorkflow() {
-        super();
-            withStartingState(startState)
-            .withValue("defaultCountry", Locale.US)
-            .withData(new String("hello world"));
+    public CommercialWorkflow(FormBasedWorkflowContext context) {
+        super(context);
+        withStartingState(startState);
+        withValue("defaultCountry", Locale.US);
     }
 
     protected void initialize() {

@@ -1,11 +1,10 @@
 package forms;
 
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.Serializable;
 
-public class WfState implements Serializable /*, BeanNameAware*/ {
+public class WfState<C extends IWorkflowContext> implements Serializable {
 
     private String name;
 
@@ -16,22 +15,11 @@ public class WfState implements Serializable /*, BeanNameAware*/ {
         this.name = name;
     }
 
-    // typically, should be created as spring beans.  but early in development cycle you can get away with these
-    //  skeleton classes.
-    public static WfState createUnmanagedState(@Nonnull String name) {
-        // TODO : make this state find a form of the same name.
-        return new WfState(name);
-    }
-
-    void setBeanName(String name) {
-        this.name = name;
-    }
-
     public String getName() {
         return name;
     }
 
-    public @Nullable String handleEvent(IWorkflowContext workflow, WfEvent event) {
+    public @Nullable String handleEvent(C workflow, WfEvent event) {
         // typically something like...
         // switch ( Event.valueOf(event.getName()) ) {
         //    case SUBMIT : doThis();
@@ -39,10 +27,10 @@ public class WfState implements Serializable /*, BeanNameAware*/ {
         //    etc...
         // }
         // return  if null, workflow will just hang around and wait for next event.
-        return event.getOnSuccessState();
+        return null; //event.getOnSuccessState();
     }
 
-    public @Nullable String enter(IWorkflowContext workflow, WfEvent event) {
+    public @Nullable String enter(C workflow, WfEvent event) {
         // load from document cache here...
         // do stuff...
         // get parameters & data from event if needed.
@@ -50,4 +38,18 @@ public class WfState implements Serializable /*, BeanNameAware*/ {
         return null;
     }
 
+    public boolean isAsync() {
+        return false;
+    }
+
+    // BA - no spring beans defined.  workflow just creates states based on form config which is named by onSuccessState().
+    // return new WfState(formConfigWIthName(event.getSuccessState()));
+
+
+    @Override
+    public String toString() {
+        return "WfState{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
