@@ -1,27 +1,20 @@
 package forms;
 
-import com.google.common.base.Preconditions;
-import com.google.common.eventbus.EventBus;
+import com.sun.istack.internal.NotNull;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
-
-import javax.annotation.Nullable;
-import java.io.Serializable;
 
 public abstract class WidgetFactory {
 
+    private final Workflow workflow;
     private boolean usePropertyAsName = false;
-    private EventBus eventBus;
 
-    public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
-    }
-
-    public WidgetFactory withEventBus(EventBus eventBus) {
-        this.eventBus = eventBus;
-        return this;
+    public WidgetFactory(Workflow workflow/**user, locale, settings, permissions - get this from session.*/) {
+        this.workflow = workflow;
     }
 
     public abstract Component createWidget(String id, WidgetConfig config, IModel<?>... models);
@@ -32,7 +25,6 @@ public abstract class WidgetFactory {
     }
 
     public final Component create(String id, WidgetConfig config, IModel<?>... models) {
-        Preconditions.checkState(eventBus!=null);
         preCreate(config, models);
         Component component = createWidget(id, config, models);
         postCreate(component, config, models);
@@ -49,7 +41,8 @@ public abstract class WidgetFactory {
             component.add(new AjaxEventBehavior(event) {
                 // on ajax event, call mediator.  (the component itself doesn't do anything but parent mediator gets a chance to react).
                 @Override protected void onEvent(final AjaxRequestTarget target) {
-                    eventBus.post(new WfAjaxEvent(event, target, getComponent()));
+                    //need access to workflow here..
+                    workflow.post(new WfAjaxEvent(event, target, getComponent(), type));
                 }
             });
         }
@@ -60,28 +53,12 @@ public abstract class WidgetFactory {
         //if (config.getName().equals("someSpecialEmail")) { config.addAjaxEvent("onchange"); config.addValidator(EmailAddressValidator.getInstance()); }
     }
 
-    @Nullable
-    protected IModel<?> createModel(WidgetConfig config, IModel <?> formModel) {
+    @NotNull
+    protected IModel<?> createModel(WidgetConfig config, CompoundPropertyModel<?> formModel) {
         String propertyExpression = config.getProperty();
-        return null;
-        //return createModelForId(propertyExpression);
-    }
-
-    public EventBus getEventBus() {
-        return eventBus;
+        return formModel.bind(propertyExpression);
     }
 
 
-    public static class WfAjaxEvent implements Serializable {
-        private String event;
-        private AjaxRequestTarget target;
-        private Component component;
-
-        public WfAjaxEvent(String event, AjaxRequestTarget target, Component component) {
-            this.event = event;
-            this.target = target;
-            this.component = component;
-        }
-    }
 
 }

@@ -1,31 +1,34 @@
 package forms;
 
-import com.google.common.eventbus.EventBus;
-import forms.WidgetFactory.WfAjaxEvent;
-import org.apache.wicket.Component;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
+import forms.Mediator.MediatorType;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
+import java.util.List;
 
-// if you want to broadcast events to a parent mediator.
-public abstract class MediatedAjaxEventBehavior extends AjaxEventBehavior {
 
-    private Component component;
-    private EventBus eventBus;
 
-    public MediatedAjaxEventBehavior(String event, EventBus bus) {
+public class MediatedAjaxEventBehavior extends AjaxEventBehavior{
+
+    private List<MediatorType> callbacks = Lists.newArrayList(MediatorType.POST);
+
+
+    public MediatedAjaxEventBehavior(String event) {
         super(event);
-        this.eventBus = bus;
     }
 
+    public MediatedAjaxEventBehavior withTypes(MediatorType... type) {
+        Preconditions.checkArgument(type.length>0, "mediator must be called either before and/or after method");
+        callbacks = Lists.newArrayList(type);
+        return this;
+    }
 
-    // new TextField().add(new MediatedAjaxEventBehavior("onchange"));
 
     @Override
-    protected final void onEvent(final AjaxRequestTarget target) {
-        eventBus.post(new WfAjaxEvent(getEvent(), target, getComponent()));
+    protected void onEvent(AjaxRequestTarget target) {
+        Mediator.mediate(this, target, getComponent(), callbacks);
     }
-
-    protected abstract void onEvent(Component component, String event, AjaxRequestTarget target);
 
 }

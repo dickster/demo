@@ -1,7 +1,9 @@
 package forms;
 
 import com.google.common.base.Preconditions;
+import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListeningExecutorService;
@@ -18,21 +20,21 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 
 // do this in subclasses....-->@WfDef("commercial")
-public abstract class Workflow<C extends IWorkflowContext> {
+public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
 
     private C context;
 
     private WfState currentState;
 
     private @Inject WfStateFactory stateFactory;
-    private @Inject /*prototype scope*/ EventBus eventBus;
     private Stack<Date> timer;
 
     private ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(5));
 
+
     public Workflow(C context) {
         this.context = (C) context;
-        eventBus.register(this);
+        register(this);
     }
 
     public Workflow start() {
@@ -50,22 +52,35 @@ public abstract class Workflow<C extends IWorkflowContext> {
         return this;
     }
 
+    @Subscribe
     public void fire(@Nonnull String event) {
         // TODO : look up spring bean of class WfEvent & name = eventName.
         // otherwise create wrapper..
         fire(createEvent(event));
     }
 
-    protected WfEvent createEvent(Object eventName) {
-        // you might want to override this to add parameters, lookup spring beans with given name, ???
-        return new WfEvent(eventName);
-    }
-
+    @Subscribe
     public void fire(@Nonnull WfEvent event) {
         String nextState = currentState.handleEvent(context, event);
         if (nextState!=null) {
             changeState(resolveState(nextState), event);
         }
+    }
+
+    @Subscribe
+    protected void handleAjax(DeadEvent event) {
+        System.out.println("an event occurred with no listeners " + event);
+    }
+
+//    @Subscribe
+//    protected void handleAjax(WfAjaxEvent event) {
+//        //override this if you want to listen to ajax events in your workflow!!!
+//        System.out.println("AJAX EVENT " + event + " occurred but no listeners attached!");
+//    }
+
+    protected WfEvent createEvent(Object eventName) {
+        // you might want to override this to add parameters, lookup spring beans with given name, ???
+        return new WfEvent(eventName);
     }
 
     private @Nonnull WfState resolveState(String nextState) {
