@@ -11,7 +11,7 @@ public class WfState<C extends IWorkflowContext> implements Serializable {
     public WfState() {
     }
 
-    private WfState(String name) {
+    public WfState(String name) {
         this.name = name;
     }
 

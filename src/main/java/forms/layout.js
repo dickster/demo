@@ -1,6 +1,11 @@
 var easy = easy ? easy : {};
 easy.layout= (function() {
 
+//    rows: ["foo", "bar", "hello".]
+//
+//        OR
+//
+//    rows : [ {id:"foo", css:"col-log-3"}, ]
 
 //    var defaults = {sections:
 //        [{id:'nameSection', label:'INFO',

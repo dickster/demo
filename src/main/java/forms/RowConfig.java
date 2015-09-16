@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.wicket.Component;
 
+import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -24,13 +25,13 @@ public class RowConfig implements Serializable {
         }
     }
 
-    private void add(Component c, String style) {
+    private void add(Component c, @Nullable String style) {
         Key key = new Key(c);
         cols.add(key.toString());
         styles.put(key, style);
     }
 
-    private String getColClass(Component comp) {
+    private @Nullable String getColClass(Component comp) {
         return null;
     }
 

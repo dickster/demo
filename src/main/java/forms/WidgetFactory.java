@@ -3,8 +3,6 @@ package forms;
 import com.sun.istack.internal.NotNull;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
-import org.apache.wicket.ajax.AjaxEventBehavior;
-import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 
@@ -38,13 +36,7 @@ public abstract class WidgetFactory {
         component.setOutputMarkupId(true);
         final String event = "onchange";//config.getMediatedEvent();
         if (StringUtils.isNotBlank(event)) {
-            component.add(new AjaxEventBehavior(event) {
-                // on ajax event, call mediator.  (the component itself doesn't do anything but parent mediator gets a chance to react).
-                @Override protected void onEvent(final AjaxRequestTarget target) {
-                    //need access to workflow here..
-                    workflow.post(new WfAjaxEvent(event, target, getComponent(), type));
-                }
-            });
+            component.add(new MediatedAjaxEventBehavior(event));
         }
     }
 

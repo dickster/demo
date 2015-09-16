@@ -2,10 +2,9 @@ package forms;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.google.common.eventbus.DeadEvent;
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.markup.head.HeaderItem;
@@ -16,8 +15,11 @@ import org.apache.wicket.markup.html.form.validation.IFormValidator;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.util.visit.IVisit;
+import org.apache.wicket.util.visit.IVisitor;
 
 import java.util.List;
+import java.util.Map;
 
 public class DynamicForm extends Form  {
 
@@ -28,13 +30,12 @@ public class DynamicForm extends Form  {
     enum EventPropogation { EVENT_STOP, EVENT_PROPOGATE };
 
     private @SpringBean Toolkit toolkit;
-    private EventBus eventBus;
 
     // needs access to workflow. (not necessarily though, just in typical case?)
 
     private FormConfig formConfig;
     private IModel<?> formModel;
-    private transient FormOptions formOptions = new FormOptions();
+    private transient FormOptions formOptions;
     private AbstractDefaultAjaxBehavior behavior;
     private String expectedAcordVersion; // TODO : set valid default here...
 
@@ -74,17 +75,17 @@ public class DynamicForm extends Form  {
         setDefaultModel(getFormModel());
 
         final WidgetFactory factory = createWidgetFactory(toolkit);
-        eventBus = factory.getEventBus();
 
-
+        formOptions = new FormOptions();
         add(new ListView<WidgetConfig>("widgets", formConfig.getWidgetConfigs()) {
             @Override
             protected void populateItem(ListItem<WidgetConfig> item) {
                 WidgetConfig config = item.getModel().getObject();
                 Component widget = createWidget("widget", config, factory);
+                formOptions.add(widget, config.getName());
                 if (widget instanceof HasWidgetOptions) {
                     WidgetOptions options = getOptions(widget);
-                    formOptions.addWidgetOptions(options);
+                    formOptions.add(widget, options);
                 }
                 item.add(widget);
             }
@@ -124,27 +125,22 @@ public class DynamicForm extends Form  {
         response.render(OnDomReadyHeaderItem.forScript(String.format(INIT_FORM, new Gson().toJson(formOptions))));
     }
 
-    @Subscribe
-    public void handleEvent(Object event) {
-        // override this to get any events fired by contained widgets.
-        eventBus.post(event);
-    }
-
-    @Subscribe
-    public void unhandledEvent(DeadEvent deadEvent) {
-        // good for debugging...may not necessarily be a bad thing if this happens but good to know.
-        System.out.println("WARNING : this event was not handled by any handlers. " + deadEvent);
-    }
-
-
     class FormOptions {
         String id = getMarkupId();
-        List<WidgetOptions> widgetOptions = Lists.newArrayList();
+        Map<String, WidgetOptions> widgetOptions = Maps.newHashMap();
+        Map<String, String> idToName = Maps.newHashMap();
         Boolean skipValidation;
 
-        public FormOptions addWidgetOptions(WidgetOptions o) {
-            widgetOptions.add(o);
+        FormOptions() {
+        }
+
+        public FormOptions add(Component widget, WidgetOptions o) {
+            widgetOptions.put(widget.getMarkupId(), o);
             return this;
+        }
+
+        public void add(Component widget, String name) {
+            idToName.put(widget.getMarkupId(), name);
         }
     }
 

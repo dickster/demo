@@ -16,11 +16,6 @@ public class Beans {
         return new DefaultTheme();
     }
 
-    @Bean(name="Comml")  // give bean specific name if you want, will use method name by default.
-    public Workflow commercialWorkflow() {
-        return new CommercialWorkflow();
-    }
-
     @Bean
     public WfFactory WorkflowFactory() {
         return new WfFactory();
@@ -28,7 +23,14 @@ public class Beans {
 
     @Bean
     public WfStateFactory wfStateFactory() {
+        // create a state factory that optionally checks for groovy files and runs them.
+        // eg  .../Commercial/AI.groovy  could contain source for "AI" state in commercial workflow.
         return new WfStateFactory();
+    }
+
+    @Bean
+    public WfState stateA() {
+        return new WfState("A");
     }
 
 }

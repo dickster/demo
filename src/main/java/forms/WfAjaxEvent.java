@@ -10,7 +10,7 @@ public class WfAjaxEvent implements Serializable {
     private AjaxRequestTarget target;
     private Component component;
     private boolean stopPropogation = false;
-    private Mediator.MediatorType type = Mediator.MediatorType.VOID;
+    private Mediator.MediatorType type = Mediator.MediatorType.POST;
 
     public WfAjaxEvent(String event, AjaxRequestTarget target, Component component) {
         this.event = event;
