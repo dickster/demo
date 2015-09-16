@@ -5,6 +5,11 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.model.IModel;
 
 public class DefaultWidgetFactory extends WidgetFactory {
+
+    public DefaultWidgetFactory() {
+        super();
+    }
+
     @Override
     public Component createWidget(String id, WidgetConfig config, IModel<?>... models) {
         switch (config.getWidgetType()) {

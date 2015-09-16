@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
-import org.apache.commons.lang3.StringUtils;
+import demo.PageLayout;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.markup.head.HeaderItem;
@@ -18,21 +18,23 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Map;
 
 public class DynamicForm extends Form  {
 
+    private static final String DEFAULT_LAYOUT_VAR = "defaultLayout";
+
+    enum EventPropogation { EVENT_STOP, EVENT_PROPOGATE };
+
     private static final String INIT_FORM = "easyForm.init(%s);";
     public static final String ID_PARAM = "id";
     public static final String EVENT_PARAM = "event";
 
-    enum EventPropogation { EVENT_STOP, EVENT_PROPOGATE };
-
     private @SpringBean Toolkit toolkit;
 
-    // needs access to workflow. (not necessarily though, just in typical case?)
-
+    private String layout = DEFAULT_LAYOUT_VAR;
     private FormConfig formConfig;
     private IModel<?> formModel;
     private transient FormOptions formOptions;
@@ -45,6 +47,12 @@ public class DynamicForm extends Form  {
 
     public DynamicForm withConfig(FormConfig config) {
         this.formConfig = config;
+        return this;
+    }
+
+    public DynamicForm withLayout(String layoutVarName) {
+        Preconditions.checkArgument(layoutVarName!=null);
+        this.layout = layoutVarName;
         return this;
     }
 
@@ -122,13 +130,36 @@ public class DynamicForm extends Form  {
         for (HeaderItem item:getTheme().getHeaderItems()) {
             response.render(item);
         }
+        // TODO : only do this in debug mode???
+        if (layout.equals(DEFAULT_LAYOUT_VAR)) {
+            String defaultLayout = new Gson().toJson(generateDefaultLayout());
+            response.render(OnDomReadyHeaderItem.forScript(String.format("var %s = %s;", DEFAULT_LAYOUT_VAR, defaultLayout )));
+        }
         response.render(OnDomReadyHeaderItem.forScript(String.format(INIT_FORM, new Gson().toJson(formOptions))));
+    }
+
+    private @Nonnull PageLayout generateDefaultLayout() {
+        final List<Component> components = Lists.newArrayList();
+        visitChildren(Component.class, new IVisitor<Component, Void>() {
+            @Override public void component(Component object, IVisit<Void> visit) {
+                components.add(object);
+            }
+        });
+        int count = components.size();
+        int colsPerRow = 3;
+        int compPerSec = (count+1)/2;
+        // mostly this is for reference so the dev will get an idea of what the layout json object should look like.
+        PageLayout pageLayout = new PageLayout();
+        pageLayout.addInDefaltManner(components, compPerSec, colsPerRow);
+        return pageLayout;
+
     }
 
     class FormOptions {
         String id = getMarkupId();
+        String layout = DynamicForm.this.layout;
         Map<String, WidgetOptions> widgetOptions = Maps.newHashMap();
-        Map<String, String> idToName = Maps.newHashMap();
+        Map<String, String> nameToId = Maps.newHashMap();
         Boolean skipValidation;
 
         FormOptions() {
@@ -140,7 +171,7 @@ public class DynamicForm extends Form  {
         }
 
         public void add(Component widget, String name) {
-            idToName.put(widget.getMarkupId(), name);
+            nameToId.put(name, widget.getMarkupId());
         }
     }
 

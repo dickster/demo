@@ -8,11 +8,9 @@ import org.apache.wicket.model.IModel;
 
 public abstract class WidgetFactory {
 
-    private final Workflow workflow;
     private boolean usePropertyAsName = false;
 
-    public WidgetFactory(Workflow workflow/**user, locale, settings, permissions - get this from session.*/) {
-        this.workflow = workflow;
+    public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
 
     public abstract Component createWidget(String id, WidgetConfig config, IModel<?>... models);

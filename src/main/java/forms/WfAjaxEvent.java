@@ -24,9 +24,10 @@ public class WfAjaxEvent implements Serializable {
     }
 
     public void stopPropogation() {
+        // DANGEROUS : you might confuse others when they don't see their methods called
+        // because you've stopped the event so make sure you use this safely!!
         this.stopPropogation = true;
     }
-
 
     public boolean isStopped() {
         return stopPropogation;
