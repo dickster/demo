@@ -13,6 +13,8 @@ import java.util.List;
 
 public class Mediator {
 
+    public static final String ABSTRACT_EVENT = "$ABSTRACT_EVENT$";
+
     enum MediatorType { VOID, PRE, POST };
 
 
@@ -29,11 +31,13 @@ public class Mediator {
         WfAjaxEvent e = new WfAjaxEvent(event, target, component).withType(MediatorType.PRE);
         if (callbacks.contains(MediatorType.PRE)) {
             post(e);
+            if (e.isStopped()) {  // allow PRE callbacks chance to veto event.
+                return;
+            }
         }
-        if (e.isStopped()) {  // allow PRE callbacks chance to veto event.
-            return;
-        }
+
         callSuperOnEventMethod(behavior, target);
+
         if (callbacks.contains(MediatorType.POST)) {
             post(e.withType(MediatorType.POST));
         }
@@ -44,7 +48,7 @@ public class Mediator {
     }
 
     public static void mediate(AbstractDefaultAjaxBehavior behavior, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
-        mediate(behavior, "$ABSTRACT_EVENT$", target, component, callbacks);
+        mediate(behavior, ABSTRACT_EVENT, target, component, callbacks);
     }
 
     private static void callSuperOnEventMethod(AbstractAjaxBehavior behavior, AjaxRequestTarget target) {

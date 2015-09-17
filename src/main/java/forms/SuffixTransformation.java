@@ -3,6 +3,8 @@ package forms;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.Nullable;
+
 public class SuffixTransformation implements Transformation<String> {
 
     private boolean skipNulls = false;
@@ -31,14 +33,15 @@ public class SuffixTransformation implements Transformation<String> {
     }
 
     @Override
-    public Object transform(String o) {
-        if (skipNulls && o==null) return o;
-        if (skipBlanks && StringUtils.isBlank(o)) return o;
+    public @Nullable Object transform(String o) {
+        if (skipNulls && o==null) return null;
+        if (skipBlanks && StringUtils.isBlank(o)) return "";
         return o+suffix;
     }
 
     @Override
-    public Object inverseTransform(String o) {
+    public @Nullable
+    Object inverseTransform(String o) {
         if (o==null) return null;
         boolean matches = caseSensitive ?
                 o.endsWith(suffix) :

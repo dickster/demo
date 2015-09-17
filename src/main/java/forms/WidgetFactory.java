@@ -1,10 +1,13 @@
 package forms;
 
-import com.sun.istack.internal.NotNull;
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
-import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.validation.IValidator;
+
+import javax.annotation.Nonnull;
 
 public abstract class WidgetFactory {
 
@@ -20,7 +23,7 @@ public abstract class WidgetFactory {
         return (T) this;
     }
 
-    public final Component create(String id, WidgetConfig config, IModel<?>... models) {
+    public final @Nonnull Component create(String id, WidgetConfig config, IModel<?>... models) {
         preCreate(config, models);
         Component component = createWidget(id, config, models);
         postCreate(component, config, models);
@@ -28,13 +31,44 @@ public abstract class WidgetFactory {
     }
 
     protected void postCreate(final Component component, WidgetConfig config, IModel<?>... models) {
+        Preconditions.checkArgument(!(component instanceof FormComponent) || models.length>0, "must supply at least one model for a form component!");
+        setMetaData(component, config);
+        setModels(component, models);
+        addAjax(component, config);
+        addValidators(component, config);
+    }
+
+    protected void setMetaData(Component component, WidgetConfig config) {
         String name = usePropertyAsName ? config.getName() : config.getProperty();
         component.setMetaData(WidgetConfig.NAME, name);
-        // set mediator...listen to all published events.
         component.setOutputMarkupId(true);
-        final String event = "onchange";//config.getMediatedEvent();
+    }
+
+    private void setModels(Component component, IModel<?>[] models) {
+        if (component instanceof IHasMultipleModels) {
+            IHasMultipleModels mm = (IHasMultipleModels) component;
+            mm.setDefaultModels(models);
+        } else {
+            if (models.length>1) System.out.println("WARNING : you have supplied more than one model to " + component.getMetaData(WidgetConfig.NAME) + " but it doesn't implement interface " + IHasMultipleModels.class.getSimpleName());
+            component.setDefaultModel(models[0]);
+        }
+    }
+
+    private void addValidators(Component component, WidgetConfig config) {
+        if (component instanceof FormComponent) {
+            FormComponent fc = (FormComponent) component;
+            for (IValidator<?> validator:config.getValidations()) {
+                fc.add(validator);
+            }
+        }
+    }
+
+    private void addAjax(Component component, WidgetConfig config) {
+        final String event = "onchange";//TODO: config.getMediatedEvent();
         if (StringUtils.isNotBlank(event)) {
-            component.add(new MediatedAjaxEventBehavior(event));
+            if (StringUtils.isNotBlank(event)) {
+                component.add(new MediatedAjaxEventBehavior(event));
+            }
         }
     }
 
@@ -42,13 +76,5 @@ public abstract class WidgetFactory {
         // do nothing by default.  you might want to filter config options based on user/settings.
         //if (config.getName().equals("someSpecialEmail")) { config.addAjaxEvent("onchange"); config.addValidator(EmailAddressValidator.getInstance()); }
     }
-
-    @NotNull
-    protected IModel<?> createModel(WidgetConfig config, CompoundPropertyModel<?> formModel) {
-        String propertyExpression = config.getProperty();
-        return formModel.bind(propertyExpression);
-    }
-
-
 
 }

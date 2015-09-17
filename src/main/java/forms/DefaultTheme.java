@@ -62,14 +62,14 @@ public class DefaultTheme implements Theme {
 
         // what about apply?() methods for each specific type of component?
         component.add(new AttributeAppender("class", "motif"));
-        if (component instanceof HasWidgetOptions) {
-            HasWidgetOptions ezWidget = (HasWidgetOptions) component;
+        if (component instanceof HasJsonOptions) {
+            HasJsonOptions ezWidget = (HasJsonOptions) component;
             ezWidget.getOptions()
                         .withOption("color", "blue")
                         .withOption("spacing", "large");
         }
         // typically add javascript to do layout, styling, adding classes, add attributes to widgets,
-        //   add listeners to facilitate overlays/dialogs/menus....whatever
+        //   add listeners to facilitate overlays/dialogs/menus...whatever
     }
 
 }

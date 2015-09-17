@@ -1,11 +1,7 @@
 package forms;
 
-/**
- * Created with IntelliJ IDEA.
- * User: derek.dick
- * Date: 9/17/15
- * Time: 9:51 AM
- * To change this template use File | Settings | File Templates.
- */
+import org.apache.wicket.model.IModel;
+
 public interface IHasMultipleModels {
+    void setDefaultModels(IModel<?>... models);
 }

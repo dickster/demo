@@ -15,6 +15,7 @@ import org.apache.wicket.markup.html.form.validation.IFormValidator;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
@@ -26,11 +27,8 @@ public class DynamicForm extends Form  {
 
     private static final String DEFAULT_LAYOUT_VAR = "defaultLayout";
 
-    enum EventPropogation { EVENT_STOP, EVENT_PROPOGATE };
-
+    // this calls layout and initializes all widgets.
     private static final String INIT_FORM = "easyForm.init(%s);";
-    public static final String ID_PARAM = "id";
-    public static final String EVENT_PARAM = "event";
 
     private @SpringBean Toolkit toolkit;
 
@@ -91,7 +89,7 @@ public class DynamicForm extends Form  {
                 WidgetConfig config = item.getModel().getObject();
                 Component widget = createWidget("widget", config, factory);
                 formOptions.add(widget, config.getName());
-                if (widget instanceof HasWidgetOptions) {
+                if (widget instanceof HasJsonOptions) {
                     WidgetOptions options = getOptions(widget);
                     formOptions.add(widget, options);
                 }
@@ -107,7 +105,7 @@ public class DynamicForm extends Form  {
     }
 
     private WidgetOptions getOptions(Component widget) {
-        WidgetOptions options = ((HasWidgetOptions) widget).getOptions();
+        WidgetOptions options = ((HasJsonOptions) widget).getOptions();
         return options;
     }
 
@@ -152,7 +150,6 @@ public class DynamicForm extends Form  {
         PageLayout pageLayout = new PageLayout();
         pageLayout.addInDefaltManner(components, compPerSec, colsPerRow);
         return pageLayout;
-
     }
 
     class FormOptions {

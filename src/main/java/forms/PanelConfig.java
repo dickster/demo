@@ -7,10 +7,10 @@ import java.util.List;
 public class PanelConfig implements HasWidgetConfigs {
 
     private String title;
-    private List<WidgetConfig<?>> widgetConfigs = Lists.newArrayList();
+    private List<WidgetConfig> widgetConfigs = Lists.newArrayList();
 
     @Override
-    public List<WidgetConfig<?>> getWidgetConfigs() {
+    public List<WidgetConfig> getWidgetConfigs() {
         return widgetConfigs;
     }
 
