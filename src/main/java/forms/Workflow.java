@@ -60,15 +60,15 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
     }
 
     @Subscribe
-    public void fire(@Nonnull WfEvent event) {
-        String nextState = currentState.handleEvent(context, event);
+    public /*synchronized*/ void fire(@Nonnull WfEvent event) {
+        WfState nextState = currentState.handleEvent(context, event);
         if (nextState!=null) {
-            changeState(resolveState(nextState), event);
+            changeState(nextState, event);
         }
     }
 
     @Subscribe
-    protected void handleAjax(DeadEvent event) {
+    protected void unhandledEvent(DeadEvent event) {
         System.out.println("an event occurred with no listeners " + event);
     }
 
@@ -99,14 +99,14 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
 
     private final void changeAsyncState(final WfState state, final WfEvent event) {
         enteringAsyncState(state);
-        Callable<String> asyncTask = new Callable<String>() {
+        Callable<WfState> asyncTask = new Callable<WfState>() {
             @Override
-            public @Nullable String call() throws Exception {
+            public @Nullable WfState call() throws Exception {
                 return state.enter(context, event);
             }
         };
-        Futures.addCallback(executor.submit(asyncTask), new FutureCallback<String>() {
-            public void onSuccess(String result) {
+        Futures.addCallback(executor.submit(asyncTask), new FutureCallback<WfState>() {
+            public void onSuccess(WfState state) {
                 currentState = state;
                 leavingAysncState(state);
             }

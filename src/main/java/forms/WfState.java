@@ -19,7 +19,7 @@ public class WfState<C extends IWorkflowContext> implements Serializable {
         return name;
     }
 
-    public @Nullable String handleEvent(C workflow, WfEvent event) {
+    public @Nullable WfState handleEvent(C workflow, WfEvent event) {
         // typically something like...
         // switch ( Event.valueOf(event.getName()) ) {
         //    case SUBMIT : doThis();
@@ -30,7 +30,7 @@ public class WfState<C extends IWorkflowContext> implements Serializable {
         return null; //event.getOnSuccessState();
     }
 
-    public @Nullable String enter(C workflow, WfEvent event) {
+    public @Nullable WfState enter(C workflow, WfEvent event) {
         // load from document cache here...
         // do stuff...
         // get parameters & data from event if needed.
