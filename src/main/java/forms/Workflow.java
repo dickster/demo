@@ -8,6 +8,9 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
+import org.apache.wicket.markup.html.form.Form;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -24,7 +27,7 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
 
     private C context;
 
-    private WfState currentState;
+    protected WfState currentState;
 
     private @Inject WfStateFactory stateFactory;
     private Stack<Date> timer;
@@ -33,6 +36,21 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
 
 
     public Workflow(C context) {
+        new AjaxSubmitLink("foo") {
+            @Override
+            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                super.onSubmit(target, form);
+            }
+
+            /**
+             * Override this method to provide special submit handling in a multi-button form. This method
+             * will be called <em>after</em> the form's onSubmit method.
+             */
+            @Override
+            protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
+                super.onAfterSubmit(target, form);
+            }
+        };
         this.context = (C) context;
         register(this);
     }
@@ -92,13 +110,17 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
             changeAsyncState(state, event);
         }
         else {
-            state.enter(context, event);
+            stateChange(state, event);
         }
+    }
+
+    protected void stateChange(WfState state, WfEvent event) {
+        state.enter(context, event);
         currentState = state;
     }
 
     private final void changeAsyncState(final WfState state, final WfEvent event) {
-        enteringAsyncState(state);
+        enteringAsyncState(state,event);
         Callable<WfState> asyncTask = new Callable<WfState>() {
             @Override
             public @Nullable WfState call() throws Exception {
@@ -108,7 +130,7 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
         Futures.addCallback(executor.submit(asyncTask), new FutureCallback<WfState>() {
             public void onSuccess(WfState state) {
                 currentState = state;
-                leavingAysncState(state);
+                leavingAysncState(state,event);
             }
 
             public void onFailure(Throwable thrown) {
@@ -118,13 +140,13 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
         });
     }
 
-    protected void enteringAsyncState(WfState state) {
+    protected void enteringAsyncState(WfState state, WfEvent event) {
         // override this to show progress bar, log, whatever...
         timer.push(new Date());
         System.out.println("starting state " + state);
     }
 
-    private void leavingAysncState(WfState state) {
+    protected void leavingAysncState(WfState state, WfEvent event) {
         // override this to hide progress bar, log, whatever...
         Date date = timer.pop();
         System.out.println("ending state " + state + " after " + (new Date().getTime()-date.getTime()) + " millis");

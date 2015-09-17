@@ -39,8 +39,9 @@ public class DynamicForm extends Form  {
     private AbstractDefaultAjaxBehavior behavior;
     private String expectedAcordVersion; // TODO : set valid default here...
 
-    public DynamicForm(String id) {
+    public DynamicForm(String id, FormConfig config) {
         super(id);
+        withConfig(config);
     }
 
     public DynamicForm withConfig(FormConfig config) {

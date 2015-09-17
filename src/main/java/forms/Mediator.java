@@ -15,7 +15,8 @@ public class Mediator {
 
     public static final String ABSTRACT_EVENT = "$ABSTRACT_EVENT$";
 
-    enum MediatorType { VOID, PRE, POST };
+    // when do i call mediator? before or after behavior is called.
+    enum MediatorType { VOID, BEFORE, AFTER };
 
 
     private static void post(WfAjaxEvent event) {
@@ -28,18 +29,18 @@ public class Mediator {
     }
 
     private static void mediate(AbstractAjaxBehavior behavior, String event, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
-        WfAjaxEvent e = new WfAjaxEvent(event, target, component).withType(MediatorType.PRE);
-        if (callbacks.contains(MediatorType.PRE)) {
+        WfAjaxEvent e = new WfAjaxEvent(event, target, component).withType(MediatorType.BEFORE);
+        if (callbacks.contains(MediatorType.BEFORE)) {
             post(e);
-            if (e.isStopped()) {  // allow PRE callbacks chance to veto event.
+            if (e.isStopped()) {  // allow BEFORE callbacks chance to veto event.
                 return;
             }
         }
 
         callSuperOnEventMethod(behavior, target);
 
-        if (callbacks.contains(MediatorType.POST)) {
-            post(e.withType(MediatorType.POST));
+        if (callbacks.contains(MediatorType.AFTER)) {
+            post(e.withType(MediatorType.AFTER));
         }
     }
 

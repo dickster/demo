@@ -3,7 +3,6 @@ package forms;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import forms.Mediator.MediatorType;
-import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
@@ -13,12 +12,11 @@ import java.util.List;
 
 public class MediatedAjaxEventBehavior extends AjaxEventBehavior{
 
-    private List<MediatorType> callbacks = Lists.newArrayList(MediatorType.POST);
+    private List<MediatorType> callbacks = Lists.newArrayList(MediatorType.AFTER);
 
 
     public MediatedAjaxEventBehavior(String event) {
         super(event);
-        Session session;
     }
 
     public MediatedAjaxEventBehavior withTypes(MediatorType... type) {

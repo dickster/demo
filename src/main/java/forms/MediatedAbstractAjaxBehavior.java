@@ -11,7 +11,7 @@ import java.util.List;
 // if you want to broadcast events to a parent mediator.
 public abstract class MediatedAbstractAjaxBehavior extends AbstractDefaultAjaxBehavior {
 
-    private List<MediatorType> callbacks = Lists.newArrayList(MediatorType.POST);
+    private List<MediatorType> callbacks = Lists.newArrayList(MediatorType.AFTER);
 
 
     public MediatedAbstractAjaxBehavior() {
