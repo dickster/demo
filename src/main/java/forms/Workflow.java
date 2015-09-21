@@ -1,26 +1,14 @@
 package forms;
 
+
 import com.google.common.base.Preconditions;
 import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
-import org.apache.wicket.markup.html.form.Form;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.inject.Inject;
-import java.util.Date;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Stack;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Executors;
 
 // do this in subclasses....-->@WfDef("commercial")
 public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
@@ -29,127 +17,52 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
 
     protected WfState currentState;
 
-    private @Inject WfStateFactory stateFactory;
-    private Stack<Date> timer;
-
-    private ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(5));
-
+    private @Inject   WfStateFactory stateFactory;
 
     public Workflow(C context) {
-        new AjaxSubmitLink("foo") {
-            @Override
-            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                super.onSubmit(target, form);
-            }
-
-            /**
-             * Override this method to provide special submit handling in a multi-button form. This method
-             * will be called <em>after</em> the form's onSubmit method.
-             */
-            @Override
-            protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
-                super.onAfterSubmit(target, form);
-            }
-        };
+//        new AjaxSubmitLink("foo") {
+//            @Override
+//            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+//                super.onSubmit(target, form);
+//            }
+//
+//            /**
+//             * Override this method to provide special submit handling in a multi-button form. This method
+//             * will be called <em>after</em> the form's onSubmit method.
+//             */
+//            @Override
+//            protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
+//                super.onAfterSubmit(target, form);
+//            }
+//        };
         this.context = (C) context;
         register(this);
     }
 
-    public Workflow start() {
+    public Workflow<C> start() {
         Preconditions.checkState(currentState != null);
         Preconditions.checkState(context != null);
         initialize();
-        currentState.enter(context, new WfEvent("STARTING"));
         return this;
-    }
-
-    public Workflow start(@Nonnull final WfState state) {
-        Preconditions.checkState(currentState == null);
-        withStartingState(state);
-        start();
-        return this;
-    }
-
-    @Subscribe
-    public void fire(@Nonnull String event) {
-        // TODO : look up spring bean of class WfEvent & name = eventName.
-        // otherwise create wrapper..
-        fire(createEvent(event));
     }
 
     @Subscribe
     public /*synchronized*/ void fire(@Nonnull WfEvent event) {
         WfState nextState = currentState.handleEvent(context, event);
         if (nextState!=null) {
-            changeState(nextState, event);
+            currentState = nextState;
+            post(createChangeStateEvent(nextState, event));
         }
+    }
+
+    protected WfEvent<String> createChangeStateEvent(WfState state, WfEvent event) {
+        // TODO : Create change event.
+        return new WfEvent<String>("p");
     }
 
     @Subscribe
     protected void unhandledEvent(DeadEvent event) {
         System.out.println("an event occurred with no listeners " + event);
-    }
-
-//    @Subscribe
-//    protected void handleAjax(WfAjaxEvent event) {
-//        //override this if you want to listen to ajax events in your workflow!!!
-//        System.out.println("AJAX EVENT " + event + " occurred but no listeners attached!");
-//    }
-
-    protected WfEvent createEvent(Object eventName) {
-        // you might want to override this to add parameters, lookup spring beans with given name, ???
-        return new WfEvent(eventName);
-    }
-
-    private @Nonnull WfState resolveState(String nextState) {
-        return stateFactory.getState(nextState);
-    }
-
-    private final void changeState(WfState state, WfEvent event) {
-        if (currentState.isAsync()) {
-            changeAsyncState(state, event);
-        }
-        else {
-            stateChange(state, event);
-        }
-    }
-
-    protected void stateChange(WfState state, WfEvent event) {
-        state.enter(context, event);
-        currentState = state;
-    }
-
-    private final void changeAsyncState(final WfState state, final WfEvent event) {
-        enteringAsyncState(state,event);
-        Callable<WfState> asyncTask = new Callable<WfState>() {
-            @Override
-            public @Nullable WfState call() throws Exception {
-                return state.enter(context, event);
-            }
-        };
-        Futures.addCallback(executor.submit(asyncTask), new FutureCallback<WfState>() {
-            public void onSuccess(WfState state) {
-                currentState = state;
-                leavingAysncState(state,event);
-            }
-
-            public void onFailure(Throwable thrown) {
-                ; // hmmm...what to do here??? leave in old state.
-                System.out.println("couldn't enter state : " + state);
-            }
-        });
-    }
-
-    protected void enteringAsyncState(WfState state, WfEvent event) {
-        // override this to show progress bar, log, whatever...
-        timer.push(new Date());
-        System.out.println("starting state " + state);
-    }
-
-    protected void leavingAysncState(WfState state, WfEvent event) {
-        // override this to hide progress bar, log, whatever...
-        Date date = timer.pop();
-        System.out.println("ending state " + state + " after " + (new Date().getTime()-date.getTime()) + " millis");
     }
 
     protected void initialize() {/*override if you want to do some pre-flight checks before workflow starts*/}
@@ -163,8 +76,8 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
         return (W) this;
     }
 
-    public Workflow withValues(Entry<String, Object>... values) {
-        for (Entry<String, Object> entry:values) {
+    public Workflow<C> withValues(Map.Entry<String, Object>... values) {
+        for (Map.Entry<String, Object> entry:values) {
             withValue(entry.getKey(), entry.getValue());
         }
         return this;

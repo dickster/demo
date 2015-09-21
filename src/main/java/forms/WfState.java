@@ -19,7 +19,7 @@ public class WfState<C extends IWorkflowContext> implements Serializable {
         return name;
     }
 
-    public @Nullable WfState handleEvent(C workflow, WfEvent event) {
+    public @Nullable <T extends WfState> T handleEvent(C workflow, WfEvent event) {
         // typically something like...
         // switch ( Event.valueOf(event.getName()) ) {
         //    case SUBMIT : doThis();
@@ -30,17 +30,6 @@ public class WfState<C extends IWorkflowContext> implements Serializable {
         return null; //event.getOnSuccessState();
     }
 
-    public @Nullable WfState enter(C workflow, WfEvent event) {
-        // load from document cache here...
-        // do stuff...
-        // get parameters & data from event if needed.
-        // binder.doBind(workflow.getCurrentData());
-        return null;
-    }
-
-    public boolean isAsync() {
-        return false;
-    }
 
     // BA - no spring beans defined.  workflow just creates states based on form config which is named by onSuccessState().
     // return new WfState(formConfigWIthName(event.getSuccessState()));

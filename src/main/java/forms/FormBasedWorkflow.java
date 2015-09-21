@@ -1,13 +1,15 @@
 package forms;
 
+
 import com.google.common.base.Preconditions;
 import com.google.common.eventbus.Subscribe;
-import org.apache.wicket.Page;
-import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.request.cycle.RequestCycle;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class FormBasedWorkflow extends Workflow<FormBasedWorkflowContext> {
 
-    private boolean useAjax = false;
+    private boolean useAjax = true;
 
     public FormBasedWorkflow() {
         super(new FormBasedWorkflowContext());
@@ -18,43 +20,30 @@ public class FormBasedWorkflow extends Workflow<FormBasedWorkflowContext> {
         return ((WfFormState)currentState).getFormConfig();
     }
 
-    @Override
-    protected void stateChange(WfState state, WfEvent event) {
-        //Preconditions.checkState(state instanceof WfFormState);
-        super.stateChange(state, event);
-        WfFormState fs = (WfFormState)state;
-        if (useAjax) {  // setREsponsePage(this);  page...
-            updateForm(fs, event);
-        } else {   // target.addOrReplace(new DynamicForm(oldFormId, workflow.formConfig))
-            changePage(fs, event);
-        }
-    }
-
     @Subscribe
-    public void changePage(WfFormState state, WfEvent event) {
-        //setResponsePage(this);
+    public void changeState(WfChangeStateEvent event) {
+        WfEvent e = event.getTriggerEvent();
+        WfState state = event.getState();
+
+
+            // need to show form.if ajax
+            if (e instanceof WfAjaxEvent) {
+                //blah...
+                // show form associated with page thru ajax;
+            }
+            else {
+                RequestCycle requestCycle = RequestCycle.get();
+                if (requestCycle!=null) {
+                    requestCycle.setResponsePage(createResponsePage());
+                } else {
+                    System.out.println("your workflow is redirecting to a page without a request cycle?  huh???");
+                }
+            }
+
     }
 
-    @Subscribe
-    public void updateForm(WfFormState state, WfEvent event) {
-        // need ajax goodies. target, WfFormState via workflow.
-        Form form = event.getForm();
-        addOrReplaceForm(new DynamicForm(form.getId(), ));
-        event.getTarget().add(form);
+    protected WebPage createResponsePage() {
+        return new WfPage(new PageParameters());
     }
 
-
-
-
-    @Override
-    protected void enteringAsyncState(WfState state, WfEvent event) {
-        super.enteringAsyncState(state, event);
-        post(new WfProgressEvent(state,event,0));
-    }
-
-    @Override
-    protected void leavingAysncState(WfState state, WfEvent event) {
-        super.leavingAysncState(state, event);
-        page.endProgress(state);
-    }
 }

@@ -1,10 +1,11 @@
 package forms;
 
 import com.google.common.base.Preconditions;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
+
+
 
 public class NullSafeModel<T> extends CompoundPropertyModel {
 
@@ -29,7 +30,7 @@ public class NullSafeModel<T> extends CompoundPropertyModel {
     }
 
     private Object getObject(String property) {
-        Preconditions.checkArgument(StringUtils.isNotBlank(property));
+        Preconditions.checkArgument(org.apache.commons.lang3.StringUtils.isNotBlank(property));
         Property prop = new Property(property);
         Object parent = getParent(prop.getParentProperty());
         IPropertyHolder propertyHolder = createPropertyHolder(parent);
@@ -37,7 +38,7 @@ public class NullSafeModel<T> extends CompoundPropertyModel {
     }
 
     protected Object getParent(String property) {
-        return StringUtils.isBlank(property) ?
+        return org.apache.commons.lang3.StringUtils.isBlank(property) ?
                 super.getObject() :
                 getObject(property);
     }
