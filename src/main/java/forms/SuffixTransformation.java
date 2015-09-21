@@ -33,15 +33,14 @@ public class SuffixTransformation implements Transformation<String> {
     }
 
     @Override
-    public @Nullable Object transform(String o) {
+    public @Nullable String transform(String o) {
         if (skipNulls && o==null) return null;
         if (skipBlanks && StringUtils.isBlank(o)) return "";
         return o+suffix;
     }
 
     @Override
-    public @Nullable
-    Object inverseTransform(String o) {
+    public @Nullable String inverseTransform(String o) {
         if (o==null) return null;
         boolean matches = caseSensitive ?
                 o.endsWith(suffix) :

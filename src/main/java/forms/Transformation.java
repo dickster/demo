@@ -1,8 +1,9 @@
 package forms;
 
+import javax.annotation.Nullable;
 import java.io.Serializable;
 
 public interface Transformation<T> extends Serializable {
-    public Object transform(T o);
-    public Object inverseTransform(T o);
+    public @Nullable T transform(@Nullable T o);
+    public @Nullable T inverseTransform(@Nullable T o);
 }

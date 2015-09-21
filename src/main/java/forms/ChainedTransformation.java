@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.ListIterator;
 
-public class ChainedTransformation implements Transformation {
+public class ChainedTransformation<T> implements Transformation<T> {
 
     private List<Transformation> transformations = Lists.newArrayList();
 

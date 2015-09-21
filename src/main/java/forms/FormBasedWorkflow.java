@@ -25,7 +25,6 @@ public class FormBasedWorkflow extends Workflow<FormBasedWorkflowContext> {
         WfEvent e = event.getTriggerEvent();
         WfState state = event.getState();
 
-
             // need to show form.if ajax
             if (e instanceof WfAjaxEvent) {
                 //blah...

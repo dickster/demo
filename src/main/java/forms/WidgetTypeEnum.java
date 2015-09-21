@@ -1,24 +1,21 @@
 package forms;
 
-import java.util.Date;
-
 public enum WidgetTypeEnum {
 
-    TEXT_FIELD("easyText", String.class),
-    DATE("easyDate", Date.class),
-    CHECKBOX("easyCheckBox", Boolean.class),
-    LABEL(Void.class),
-    RADIO_GROUP("easyRadio", Boolean.class);
+    TEXT_FIELD("easyText"),
+    DATE("easyDate"),
+    CHECKBOX("easyCheckBox"),
+    LABEL(),
+    BUTTON(),
+    RADIO_GROUP("easyRadio");
 
-    private final Class<?> type;
     private final String pluginName;
 
-    WidgetTypeEnum(String pluginName, Class<?> type) {
-        this.type = type;
+    WidgetTypeEnum(String pluginName) {
         this.pluginName = pluginName;
     }
-    WidgetTypeEnum(Class<?> type) {
-       this("", type);
+    WidgetTypeEnum() {
+       this("");
     }
 
 }

@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableBiMap;
 
 import java.util.Map;
 
-public class MapTransformation implements Transformation {
+public class MapTransformation implements Transformation<String> {
 
     private final BiMap<String, String> map;
 
@@ -14,12 +14,12 @@ public class MapTransformation implements Transformation {
     }
 
     @Override
-    public Object transform(Object o) {
+    public String transform(String o) {
         return map.get(o);
     }
 
     @Override
-    public Object inverseTransform(Object o) {
+    public String inverseTransform(String o) {
         return map.inverse().get(o);
     }
 }
