@@ -1273,7 +1273,7 @@ var JSHINT = (function () {
             },
 
 
-            // token -- this is called by advance to get the next token
+            // token -- this is called by advance to getTarget the next token
             token: function () {
                 var b, c, captures, d, depth, high, i, l, low, q, t, isLiteral, isInRange, n;
 
@@ -3663,10 +3663,10 @@ loop:
                 if (b) {
                     indentation();
                 }
-                if (nexttoken.value === "get" && peek().id !== ":") {
-                    advance("get");
+                if (nexttoken.value === "getTarget" && peek().id !== ":") {
+                    advance("getTarget");
                     if (!option.es5) {
-                        error("get/set are ES5 features.");
+                        error("getTarget/set are ES5 features.");
                     }
                     i = property_name();
                     if (!i) {
@@ -3678,13 +3678,13 @@ loop:
                     f = doFunction();
                     p = f["(params)"];
                     if (p) {
-                        warning("Unexpected parameter '{a}' in get {b} function.", t, p[0], i);
+                        warning("Unexpected parameter '{a}' in getTarget {b} function.", t, p[0], i);
                     }
                     adjacent(token, nexttoken);
                 } else if (nexttoken.value === "set" && peek().id !== ":") {
                     advance("set");
                     if (!option.es5) {
-                        error("get/set are ES5 features.");
+                        error("getTarget/set are ES5 features.");
                     }
                     i = property_name();
                     if (!i) {

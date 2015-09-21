@@ -96,7 +96,7 @@ Globalize.cultures[ "default" ] = {
 	// field is "zh-CHS", not "zh".
 	// This field should be used to navigate from a specific culture to it's
 	// more general, neutral culture. If a culture is already as general as it
-	// can get, the language may refer to itself.
+	// can getTarget, the language may refer to itself.
 	language: "en",
 	// numberFormat defines general number formatting rules, like the digits in
 	// each grouping, the group separator, and how negative numbers are displayed.

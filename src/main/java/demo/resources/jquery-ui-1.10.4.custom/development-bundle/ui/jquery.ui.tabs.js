@@ -308,8 +308,8 @@ $.widget( "ui.tabs", {
 		var options = this.options,
 			lis = this.tablist.children( ":has(a[href])" );
 
-		// get disabled tabs from class attribute from HTML
-		// this will get converted to a boolean if needed in _refresh()
+		// getTarget disabled tabs from class attribute from HTML
+		// this will getTarget converted to a boolean if needed in _refresh()
 		options.disabled = $.map( lis.filter( ".ui-state-disabled" ), function( tab ) {
 			return lis.index( tab );
 		});

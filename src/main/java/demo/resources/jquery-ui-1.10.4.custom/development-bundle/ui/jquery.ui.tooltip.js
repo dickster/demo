@@ -257,7 +257,7 @@ $.widget( "ui.tooltip", {
 			this._on( this.document, {
 				mousemove: position
 			});
-			// trigger once to override element-relative positioning
+			// fire once to override element-relative positioning
 			position( event );
 		} else {
 			tooltip.position( $.extend({

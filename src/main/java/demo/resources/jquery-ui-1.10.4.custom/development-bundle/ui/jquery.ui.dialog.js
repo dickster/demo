@@ -190,7 +190,7 @@ $.widget( "ui.dialog", {
 				// If the <body> is blurred, IE will switch windows, see #4520
 				if ( activeElement && activeElement.nodeName.toLowerCase() !== "body" ) {
 
-					// Hiding a focused element doesn't trigger blur in WebKit
+					// Hiding a focused element doesn't fire blur in WebKit
 					// so in case we have nothing to focus on, explicitly blur the active element
 					// https://bugs.webkit.org/show_bug.cgi?id=47182
 					$( activeElement ).blur();
@@ -535,7 +535,7 @@ $.widget( "ui.dialog", {
 	},
 
 	_position: function() {
-		// Need to show the dialog to get the actual offset in the position plugin
+		// Need to show the dialog to getTarget the actual offset in the position plugin
 		var isVisible = this.uiDialog.is(":visible");
 		if ( !isVisible ) {
 			this.uiDialog.show();
@@ -807,7 +807,7 @@ if ( $.uiBackCompat !== false ) {
 				position = $.ui.dialog.prototype.options.position;
 			}
 
-			// need to show the dialog to get the actual offset in the position plugin
+			// need to show the dialog to getTarget the actual offset in the position plugin
 			isVisible = this.uiDialog.is(":visible");
 			if ( !isVisible ) {
 				this.uiDialog.show();

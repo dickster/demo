@@ -187,7 +187,7 @@ $.widget( "ui.spinner", {
 		},
 		// TODO: do we really want to consider this a stop?
 		// shouldn't we just stop the repeater and wait until mouseup before
-		// we trigger the stop event?
+		// we fire the stop event?
 		"mouseleave .ui-spinner-button": "_stop"
 	},
 

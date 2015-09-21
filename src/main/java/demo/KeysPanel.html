@@ -1,10 +1,10 @@
 <wicket:panel>
     <form wicket:id="form">
-        <select wicket:id="keys"/>
+        <select wicket:id="keys" data-live-search="true" class="selectpicker"/>
         <input wicket:id="filter" type="checkbox">
-            <!--<wicket:message key="label.hideInactiveKeys"/>-->
+           <p style="display:inline;">hide inactive keys that have already been used.</p> <!--<wicket:message key="label.hideInactiveKeys"/>-->
         </input>
-        <a wicket:id="activate"></a>
-        <a wicket:id="create"></a>
+        <a wicket:id="activate" class="btn btn-primary">Activate</a>
+        <a wicket:id="create" class="btn btn-primary">Create New Key</a>
     </form>
 </wicket:panel>

@@ -4,9 +4,12 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import org.apache.wicket.Component;
 import org.apache.wicket.RuntimeConfigurationType;
-import org.apache.wicket.markup.head.*;
+import org.apache.wicket.markup.head.HeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
+import org.apache.wicket.markup.head.ResourceAggregator;
 import org.apache.wicket.markup.html.IHeaderResponseDecorator;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Response;
@@ -30,7 +33,7 @@ public class WicketApplication extends WebApplication {
     }
 
     public Class getHomePage() {
-        return SelectPickerPage.class;
+        return KeysPage.class;
         //return HomePage.class;
 //        return ManagerPage.class;
     }
@@ -112,9 +115,6 @@ this.getMarkupSettings().setStripWicketTags(true);
             unbundledItems.add(name);
             System.out.println("the javascript reference [" + item.getReference().getName() + "] is NOT in the resource bundle.");
         }
-
-        Component c;
-        c.getPage().setResponsePage();
         return inBundle;
     }
 

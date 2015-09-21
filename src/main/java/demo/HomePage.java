@@ -175,7 +175,7 @@ public class HomePage extends WebPage {
             c.add(new Label("label","Name"));
             c.add(usingAsTitle(new TextField("text", model)));
             c.add(new EasyAddress("address", new PropertyModel<Address>(this, "address")));
-            c.add(new SelectPicker("fruits", new PropertyModel(this, "fruit")));
+            c.add(new SelectPicker("fruits", new PropertyModel(this, "fruit"), Lists.newArrayList("apple", "pear")));
             c.add(new Question("q1", Model.of("have you had an accident in the last year")).withPrompt("describe the accident..."));
             c.add(new Question("q2", Model.of("where you on a farm?")).withPrompt("what type of farm?"));
             c.add(new Question("q3", Model.of("were you convicted?")).withPrompt("what was the sentence?."));

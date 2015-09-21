@@ -32,7 +32,7 @@ function Datepicker() {
 	this._mainDivId = "ui-datepicker-div"; // The ID of the main datepicker division
 	this._inlineClass = "ui-datepicker-inline"; // The name of the inline marker class
 	this._appendClass = "ui-datepicker-append"; // The name of the append marker class
-	this._triggerClass = "ui-datepicker-trigger"; // The name of the trigger marker class
+	this._triggerClass = "ui-datepicker-fire"; // The name of the fire marker class
 	this._dialogClass = "ui-datepicker-dialog"; // The name of the dialog marker class
 	this._disableClass = "ui-datepicker-disabled"; // The name of the disabled covering marker class
 	this._unselectableClass = "ui-datepicker-unselectable"; // The name of the unselectable cell marker class
@@ -59,14 +59,14 @@ function Datepicker() {
 	};
 	this._defaults = { // Global defaults for all the date picker instances
 		showOn: "focus", // "focus" for popup on focus,
-			// "button" for trigger button, or "both" for either
+			// "button" for fire button, or "both" for either
 		showAnim: "fadeIn", // Name of jQuery animation for popup
 		showOptions: {}, // Options for enhanced animations
 		defaultDate: null, // Used when field is blank: actual date,
 			// +/-number for offset from today, null for today
 		appendText: "", // Display text following the input box, e.g. showing the format
-		buttonText: "...", // Text for trigger button
-		buttonImage: "", // URL for trigger button image
+		buttonText: "...", // Text for fire button
+		buttonImage: "", // URL for fire button image
 		buttonImageOnly: false, // True if the image appears alone, false if it appears on a button
 		hideIfNoPrevNext: false, // True to hide next/previous month links
 			// if not applicable, false to just disable them
@@ -565,7 +565,7 @@ $.extend(Datepicker.prototype, {
 						if (onSelect) {
 							dateStr = $.datepicker._formatDate(inst);
 
-							// trigger custom callback
+							// fire custom callback
 							onSelect.apply((inst.input ? inst.input[0] : null), [dateStr, inst]);
 						} else {
 							$.datepicker._hideDatepicker();
@@ -682,7 +682,7 @@ $.extend(Datepicker.prototype, {
 	 */
 	_showDatepicker: function(input) {
 		input = input.target || input;
-		if (input.nodeName.toLowerCase() !== "input") { // find from button/image trigger
+		if (input.nodeName.toLowerCase() !== "input") { // find from button/image fire
 			input = $("input", input.parentNode)[0];
 		}
 
@@ -998,7 +998,7 @@ $.extend(Datepicker.prototype, {
 
 		onSelect = this._get(inst, "onSelect");
 		if (onSelect) {
-			onSelect.apply((inst.input ? inst.input[0] : null), [dateStr, inst]);  // trigger custom callback
+			onSelect.apply((inst.input ? inst.input[0] : null), [dateStr, inst]);  // fire custom callback
 		} else if (inst.input) {
 			inst.input.trigger("change"); // fire the change event
 		}
@@ -1038,7 +1038,7 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Set as calculateWeek to determine the week of the year based on the ISO 8601 definition.
-	 * @param  date  Date - the date to get the week for
+	 * @param  date  Date - the date to getTarget the week for
 	 * @return  number - the number of the week within the year that contains this date
 	 */
 	iso8601Week: function(date) {

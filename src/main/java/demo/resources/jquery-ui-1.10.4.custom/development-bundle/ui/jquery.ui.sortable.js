@@ -813,7 +813,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 			innermostContainer = null,
 			innermostIndex = null;
 
-		// get innermost container that intersects with item
+		// getTarget innermost container that intersects with item
 		for (i = this.containers.length - 1; i >= 0; i--) {
 
 			// never consider a container that's located within the item itself
@@ -832,7 +832,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 				innermostIndex = i;
 
 			} else {
-				// container doesn't intersect. trigger "out" event if necessary
+				// container doesn't intersect. fire "out" event if necessary
 				if(this.containers[i].containerCache.over) {
 					this.containers[i]._trigger("out", event, this._uiHash(this));
 					this.containers[i].containerCache.over = 0;
@@ -1141,7 +1141,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 
 		//Various things done here to improve the performance:
 		// 1. we create a setTimeout, that calls refreshPositions
-		// 2. on the instance, we have a counter variable, that get's higher after every append
+		// 2. on the instance, we have a counter variable, that getTarget's higher after every append
 		// 3. on the local scope, we copy the counter variable, and check in the timeout, if it's still the same
 		// 4. this lets only the last addition to the timeout stack through
 		this.counter = this.counter ? ++this.counter : 1;
@@ -1188,7 +1188,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 			delayedTriggers.push(function(event) { this._trigger("update", event, this._uiHash()); }); //Trigger update callback if the DOM position has changed
 		}
 
-		// Check if the items Container has Changed and trigger appropriate
+		// Check if the items Container has Changed and fire appropriate
 		// events.
 		if (this !== this.currentContainer) {
 			if(!noPropagation) {

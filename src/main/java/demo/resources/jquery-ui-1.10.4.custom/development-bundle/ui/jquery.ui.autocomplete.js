@@ -265,7 +265,7 @@ $.widget( "ui.autocomplete", {
 				var item = ui.item.data( "ui-autocomplete-item" ),
 					previous = this.previous;
 
-				// only trigger when focus was lost (click on menu)
+				// only fire when focus was lost (click on menu)
 				if ( this.element[0] !== this.document[0].activeElement ) {
 					this.element.focus();
 					this.previous = previous;

@@ -182,7 +182,7 @@ function clamp( value, prop, allowEmpty ) {
 
 	if ( type.mod ) {
 		// we add mod before modding to make sure that negatives values
-		// get converted properly: -10 -> 350
+		// getTarget converted properly: -10 -> 350
 		return (value + type.mod) % type.mod;
 	}
 

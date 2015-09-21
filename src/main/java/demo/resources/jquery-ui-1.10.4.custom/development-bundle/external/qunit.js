@@ -2148,5 +2148,5 @@ if ( typeof exports !== "undefined" ) {
 	extend( exports, QUnit );
 }
 
-// get at whatever the global object is, like window in browsers
+// getTarget at whatever the global object is, like window in browsers
 }( (function() {return this;}.call()) ));

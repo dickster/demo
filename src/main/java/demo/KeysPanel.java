@@ -15,11 +15,12 @@ public class KeysPanel extends Panel {
 
     private List<String> keys = Lists.newArrayList("September", "August", "October", "January");
     private Boolean filter = true;
+    private String key=null;
 
     public KeysPanel(String id) {
         super(id);
         add(new Form("form")
-                .add(new DropDownChoice<String>("keys", new PropertyModel<String>(this,"key"), keys )
+                .add(new DropDownChoice<String>("keys", new PropertyModel<String>(this,"key"), keys ))
                 .add(new CheckBox("filter", new PropertyModel<Boolean>(this,"filter")))
                 .add(new AjaxSubmitLink("activate") {
                     @Override protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
@@ -32,8 +33,7 @@ public class KeysPanel extends Panel {
                         super.onSubmit(target, form);
                         // show dialog here...
                     }
-                }))
-            );
+                }));
 
     }
 

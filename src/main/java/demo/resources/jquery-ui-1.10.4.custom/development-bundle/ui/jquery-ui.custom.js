@@ -4812,7 +4812,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 			innermostContainer = null,
 			innermostIndex = null;
 
-		// get innermost container that intersects with item
+		// getTarget innermost container that intersects with item
 		for (i = this.containers.length - 1; i >= 0; i--) {
 
 			// never consider a container that's located within the item itself
@@ -4831,7 +4831,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 				innermostIndex = i;
 
 			} else {
-				// container doesn't intersect. trigger "out" event if necessary
+				// container doesn't intersect. fire "out" event if necessary
 				if(this.containers[i].containerCache.over) {
 					this.containers[i]._trigger("out", event, this._uiHash(this));
 					this.containers[i].containerCache.over = 0;
@@ -5140,7 +5140,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 
 		//Various things done here to improve the performance:
 		// 1. we create a setTimeout, that calls refreshPositions
-		// 2. on the instance, we have a counter variable, that get's higher after every append
+		// 2. on the instance, we have a counter variable, that getTarget's higher after every append
 		// 3. on the local scope, we copy the counter variable, and check in the timeout, if it's still the same
 		// 4. this lets only the last addition to the timeout stack through
 		this.counter = this.counter ? ++this.counter : 1;
@@ -5187,7 +5187,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 			delayedTriggers.push(function(event) { this._trigger("update", event, this._uiHash()); }); //Trigger update callback if the DOM position has changed
 		}
 
-		// Check if the items Container has Changed and trigger appropriate
+		// Check if the items Container has Changed and fire appropriate
 		// events.
 		if (this !== this.currentContainer) {
 			if(!noPropagation) {
@@ -6093,7 +6093,7 @@ $.widget( "ui.autocomplete", {
 				var item = ui.item.data( "ui-autocomplete-item" ),
 					previous = this.previous;
 
-				// only trigger when focus was lost (click on menu)
+				// only fire when focus was lost (click on menu)
 				if ( this.element[0] !== this.document[0].activeElement ) {
 					this.element.focus();
 					this.previous = previous;
@@ -6834,7 +6834,7 @@ function Datepicker() {
 	this._mainDivId = "ui-datepicker-div"; // The ID of the main datepicker division
 	this._inlineClass = "ui-datepicker-inline"; // The name of the inline marker class
 	this._appendClass = "ui-datepicker-append"; // The name of the append marker class
-	this._triggerClass = "ui-datepicker-trigger"; // The name of the trigger marker class
+	this._triggerClass = "ui-datepicker-fire"; // The name of the fire marker class
 	this._dialogClass = "ui-datepicker-dialog"; // The name of the dialog marker class
 	this._disableClass = "ui-datepicker-disabled"; // The name of the disabled covering marker class
 	this._unselectableClass = "ui-datepicker-unselectable"; // The name of the unselectable cell marker class
@@ -6861,14 +6861,14 @@ function Datepicker() {
 	};
 	this._defaults = { // Global defaults for all the date picker instances
 		showOn: "focus", // "focus" for popup on focus,
-			// "button" for trigger button, or "both" for either
+			// "button" for fire button, or "both" for either
 		showAnim: "fadeIn", // Name of jQuery animation for popup
 		showOptions: {}, // Options for enhanced animations
 		defaultDate: null, // Used when field is blank: actual date,
 			// +/-number for offset from today, null for today
 		appendText: "", // Display text following the input box, e.g. showing the format
-		buttonText: "...", // Text for trigger button
-		buttonImage: "", // URL for trigger button image
+		buttonText: "...", // Text for fire button
+		buttonImage: "", // URL for fire button image
 		buttonImageOnly: false, // True if the image appears alone, false if it appears on a button
 		hideIfNoPrevNext: false, // True to hide next/previous month links
 			// if not applicable, false to just disable them
@@ -7367,7 +7367,7 @@ $.extend(Datepicker.prototype, {
 						if (onSelect) {
 							dateStr = $.datepicker._formatDate(inst);
 
-							// trigger custom callback
+							// fire custom callback
 							onSelect.apply((inst.input ? inst.input[0] : null), [dateStr, inst]);
 						} else {
 							$.datepicker._hideDatepicker();
@@ -7484,7 +7484,7 @@ $.extend(Datepicker.prototype, {
 	 */
 	_showDatepicker: function(input) {
 		input = input.target || input;
-		if (input.nodeName.toLowerCase() !== "input") { // find from button/image trigger
+		if (input.nodeName.toLowerCase() !== "input") { // find from button/image fire
 			input = $("input", input.parentNode)[0];
 		}
 
@@ -7800,7 +7800,7 @@ $.extend(Datepicker.prototype, {
 
 		onSelect = this._get(inst, "onSelect");
 		if (onSelect) {
-			onSelect.apply((inst.input ? inst.input[0] : null), [dateStr, inst]);  // trigger custom callback
+			onSelect.apply((inst.input ? inst.input[0] : null), [dateStr, inst]);  // fire custom callback
 		} else if (inst.input) {
 			inst.input.trigger("change"); // fire the change event
 		}
@@ -7840,7 +7840,7 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Set as calculateWeek to determine the week of the year based on the ISO 8601 definition.
-	 * @param  date  Date - the date to get the week for
+	 * @param  date  Date - the date to getTarget the week for
 	 * @return  number - the number of the week within the year that contains this date
 	 */
 	iso8601Week: function(date) {
@@ -9011,7 +9011,7 @@ $.widget( "ui.dialog", {
 				// If the <body> is blurred, IE will switch windows, see #4520
 				if ( activeElement && activeElement.nodeName.toLowerCase() !== "body" ) {
 
-					// Hiding a focused element doesn't trigger blur in WebKit
+					// Hiding a focused element doesn't fire blur in WebKit
 					// so in case we have nothing to focus on, explicitly blur the active element
 					// https://bugs.webkit.org/show_bug.cgi?id=47182
 					$( activeElement ).blur();
@@ -9356,7 +9356,7 @@ $.widget( "ui.dialog", {
 	},
 
 	_position: function() {
-		// Need to show the dialog to get the actual offset in the position plugin
+		// Need to show the dialog to getTarget the actual offset in the position plugin
 		var isVisible = this.uiDialog.is(":visible");
 		if ( !isVisible ) {
 			this.uiDialog.show();
@@ -9628,7 +9628,7 @@ if ( $.uiBackCompat !== false ) {
 				position = $.ui.dialog.prototype.options.position;
 			}
 
-			// need to show the dialog to get the actual offset in the position plugin
+			// need to show the dialog to getTarget the actual offset in the position plugin
 			isVisible = this.uiDialog.is(":visible");
 			if ( !isVisible ) {
 				this.uiDialog.show();
@@ -10243,7 +10243,7 @@ $.widget( "ui.menu", {
 
 	select: function( event ) {
 		// TODO: It should never be possible to not have an active item at this
-		// point, but the tests don't trigger mouseenter before click.
+		// point, but the tests don't fire mouseenter before click.
 		this.active = this.active || $( event.target ).closest( ".ui-menu-item" );
 		var ui = { item: this.active };
 		if ( !this.active.has( ".ui-menu" ).length ) {
@@ -11220,7 +11220,7 @@ $.widget( "ui.spinner", {
 		},
 		// TODO: do we really want to consider this a stop?
 		// shouldn't we just stop the repeater and wait until mouseup before
-		// we trigger the stop event?
+		// we fire the stop event?
 		"mouseleave .ui-spinner-button": "_stop"
 	},
 
@@ -11824,8 +11824,8 @@ $.widget( "ui.tabs", {
 		var options = this.options,
 			lis = this.tablist.children( ":has(a[href])" );
 
-		// get disabled tabs from class attribute from HTML
-		// this will get converted to a boolean if needed in _refresh()
+		// getTarget disabled tabs from class attribute from HTML
+		// this will getTarget converted to a boolean if needed in _refresh()
 		options.disabled = $.map( lis.filter( ".ui-state-disabled" ), function( tab ) {
 			return lis.index( tab );
 		});
@@ -12607,7 +12607,7 @@ $.widget( "ui.tooltip", {
 			this._on( this.document, {
 				mousemove: position
 			});
-			// trigger once to override element-relative positioning
+			// fire once to override element-relative positioning
 			position( event );
 		} else {
 			tooltip.position( $.extend({
@@ -12924,7 +12924,7 @@ function clamp( value, prop, allowEmpty ) {
 
 	if ( type.mod ) {
 		// we add mod before modding to make sure that negatives values
-		// get converted properly: -10 -> 350
+		// getTarget converted properly: -10 -> 350
 		return (value + type.mod) % type.mod;
 	}
 
