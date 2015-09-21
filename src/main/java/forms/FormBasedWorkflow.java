@@ -5,7 +5,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.eventbus.Subscribe;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.cycle.RequestCycle;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class FormBasedWorkflow extends Workflow<FormBasedWorkflowContext> {
 
@@ -42,7 +41,7 @@ public class FormBasedWorkflow extends Workflow<FormBasedWorkflowContext> {
     }
 
     protected WebPage createResponsePage() {
-        return new WfPage(new PageParameters());
+        return new WfPage(this);
     }
 
 }

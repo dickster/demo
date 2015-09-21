@@ -1,6 +1,7 @@
 package forms;
 
 
+import forms.Mediator.MediatorType;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
@@ -8,7 +9,7 @@ public class WfAjaxEvent extends WfEvent<String> {
     private AjaxRequestTarget target;
     private Component component;
     private boolean stopPropogation = false;
-    private Workflow.MediatorType type = Workflow.MediatorType.AFTER;
+    private MediatorType type = MediatorType.AFTER;
 
     public WfAjaxEvent(String event, AjaxRequestTarget target, Component component) {
         super(event);
@@ -28,7 +29,7 @@ public class WfAjaxEvent extends WfEvent<String> {
         stopPropogation = true;
     }
 
-    public WfAjaxEvent withType(Workflow.MediatorType type) {
+    public WfAjaxEvent withType(MediatorType type) {
         this.type = type;
         return this;
     }

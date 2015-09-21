@@ -12,14 +12,6 @@ import java.util.Map;
 // do this in subclasses....-->@WfDef("commercial")
 public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
 
-    public static final String ABSTRACT_EVENT = "$ABSTRACT_EVENT$";
-
-    // when do i call mediator? before or after behavior is called.
-    public enum MediatorType { VOID, BEFORE, AFTER };
-
-//    private List<MediatorType> callbacks = Lists.newArrayList(MediatorType.AFTER);
-
-
     private C context;
 
     protected WfState currentState;
@@ -28,7 +20,7 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
         this.context = (C) context;
         register(this);
     }
-    
+
     public Workflow<C> start() {
         Preconditions.checkState(currentState != null);
         Preconditions.checkState(context != null);

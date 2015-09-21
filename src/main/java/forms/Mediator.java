@@ -1,6 +1,6 @@
 package forms;
 
-import forms.Workflow.MediatorType;
+
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxEventBehavior;
@@ -14,9 +14,10 @@ import java.util.List;
 
 public class Mediator {
 
+    // when do i call mediator? before or after behavior is called.
+    public enum MediatorType { VOID, BEFORE, AFTER };
+
     public static final String ABSTRACT_EVENT = "$ABSTRACT_EVENT$";
-
-
 
     private static void post(WfAjaxEvent event) {
         getWorkflowFromSession().post(event);

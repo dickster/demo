@@ -1,8 +1,6 @@
 package forms;
 
-import org.apache.wicket.Component;
-
-public class BvLabelConfig extends WidgetConfig<BvLabel> {
+public class BvLabelConfig extends WidgetConfig {
 
     private String color;
 
