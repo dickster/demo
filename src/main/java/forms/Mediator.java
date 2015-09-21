@@ -1,12 +1,13 @@
 package forms;
 
-import com.sun.istack.internal.NotNull;
+import forms.Workflow.MediatorType;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.behavior.AbstractAjaxBehavior;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -15,23 +16,22 @@ public class Mediator {
 
     public static final String ABSTRACT_EVENT = "$ABSTRACT_EVENT$";
 
-    // when do i call mediator? before or after behavior is called.
-    enum MediatorType { VOID, BEFORE, AFTER };
 
 
     private static void post(WfAjaxEvent event) {
         getWorkflowFromSession().post(event);
     }
 
-    static private @NotNull DefaultWorkflow getWorkflowFromSession() {
+    static private @Nonnull DefaultWorkflow getWorkflowFromSession() {
         // TODO : read wicket session etc...
         return new DefaultWorkflow();
     }
 
     private static void mediate(AbstractAjaxBehavior behavior, String event, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
+        Workflow workflow = getWorkflow(component);
         WfAjaxEvent e = new WfAjaxEvent(event, target, component).withType(MediatorType.BEFORE);
         if (callbacks.contains(MediatorType.BEFORE)) {
-            post(e);
+            workflow.post(e);
             if (e.isStopped()) {  // allow BEFORE callbacks chance to veto event.
                 return;
             }
@@ -42,6 +42,14 @@ public class Mediator {
         if (callbacks.contains(MediatorType.AFTER)) {
             post(e.withType(MediatorType.AFTER));
         }
+    }
+
+    private static @Nonnull Workflow getWorkflow(Component component) {
+        WorkflowPage parent = component.findParent(WorkflowPage.class);
+        if (parent==null) {
+            throw new IllegalStateException("uh oh, can't find workflow....this is not valid state of affairs!!");
+        }
+        return parent.getWorkflow();
     }
 
     public static void mediate(AjaxEventBehavior behavior, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
@@ -63,9 +71,9 @@ public class Mediator {
             // oops.  seriously screwed if this happens.
             System.out.println("????");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (IllegalAccessException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 

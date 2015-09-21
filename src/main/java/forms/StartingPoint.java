@@ -13,7 +13,8 @@ public class StartingPoint {
         new AjaxLink("newBusiness") {
             @Override
             public void onClick(AjaxRequestTarget target) {
-                workflowFactory.create("comml", new FormBasedWorkflowContext(this).withAjaxEnabled());
+                Workflow wf = workflowFactory.create("comml", new FormBasedWorkflowContext().withAjaxEnabled());
+                setResponsePage(new WfPage((FormBasedWorkflow) wf));
             }
         };
     }

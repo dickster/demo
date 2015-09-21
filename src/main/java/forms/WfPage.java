@@ -1,19 +1,23 @@
 package forms;
 
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
-public class WfPage extends WebPage {
+public class WfPage extends WebPage implements WorkflowPage {
 
-    private @SpringBean DynamicFormManager formManager;
+    private @SpringBean WorkflowManager workflowManager;
     private DynamicForm form;
 
-    public WfPage(PageParameters parameters) {
-        super(parameters);
-        formManager.addOrReplaceForm(this);
+    public WfPage(FormBasedWorkflow workflow) {
+        super();
+        workflowManager = new WorkflowManager(workflow, this);
+        form = workflowManager.addOrReplaceForm();
     }
 
+    @Override
+    public Workflow getWorkflow() {
+        return workflowManager.getWorkflow();
+    }
 }
 
 
@@ -54,4 +58,3 @@ public class WfPage extends WebPage {
 
 
 
-}

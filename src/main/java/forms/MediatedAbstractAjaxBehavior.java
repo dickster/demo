@@ -2,7 +2,7 @@ package forms;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import forms.Mediator.MediatorType;
+import forms.Workflow.MediatorType;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
@@ -18,7 +18,7 @@ public abstract class MediatedAbstractAjaxBehavior extends AbstractDefaultAjaxBe
         super();
     }
 
-    public MediatedAbstractAjaxBehavior withTypes(MediatorType... type) {
+    public MediatedAbstractAjaxBehavior withTypes(Workflow.MediatorType... type) {
         Preconditions.checkArgument(type.length > 0, "mediator must be called either before and/or after method");
         callbacks = Lists.newArrayList(type);
         return this;

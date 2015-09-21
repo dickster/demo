@@ -7,38 +7,28 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import java.util.Map;
 
 // do this in subclasses....-->@WfDef("commercial")
 public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
 
+    public static final String ABSTRACT_EVENT = "$ABSTRACT_EVENT$";
+
+    // when do i call mediator? before or after behavior is called.
+    public enum MediatorType { VOID, BEFORE, AFTER };
+
+//    private List<MediatorType> callbacks = Lists.newArrayList(MediatorType.AFTER);
+
+
     private C context;
 
     protected WfState currentState;
 
-    private @Inject   WfStateFactory stateFactory;
-
     public Workflow(C context) {
-//        new AjaxSubmitLink("foo") {
-//            @Override
-//            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-//                super.onSubmit(target, form);
-//            }
-//
-//            /**
-//             * Override this method to provide special submit handling in a multi-button form. This method
-//             * will be called <em>after</em> the form's onSubmit method.
-//             */
-//            @Override
-//            protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
-//                super.onAfterSubmit(target, form);
-//            }
-//        };
         this.context = (C) context;
         register(this);
     }
-
+    
     public Workflow<C> start() {
         Preconditions.checkState(currentState != null);
         Preconditions.checkState(context != null);
@@ -47,11 +37,15 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
     }
 
     @Subscribe
-    public /*synchronized*/ void fire(@Nonnull WfEvent event) {
-        WfState nextState = currentState.handleEvent(context, event);
-        if (nextState!=null) {
-            currentState = nextState;
-            post(createChangeStateEvent(nextState, event));
+    public /*synchronized*/ void fire(@Nonnull WfEvent event) throws WorkflowException {
+        try {
+            WfState nextState = currentState.handleEvent(context, event);
+            if (nextState!=null) {
+                currentState = nextState;
+                post(createChangeStateEvent(nextState, event));
+            }
+        } catch (Throwable t) {
+            throw new WorkflowException("workflow failed when handling event", event, t);
         }
     }
 
@@ -103,4 +97,6 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
     public C getContext() {
         return context;
     }
+
+
 }
