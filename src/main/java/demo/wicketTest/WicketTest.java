@@ -101,7 +101,7 @@ public abstract class WicketTest<T extends WicketHarness,F extends Component> im
 	public BrovadaWicketTester initialize() {
 		if (wicketTester==null) {
 			ComponentTestInjector injector = createTestInjector();
-			wicketTester = new BrovadaWicketTester(createApp(injector), injector);
+		//	wicketTester = new BrovadaWicketTester(createApp(injector), injector);
 			Application.get().getResourceSettings().getStringResourceLoaders().add(new IStringResourceLoader() {
 	            @Override
 	            public String loadStringResource(Class<?> clazz, String key, Locale locale, String style, String variation) {
