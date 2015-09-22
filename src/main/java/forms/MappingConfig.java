@@ -15,6 +15,15 @@ public class MappingConfig<A,T> implements Serializable {
     //A-->Transform-->T
     //T-->InverseTransform-->A
 
+    private final Transformation nopTransformation = new Transformation() {
+        @Override public Object transform(@Nullable Object o) {
+            return o;
+        }
+        @Override public Object inverseTransform(@Nullable Object o) {
+            return o;
+        }
+    };
+
     private BiMap<String, String> properties = HashBiMap.create();
     private Map<String, Function> implTransformations = Maps.newHashMap();
     private Map<String, Function> acordTransformations = Maps.newHashMap();
@@ -33,6 +42,10 @@ public class MappingConfig<A,T> implements Serializable {
         properties.put(acord, impl);
         acordTransformations.put(acord, fn(transformation));
         implTransformations.put(impl, inverseFn(transformation));
+    }
+
+    public void addMapping(String acord, String impl) {
+        addTransformation(acord, impl, nopTransformation);
     }
 
     private Function fn(final Transformation transformation) {
