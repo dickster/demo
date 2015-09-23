@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@Profile("production")
+@Profile("prod")
 public class StateBeans {
 
     @Bean

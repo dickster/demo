@@ -15,4 +15,5 @@ public class TestStateBeans {
     public WfState dummyState() {
         return new WfState("test");
     }
+
 }
