@@ -20,12 +20,22 @@
 
 </head>
 
-<body style="position:relative;" data-spy="scroll" data-target="#nav" data-offset="115">
+<body>
 
-<p>----------------KEYS-----------------</p>
-<div wicket:id="keys"/>
+    <div wicket:id="keys"/>
 
-</body></html>
+    <wicket:fragment wicket:id="modalFragment">
+        <form wicket:id="form">
+            <input wicket:id="alias">
+            <a wicket:id="create">Create</a>
+            <a wicket:id="createAndActivate">Create and Activate</a>
+            <a wicket:id="Cancel">Create</a>
+        </form>
+    </wicket:fragment>
+
+</body>
+
+</html>
 
 
 

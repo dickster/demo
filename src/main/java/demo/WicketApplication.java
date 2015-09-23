@@ -14,6 +14,7 @@ import org.apache.wicket.markup.html.IHeaderResponseDecorator;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Response;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
+import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.time.Duration;
 
 import java.util.Collections;
@@ -61,7 +62,7 @@ this.getMarkupSettings().setStripWicketTags(true);
                 throw new RuntimeException("Unknown ConfigurationType: " + this.getConfigurationType());
         }
 
-
+        getComponentInstantiationListeners().add(new SpringComponentInjector(this));
                 //        if (getConfigurationType().equals(RuntimeConfigurationType.DEPLOYMENT)) {
         addBundle();
                 //        }
