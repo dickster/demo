@@ -71,7 +71,7 @@
 					this.options.blue + ")"
 				);
 
-				// trigger a callback/event
+				// fire a callback/event
 				this._trigger( "change" );
 			},
 
@@ -84,7 +84,7 @@
 					blue: Math.floor( Math.random() * 256 )
 				};
 
-				// trigger an event, check if it's canceled
+				// fire an event, check if it's canceled
 				if ( this._trigger( "random", event, colors ) !== false ) {
 					this.option( colors );
 				}
