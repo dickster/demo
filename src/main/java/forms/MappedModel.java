@@ -1,35 +1,33 @@
 package forms;
 
+import com.google.common.base.Joiner;
+import org.apache.wicket.Component;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.IWrapModel;
 
 import java.util.Map;
 
-public class MappedModel extends CompoundPropertyModel {
-
-    private Map<String, Object> values;
+public class MappedModel extends CompoundPropertyModel<Map<String, Object>> {
 
     public MappedModel(Map<String, Object> object) {
         super(object);
     }
 
-    public Map<String, Object> getMapObject() {
-        return (Map<String, Object>) super.getObject();
-    }
-
     private void setObject(String property, Object object) {
-        values.put(property, object);
+        getObject().put(property, object);
     }
 
     private Object getObject(String property) {
-        return getMapObject().get(property);
+        return getObject().get(property);
     }
 
-    public IModel bind(String property) {
-        return new MappedPropertyModel(this, property);
+    @Override
+    public <C> IWrapModel<C> wrapOnInheritance(Component component) {
+        return new MappedPropertyModel(this, component.getId());
     }
 
-    public static class MappedPropertyModel implements IModel<Object> {
+    public class MappedPropertyModel implements IWrapModel {
         private MappedModel model;
         private String propertyExpression;
 
@@ -50,8 +48,18 @@ public class MappedModel extends CompoundPropertyModel {
 
         @Override
         public void detach() {
-            //To change body of implemented methods use File | Settings | File Templates.
+
+        }
+
+        @Override
+        public IModel<?> getWrappedModel() {
+            return model;
         }
     }
 
+    @Override
+    public String toString() {
+        String values = Joiner.on(", ").withKeyValueSeparator("->").join(getObject());
+        return "MappedModel:{" + values + "}";
+    }
 }

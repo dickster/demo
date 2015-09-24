@@ -36,7 +36,7 @@ public class SuffixTransformation implements Transformation<String> {
     public @Nullable String transform(String o) {
         if (skipNulls && o==null) return null;
         if (skipBlanks && StringUtils.isBlank(o)) return "";
-        return o+suffix;
+        return o==null ? suffix : o+suffix;
     }
 
     @Override

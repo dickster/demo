@@ -10,12 +10,21 @@ public class ChainedTransformation<T> implements Transformation<T> {
     private List<Transformation> transformations = Lists.newArrayList();
 
 
+    public ChainedTransformation(Transformation... transformations) {
+        chain(transformations);
+    }
+
     public ChainedTransformation(Transformation transformation) {
         chain(transformation);
     }
 
     public ChainedTransformation chain(Transformation transformation) {
         transformations.add(transformation);
+        return this;
+    }
+
+    public ChainedTransformation chain(Transformation... transformation) {
+        transformations.addAll(Lists.newArrayList(transformation));
         return this;
     }
 
