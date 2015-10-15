@@ -19,15 +19,6 @@ public class Mediator {
 
     public static final String ABSTRACT_EVENT = "$ABSTRACT_EVENT$";
 
-    private static void post(WfAjaxEvent event) {
-        getWorkflowFromSession().post(event);
-    }
-
-    static private @Nonnull DefaultWorkflow getWorkflowFromSession() {
-        // TODO : read wicket session etc...
-        return new DefaultWorkflow();
-    }
-
     private static void mediate(AbstractAjaxBehavior behavior, String event, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
         Workflow<?> workflow = getWorkflow(component);
         WfAjaxEvent e = new WfAjaxEvent(event, target, component).withType(MediatorType.BEFORE);
@@ -41,7 +32,7 @@ public class Mediator {
         callSuperOnEventMethod(behavior, target);
 
         if (callbacks.contains(MediatorType.AFTER)) {
-            post(e.withType(MediatorType.AFTER));
+            workflow.post(e.withType(MediatorType.AFTER));
         }
     }
 
