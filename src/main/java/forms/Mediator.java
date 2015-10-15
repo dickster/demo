@@ -29,7 +29,7 @@ public class Mediator {
     }
 
     private static void mediate(AbstractAjaxBehavior behavior, String event, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
-        Workflow workflow = getWorkflow(component);
+        Workflow<?> workflow = getWorkflow(component);
         WfAjaxEvent e = new WfAjaxEvent(event, target, component).withType(MediatorType.BEFORE);
         if (callbacks.contains(MediatorType.BEFORE)) {
             workflow.post(e);
@@ -45,7 +45,7 @@ public class Mediator {
         }
     }
 
-    private static @Nonnull Workflow getWorkflow(Component component) {
+    private static @Nonnull Workflow<?> getWorkflow(Component component) {
         WorkflowPage parent = component.findParent(WorkflowPage.class);
         if (parent==null) {
             throw new IllegalStateException("uh oh, can't find workflow....this is not valid state of affairs!!");

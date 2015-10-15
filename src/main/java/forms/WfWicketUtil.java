@@ -9,11 +9,11 @@ import javax.annotation.Nonnull;
 public class WfWicketUtil {
 
     public static void post(@Nonnull Component component, @Nonnull WfEvent event) {
-        Workflow workflow = getWorkflow(component);
+        Workflow<?> workflow = getWorkflow(component);
         workflow.post(event);
     }
 
-    private static @Nonnull Workflow getWorkflow(@Nonnull Component component) {
+    private static @Nonnull Workflow<?> getWorkflow(@Nonnull Component component) {
         WorkflowPage parent = component.findParent(WorkflowPage.class);
         if (parent==null) {
             throw new IllegalStateException("uh oh, can't find workflow....this is not valid state of affairs!!");

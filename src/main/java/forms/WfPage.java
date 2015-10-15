@@ -15,7 +15,7 @@ public class WfPage extends WebPage implements WorkflowPage, IAjaxIndicatorAware
     }
 
     @Override
-    public Workflow getWorkflow() {
+    public Workflow<?> getWorkflow() {
         return workflowManager.getWorkflow();
     }
 

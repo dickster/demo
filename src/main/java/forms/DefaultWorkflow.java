@@ -1,8 +1,8 @@
 package forms;
 
-public class DefaultWorkflow extends Workflow<DefaultWorkflowContext> {
+public class DefaultWorkflow extends Workflow {
 
     public DefaultWorkflow() {
-        super(new DefaultWorkflowContext());
+        super();
     }
 }

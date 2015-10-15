@@ -5,14 +5,17 @@ import com.google.common.base.Preconditions;
 import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import org.apache.wicket.model.IModel;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
 
 // do this in subclasses....-->@WfDef("commercial")
-public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
+public abstract class Workflow<T> extends EventBus {
 
-    private C context;
+    private Map<String, Object> context;
+
+    private IModel<T> model;
 
     protected WfState currentState;
 
@@ -20,12 +23,7 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
         register(this);
     }
 
-    public Workflow(C context) {
-        this();
-        this.context = (C) context;
-    }
-
-    public Workflow<C> start() {
+    public Workflow<?> start() {
         Preconditions.checkState(context != null);
         Preconditions.checkState(currentState != null);
         Preconditions.checkState(context != null);
@@ -34,9 +32,9 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
     }
 
     @Subscribe
-    public /*synchronized*/ void fire(@Nonnull WfEvent event) throws WorkflowException {
+    public synchronized void fire(@Nonnull WfEvent event) throws WorkflowException {
         try {
-            WfState nextState = currentState.handleEvent(context, event);
+            WfState nextState = currentState.handleEvent(this, event);
             if (nextState!=null) {
                 currentState = nextState;
                 post(createChangeStateEvent(nextState, event));
@@ -67,7 +65,7 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
         return (W) this;
     }
 
-    public Workflow<C> withValues(Map.Entry<String, Object>... values) {
+    public Workflow withValues(Map.Entry<String, Object>... values) {
         for (Map.Entry<String, Object> entry:values) {
             withValue(entry.getKey(), entry.getValue());
         }
@@ -75,9 +73,7 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
     }
 
     public <W extends Workflow> W withValues(Map<String, Object> values) {
-        for (String key:values.keySet()) {
-            withValue(key, values.get(key));
-        }
+        context.putAll(values);
         return (W) this;
     }
 
@@ -86,13 +82,19 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
         return (T) this;
     }
 
-    public <T extends Workflow> T restoreContext(C context) {
+    public <T extends Workflow> T restoreContext(Map<String, Object> context) {
         this.context = context;
         return (T) this;
     }
 
-    public C getContext() {
+    public Map<String, Object> getContext() {
         return context;
+    }
+
+    protected abstract IModel<T> createModel();
+
+    public IModel<T> getModel() {
+        return model;
     }
 
 
