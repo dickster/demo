@@ -6,22 +6,16 @@ public class WorkflowManager {
 
     private final FormBasedWorkflow workflow;
     private final WebPage page;
+    private final String formId;
 
-    public WorkflowManager(FormBasedWorkflow workflow, WebPage page) {
+    public WorkflowManager(FormBasedWorkflow workflow, WebPage page, String id) {
         this.workflow = workflow;
         this.page = page;
-    }
-
-    public void startProgress(WfState state) {
-        //TODO : whatever you want...show spinner, dialog, etc...
-    }
-
-    public void endProgress(WfState state) {
-        //TODO : whatever you want...show spinner, dialog, etc...
+        this.formId = id;
     }
 
     public DynamicForm addOrReplaceForm() {
-        DynamicForm form = new DynamicForm("form", workflow.getCurrentFormConfig());
+        DynamicForm form = new DynamicForm(formId, workflow.getCurrentFormConfig());
         this.page.addOrReplace(form);
         return form;
     }

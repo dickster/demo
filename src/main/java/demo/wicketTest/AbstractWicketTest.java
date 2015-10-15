@@ -26,15 +26,13 @@ import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 import org.junit.Before;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.easymock.EasyMock.createMock;
@@ -43,20 +41,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.reflections.ReflectionUtils.getAllFields;
-import static org.reflections.ReflectionUtils.withAnnotation;
-import static org.reflections.ReflectionUtils.withTypeAssignableTo;
 
-public abstract class AbstractWicketTest<T extends WicketHarness,F extends Component> implements IFixtureFactory<F> {
+public abstract class AbstractWicketTest {
 	
 	private static final String CLASS = "class";
 
     protected BrovadaWicketTester wicketTester;
-	private T harness;
 	private String path;
 	private BrovadaWicketTestContext testContext;
-	
-	
+
 	@Before
 	public void setUp() throws Exception {
 		initialize();
@@ -121,68 +114,12 @@ public abstract class AbstractWicketTest<T extends WicketHarness,F extends Compo
 		return wicketTester;
 	}	
 
-	public abstract F createFixture(String id);
-
-	protected T createHarness() {
-        Class<T> harnessClass = getHarnessClass();
-        return makeHarness(harnessClass, null, path);
-    }
-
-    private <H extends WicketHarness> H makeHarness(Class<H> harnessClass, @Nullable WicketHarness parent, String path) {
-        H instance = null;
-        try {
-            instance = harnessClass.newInstance();
-            instance.withPath(path).withWicketTester(wicketTester);
-            return inject(instance);
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        throw new IllegalArgumentException(parent==null ?
-                "can't create harness @ " + path + " of type " + harnessClass.getSimpleName() :
-                "can't create harness @ " + path + " of type " + harnessClass.getSimpleName() + " in parent harness " + parent.getClass().getSimpleName());
-    }
-
-    private final <H extends WicketHarness> H inject(H parent) {
-        Set<Field> harnesses = getAllFields(parent.getClass(), withAnnotation(Harness.class), withTypeAssignableTo(WicketHarness.class));
-        for (Field harnessField:harnesses) {
-            injectField(harnessField, parent);
-        }
-        return parent;
-    }
-
-    private WicketHarness injectField(Field harnessField, WicketHarness parent) {
-        Preconditions.checkArgument(harnessField.getAnnotation(Harness.class)!=null, "must have @"+Harness.class.getSimpleName() + " annotated field for harnesses");
-        Harness annotation = harnessField.getAnnotation(Harness.class);
-        String path = parent.getPathFor(annotation.value());
-        Class<? extends WicketHarness> type = (Class<T>) harnessField.getType();
-        WicketHarness harness = makeHarness(type, parent, path);
-        harnessField.setAccessible(true);
-        try {
-            harnessField.set(parent, harness);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        return harness;
-    }
-
-
-    protected abstract Class<T> getHarnessClass();
-
-    public AbstractWicketTest<T,F> wire(Object bean, String fieldName) {
+    public AbstractWicketTest wire(Object bean, String fieldName) {
 		// wire up bean to all fields with given name.  
 		wicketTester.wire(fieldName, bean);
 		return this;
 	}
 
-	public void renderFixture() {
-        renderFixture(this);
-    }
-
-	public void renderFixture(IFixtureFactory<F> factory) {
-        renderFixture(factory.createFixture(getFixtureId()));
-    }
 
     protected String getPathBase() {
         return getFixtureId();
@@ -191,16 +128,6 @@ public abstract class AbstractWicketTest<T extends WicketHarness,F extends Compo
     protected String getFixtureId() {
         return "";
     }
-
-    public abstract void renderFixture(F fixture);
-
-	protected T getHarness() {
-        // page must be rendered first for harness to work!
-		if (harness ==null) {
-			harness = createHarness();
-		}
-		return harness;
-	}			
 
 	// use this if you expect the class to be *ONLY* the expected value, as opposed to having it 
 	//   be one of many classes.   typically you'll use assertClassContains() instead.
@@ -261,10 +188,6 @@ public abstract class AbstractWicketTest<T extends WicketHarness,F extends Compo
 		assertNull("component should not be visible", component);
 	}
 	
-	protected void assertInvisible(String path) {
-		assertInvisible(getHarness().get(path));
-	}
-
 	protected void assertErrorMessages(String[] messages) {
 		getWicketTester().assertErrorMessages(messages);
 	}
@@ -273,10 +196,6 @@ public abstract class AbstractWicketTest<T extends WicketHarness,F extends Compo
 		assertNotNull(component);
 	}
 	
-	protected void assertVisible(String path) {
-		assertVisible(getHarness().get(path));
-	}
-
     protected void assertComponentOnAjaxResponse(Component c) {
         getWicketTester().assertComponentOnAjaxResponse(c);
     }
@@ -424,8 +343,7 @@ public abstract class AbstractWicketTest<T extends WicketHarness,F extends Compo
             injector.wire(fieldName, bean);
         }
 
-        public FormTester getFormTester(Component component) {
-            Preconditions.checkArgument(component!=null);
+        public FormTester getFormTester(@Nonnull Component component) {
             Component c = component;
             while (c!=null) {
                 if (c instanceof Form) {

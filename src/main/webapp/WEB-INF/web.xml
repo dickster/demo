@@ -33,9 +33,9 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <context-param>
-        <param-name>spring.profiles.active</param-name>
-        <param-value>test</param-value>   <!--as opposed "prod"-->
-        <!--this wins out over JVM specification of -Dspring.profiles.active=???-->
-    </context-param>
+    <!--<context-param>-->
+        <!--<param-name>spring.profiles.active</param-name>-->
+        <!--<param-value>test</param-value>   &lt;!&ndash;as opposed "prod"&ndash;&gt;-->
+        <!--&lt;!&ndash;this wins out over JVM specification of -Dspring.profiles.active=???&ndash;&gt;-->
+    <!--</context-param>-->
 </web-app>

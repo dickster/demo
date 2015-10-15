@@ -1,10 +1,12 @@
 package forms;
 
+import javax.annotation.Resource;
 import java.util.Locale;
 
-public class CommercialWorkflow extends Workflow<FormBasedWorkflowContext> {
+public class CommercialWorkflow extends FormBasedWorkflow {
 
-    private WfState startState = /*blah blah blah*/null;
+    private @Resource(name="commercialStartState")
+    WfState startState;
 
     public CommercialWorkflow(FormBasedWorkflowContext context) {
         super(context);

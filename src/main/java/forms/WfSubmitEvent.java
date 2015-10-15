@@ -1,11 +1,13 @@
 package forms;
 
-/**
- * Created with IntelliJ IDEA.
- * User: derek.dick
- * Date: 9/28/15
- * Time: 10:27 AM
- * To change this template use File | Settings | File Templates.
- */
-public class WfSubmitEvent {
+import org.apache.wicket.Component;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+
+public class WfSubmitEvent extends WfAjaxEvent {
+
+    public static final String SUBMIT = "SUBMIT";
+
+    public WfSubmitEvent(AjaxRequestTarget target, Component component) {
+        super(SUBMIT, target, component);
+    }
 }

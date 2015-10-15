@@ -1,12 +1,16 @@
 package demo;
 
 import demo.resources.Resource;
-import forms.Toolkit;
+import org.apache.wicket.Application;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -15,11 +19,9 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
-import org.apache.wicket.spring.injection.annot.SpringBean;
+
 
 public class KeysPage extends WebPage {
-
-    private @SpringBean Toolkit toolkit;
 
     private static final JavaScriptResourceReference BOOTSTRAP_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap.js");
     private static final CssResourceReference BOOTSTRAP_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap.min.css");
@@ -29,14 +31,13 @@ public class KeysPage extends WebPage {
     private static final CssResourceReference SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-select.css");
     private ModalWindow modal;
 
-
     public KeysPage(final PageParameters parameters) {
         add(new KeysPanel("keys"));
         modal = new ModalWindow("modal");
         modal.setTitle("Create New Key");
         modal.setContent(createModalContent(ModalWindow.CONTENT_ID));
         modal.setCookieName(getClass().getSimpleName()+".modal");
-
+        add(modal);
     }
 
     private Component createModalContent(String id) {
@@ -49,7 +50,7 @@ public class KeysPage extends WebPage {
 
                             }
                         })
-                        .add(new AjaxSubmitLink("create") {
+                        .add(new AjaxSubmitLink("createAndActivate") {
                             @Override protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                                 create(target, true);
                             }
@@ -67,5 +68,28 @@ public class KeysPage extends WebPage {
         // call creation stuff here...
         modal.close(target);
     }
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        // TODO : add this to a resource bundle.
+        response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
+//        response.render(JavaScriptReferenceHeaderItem.forReference(JQUERY_UI_JS));
+//        response.render(JavaScriptReferenceHeaderItem.forReference(LIBPHONENUMBER_JS));
+//        response.render(CssHeaderItem.forReference(JQUERY_UI_CSS));
+//        response.render(JavaScriptReferenceHeaderItem.forReference(JQUERY_UI_JS));
+        response.render(JavaScriptReferenceHeaderItem.forReference(BOOTSTRAP_JS));
+        response.render(CssHeaderItem.forReference(BOOTSTRAP_CSS));
+
+        response.render(JavaScriptReferenceHeaderItem.forReference(SELECT_JS));
+        response.render(CssHeaderItem.forReference(SELECT_CSS));
+
+        //response.render(JavaScriptReferenceHeaderItem.forReference(EASY_SELECT_JS));
+
+//        response.render(JavaScriptReferenceHeaderItem.forReference(MULTISELECT_JS));
+//        response.render(CssHeaderItem.forReference(MULTISELECT_CSS));
+//        response.render(JavaScriptReferenceHeaderItem.forReference(TYPEAHEAD_JS));
+//        response.render(CssHeaderItem.forReference(TYPEAHEAD_CSS));
+    }
+
 
 }

@@ -4,12 +4,15 @@ import org.apache.wicket.model.IModel;
 
 import java.util.HashMap;
 
-public class DefaultWorkflowContext<M extends IModel<?>> extends HashMap implements IWorkflowContext<M>  {
+public class DefaultWorkflowContext<M> extends HashMap implements IWorkflowContext<M> {
 
     private static final String DATA = "$$DATA$$";
 
     public DefaultWorkflowContext() {
+    }
 
+    public DefaultWorkflowContext(IModel<M> model) {
+        withModel(model);
     }
 
     @Override
@@ -23,12 +26,11 @@ public class DefaultWorkflowContext<M extends IModel<?>> extends HashMap impleme
     }
 
     @Override
-    public M getModel() {
-        return (M) super.get(DATA);
+    public IModel<M> getModel() {
+        return (IModel<M>) super.get(DATA);
     }
 
-    @Override
-    public void setModel(M model) {
+    public void withModel(IModel<M> model) {
         super.put(DATA, model);
     }
 

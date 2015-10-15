@@ -16,12 +16,17 @@ public abstract class Workflow<C extends IWorkflowContext> extends EventBus {
 
     protected WfState currentState;
 
-    public Workflow(C context) {
-        this.context = (C) context;
+    public Workflow() {
         register(this);
     }
 
+    public Workflow(C context) {
+        this();
+        this.context = (C) context;
+    }
+
     public Workflow<C> start() {
+        Preconditions.checkState(context != null);
         Preconditions.checkState(currentState != null);
         Preconditions.checkState(context != null);
         initialize();

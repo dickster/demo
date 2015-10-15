@@ -2,8 +2,12 @@ package forms;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
 
 public class DefaultWidgetFactory extends WidgetFactory {
@@ -16,29 +20,18 @@ public class DefaultWidgetFactory extends WidgetFactory {
     public Component createWidget(String id, WidgetConfig config, IModel<?>... models) {
         switch (config.getWidgetType()) {
             case TEXT_FIELD:
+                return new TextField<String>(id);
             case CHECKBOX:
+                return new CheckBox(id);
             case DATE:
+                return new DateTextField(id);
             case LABEL:
-            case RADIO_GROUP:
-                break;
+                return new Label(id);
             case BUTTON:
                 return new IndicatingAjaxSubmitLink(id) {
-                    /**
-                     * Override this method to provide special submit handling in a multi-button form. This method
-                     * will be called <em>before</em> the form's onSubmit method.
-                     */
-                    @Override
-                    protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                        super.onSubmit(target, form);
-                    }
-
-                    /**
-                     * Override this method to provide special submit handling in a multi-button form. This method
-                     * will be called <em>after</em> the form's onSubmit method.
-                     */
                     @Override
                     protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
-                        super.onAfterSubmit(target, form);
+                        WfWicketUtil.post(form, new WfSubmitEvent(target, form));
                     }
                 };
             default:

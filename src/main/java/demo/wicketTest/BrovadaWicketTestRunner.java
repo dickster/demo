@@ -5,7 +5,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import demo.wicketTest.WicketTest.BrovadaWicketTester;
+import demo.wicketTest.AbstractWicketTest.BrovadaWicketTester;
 import org.junit.Test;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;

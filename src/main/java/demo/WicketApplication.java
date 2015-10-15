@@ -34,6 +34,7 @@ public class WicketApplication extends WebApplication {
     }
 
     public Class getHomePage() {
+//        return StartingPoint.class;
         return KeysPage.class;
         //return HomePage.class;
 //        return ManagerPage.class;

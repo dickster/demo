@@ -2,7 +2,7 @@ package demo.wicketTest;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
-import demo.wicketTest.WicketTest.BrovadaWicketTester;
+import demo.wicketTest.AbstractWicketTest.BrovadaWicketTester;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.DropDownChoice;

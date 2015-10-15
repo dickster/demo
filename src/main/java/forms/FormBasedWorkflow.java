@@ -8,10 +8,12 @@ import org.apache.wicket.request.cycle.RequestCycle;
 
 public class FormBasedWorkflow extends Workflow<FormBasedWorkflowContext> {
 
-    private boolean useAjax = true;
-
     public FormBasedWorkflow() {
         super(new FormBasedWorkflowContext());
+    }
+
+    public FormBasedWorkflow(FormBasedWorkflowContext context) {
+        super(context);
     }
 
     public FormConfig getCurrentFormConfig() {

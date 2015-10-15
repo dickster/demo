@@ -1,22 +1,28 @@
 package forms;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
-import javax.inject.Inject;
+public class StartingPoint extends WebPage {
 
-public class StartingPoint {
+    private @SpringBean WfFactory workflowFactory;
 
-    private @Inject WfFactory workflowFactory;
-
-    public void foo() {
-        new AjaxLink("newBusiness") {
-            @Override
-            public void onClick(AjaxRequestTarget target) {
-                Workflow wf = workflowFactory.create("comml", new FormBasedWorkflowContext().withAjaxEnabled());
-                setResponsePage(new WfPage((FormBasedWorkflow) wf));
-            }
-        };
+    public StartingPoint() {
+        super(new PageParameters());
+        add(new Form("form")
+                .add( new AjaxSubmitLink("start") {
+                    @Override
+                    protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                        super.onSubmit(target, form);
+                        Workflow wf = workflowFactory.create("comml");
+                        setResponsePage(new WfPage((FormBasedWorkflow) wf));
+                    }
+                })
+        );
     }
 
 }
