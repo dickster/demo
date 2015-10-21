@@ -35,7 +35,8 @@ public class WicketApplication extends WebApplication {
 
     public Class getHomePage() {
 //        return StartingPoint.class;
-        return KeysPage.class;
+//          return KeysPage.class;
+        return GridstackPage.class;
         //return HomePage.class;
 //        return ManagerPage.class;
     }
@@ -67,6 +68,10 @@ this.getMarkupSettings().setStripWicketTags(true);
                 //        if (getConfigurationType().equals(RuntimeConfigurationType.DEPLOYMENT)) {
         addBundle();
                 //        }
+
+//        getRequestCycleSettings().setRenderStrategy(RenderStrategy.ONE_PASS_RENDER);
+
+        //mountPage("keys/foo", KeysPage.class);
 
         if (getConfigurationType().equals(RuntimeConfigurationType.DEVELOPMENT)) {
             getComponentInitializationListeners().add(new PerformanceListener());

@@ -23,11 +23,14 @@ import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 public class KeysPage extends WebPage {
 
+    private static final JavaScriptResourceReference GRIDSTACK_JS = new JavaScriptResourceReference(Resource.class, "gridstack/gridstack.js");
+    private static final CssResourceReference GRIDSTACK_CSS = new CssResourceReference(Resource.class, "gridstack/gridstack.css");
+    private static final CssResourceReference GRIDSTACK_EXTRA_CSS = new CssResourceReference(Resource.class, "gridstack/gridstack-extra.css");
     private static final JavaScriptResourceReference BOOTSTRAP_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap.js");
     private static final CssResourceReference BOOTSTRAP_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap.min.css");
     private static final JavaScriptResourceReference JQUERY_UI_JS = new JavaScriptResourceReference(Resource.class, "jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js");
     private static final CssResourceReference JQUERY_UI_CSS = new CssResourceReference(Resource.class, "jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css");
-    private static final JavaScriptResourceReference SELECT_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-select.js");
+    private static final JavaScriptResourceReference SELECT_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-select.min.js");
     private static final CssResourceReference SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-select.css");
     private ModalWindow modal;
 
@@ -82,8 +85,10 @@ public class KeysPage extends WebPage {
 
         response.render(JavaScriptReferenceHeaderItem.forReference(SELECT_JS));
         response.render(CssHeaderItem.forReference(SELECT_CSS));
+        response.render(CssHeaderItem.forReference(GRIDSTACK_CSS));
+        response.render(CssHeaderItem.forReference(GRIDSTACK_EXTRA_CSS));
 
-        //response.render(JavaScriptReferenceHeaderItem.forReference(EASY_SELECT_JS));
+        response.render(JavaScriptReferenceHeaderItem.forReference(GRIDSTACK_JS));
 
 //        response.render(JavaScriptReferenceHeaderItem.forReference(MULTISELECT_JS));
 //        response.render(CssHeaderItem.forReference(MULTISELECT_CSS));
