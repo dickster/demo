@@ -18,7 +18,7 @@ public class Group extends Panel {
         super(id);
         this.config = config;
         this.model = model;
-        setOutputMarkupId(true);
+        setOutputMarkupId(!config.getRenderBodyOnly());
         setRenderBodyOnly(config.getRenderBodyOnly());
     }
 
@@ -26,7 +26,7 @@ public class Group extends Panel {
     protected void onInitialize() {
         Preconditions.checkState(factory!=null);
         super.onInitialize();
-        add(new ListView<Config>("items", config.getConfigs()) {
+        add(new ListView<Config>("group", config.getConfigs()) {
             @Override
             protected void populateItem(ListItem<Config> item) {
                 Config config = item.getModelObject();

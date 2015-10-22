@@ -22,7 +22,7 @@ public class GroupConfig implements Config {
         return ImmutableList.copyOf(configs);
     }
 
-    private List<WidgetConfig> getWidgetConfigs() {
+    protected List<WidgetConfig> getWidgetConfigs() {
         List<WidgetConfig> result = Lists.newArrayList();
         for (Config config:configs) {
             if (config instanceof WidgetConfig) {

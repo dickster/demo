@@ -34,7 +34,7 @@ public class FormConfig<T> extends GroupConfig {
         if (acordVersions.size()==1 && !acordVersions.contains(version)) {
             throw new IllegalStateException("this form is supposed to be Acord Version : " + version  +  " but contains fields for version " + acordVersions.iterator().next());
         }
-        // note : it's possible that form could contain NO acord fields. (which is valid, no exceptions thrown).
+        // if (acordVersions.size()==0) {   // that's ok. it's possible to have no acord fields on a form
     }
 
 

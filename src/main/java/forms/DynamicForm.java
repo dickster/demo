@@ -5,7 +5,6 @@ import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import demo.PageLayout;
 import org.apache.wicket.Component;
-import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
@@ -28,7 +27,6 @@ public class DynamicForm extends Form  {
 
     private FormConfig formConfig;
     private IModel<?> formModel;
-    private AbstractDefaultAjaxBehavior behavior;
     private String expectedAcordVersion; // TODO : set valid default here...
     private PageLayout layout = null;
     private boolean useDefaultLayout = false;
