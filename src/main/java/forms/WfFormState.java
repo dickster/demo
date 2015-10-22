@@ -3,12 +3,13 @@ package forms;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class WfFormState extends WfState<FormBasedWorkflowContext> {
+public class WfFormState extends WfState {
 
     private FormConfig formConfig = new FormConfig();
 
+    @Nullable
     @Override
-    public @Nullable WfState handleEvent(FormBasedWorkflowContext workflow, WfEvent event) {
+    public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
         return super.handleEvent(workflow, event);
     }
 

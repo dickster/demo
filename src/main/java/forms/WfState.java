@@ -19,7 +19,7 @@ public class WfState implements Serializable {
         return name;
     }
 
-    public @Nullable <T extends WfState> T handleEvent(Workflow<?> workflow, WfEvent event) {
+    public @Nullable WfState handleEvent(Workflow<?> workflow, WfEvent event) {
         // typically something like...
         // switch ( Event.valueOf(event.getName()) ) {
         //    case SUBMIT : doThis();

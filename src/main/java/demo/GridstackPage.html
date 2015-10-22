@@ -22,35 +22,38 @@
 
     <style type="text/css">
         #grid1 {
-            background: lightgoldenrodyellow;
-        }
-
-        #grid2 {
-            background: lightcyan;
+            background: #eeeeff;
         }
 
         .grid-stack-item-content {
             color: #2c3e50;
             text-align: center;
-            background-color: #18bc9c;
+            background-color: #f0f0f0;
+            border:1px solid darkgray;
+            border-radius: 3px;
         }
+        .grid-stack-item-content .form-horizontal {
+            padding:10px;
+        }
+
     </style>
 
 </head>
 
 <body>
+
+    <div wicket:id="widgets">
+        <div wicket:id="widget" class="widget"/>
+    </div>
+
     <div class="container-fluid">
         <h1>Layout Demo</h1>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="grid-stack grid-stack-6" id="grid1">
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="grid-stack grid-stack-6" id="grid2">
-                </div>
-            </div>
         </div>
 
     </div>
@@ -59,35 +62,69 @@
     <script type="text/javascript">
         $(function () {
             var options = {
-                width: 6,
+                width: 12,
                 float: true
             };
             $('#grid1').gridstack(options);
-            $('#grid2').gridstack(options);
 
             var items = [
-                {x: 0, y: 0, width: 2, height: 2},
-                {x: 3, y: 1, width: 1, height: 2},
-                {x: 4, y: 1, width: 1, height: 1},
-                {x: 2, y: 3, width: 3, height: 1},
-                {x: 2, y: 5, width: 1, height: 1}
+                {x: 0, y: 0, width: 5, height: 3},
+                {x: 3, y: 1, width: 10, height: 2},
+                {x: 4, y: 1, width: 3, height: 6}
             ];
 
             $('.grid-stack').each(function () {
                 var grid = $(this).data('gridstack');
 
-                _.each(items, function (node) {
-                    grid.add_widget($('<div>' +
-                                            '<div class="grid-stack-item-content">' +
-                                                '<span class="fa fa-hand-o-up"></span> ' +
-                                                '<p>WIDGET 1</p></div>' +
-                                            '</div>' +
-                                        '</div>'),
-                            node.x, node.y, node.width, node.height);
-                }, this);
+                $('.widget').each(function (index, widget) {
+                    item = items[index%items.length];
+                    grid.add_widget(widget,
+                            item.x, item.y, item.width, item.height);
+                });
             });
         });
+
+
     </script>
+
+    <wicket:fragment wicket:id="widgetFormFragment">
+
+            <div class="grid-stack-item-content">
+
+
+                <form wicket:id="form" class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div wicket:id="label"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input wicket:id="input" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <a wicket:id="submit" class="form-control btn btn-primary">Submit</a>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+
+    </wicket:fragment>
+
+    <wicket:fragment wicket:id="widgetListFragment">
+        <ul>
+            <li wicket:id="list">
+                <span wicket:id="item"/>
+            </li>
+        </ul>
+
+    </wicket:fragment>
+
 
 </body>
 

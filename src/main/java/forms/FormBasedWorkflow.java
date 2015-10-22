@@ -6,14 +6,10 @@ import com.google.common.eventbus.Subscribe;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.cycle.RequestCycle;
 
-public class FormBasedWorkflow extends Workflow<FormBasedWorkflowContext> {
+public abstract class FormBasedWorkflow<T> extends Workflow<T> {
 
     public FormBasedWorkflow() {
-        super(new FormBasedWorkflowContext());
-    }
-
-    public FormBasedWorkflow(FormBasedWorkflowContext context) {
-        super(context);
+        super();
     }
 
     public FormConfig getCurrentFormConfig() {
