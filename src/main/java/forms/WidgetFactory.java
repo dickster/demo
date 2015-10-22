@@ -1,8 +1,8 @@
 package forms;
 
-import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.validation.IValidator;
@@ -16,42 +16,46 @@ public abstract class WidgetFactory {
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
 
-    public abstract Component createWidget(String id, WidgetConfig config, IModel<?>... models);
+    public abstract Component create(String id, WidgetConfig config, IModel<?> model);
 
     public <T extends WidgetFactory> T usingPropertyAsName() {
         usePropertyAsName = true;
         return (T) this;
     }
 
-    public final @Nonnull Component create(String id, WidgetConfig config, IModel<?>... models) {
-        preCreate(config, models);
-        Component component = createWidget(id, config, models);
-        postCreate(component, config, models);
+    public Component createWidget(String id, WidgetConfig config, IModel<?> model) {
+        preCreate(config, model);
+        Component component = create(id, config, model);
+        postCreate(component, config, model);
         return component;
     }
 
-    protected void postCreate(final Component component, WidgetConfig config, IModel<?>... models) {
-        Preconditions.checkArgument(!(component instanceof FormComponent) || models.length>0, "must supply at least one model for a form component!");
+    private final @Nonnull WebMarkupContainer createGroup(String id, GroupConfig groupConfig, IModel<?> model) {
+        Group group = new Group(id, groupConfig, model).withWidgetFactory(this);
+        return group;
+    }
+
+    protected void postCreate(final Component component, WidgetConfig config, IModel<?> model) {
         setMetaData(component, config);
-        setModels(component, models);
+        setModels(component, model);
         addAjax(component, config);
         addValidators(component, config);
     }
 
     protected void setMetaData(Component component, WidgetConfig config) {
         String name = usePropertyAsName ? config.getName() : config.getProperty();
-        component.setMetaData(WidgetConfig.NAME, name);
+        component.setMetaData(Config.NAME, name);
         component.setOutputMarkupId(true);
     }
 
-    private void setModels(Component component, IModel<?>[] models) {
-        if (component instanceof IHasMultipleModels) {
-            IHasMultipleModels mm = (IHasMultipleModels) component;
-            mm.setDefaultModels(models);
-        } else {
-            if (models.length>1) System.out.println("WARNING : you have supplied more than one model to " + component.getMetaData(WidgetConfig.NAME) + " but it doesn't implement interface " + IHasMultipleModels.class.getSimpleName());
-            component.setDefaultModel(models[0]);
-        }
+    private void setModels(Component component, IModel<?> model) {
+//        if (component instanceof IHasMultipleModels) {
+//            IHasMultipleModels mm = (IHasMultipleModels) component;
+//            mm.setDefaultModels(models);
+//        } else {
+//            if (models.length>1) System.out.println("WARNING : you have supplied more than one model to " + component.getMetaData(Config.NAME) + " but it doesn't implement interface " + IHasMultipleModels.class.getSimpleName());
+            component.setDefaultModel(model);
+//        }
     }
 
     private void addValidators(Component component, WidgetConfig config) {
@@ -72,9 +76,12 @@ public abstract class WidgetFactory {
         }
     }
 
-    protected void preCreate(WidgetConfig config, IModel<?>[] formModel) {
+    protected void preCreate(WidgetConfig config, IModel<?> formModel) {
         // do nothing by default.  you might want to filter config options based on user/settings.
         //if (config.getName().equals("someSpecialEmail")) { config.addAjaxEvent("onchange"); config.addValidator(EmailAddressValidator.getInstance()); }
     }
 
+    public void createForm(String id, FormConfig formConfig, IModel<?> formModel) {
+        createGroup(id, formConfig, formModel);
+    }
 }

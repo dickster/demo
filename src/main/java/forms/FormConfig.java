@@ -6,13 +6,13 @@ import org.apache.wicket.markup.html.form.validation.IFormValidator;
 
 import java.util.Set;
 
-public class FormConfig<T> extends PanelConfig {
+public class FormConfig<T> extends GroupConfig {
 
     private String version;
-    private Class<T> modelObject;
     private IFormValidator validator;
 
     public FormConfig() {
+        setRenderBodyOnly(false);
     }
 
 
@@ -22,7 +22,7 @@ public class FormConfig<T> extends PanelConfig {
         }
 
         Set<String> acordVersions = Sets.newHashSet();
-        for (WidgetConfig config:getWidgetConfigs()) {
+        for (WidgetConfig config: getWidgetConfigs()) {
             String v = config.getAcordVersion();
             if (v != null) {
                 acordVersions.add(v);
@@ -36,6 +36,7 @@ public class FormConfig<T> extends PanelConfig {
         }
         // note : it's possible that form could contain NO acord fields. (which is valid, no exceptions thrown).
     }
+
 
 
 }

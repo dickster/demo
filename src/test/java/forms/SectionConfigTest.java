@@ -56,7 +56,7 @@ public class SectionConfigTest extends WicketPageTest {
 
     private void setName(Component... comps) {
         for (Component c:comps) {
-            c.setMetaData(WidgetConfig.NAME, c.getId());
+            c.setMetaData(Config.NAME, c.getId());
         }
     }
 

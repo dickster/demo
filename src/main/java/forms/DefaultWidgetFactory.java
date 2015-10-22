@@ -17,7 +17,7 @@ public class DefaultWidgetFactory extends WidgetFactory {
     }
 
     @Override
-    public Component createWidget(String id, WidgetConfig config, IModel<?>... models) {
+    public Component create(String id, WidgetConfig config, IModel<?> model) {
         switch (config.getWidgetType()) {
             case TEXT_FIELD:
                 return new TextField<String>(id);
@@ -28,15 +28,19 @@ public class DefaultWidgetFactory extends WidgetFactory {
             case LABEL:
                 return new Label(id);
             case BUTTON:
-                return new IndicatingAjaxSubmitLink(id) {
-                    @Override
-                    protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
-                        WfWicketUtil.post(form, new WfSubmitEvent(target, form));
-                    }
-                };
+                return createAjaxButton(id);
             default:
                 break;
         }
         return new WebMarkupContainer(id);
+    }
+
+    protected IndicatingAjaxSubmitLink createAjaxButton(final String id) {
+        return new IndicatingAjaxSubmitLink(id) {
+            @Override
+            protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
+                WfWicketUtil.post(form, new WfSubmitEvent(target, form));
+            }
+        };
     }
 }

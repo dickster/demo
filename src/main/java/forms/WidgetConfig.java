@@ -1,19 +1,21 @@
 package forms;
 
 import com.google.common.collect.Lists;
-import org.apache.wicket.MetaDataKey;
 import org.apache.wicket.validation.IValidator;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class WidgetConfig {
-
-    public static final MetaDataKey<String> NAME = new MetaDataKey<String>() {};
+public class WidgetConfig implements Config {
 
     private String property;
     private String name;
     private WidgetTypeEnum type;
+
+    public WidgetTypeEnum getType() {
+        return type;
+    }
+
     private String acordProperty;
     private String acordVersion;
     private List<String> mediatedAjaxEvents = Lists.newArrayList();
@@ -35,10 +37,6 @@ public class WidgetConfig {
 
     public String getName() {
         return name;
-    }
-
-    public WidgetTypeEnum getType() {
-        return type;
     }
 
     public String getAcordProperty() {

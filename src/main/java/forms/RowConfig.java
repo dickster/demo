@@ -73,7 +73,7 @@ public class RowConfig implements Serializable {
 
         @Override
         public String toString() {
-            return c.getMetaData(WidgetConfig.NAME);
+            return c.getMetaData(Config.NAME);
         }
 
         @Override

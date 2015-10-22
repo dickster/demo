@@ -3,13 +3,17 @@ package demo;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
+import forms.Config;
 import forms.RowConfig;
 import forms.SectionConfig;
-import forms.WidgetConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
+import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.util.visit.IVisit;
+import org.apache.wicket.util.visit.IVisitor;
 
+import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +72,7 @@ public class PageLayout implements Serializable {
     }
 
     protected String getName(Component c) {
-        return c.getMetaData(WidgetConfig.NAME);
+        return c.getMetaData(Config.NAME);
     }
 
     public PageLayout add(SectionConfig sectionConfig) {
@@ -122,5 +126,24 @@ public class PageLayout implements Serializable {
         }
 
     }
+
+    public @Nonnull PageLayout withDefaultLayout(WebMarkupContainer parent) {
+        final List<Component> components = Lists.newArrayList();
+        parent.visitChildren(Component.class, new IVisitor<Component, Void>() {
+            @Override
+            public void component(Component object, IVisit<Void> visit) {
+                components.add(object);
+            }
+        });
+        int count = components.size();
+        int colsPerRow = 3;
+        int compPerSec = (count+1)/2;
+        // mostly this is for reference so the dev will get an idea of what the layout json object should look like.
+        PageLayout pageLayout = new PageLayout();
+        pageLayout.addInDefaltManner(components, compPerSec, colsPerRow);
+        return pageLayout;
+    }
+
+
 
 }
