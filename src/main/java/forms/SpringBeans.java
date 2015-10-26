@@ -16,6 +16,11 @@ public class SpringBeans {
     }
 
     @Bean @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public WorkflowManager workflowManager() {
+        return new WorkflowManager();
+    }
+
+    @Bean @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public Theme theme() {
         return new DefaultTheme();
     }

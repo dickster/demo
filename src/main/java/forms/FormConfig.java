@@ -24,7 +24,7 @@ public class FormConfig<T> extends GroupConfig {
         Set<String> acordVersions = Sets.newHashSet();
         for (WidgetConfig config: getWidgetConfigs()) {
             String v = config.getAcordVersion();
-            if (v != null) {
+            if (StringUtils.isNotBlank(v)) {
                 acordVersions.add(v);
             }
         }

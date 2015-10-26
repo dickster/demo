@@ -10,7 +10,12 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
 
+import javax.inject.Inject;
+
 public class DefaultWidgetFactory extends WidgetFactory {
+
+    private @Inject
+    WorkflowManager manager;
 
     public DefaultWidgetFactory() {
         super();
@@ -39,7 +44,7 @@ public class DefaultWidgetFactory extends WidgetFactory {
         return new IndicatingAjaxSubmitLink(id) {
             @Override
             protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
-                WfWicketUtil.post(form, new WfSubmitEvent(target, form));
+                manager.post(form, new WfSubmitEvent(target, form));
             }
         };
     }
