@@ -1,18 +1,16 @@
 package forms;
 
-import com.google.common.base.Preconditions;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
-
-import javax.annotation.Nonnull;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 public class Group extends Panel {
 
     private final IModel<?> model;
     private GroupConfig config;
-    private WidgetFactory factory;
+    private @SpringBean WidgetFactory factory;
 
     public Group(String id, GroupConfig config, final IModel<?> model) {
         super(id);
@@ -24,24 +22,28 @@ public class Group extends Panel {
 
     @Override
     protected void onInitialize() {
-        Preconditions.checkState(factory!=null);
         super.onInitialize();
         add(new ListView<Config>("group", config.getConfigs()) {
             @Override
             protected void populateItem(ListItem<Config> item) {
                 Config config = item.getModelObject();
                 if (config instanceof WidgetConfig) {
-                    item.add(factory.createWidget("item", (WidgetConfig) config, model));
+                    item.add(getFactory().createWidget("item", (WidgetConfig) config, model));
                 } else if (config instanceof GroupConfig) {
-                    item.add(new Group("item", (GroupConfig) config, model).withWidgetFactory(factory));
+                    item.add(newGroup((GroupConfig) config));
                 }
             }
         });
-
     }
 
-    public Group withWidgetFactory(@Nonnull WidgetFactory factory) {
-        this.factory = factory;
-        return this;
+    // override these if you really want custom behaviors (different widget factory?)
+    // 99% of the time these will be fine.
+
+    protected Group newGroup(GroupConfig config) {
+        return new Group("item", (GroupConfig) config, model);
+    }
+
+    protected WidgetFactory getFactory() {
+        return factory;
     }
 }

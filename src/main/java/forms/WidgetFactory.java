@@ -81,7 +81,4 @@ public abstract class WidgetFactory {
         //if (config.getName().equals("someSpecialEmail")) { config.addAjaxEvent("onchange"); config.addValidator(EmailAddressValidator.getInstance()); }
     }
 
-    public void createForm(String id, FormConfig formConfig, IModel<?> formModel) {
-        createGroup(id, formConfig, formModel);
-    }
 }

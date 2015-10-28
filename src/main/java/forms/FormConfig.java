@@ -15,7 +15,6 @@ public class FormConfig<T> extends GroupConfig {
         setRenderBodyOnly(false);
     }
 
-
     public void validateAcordVersion(String version) throws IllegalStateException {
         if (StringUtils.isBlank(version)) {
             return;
@@ -36,7 +35,5 @@ public class FormConfig<T> extends GroupConfig {
         }
         // if (acordVersions.size()==0) {   // that's ok. it's possible to have no acord fields on a form
     }
-
-
 
 }

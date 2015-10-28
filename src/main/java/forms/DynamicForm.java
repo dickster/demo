@@ -23,7 +23,8 @@ public class DynamicForm extends Form  {
     // this calls layout and initializes all widgets.
     private static final String INIT_FORM = "easyForm.init(%s);";
 
-    private @SpringBean Toolkit toolkit;
+    private @SpringBean Theme theme;
+    private @SpringBean WidgetFactory factory;
 
     private FormConfig formConfig;
     private IModel<?> formModel;
@@ -77,9 +78,7 @@ public class DynamicForm extends Form  {
         setOutputMarkupId(true);
         setDefaultModel(getFormModel());
 
-        WidgetFactory factory = createWidgetFactory(toolkit);
-
-        factory.createForm("widgets", formConfig, getFormModel() );
+        add(new Group("widgets", formConfig, getFormModel()));
 
         getTheme().apply(this);
     }
@@ -90,11 +89,7 @@ public class DynamicForm extends Form  {
     }
 
     private Theme getTheme() {
-        return toolkit.getTheme();
-    }
-
-    private WidgetFactory createWidgetFactory(Toolkit toolkit) {
-        return this.toolkit.createWidgetFactory();
+        return theme;
     }
 
     public <T extends DynamicForm> T supportingAcordVersion(String version) {
