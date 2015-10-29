@@ -32,16 +32,24 @@ public abstract class Workflow<T> extends EventBus {
     }
 
     @Subscribe
-    public synchronized void fire(@Nonnull WfEvent event) throws WorkflowException {
+    public synchronized final void fire(@Nonnull WfEvent event) throws WorkflowException {
         try {
             WfState nextState = currentState.handleEvent(this, event);
             if (nextState!=null) {
-                currentState = nextState;
-                post(createChangeStateEvent(nextState, event));
+                changeState(nextState, event);
             }
         } catch (Throwable t) {
             throw new WorkflowException("workflow failed when handling event", event, t);
         }
+    }
+
+    protected void changeState(WfState nextState, WfEvent event) {
+        validate(nextState);
+        currentState = nextState;
+    }
+
+    protected void validate(WfState nextState) {
+        Preconditions.checkArgument(nextState!=null, "can't have a null state for workflow.");
     }
 
     protected WfEvent<String> createChangeStateEvent(WfState state, WfEvent event) {

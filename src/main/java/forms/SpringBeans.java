@@ -10,11 +10,6 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class SpringBeans {
 
-    @Lazy @Bean @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-    public Toolkit toolkit() {
-        return new Toolkit();
-    }
-
     @Bean @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public WorkflowManager workflowManager() {
         return new WorkflowManager();
