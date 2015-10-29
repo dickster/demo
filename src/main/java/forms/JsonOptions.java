@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 // refers to javascript/json options object that are sent to the browser.
-public class WidgetOptions {
+public class JsonOptions {
 
     private WidgetTypeEnum type;
     private String id;
@@ -18,34 +18,34 @@ public class WidgetOptions {
     //   all new brovada wide options should be added to this class as fields.
     private Map<String, Object> impl = Maps.newHashMap();
 
-    public WidgetOptions(String id, WidgetTypeEnum type) {
+    public JsonOptions(String id, WidgetTypeEnum type) {
         this.id = id;
         this.type = type;
     }
 
-    public WidgetOptions withOption(String property, JsonElement value) {
+    public JsonOptions withOption(String property, JsonElement value) {
         Preconditions.checkState(impl.get(property)!=null, "you are overriding the property " + property + " with " + value + " [previously " + impl.get(property) + "]");
         impl.put(property, value);
         return this;
     }
 
-    public WidgetOptions withOption(String property, String value) {
+    public JsonOptions withOption(String property, String value) {
         return withOption(property, new JsonPrimitive(value));
     }
 
-    public WidgetOptions withOption(String property, Number value) {
+    public JsonOptions withOption(String property, Number value) {
         return withOption(property, new JsonPrimitive(value));
     }
 
-    public WidgetOptions withOption(String property, Character value) {
+    public JsonOptions withOption(String property, Character value) {
         return withOption(property, new JsonPrimitive(value));
     }
 
-    public WidgetOptions withOption(String property, Boolean value) {
+    public JsonOptions withOption(String property, Boolean value) {
         return withOption(property, new JsonPrimitive(value));
     }
 
-    public WidgetOptions withOption(String property, Object value) {
+    public JsonOptions withOption(String property, Object value) {
         return withOption(property, new Gson().toJsonTree(value));
     }
 

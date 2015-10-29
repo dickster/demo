@@ -16,7 +16,7 @@ public class BvLabel extends Label implements HasJsonOptions {
     }
 
     @Nonnull
-    public WidgetOptions getOptions() {
+    public JsonOptions getOptions() {
         return null;
     }
 

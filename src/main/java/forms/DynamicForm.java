@@ -21,6 +21,7 @@ import java.util.Map;
 public class DynamicForm extends Form  {
 
     // this calls layout and initializes all widgets.
+    // TODO : use gridstack to handle layouts?
     private static final String INIT_FORM = "easyForm.init(%s);";
 
     private @SpringBean Theme theme;
@@ -83,8 +84,8 @@ public class DynamicForm extends Form  {
         getTheme().apply(this);
     }
 
-    private WidgetOptions getOptions(Component widget) {
-        WidgetOptions options = ((HasJsonOptions) widget).getOptions();
+    private JsonOptions getOptions(Component widget) {
+        JsonOptions options = ((HasJsonOptions) widget).getOptions();
         return options;
     }
 
@@ -116,10 +117,10 @@ public class DynamicForm extends Form  {
         return (layout == null && useDefaultLayout) ? new PageLayout().withDefaultLayout(this) : layout;
     }
 
-    class FormOptions {
+    public class FormOptions {
         String id = getMarkupId();
         PageLayout layout;
-        Map<String, WidgetOptions> widgetOptions = Maps.newHashMap();
+        Map<String, JsonOptions> widgetOptions = Maps.newHashMap();
         Map<String, String> nameToId = Maps.newHashMap();
         Boolean skipValidation;
 
@@ -136,7 +137,7 @@ public class DynamicForm extends Form  {
             layout = getLayout();
         }
 
-        public FormOptions add(Component widget, WidgetOptions o) {
+        public FormOptions add(Component widget, JsonOptions o) {
             widgetOptions.put(widget.getMarkupId(), o);
             return this;
         }

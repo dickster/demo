@@ -4,5 +4,5 @@ package forms;
 //  an example would be options that you pass to jquery ui plugin when initializing.
 
 public interface HasJsonOptions {
-    WidgetOptions getOptions();
+    JsonOptions getOptions();
 }

@@ -11,7 +11,7 @@ public class BvButton extends Button implements HasJsonOptions {
     }
 
     @Override
-    public WidgetOptions getOptions() {
+    public JsonOptions getOptions() {
         return null;
     }
 }
