@@ -2,12 +2,9 @@ package forms;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
-import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.validation.IValidator;
-
-import javax.annotation.Nonnull;
 
 public abstract class WidgetFactory {
 
@@ -28,11 +25,6 @@ public abstract class WidgetFactory {
         Component component = create(id, config, model);
         postCreate(component, config, model);
         return component;
-    }
-
-    private final @Nonnull WebMarkupContainer createGroup(String id, GroupConfig groupConfig, IModel<?> model) {
-        Group group = new Group(id, groupConfig, model).withWidgetFactory(this);
-        return group;
     }
 
     protected void postCreate(final Component component, WidgetConfig config, IModel<?> model) {

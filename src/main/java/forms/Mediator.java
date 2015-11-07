@@ -21,7 +21,7 @@ public class Mediator {
 
     private static void mediate(AbstractAjaxBehavior behavior, String event, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
         Workflow<?> workflow = getWorkflow(component);
-        WfAjaxEvent e = new WfAjaxEvent(event, target, component).withType(MediatorType.BEFORE);
+        WfAjaxEvent e = new WfAjaxEvent(event, target, component);
         if (callbacks.contains(MediatorType.BEFORE)) {
             workflow.post(e);
             if (e.isStopped()) {  // allow BEFORE callbacks chance to veto event.
@@ -32,7 +32,7 @@ public class Mediator {
         callSuperOnEventMethod(behavior, target);
 
         if (callbacks.contains(MediatorType.AFTER)) {
-            workflow.post(e.withType(MediatorType.AFTER));
+            workflow.post(e);
         }
     }
 
