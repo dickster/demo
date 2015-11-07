@@ -11,9 +11,9 @@ public class WidgetConfig implements Config {
 
     private String property;
     private String name;
-    private WidgetTypeEnum type;
+    private String type;
 
-    public WidgetTypeEnum getType() {
+    public String getType() {
         return type;
     }
 
@@ -23,10 +23,14 @@ public class WidgetConfig implements Config {
     private List<IValidator<?>> validations = Lists.newArrayList();
     private Boolean required;
 
-    public WidgetConfig(@Nonnull String property, @Nonnull WidgetTypeEnum type) {
+    public WidgetConfig(@Nonnull String property, @Nonnull String type) {
         this.property = property;
         this.name = property; // use property as name by default.
         this.type = type;
+    }
+
+    public WidgetConfig(@Nonnull String property, WidgetTypeEnum type) {
+        this(property, type.toString());
     }
 
     public String getName() {
@@ -42,7 +46,7 @@ public class WidgetConfig implements Config {
     }
     //other config stuff...visible, css class,
 
-    public WidgetTypeEnum getWidgetType() {
+    public String getWidgetType() {
         return type;
     }
 

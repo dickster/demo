@@ -20,7 +20,7 @@ import org.apache.wicket.util.visit.IVisitor;
 import javax.annotation.Nullable;
 import java.util.Map;
 
-public class DynamicForm extends Form  {
+public class WorkflowForm extends Form  {
 
     // this calls layout and initializes all widgets.
     // TODO : use gridstack to handle layouts?
@@ -35,33 +35,33 @@ public class DynamicForm extends Form  {
     private PageLayout layout = null;
     private boolean useDefaultLayout = false;
 
-    public DynamicForm(String id, FormConfig config) {
+    public WorkflowForm(String id, FormConfig config) {
         super(id);
         withConfig(config);
     }
 
-    public DynamicForm withConfig(FormConfig config) {
+    public WorkflowForm withConfig(FormConfig config) {
         this.formConfig = config;
         return this;
     }
 
-    public DynamicForm withLayout(PageLayout layout) {
+    public WorkflowForm withLayout(PageLayout layout) {
         this.layout = layout;
         return this;
     }
 
-    public DynamicForm withDefaultLayout() {
+    public WorkflowForm withDefaultLayout() {
         this.useDefaultLayout = true;
         this.layout = null;
         return this;
     }
 
-    public DynamicForm withModel(IModel<?> model) {
+    public WorkflowForm withModel(IModel<?> model) {
         this.formModel = model;
         return this;
     }
 
-    public DynamicForm withFormValidator(IFormValidator validator) {
+    public WorkflowForm withFormValidator(IFormValidator validator) {
         add(validator);
         return this;
     }
@@ -95,7 +95,7 @@ public class DynamicForm extends Form  {
         return theme;
     }
 
-    public <T extends DynamicForm> T supportingAcordVersion(String version) {
+    public <T extends WorkflowForm> T supportingAcordVersion(String version) {
         this.expectedAcordVersion = version;
         return (T) this;
     }
@@ -127,7 +127,7 @@ public class DynamicForm extends Form  {
         Boolean skipValidation;
 
         public FormOptions() {
-            DynamicForm.this.visitChildren(Component.class, new IVisitor<Component, Void>() {
+            WorkflowForm.this.visitChildren(Component.class, new IVisitor<Component, Void>() {
                 @Override
                 public void component(Component widget, IVisit visit) {
                     add(widget, widget.getMetaData(Config.NAME));

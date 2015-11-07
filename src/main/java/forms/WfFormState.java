@@ -9,6 +9,10 @@ public class WfFormState extends WfState {
 
     private FormConfig formConfig = new FormConfig();
 
+    public WfFormState(FormConfig formConfig) {
+        this.formConfig = formConfig;
+    }
+
     @Nullable
     @Override
     public WfState handleEvent(Workflow<?> workflow, WfEvent event) {

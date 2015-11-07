@@ -37,9 +37,9 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T> {
     }
 
     protected void updateFormViaAjax(WfAjaxEvent event) {
-        DynamicForm form = event.getComponent().findParent(DynamicForm.class);
+        WorkflowForm form = event.getComponent().findParent(WorkflowForm.class);
         if (form!=null) {
-            DynamicForm newForm = new DynamicForm(form.getId(), getCurrentFormConfig());
+            WorkflowForm newForm = new WorkflowForm(form.getId(), getCurrentFormConfig());
             form.replaceWith(newForm);
             event.getTarget().add(newForm);
         }

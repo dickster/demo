@@ -9,8 +9,8 @@ public class DatePickerConfig extends WidgetConfig {
     private Date min;
     private Date max;
 
-    public DatePickerConfig(String property, String label) {
-        super(property, label, WidgetTypeEnum.DATE);
+    public DatePickerConfig(String property) {
+        super(property, WidgetTypeEnum.DATE);
     }
 
     public Date getMin() {
