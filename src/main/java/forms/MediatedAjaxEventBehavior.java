@@ -28,7 +28,7 @@ public class MediatedAjaxEventBehavior extends AjaxEventBehavior{
 
     @Override
     protected void onEvent(AjaxRequestTarget target) {
-        Mediator.mediate(this, target, getComponent(), callbacks);
+        new Mediator().mediate(this, target, getComponent(), callbacks);
     }
 
 }

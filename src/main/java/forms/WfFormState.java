@@ -1,5 +1,7 @@
 package forms;
 
+import forms.config.FormConfig;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -16,10 +18,6 @@ public class WfFormState extends WfState {
     public @Nonnull FormConfig getFormConfig() {
         return formConfig;
     }
-
-    private final void startHandlingEvent() {};
-
-    private final void  endHandlingEvent() { }
 
 }
 

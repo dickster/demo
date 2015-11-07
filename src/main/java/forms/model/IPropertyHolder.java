@@ -1,4 +1,4 @@
-package forms;
+package forms.model;
 
 
 public interface IPropertyHolder {

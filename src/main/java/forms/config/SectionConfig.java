@@ -1,4 +1,4 @@
-package forms;
+package forms.config;
 
 import com.google.common.collect.Lists;
 import org.apache.wicket.Component;

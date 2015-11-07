@@ -2,6 +2,7 @@ package forms;
 
 
 import com.google.common.base.Preconditions;
+import forms.config.FormConfig;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.cycle.RequestCycle;
 

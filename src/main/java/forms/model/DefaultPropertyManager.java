@@ -1,4 +1,4 @@
-package forms;
+package forms.model;
 
 public class DefaultPropertyManager implements IPropertyManager {
     @Override

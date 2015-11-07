@@ -11,7 +11,7 @@ public class WorkflowManager {
     public WorkflowManager() {
     }
 
-    public <T extends WebPage & WorkflowPage> DynamicForm addOrReplaceForm(String id, @Nonnull T page) {
+    public <T extends WebPage & HasWorkflow> DynamicForm addOrReplaceForm(String id, @Nonnull T page) {
         Preconditions.checkArgument(page.getWorkflow() instanceof FormBasedWorkflow);
         FormBasedWorkflow<?> workflow = (FormBasedWorkflow<?>) page.getWorkflow();
         DynamicForm form = new DynamicForm(id, workflow.getCurrentFormConfig());
@@ -25,7 +25,7 @@ public class WorkflowManager {
     }
 
     private @Nonnull Workflow<?> getWorkflow(@Nonnull Component component) {
-        WorkflowPage parent = component.findParent(WorkflowPage.class);
+        HasWorkflow parent = component.findParent(HasWorkflow.class);
         if (parent==null) {
             throw new IllegalStateException("uh oh, can't find workflow....this is not valid state of affairs!!");
         }

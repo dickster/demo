@@ -13,7 +13,6 @@ public abstract class MediatedAbstractAjaxBehavior extends AbstractDefaultAjaxBe
 
     private List<MediatorType> callbacks = Lists.newArrayList(MediatorType.AFTER);
 
-
     public MediatedAbstractAjaxBehavior() {
         super();
     }
@@ -26,7 +25,7 @@ public abstract class MediatedAbstractAjaxBehavior extends AbstractDefaultAjaxBe
 
     @Override
     protected final void respond(final AjaxRequestTarget target) {
-        Mediator.mediate(this, target, getComponent(), callbacks);
+        new Mediator().mediate(this, target, getComponent(), callbacks);
     }
 
 }

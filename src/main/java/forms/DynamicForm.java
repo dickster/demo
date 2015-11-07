@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import demo.PageLayout;
+import forms.config.Config;
+import forms.config.FormConfig;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -124,7 +126,7 @@ public class DynamicForm extends Form  {
         Map<String, String> nameToId = Maps.newHashMap();
         Boolean skipValidation;
 
-        FormOptions() {
+        public FormOptions() {
             DynamicForm.this.visitChildren(Component.class, new IVisitor<Component, Void>() {
                 @Override
                 public void component(Component widget, IVisit visit) {

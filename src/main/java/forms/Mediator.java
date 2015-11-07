@@ -19,7 +19,7 @@ public class Mediator {
 
     public static final String ABSTRACT_EVENT = "$ABSTRACT_EVENT$";
 
-    private static void mediate(AbstractAjaxBehavior behavior, String event, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
+    private void mediate(AbstractAjaxBehavior behavior, String event, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
         Workflow<?> workflow = getWorkflow(component);
         WfAjaxEvent e = new WfAjaxEvent(event, target, component);
         if (callbacks.contains(MediatorType.BEFORE)) {
@@ -36,23 +36,23 @@ public class Mediator {
         }
     }
 
-    private static @Nonnull Workflow<?> getWorkflow(Component component) {
-        WorkflowPage parent = component.findParent(WorkflowPage.class);
+    private @Nonnull Workflow<?> getWorkflow(Component component) {
+        HasWorkflow parent = component.findParent(HasWorkflow.class);
         if (parent==null) {
             throw new IllegalStateException("uh oh, can't find workflow....this is not valid state of affairs!!");
         }
         return parent.getWorkflow();
     }
 
-    public static void mediate(AjaxEventBehavior behavior, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
+    public void mediate(AjaxEventBehavior behavior, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
         mediate(behavior, behavior.getEvent(), target, component, callbacks);
     }
 
-    public static void mediate(AbstractDefaultAjaxBehavior behavior, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
+    public void mediate(AbstractDefaultAjaxBehavior behavior, AjaxRequestTarget target, Component component, List<MediatorType> callbacks) {
         mediate(behavior, ABSTRACT_EVENT, target, component, callbacks);
     }
 
-    private static void callSuperOnEventMethod(AbstractAjaxBehavior behavior, AjaxRequestTarget target) {
+    private void callSuperOnEventMethod(AbstractAjaxBehavior behavior, AjaxRequestTarget target) {
         // blargh.  super.onEvent can't be called directly so i have to call it via reflection.
         // this equates to super.onEvent(target);
         try {

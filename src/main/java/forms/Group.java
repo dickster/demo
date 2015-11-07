@@ -1,5 +1,8 @@
 package forms;
 
+import forms.config.Config;
+import forms.config.GroupConfig;
+import forms.config.WidgetConfig;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;

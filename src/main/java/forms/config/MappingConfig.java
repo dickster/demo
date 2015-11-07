@@ -1,9 +1,10 @@
-package forms;
+package forms.config;
 
 import com.google.common.base.Function;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
+import forms.Transformation;
 import org.apache.wicket.model.PropertyModel;
 
 import javax.annotation.Nullable;

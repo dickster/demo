@@ -1,6 +1,7 @@
-package forms;
+package forms.config;
 
 import com.google.common.collect.Lists;
+import forms.WidgetTypeEnum;
 import org.apache.wicket.validation.IValidator;
 
 import javax.annotation.Nonnull;
@@ -21,13 +22,6 @@ public class WidgetConfig implements Config {
     private List<String> mediatedAjaxEvents = Lists.newArrayList();
     private List<IValidator<?>> validations = Lists.newArrayList();
     private Boolean required;
-
-
-    public WidgetConfig(@Nonnull String property, @Nonnull String label, @Nonnull WidgetTypeEnum type) {
-        this.property = property;
-        this.name = label;
-        this.type = type;
-    }
 
     public WidgetConfig(@Nonnull String property, @Nonnull WidgetTypeEnum type) {
         this.property = property;
@@ -56,12 +50,14 @@ public class WidgetConfig implements Config {
         return acordVersion;
     }
 
-    public void setAcordVersion(String acordVersion) {
+    public WidgetConfig acordVersion(String acordVersion) {
         this.acordVersion = acordVersion;
+        return this;
     }
 
-    public void setName(String name) {
+    public WidgetConfig name(String name) {
         this.name = name;
+        return this;
     }
 
     public WidgetConfig addAjaxEvent(String event) {
@@ -77,4 +73,14 @@ public class WidgetConfig implements Config {
     public List<IValidator<?>> getValidations() {
         return validations;
     }
+
+    public Boolean getRequired() {
+        return required;
+    }
+
+    public WidgetConfig required(Boolean required) {
+        this.required = required;
+        return this;
+    }
 }
+

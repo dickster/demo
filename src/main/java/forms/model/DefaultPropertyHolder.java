@@ -1,4 +1,4 @@
-package forms;
+package forms.model;
 
 import com.google.gson.internal.Primitives;
 

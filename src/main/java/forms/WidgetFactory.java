@@ -1,5 +1,7 @@
 package forms;
 
+import forms.config.Config;
+import forms.config.WidgetConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.FormComponent;

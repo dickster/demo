@@ -2,6 +2,7 @@ package forms;
 
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -13,7 +14,7 @@ import java.util.Map;
 // do this in subclasses....-->@WfDef("commercial")
 public abstract class Workflow<T> extends EventBus {
 
-    private Map<String, Object> context;
+    private Map<String, Object> context = Maps.newHashMap();
 
     private IModel<T> model;
 
@@ -50,11 +51,6 @@ public abstract class Workflow<T> extends EventBus {
 
     protected void validate(WfState nextState) {
         Preconditions.checkArgument(nextState!=null, "can't have a null state for workflow.");
-    }
-
-    protected WfEvent<String> createChangeStateEvent(WfState state, WfEvent event) {
-        // TODO : Create change event.
-        return new WfEvent<String>("p");
     }
 
     @Subscribe

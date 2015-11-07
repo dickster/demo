@@ -1,8 +1,10 @@
-package forms;
+package forms.config;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import forms.WidgetTypeEnum;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class GroupConfig implements Config {
@@ -39,8 +41,9 @@ public class GroupConfig implements Config {
         return title;
     }
 
-    public void setTitle(String title) {
+    public GroupConfig withTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public String getName() {
@@ -52,17 +55,32 @@ public class GroupConfig implements Config {
         return WidgetTypeEnum.GROUP;
     }
 
-    public void setName(String name) {
+    public GroupConfig withName(String name) {
         this.name = name;
+        return this;
     }
 
     public Boolean getRenderBodyOnly() {
         return renderBodyOnly;
     }
 
-    public void setRenderBodyOnly(Boolean renderBodyOnly) {
+    public GroupConfig withRenderBodyOnly(Boolean renderBodyOnly) {
         this.renderBodyOnly = renderBodyOnly;
+        return this;
     }
 
+    public GroupConfig withConfigs(Config... configs) {
+        return withConfigs(Lists.newArrayList(configs));
+    }
+
+    public GroupConfig withConfigs(@Nonnull List<Config> configs) {
+        this.configs = configs;
+        return this;
+    }
+
+    public GroupConfig withConfig(Config config) {
+        configs.add(config);
+        return this;
+    }
 
 }

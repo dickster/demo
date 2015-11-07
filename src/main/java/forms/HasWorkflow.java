@@ -1,5 +1,5 @@
 package forms;
 
-public interface WorkflowPage {
+public interface HasWorkflow {
     Workflow<?> getWorkflow();
 }

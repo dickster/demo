@@ -3,13 +3,10 @@ package forms;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.markup.html.WebPage;
 
-import javax.inject.Inject;
+public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware {
 
-public class WfPage extends WebPage implements WorkflowPage, IAjaxIndicatorAware {
-
-    private WorkflowManager workflowManager;
-    private @Inject
-    FormBasedWorkflow workflow;
+    private WorkflowManager workflowManager = new WorkflowManager();
+    private FormBasedWorkflow workflow;
     private DynamicForm form;
 
     public WfPage(FormBasedWorkflow workflow) {

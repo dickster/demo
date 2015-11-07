@@ -2,6 +2,7 @@ package forms;
 
 import com.google.common.collect.Maps;
 import demo.wicketTest.WicketHeadlessTest;
+import forms.model.MappedModel;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.junit.Test;

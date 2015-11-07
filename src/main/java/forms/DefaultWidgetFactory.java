@@ -1,5 +1,6 @@
 package forms;
 
+import forms.config.WidgetConfig;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;

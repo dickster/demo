@@ -1,4 +1,4 @@
-package forms;
+package forms.config;
 
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
@@ -8,11 +8,12 @@ import java.util.Set;
 
 public class FormConfig<T> extends GroupConfig {
 
+
     private String version;
     private IFormValidator validator;
 
     public FormConfig() {
-        setRenderBodyOnly(false);
+        withRenderBodyOnly(false);
     }
 
     public void validateAcordVersion(String version) throws IllegalStateException {
@@ -35,5 +36,24 @@ public class FormConfig<T> extends GroupConfig {
         }
         // if (acordVersions.size()==0) {   // that's ok. it's possible to have no acord fields on a form
     }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public FormConfig<T> withVersion(String version) {
+        this.version = version;
+        return this;
+    }
+
+    public IFormValidator getValidator() {
+        return validator;
+    }
+
+    public FormConfig<T> withValidator(IFormValidator validator) {
+        this.validator = validator;
+        return this;
+    }
+
 
 }
