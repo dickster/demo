@@ -20,6 +20,7 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
     private IModel<T> model;
 
     protected WfState currentState;
+    private boolean ended = false;
 
     public Workflow() {
         register(this);
@@ -37,6 +38,7 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
     public synchronized final void fire(@Nonnull WfEvent event) throws WorkflowException {
         try {
             WfState nextState = currentState.handleEvent(this, event);
+            System.out.println("changing to state " + nextState);
             if (nextState!=null) {
                 changeState(nextState, event);
             }
@@ -106,4 +108,12 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
     }
 
 
+    public void end() {
+        //currentState=null;
+        ended = true;
+    }
+
+    public boolean isEnded() {
+        return ended;
+    }
 }

@@ -25,6 +25,11 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     }
 
     @Override
+    public void end() {
+        updatePage(new StartingPoint());
+    }
+
+    @Override
     protected IModel createModel() {
         // e.g. return new GrenvilleObject();
         return new MappedModel();
@@ -34,17 +39,39 @@ public class CommercialWorkflow extends FormBasedWorkflow {
         StateA() {
             super(new FormAConfig());
         }
+
+        @Override
+        public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+            if ("next".equals(event.getName())) {
+                return stateB;
+            }
+            return this;
+        }
     }
 
     class StateB extends WfFormState {
         StateB() {
             super(new FormBConfig());
         }
+        @Override
+        public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+            if ("next".equals(event.getName())) {
+                return stateC;
+            }
+            return this;
+        }
     }
 
     class StateC extends WfFormState {
         StateC() {
             super(new FormCConfig());
+        }
+        @Override
+        public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+            if ("ok".equals(event.getName())) {
+                workflow.end();
+            }
+            return this;
         }
     }
 

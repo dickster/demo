@@ -3,7 +3,6 @@ package forms;
 import forms.config.FormConfig;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class WfFormState extends WfState {
 
@@ -13,7 +12,6 @@ public class WfFormState extends WfState {
         this.formConfig = formConfig;
     }
 
-    @Nullable
     @Override
     public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
         return super.handleEvent(workflow, event);

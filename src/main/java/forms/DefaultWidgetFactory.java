@@ -1,5 +1,6 @@
 package forms;
 
+import com.google.common.base.Preconditions;
 import forms.config.ButtonConfig;
 import forms.config.CheckBoxConfig;
 import forms.config.DateLabelConfig;
@@ -49,22 +50,23 @@ public class DefaultWidgetFactory extends WidgetFactory {
             return new Label(id,((LabelConfig)config).getText());
         }
         if (config instanceof DatePickerConfig) {
-            return new DatePanel(id);
-        }
-        if (config instanceof DateLabelConfig) {
-            return new Label(id); // TODO : add a timeago behavior to this.
-        }
-        if (config instanceof ButtonConfig) {
-            return createAjaxButton(id, (ButtonConfig)config);
-        }
-        throw new IllegalArgumentException("widget type " + config.getClass().getSimpleName() + " is not supported.");
+        return new DatePanel(id);
     }
+    if (config instanceof DateLabelConfig) {
+        return new Label(id); // TODO : add a timeago behavior to this.
+    }
+    if (config instanceof ButtonConfig) {
+        return createAjaxButton(id, (ButtonConfig)config);
+    }
+    throw new IllegalArgumentException("widget type " + config.getClass().getSimpleName() + " is not supported.");
+}
 
-    protected IndicatingAjaxSubmitLink createAjaxButton(final String id, ButtonConfig config) {
+    protected IndicatingAjaxSubmitLink createAjaxButton(final String id, final ButtonConfig config) {
+        Preconditions.checkArgument(config.getName()!=null);
         return new IndicatingAjaxSubmitLink(id, config.getName()) {
             @Override
-            protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
-                new WorkflowManager().post(form, new WfSubmitEvent(target, form));
+            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                new WorkflowManager().post(form, new WfSubmitEvent(config.getName(), target, this));
             }
         };
     }

@@ -24,7 +24,7 @@ public class WorkflowForm extends Form  {
 
     // this calls layout and initializes all widgets.
     // TODO : use gridstack to handle layouts?
-    private static final String INIT_FORM = "easyForm.init(%s);";
+    private static final String INIT_FORM = "var init_form_options = %s;";
 
     private @SpringBean Theme theme;
     private @SpringBean WidgetFactory factory;
@@ -98,6 +98,12 @@ public class WorkflowForm extends Form  {
     public <T extends WorkflowForm> T supportingAcordVersion(String version) {
         this.expectedAcordVersion = version;
         return (T) this;
+    }
+
+    @Override
+    protected void onSubmit() {
+        super.onSubmit();
+        System.out.println("submitting!!!!");
     }
 
     @Override

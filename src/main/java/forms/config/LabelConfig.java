@@ -8,6 +8,7 @@ public class LabelConfig extends WidgetConfig {
 
     public LabelConfig(String name) {
         super(name, WidgetTypeEnum.LABEL);
+        text(name);
     }
 
     public LabelConfig text(String value) {

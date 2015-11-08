@@ -19,6 +19,7 @@ public class StartingPoint extends WebPage {
                     }
                 })
         );
+
     }
 
 }

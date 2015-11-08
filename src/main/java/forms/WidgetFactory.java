@@ -12,17 +12,15 @@ import java.io.Serializable;
 
 public abstract class WidgetFactory implements Serializable {
 
-    private boolean usePropertyAsName = false;
-
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
 
     public abstract Component create(String id, WidgetConfig config, IModel<?> model);
 
-    public <T extends WidgetFactory> T usingPropertyAsName() {
-        usePropertyAsName = true;
-        return (T) this;
-    }
+//    public <T extends WidgetFactory> T usingPropertyAsName() {
+//        usePropertyAsName = true;
+//        return (T) this;
+//    }
 
     public Component createWidget(String id, WidgetConfig config, IModel<?> model) {
         preCreate(config, model);
@@ -39,7 +37,7 @@ public abstract class WidgetFactory implements Serializable {
     }
 
     protected void setMetaData(Component component, WidgetConfig config) {
-        String name = usePropertyAsName ? config.getName() : config.getProperty();
+        String name = config.getName()==null ? config.getProperty() : config.getName();
         component.setMetaData(Config.NAME, name);
         component.setOutputMarkupId(true);
     }

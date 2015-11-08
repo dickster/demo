@@ -9,21 +9,20 @@ public class FormBConfig extends FormConfig {
     public FormBConfig() {
         super();
         withConfigs(configs());
-        withName("FORM-A");
-        withTitle("Form A");
+        withName("FORM-B");
+        withTitle("Form B");
         withVersion("acord-1.2.3");
     }
 
     private List<Config> configs() {
         List<Config> result = Lists.newArrayList();
-        GroupConfig nameConfig = new GroupConfig();
-        nameConfig.withConfig(new LabelConfig("l1").text("first name"));
-        nameConfig.withConfig(new TextFieldConfig("name.first"));
-        nameConfig.withConfig(new LabelConfig("l1").text("middle name"));
-        nameConfig.withConfig(new TextFieldConfig("name.middle"));
-        nameConfig.withConfig(new LabelConfig("l1").text("last name"));
-        nameConfig.withConfig(new TextFieldConfig("name.last"));
-        result.add(new GroupConfig().withConfigs(nameConfig));
+        GroupConfig addressConfig = new GroupConfig();
+        addressConfig.withConfig(new LabelConfig("Address"));
+        addressConfig.withConfig(new TextFieldConfig("insured.address"));
+        addressConfig.withConfig(new LabelConfig("Address2"));
+        addressConfig.withConfig(new TextFieldConfig("insured.address2"));
+        result.add(new GroupConfig().withConfigs(addressConfig));
+        result.add(new ButtonConfig("next"));
         return result;
     }
 }

@@ -13,15 +13,15 @@ public class IndicatingAjaxSubmitLink extends Panel implements IAjaxIndicatorAwa
 
     public IndicatingAjaxSubmitLink(String id, String label) {
         super(id);
-        add(new AjaxSubmitLink("link"){
+        add(new AjaxSubmitLink("link") {
             @Override
-            protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
-                IndicatingAjaxSubmitLink.this.onAfterSubmit(target, form);
+            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                IndicatingAjaxSubmitLink.this.onSubmit(target, form);
             }
         }.add(new Label("label", label )));
     }
 
-    protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
+    protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
     }
 
     @Override

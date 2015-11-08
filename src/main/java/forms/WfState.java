@@ -1,7 +1,6 @@
 package forms;
 
 
-import javax.annotation.Nullable;
 import java.io.Serializable;
 
 public class WfState implements Serializable {
@@ -16,10 +15,10 @@ public class WfState implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return name==null ? getClass().getSimpleName() : name;
     }
 
-    public @Nullable WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+    public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
         // typically something like...
         // switch ( Event.valueOf(event.getName()) ) {
         //    case SUBMIT : doThis();
@@ -27,7 +26,7 @@ public class WfState implements Serializable {
         //    etc...
         // }
         // return  if null, workflow will just hang around and wait for next event.
-        return null; //event.getOnSuccessState();
+        return this; //event.getOnSuccessState();
     }
 
     // BA - no spring beans defined.  workflow just creates states based on form config which is named by onSuccessState().
@@ -36,7 +35,7 @@ public class WfState implements Serializable {
     @Override
     public String toString() {
         return "WfState{" +
-                "name='" + name + '\'' +
+                "name='" + getName() + '\'' +
                 '}';
     }
 }

@@ -7,7 +7,7 @@ public class WfSubmitEvent extends WfAjaxEvent {
 
     public static final String SUBMIT = "SUBMIT";
 
-    public WfSubmitEvent(AjaxRequestTarget target, Component component) {
-        super(SUBMIT, target, component);
+    public WfSubmitEvent(String name, AjaxRequestTarget target, Component component) {
+        super(name, target, component);
     }
 }

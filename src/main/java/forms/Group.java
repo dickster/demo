@@ -5,9 +5,9 @@ import forms.config.Config;
 import forms.config.GroupConfig;
 import forms.config.WidgetConfig;
 import org.apache.wicket.Component;
-import org.apache.wicket.markup.html.list.AbstractItem;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -23,30 +23,31 @@ public class Group extends Panel {
         super(id);
         this.config = config;
         this.model = model;
-        setOutputMarkupId(!config.getRenderBodyOnly());
-        setRenderBodyOnly(config.getRenderBodyOnly());
+        //setOutputMarkupId(!config.getRenderBodyOnly());
+       // setRenderBodyOnly(config.getRenderBodyOnly());
     }
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
+
         List<Component> components = createComponents("component");
-        RepeatingView repeating = new RepeatingView("components");
-        add(repeating);
+//        RepeatingView repeating = new RepeatingView("components");
+//        add(repeating);
+       // add(new IndicatingAjaxSubmitLink("link", "hello"));
 
-        for (Component component:components) {
-            AbstractItem item = new AbstractItem(repeating.newChildId());
-            repeating.add(item);
-            item.setRenderBodyOnly(true);
-            item.add(component);
-        }
+//        for (Component component:components) {
+//            AbstractItem item = new AbstractItem(repeating.newChildId());
+//            repeating.add(item);
+//            item.add(component);
+//        }
 
-//        add(new ListView<Component>("components", components) {
-//            @Override
-//            protected void populateItem(ListItem<Component> item) {
-//                item.add(item.getModelObject());
-//            }
-//        });
+        add(new ListView<Component>("components", components) {
+            @Override
+            protected void populateItem(ListItem<Component> item) {
+                item.add(item.getModelObject());
+            }
+        }.setReuseItems(true));
     }
 
     private List<Component> createComponents(String id) {

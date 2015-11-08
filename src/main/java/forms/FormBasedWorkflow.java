@@ -31,9 +31,9 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T> {
         if (event instanceof WfAjaxEvent) {
             updateFormViaAjax((WfAjaxEvent)event);
         }
-        else {
-            updatePage();
-        }
+//        else {
+//            updatePage(createResponsePage());
+//        }
     }
 
     protected void updateFormViaAjax(WfAjaxEvent event) {
@@ -45,10 +45,10 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T> {
         }
     }
 
-    protected void updatePage() {
+    protected void updatePage(WebPage page) {
         RequestCycle requestCycle = RequestCycle.get();
         if (requestCycle!=null) {
-            requestCycle.setResponsePage(createResponsePage());
+            requestCycle.setResponsePage(page);
         } else {
             System.out.println("your workflow is redirecting to a page without a request cycle?  huh???");
         }
