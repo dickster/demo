@@ -8,7 +8,9 @@ import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.validation.IValidator;
 
-public abstract class WidgetFactory {
+import java.io.Serializable;
+
+public abstract class WidgetFactory implements Serializable {
 
     private boolean usePropertyAsName = false;
 
@@ -31,7 +33,7 @@ public abstract class WidgetFactory {
 
     protected void postCreate(final Component component, WidgetConfig config, IModel<?> model) {
         setMetaData(component, config);
-        setModels(component, model);
+       // setModels(component, model);
         addAjax(component, config);
         addValidators(component, config);
     }
@@ -42,15 +44,15 @@ public abstract class WidgetFactory {
         component.setOutputMarkupId(true);
     }
 
-    private void setModels(Component component, IModel<?> model) {
+//    private void setModels(Component component, IModel<?> model) {
 //        if (component instanceof IHasMultipleModels) {
 //            IHasMultipleModels mm = (IHasMultipleModels) component;
 //            mm.setDefaultModels(models);
 //        } else {
 //            if (models.length>1) System.out.println("WARNING : you have supplied more than one model to " + component.getMetaData(Config.NAME) + " but it doesn't implement interface " + IHasMultipleModels.class.getSimpleName());
-            component.setDefaultModel(model);
+//            component.setDefaultModel(model);
 //        }
-    }
+//    }
 
     private void addValidators(Component component, WidgetConfig config) {
         if (component instanceof FormComponent) {

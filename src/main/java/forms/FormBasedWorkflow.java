@@ -39,7 +39,7 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T> {
     protected void updateFormViaAjax(WfAjaxEvent event) {
         WorkflowForm form = event.getComponent().findParent(WorkflowForm.class);
         if (form!=null) {
-            WorkflowForm newForm = new WorkflowForm(form.getId(), getCurrentFormConfig());
+            WorkflowForm newForm = new WorkflowForm(form.getId(), getCurrentFormConfig()).withModel(getModel());
             form.replaceWith(newForm);
             event.getTarget().add(newForm);
         }

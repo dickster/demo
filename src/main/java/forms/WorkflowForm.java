@@ -81,7 +81,7 @@ public class WorkflowForm extends Form  {
         setOutputMarkupId(true);
         setDefaultModel(getFormModel());
 
-        add(new Group("widgets", formConfig, getFormModel()));
+        add(new Group("content", formConfig, getFormModel()));
 
         getTheme().apply(this);
     }

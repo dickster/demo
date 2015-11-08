@@ -2,7 +2,9 @@ package forms.config;
 
 import org.apache.wicket.MetaDataKey;
 
-public interface Config {
+import java.io.Serializable;
+
+public interface Config extends Serializable {
 
     public MetaDataKey<String> NAME = new MetaDataKey<String>() {};
 

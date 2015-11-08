@@ -24,6 +24,7 @@ public class FormAConfig extends FormConfig {
         nameConfig.withConfig(new LabelConfig("l1").text("last name"));
         nameConfig.withConfig(new TextFieldConfig("name.last"));
         result.add(new GroupConfig().withConfigs(nameConfig));
+        result.add(new ButtonConfig("next"));
         return result;
     }
 }

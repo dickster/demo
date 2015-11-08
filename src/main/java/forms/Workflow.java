@@ -9,10 +9,11 @@ import com.google.common.eventbus.Subscribe;
 import org.apache.wicket.model.IModel;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 import java.util.Map;
 
 // do this in subclasses....-->@WfDef("commercial")
-public abstract class Workflow<T> extends EventBus {
+public abstract class Workflow<T> extends EventBus implements Serializable {
 
     private Map<String, Object> context = Maps.newHashMap();
 
@@ -95,9 +96,12 @@ public abstract class Workflow<T> extends EventBus {
         return context;
     }
 
-    protected abstract IModel<T> createModel();
+    protected abstract @Nonnull IModel<T> createModel();
 
     public IModel<T> getModel() {
+        if (model==null) {
+            model = createModel();
+        }
         return model;
     }
 

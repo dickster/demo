@@ -20,6 +20,11 @@ public class SpringBeans {
         return new DefaultTheme();
     }
 
+    @Bean @Lazy @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public WidgetFactory widgetFactory() {
+        return new DefaultWidgetFactory();
+    }
+
     @Lazy @Bean
     public WfFactory WorkflowFactory() {
         return new WfFactory();

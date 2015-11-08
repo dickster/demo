@@ -3,8 +3,8 @@ package forms;
 import forms.config.FormAConfig;
 import forms.config.FormBConfig;
 import forms.config.FormCConfig;
+import forms.model.MappedModel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
 
 import java.util.Locale;
 
@@ -26,9 +26,9 @@ public class CommercialWorkflow extends FormBasedWorkflow {
 
     @Override
     protected IModel createModel() {
-        return Model.of("hi");
+        // e.g. return new GrenvilleObject();
+        return new MappedModel();
     }
-
 
     class StateA extends WfFormState {
         StateA() {

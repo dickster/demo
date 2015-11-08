@@ -10,6 +10,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.IWrapModel;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,10 @@ public class MappedModel extends CompoundPropertyModel<Map<String, Object>> {
 
     public MappedModel(Map<String, Object> object) {
         super(object);
+    }
+
+    public MappedModel() {
+        super(new HashMap<String, Object>());
     }
 
     private void setObject(String property, Object object) {

@@ -1,17 +1,20 @@
 package forms.config;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import forms.WidgetTypeEnum;
 import org.apache.wicket.validation.IValidator;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Map;
 
 public class WidgetConfig implements Config {
 
     private String property;
     private String name;
     private String type;
+    private Map options = Maps.newHashMap();  // a place to store custom options.
 
     public String getType() {
         return type;
@@ -85,6 +88,14 @@ public class WidgetConfig implements Config {
     public WidgetConfig required(Boolean required) {
         this.required = required;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "WidgetConfig{" +
+                "property='" + property + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }
 

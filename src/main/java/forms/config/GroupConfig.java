@@ -51,8 +51,8 @@ public class GroupConfig implements Config {
     }
 
     @Override
-    public final WidgetTypeEnum getType() {
-        return WidgetTypeEnum.GROUP;
+    public final String getType() {
+        return WidgetTypeEnum.GROUP.toString();
     }
 
     public GroupConfig withName(String name) {

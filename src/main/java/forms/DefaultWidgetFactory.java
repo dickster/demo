@@ -1,17 +1,23 @@
 package forms;
 
+import forms.config.ButtonConfig;
+import forms.config.CheckBoxConfig;
+import forms.config.DateLabelConfig;
+import forms.config.DatePickerConfig;
+import forms.config.LabelConfig;
+import forms.config.TextFieldConfig;
 import forms.config.WidgetConfig;
+import forms.widgets.CheckBoxPanel;
+import forms.widgets.DatePanel;
+import forms.widgets.IndicatingAjaxSubmitLink;
+import forms.widgets.TextFieldPanel;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
 
 import javax.annotation.Nullable;
-import java.util.Date;
 
 public class DefaultWidgetFactory extends WidgetFactory {
 
@@ -33,30 +39,29 @@ public class DefaultWidgetFactory extends WidgetFactory {
     }
 
     private @Nullable Component createBasic(String id, WidgetConfig config, IModel<?> model) {
-        WidgetTypeEnum type = WidgetTypeEnum.valueOf(config.getWidgetType());
-        if (type==null) {
-            return null;
+        if (config instanceof TextFieldConfig) {
+            return new TextFieldPanel<String>(id);
         }
-        switch (type) {
-            case TEXT_FIELD:
-                return new TextField<String>(id);
-            case CHECKBOX:
-                return new CheckBox(id);
-            case DATE:
-                return new DateTextField(id);
-            case DATE_LABEL:
-                return new TextField<Date>(id);
-            case LABEL:
-                return new Label(id);
-            case BUTTON:
-                return createAjaxButton(id);
-            default:
-                throw new IllegalArgumentException("widget type " + type + " is not supported.");
+        if (config instanceof CheckBoxConfig) {
+            return new CheckBoxPanel(id);
         }
+        if (config instanceof LabelConfig) {
+            return new Label(id,((LabelConfig)config).getText());
+        }
+        if (config instanceof DatePickerConfig) {
+            return new DatePanel(id);
+        }
+        if (config instanceof DateLabelConfig) {
+            return new Label(id); // TODO : add a timeago behavior to this.
+        }
+        if (config instanceof ButtonConfig) {
+            return createAjaxButton(id, (ButtonConfig)config);
+        }
+        throw new IllegalArgumentException("widget type " + config.getClass().getSimpleName() + " is not supported.");
     }
 
-    protected IndicatingAjaxSubmitLink createAjaxButton(final String id) {
-        return new IndicatingAjaxSubmitLink(id) {
+    protected IndicatingAjaxSubmitLink createAjaxButton(final String id, ButtonConfig config) {
+        return new IndicatingAjaxSubmitLink(id, config.getName()) {
             @Override
             protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
                 new WorkflowManager().post(form, new WfSubmitEvent(target, form));

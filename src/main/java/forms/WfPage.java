@@ -5,14 +5,14 @@ import org.apache.wicket.markup.html.WebPage;
 
 public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware {
 
-    private WorkflowManager workflowManager = new WorkflowManager();
     private FormBasedWorkflow workflow;
-    private WorkflowForm form;
 
     public WfPage(FormBasedWorkflow workflow) {
         super();
         this.workflow = workflow;
-        form = workflowManager.addOrReplaceForm("form", this);
+        add( new WorkflowForm("form", workflow.getCurrentFormConfig())
+                .withModel(workflow.getModel())
+        );
     }
 
     @Override

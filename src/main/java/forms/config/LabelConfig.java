@@ -4,11 +4,10 @@ import forms.WidgetTypeEnum;
 
 public class LabelConfig extends WidgetConfig {
 
-
-    private String text;
+    private String text;  // this should be localized.
 
     public LabelConfig(String name) {
-        super("", name, WidgetTypeEnum.LABEL);
+        super(name, WidgetTypeEnum.LABEL);
     }
 
     public LabelConfig text(String value) {
@@ -16,4 +15,7 @@ public class LabelConfig extends WidgetConfig {
         return this;
     }
 
+    public String getText() {
+        return text;
+    }
 }
