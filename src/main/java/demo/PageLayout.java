@@ -1,12 +1,10 @@
 package demo;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import forms.config.Config;
 import forms.config.RowConfig;
 import forms.config.SectionConfig;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -16,7 +14,6 @@ import org.apache.wicket.util.visit.IVisitor;
 import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 // pages
 //  have sections
@@ -44,40 +41,22 @@ public class PageLayout implements Serializable {
     public PageLayout() {
     }
 
-    private List<SectionConfig> sectionConfigs = Lists.newArrayList();
-    private Map<String, String> idMap = Maps.newHashMap();
+    private List<SectionConfig> sections = Lists.newArrayList();
 
     protected PageLayout layout(SectionConfig... configs) {
         return this;
     }
 
     protected OnDomReadyHeaderItem asHeaderItem() {
-        return OnDomReadyHeaderItem.forScript(String.format(JS, gson.toJson(sectionConfigs)));
+        return OnDomReadyHeaderItem.forScript(String.format(JS, gson.toJson(sections)));
     }
 
-    private Map<String, String> updateIdMap(SectionConfig sectionConfig) {
-        for (Component c:sectionConfig.getComponents()) {
-            String name = getName(c);
-            if (StringUtils.isNotBlank(name)) {
-                if (idMap.get(name)!=null) {
-                    // "WARN: You have two components with the same name : " + name;
-                    System.out.println("duplicate ids....! " );
-                    idMap.put("ERROR OCCURRED - duplicate ids", name);
-                    return idMap;
-                }
-                idMap.put(name, c.getMarkupId());
-            }
-        }
-        return idMap;
-    }
-
-    protected String getName(Component c) {
+    private String compName(Component c) {
         return c.getMetaData(Config.NAME);
     }
 
     public PageLayout add(SectionConfig sectionConfig) {
-        sectionConfigs.add(sectionConfig);
-        updateIdMap(sectionConfig);
+        sections.add(sectionConfig);
         return this;
     }
 

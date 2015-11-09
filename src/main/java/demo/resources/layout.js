@@ -1,12 +1,6 @@
 var easy = easy ? easy : {};
 easy.layout= (function() {
 
-//    rows: ["foo", "bar", "hello".]
-//
-//        OR
-//
-//    rows : [ {id:"foo", css:"col-log-3"}, ]
-
 //    var defaults = {sections:
 //        [{id:'nameSection', label:'INFO',
 //            rows:[
@@ -42,24 +36,33 @@ easy.layout= (function() {
 
 
     var init = function(options) {
-        doLayout($.extend(defaults, options));
+        //doLayout($.extend(defaults, options));
+        // TODO : add default options later.
+        doLayout(options);
     }
 
-
     function doLayout(opts) {
-        $(opts.sections).each(function(index) {
-            var $oldContent = $('#'+this.id);
-            var $content = $('<div class="reformatted-content"></div>').appendTo($('#'+this.id));
-            $content.append('<h4>'+this.label+'</h4>')
+//need to move form?
+        var $oldContent = $('#'+opts.id);
+        var $content = $('<div class="reformatted-content"></div>').appendTo($oldContent);
+
+        $(opts.layout.sections).each(function(index) {
+
+            if (this.label) $content.append('<h4>'+this.label+'</h4>');
+
             $(this.rows).each(function(rowsIndex) {
-                var $row = $('<div class="row"></div>').appendTo($content);
-                $(this).each(function(rowIndex) {
-                    var $col = $('<div class='+this.class+'></div>').appendTo($row);
-                    $(this.components).each(function(compIndex){
-                        var $component = $('#'+this);
-                        $component.appendTo($col);
-                    });
-                })
+                var $row = $('<div class="form-group"></div>').appendTo($content);
+                for (col in this) {
+                    alert(this[col]);
+                }
+//
+//                $(this).each(function(rowIndex) {
+//                    var $col = $('<div class='+this.class+'></div>').appendTo($row);
+//                    $(this.cols).each(function(compIndex){
+//                        var $component = $('#'+this);
+//                        $component.appendTo($col);
+//                    });
+//                })
             });
         });
 

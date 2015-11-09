@@ -4,7 +4,7 @@ import forms.WidgetTypeEnum;
 
 public class LabelConfig extends WidgetConfig {
 
-    private String text;  // this should be localized.
+    private String text;  // this should be localized!
 
     public LabelConfig(String name) {
         super(name, WidgetTypeEnum.LABEL);

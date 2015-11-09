@@ -11,9 +11,10 @@ public class GroupConfig implements Config {
 
     private String title;
     private String name;
+    private boolean useDefaultLayout = false;
 
     // contains widgets or other groups...?
-    private Boolean renderBodyOnly = false;
+    private Boolean renderBodyOnly = true;
 
     private List<Config> configs = Lists.newArrayList();
 
@@ -83,4 +84,17 @@ public class GroupConfig implements Config {
         return this;
     }
 
+    // ALIAS - maybe this short form is better?
+    public GroupConfig with(Config config) {
+        return withConfig(config);
+    }
+
+    public boolean isUseDefaultLayout() {
+        return useDefaultLayout;
+    }
+
+    public GroupConfig usingDefaultLayout(boolean useDefaultLayout) {
+        this.useDefaultLayout = useDefaultLayout;
+        return this;
+    }
 }

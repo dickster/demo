@@ -56,6 +56,17 @@ public class SectionConfigTest extends WicketPageTest {
         layout.add(sec);
         System.out.println(gson.toJson(layout));
     }
+    @Test
+    public void test_sectionConfigNoName() {
+        Label c1 = new Label("foo");
+        Label c2 = new Label("bar");
+        Label d1 = new Label("x");
+        Label d2 = new Label("y");
+        setName(c1, c2, d1, d2);
+        SectionConfig sec = new SectionConfig().withRow(c1,c2).withRow(d1,d2);
+        layout.add(sec);
+        System.out.println(gson.toJson(layout));
+    }
 
     private void setName(Component... comps) {
         for (Component c:comps) {
@@ -93,7 +104,7 @@ public class SectionConfigTest extends WicketPageTest {
         Label c2 = new Label("bar");
         setName(c1, c2);
         layout.add(new SectionConfig("sec")
-                .withRow(new RowConfig(c1, c2).withDefaultCols()));
+                .withRow(new RowConfig(c1, c2)));
         System.out.println(gson.toJson(layout));
     }
 
@@ -111,12 +122,12 @@ public class SectionConfigTest extends WicketPageTest {
 
     @Override
     public Component createFixture(String id) {
-        return null;
+        return new Label("foo");
     }
 
     @Override
     protected Class getHarnessClass() {
-        return null;
+        return String.class;
     }
 
     @Override

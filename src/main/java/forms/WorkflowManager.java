@@ -15,22 +15,15 @@ public class WorkflowManager {
 
     public static final String ABSTRACT_EVENT = "$ABSTRACT_EVENT$";
 
-
     public WorkflowManager() {
     }
 
-
-    public void post(@Nonnull Component component, @Nonnull WfEvent event) {
-        Workflow<?> workflow = getWorkflow(component);
-        workflow.post(event);
+    public void mediate(AjaxEventBehavior behavior, AjaxRequestTarget target, Component component, EnumSet<Advice> advice) {
+        mediate(behavior, behavior.getEvent(), target, component, advice);
     }
 
-    private @Nonnull Workflow<?> getWorkflow(@Nonnull Component component) {
-        HasWorkflow parent = component.findParent(HasWorkflow.class);
-        if (parent==null) {
-            throw new IllegalStateException("uh oh, can't find workflow....this is not valid state of affairs!!");
-        }
-        return parent.getWorkflow();
+    public void mediate(AbstractDefaultAjaxBehavior behavior, AjaxRequestTarget target, Component component, EnumSet<Advice> advice) {
+        mediate(behavior, ABSTRACT_EVENT, target, component, advice);
     }
 
     private void mediate(AbstractAjaxBehavior behavior, String event, AjaxRequestTarget target, Component component, EnumSet callbacks) {
@@ -50,14 +43,6 @@ public class WorkflowManager {
         }
     }
 
-    public void mediate(AjaxEventBehavior behavior, AjaxRequestTarget target, Component component, EnumSet<Advice> advice) {
-        mediate(behavior, behavior.getEvent(), target, component, advice);
-    }
-
-    public void mediate(AbstractDefaultAjaxBehavior behavior, AjaxRequestTarget target, Component component, EnumSet<Advice> advice) {
-        mediate(behavior, ABSTRACT_EVENT, target, component, advice);
-    }
-
     private void callSuperOnEventMethod(AbstractAjaxBehavior behavior, AjaxRequestTarget target) {
         // blargh.  super.onEvent can't be called directly so i have to call it via reflection.
         // this equates to super.onEvent(target);
@@ -75,4 +60,17 @@ public class WorkflowManager {
         }
     }
 
+
+    public void post(@Nonnull Component component, @Nonnull WfEvent event) {
+        Workflow<?> workflow = getWorkflow(component);
+        workflow.post(event);
+    }
+
+    private @Nonnull Workflow<?> getWorkflow(@Nonnull Component component) {
+        HasWorkflow parent = component.findParent(HasWorkflow.class);
+        if (parent==null) {
+            throw new IllegalStateException("uh oh, can't find workflow....this is not valid state of affairs!!");
+        }
+        return parent.getWorkflow();
+    }
 }

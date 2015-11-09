@@ -12,6 +12,7 @@ public class FormConfig<T> extends GroupConfig {
     private String version;
     private IFormValidator validator;
 
+
     public FormConfig() {
         withRenderBodyOnly(false);
     }

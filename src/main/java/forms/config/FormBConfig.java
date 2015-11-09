@@ -8,6 +8,7 @@ public class FormBConfig extends FormConfig {
 
     public FormBConfig() {
         super();
+        usingDefaultLayout(true);
         withConfigs(configs());
         withName("FORM-B");
         withTitle("Form B");

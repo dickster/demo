@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import org.apache.wicket.Component;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 public class SectionConfig implements Serializable {
@@ -43,14 +42,6 @@ public class SectionConfig implements Serializable {
     public SectionConfig withRows(List<RowConfig> rows) {
         this.rows.addAll(rows);
         return this;
-    }
-
-    public Collection<Component> getComponents() {
-        List<Component> components = Lists.newArrayList();
-        for (RowConfig config:rows) {
-            components.addAll(config.getComponents());
-        }
-        return components;
     }
 
 }

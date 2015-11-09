@@ -4,15 +4,19 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import demo.PageLayout;
+import demo.resources.Resource;
 import forms.config.Config;
 import forms.config.FormConfig;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
@@ -24,8 +28,8 @@ public class WorkflowForm extends Form  {
 
     // this calls layout and initializes all widgets.
     // TODO : use gridstack to handle layouts?
-    private static final String INIT_FORM = "var init_form_options = %s;";
-
+    private static final String INIT_FORM = "easy.layout.init(%s);";
+    private static final JavaScriptResourceReference LAYOUT_JS = new JavaScriptResourceReference(Resource.class, "layout.js");
     private @SpringBean Theme theme;
     private @SpringBean WidgetFactory factory;
 
@@ -33,7 +37,6 @@ public class WorkflowForm extends Form  {
     private IModel<?> formModel;
     private String expectedAcordVersion; // TODO : set valid default here...
     private PageLayout layout = null;
-    private boolean useDefaultLayout = false;
 
     public WorkflowForm(String id, FormConfig config) {
         super(id);
@@ -47,12 +50,6 @@ public class WorkflowForm extends Form  {
 
     public WorkflowForm withLayout(PageLayout layout) {
         this.layout = layout;
-        return this;
-    }
-
-    public WorkflowForm withDefaultLayout() {
-        this.useDefaultLayout = true;
-        this.layout = null;
         return this;
     }
 
@@ -112,6 +109,7 @@ public class WorkflowForm extends Form  {
         for (HeaderItem item:getTheme().getHeaderItems()) {
             response.render(item);
         }
+        response.render(JavaScriptReferenceHeaderItem.forReference(LAYOUT_JS));
         String optionsJson = new Gson().toJson(getFormOptions());
         response.render(OnDomReadyHeaderItem.forScript(String.format(INIT_FORM, optionsJson)));
     }
@@ -122,12 +120,12 @@ public class WorkflowForm extends Form  {
     }
 
     protected @Nullable PageLayout getLayout() {
-        return (layout == null && useDefaultLayout) ? new PageLayout().withDefaultLayout(this) : layout;
+        return (layout == null && formConfig.isUseDefaultLayout()) ? new PageLayout().withDefaultLayout(this) : layout;
     }
 
     public class FormOptions {
         String id = getMarkupId();
-        PageLayout layout;
+        PageLayout layout = getLayout();
         Map<String, JsonOptions> widgetOptions = Maps.newHashMap();
         Map<String, String> nameToId = Maps.newHashMap();
         Boolean skipValidation;
@@ -136,13 +134,15 @@ public class WorkflowForm extends Form  {
             WorkflowForm.this.visitChildren(Component.class, new IVisitor<Component, Void>() {
                 @Override
                 public void component(Component widget, IVisit visit) {
-                    add(widget, widget.getMetaData(Config.NAME));
+                    String name=widget.getMetaData(Config.NAME);
+                    if (name!=null) {
+                        addNameToId(widget.getMetaData(Config.NAME), widget.getMarkupId());
+                    }
                     if (widget instanceof HasJsonOptions) {
                         add(widget, getOptions(widget));
                     }
                 }
             });
-            layout = getLayout();
         }
 
         public FormOptions add(Component widget, JsonOptions o) {
@@ -150,8 +150,10 @@ public class WorkflowForm extends Form  {
             return this;
         }
 
-        public void add(Component widget, String name) {
-            nameToId.put(name, widget.getMarkupId());
+        public void addNameToId(String name, String id) {
+            Preconditions.checkArgument(StringUtils.isNotBlank(id) && StringUtils.isNotBlank(name));
+            Preconditions.checkState(nameToId.get(name)==null, " unique names for components are required! - " + name + " is already used by component " + nameToId.get(name));
+            nameToId.put(name, id);
         }
     }
 

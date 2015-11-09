@@ -23,8 +23,9 @@ public class Group extends Panel {
         super(id);
         this.config = config;
         this.model = model;
-        //setOutputMarkupId(!config.getRenderBodyOnly());
-       // setRenderBodyOnly(config.getRenderBodyOnly());
+        setMetaData(Config.NAME, config.getName());
+        setOutputMarkupId(!config.getRenderBodyOnly());
+        setRenderBodyOnly(config.getRenderBodyOnly());
     }
 
     @Override
@@ -32,20 +33,12 @@ public class Group extends Panel {
         super.onInitialize();
 
         List<Component> components = createComponents("component");
-//        RepeatingView repeating = new RepeatingView("components");
-//        add(repeating);
-       // add(new IndicatingAjaxSubmitLink("link", "hello"));
-
-//        for (Component component:components) {
-//            AbstractItem item = new AbstractItem(repeating.newChildId());
-//            repeating.add(item);
-//            item.add(component);
-//        }
 
         add(new ListView<Component>("components", components) {
             @Override
             protected void populateItem(ListItem<Component> item) {
                 item.add(item.getModelObject());
+                item.setRenderBodyOnly(true);
             }
         }.setReuseItems(true));
     }

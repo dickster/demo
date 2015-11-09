@@ -8,6 +8,7 @@ public class FormAConfig extends FormConfig {
 
     public FormAConfig() {
         super();
+        usingDefaultLayout(true);
         withConfigs(configs());
         withName("FORM-A");
         withTitle("Form A");
@@ -17,11 +18,11 @@ public class FormAConfig extends FormConfig {
     private List<Config> configs() {
         List<Config> result = Lists.newArrayList();
         GroupConfig nameConfig = new GroupConfig();
-        nameConfig.withConfig(new LabelConfig("l1").text("first name"));
+        nameConfig.withConfig(new LabelConfig("first name"));
         nameConfig.withConfig(new TextFieldConfig("name.first"));
-        nameConfig.withConfig(new LabelConfig("l1").text("middle name"));
+        nameConfig.withConfig(new LabelConfig("middle name"));
         nameConfig.withConfig(new TextFieldConfig("name.middle"));
-        nameConfig.withConfig(new LabelConfig("l1").text("last name"));
+        nameConfig.withConfig(new LabelConfig("last name"));
         nameConfig.withConfig(new TextFieldConfig("name.last"));
         result.add(new GroupConfig().withConfigs(nameConfig));
         result.add(new ButtonConfig("next"));

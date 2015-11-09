@@ -2,7 +2,6 @@ package forms;
 
 import forms.config.Config;
 import forms.config.WidgetConfig;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.IModel;
@@ -62,12 +61,14 @@ public abstract class WidgetFactory implements Serializable {
     }
 
     private void addAjax(Component component, WidgetConfig config) {
-        final String event = "onchange";//TODO: config.getMediatedEvent();
-        if (StringUtils.isNotBlank(event)) {
-            if (StringUtils.isNotBlank(event)) {
-                component.add(new MediatedAjaxEventBehavior(event));
-            }
-        }
+        //        Preconditions.checkArgument(component instanceof FormComponent);
+        // if this is panel, how to add behaviour to underlying text field?
+//        final String event = "onchange";//TODO: config.getMediatedEvent();
+//        if (StringUtils.isNotBlank(event)) {
+//            if (StringUtils.isNotBlank(event)) {
+//                component.add(new MediatedAjaxEventBehavior(event));
+//            }
+//        }
     }
 
     protected void preCreate(WidgetConfig config, IModel<?> formModel) {

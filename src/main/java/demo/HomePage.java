@@ -5,9 +5,7 @@ import demo.resources.Resource;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
-import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
@@ -136,17 +134,7 @@ public class HomePage extends WebPage {
     @Override
     public void renderHead(IHeaderResponse response) {
         // TODO : add this to a resource bundle.
-        response.render(JavaScriptReferenceHeaderItem.forReference(JQUERY_UI_JS));
-//        response.render(JavaScriptReferenceHeaderItem.forReference(LIBPHONENUMBER_JS));
-        response.render(CssHeaderItem.forReference(JQUERY_UI_CSS));
-        response.render(JavaScriptReferenceHeaderItem.forReference(BOOTSTRAP_JS));
-        response.render(CssHeaderItem.forReference(BOOTSTRAP_CSS));
-        response.render(JavaScriptReferenceHeaderItem.forReference(MULTISELECT_JS));
-        response.render(CssHeaderItem.forReference(MULTISELECT_CSS));
-        response.render(JavaScriptReferenceHeaderItem.forReference(SELECT_JS));
-        response.render(CssHeaderItem.forReference(SELECT_CSS));
-        response.render(JavaScriptReferenceHeaderItem.forReference(TYPEAHEAD_JS));
-        response.render(CssHeaderItem.forReference(TYPEAHEAD_CSS));
+
     }
 
     class InsuredTab extends Tab<String> {
