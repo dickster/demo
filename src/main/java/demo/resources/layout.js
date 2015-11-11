@@ -52,9 +52,9 @@ easy.layout= (function() {
 
             $(this.rows).each(function(rowsIndex) {
                 var $row = $('<div class="form-group"></div>').appendTo($content);
-                for (col in this) {
-                    alert(this[col]);
-                }
+                $.each(this, function(k,v) {
+                    alert(k + " --> " + v);
+                });
 //
 //                $(this).each(function(rowIndex) {
 //                    var $col = $('<div class='+this.class+'></div>').appendTo($row);
