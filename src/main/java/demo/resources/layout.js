@@ -55,7 +55,7 @@ easy.layout= (function() {
                 $.each(this, function(k,v) {
                     alert(k + " --> " + v);
                 });
-//
+// TESTING
 //                $(this).each(function(rowIndex) {
 //                    var $col = $('<div class='+this.class+'></div>').appendTo($row);
 //                    $(this.cols).each(function(compIndex){
