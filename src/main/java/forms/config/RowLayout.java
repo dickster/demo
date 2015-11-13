@@ -1,28 +1,28 @@
 package forms.config;
 
 import com.google.common.collect.Maps;
+import forms.util.WfUtil;
 import org.apache.wicket.Component;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.util.Map;
 
-public class RowConfig implements Serializable {
+public class RowLayout implements Serializable {
 
     private Map<String, String> cols = Maps.newHashMap();
 
-    public RowConfig() {
+    public RowLayout() {
     }
 
-    public RowConfig(Component... comps) {
+    public RowLayout(Component... comps) {
         for (Component c:comps) {
-            //c.setOutputMarkupId(true);
             add(c, getColClass(c));
         }
     }
 
     private void add(Component c, @Nullable String style) {
-        String name = c.getMetaData(Config.NAME);
+        String name = WfUtil.getComponentName(c);
         if (name!=null) {
             cols.put(name, style);
         }
@@ -32,7 +32,7 @@ public class RowConfig implements Serializable {
         return null;
     }
 
-    public RowConfig withCol(Component c, String style) {
+    public RowLayout withCol(Component c, String style) {
         //c.setOutputMarkupId(true);
         add(c, style);
         return this;

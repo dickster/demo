@@ -17,12 +17,12 @@ public class FormBConfig extends FormConfig {
 
     private List<Config> configs() {
         List<Config> result = Lists.newArrayList();
-        GroupConfig addressConfig = new GroupConfig();
+        GroupConfig addressConfig = new GroupConfig("x");
         addressConfig.withConfig(new LabelConfig("Address"));
         addressConfig.withConfig(new TextFieldConfig("insured.address"));
         addressConfig.withConfig(new LabelConfig("Address2"));
         addressConfig.withConfig(new TextFieldConfig("insured.address2"));
-        result.add(new GroupConfig().withConfigs(addressConfig));
+        result.add(new GroupConfig("y").withConfigs(addressConfig));
         result.add(new ButtonConfig("next"));
         return result;
     }

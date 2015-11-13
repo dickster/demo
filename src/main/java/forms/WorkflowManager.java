@@ -60,7 +60,6 @@ public class WorkflowManager {
         }
     }
 
-
     public void post(@Nonnull Component component, @Nonnull WfEvent event) {
         Workflow<?> workflow = getWorkflow(component);
         workflow.post(event);

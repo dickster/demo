@@ -1,7 +1,7 @@
 package forms;
 
-import forms.config.Config;
 import forms.config.WidgetConfig;
+import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.IModel;
@@ -37,7 +37,7 @@ public abstract class WidgetFactory implements Serializable {
 
     protected void setMetaData(Component component, WidgetConfig config) {
         String name = config.getName()==null ? config.getProperty() : config.getName();
-        component.setMetaData(Config.NAME, name);
+        WfUtil.setComponentName(component, name);
         component.setOutputMarkupId(true);
     }
 

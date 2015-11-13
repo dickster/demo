@@ -17,7 +17,7 @@ public class FormCConfig extends FormConfig {
 
     private List<Config> configs() {
         List<Config> result = Lists.newArrayList();
-        GroupConfig coveragesConfig = new GroupConfig();
+        GroupConfig coveragesConfig = new GroupConfig("c");
         // dropdown = type of roof.  jchosen.
         // checkbox=do you smoke?  (YN?)
         // earthquake zone (depends on postal code/country/state)
@@ -28,7 +28,7 @@ public class FormCConfig extends FormConfig {
 //        coveragesConfig.withConfig(new TextFieldConfig("name.middle"));
 //        coveragesConfig.withConfig(new LabelConfig("l1").text("last name"));
 //        coveragesConfig.withConfig(new TextFieldConfig("name.last"));
-        result.add(new GroupConfig().withConfigs(coveragesConfig));
+        result.add(new GroupConfig("d").withConfigs(coveragesConfig));
         result.add(new ButtonConfig("ok"));
         return result;
     }

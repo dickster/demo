@@ -17,14 +17,14 @@ public class FormAConfig extends FormConfig {
 
     private List<Config> configs() {
         List<Config> result = Lists.newArrayList();
-        GroupConfig nameConfig = new GroupConfig();
+        GroupConfig nameConfig = new GroupConfig("1");
         nameConfig.withConfig(new LabelConfig("first name"));
         nameConfig.withConfig(new TextFieldConfig("name.first"));
         nameConfig.withConfig(new LabelConfig("middle name"));
         nameConfig.withConfig(new TextFieldConfig("name.middle"));
         nameConfig.withConfig(new LabelConfig("last name"));
         nameConfig.withConfig(new TextFieldConfig("name.last"));
-        result.add(new GroupConfig().withConfigs(nameConfig));
+        result.add(new GroupConfig("1").withConfigs(nameConfig));
         result.add(new ButtonConfig("next"));
         return result;
     }

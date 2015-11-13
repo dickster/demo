@@ -12,4 +12,6 @@ public interface Config extends Serializable {
 
     public String getType();
 
+    public String getCss();
+
 }

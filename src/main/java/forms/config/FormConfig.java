@@ -8,12 +8,11 @@ import java.util.Set;
 
 public class FormConfig<T> extends GroupConfig {
 
-
     private String version;
     private IFormValidator validator;
 
-
     public FormConfig() {
+        super("a");
         withRenderBodyOnly(false);
     }
 

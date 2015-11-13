@@ -14,6 +14,7 @@ public class WidgetConfig implements Config {
     private String property;
     private String name;
     private String type;
+    private String css = "col_md_6";
     private Map options = Maps.newHashMap();  // a place to store custom options.
 
     public String getType() {
@@ -96,6 +97,15 @@ public class WidgetConfig implements Config {
                 "property='" + property + '\'' +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    public String getCss() {
+        return css;
+    }
+
+    public WidgetConfig withCss(String css) {
+        this.css = css;
+        return this;
     }
 }
 

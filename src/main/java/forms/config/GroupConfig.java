@@ -5,20 +5,22 @@ import com.google.common.collect.Lists;
 import forms.WidgetTypeEnum;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class GroupConfig implements Config {
 
     private String title;
     private String name;
-    private boolean useDefaultLayout = false;
-
-    // contains widgets or other groups...?
-    private Boolean renderBodyOnly = true;
+    private boolean useDefaultLayout = true;
+    private Boolean renderBodyOnly = false;
+    private String css = "form_group";
 
     private List<Config> configs = Lists.newArrayList();
 
-    public GroupConfig() {
+    public GroupConfig(@Nonnull String name) {
+        this.name = name;
+        withTitle(name); // use name as default title.
     }
 
     public List<Config> getConfigs() {
@@ -97,4 +99,35 @@ public class GroupConfig implements Config {
         this.useDefaultLayout = useDefaultLayout;
         return this;
     }
+
+    public String getCss() {
+        return css;
+    }
+
+    public GroupConfig withCss(String css) {
+        this.css = css;
+        return this;
+    }
+
+    public @Nullable Config getConfigWithName(@Nonnull String name) {
+        List<Config> c = getConfigsDeep();
+        for (Config config:c) {
+            if (name.equals(config.getName())) {
+                return config;
+            }
+        }
+        throw new IllegalArgumentException("can't find config with name " + name);
+    }
+
+    protected List<Config> getConfigsDeep() {
+        List<Config> result = Lists.newArrayList();
+        for (Config config:configs) {
+            result.add(config);
+            if (config instanceof GroupConfig) {
+                result.addAll(((GroupConfig)config).getConfigsDeep());
+            }
+        }
+        return result;
+    }
+
 }

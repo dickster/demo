@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import forms.config.Config;
 import forms.config.GroupConfig;
 import forms.config.WidgetConfig;
+import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
@@ -23,7 +24,7 @@ public class Group extends Panel {
         super(id);
         this.config = config;
         this.model = model;
-        setMetaData(Config.NAME, config.getName());
+        WfUtil.setComponentName(this, config.getName());
         setOutputMarkupId(!config.getRenderBodyOnly());
         setRenderBodyOnly(config.getRenderBodyOnly());
     }
@@ -46,7 +47,6 @@ public class Group extends Panel {
     private List<Component> createComponents(String id) {
         List<Component> result = Lists.newArrayList();
         for (Config c:config.getConfigs()) {
-            System.out.println("adding " + c);
             if (c instanceof WidgetConfig) {
                 result.add(getFactory().createWidget(id, (WidgetConfig) c, model));
             }
