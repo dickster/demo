@@ -16,6 +16,11 @@ public class SpringBeans {
     }
 
     @Bean @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public Toolkit toolkit() {
+        return new DefaultToolkit();
+    }
+
+    @Bean @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public Theme theme() {
         return new DefaultTheme();
     }

@@ -50,16 +50,16 @@ public class DefaultWidgetFactory extends WidgetFactory {
             return new Label(id,((LabelConfig)config).getText());
         }
         if (config instanceof DatePickerConfig) {
-        return new DatePanel(id);
+            return new DatePanel(id);
+        }
+        if (config instanceof DateLabelConfig) {
+            return new Label(id); // TODO : add a timeago behavior to this.
+        }
+        if (config instanceof ButtonConfig) {
+            return createAjaxButton(id, (ButtonConfig)config);
+        }
+        throw new IllegalArgumentException("widget type " + config.getClass().getSimpleName() + " is not supported.");
     }
-    if (config instanceof DateLabelConfig) {
-        return new Label(id); // TODO : add a timeago behavior to this.
-    }
-    if (config instanceof ButtonConfig) {
-        return createAjaxButton(id, (ButtonConfig)config);
-    }
-    throw new IllegalArgumentException("widget type " + config.getClass().getSimpleName() + " is not supported.");
-}
 
     protected IndicatingAjaxSubmitLink createAjaxButton(final String id, final ButtonConfig config) {
         Preconditions.checkArgument(config.getName()!=null);

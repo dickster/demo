@@ -1,4 +1,4 @@
-package forms;
+package forms.mapping;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;

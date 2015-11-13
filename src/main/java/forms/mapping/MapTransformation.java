@@ -1,4 +1,4 @@
-package forms;
+package forms.mapping;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;

@@ -1,6 +1,10 @@
 package forms;
 
 
+import forms.mapping.ChainedTransformation;
+import forms.mapping.PredefinedTransformation;
+import forms.mapping.SuffixTransformation;
+import forms.mapping.Transformation;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;

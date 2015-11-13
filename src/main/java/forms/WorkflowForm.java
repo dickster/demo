@@ -15,9 +15,9 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 import java.util.Map;
 
 public class WorkflowForm extends Form  {
@@ -26,13 +26,12 @@ public class WorkflowForm extends Form  {
     // TODO : use gridstack to handle layouts?
     private static final String INIT_FORM = "easy.layout.init(%s);";
     private static final JavaScriptResourceReference LAYOUT_JS = new JavaScriptResourceReference(Resource.class, "layout.js");
-    private @SpringBean Theme theme;
-    private @SpringBean WidgetFactory factory;
+
+    private @Inject Toolkit toolkit;
 
     private FormConfig formConfig;
     private IModel<?> formModel;
     private String expectedAcordVersion; // TODO : set valid default here...
-    private PageLayout layout = null;
 
     public WorkflowForm(String id, FormConfig config) {
         super(id);
@@ -42,11 +41,6 @@ public class WorkflowForm extends Form  {
 
     public WorkflowForm withConfig(FormConfig config) {
         this.formConfig = config;
-        return this;
-    }
-
-    public WorkflowForm withLayout(PageLayout layout) {
-        this.layout = layout;
         return this;
     }
 
@@ -86,7 +80,7 @@ public class WorkflowForm extends Form  {
     }
 
     private Theme getTheme() {
-        return theme;
+        return toolkit.getTheme();
     }
 
     public <T extends WorkflowForm> T supportingAcordVersion(String version) {

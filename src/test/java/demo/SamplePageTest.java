@@ -7,6 +7,7 @@ import demo.wicketTest.TestContextHandler;
 import demo.wicketTest.WicketPageTest;
 import org.apache.wicket.feedback.FeedbackMessage;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.util.IHierarchical;
 import org.apache.wicket.util.tester.TagTester;
 import org.junit.Before;
 import org.junit.Test;
@@ -112,6 +113,7 @@ public class SamplePageTest extends WicketPageTest<SamplePageHarness, SamplePage
     @Test
     public void test_customPageFixture()  {
         expectingSampleService();
+
         // if you want to create a different fixture for each test.
         renderFixture(new SamplePage(new PageParameters().add("customParam", "foobar")));
         verifyMocks(sampleService);

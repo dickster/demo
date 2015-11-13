@@ -9,5 +9,6 @@ public class TextFieldPanel<T> extends Panel {
         super(id);
         setRenderBodyOnly(true);
         add(new TextField<T>("text"));
+        // todo : add help box.  shows error & messages.
     }
 }

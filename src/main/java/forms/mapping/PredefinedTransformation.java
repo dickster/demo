@@ -1,4 +1,6 @@
-package forms;
+package forms.mapping;
+
+import forms.mapping.Transformation;
 
 import javax.annotation.Nullable;
 
