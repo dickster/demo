@@ -14,6 +14,7 @@ public class FormConfig<T> extends GroupConfig {
     public FormConfig() {
         super("a");
         withRenderBodyOnly(false);
+        withCss("form");
     }
 
     public void validateAcordVersion(String version) throws IllegalStateException {

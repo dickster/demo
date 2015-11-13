@@ -91,7 +91,6 @@ public class WorkflowForm extends Form  {
     @Override
     protected void onSubmit() {
         super.onSubmit();
-        System.out.println("submitting!!!!");
     }
 
     @Override

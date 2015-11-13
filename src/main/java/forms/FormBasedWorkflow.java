@@ -3,6 +3,8 @@ package forms;
 
 import com.google.common.base.Preconditions;
 import forms.config.FormConfig;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 public abstract class FormBasedWorkflow<T> extends Workflow<T> {
 
@@ -37,7 +39,16 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T> {
         }
     }
 
-    public WorkflowForm createForm(String id, FormConfig config) {
+    protected void updatePage(WebPage page) {
+        RequestCycle requestCycle = RequestCycle.get();
+        if (requestCycle!=null) {
+            requestCycle.setResponsePage(page);
+        } else {
+            System.out.println("your workflow is redirecting to a page without a request cycle?  huh???");
+        }
+    }
+
+    protected WorkflowForm createForm(String id, FormConfig config) {
         return new WorkflowForm(id, config).withModel(getModel());
     }
 

@@ -10,5 +10,6 @@ public class ButtonConfig extends WidgetConfig {
     // add button options here.
     public ButtonConfig(@Nonnull String label) {
         super(label, WidgetTypeEnum.BUTTON);
+        withCss("btn btn-primary");
     }
 }
