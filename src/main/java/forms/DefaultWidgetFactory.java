@@ -11,7 +11,7 @@ import forms.config.WidgetConfig;
 import forms.widgets.CheckBoxPanel;
 import forms.widgets.DatePanel;
 import forms.widgets.IndicatingAjaxSubmitLink;
-import forms.widgets.TextFieldPanel;
+import forms.widgets.TextField2;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.basic.Label;
@@ -41,7 +41,7 @@ public class DefaultWidgetFactory extends WidgetFactory {
 
     private @Nullable Component createBasic(String id, WidgetConfig config, IModel<?> model) {
         if (config instanceof TextFieldConfig) {
-            return new TextFieldPanel<String>(id);
+            return new TextField2(id);
         }
         if (config instanceof CheckBoxConfig) {
             return new CheckBoxPanel(id);

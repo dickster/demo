@@ -8,6 +8,7 @@ import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 
 public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware {
 
@@ -21,11 +22,12 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     private static final CssResourceReference BOOTSTRAP_SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-multiselect.css");
     private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/typeahead.bundle.js");
     private static final CssResourceReference TYPEAHEAD_CSS = new CssResourceReference(Resource.class,"bootstrap-3.1.1-dist/css/typeahead.bootstrap.css");
+    private static final ResourceReference BRAND_CSS = new CssResourceReference(Resource.class,"brand.css");
 
 
     private FormBasedWorkflow workflow;
 
-    public WfPage(FormBasedWorkflow workflow) {
+    public WfPage(final FormBasedWorkflow workflow) {
         super();
         this.workflow = workflow;
         add( workflow.createForm("form", workflow.getCurrentFormConfig()) );
@@ -54,6 +56,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
         response.render(CssHeaderItem.forReference(SELECT_CSS));
         response.render(JavaScriptReferenceHeaderItem.forReference(TYPEAHEAD_JS));
         response.render(CssHeaderItem.forReference(TYPEAHEAD_CSS));
+        response.render(CssHeaderItem.forReference(BRAND_CSS));
     }
 
 }

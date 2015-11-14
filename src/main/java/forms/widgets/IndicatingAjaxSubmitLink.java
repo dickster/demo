@@ -2,26 +2,28 @@ package forms.widgets;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
-import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
-import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
 
 import javax.annotation.Nullable;
 
-public class IndicatingAjaxSubmitLink extends Panel implements IAjaxIndicatorAware {
+public class IndicatingAjaxSubmitLink extends AjaxButton implements IAjaxIndicatorAware {
 
     public IndicatingAjaxSubmitLink(String id, String label) {
-        super(id);
-        add(new AjaxSubmitLink("link") {
-            @Override
-            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                IndicatingAjaxSubmitLink.this.onSubmit(target, form);
-            }
-        }.add(new Label("label", label )));
+        super(id, Model.of(label));
+       // add(new Label("label", label ));
     }
 
     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+    }
+
+    @Override
+    protected void onComponentTag(ComponentTag tag) {
+        tag.setName("input");
+        tag.getAttributes().put("type", "button");
+        super.onComponentTag(tag);
     }
 
     @Override

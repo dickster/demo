@@ -72,7 +72,8 @@ this.getMarkupSettings().setStripWicketTags(true);
 
 //        getRequestCycleSettings().setRenderStrategy(RenderStrategy.ONE_PASS_RENDER);
 
-        //mountPage("keys/foo", KeysPage.class);
+        mountPage("widgets", HomePage.class);
+        mountPage("tabs", HomeTabPage.class);
 
         if (getConfigurationType().equals(RuntimeConfigurationType.DEVELOPMENT)) {
             getComponentInitializationListeners().add(new PerformanceListener());

@@ -47,8 +47,15 @@ public class PageLayout implements Serializable {
 
     public void addNameToId(@Nonnull String name, @Nonnull String id) {
         Preconditions.checkArgument(StringUtils.isNotBlank(id) && StringUtils.isNotBlank(name));
-        Preconditions.checkState(nameToId.get(name)==null, " unique names for components are required! - " + name + " is already used by component " + nameToId.get(name));
+        Preconditions.checkState(nameToId.get(name)==null, " unique names for components are required!  " + name + " is already used by component " + nameToId.get(name));
         nameToId.put(name, id);
     }
 
 }
+
+
+/**
+ *
+ * need a nameToId, type, column hint.
+ * e.g. 'first.name', 'fn3', text, 'col-md-3' <-- or can be a function.
+ */
