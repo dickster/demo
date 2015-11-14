@@ -15,6 +15,7 @@ public class GroupConfig implements Config {
     private boolean useDefaultLayout = true;
     private Boolean renderBodyOnly = false;
     private String css = "form_group";
+    private int min=1, max = Integer.MAX_VALUE;
 
     private List<Config> configs = Lists.newArrayList();
 

@@ -102,7 +102,7 @@ this.getMarkupSettings().setStripWicketTags(true);
 
     private List<JavaScriptReferenceHeaderItem> getHeaderItems() {
         List<JavaScriptResourceReference> references = Lists.newArrayList(
-//                new JavaScriptResourceReference(EasyTabbedPanel.class, "easyTabbedPanel.js"),
+//                new JavaScriptResourceReference(GroupPanel.class, "groupPanel.js"),
                 new JavaScriptResourceReference(EasyAddress.class, "address.js"),
                 new JavaScriptResourceReference(EasyTextArea.class, "easyTextArea.js"));
 

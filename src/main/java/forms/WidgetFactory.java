@@ -47,6 +47,7 @@ public abstract class WidgetFactory implements Serializable {
 //            mm.setDefaultModels(models);
 //        } else {
 //            if (models.length>1) System.out.println("WARNING : you have supplied more than one model to " + component.getMetaData(Config.NAME) + " but it doesn't implement interface " + IHasMultipleModels.class.getSimpleName());
+    // new PropertyModel(onfig.getProperty());
 //            component.setDefaultModel(model);
 //        }
 //    }
@@ -66,7 +67,7 @@ public abstract class WidgetFactory implements Serializable {
 //        final String event = "onchange";//TODO: config.getMediatedEvent();
 //        if (StringUtils.isNotBlank(event)) {
 //            if (StringUtils.isNotBlank(event)) {
-//                component.add(new MediatedAjaxEventBehavior(event));
+//                component.addMediatedBehavior(new MediatedAjaxEventBehavior(event));
 //            }
 //        }
     }

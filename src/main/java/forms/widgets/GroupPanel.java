@@ -37,7 +37,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 
-public abstract class EasyTabbedPanel<T extends Serializable> extends Panel implements FeedbackListener, ISection {
+public abstract class GroupPanel<T extends Serializable> extends Panel implements FeedbackListener, ISection {
 
     private static final String SELECT_LAST_TAB_JS = "$('#%s').tabPanel.selectLastTab()";
     private static final String BLANK_SLATE_ID = "blankSlate";
@@ -45,8 +45,8 @@ public abstract class EasyTabbedPanel<T extends Serializable> extends Panel impl
     private static final String TAB_PANEL_INIT = "easy.tabPanel().init(%s)";
     private static final String SET_STATUS_JS = "document.getElementById('%s').tabPanel.setStatus('%s');";
 
-    private static final JavaScriptHeaderItem TAB_PANEL_JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(EasyTabbedPanel.class, "easyTabbedPanel.js"));
-    private static final CssHeaderItem TAB_PANEL_CSS = CssHeaderItem.forReference(new CssResourceReference(EasyTabbedPanel.class,"easyTabbedPanel.css"));
+    private static final JavaScriptHeaderItem TAB_PANEL_JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(GroupPanel.class, "groupPanel.js"));
+    private static final CssHeaderItem TAB_PANEL_CSS = CssHeaderItem.forReference(new CssResourceReference(GroupPanel.class,"groupPanel.css"));
 
     private final IndexedModel<T> model;
 
@@ -59,14 +59,24 @@ public abstract class EasyTabbedPanel<T extends Serializable> extends Panel impl
     private WebMarkupContainer panel;
     private List<EasyTab> tabz;
 
-    public EasyTabbedPanel(final String id, final IModel<List<T>> data) {
+     // blah.person, blah.address,     person.foo, address.bar
+    // given a groupConfig.  mapping = policy.insured[].
+    // policy.insured[x].name.first.   policy.insured.  or create a wrapper model?
+
+//    public GroupPanel(String id, final IModel<?> model, GroupConfig config) {
+//        // 1: determine if model represents an array or single entity?
+//        super(id);
+//       // this.model = new IndexedModel(data, getInitialIndex());
+//    }
+
+    public GroupPanel(final String id, final IModel<List<T>> data) {
         super(id);
         setOutputMarkupId(true);
         this.header = Model.of(id);
         this.model = new IndexedModel(data, getInitialIndex());
     }
 
-    public EasyTabbedPanel(final String id, final List<T> data) {
+    public GroupPanel(final String id, final List<T> data) {
         this(id, new ListModel<T>(data));
     }
 
@@ -84,7 +94,7 @@ public abstract class EasyTabbedPanel<T extends Serializable> extends Panel impl
         return 0;
     }
 
-    public EasyTabbedPanel withHeader(String header) {
+    public GroupPanel withHeader(String header) {
         this.header = Model.of(header);
         return this;
     }
@@ -98,7 +108,7 @@ public abstract class EasyTabbedPanel<T extends Serializable> extends Panel impl
         return status;
     }
 
-    public EasyTabbedPanel<T> setStatus(Enum <?> status) {
+    public GroupPanel<T> setStatus(Enum <?> status) {
         this.status = status;
         return this;
     }
@@ -190,7 +200,7 @@ public abstract class EasyTabbedPanel<T extends Serializable> extends Panel impl
 
     protected void addTab(AjaxRequestTarget target) {
         model.add(createNewTabData(getCurrentData()));
-        target.add(EasyTabbedPanel.this);
+        target.add(GroupPanel.this);
     }
 
     protected T createNewTabData(T data) {
@@ -217,7 +227,7 @@ public abstract class EasyTabbedPanel<T extends Serializable> extends Panel impl
                 try { Thread.sleep(500);  } catch (InterruptedException e) { }
 // ........
                 deleteTab(target, index);
-                target.add(EasyTabbedPanel.this);
+                target.add(GroupPanel.this);
             }
             @Override protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
                 super.updateAjaxAttributes(attributes);
@@ -252,8 +262,8 @@ public abstract class EasyTabbedPanel<T extends Serializable> extends Panel impl
         response.render(OnDomReadyHeaderItem.forScript(String.format(TAB_PANEL_INIT, new Gson().toJson(getOptions()))));
     }
 
-    protected EasyTabbedPanelOptions getOptions() {
-        return new EasyTabbedPanelOptions();
+    protected GroupPanelOptions getOptions() {
+        return new GroupPanelOptions();
     }
 
     protected Component newTitle(final String titleId, final String title, final int index) {
@@ -282,22 +292,22 @@ public abstract class EasyTabbedPanel<T extends Serializable> extends Panel impl
         };
     }
 
-    public <X extends EasyTabbedPanel> X allowingOneOrMore() {
+    public <X extends GroupPanel> X allowingOneOrMore() {
         mandatory = true;
         return (X) this;
     }
 
-    public <X extends EasyTabbedPanel> X allowingZeroOrMore() {
+    public <X extends GroupPanel> X allowingZeroOrMore() {
         mandatory = false;
         return (X) this;
     }
 
-    public <X extends EasyTabbedPanel> X allowingOnlyOne() {
+    public <X extends GroupPanel> X allowingOnlyOne() {
         canAdd = false;
         return (X) this;
     }
 
-    public <T extends EasyTabbedPanel> T withAddTooltip(String tooltip) {
+    public <T extends GroupPanel> T withAddTooltip(String tooltip) {
         Preconditions.checkState(canAdd, "you must be able to add for this tooltip to show up.");
         addTooltip = tooltip;
         return (T) this;
@@ -352,25 +362,25 @@ public abstract class EasyTabbedPanel<T extends Serializable> extends Panel impl
 
         public AjaxLoadingListener() {
             css = getStatusCss(getLoadingState());
-            onBefore(String.format(SET_STATUS_JS, EasyTabbedPanel.this.getMarkupId(),css));
+            onBefore(String.format(SET_STATUS_JS, GroupPanel.this.getMarkupId(),css));
         }
     }
 
 
 
-    public class EasyTabbedPanelOptions implements Serializable {
-        public String id = EasyTabbedPanel.this.getMarkupId();
+    public class GroupPanelOptions implements Serializable {
+        public String id = GroupPanel.this.getMarkupId();
         public Boolean mandatory = isMandatory();
         public List<String> titleInputs;
         public String addTooltip = getAddTooltip();
-        public Boolean canAdd = EasyTabbedPanel.this.canAdd;
+        public Boolean canAdd = GroupPanel.this.canAdd;
         public Boolean collapsed;
         public Boolean tooltipOnAdd;
         public int current = model.getIndex();
         public HeaderOptions header = new HeaderOptions();
 
 
-        public EasyTabbedPanelOptions() {
+        public GroupPanelOptions() {
             titleInputs = Lists.newArrayList();
 //            for (Tab<T> tab:tabs) {
             // TODO : reimplement this.
@@ -388,7 +398,7 @@ public abstract class EasyTabbedPanel<T extends Serializable> extends Panel impl
     public class EasyAdditionTab extends Fragment {
 
         private EasyAdditionTab(String id, int index) {
-            super(id, "additionTabFragment", EasyTabbedPanel.this);
+            super(id, "additionTabFragment", GroupPanel.this);
             add(new AjaxButton("add") {
                 @Override
                 public boolean isVisible() {
@@ -425,7 +435,7 @@ public abstract class EasyTabbedPanel<T extends Serializable> extends Panel impl
         private String titleInput;
 
         public EasyTab(String id, int index) {
-            super(id, "tabFragment", EasyTabbedPanel.this);
+            super(id, "tabFragment", GroupPanel.this);
             this.label = model.getObject(index).toString();
             this.index = index;
 
@@ -433,7 +443,7 @@ public abstract class EasyTabbedPanel<T extends Serializable> extends Panel impl
                 @Override
                 protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                     model.setIndex(EasyTab.this.index);
-                    target.add(EasyTabbedPanel.this);
+                    target.add(GroupPanel.this);
                 }
 
                 @Override
