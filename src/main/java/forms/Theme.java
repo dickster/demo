@@ -1,6 +1,5 @@
 package forms;
 
-
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.html.form.Form;
 
@@ -10,10 +9,7 @@ import java.util.Locale;
 
 public interface Theme {
 
-//    @Nonnull List<CssHeaderItem> getCss();
-//    @Nonnull List<JavaScriptReferenceHeaderItem> getJavaScript();
-//    @Nonnull List<OnDomReadyHeaderItem> getDomReadyScript();
-// above 3 replaced by single generic call.
+    // above 3 replaced by single generic call.
     @Nonnull List<? extends HeaderItem> getHeaderItems();
 
     String getCssClass();
@@ -27,5 +23,4 @@ public interface Theme {
     String getFlavour();
 
     void apply(Form form);
-
 }

@@ -65,16 +65,16 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
     // given a groupConfig.  mapping = policy.insured[].
     // policy.insured[x].name.first.   policy.insured.  or create a wrapper model?
     //compound model??? = IndexedModel?  widget factory = if widget = section/group and model = array then use IndexedModel.
-    public GroupPanel(String id, GroupConfig config) {
-        super(id);
-    }
+//    public GroupPanel(String id, GroupConfig config) {
+//        super(id);
+//    }
 
     @Override
     public MarkupContainer setDefaultModel(IModel<?> model) {
         // if  model refers to single entity, create simple model and enforce configurations.
         super.setDefaultModel(model);
         // otherwise create an indexed model.
-
+        return this;
     }
 
     public GroupPanel(final String id, final IModel<List<T>> data) {

@@ -1,16 +1,18 @@
 package forms;
 
 import forms.config.FormAConfig;
+import forms.config.FormANewLayoutConfig;
 import forms.config.FormBConfig;
 import forms.config.FormCConfig;
 import forms.model.MappedModel;
-import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.CompoundPropertyModel;
 
 import java.util.Locale;
 
 public class CommercialWorkflow extends FormBasedWorkflow {
 
     private WfState stateA = new StateA();
+    private WfState stateAx = new StateAx();
     private WfState stateB = new StateB();
     private WfState stateC = new StateC();
 
@@ -30,7 +32,7 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     }
 
     @Override
-    protected IModel createModel() {
+    protected CompoundPropertyModel createModel() {
         // e.g. return new GrenvilleObject();
         return new MappedModel();
     }
@@ -38,6 +40,20 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     class StateA extends WfFormState {
         StateA() {
             super(new FormAConfig());
+        }
+
+        @Override
+        public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+            if ("next".equals(event.getName())) {
+                return stateAx;
+            }
+            return this;
+        }
+    }
+
+    class StateAx extends WfFormState {
+        StateAx() {
+            super(new FormANewLayoutConfig());
         }
 
         @Override

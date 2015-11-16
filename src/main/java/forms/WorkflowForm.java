@@ -1,11 +1,10 @@
 package forms;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import demo.resources.Resource;
 import forms.config.FormConfig;
-import forms.config.PageLayout;
+import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -15,12 +14,11 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
-import javax.annotation.Nullable;
 import javax.inject.Inject;
-import java.util.Map;
 
 public class WorkflowForm extends Panel {
 
@@ -39,6 +37,7 @@ public class WorkflowForm extends Panel {
     public WorkflowForm(String id, FormConfig config) {
         super(id);
         withConfig(config);
+        WfUtil.setComponentName(this,config.getName());
         setOutputMarkupId(true);
         add(form = new Form("form"));
         add(new Label("subheader", config.getTitle()));
@@ -99,13 +98,12 @@ public class WorkflowForm extends Panel {
             response.render(item);
         }
         response.render(JavaScriptReferenceHeaderItem.forReference(LAYOUT_JS));
-        String optionsJson = new Gson().toJson(getFormOptions());
+        String optionsJson = new Gson().toJson(getFormJsonOptions());
         response.render(OnDomReadyHeaderItem.forScript(String.format(INIT_FORM, optionsJson)));
     }
 
-    private FormJsonOptions getFormOptions() {
-        final FormJsonOptions formOptions = new FormJsonOptions(this, getFormConfig());
-        return formOptions;
+    private FormJsonOptions getFormJsonOptions() {
+        return new FormJsonOptions(this);
     }
 
     public FormConfig getFormConfig() {

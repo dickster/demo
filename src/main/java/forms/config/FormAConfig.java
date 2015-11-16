@@ -7,10 +7,9 @@ import java.util.List;
 public class FormAConfig extends FormConfig {
 
     public FormAConfig() {
-        super();
+        super("FORM-A");
         usingDefaultLayout(true);
         withConfigs(configs());
-        withName("FORM-A");
         withTitle("Form A");
     }
 

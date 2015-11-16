@@ -1,36 +1,21 @@
 var easy = easy ? easy : {};
 easy.layout= (function() {
 
-
-    var foo =
-    {
-        "id":"form21",
-
-        "layout":{
-            "nameToId":{
-                "2":"component24",
-                "1":"component25",
-                "first name":"component26",
-                "FORM-A":"content23",
-                "middle name":"component28",
-                "name.first":"component27",
-                "next":"component2c",
-                "name.last":"component2b",
-                "last name":"component2a",
-                "name.middle":"component29"
-            },
-            "nameToCss":{
-                "2":"form_group",
-                "1":"form_group",
-                "first name":"",
-                "FORM-A":"form",
-                "middle name":"",
-                "name.first":"form-control",
-                "next":"btn btn-primary",
-                "name.last":"form-control",
-                "last name":"",
-                "name.middle":"form-control"
-            }},"widgetOptions":{}};
+    var rowsCss = [
+        null, //"can't have 0 colsPerRow!!!",
+        "col-md-12",
+        "col-md-6",
+        "col-md-4",
+        "col-md-3",
+        "col-md-2",
+        "col-md-2",
+        "col-md-1",
+        "col-md-1",
+        "col-md-1",
+        "col-md-1",
+        "col-md-1",
+        "col-md-1"
+        ];
 
     var init = function(options) {
         //doLayout($.extend(defaults, options));
@@ -39,14 +24,32 @@ easy.layout= (function() {
     }
 
     function doLayout(opts) {
-        var layout = opts.layout;
-        for (var name in layout.nameToCss) {
-            console.log('css for ' + name + ' is ' + css);
-            var css = layout.nameToCss[name];
-            $('#'+layout.nameToId[name]).addClass(css);
+        var $form = $('#'+opts.id).find('form');
 
-            console.log(layout.nameToId[name] + ' --> ' + $('#'+layout.nameToId[name]));
+        for (var name in opts.nameToCss) {
+            console.log('widget ' + name + '/' +opts.nameToId[name] + ' --> ' + opts.nameToCss[name]);
+            var css = opts.nameToCss[name];
+            $('#'+opts.nameToId[name]).addClass(css);
         }
+
+        var layout = layoutDef[opts.name];
+        if (!layout) return;
+        var rowCss = rowsCss[layout.colsPerRow];
+
+        for (var i = 0; i < layout.rows.length; i++) {
+            var $row = $('<div class="row"></div>');
+            $form.append($row);
+            for (var j = 0; j < layout.rows[i].length; j++) {
+                var $formGroup = $('<div class="col-md-6 form-group"></div>');
+                $row.append($formGroup);
+                for (var k = 0; k<layout.rows[i][j].length; k++) {
+                    var colName = layout.rows[i][j][k];
+                    var $el = $('#'+opts.nameToId[layout.rows[i][j][k]]);
+                    $formGroup.append($el);
+                }
+            }
+        }
+        console.log("the form is ---> " + $form[0].outerHTML);
     }
 
     return {

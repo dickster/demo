@@ -1023,7 +1023,7 @@ getEraYear = function( date, cal, era, sortable ) {
 
 		// allow whitespace to differ when matching formats.
 		var regexpStr = regexp.join( "" ).replace( /\s+/g, "\\s+" ),
-			parseRegExp = { "regExp": regexpStr, "groups": groups };
+			parseRegExp = { "regExp": regexpStr, "rows": groups };
 
 		// cache the regex for this format.
 		return re[ format ] = parseRegExp;
@@ -1059,7 +1059,7 @@ getEraYear = function( date, cal, era, sortable ) {
 			return null;
 		}
 		// found a date format that matches the input.
-		var groups = parseInfo.groups,
+		var groups = parseInfo.rows,
 			era = null, year = null, month = null, date = null, weekDay = null,
 			hour = 0, hourOffset, min = 0, sec = 0, msec = 0, tzMinOffset = null,
 			pmHour = false;

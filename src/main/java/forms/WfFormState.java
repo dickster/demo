@@ -6,9 +6,9 @@ import javax.annotation.Nonnull;
 
 public class WfFormState extends WfState {
 
-    private FormConfig formConfig = new FormConfig();
+    private FormConfig formConfig;
 
-    public WfFormState(FormConfig formConfig) {
+    public WfFormState(@Nonnull FormConfig formConfig) {
         this.formConfig = formConfig;
     }
 
