@@ -5,6 +5,7 @@ import forms.WidgetTypeEnum;
 public class LabelConfig extends WidgetConfig {
 
     private String text;  // this should be localized!
+    private String associatedWidget;
 
     public LabelConfig(String name) {
         super(name, WidgetTypeEnum.LABEL);
@@ -19,5 +20,19 @@ public class LabelConfig extends WidgetConfig {
 
     public String getText() {
         return text;
+    }
+
+    public LabelConfig forAssociatedWidget(String associatedWidgetName) {
+        associatedWidget = associatedWidgetName;
+        return this;
+    }
+
+    public LabelConfig forAssociatedWidget(WidgetConfig config) {
+        associatedWidget = config.getName();
+        return this;
+    }
+
+    public String getAssociatedWidget() {
+        return associatedWidget;
     }
 }

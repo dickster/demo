@@ -1,11 +1,9 @@
 package forms;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import demo.resources.Resource;
 import forms.config.FormConfig;
-import forms.config.PageLayout;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -13,12 +11,11 @@ import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
+import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
-import javax.annotation.Nullable;
 import javax.inject.Inject;
-import java.util.Map;
 
 public class WorkflowForm extends Form  {
 
@@ -61,10 +58,9 @@ public class WorkflowForm extends Form  {
     @Override
     protected void onInitialize() {
         Preconditions.checkNotNull(formConfig);
-        Preconditions.checkNotNull(getFormModel());
+        Preconditions.checkState(getFormModel() != null && getFormModel() instanceof CompoundPropertyModel);
 
         super.onInitialize();
-        formConfig.validateAcordVersion(expectedAcordVersion);
 
         setOutputMarkupId(true);
         setDefaultModel(getFormModel());
@@ -104,33 +100,14 @@ public class WorkflowForm extends Form  {
         response.render(OnDomReadyHeaderItem.forScript(String.format(INIT_FORM, optionsJson)));
     }
 
-    private FormOptions getFormOptions() {
-        final FormOptions formOptions = new FormOptions();
+    private FormJsonOptions getFormOptions() {
+        final FormJsonOptions formOptions = new FormJsonOptions(this, getFormConfig());
         return formOptions;
-    }
-
-    protected @Nullable PageLayout getLayout() {
-        return new PageLayout(this, getFormConfig());
     }
 
     public FormConfig getFormConfig() {
         return formConfig;
     }
 
-    public class FormOptions {
-        String id = getMarkupId();
-        PageLayout layout = getLayout();
-        Map<String, JsonOptions> widgetOptions = Maps.newHashMap();
-        Boolean skipValidation;
-
-        public FormOptions() {
-        }
-
-        public FormOptions add(Component widget, JsonOptions o) {
-            widgetOptions.put(widget.getMarkupId(), o);
-            return this;
-        }
-
-    }
 
 }

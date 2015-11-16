@@ -5,9 +5,11 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import demo.*;
+import forms.config.GroupConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
+import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.attributes.AjaxCallListener;
 import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
@@ -62,12 +64,18 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
      // blah.person, blah.address,     person.foo, address.bar
     // given a groupConfig.  mapping = policy.insured[].
     // policy.insured[x].name.first.   policy.insured.  or create a wrapper model?
+    //compound model??? = IndexedModel?  widget factory = if widget = section/group and model = array then use IndexedModel.
+    public GroupPanel(String id, GroupConfig config) {
+        super(id);
+    }
 
-//    public GroupPanel(String id, final IModel<?> model, GroupConfig config) {
-//        // 1: determine if model represents an array or single entity?
-//        super(id);
-//       // this.model = new IndexedModel(data, getInitialIndex());
-//    }
+    @Override
+    public MarkupContainer setDefaultModel(IModel<?> model) {
+        // if  model refers to single entity, create simple model and enforce configurations.
+        super.setDefaultModel(model);
+        // otherwise create an indexed model.
+
+    }
 
     public GroupPanel(final String id, final IModel<List<T>> data) {
         super(id);

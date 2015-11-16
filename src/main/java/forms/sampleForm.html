@@ -37,6 +37,44 @@
     </div>
 </form>
 
+<label id="l1">Label1</label>
+<input id="t1"  class="form-control" type="text"/>
+<label id="l2">Label2</label>
+<input id="t2" class="form-control" type="text"/>
+<label id="l3" >Label3</label>
+<input id="t3" class="form-control" type="text"/>
+<label id="l4" >Label4</label>
+<input id="t4" class="form-control" type="text"/>
+
+
+{ colsPerRow : 3, groups : {[l1,t1]}, {[l2,t2]}
+
+for (int i=0; i<numCols; i++) {
+    var css = numCols==2 ? "col-md-6" : blah;
+    var formGroup = $('<div class="col-md-6 form-group"></div>');
+    //append formGroup to form parent.
+    formGroup.append(col1 ids);
+
+
+
+    <div class="col-xs-6 form-group">
+        <label>Label1</label>
+        <input class="form-control" type="text"/>
+    </div>
+    <div class="col-xs-6 form-group">
+        <label>Label2</label>
+        <input class="form-control" type="text"/>
+    </div>
+    <div class="col-xs-6 form-group">
+        <label >Label3</label>
+        <input class="form-control" type="text"/>
+    </div>
+    <div class="col-xs-6 form-group">
+        <label>Label4</label>
+        <input class="form-control" type="text"/>
+    </div>
+
+
 
 <!--
 1: apply "form" class to <form>

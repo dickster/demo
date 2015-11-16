@@ -6,7 +6,7 @@ import com.google.common.collect.Maps;
 import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.CompoundPropertyModel;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
@@ -17,7 +17,7 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
 
     private Map<String, Object> context = Maps.newHashMap();
 
-    private IModel<T> model;
+    private CompoundPropertyModel<T> model;
 
     protected WfState currentState;
     private boolean ended = false;
@@ -98,15 +98,14 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
         return context;
     }
 
-    protected abstract @Nonnull IModel<T> createModel();
+    protected abstract @Nonnull CompoundPropertyModel<T> createModel();
 
-    public IModel<T> getModel() {
+    public CompoundPropertyModel<T> getModel() {
         if (model==null) {
             model = createModel();
         }
         return model;
     }
-
 
     public void end() {
         //currentState=null;

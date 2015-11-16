@@ -30,7 +30,6 @@ public abstract class WidgetFactory implements Serializable {
 
     protected void postCreate(final Component component, WidgetConfig config, IModel<?> model) {
         setMetaData(component, config);
-       // setModels(component, model);
         addAjax(component, config);
         addValidators(component, config);
     }
@@ -40,17 +39,6 @@ public abstract class WidgetFactory implements Serializable {
         WfUtil.setComponentName(component, name);
         component.setOutputMarkupId(true);
     }
-
-//    private void setModels(Component component, IModel<?> model) {
-//        if (component instanceof IHasMultipleModels) {
-//            IHasMultipleModels mm = (IHasMultipleModels) component;
-//            mm.setDefaultModels(models);
-//        } else {
-//            if (models.length>1) System.out.println("WARNING : you have supplied more than one model to " + component.getMetaData(Config.NAME) + " but it doesn't implement interface " + IHasMultipleModels.class.getSimpleName());
-    // new PropertyModel(onfig.getProperty());
-//            component.setDefaultModel(model);
-//        }
-//    }
 
     private void addValidators(Component component, WidgetConfig config) {
         if (component instanceof FormComponent) {

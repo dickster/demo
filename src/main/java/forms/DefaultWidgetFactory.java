@@ -66,6 +66,7 @@ public class DefaultWidgetFactory extends WidgetFactory {
         return new IndicatingAjaxSubmitLink(id, config.getName()) {
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                //refactor this into this class...don't need to post anywhere else.
                 new WorkflowManager().post(form, new WfSubmitEvent(config.getName(), target, this));
             }
         };

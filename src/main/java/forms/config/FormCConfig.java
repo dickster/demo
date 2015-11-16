@@ -12,7 +12,6 @@ public class FormCConfig extends FormConfig {
         withConfigs(configs());
         withName("FORM-C");
         withTitle("Form C");
-        withVersion("acord-1.2.3");
     }
 
     private List<Config> configs() {
