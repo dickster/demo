@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import forms.WidgetTypeEnum;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class GroupConfig implements Config {
@@ -110,7 +109,7 @@ public class GroupConfig implements Config {
         return this;
     }
 
-    public @Nullable Config getConfigWithName(@Nonnull String name) {
+    public Config getConfigWithName(@Nonnull String name) {
         List<Config> c = getConfigsDeep();
         for (Config config:c) {
             if (name.equals(config.getName())) {
@@ -122,6 +121,7 @@ public class GroupConfig implements Config {
 
     protected List<Config> getConfigsDeep() {
         List<Config> result = Lists.newArrayList();
+        result.add(this);
         for (Config config:configs) {
             result.add(config);
             if (config instanceof GroupConfig) {

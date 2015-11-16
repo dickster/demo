@@ -2,12 +2,11 @@ package forms;
 
 import demo.resources.Resource;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
@@ -28,15 +27,12 @@ public class StartingPoint extends WebPage {
 
     public StartingPoint() {
         super(new PageParameters());
-        add(new Form("form")
-                .add(new AjaxSubmitLink("start") {
-                    @Override
-                    protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                        super.onSubmit(target, form);
-                        setResponsePage(new WfPage(new CommercialWorkflow()));
-                    }
-                })
-        );
+        add(new AjaxLink("start") {
+            @Override
+            public void onClick(AjaxRequestTarget target) {
+                setResponsePage(new WfPage(new CommercialWorkflow()));
+            }
+        });
 
     }
 

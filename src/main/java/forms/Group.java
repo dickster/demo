@@ -25,6 +25,7 @@ public class Group extends Panel {
         this.config = config;
         this.model = model;
         WfUtil.setComponentName(this, config.getName());
+        setOutputMarkupId(false);
         setOutputMarkupId(!config.getRenderBodyOnly());
         setRenderBodyOnly(config.getRenderBodyOnly());
     }

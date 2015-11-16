@@ -1,39 +1,36 @@
 var easy = easy ? easy : {};
 easy.layout= (function() {
 
-//    var defaults = {sections:
-//        [{id:'nameSection', label:'INFO',
-//            rows:[
-//                [ {components:['firstNameLabel','firstName'],class:'col-lg-3'},
-//                    {components:['middleNameLabel','middleName'],class:'col-lg-3'},
-//                    {components:['lastNameLabel','lastName'],class:'col-lg-3'},
-//                    {components:['compInd'],class:'col-lg-3'}
-//                ]
-//            ]
-//        },
-//            {id:'addressSection', label:'ADDRESS',
-//                rows:
-//                    [
-//                        [  {components:['addrLabel', 'addr'],class:'col-lg-6'},
-//                            {components:['addr2Label','addr2'],class:'col-lg-3'}
-//                        ],
-//                        [
-//                            {components:['cityLabel','city'],class:'col-lg-3'},
-//                            {components:['provLabel','prov'],class:'col-lg-3'},
-//                            {components:['postalCodeLabel','postalCode'],class:'col-lg-3'}
-//                        ],
-//                        [
-//                            {components:['countryLabel','country'],class:'col-lg-3'}
-//                        ],
-//                        [
-//                            {components:['relationshipLabel','relationship'],class:'col-lg-3'}
-//                        ]
-//                    ]
-//
-//            }
-//
-//        ]};
 
+    var foo =
+    {
+        "id":"form21",
+
+        "layout":{
+            "nameToId":{
+                "2":"component24",
+                "1":"component25",
+                "first name":"component26",
+                "FORM-A":"content23",
+                "middle name":"component28",
+                "name.first":"component27",
+                "next":"component2c",
+                "name.last":"component2b",
+                "last name":"component2a",
+                "name.middle":"component29"
+            },
+            "nameToCss":{
+                "2":"form_group",
+                "1":"form_group",
+                "first name":"",
+                "FORM-A":"form",
+                "middle name":"",
+                "name.first":"form-control",
+                "next":"btn btn-primary",
+                "name.last":"form-control",
+                "last name":"",
+                "name.middle":"form-control"
+            }},"widgetOptions":{}};
 
     var init = function(options) {
         //doLayout($.extend(defaults, options));
@@ -42,30 +39,14 @@ easy.layout= (function() {
     }
 
     function doLayout(opts) {
-//need to move form?
-        var $oldContent = $('#'+opts.id);
-        var $content = $('<div class="reformatted-content"></div>').appendTo($oldContent);
+        var layout = opts.layout;
+        for (var name in layout.nameToCss) {
+            console.log('css for ' + name + ' is ' + css);
+            var css = layout.nameToCss[name];
+            $('#'+layout.nameToId[name]).addClass(css);
 
-        $(opts.layout.sections).each(function(index) {
-
-            if (this.label) $content.append('<h4>'+this.label+'</h4>');
-
-            $(this.rows).each(function(rowsIndex) {
-                var $row = $('<div class="form-group"></div>').appendTo($content);
-                jQuery.each(this.cols, function(k,v) {
-                    alert(k + " --> " + v);
-                });
-// TESTING
-//                $(this).each(function(rowIndex) {
-//                    var $col = $('<div class='+this.class+'></div>').appendTo($row);
-//                    $(this.cols).each(function(compIndex){
-//                        var $component = $('#'+this);
-//                        $component.appendTo($col);
-//                    });
-//                })
-            });
-        });
-
+            console.log(layout.nameToId[name] + ' --> ' + $('#'+layout.nameToId[name]));
+        }
     }
 
     return {
@@ -73,6 +54,9 @@ easy.layout= (function() {
     };
 
 })();
+
+
+
 
 
 

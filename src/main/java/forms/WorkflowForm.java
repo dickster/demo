@@ -1,28 +1,34 @@
 package forms;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import demo.resources.Resource;
 import forms.config.FormConfig;
+import forms.config.PageLayout;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
-import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
+import java.util.Map;
 
-public class WorkflowForm extends Form  {
+public class WorkflowForm extends Panel {
 
     // this calls layout and initializes all widgets.
     // TODO : use gridstack to handle layouts?
     private static final String INIT_FORM = "easy.layout.init(%s);";
     private static final JavaScriptResourceReference LAYOUT_JS = new JavaScriptResourceReference(Resource.class, "layout.js");
+    private final Form form;
 
     private @Inject Toolkit toolkit;
 
@@ -34,6 +40,8 @@ public class WorkflowForm extends Form  {
         super(id);
         withConfig(config);
         setOutputMarkupId(true);
+        add(form = new Form("form"));
+        add(new Label("subheader", config.getTitle()));
     }
 
     public WorkflowForm withConfig(FormConfig config) {
@@ -47,7 +55,7 @@ public class WorkflowForm extends Form  {
     }
 
     public WorkflowForm withFormValidator(IFormValidator validator) {
-        add(validator);
+        form.add(validator);
         return this;
     }
 
@@ -62,12 +70,12 @@ public class WorkflowForm extends Form  {
 
         super.onInitialize();
 
-        setOutputMarkupId(true);
-        setDefaultModel(getFormModel());
+        form.setOutputMarkupId(true);
+        form.setDefaultModel(getFormModel());
 
-        add(new Group("content", formConfig, getFormModel()));
+        form.add(new Group("content", formConfig, getFormModel()));
 
-        getTheme().apply(this);
+        getTheme().apply(form);
     }
 
     private JsonOptions getOptions(Component widget) {
@@ -84,12 +92,7 @@ public class WorkflowForm extends Form  {
         return (T) this;
     }
 
-    @Override
-    protected void onSubmit() {
-        super.onSubmit();
-    }
-
-    @Override
+       @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
         for (HeaderItem item:getTheme().getHeaderItems()) {
