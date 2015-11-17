@@ -2,7 +2,7 @@
 var easy = easy ? easy : {};
 
 
-easy.tabPanel2 = (function() {
+easy.sectionPanel = (function() {
 
     var defaultOptions = {
         emptyText:'\u00a0',

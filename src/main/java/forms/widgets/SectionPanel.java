@@ -4,12 +4,14 @@ package forms.widgets;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
-import demo.*;
-import forms.config.GroupConfig;
+import demo.FeedbackListener;
+import demo.FeedbackState;
+import demo.ISection;
+import demo.IndexedModel;
+import forms.config.SectionConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
-import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.attributes.AjaxCallListener;
 import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
@@ -30,7 +32,6 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.model.util.ListModel;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
@@ -38,8 +39,11 @@ import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.List;
 
+// new SectionPanel(id);   inherit model = new PropertyModel("foo.bar") ---> foo.bar[]
+// assume array for now. requires GroupConfig with min/max etc...
+// based on inherited model
 
-public abstract class GroupPanel<T extends Serializable> extends Panel implements FeedbackListener, ISection {
+public abstract class SectionPanel<T extends Serializable> extends Panel implements FeedbackListener, ISection {
 
     private static final String SELECT_LAST_TAB_JS = "$('#%s').tabPanel.selectLastTab()";
     private static final String BLANK_SLATE_ID = "blankSlate";
@@ -47,10 +51,10 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
     private static final String TAB_PANEL_INIT = "easy.tabPanel().init(%s)";
     private static final String SET_STATUS_JS = "document.getElementById('%s').tabPanel.setStatus('%s');";
 
-    private static final JavaScriptHeaderItem TAB_PANEL_JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(GroupPanel.class, "groupPanel.js"));
-    private static final CssHeaderItem TAB_PANEL_CSS = CssHeaderItem.forReference(new CssResourceReference(GroupPanel.class,"groupPanel.css"));
+    private static final JavaScriptHeaderItem TAB_PANEL_JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(SectionPanel.class, "sectionPanel.js"));
+    private static final CssHeaderItem TAB_PANEL_CSS = CssHeaderItem.forReference(new CssResourceReference(SectionPanel.class,"sectionPanel.css"));
 
-    private final IndexedModel<T> model;
+    //private final IndexedModel<T> model;
 
     private Model<String> header;
     private boolean mandatory;
@@ -59,42 +63,23 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
     private Enum<?> status = FeedbackState.VOID;
     private Component statusIcon;
     private WebMarkupContainer panel;
-    private List<EasyTab> tabz;
 
-     // blah.person, blah.address,     person.foo, address.bar
-    // given a groupConfig.  mapping = policy.insured[].
-    // policy.insured[x].name.first.   policy.insured.  or create a wrapper model?
-    //compound model??? = IndexedModel?  widget factory = if widget = section/group and model = array then use IndexedModel.
-//    public GroupPanel(String id, GroupConfig config) {
-//        super(id);
-//    }
 
-    @Override
-    public MarkupContainer setDefaultModel(IModel<?> model) {
-        // if  model refers to single entity, create simple model and enforce configurations.
-        super.setDefaultModel(model);
-        // otherwise create an indexed model.
-        return this;
-    }
-
-    public GroupPanel(final String id, final IModel<List<T>> data) {
+    public SectionPanel(final String id, SectionConfig config) {
         super(id);
         setOutputMarkupId(true);
-        this.header = Model.of(id);
-        this.model = new IndexedModel(data, getInitialIndex());
-    }
-
-    public GroupPanel(final String id, final List<T> data) {
-        this(id, new ListModel<T>(data));
+        this.header = Model.of(config.getTitle());
     }
 
     private List<Tab<T>> createTabs() {
         List<Tab<T>> result = Lists.newArrayList();
-        for (int i = 0; i<model.size(); i++) {
-            result.add(createTab(model.getObject(i), i));
+        for (int i = 0; i<getIndexedModel().size(); i++) {
+            result.add(createTab(getIndexedModel().getObject(i), i));
         }
         return result;
     }
+
+
 
     protected abstract Tab<T> createTab(T model, int index);
 
@@ -102,7 +87,7 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
         return 0;
     }
 
-    public GroupPanel withHeader(String header) {
+    public SectionPanel withHeader(String header) {
         this.header = Model.of(header);
         return this;
     }
@@ -116,7 +101,7 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
         return status;
     }
 
-    public GroupPanel<T> setStatus(Enum <?> status) {
+    public SectionPanel<T> setStatus(Enum <?> status) {
         this.status = status;
         return this;
     }
@@ -134,11 +119,8 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
 
         final IModel<Integer> tabCount = new AbstractReadOnlyModel<Integer>() {
             @Override public Integer getObject() {
-                if (canAdd) {   // make room for one tab to house the add button.
-                    return model.size() + 1;
-                } else {
-                    return model.size();
-                }
+                int size = getIndexedModel().size();
+                return canAdd ? size + 1 : size;   // make room for one tab to house the add button.
             }
         };
 
@@ -147,7 +129,7 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
             @Override protected void populateItem(final LoopItem item) {
                 final int index = item.getIndex();
                 // note : the "Add" tab is the last item added in this loop.
-                item.add(index < model.size() ? new EasyTab("tab", index) : new EasyAdditionTab("tab", index));
+                item.add(index < getIndexedModel().size() ? new EasyTab("tab", index) : new EasyAdditionTab("tab", index));
             }
 
             @Override
@@ -160,7 +142,7 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
         tabsContainer.add(statusIcon = new WebMarkupContainer("status").setOutputMarkupId(true).add(new AttributeAppender("class", getStatusCssModel())));
 
         // TODO : take this method out of tab.
-        form.add(panel = createPanel(TAB_PANEL_ID, model));
+        form.add(panel = createPanel(TAB_PANEL_ID, getIndexedModel()));
         panel.setOutputMarkupId(true);
 
 //        panelContainer.add(createBlankSlate(BLANK_SLATE_ID));
@@ -207,8 +189,8 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
     }
 
     protected void addTab(AjaxRequestTarget target) {
-        model.add(createNewTabData(getCurrentData()));
-        target.add(GroupPanel.this);
+        getIndexedModel().add(createNewTabData(getCurrentData()));
+        target.add(SectionPanel.this);
     }
 
     protected T createNewTabData(T data) {
@@ -222,20 +204,20 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
     }
 
     protected T getCurrentData() {
-        return model.getObject();
+        return getIndexedModel().getObject();
     }
 
     private Component newDeleteButton(String id, final int index) {
         return new AjaxLink(id) {
             @Override public boolean isVisible() {
-                return model.size()>1 || !isMandatory();   // if tab is last one and it's a mandatory field then don't show this button.  e.g. can't delete only driver. (but you can delete only conviction).
+                return getIndexedModel().size()>1 || !isMandatory();   // if tab is last one and it's a mandatory field then don't show this button.  e.g. can't delete only driver. (but you can delete only conviction).
             }
             @Override public void onClick(AjaxRequestTarget target) {
 // for DEBUGGING only.....
                 try { Thread.sleep(500);  } catch (InterruptedException e) { }
 // ........
                 deleteTab(target, index);
-                target.add(GroupPanel.this);
+                target.add(SectionPanel.this);
             }
             @Override protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
                 super.updateAjaxAttributes(attributes);
@@ -245,7 +227,7 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
     }
 
     protected void deleteTab(AjaxRequestTarget target, int index) {
-        model.delete(index);
+        getIndexedModel().delete(index);
     }
 
     protected boolean isMandatory() {
@@ -254,7 +236,12 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
 
     @Override
     protected IModel<?> initModel() {
-        return new Model<Integer>(-1);
+        IModel<List<T>> inheritedModel = (IModel<List<T>>) super.initModel();
+        return new IndexedModel<T>(inheritedModel);
+    }
+
+    private IndexedModel<T> getIndexedModel() {
+        return (IndexedModel<T>) getDefaultModel();
     }
 
     protected LoopItem newTabContainer(final int index) {
@@ -270,8 +257,8 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
         response.render(OnDomReadyHeaderItem.forScript(String.format(TAB_PANEL_INIT, new Gson().toJson(getOptions()))));
     }
 
-    protected GroupPanelOptions getOptions() {
-        return new GroupPanelOptions();
+    protected SectionPanelOptions getOptions() {
+        return new SectionPanelOptions();
     }
 
     protected Component newTitle(final String titleId, final String title, final int index) {
@@ -294,28 +281,28 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
     public IModel<String> getHeaderModel() {
         return new Model<String>() {
             @Override public String getObject() {
-                int tabCount = model.size();
-                return String.format("%s%s",header.getObject(),(tabCount>1 ? " ("+tabCount+")" : ""));
+                int tabCount = getIndexedModel().size();
+                return String.format("%s%s", header.getObject(), (tabCount > 1 ? " (" + tabCount + ")" : ""));
             }
         };
     }
 
-    public <X extends GroupPanel> X allowingOneOrMore() {
+    public <X extends SectionPanel> X allowingOneOrMore() {
         mandatory = true;
         return (X) this;
     }
 
-    public <X extends GroupPanel> X allowingZeroOrMore() {
+    public <X extends SectionPanel> X allowingZeroOrMore() {
         mandatory = false;
         return (X) this;
     }
 
-    public <X extends GroupPanel> X allowingOnlyOne() {
+    public <X extends SectionPanel> X allowingOnlyOne() {
         canAdd = false;
         return (X) this;
     }
 
-    public <T extends GroupPanel> T withAddTooltip(String tooltip) {
+    public <T extends SectionPanel> T withAddTooltip(String tooltip) {
         Preconditions.checkState(canAdd, "you must be able to add for this tooltip to show up.");
         addTooltip = tooltip;
         return (T) this;
@@ -370,25 +357,25 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
 
         public AjaxLoadingListener() {
             css = getStatusCss(getLoadingState());
-            onBefore(String.format(SET_STATUS_JS, GroupPanel.this.getMarkupId(),css));
+            onBefore(String.format(SET_STATUS_JS, SectionPanel.this.getMarkupId(), css));
         }
     }
 
 
 
-    public class GroupPanelOptions implements Serializable {
-        public String id = GroupPanel.this.getMarkupId();
+    public class SectionPanelOptions implements Serializable {
+        public String id = SectionPanel.this.getMarkupId();
         public Boolean mandatory = isMandatory();
         public List<String> titleInputs;
         public String addTooltip = getAddTooltip();
-        public Boolean canAdd = GroupPanel.this.canAdd;
+        public Boolean canAdd = SectionPanel.this.canAdd;
         public Boolean collapsed;
         public Boolean tooltipOnAdd;
-        public int current = model.getIndex();
+        public int current = getIndexedModel().getIndex();
         public HeaderOptions header = new HeaderOptions();
 
 
-        public GroupPanelOptions() {
+        public SectionPanelOptions() {
             titleInputs = Lists.newArrayList();
 //            for (Tab<T> tab:tabs) {
             // TODO : reimplement this.
@@ -406,7 +393,7 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
     public class EasyAdditionTab extends Fragment {
 
         private EasyAdditionTab(String id, int index) {
-            super(id, "additionTabFragment", GroupPanel.this);
+            super(id, "additionTabFragment", SectionPanel.this);
             add(new AjaxButton("add") {
                 @Override
                 public boolean isVisible() {
@@ -443,15 +430,15 @@ public abstract class GroupPanel<T extends Serializable> extends Panel implement
         private String titleInput;
 
         public EasyTab(String id, int index) {
-            super(id, "tabFragment", GroupPanel.this);
-            this.label = model.getObject(index).toString();
+            super(id, "tabFragment", SectionPanel.this);
+            this.label = getIndexedModel().getObject(index).toString();
             this.index = index;
 
             final AjaxSubmitLink titleLink = new AjaxSubmitLink("link") {
                 @Override
                 protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                    model.setIndex(EasyTab.this.index);
-                    target.add(GroupPanel.this);
+                    getIndexedModel().setIndex(EasyTab.this.index);
+                    target.add(SectionPanel.this);
                 }
 
                 @Override
