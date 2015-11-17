@@ -10,6 +10,7 @@ public enum WidgetTypeEnum {
     LABEL,
     BUTTON,
     RADIO_GROUP,
-    GROUP;
+    GROUP,
+    SELECT;
 
 }

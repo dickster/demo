@@ -1,5 +1,6 @@
 package forms.config;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forms.WidgetTypeEnum;
@@ -14,18 +15,17 @@ public class WidgetConfig implements Config {
     private String property;
     private String name;
     private String type;
+    private List<IValidator> validators = Lists.newArrayList();
     private String css = "form-control";
     private Map options = Maps.newHashMap();  // a place to store custom options.
+    private List<String> mediatedAjaxEvents = Lists.newArrayList();
+    private Boolean required;
 
     public String getType() {
         return type;
     }
 
-    private String acordProperty;
-    private String acordVersion;
-    private List<String> mediatedAjaxEvents = Lists.newArrayList();
-    private List<IValidator<?>> validations = Lists.newArrayList();
-    private Boolean required;
+
 
     public WidgetConfig(@Nonnull String property, @Nonnull String type) {
         this.property = property;
@@ -41,10 +41,6 @@ public class WidgetConfig implements Config {
         return name;
     }
 
-    public String getAcordProperty() {
-        return acordProperty;
-    }
-
     public String getProperty() {
         return property;
     }
@@ -54,16 +50,7 @@ public class WidgetConfig implements Config {
         return type;
     }
 
-    public String getAcordVersion() {
-        return acordVersion;
-    }
-
-    public WidgetConfig acordVersion(String acordVersion) {
-        this.acordVersion = acordVersion;
-        return this;
-    }
-
-    public WidgetConfig name(String name) {
+       public WidgetConfig name(String name) {
         this.name = name;
         return this;
     }
@@ -74,12 +61,12 @@ public class WidgetConfig implements Config {
     }
 
     public WidgetConfig addValidator(IValidator<?> validator) {
-        validations.add(validator);
+        validators.add(validator);
         return this;
     }
 
-    public List<IValidator<?>> getValidations() {
-        return validations;
+    public List<IValidator> getValidators() {
+        return ImmutableList.copyOf(validators);
     }
 
     public Boolean getRequired() {
@@ -108,5 +95,6 @@ public class WidgetConfig implements Config {
         this.css = css;
         return this;
     }
+
 }
 

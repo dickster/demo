@@ -18,8 +18,6 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     private static final CssResourceReference JQUERY_UI_CSS = new CssResourceReference(Resource.class, "jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css");
     private static final JavaScriptResourceReference SELECT_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-multiselect.js");
     private static final CssResourceReference SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-select.css");
-    private static final JavaScriptResourceReference BOOTSTRAP_SELECT_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-select.js");
-    private static final CssResourceReference BOOTSTRAP_SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-multiselect.css");
     private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/typeahead.bundle.js");
     private static final JavaScriptResourceReference LAYOUTDEF_JS = new JavaScriptResourceReference(Resource.class, "layoutDef.js");
     private static final CssResourceReference TYPEAHEAD_CSS = new CssResourceReference(Resource.class,"bootstrap-3.1.1-dist/css/typeahead.bootstrap.css");
@@ -51,12 +49,10 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
         response.render(CssHeaderItem.forReference(JQUERY_UI_CSS));
         response.render(JavaScriptReferenceHeaderItem.forReference(BOOTSTRAP_JS));
         response.render(CssHeaderItem.forReference(BOOTSTRAP_CSS));
-        response.render(JavaScriptReferenceHeaderItem.forReference(BOOTSTRAP_SELECT_JS));
-        response.render(CssHeaderItem.forReference(BOOTSTRAP_SELECT_CSS));
-        response.render(JavaScriptReferenceHeaderItem.forReference(SELECT_JS));
-        response.render(CssHeaderItem.forReference(SELECT_CSS));
+//        response.render(JavaScriptReferenceHeaderItem.forReference(SELECT_JS));
+//        response.render(CssHeaderItem.forReference(SELECT_CSS));
         response.render(JavaScriptReferenceHeaderItem.forReference(TYPEAHEAD_JS));
-        response.render(CssHeaderItem.forReference(TYPEAHEAD_CSS));
+
         response.render(CssHeaderItem.forReference(BRAND_CSS));
         response.render(JavaScriptReferenceHeaderItem.forReference(LAYOUTDEF_JS));
     }

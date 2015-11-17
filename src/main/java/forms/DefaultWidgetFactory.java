@@ -1,8 +1,19 @@
 package forms;
 
 import com.google.common.base.Preconditions;
-import forms.config.*;
-import forms.widgets.*;
+import forms.config.ButtonConfig;
+import forms.config.CheckBoxConfig;
+import forms.config.DateLabelConfig;
+import forms.config.DatePickerConfig;
+import forms.config.LabelConfig;
+import forms.config.SelectPickerConfig;
+import forms.config.TextFieldConfig;
+import forms.config.WidgetConfig;
+import forms.widgets.CheckBoxPanel;
+import forms.widgets.DatePanel;
+import forms.widgets.IndicatingAjaxSubmitLink;
+import forms.widgets.SelectPicker;
+import forms.widgets.TextField2;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.basic.Label;
@@ -48,9 +59,12 @@ public class DefaultWidgetFactory extends WidgetFactory {
         if (config instanceof ButtonConfig) {
             return createAjaxButton(id, (ButtonConfig)config);
         }
-        if (config instanceof SectionConfig) {
-            return new SectionPanel(id, (SectionConfig)config) {
+        if (config instanceof SelectPickerConfig) {
+            return new SelectPicker(id, (SelectPickerConfig)config);
         }
+//        if (config instanceof SectionConfig) {
+//            return new SectionPanel(id, (SectionConfig)config) {
+//        }
         throw new IllegalArgumentException("widget type " + config.getClass().getSimpleName() + " is not supported.");
     }
 

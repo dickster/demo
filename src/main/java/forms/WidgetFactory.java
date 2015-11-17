@@ -37,7 +37,7 @@ public abstract class WidgetFactory implements Serializable {
     private void addValidators(Component component, WidgetConfig config) {
         if (component instanceof FormComponent) {
             FormComponent fc = (FormComponent) component;
-            for (IValidator<?> validator:config.getValidations()) {
+            for (IValidator<?> validator:config.getValidators()) {
                 fc.add(validator);
             }
         }
