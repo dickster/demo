@@ -85,19 +85,9 @@ public class GroupConfig implements Config {
         configs.add(config);
         return this;
     }
-
     // ALIAS - maybe this short form is better?
     public GroupConfig with(Config config) {
         return withConfig(config);
-    }
-
-    public boolean isUseDefaultLayout() {
-        return useDefaultLayout;
-    }
-
-    public GroupConfig usingDefaultLayout(boolean useDefaultLayout) {
-        this.useDefaultLayout = useDefaultLayout;
-        return this;
     }
 
     public String getCss() {
@@ -119,7 +109,7 @@ public class GroupConfig implements Config {
         throw new IllegalArgumentException("can't find config with name " + name);
     }
 
-    protected List<Config> getConfigsDeep() {
+    private List<Config> getConfigsDeep() {
         List<Config> result = Lists.newArrayList();
         result.add(this);
         for (Config config:configs) {

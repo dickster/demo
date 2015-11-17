@@ -34,13 +34,13 @@ easy.layout= (function() {
 
         var layout = layoutDef[opts.name];
         if (!layout) return;
-        var rowCss = rowsCss[layout.colsPerRow];
 
         for (var i = 0; i < layout.rows.length; i++) {
             var $row = $('<div class="row"></div>');
             $form.append($row);
             for (var j = 0; j < layout.rows[i].length; j++) {
-                var $formGroup = $('<div class="col-md-6 form-group"></div>');
+                var rowCss = rowsCss[layout.rows[i].length];
+                var $formGroup = $('<div class="form-group"></div>').addClass(rowCss);
                 $row.append($formGroup);
                 for (var k = 0; k<layout.rows[i][j].length; k++) {
                     var colName = layout.rows[i][j][k];

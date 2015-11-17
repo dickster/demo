@@ -8,7 +8,6 @@ public class FormAConfig extends FormConfig {
 
     public FormAConfig() {
         super("FORM-A");
-        usingDefaultLayout(true);
         withConfigs(configs());
         withTitle("Form A");
     }
@@ -32,6 +31,7 @@ public class FormAConfig extends FormConfig {
         result.add(aiConfig);
 
         result.add(new ButtonConfig("next"));
+        result.add(new ButtonConfig("formA3"));
         return result;
     }
 }

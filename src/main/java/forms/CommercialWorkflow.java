@@ -1,5 +1,6 @@
 package forms;
 
+import forms.config.FormAAnotherNewLayoutConfig;
 import forms.config.FormAConfig;
 import forms.config.FormANewLayoutConfig;
 import forms.config.FormBConfig;
@@ -13,6 +14,7 @@ public class CommercialWorkflow extends FormBasedWorkflow {
 
     private WfState stateA = new StateA();
     private WfState stateAx = new StateAx();
+    private WfState stateAy = new StateAy();
     private WfState stateB = new StateB();
     private WfState stateC = new StateC();
 
@@ -28,6 +30,7 @@ public class CommercialWorkflow extends FormBasedWorkflow {
 
     @Override
     public void end() {
+        System.out.println(getModel());
         updatePage(new StartingPoint());
     }
 
@@ -47,6 +50,9 @@ public class CommercialWorkflow extends FormBasedWorkflow {
             if ("next".equals(event.getName())) {
                 return stateAx;
             }
+            if ("formA3".equals(event.getName())) {
+                return stateAy;
+            }
             return this;
         }
     }
@@ -54,6 +60,20 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     class StateAx extends WfFormState {
         StateAx() {
             super(new FormANewLayoutConfig());
+        }
+
+        @Override
+        public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+            if ("next".equals(event.getName())) {
+                return stateAy;
+            }
+            return this;
+        }
+    }
+
+    class StateAy extends WfFormState {
+        StateAy() {
+            super(new FormAAnotherNewLayoutConfig());
         }
 
         @Override

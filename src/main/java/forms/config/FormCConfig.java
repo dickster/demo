@@ -8,7 +8,6 @@ public class FormCConfig extends FormConfig {
 
     public FormCConfig() {
         super("FORM-C");
-        usingDefaultLayout(true);
         withConfigs(configs());
         withTitle("Form C");
     }

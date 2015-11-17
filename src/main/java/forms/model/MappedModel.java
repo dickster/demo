@@ -5,11 +5,13 @@ import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.IWrapModel;
 
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,8 +35,13 @@ public class MappedModel extends CompoundPropertyModel<Map<String, Object>> {
     }
 
     @Override
-    public <C> IWrapModel<C> wrapOnInheritance(Component component) {
-        return new MappedPropertyModel(this, component.getId());
+    public <C> IWrapModel<C> wrapOnInheritance(@Nonnull Component component) {
+        String property = WfUtil.getComponentName(component);
+        if (property==null) {
+            throw new IllegalStateException("component has no name stored in meta data " + component.getId());
+        } else {
+            return new MappedPropertyModel(this, property);
+        }
     }
 
     public class MappedPropertyModel implements IWrapModel {

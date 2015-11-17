@@ -9,30 +9,23 @@ import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.List;
 
 public class Group extends Panel {
 
-    private final IModel<?> model;
+    //private final IModel<?> model;
     private GroupConfig config;
     private @SpringBean WidgetFactory factory;
 
-    public Group(String id, GroupConfig config, final IModel<?> model) {
+    public Group(String id, GroupConfig config) {
         super(id);
         this.config = config;
-        this.model = model;
         WfUtil.setComponentName(this, config.getName());
         setOutputMarkupId(false);
         setOutputMarkupId(!config.getRenderBodyOnly());
         setRenderBodyOnly(config.getRenderBodyOnly());
-    }
-
-    @Override
-    protected void onInitialize() {
-        super.onInitialize();
 
         List<Component> components = createComponents("component");
 
@@ -43,13 +36,19 @@ public class Group extends Panel {
                 item.setRenderBodyOnly(true);
             }
         }.setReuseItems(true));
+
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
     }
 
     private List<Component> createComponents(String id) {
         List<Component> result = Lists.newArrayList();
         for (Config c:config.getConfigs()) {
             if (c instanceof WidgetConfig) {
-                result.add(getFactory().createWidget(id, (WidgetConfig) c, model));
+                result.add(getFactory().createWidget(id, (WidgetConfig) c));
             }
             else if (c instanceof GroupConfig) {
                 result.add(newGroup(id, (GroupConfig) c));
@@ -62,7 +61,7 @@ public class Group extends Panel {
     // 99% of the time these will be fine.
 
     protected Group newGroup(String id, GroupConfig config) {
-        return new Group(id, config, model);
+        return new Group(id, config);
     }
 
     protected WidgetFactory getFactory() {

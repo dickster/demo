@@ -4,7 +4,6 @@ import forms.config.WidgetConfig;
 import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.FormComponent;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.validation.IValidator;
 
 import java.io.Serializable;
@@ -14,21 +13,16 @@ public abstract class WidgetFactory implements Serializable {
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
 
-    public abstract Component create(String id, WidgetConfig config, IModel<?> model);
+    public abstract Component create(String id, WidgetConfig config);
 
-//    public <T extends WidgetFactory> T usingPropertyAsName() {
-//        usePropertyAsName = true;
-//        return (T) this;
-//    }
-
-    public Component createWidget(String id, WidgetConfig config, IModel<?> model) {
-        preCreate(config, model);
-        Component component = create(id, config, model);
-        postCreate(component, config, model);
+    public Component createWidget(String id, WidgetConfig config) {
+        preCreate(config);
+        Component component = create(id, config);
+        postCreate(component, config);
         return component;
     }
 
-    protected void postCreate(final Component component, WidgetConfig config, IModel<?> model) {
+    protected void postCreate(final Component component, WidgetConfig config) {
         setMetaData(component, config);
         addAjax(component, config);
         addValidators(component, config);
@@ -60,7 +54,7 @@ public abstract class WidgetFactory implements Serializable {
 //        }
     }
 
-    protected void preCreate(WidgetConfig config, IModel<?> formModel) {
+    protected void preCreate(WidgetConfig config) {
         // do nothing by default.  you might want to filter config options based on user/settings.
         //if (config.getName().equals("someSpecialEmail")) { config.addAjaxEvent("onchange"); config.addValidator(EmailAddressValidator.getInstance()); }
     }

@@ -16,7 +16,6 @@ import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.model.IModel;
 
 import javax.annotation.Nullable;
 
@@ -27,8 +26,8 @@ public class DefaultWidgetFactory extends WidgetFactory {
     }
 
     @Override
-    public Component create(String id, WidgetConfig config, IModel<?> model) {
-        Component basicComponent = createBasic(id, config, model);
+    public Component create(String id, WidgetConfig config) {
+        Component basicComponent = createBasic(id, config);
         if (basicComponent!=null) {
             return basicComponent;
         }
@@ -39,7 +38,7 @@ public class DefaultWidgetFactory extends WidgetFactory {
 //        if ("FOOBAR".equals(config.getWidgetType())) { return new CustomWidget(id); }
     }
 
-    private @Nullable Component createBasic(String id, WidgetConfig config, IModel<?> model) {
+    private @Nullable Component createBasic(String id, WidgetConfig config) {
         if (config instanceof TextFieldConfig) {
             return new TextField2(id);
         }

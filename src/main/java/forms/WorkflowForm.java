@@ -15,9 +15,11 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
+import org.apache.wicket.util.visit.IVisit;
+import org.apache.wicket.util.visit.IVisitor;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
 public class WorkflowForm extends Panel {
@@ -31,15 +33,29 @@ public class WorkflowForm extends Panel {
     private @Inject Toolkit toolkit;
 
     private FormConfig formConfig;
-    private IModel<?> formModel;
+    private CompoundPropertyModel<?> formModel;
     private String expectedAcordVersion; // TODO : set valid default here...
 
-    public WorkflowForm(String id, FormConfig config) {
+    public WorkflowForm(@Nonnull String id, @Nonnull FormConfig config, @Nonnull CompoundPropertyModel model) {
         super(id);
         withConfig(config);
-        WfUtil.setComponentName(this,config.getName());
+        WfUtil.setComponentName(this, config.getName());
         setOutputMarkupId(true);
-        add(form = new Form("form"));
+        add(form = new Form("form") {
+            @Override
+            protected void onInitialize() {
+                super.onInitialize();
+                form.visitChildren(Component.class, new IVisitor<Component, Object>() {
+                    @Override
+                    public void component(Component component, IVisit<Object> visit) {
+                        Object o = component.getDefaultModelObject();
+                        System.out.println(o);
+                    }
+                });
+            }
+        });
+        form.setModel(model);
+        Object x = form.getModelObject();
         add(new Label("subheader", config.getTitle()));
     }
 
@@ -48,7 +64,7 @@ public class WorkflowForm extends Panel {
         return this;
     }
 
-    public WorkflowForm withModel(IModel<?> model) {
+    public WorkflowForm withModel(CompoundPropertyModel<?> model) {
         this.formModel = model;
         return this;
     }
@@ -58,24 +74,23 @@ public class WorkflowForm extends Panel {
         return this;
     }
 
-    public IModel<?> getFormModel() {
-        return formModel;
+    public CompoundPropertyModel<?> getFormModel() {
+        return (CompoundPropertyModel<?>) form.getModel();
     }
 
     @Override
     protected void onInitialize() {
         Preconditions.checkNotNull(formConfig);
-        Preconditions.checkState(getFormModel() != null && getFormModel() instanceof CompoundPropertyModel);
 
         super.onInitialize();
 
         form.setOutputMarkupId(true);
-        form.setDefaultModel(getFormModel());
 
-        form.add(new Group("content", formConfig, getFormModel()));
+        form.add(new Group("content", formConfig));
 
         getTheme().apply(form);
     }
+
 
     private JsonOptions getOptions(Component widget) {
         JsonOptions options = ((HasJsonOptions) widget).getOptions();

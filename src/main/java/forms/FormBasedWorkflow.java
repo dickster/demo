@@ -49,7 +49,7 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T> {
     }
 
     protected WorkflowForm createForm(String id, FormConfig config) {
-        return new WorkflowForm(id, config).withModel(getModel());
+        return new WorkflowForm(id, config, getModel());
     }
 
 }
