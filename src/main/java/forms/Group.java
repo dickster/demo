@@ -6,13 +6,11 @@ import forms.config.GroupConfig;
 import forms.config.WidgetConfig;
 import forms.util.WfUtil;
 import org.apache.wicket.Component;
-import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.util.visit.IVisit;
-import org.apache.wicket.util.visit.IVisitor;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class Group extends Panel {
@@ -20,9 +18,10 @@ public class Group extends Panel {
     private GroupConfig config;
     private WidgetFactory factory;
 
-    public Group(String id, GroupConfig config) {
+    public Group(String id, @Nonnull GroupConfig config, @Nonnull WidgetFactory factory) {
         super(id);
         this.config = config;
+        this.factory = factory;
         WfUtil.setComponentName(this, config.getName());
         setOutputMarkupId(false);
         setOutputMarkupId(!config.getRenderBodyOnly());
@@ -49,7 +48,7 @@ public class Group extends Panel {
         List<Component> result = Lists.newArrayList();
         for (Config c:config.getConfigs()) {
             if (c instanceof WidgetConfig) {
-                result.add(getFactory().createWidget(id, (WidgetConfig) c));
+                result.add(factory.createWidget(id, (WidgetConfig) c));
             }
             else if (c instanceof GroupConfig) {
                 result.add(newGroup(id, (GroupConfig) c));
@@ -62,20 +61,7 @@ public class Group extends Panel {
     // 99% of the time these will be fine.
 
     protected Group newGroup(String id, GroupConfig config) {
-        return new Group(id, config);
+        return new Group(id, config, factory);
     }
 
-    protected WidgetFactory getFactory() {
-        if (factory==null) {
-            visitParents(MarkupContainer.class, new IVisitor<MarkupContainer, Object>() {
-                @Override public void component(MarkupContainer c, IVisit<Object> visit) {
-                    if (c instanceof HasWorkflow) {
-                        factory = ((HasWorkflow)c).getWorkflow().getWidgetFactory();
-                        visit.stop();
-                    }
-                }
-            });
-        }
-        return factory;
-    }
 }

@@ -69,9 +69,13 @@ public class WorkflowForm extends Panel {
 
         form.setOutputMarkupId(true);
 
-        form.add(new Group("content", formConfig));
+        form.add(new Group("content", formConfig, getWidgetFactory()));
 
         getTheme().apply(form);
+    }
+
+    private WidgetFactory getWidgetFactory() {
+        return toolkit.createWidgetFactory(getFormConfig());
     }
 
 

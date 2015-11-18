@@ -16,14 +16,12 @@ import java.util.Map;
 public abstract class Workflow<T> extends EventBus implements Serializable {
 
     private Map<String, Object> context = Maps.newHashMap();
-
     private CompoundPropertyModel<T> model;
-
+    private WidgetFactory widgetFactory = new DefaultWidgetFactory();
     protected WfState currentState;
     private boolean ended = false;
 
     public Workflow() {
-        // TODO : assert this bean is of scope=prototype.
         register(this);
     }
 
@@ -59,7 +57,7 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
     }
 
     protected void validate(WfState nextState) {
-        Preconditions.checkArgument(nextState!=null, "can't have a null state for workflow.");
+        Preconditions.checkArgument(nextState != null, "can't have a null state for workflow.");
     }
 
     @Subscribe
@@ -122,6 +120,13 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
         return ended;
     }
 
-    public abstract WidgetFactory getWidgetFactory();
+    public WidgetFactory widgetFactory() {
+        return widgetFactory;
+    }
+
+    public <T extends Workflow> T withWidgetFactory(WidgetFactory factory) {
+        this.widgetFactory = factory;
+        return (T) this;
+    }
 
 }

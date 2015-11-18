@@ -20,6 +20,7 @@ public class FormBConfig extends FormConfig {
         addressConfig.withConfig(new TextFieldConfig("insured.address"));
         addressConfig.withConfig(new LabelConfig("Email"));
         addressConfig.withConfig(new TextFieldConfig("insured.email")
+                .required()
                 .addValidator(EmailAddressValidator.getInstance()));
         result.add(new GroupConfig("y").withConfigs(addressConfig));
         result.add(new ButtonConfig("next"));

@@ -3,22 +3,11 @@ package forms;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 
 
 @Configuration
 public class SpringBeans {
-
-    @Bean @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-    public WorkflowManager workflowManager() {
-        return new WorkflowManager();
-    }
-
-    @Bean @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public CommercialWorkflow commercialWorkflow() {
-        return new CommercialWorkflow();
-    }
 
     @Bean @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public Toolkit toolkit() {
@@ -30,12 +19,7 @@ public class SpringBeans {
         return new DefaultTheme();
     }
 
-    @Bean @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public WidgetFactory widgetFactory() {
-        return new DefaultWidgetFactory();
-    }
-
-    @Lazy @Bean
+    @Bean @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public WfFactory WorkflowFactory() {
         return new WfFactory();
     }

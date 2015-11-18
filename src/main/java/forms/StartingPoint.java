@@ -23,17 +23,17 @@ public class StartingPoint extends WebPage {
     private static final CssResourceReference BOOTSTRAP_SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-multiselect.css");
     private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/typeahead.bundle.js");
     private static final CssResourceReference TYPEAHEAD_CSS = new CssResourceReference(Resource.class,"bootstrap-3.1.1-dist/css/typeahead.bootstrap.css");
-    private @Inject CommercialWorkflow commercial;
+    private @Inject WfFactory workflowFactory;
 
     public StartingPoint() {
         super(new PageParameters());
         add(new AjaxLink("start") {
             @Override
             public void onClick(AjaxRequestTarget target) {
-                setResponsePage(new WfPage(commercial));
+                FormBasedWorkflow wf = workflowFactory.create("commercial");
+                setResponsePage(new WfPage(wf));
             }
         });
-
     }
 
     @Override
