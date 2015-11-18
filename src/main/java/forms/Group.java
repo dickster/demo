@@ -6,18 +6,19 @@ import forms.config.GroupConfig;
 import forms.config.WidgetConfig;
 import forms.util.WfUtil;
 import org.apache.wicket.Component;
+import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.util.visit.IVisit;
+import org.apache.wicket.util.visit.IVisitor;
 
 import java.util.List;
 
 public class Group extends Panel {
 
-    //private final IModel<?> model;
     private GroupConfig config;
-    private @SpringBean WidgetFactory factory;
+    private WidgetFactory factory;
 
     public Group(String id, GroupConfig config) {
         super(id);
@@ -26,7 +27,12 @@ public class Group extends Panel {
         setOutputMarkupId(false);
         setOutputMarkupId(!config.getRenderBodyOnly());
         setRenderBodyOnly(config.getRenderBodyOnly());
+    }
 
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
+        // TODO : refactor this to iterate over list of configs.
         List<Component> components = createComponents("component");
 
         add(new ListView<Component>("components", components) {
@@ -37,11 +43,6 @@ public class Group extends Panel {
             }
         }.setReuseItems(true));
 
-    }
-
-    @Override
-    protected void onInitialize() {
-        super.onInitialize();
     }
 
     private List<Component> createComponents(String id) {
@@ -65,6 +66,16 @@ public class Group extends Panel {
     }
 
     protected WidgetFactory getFactory() {
+        if (factory==null) {
+            visitParents(MarkupContainer.class, new IVisitor<MarkupContainer, Object>() {
+                @Override public void component(MarkupContainer c, IVisit<Object> visit) {
+                    if (c instanceof HasWorkflow) {
+                        factory = ((HasWorkflow)c).getWorkflow().getWidgetFactory();
+                        visit.stop();
+                    }
+                }
+            });
+        }
         return factory;
     }
 }

@@ -11,8 +11,9 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
-public class StartingPoint extends WebPage {
+import javax.inject.Inject;
 
+public class StartingPoint extends WebPage {
 
     private static final JavaScriptResourceReference BOOTSTRAP_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap.min.js");
     private static final CssResourceReference BOOTSTRAP_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap.min.css");
@@ -22,13 +23,14 @@ public class StartingPoint extends WebPage {
     private static final CssResourceReference BOOTSTRAP_SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-multiselect.css");
     private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/typeahead.bundle.js");
     private static final CssResourceReference TYPEAHEAD_CSS = new CssResourceReference(Resource.class,"bootstrap-3.1.1-dist/css/typeahead.bootstrap.css");
+    private @Inject CommercialWorkflow commercial;
 
     public StartingPoint() {
         super(new PageParameters());
         add(new AjaxLink("start") {
             @Override
             public void onClick(AjaxRequestTarget target) {
-                setResponsePage(new WfPage(new CommercialWorkflow()));
+                setResponsePage(new WfPage(commercial));
             }
         });
 

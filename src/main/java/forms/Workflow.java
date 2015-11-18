@@ -23,6 +23,7 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
     private boolean ended = false;
 
     public Workflow() {
+        // TODO : assert this bean is of scope=prototype.
         register(this);
     }
 
@@ -35,7 +36,12 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
     }
 
     @Subscribe
-    public synchronized final void fire(@Nonnull WfEvent event) throws WorkflowException {
+    public void error(@Nonnull WfSubmitErrorEvent event) throws WorkflowException {
+
+    }
+
+    @Subscribe
+    public final void fire(@Nonnull WfEvent event) throws WorkflowException {
         try {
             WfState nextState = currentState.handleEvent(this, event);
             System.out.println("changing to state " + nextState);
@@ -84,7 +90,7 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
         return (W) this;
     }
 
-    protected <T extends Workflow> T  withStartingState(WfState state) {
+    public <T extends Workflow> T  withStartingState(WfState state) {
         this.currentState = state;
         return (T) this;
     }
@@ -115,4 +121,7 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
     public boolean isEnded() {
         return ended;
     }
+
+    public abstract WidgetFactory getWidgetFactory();
+
 }

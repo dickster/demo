@@ -13,11 +13,10 @@ import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
-import org.apache.wicket.util.visit.IVisit;
-import org.apache.wicket.util.visit.IVisitor;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -29,34 +28,27 @@ public class WorkflowForm extends Panel {
     private static final String INIT_FORM = "easy.layout.init(%s);";
     private static final JavaScriptResourceReference LAYOUT_JS = new JavaScriptResourceReference(Resource.class, "layout.js");
     private final Form form;
+    private final FeedbackPanel feedback;
 
     private @Inject Toolkit toolkit;
 
     private FormConfig formConfig;
     private CompoundPropertyModel<?> formModel;
-    private String expectedAcordVersion; // TODO : set valid default here...
 
     public WorkflowForm(@Nonnull String id, @Nonnull FormConfig config, @Nonnull CompoundPropertyModel model) {
         super(id);
         withConfig(config);
         WfUtil.setComponentName(this, config.getName());
         setOutputMarkupId(true);
-        add(form = new Form("form") {
-            @Override
-            protected void onInitialize() {
-                super.onInitialize();
-                form.visitChildren(Component.class, new IVisitor<Component, Object>() {
-                    @Override
-                    public void component(Component component, IVisit<Object> visit) {
-                        Object o = component.getDefaultModelObject();
-                        System.out.println(o);
-                    }
-                });
-            }
-        });
+        add(feedback = new FeedbackPanel("feedback"));
+        feedback.setOutputMarkupPlaceholderTag(true);
+        add(form = new Form("form"));
         form.setModel(model);
-        Object x = form.getModelObject();
         add(new Label("subheader", config.getTitle()));
+    }
+
+    public void handleError(WfSubmitErrorEvent event) {
+        event.getTarget().add(feedback);
     }
 
     public WorkflowForm withConfig(FormConfig config) {
@@ -64,18 +56,9 @@ public class WorkflowForm extends Panel {
         return this;
     }
 
-    public WorkflowForm withModel(CompoundPropertyModel<?> model) {
-        this.formModel = model;
-        return this;
-    }
-
     public WorkflowForm withFormValidator(IFormValidator validator) {
         form.add(validator);
         return this;
-    }
-
-    public CompoundPropertyModel<?> getFormModel() {
-        return (CompoundPropertyModel<?>) form.getModel();
     }
 
     @Override
@@ -101,12 +84,7 @@ public class WorkflowForm extends Panel {
         return toolkit.getTheme();
     }
 
-    public <T extends WorkflowForm> T supportingAcordVersion(String version) {
-        this.expectedAcordVersion = version;
-        return (T) this;
-    }
-
-       @Override
+    @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
         for (HeaderItem item:getTheme().getHeaderItems()) {

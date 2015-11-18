@@ -21,12 +21,6 @@ public class WidgetConfig implements Config {
     private List<String> mediatedAjaxEvents = Lists.newArrayList();
     private Boolean required;
 
-    public String getType() {
-        return type;
-    }
-
-
-
     public WidgetConfig(@Nonnull String property, @Nonnull String type) {
         this.property = property;
         this.name = property; // use property as name by default.
@@ -44,15 +38,18 @@ public class WidgetConfig implements Config {
     public String getProperty() {
         return property;
     }
-    //other config stuff...visible, css class,
 
     public String getWidgetType() {
         return type;
     }
 
-       public WidgetConfig name(String name) {
+    public WidgetConfig name(String name) {
         this.name = name;
         return this;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public WidgetConfig addAjaxEvent(String event) {
@@ -76,6 +73,10 @@ public class WidgetConfig implements Config {
     public WidgetConfig required(Boolean required) {
         this.required = required;
         return this;
+    }
+
+    public WidgetConfig required() {
+        return required(true);
     }
 
     @Override

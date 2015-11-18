@@ -8,6 +8,7 @@ import forms.config.FormCConfig;
 import forms.model.MappedModel;
 import org.apache.wicket.model.CompoundPropertyModel;
 
+import javax.inject.Inject;
 import java.util.Locale;
 
 public class CommercialWorkflow extends FormBasedWorkflow {
@@ -17,6 +18,7 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     private WfState stateAy = new StateAy();
     private WfState stateB = new StateB();
     private WfState stateC = new StateC();
+    private @Inject WidgetFactory widgetFactory;
 
     public CommercialWorkflow() {
         super();
@@ -38,6 +40,11 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     protected CompoundPropertyModel createModel() {
         // e.g. return new GrenvilleObject();
         return new MappedModel();
+    }
+
+
+    public WidgetFactory getWidgetFactory() {
+        return widgetFactory;
     }
 
     class StateA extends WfFormState {

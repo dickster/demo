@@ -15,6 +15,11 @@ public class SpringBeans {
         return new WorkflowManager();
     }
 
+    @Bean @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public CommercialWorkflow commercialWorkflow() {
+        return new CommercialWorkflow();
+    }
+
     @Bean @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public Toolkit toolkit() {
         return new DefaultToolkit();
@@ -25,7 +30,7 @@ public class SpringBeans {
         return new DefaultTheme();
     }
 
-    @Bean @Lazy @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+    @Bean @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public WidgetFactory widgetFactory() {
         return new DefaultWidgetFactory();
     }

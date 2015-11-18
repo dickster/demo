@@ -4,6 +4,7 @@ import forms.config.WidgetConfig;
 import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.FormComponent;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.validation.IValidator;
 
 import java.io.Serializable;
@@ -26,6 +27,13 @@ public abstract class WidgetFactory implements Serializable {
         setMetaData(component, config);
         addAjax(component, config);
         addValidators(component, config);
+        setLabel(component, config);
+    }
+
+    private void setLabel(Component component, WidgetConfig config) {
+        if (component instanceof FormComponent) {
+            ((FormComponent)component).setLabel(Model.of(config.getName()));
+        }
     }
 
     protected void setMetaData(Component component, WidgetConfig config) {

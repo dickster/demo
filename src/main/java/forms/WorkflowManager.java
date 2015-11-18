@@ -60,16 +60,12 @@ public class WorkflowManager {
         }
     }
 
-    public void post(@Nonnull Component component, @Nonnull WfEvent event) {
-        Workflow<?> workflow = getWorkflow(component);
-        workflow.post(event);
-    }
-
-    private @Nonnull Workflow<?> getWorkflow(@Nonnull Component component) {
+    protected final @Nonnull Workflow<?> getWorkflow(@Nonnull Component component) {
         HasWorkflow parent = component.findParent(HasWorkflow.class);
         if (parent==null) {
             throw new IllegalStateException("uh oh, can't find workflow....this is not valid state of affairs!!");
         }
         return parent.getWorkflow();
     }
+
 }

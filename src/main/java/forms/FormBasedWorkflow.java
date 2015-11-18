@@ -2,9 +2,12 @@ package forms;
 
 
 import com.google.common.base.Preconditions;
+import com.google.common.eventbus.Subscribe;
 import forms.config.FormConfig;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.cycle.RequestCycle;
+
+import javax.annotation.Nonnull;
 
 public abstract class FormBasedWorkflow<T> extends Workflow<T> {
 
@@ -20,6 +23,12 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T> {
     protected void validate(WfState nextState) {
         super.validate(nextState);
         Preconditions.checkArgument(nextState instanceof WfFormState, "workflow states must be of type " + WfFormState.class.getSimpleName());
+    }
+
+    @Subscribe
+    public void error(@Nonnull WfSubmitErrorEvent event) throws WorkflowException {
+        WorkflowForm form = event.getForm().findParent(WorkflowForm.class);
+        form.handleError(event);
     }
 
     @Override
@@ -48,7 +57,7 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T> {
         }
     }
 
-    protected WorkflowForm createForm(String id, FormConfig config) {
+    public WorkflowForm createForm(String id, FormConfig config) {
         return new WorkflowForm(id, config, getModel());
     }
 
