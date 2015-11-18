@@ -2,11 +2,14 @@ package forms;
 
 import demo.resources.Resource;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
@@ -24,16 +27,24 @@ public class StartingPoint extends WebPage {
     private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/typeahead.bundle.js");
     private static final CssResourceReference TYPEAHEAD_CSS = new CssResourceReference(Resource.class,"bootstrap-3.1.1-dist/css/typeahead.bootstrap.css");
     private @Inject WfFactory workflowFactory;
+    private @Inject Toolkit toolkit;
+
+    private boolean customWidgets = false;
 
     public StartingPoint() {
         super(new PageParameters());
-        add(new AjaxLink("start") {
-            @Override
-            public void onClick(AjaxRequestTarget target) {
-                FormBasedWorkflow wf = workflowFactory.create("commercial");
-                setResponsePage(new WfPage(wf));
-            }
-        });
+
+        add(new Form("form")
+                .add(new CheckBox("customWidgets", new PropertyModel(toolkit, "customWidgets")))
+                .add(new AjaxSubmitLink("start") {
+                    @Override
+                    protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                        super.onSubmit(target, form);
+                        FormBasedWorkflow wf = workflowFactory.create("commercial");
+                        setResponsePage(new WfPage(wf));
+                    }
+                }));
+
     }
 
     @Override

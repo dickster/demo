@@ -14,8 +14,15 @@ public class DefaultToolkit implements Toolkit {
     private /*@Inject*/ Object sessionUser;  //
     private @Inject Theme theme;
 
+    /*debug only*/ private boolean customWidgets;
+
     @Override
     public WidgetFactory createWidgetFactory(FormConfig formConfig) {
+        // example for debugging only.
+        if (!customWidgets) {
+            return createWidgetFactory();
+        }
+
         if ("FORM-A".equals(formConfig.getName())) {
             return new DefaultWidgetFactory() {
                 @Override
@@ -57,5 +64,13 @@ public class DefaultToolkit implements Toolkit {
         return theme;
     }
 
+
+public boolean isCustomWidgets() {
+    return customWidgets;
+}
+
+public void setCustomWidgets(boolean customWidgets) {
+    this.customWidgets = customWidgets;
+}
 
 }
