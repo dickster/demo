@@ -29,12 +29,12 @@ public class StartingPoint extends WebPage {
     private @Inject WfFactory workflowFactory;
     private @Inject Toolkit toolkit;
 
-    private boolean customWidgets = false;
 
     public StartingPoint() {
         super(new PageParameters());
 
         add(new Form("form")
+                .add(new CheckBox("customTheme", new PropertyModel(toolkit, "customTheme")))
                 .add(new CheckBox("customWidgets", new PropertyModel(toolkit, "customWidgets")))
                 .add(new AjaxSubmitLink("start") {
                     @Override

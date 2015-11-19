@@ -39,8 +39,18 @@
             <h1>Configurable Workflow</h1>
             <p>Demo to show a simple 3 form workflow.</p>
             <form wicket:id="form">
-                <span>Use Custom Widget Factory?</span>
-                <input wicket:id="customWidgets" type="checkbox"/>
+                <div class="checkbox">
+                    <label>
+                        <input wicket:id="customWidgets" type="checkbox">
+                        <span>Custom Widget Factory</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input wicket:id="customTheme" type="checkbox">
+                        <span>Custom Theme</span>
+                    </label>
+                </div>
                 <p style="padding-top:25px;">
                     <a wicket:id="start" class="btn btn-primary btn-lg" role="button">Start</a>
                 </p>

@@ -97,6 +97,11 @@ public class GroupConfig implements Config {
         return this;
     }
 
+    public GroupConfig appendCss(@Nonnull String css) {
+        this.css = this.css + " " + css;
+        return this;
+    }
+
     public Config getConfigWithName(@Nonnull String name) {
         List<Config> c = getConfigsDeep();
         for (Config config:c) {

@@ -7,7 +7,10 @@ public interface Toolkit {
 
 
     public boolean isCustomWidgets();
-    public void setCustomWidgets(boolean customWidgets);
+    public void setCustomWidgets(boolean custom);
+
+    public boolean isCustomTheme();
+    public void setCustomTheme(boolean custom);
 
     WidgetFactory createWidgetFactory(FormConfig formConfig);
     WidgetFactory createWidgetFactory();

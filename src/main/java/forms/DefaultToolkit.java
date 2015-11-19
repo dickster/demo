@@ -6,6 +6,8 @@ import forms.config.TextFieldConfig;
 import forms.config.WidgetConfig;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.FormComponent;
+import org.apache.wicket.validation.validator.StringValidator;
 
 import javax.inject.Inject;
 
@@ -15,6 +17,7 @@ public class DefaultToolkit implements Toolkit {
     private @Inject Theme theme;
 
     /*debug only*/ private boolean customWidgets;
+    private boolean customTheme = true;
 
     @Override
     public WidgetFactory createWidgetFactory(FormConfig formConfig) {
@@ -40,8 +43,11 @@ public class DefaultToolkit implements Toolkit {
                 @Override
                 public Component create(String id, WidgetConfig config) {
                     if (config instanceof TextFieldConfig) {
-                        config.withCss("");
-                        return new Label(id, config.getName() + " (ALL texts are labels. weee)");
+                        Component c = super.create(id, config);
+                        if (c instanceof FormComponent) {
+                            c.add(new StringValidator(1,5));
+                            ((FormComponent)c).setRequired(true);
+                        }
                     }
                     config.withCss("bg-success");
                     return super.create(id, config);
@@ -61,6 +67,9 @@ public class DefaultToolkit implements Toolkit {
 
     @Override
     public Theme getTheme() {
+        if (isCustomTheme()) {
+            return new CustomTheme();
+        }
         return theme;
     }
 
@@ -72,5 +81,15 @@ public boolean isCustomWidgets() {
 public void setCustomWidgets(boolean customWidgets) {
     this.customWidgets = customWidgets;
 }
+
+public boolean isCustomTheme() {
+    return customTheme;
+}
+
+public void setCustomTheme(boolean custom) {
+    this.customTheme = custom;
+}
+
+
 
 }
