@@ -13,4 +13,10 @@ body.derek form {
     width:500px;
 }
 
-
+.wf-progress {
+    top: 10px;
+    font-size: 20px;
+    color:#483d8b;
+    position: absolute;
+    right: 10px;
+}

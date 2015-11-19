@@ -5,8 +5,8 @@ import forms.config.FormAConfig;
 import forms.config.FormANewLayoutConfig;
 import forms.config.FormBConfig;
 import forms.config.FormCConfig;
-import forms.model.MappedModel;
-import org.apache.wicket.model.CompoundPropertyModel;
+import forms.model.GermanInsuranceObject;
+import forms.model.WfCompoundPropertyModel;
 
 import java.util.Locale;
 
@@ -34,12 +34,13 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     }
 
     @Override
-    protected CompoundPropertyModel createModel() {
-        // e.g. return new GrenvilleObject();
-        return new MappedModel();
+    protected WfCompoundPropertyModel createModel() {
+        return new WfCompoundPropertyModel(new GermanInsuranceObject());
     }
 
-
+    // ------------------------------------------------------------------------------
+    // states.  typically declared in another file?   whatevs.
+    // ------------------------------------------------------------------------------
     class StateA extends WfFormState {
         StateA() {
             super(new FormAConfig());

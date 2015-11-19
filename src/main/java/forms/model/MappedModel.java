@@ -5,9 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import forms.util.WfUtil;
 import org.apache.wicket.Component;
-import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.IWrapModel;
 
@@ -16,7 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MappedModel extends CompoundPropertyModel<Map<String, Object>> {
+
+public class MappedModel extends WfCompoundPropertyModel<Map<String, Object>> {
 
     public MappedModel(Map<String, Object> object) {
         super(object);
@@ -36,41 +35,34 @@ public class MappedModel extends CompoundPropertyModel<Map<String, Object>> {
 
     @Override
     public <C> IWrapModel<C> wrapOnInheritance(@Nonnull Component component) {
-        String property = WfUtil.getComponentName(component);
-        if (property==null) {
-            throw new IllegalStateException("component has no name stored in meta data " + component.getId());
-        } else {
-            return new MappedPropertyModel(this, property);
-        }
+        return new MappedPropertyModel(component);
     }
 
     public class MappedPropertyModel implements IWrapModel {
-        private MappedModel model;
-        private String propertyExpression;
 
-        public MappedPropertyModel(MappedModel model, String propertyExpression) {
-            this.model = model;
-            this.propertyExpression = propertyExpression;
+        private String property;
+
+        public MappedPropertyModel(Component c) {
+            this.property = propertyExpression(c);
         }
 
         @Override
         public Object getObject() {
-            return model.getObject(propertyExpression);
+            return MappedModel.this.getObject(property);
         }
 
         @Override
         public void setObject(Object object) {
-            model.setObject(propertyExpression, object);
+            MappedModel.this.setObject(property, object);
         }
 
         @Override
         public void detach() {
-
         }
 
         @Override
         public IModel<?> getWrappedModel() {
-            return model;
+            return MappedModel.this;
         }
     }
 

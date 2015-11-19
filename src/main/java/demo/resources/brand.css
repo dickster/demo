@@ -3,6 +3,13 @@
     padding-bottom:25px;
 }
 
+.wf-progress {
+bottom: 10px;
+font-size: 32px;
+position: absolute;
+right: 10px;
+}
+
 form.custom {
     width:500px;
 }

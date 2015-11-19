@@ -4,10 +4,9 @@ import forms.config.Config;
 import org.apache.wicket.Component;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class WfUtil {
-    public static @Nullable String getComponentName(@Nonnull Component component) {
+    public static String getComponentName(@Nonnull Component component) {
         return component.getMetaData(Config.NAME);
     }
 

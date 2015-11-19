@@ -2,6 +2,7 @@ package forms;
 
 import com.google.common.collect.Maps;
 import demo.wicketTest.WicketHeadlessTest;
+import forms.config.Config;
 import forms.model.MappedModel;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -23,10 +24,13 @@ public class MappedModelTest extends WicketHeadlessTest {
         form.add(abc);
         TextField<String> hw = new TextField<String>("hello.world");
         form.add(hw);
+        foo.setMetaData(Config.NAME, "foo");
+        abc.setMetaData(Config.NAME, "a.b.c");
+        hw.setMetaData(Config.NAME, "hello.world");
 
-        foo.getModel().setObject("foo");
-        abc.getModel().setObject("ABC");
-        hw.getModel().setObject("HELLO!");
+        foo.getModel().setObject("foo value");
+        abc.getModel().setObject("ABC value");
+        hw.getModel().setObject("HELLO value!");
 
         System.out.println(model);
     }

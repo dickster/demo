@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import forms.model.WfCompoundPropertyModel;
 import org.apache.wicket.model.CompoundPropertyModel;
 
 import javax.annotation.Nonnull;
@@ -44,6 +45,7 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
             WfState nextState = currentState.handleEvent(this, event);
             System.out.println("changing to state " + nextState);
             if (nextState!=null) {
+                Thread.sleep(1000);
                 changeState(nextState, event);
             }
         } catch (Throwable t) {
@@ -102,7 +104,7 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
         return context;
     }
 
-    protected abstract @Nonnull CompoundPropertyModel<T> createModel();
+    protected abstract @Nonnull WfCompoundPropertyModel<T> createModel();
 
     public CompoundPropertyModel<T> getModel() {
         if (model==null) {
