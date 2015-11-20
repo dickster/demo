@@ -35,25 +35,20 @@ public abstract class Workflow<T> extends EventBus implements Serializable {
     }
 
     @Subscribe
-    public void error(@Nonnull WfSubmitErrorEvent event) throws WorkflowException {
-
-    }
-
-    @Subscribe
-    public final void fire(@Nonnull WfEvent event) throws WorkflowException {
+    public final void fire(@Nonnull WfSubmitEvent event) throws WorkflowException {
         try {
-            WfState nextState = currentState.handleEvent(this, event);
-            System.out.println("changing to state " + nextState);
-            if (nextState!=null) {
-                Thread.sleep(1000);
-                changeState(nextState, event);
-            }
+            WfState nextState = (event instanceof WfSubmitErrorEvent) ?
+                    currentState.handleError(this, event) :
+                    currentState.handleEvent(this, event);
+System.out.println("changing to state " + nextState);
+Thread.sleep(1000);
+            changeState(nextState, event);
         } catch (Throwable t) {
             throw new WorkflowException("workflow failed when handling event", event, t);
         }
     }
 
-    protected void changeState(WfState nextState, WfEvent event) {
+    protected void changeState(WfState nextState, WfSubmitEvent event) {
         validate(nextState);
         currentState = nextState;
     }

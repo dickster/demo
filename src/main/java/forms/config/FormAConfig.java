@@ -6,8 +6,10 @@ import java.util.List;
 
 public class FormAConfig extends FormConfig {
 
+    public static final String FORM_CONFIG_A = "FORM-A";
+
     public FormAConfig() {
-        super("FORM-A");
+        super(FORM_CONFIG_A);
         withConfigs(configs());
         withTitle("Form A");
     }

@@ -31,10 +31,6 @@ public class WfEvent<T> implements Serializable /* ApplicationContextAware, Appl
         return obj;
     }
 
-    public void setBeanName(String name) {
-        this.name = name;
-    }
-
     public String getName() {
         return name;
     }

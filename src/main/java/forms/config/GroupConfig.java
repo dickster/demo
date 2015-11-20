@@ -83,6 +83,10 @@ public class GroupConfig implements Config {
         configs.add(config);
         return this;
     }
+    public GroupConfig withConfig(Config config, int index) {
+        configs.add(index, config);
+        return this;
+    }
     // ALIAS - maybe this short form is better?
     public GroupConfig with(Config config) {
         return withConfig(config);

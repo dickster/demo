@@ -5,9 +5,11 @@ import forms.config.FormAConfig;
 import forms.config.FormANewLayoutConfig;
 import forms.config.FormBConfig;
 import forms.config.FormCConfig;
+import forms.config.FormErrorConfig;
 import forms.model.GermanInsuranceObject;
 import forms.model.WfCompoundPropertyModel;
 
+import javax.annotation.Nonnull;
 import java.util.Locale;
 
 public class CommercialWorkflow extends FormBasedWorkflow {
@@ -17,6 +19,7 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     private WfState stateAy = new StateAy();
     private WfState stateB = new StateB();
     private WfState stateC = new StateC();
+    private WfState stateError = new StateError();
 
     public CommercialWorkflow() {
         super();
@@ -84,12 +87,18 @@ public class CommercialWorkflow extends FormBasedWorkflow {
             }
             return this;
         }
+
+        @Nonnull @Override
+        public WfState handleError(Workflow workflow, WfSubmitEvent event) {
+            return stateError;
+        }
     }
 
     class StateB extends WfFormState {
         StateB() {
             super(new FormBConfig());
         }
+
         @Override
         public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
             if ("next".equals(event.getName())) {
@@ -97,6 +106,7 @@ public class CommercialWorkflow extends FormBasedWorkflow {
             }
             return this;
         }
+
     }
 
     class StateC extends WfFormState {
@@ -107,6 +117,20 @@ public class CommercialWorkflow extends FormBasedWorkflow {
         public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
             if ("ok".equals(event.getName())) {
                 workflow.end();
+            }
+            return this;
+        }
+    }
+
+    class StateError extends WfFormState {
+        public StateError() {
+            super(new FormErrorConfig());
+        }
+
+        @Override
+        public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+            if ("ok".equals(event.getName())) {
+                return stateA;
             }
             return this;
         }

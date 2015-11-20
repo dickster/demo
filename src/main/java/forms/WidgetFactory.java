@@ -48,6 +48,9 @@ public abstract class WidgetFactory implements Serializable {
             for (IValidator<?> validator:config.getValidators()) {
                 fc.add(validator);
             }
+            if (config.isRequired()) {
+                fc.setRequired(true);
+            }
         }
     }
 

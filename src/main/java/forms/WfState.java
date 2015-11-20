@@ -1,6 +1,7 @@
 package forms;
 
 
+import javax.annotation.Nonnull;
 import java.io.Serializable;
 
 public class WfState implements Serializable {
@@ -18,7 +19,12 @@ public class WfState implements Serializable {
         return name==null ? getClass().getSimpleName() : name;
     }
 
-    public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+
+    public @Nonnull WfState handleError(Workflow workflow, WfSubmitEvent event) {
+        return this;
+    }
+
+    public @Nonnull WfState handleEvent(Workflow<?> workflow, WfEvent event) {
         // typically something like...
         // switch ( Event.valueOf(event.getName()) ) {
         //    case SUBMIT : doThis();

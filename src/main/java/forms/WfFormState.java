@@ -12,11 +12,6 @@ public class WfFormState extends WfState {
         this.formConfig = formConfig;
     }
 
-    @Override
-    public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
-        return super.handleEvent(workflow, event);
-    }
-
     public @Nonnull FormConfig getFormConfig() {
         return formConfig;
     }

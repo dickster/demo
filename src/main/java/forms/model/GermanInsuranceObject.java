@@ -29,8 +29,8 @@ public class GermanInsuranceObject implements Serializable {
     }
 
     class Insured implements Serializable {
-        public String address, email, age, occupation;
-        public Dwelling dwelling;
+        public String address, email, age, occupation, cc;
+        public Dwelling dwelling = new Dwelling();
 
         @Override
         public String toString() {
@@ -39,13 +39,15 @@ public class GermanInsuranceObject implements Serializable {
                     ", email='" + email + '\'' +
                     ", age='" + age + '\'' +
                     ", occupation='" + occupation + '\'' +
+                    ", cc='" + cc + '\'' +
                     ", dwelling=" + dwelling +
                     '}';
         }
     }
 
     class Dwelling implements Serializable {
-        String pool, roofType;
+        public String pool, roofType = "";
+
 
         @Override
         public String toString() {

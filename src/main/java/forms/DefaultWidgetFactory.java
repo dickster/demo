@@ -72,12 +72,12 @@ public class DefaultWidgetFactory extends WidgetFactory {
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                 //refactor this into this class...don't need to post anywhere else.
-                post(form, new WfSubmitEvent(config.getName(), target, this));
+                post(form, new WfSubmitEvent(target, this, form));
             }
             @Override
             protected void onError(AjaxRequestTarget target, Form<?> form) {
                 //refactor this into this class...don't need to post anywhere else.
-                post(form, new WfSubmitErrorEvent(target, form));
+                post(form, new WfSubmitErrorEvent(target, this, form));
             }
         };
     }

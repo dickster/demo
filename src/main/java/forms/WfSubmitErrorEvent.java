@@ -1,23 +1,14 @@
 package forms;
 
+import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.form.Form;
 
-public class WfSubmitErrorEvent {
+public class WfSubmitErrorEvent extends WfSubmitEvent {
 
-    private AjaxRequestTarget target;
-    private Form form;
-
-    public WfSubmitErrorEvent(AjaxRequestTarget target, Form form) {
-        this.target = target;
-        this.form = form;
+    // marker class...just used to distinguish error from success.
+    public WfSubmitErrorEvent(AjaxRequestTarget target, Component component, Form form) {
+        super(target, component, form);
     }
 
-    public AjaxRequestTarget getTarget() {
-        return target;
-    }
-
-    public Form getForm() {
-        return form;
-    }
 }

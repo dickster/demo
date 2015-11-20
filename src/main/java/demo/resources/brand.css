@@ -4,14 +4,19 @@
 }
 
 .wf-progress {
-bottom: 10px;
-font-size: 32px;
-position: absolute;
-right: 10px;
+    bottom: 10px;
+    font-size: 32px;
+    position: absolute;
+    right: 10px;
 }
 
 form.custom {
     width:500px;
+}
+
+.error-message {
+    padding:50px;
+    font-size:30px;
 }
 
 

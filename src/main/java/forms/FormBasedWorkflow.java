@@ -2,12 +2,9 @@ package forms;
 
 
 import com.google.common.base.Preconditions;
-import com.google.common.eventbus.Subscribe;
 import forms.config.FormConfig;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.cycle.RequestCycle;
-
-import javax.annotation.Nonnull;
 
 public abstract class FormBasedWorkflow<T> extends Workflow<T> {
 
@@ -25,22 +22,25 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T> {
         Preconditions.checkArgument(nextState instanceof WfFormState, "workflow states must be of type " + WfFormState.class.getSimpleName());
     }
 
-    @Subscribe
-    public void error(@Nonnull WfSubmitErrorEvent event) throws WorkflowException {
+    @Override
+    protected void changeState(WfState nextState, WfSubmitEvent event) {
+        if (event instanceof WfSubmitErrorEvent && currentState.equals(nextState)) {
+            // do you want to stay on this page? we'll notify form so you can add
+            //  to the ajax target.
+            updateErrorViaAjax((WfSubmitErrorEvent) event);
+            return;
+        }
+        super.changeState(nextState, event);
+        updateFormViaAjax(event);
+    }
+
+    private void updateErrorViaAjax(WfSubmitErrorEvent event) {
         WorkflowForm form = event.getForm().findParent(WorkflowForm.class);
         form.handleError(event);
     }
 
-    @Override
-    protected void changeState(WfState nextState, WfEvent event) {
-        super.changeState(nextState, event);
-        if (event instanceof WfAjaxEvent) {
-            updateFormViaAjax((WfAjaxEvent)event);
-        }
-    }
-
-    protected void updateFormViaAjax(WfAjaxEvent event) {
-        WorkflowForm form = event.getComponent().findParent(WorkflowForm.class);
+    protected void updateFormViaAjax(WfSubmitEvent event) {
+        WorkflowForm form = event.getForm().findParent(WorkflowForm.class);
         if (form!=null) {
             WorkflowForm newForm = createForm(form.getId(), getCurrentFormConfig());
             form.replaceWith(newForm);

@@ -19,7 +19,7 @@ public class WidgetConfig implements Config {
     private String css = "form-control";
     private Map options = Maps.newHashMap();  // a place to store custom options.
     private List<String> mediatedAjaxEvents = Lists.newArrayList();
-    private Boolean required;
+    private boolean required;
 
     public WidgetConfig(@Nonnull String property, @Nonnull String type) {
         this.property = property;
@@ -66,7 +66,7 @@ public class WidgetConfig implements Config {
         return ImmutableList.copyOf(validators);
     }
 
-    public Boolean getRequired() {
+    public boolean isRequired() {
         return required;
     }
 
