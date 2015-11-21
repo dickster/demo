@@ -2,7 +2,6 @@ package forms;
 
 import forms.config.Config;
 import forms.config.GroupConfig;
-import forms.util.WfUtil;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -20,7 +19,6 @@ public class Group extends Panel {
         super(id);
         this.config = config;
         this.factory = toolkit.createWidgetFactory(config);
-        WfUtil.setComponentName(this, config.getName());
         setOutputMarkupId(false);
         setOutputMarkupId(!config.getRenderBodyOnly());
         setRenderBodyOnly(config.getRenderBodyOnly());

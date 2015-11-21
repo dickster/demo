@@ -2,6 +2,7 @@ package forms.widgets;
 
 import forms.Group;
 import forms.Toolkit;
+import forms.WidgetFactory;
 import forms.config.DialogConfig;
 import forms.config.DialogSubmitButtonConfig;
 import org.apache.wicket.Component;
@@ -17,8 +18,7 @@ import javax.inject.Inject;
 public class Dialog extends Panel {
 
     private final DialogConfig config;
-    private @Inject
-    Toolkit toolkit;
+    private @Inject Toolkit toolkit;
 
     public Dialog(String id, DialogConfig config) {
         super(id);
@@ -48,6 +48,7 @@ public class Dialog extends Panel {
     }
 
     protected Component createButton(String id, DialogSubmitButtonConfig config) {
-        return config.create(id);
+        WidgetFactory factory = toolkit.createWidgetFactory(this.config);
+        return factory.create(id, config);
     }
 }

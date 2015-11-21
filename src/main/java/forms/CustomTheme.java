@@ -52,12 +52,12 @@ public class CustomTheme extends DefaultTheme {
 
 //        // what about apply?() methods for each specific type of component?
 //        component.add(new AttributeAppender("class", "motif"));
-        if (component instanceof HasJsonOptions) {
-            HasJsonOptions widget = (HasJsonOptions) component;
-            widget.getOptions()
-                        .withOption("color", "blue")
-                        .withOption("spacing", "large");
-        }
+//        if (component instanceof HasJsonOptions) {
+//            HasJsonOptions widget = (HasJsonOptions) component;
+//            widget.getOptions()
+//                        .withOption("color", "blue")
+//                        .withOption("spacing", "large");
+//        }
         // typically add javascript to do layout, styling, adding classes, add attributes to widgets,
         //   add listeners to facilitate overlays/dialogs/menus...whatever
     }

@@ -1,16 +1,19 @@
 package forms;
 
-import forms.config.WidgetConfig;
+import com.google.common.collect.Maps;
 import forms.config.Config;
-import forms.util.WfUtil;
+import forms.config.WidgetConfig;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.validation.IValidator;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public abstract class WidgetFactory implements Serializable {
+
+    private Map<String, String> pluginNames = Maps.newHashMap();
 
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
@@ -26,26 +29,25 @@ public abstract class WidgetFactory implements Serializable {
 
     protected void postCreate(final Component component, Config config) {
         setMetaData(component, config);
-        addAjax(component, config);
-        addValidators(component, config);
-        setLabel(component, config);
-    }
-
-    private void setLabel(Component component, Config config) {
         if (component instanceof FormComponent) {
-            ((FormComponent)component).setLabel(Model.of(config.getName()));
+            FormComponent fc = (FormComponent) component;
+            addValidators(fc, config);
+            addAjax(fc, config);
+            setLabel(fc, config);
         }
     }
 
+    protected void setLabel(FormComponent component, Config config) {
+            component.setLabel(Model.of(config.getName()));
+    }
+
     protected void setMetaData(Component component, Config config) {
-        String name = config.getName()==null ? config.getProperty() : config.getName();
-        WfUtil.setComponentName(component, name);
+        component.setMetaData(Config.KEY, config);
         component.setOutputMarkupId(true);
     }
 
-    private void addValidators(Component component, Config config) {
-        if (component instanceof FormComponent && config instanceof WidgetConfig) {
-            FormComponent fc = (FormComponent) component;
+    private void addValidators(FormComponent fc, Config config) {
+        if (config instanceof WidgetConfig) {
             WidgetConfig c = (WidgetConfig) config;
             // yuck.   fix this shit!  can you add validators to a panel?
             for (IValidator<?> validator:c.getValidators()) {
@@ -57,7 +59,7 @@ public abstract class WidgetFactory implements Serializable {
         }
     }
 
-    private void addAjax(Component component, Config config) {
+    private void addAjax(FormComponent component, Config config) {
         //        Preconditions.checkArgument(component instanceof FormComponent);
         // if this is panel, how to add behaviour to underlying text field?
 //        final String event = "onchange";//TODO: config.getMediatedEvent();

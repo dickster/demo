@@ -34,10 +34,10 @@ public class FormAConfig extends FormConfig {
                         new DialogSubmitButtonConfig("cancel"),
                         new DialogSubmitButtonConfig("save") )
                  .withTitle("Hello!")
-                 .withConfigs(new LabelConfig("First Name"),
-                           new TextFieldConfig("name.first"),
-                           new LabelConfig("Last Name"),
-                           new TextFieldConfig("name.last"))
+                 .withConfigs(new LabelConfig("First Name").name("fnlbl"),
+                           new TextFieldConfig("name.first").name("fname"),
+                           new LabelConfig("Last Name").name("lnlbl"),
+                           new TextFieldConfig("name.last").name("lname"))
 
         );
 //        dialog.with(new AjaxButtonConfig("Ok"));

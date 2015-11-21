@@ -12,11 +12,11 @@ public class FormCConfig extends FormConfig {
     }
 
     private void  addConfigs() {
+        with(new SelectPickerConfig("insured.dwelling.roofType")
+                .withChoices(Lists.newArrayList("shingles", "metal", "tile", "slate")));
         with(new LabelConfig("do you have a pool"));
         with(new TextFieldConfig("insured.dwelling.pool"));
         with(new LabelConfig("what kind of roof do you have?"));
-        with(new SelectPickerConfig("insured.dwelling.roofType")
-                .withChoices(Lists.newArrayList("shingles", "metal", "tile", "slate")));
         with(new ButtonConfig("ok"));
     }
 }

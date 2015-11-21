@@ -9,23 +9,31 @@ import java.util.Map;
 
 public abstract class AbstractConfig implements Config {
 
+    private static final String PLUGIN_NA = "n/a";
+
     private final String CLASS="class";
 
+    // need annotations to figure out which options are json worthy.
+    private final String pluginName;
     private String property;
     private Map<String, String> attributes = Maps.newHashMap();
     private String name;
     private String type;
     private Map options = Maps.newHashMap();  // a place to store custom options.
 
-    public AbstractConfig(@Nonnull String property, @Nonnull String type) {
+    public AbstractConfig(@Nonnull String property, @Nonnull String type, String pluginName) {
         this.property = property;
         this.name = property; // use property as name by default.
         this.type = type;
-        withCss("form-control");
+        this.pluginName = pluginName;
+    }
+
+    public AbstractConfig(@Nonnull String property, @Nonnull String type) {
+        this(property, type, PLUGIN_NA);
     }
 
     public AbstractConfig(@Nonnull String property, WidgetTypeEnum type) {
-        this(property, type.toString());
+        this(property, type.toString(), type.getPluginName());
     }
 
     public String getName() {
@@ -82,6 +90,15 @@ public abstract class AbstractConfig implements Config {
     @Override
     public Map<String, String> getAttributes() {
         return attributes;
+    }
+
+    @Override
+    public Map<String, Object> getOptions() {
+        return options;
+    }
+
+    public String getPluginName() {
+        return pluginName;
     }
 }
 

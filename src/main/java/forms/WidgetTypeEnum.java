@@ -13,4 +13,9 @@ public enum WidgetTypeEnum {
     GROUP,
     SELECT, DIALOG_BUTTON, DIALOG, CONTAINER, DIALOG_SUBMIT_BUTTON;
 
+    // TODO : add plugin name parameter to constructors.
+    public String getPluginName() {
+        return this.name().toLowerCase();
+    }
+
 }

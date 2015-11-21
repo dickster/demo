@@ -3,8 +3,8 @@ package forms;
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import demo.resources.Resource;
+import forms.config.Config;
 import forms.config.FormConfig;
-import forms.util.WfUtil;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
@@ -35,7 +35,6 @@ public class WorkflowForm extends Panel {
     public WorkflowForm(@Nonnull String id, @Nonnull FormConfig config, @Nonnull CompoundPropertyModel model) {
         super(id);
         withConfig(config);
-        WfUtil.setComponentName(this, config.getName());
         setOutputMarkupId(true);
         add(feedback = new FeedbackPanel("feedback"));
         feedback.setOutputMarkupPlaceholderTag(true);
@@ -71,11 +70,6 @@ public class WorkflowForm extends Panel {
         getTheme().apply(form);
     }
 
-//    private JsonOptions getOptions(Component widget) {
-//        JsonOptions options = ((HasJsonOptions) widget).getOptions();
-//        return options;
-//    }
-
     private Theme getTheme() {
         return toolkit.getTheme();
     }
@@ -87,19 +81,15 @@ public class WorkflowForm extends Panel {
             response.render(item);
         }
         response.render(JavaScriptReferenceHeaderItem.forReference(LAYOUT_JS));
-        String optionsJson = new Gson().toJson(getFormJsonOptions());
+        String optionsJson = new Gson().toJson(new FormData(this));
         response.render(OnDomReadyHeaderItem.forScript(String.format(INIT_FORM, optionsJson)));
-    }
-
-    private FormJsonOptions getFormJsonOptions() {
-        return new FormJsonOptions(this);
-    }
-
-    public FormConfig getFormConfig() {
-        return formConfig;
     }
 
     public Form getForm() {
         return form;
+    }
+
+    public FormConfig getFormConfig() {
+        return formConfig;
     }
 }

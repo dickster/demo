@@ -4,7 +4,9 @@ import forms.config.DialogSubmitButtonConfig;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.ComponentTag;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.model.Model;
 
 public class DialogSubmitButton extends AjaxSubmitLink {
 
@@ -12,6 +14,7 @@ public class DialogSubmitButton extends AjaxSubmitLink {
 
     public DialogSubmitButton(String id, DialogSubmitButtonConfig config) {
         super(id);
+        add(new Label("label", Model.of(config.getName())));
         this.config = config;
     }
 

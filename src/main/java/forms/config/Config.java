@@ -8,18 +8,17 @@ import java.util.Map;
 
 public interface Config extends Serializable {
 
-    public MetaDataKey<String> NAME = new MetaDataKey<String>() {};
-    public MetaDataKey<String> ATTRIBUTES = new MetaDataKey<String>() {};
-    public MetaDataKey<String> OPTIONS = new MetaDataKey<String>() {};
+    //public static MetaDataKey<String> NAME = new MetaDataKey<String>() {};
+    public static MetaDataKey<Config> KEY = new MetaDataKey<Config>() {};
+    //public static MetaDataKey<String> PROPERTY = new MetaDataKey<String>() {};
 
-    public String getName();
-
-    public String getType();
-
-    public String getProperty();
-
-    public Map<String, String> getAttributes();
-
-    public Component create(String id);
+    // TODO : refactor this - rename it to getId(); not to be confused with wicketId.
+    String getName();
+    String getType();
+    String getProperty();
+    Map<String, String> getAttributes();
+    Map<String, Object> getOptions();
+    Component create(String id);
+    String getPluginName();
 
 }
