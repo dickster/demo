@@ -1,10 +1,11 @@
 package forms.widgets;
 
+import forms.config.TextFieldConfig;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.form.TextField;
 
 public class TextField2 extends TextField {
-    public TextField2(String id) {
+    public TextField2(String id, TextFieldConfig config) {
         super(id);
     }
 

@@ -1,27 +1,25 @@
 package forms;
 
-import com.google.common.collect.Lists;
 import forms.config.Config;
 import forms.config.GroupConfig;
-import forms.config.WidgetConfig;
 import forms.util.WfUtil;
-import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import javax.annotation.Nonnull;
-import java.util.List;
+import javax.inject.Inject;
 
 public class Group extends Panel {
 
+    private final WidgetFactory factory;
     private GroupConfig config;
-    private WidgetFactory factory;
+    private @Inject Toolkit toolkit; // change this to get factory from workflow.
 
-    public Group(String id, @Nonnull GroupConfig config, @Nonnull WidgetFactory factory) {
+    public Group(String id, @Nonnull GroupConfig config) {
         super(id);
         this.config = config;
-        this.factory = factory;
+        this.factory = toolkit.createWidgetFactory(config);
         WfUtil.setComponentName(this, config.getName());
         setOutputMarkupId(false);
         setOutputMarkupId(!config.getRenderBodyOnly());
@@ -31,37 +29,16 @@ public class Group extends Panel {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        // TODO : refactor this to iterate over list of configs.
-        List<Component> components = createComponents("component");
-
-        add(new ListView<Component>("components", components) {
+        add(new ListView<Config>("div", config.getConfigs()) {
             @Override
-            protected void populateItem(ListItem<Component> item) {
-                item.add(item.getModelObject());
+            protected void populateItem(ListItem<Config> item) {
+                System.out.println(config.getName() + "[" +item.getIndex() + "] - " + item.getModelObject().getName());
+                item.add(factory.createWidget("el", item.getModelObject()));
                 item.setRenderBodyOnly(true);
             }
         }.setReuseItems(true));
 
     }
 
-    private List<Component> createComponents(String id) {
-        List<Component> result = Lists.newArrayList();
-        for (Config c:config.getConfigs()) {
-            if (c instanceof WidgetConfig) {
-                result.add(factory.createWidget(id, (WidgetConfig) c));
-            }
-            else if (c instanceof GroupConfig) {
-                result.add(newGroup(id, (GroupConfig) c));
-            }
-        }
-        return result;
-    }
-
-    // override these if you really want custom behaviors (different widget factory?)
-    // 99% of the time these will be fine.
-
-    protected Group newGroup(String id, GroupConfig config) {
-        return new Group(id, config, factory);
-    }
 
 }

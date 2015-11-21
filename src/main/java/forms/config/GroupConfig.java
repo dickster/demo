@@ -2,41 +2,40 @@ package forms.config;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import forms.Group;
 import forms.WidgetTypeEnum;
+import org.apache.wicket.Component;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class GroupConfig implements Config {
+public class GroupConfig extends AbstractConfig {
 
     private String title;
-    private String name;
     private Boolean renderBodyOnly = false;
-    private String css = "form_group";
-
     private List<Config> configs = Lists.newArrayList();
 
+
     public GroupConfig(@Nonnull String name) {
-        this.name = name;
-        withTitle(name); // use name as default title.
+        super(name, WidgetTypeEnum.CONTAINER);
     }
 
     public List<Config> getConfigs() {
         return ImmutableList.copyOf(configs);
     }
 
-    protected List<WidgetConfig> getWidgetConfigs() {
-        List<WidgetConfig> result = Lists.newArrayList();
-        for (Config config:configs) {
-            if (config instanceof WidgetConfig) {
-                result.add((WidgetConfig)config);
-            }
-            else if (config instanceof GroupConfig) {
-                result.addAll(((GroupConfig)config).getWidgetConfigs());
-            }
-        }
-        return result;
-    }
+//    protected List<WidgetConfig> getWidgetConfigs() {
+//        List<WidgetConfig> result = Lists.newArrayList();
+//        for (Config config:configs) {
+//            if (config instanceof WidgetConfig) {
+//                result.add((WidgetConfig)config);
+//            }
+//            else if (config instanceof GroupConfig) {
+//                result.addAll(((GroupConfig)config).getWidgetConfigs());
+//            }
+//        }
+//        return result;
+//    }
 
     public String getTitle() {
         return title;
@@ -47,18 +46,9 @@ public class GroupConfig implements Config {
         return this;
     }
 
-    public String getName() {
-        return name;
-    }
-
     @Override
     public final String getType() {
         return WidgetTypeEnum.GROUP.toString();
-    }
-
-    public GroupConfig withName(String name) {
-        this.name = name;
-        return this;
     }
 
     public Boolean getRenderBodyOnly() {
@@ -92,18 +82,15 @@ public class GroupConfig implements Config {
         return withConfig(config);
     }
 
-    public String getCss() {
-        return css;
+
+    @Override
+    public String getProperty() {
+        return getName();
     }
 
-    public GroupConfig withCss(String css) {
-        this.css = css;
-        return this;
-    }
-
-    public GroupConfig appendCss(@Nonnull String css) {
-        this.css = this.css + " " + css;
-        return this;
+    @Override
+    public Component create(String id) {
+        return new Group(id, this);  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public Config getConfigWithName(@Nonnull String name) {

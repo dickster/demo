@@ -1,6 +1,8 @@
 package forms.config;
 
 import forms.WidgetTypeEnum;
+import org.apache.wicket.Component;
+import org.apache.wicket.markup.html.basic.Label;
 
 public class LabelConfig extends WidgetConfig {
 
@@ -35,4 +37,10 @@ public class LabelConfig extends WidgetConfig {
     public String getAssociatedWidget() {
         return associatedWidget;
     }
+
+    @Override
+    public Component create(String id) {
+        return new Label(id, getName());
+    }
+
 }

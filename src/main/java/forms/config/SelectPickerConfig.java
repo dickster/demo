@@ -1,6 +1,8 @@
 package forms.config;
 
 import forms.WidgetTypeEnum;
+import forms.widgets.SelectPicker;
+import org.apache.wicket.Component;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -21,4 +23,10 @@ public class SelectPickerConfig extends WidgetConfig {
         this.choices = choices;
         return this;
     }
+
+    @Override
+    public Component create(String id) {
+        return new SelectPicker(id, this);
+    }
+
 }

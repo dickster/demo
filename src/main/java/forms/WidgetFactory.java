@@ -1,6 +1,7 @@
 package forms;
 
 import forms.config.WidgetConfig;
+import forms.config.Config;
 import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.FormComponent;
@@ -14,47 +15,49 @@ public abstract class WidgetFactory implements Serializable {
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
 
-    public abstract Component create(String id, WidgetConfig config);
+    public abstract Component create(String id, Config config);
 
-    public Component createWidget(String id, WidgetConfig config) {
+    public Component createWidget(String id, Config config) {
         preCreate(config);
         Component component = create(id, config);
         postCreate(component, config);
         return component;
     }
 
-    protected void postCreate(final Component component, WidgetConfig config) {
+    protected void postCreate(final Component component, Config config) {
         setMetaData(component, config);
         addAjax(component, config);
         addValidators(component, config);
         setLabel(component, config);
     }
 
-    private void setLabel(Component component, WidgetConfig config) {
+    private void setLabel(Component component, Config config) {
         if (component instanceof FormComponent) {
             ((FormComponent)component).setLabel(Model.of(config.getName()));
         }
     }
 
-    protected void setMetaData(Component component, WidgetConfig config) {
+    protected void setMetaData(Component component, Config config) {
         String name = config.getName()==null ? config.getProperty() : config.getName();
         WfUtil.setComponentName(component, name);
         component.setOutputMarkupId(true);
     }
 
-    private void addValidators(Component component, WidgetConfig config) {
-        if (component instanceof FormComponent) {
+    private void addValidators(Component component, Config config) {
+        if (component instanceof FormComponent && config instanceof WidgetConfig) {
             FormComponent fc = (FormComponent) component;
-            for (IValidator<?> validator:config.getValidators()) {
+            WidgetConfig c = (WidgetConfig) config;
+            // yuck.   fix this shit!  can you add validators to a panel?
+            for (IValidator<?> validator:c.getValidators()) {
                 fc.add(validator);
             }
-            if (config.isRequired()) {
+            if (c.isRequired()) {
                 fc.setRequired(true);
             }
         }
     }
 
-    private void addAjax(Component component, WidgetConfig config) {
+    private void addAjax(Component component, Config config) {
         //        Preconditions.checkArgument(component instanceof FormComponent);
         // if this is panel, how to add behaviour to underlying text field?
 //        final String event = "onchange";//TODO: config.getMediatedEvent();
@@ -65,7 +68,7 @@ public abstract class WidgetFactory implements Serializable {
 //        }
     }
 
-    protected void preCreate(WidgetConfig config) {
+    protected void preCreate(Config config) {
         // do nothing by default.  you might want to filter config options based on user/settings.
         //if (config.getName().equals("someSpecialEmail")) { config.addAjaxEvent("onchange"); config.addValidator(EmailAddressValidator.getInstance()); }
     }

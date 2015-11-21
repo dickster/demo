@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import demo.resources.Resource;
 import forms.config.FormConfig;
 import forms.util.WfUtil;
-import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
@@ -24,7 +23,6 @@ import javax.inject.Inject;
 public class WorkflowForm extends Panel {
 
     // this calls layout and initializes all widgets.
-    // TODO : use gridstack to handle layouts?
     private static final String INIT_FORM = "easy.layout.init(%s);";
     private static final JavaScriptResourceReference LAYOUT_JS = new JavaScriptResourceReference(Resource.class, "layout.js");
     private final Form form;
@@ -33,7 +31,6 @@ public class WorkflowForm extends Panel {
     private @Inject Toolkit toolkit;
 
     private FormConfig formConfig;
-    private CompoundPropertyModel<?> formModel;
 
     public WorkflowForm(@Nonnull String id, @Nonnull FormConfig config, @Nonnull CompoundPropertyModel model) {
         super(id);
@@ -69,20 +66,15 @@ public class WorkflowForm extends Panel {
 
         form.setOutputMarkupId(true);
 
-        form.add(new Group("content", formConfig, getWidgetFactory()));
+        form.add(new Group("content", formConfig));
 
         getTheme().apply(form);
     }
 
-    private WidgetFactory getWidgetFactory() {
-        return toolkit.createWidgetFactory(getFormConfig());
-    }
-
-
-    private JsonOptions getOptions(Component widget) {
-        JsonOptions options = ((HasJsonOptions) widget).getOptions();
-        return options;
-    }
+//    private JsonOptions getOptions(Component widget) {
+//        JsonOptions options = ((HasJsonOptions) widget).getOptions();
+//        return options;
+//    }
 
     private Theme getTheme() {
         return toolkit.getTheme();
@@ -107,5 +99,7 @@ public class WorkflowForm extends Panel {
         return formConfig;
     }
 
-
+    public Form getForm() {
+        return form;
+    }
 }

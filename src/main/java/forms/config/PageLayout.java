@@ -18,6 +18,9 @@ import java.util.Map;
 //      which have rows
 //          which have columns
 //              which have components in them.
+
+
+// NOT USED ANYMORE.  DELETE FROM TESTS!
 public class PageLayout implements Serializable {
 
     private Map<String, String> nameToId = Maps.newHashMap();
@@ -33,7 +36,7 @@ public class PageLayout implements Serializable {
                 String name = WfUtil.getComponentName(widget);
                 if (name != null) {
                     addNameToId(name, widget.getMarkupId());
-                    addNameToCss(name, formConfig.getConfigWithName(name).getCss());
+//                    addNameToCss(name, formConfig.getConfigWithName(name).getCss());
                 }
             }
         });

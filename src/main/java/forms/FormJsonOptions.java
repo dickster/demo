@@ -35,14 +35,15 @@ public class FormJsonOptions {
     public void init(WorkflowForm form) {
         final FormConfig formConfig = form.getFormConfig();
 
-
         form.visitChildren(Component.class, new IVisitor<Component, Void>() {
             @Override
             public void component(Component widget, IVisit visit) {
                 String name = WfUtil.getComponentName(widget);
                 if (name != null) {
-                    addNameToId(name, widget.getMarkupId());
-                    addNameToCss(name, formConfig.getConfigWithName(name).getCss());
+                    // TODO : fix this.
+                    //addNameToId(name, widget.getMarkupId());
+                    // addAttributes(name, attributes);
+//                    addNameToCss(name, formConfig.getConfigWithName(name).getCss());
                 }
             }
         });

@@ -1,7 +1,7 @@
 package forms;
 
 
-import forms.config.FormConfig;
+import forms.config.GroupConfig;
 
 public interface Toolkit {
 
@@ -12,7 +12,7 @@ public interface Toolkit {
     public boolean isCustomTheme();
     public void setCustomTheme(boolean custom);
 
-    WidgetFactory createWidgetFactory(FormConfig formConfig);
+    WidgetFactory createWidgetFactory(GroupConfig formConfig);
     WidgetFactory createWidgetFactory();
     Theme getTheme();
 

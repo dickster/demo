@@ -1,5 +1,6 @@
 package forms.widgets;
 
+import forms.config.Config;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -19,6 +20,10 @@ public class IndicatingAjaxSubmitLink extends AjaxButton implements IAjaxIndicat
 
     public IndicatingAjaxSubmitLink(String id, String label) {
         super(id, Model.of(label));
+    }
+
+    public IndicatingAjaxSubmitLink(String id, Config config) {
+        super(id, Model.of(config.getName()));
     }
 
     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {

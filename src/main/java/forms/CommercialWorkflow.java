@@ -54,8 +54,8 @@ public class CommercialWorkflow extends FormBasedWorkflow {
             if ("next".equals(event.getName())) {
                 return stateAx;
             }
-            if ("formA3".equals(event.getName())) {
-                return stateAy;
+            if ("formB".equals(event.getName())) {
+                return stateB;
             }
             return this;
         }

@@ -11,6 +11,6 @@ public enum WidgetTypeEnum {
     BUTTON,
     RADIO_GROUP,
     GROUP,
-    SELECT;
+    SELECT, DIALOG_BUTTON, DIALOG, CONTAINER, DIALOG_SUBMIT_BUTTON;
 
 }

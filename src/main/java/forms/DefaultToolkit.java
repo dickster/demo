@@ -1,9 +1,9 @@
 package forms;
 
 
-import forms.config.FormConfig;
+import forms.config.GroupConfig;
 import forms.config.TextFieldConfig;
-import forms.config.WidgetConfig;
+import forms.config.Config;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.FormComponent;
@@ -20,7 +20,7 @@ public class DefaultToolkit implements Toolkit {
     private boolean customTheme = true;
 
     @Override
-    public WidgetFactory createWidgetFactory(FormConfig formConfig) {
+    public WidgetFactory createWidgetFactory(GroupConfig formConfig) {
         // example for debugging only.
         if (!customWidgets) {
             return createWidgetFactory();
@@ -29,9 +29,8 @@ public class DefaultToolkit implements Toolkit {
         if ("FORM-A".equals(formConfig.getName())) {
             return new DefaultWidgetFactory() {
                 @Override
-                public Component create(String id, WidgetConfig config) {
+                public Component create(String id, Config config) {
                     if ("name.first".equals(config.getName())) {
-                        config.withCss("bg-primary");
                         return new Label(id, config.getName() + " (custom widget)");
                     }
                     return super.create(id, config);
@@ -41,7 +40,7 @@ public class DefaultToolkit implements Toolkit {
         else if ("FORM-A-relayout".equals(formConfig.getName())) {
             return new DefaultWidgetFactory() {
                 @Override
-                public Component create(String id, WidgetConfig config) {
+                public Component create(String id, Config config) {
                     if (config instanceof TextFieldConfig) {
                         Component c = super.create(id, config);
                         if (c instanceof FormComponent) {
@@ -49,7 +48,6 @@ public class DefaultToolkit implements Toolkit {
                             ((FormComponent)c).setRequired(true);
                         }
                     }
-                    config.withCss("bg-success");
                     return super.create(id, config);
                 }
             };

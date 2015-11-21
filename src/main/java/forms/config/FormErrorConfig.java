@@ -15,5 +15,6 @@ public class FormErrorConfig extends FormConfig {
         with(new LabelConfig("please enter a new number"));
         with(new TextFieldConfig("insured.cc"));
         with(new ButtonConfig("ok"));
+
     }
 }
