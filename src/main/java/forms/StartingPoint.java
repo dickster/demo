@@ -26,16 +26,18 @@ public class StartingPoint extends WebPage {
     private static final CssResourceReference BOOTSTRAP_SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-multiselect.css");
     private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/typeahead.bundle.js");
     private static final CssResourceReference TYPEAHEAD_CSS = new CssResourceReference(Resource.class,"bootstrap-3.1.1-dist/css/typeahead.bootstrap.css");
+
     private @Inject WfFactory workflowFactory;
     private @Inject Toolkit toolkit;
 
+    private boolean customWidgets;
 
     public StartingPoint() {
         super(new PageParameters());
 
         add(new Form("form")
                 .add(new CheckBox("customTheme", new PropertyModel(toolkit, "customTheme")))
-                .add(new CheckBox("customWidgets", new PropertyModel(toolkit, "customWidgets")))
+                .add(new CheckBox("customWidgets", new PropertyModel(workflowFactory, "customWidgets")))
                 .add(new AjaxSubmitLink("start") {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {

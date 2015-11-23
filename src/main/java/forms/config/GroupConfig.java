@@ -13,7 +13,7 @@ public class GroupConfig extends AbstractConfig {
 
     private String title;
     private Boolean renderBodyOnly = false;
-    private List<Config> configs = Lists.newArrayList();
+    private /*don't emit this in json*/ List<Config> configs = Lists.newArrayList();
 
 
     public GroupConfig(@Nonnull String name) {

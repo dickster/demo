@@ -3,7 +3,6 @@ package forms;
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import demo.resources.Resource;
-import forms.config.Config;
 import forms.config.FormConfig;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;

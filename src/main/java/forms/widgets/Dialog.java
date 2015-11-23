@@ -5,6 +5,7 @@ import forms.Toolkit;
 import forms.WidgetFactory;
 import forms.config.DialogConfig;
 import forms.config.DialogSubmitButtonConfig;
+import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.basic.Label;
@@ -48,7 +49,7 @@ public class Dialog extends Panel {
     }
 
     protected Component createButton(String id, DialogSubmitButtonConfig config) {
-        WidgetFactory factory = toolkit.createWidgetFactory(this.config);
+        WidgetFactory factory = WfUtil.getWidgetFactoryFor(this);
         return factory.create(id, config);
     }
 }

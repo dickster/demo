@@ -13,7 +13,6 @@ import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.Map;
 
-// do this in subclasses....-->@WfDef("commercial")
 public abstract class Workflow<T> extends EventBus implements Serializable {
 
     private Map<String, Object> context = Maps.newHashMap();
@@ -126,4 +125,7 @@ Thread.sleep(1000);
         return (T) this;
     }
 
+    public WidgetFactory getWidgetFactory() {
+        return widgetFactory;
+    }
 }

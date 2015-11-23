@@ -14,11 +14,11 @@ public abstract class AbstractConfig implements Config {
     private final String CLASS="class";
 
     // need annotations to figure out which options are json worthy.
-    private final String pluginName;
-    private String property;
-    private Map<String, String> attributes = Maps.newHashMap();
     private String name;
     private String type;
+    private String property;
+    private final String pluginName;
+    private Map<String, String> attributes = Maps.newHashMap();
     private Map options = Maps.newHashMap();  // a place to store custom options.
 
     public AbstractConfig(@Nonnull String property, @Nonnull String type, String pluginName) {
