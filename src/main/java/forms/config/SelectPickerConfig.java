@@ -11,6 +11,7 @@ public class SelectPickerConfig extends WidgetConfig {
 
     private List choices;
 
+
     public SelectPickerConfig(@Nonnull String property) {
         super(property, WidgetTypeEnum.SELECT);
     }

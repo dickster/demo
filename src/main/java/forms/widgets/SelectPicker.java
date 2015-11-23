@@ -8,7 +8,6 @@ import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
-import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.cycle.RequestCycle;
@@ -23,8 +22,6 @@ public class SelectPicker extends DropDownChoice<String> {
     private static final JavaScriptResourceReference SELECT_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-select.min.js");
     private static final CssResourceReference SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-select.css");
 
-
-    private static final String INIT = "$('#%s').selectpicker();";
     private AbstractDefaultAjaxBehavior ajaxHandler;
 
     public SelectPicker(String id, SelectPickerConfig config) {
@@ -48,8 +45,6 @@ public class SelectPicker extends DropDownChoice<String> {
     @Override
     protected void onComponentTag(ComponentTag tag) {
         tag.setName("select");
-        tag.getAttributes().put("multiple","");
-        tag.getAttributes().put("data-selected-text-format","count>3");
         super.onComponentTag(tag);
     }
 
@@ -58,16 +53,6 @@ public class SelectPicker extends DropDownChoice<String> {
         super.renderHead(response);
         response.render(JavaScriptHeaderItem.forReference(SELECT_JS));
         response.render(CssHeaderItem.forReference(SELECT_CSS));
-        //String optionsJson = new Gson().toJson(getOptions());
-        response.render(OnDomReadyHeaderItem.forScript(String.format(INIT, getMarkupId())));
     }
 
-    private SelectPickerOptions getOptions() {
-        return new SelectPickerOptions();
-    }
-
-    public class SelectPickerOptions {
-       // String url = ajaxHandler.getCallbackUrl().toString();
-        String id = getMarkupId();
-    }
 }

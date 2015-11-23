@@ -22,13 +22,13 @@ import javax.inject.Inject;
 public class WorkflowForm extends Panel {
 
     // this calls layout and initializes all widgets.
-    private static final String INIT_FORM = "easy.layout.init(%s);";
-    private static final JavaScriptResourceReference LAYOUT_JS = new JavaScriptResourceReference(Resource.class, "layout.js");
-    private final Form form;
-    private final FeedbackPanel feedback;
+    private static final String INIT_FORM = "workflow.init(%s);";
+    private static final JavaScriptResourceReference WORKFLOW_JS = new JavaScriptResourceReference(Resource.class, "workflow.js");
 
     private @Inject Toolkit toolkit;
 
+    private final Form form;
+    private final FeedbackPanel feedback;
     private FormConfig formConfig;
 
     public WorkflowForm(@Nonnull String id, @Nonnull FormConfig config, @Nonnull CompoundPropertyModel model) {
@@ -79,7 +79,7 @@ public class WorkflowForm extends Panel {
         for (HeaderItem item:getTheme().getHeaderItems()) {
             response.render(item);
         }
-        response.render(JavaScriptReferenceHeaderItem.forReference(LAYOUT_JS));
+        response.render(JavaScriptReferenceHeaderItem.forReference(WORKFLOW_JS));
         String optionsJson = new Gson().toJson(new FormData(this));
         response.render(OnDomReadyHeaderItem.forScript(String.format(INIT_FORM, optionsJson)));
     }

@@ -1,4 +1,5 @@
 var easy = easy ? easy : {};
+
 easy.layout= (function() {
 
     var rowsCss = [
@@ -17,20 +18,17 @@ easy.layout= (function() {
         "col-md-1"
         ];
 
+
     var init = function(options) {
         //doLayout($.extend(defaults, options));
         // TODO : add default options later.
-        doLayout(options);
+        addAttributes(options);
+        doLayout(options.nameToId, );
     }
 
     function doLayout(opts) {
         var $form = $('#'+opts.id).find('form');
 
-        for (var name in opts.nameToCss) {
-            console.log('widget ' + name + '/' +opts.nameToId[name] + ' --> ' + opts.nameToCss[name]);
-            var css = opts.nameToCss[name];
-            $('#'+opts.nameToId[name]).addClass(css);
-        }
 
         var layout = layoutDef[opts.name];
         if (!layout) return;

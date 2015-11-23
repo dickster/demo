@@ -10,8 +10,13 @@ import java.util.List;
 
 public abstract class WidgetConfig extends AbstractConfig {
 
-    private /*not sent with json*/List<IValidator> validators = Lists.newArrayList();
+    @DontSendInJson
+    private List<IValidator> validators = Lists.newArrayList();
+
+    @DontSendInJson  // don't include in gson - not required by .js side.
     private List<String> mediatedAjaxEvents = Lists.newArrayList();
+
+    @DontSendInJson
     private boolean required;
 
     public WidgetConfig(@Nonnull String property, @Nonnull String type, String pluginName) {
