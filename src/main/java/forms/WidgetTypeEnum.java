@@ -15,7 +15,8 @@ public enum WidgetTypeEnum {
     DIALOG_BUTTON(),
     DIALOG(),
     CONTAINER(),
-    DIALOG_SUBMIT_BUTTON();
+    DIALOG_SUBMIT_BUTTON(),
+    ADDRESS();
 
     String pluginName;
 

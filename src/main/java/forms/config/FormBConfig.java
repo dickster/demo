@@ -11,13 +11,14 @@ public class FormBConfig extends FormConfig {
     }
 
     private void addConfigs() {
-        with( new GroupConfig("address")
-                .withConfig(new LabelConfig("Address").required(true))
-                .withConfig(new TextFieldConfig("insured.address"))
+        with( new GroupConfig("deets")
+                .withConfig(new LabelConfig("Phone"))
+                .withConfig(new TextFieldConfig("insured.phone"))
                 .withConfig(new LabelConfig("Email"))
                 .withConfig(new TextFieldConfig("insured.email")
                                 .required()
                                 .addValidator(EmailAddressValidator.getInstance())));
         with(new ButtonConfig("next"));
     }
+
 }

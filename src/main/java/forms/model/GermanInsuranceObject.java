@@ -1,8 +1,13 @@
 package forms.model;
 
+import demo.Address;
+
 import java.io.Serializable;
 
 public class GermanInsuranceObject implements Serializable {
+
+    // this could include an acord object, an ibis object., a collection of objects like
+    //  temp, misc, ai, acord & errors or whatever you like.
 
     private Name name = new Name();
     private Insured insured = new Insured();
@@ -29,8 +34,9 @@ public class GermanInsuranceObject implements Serializable {
     }
 
     class Insured implements Serializable {
-        public String address, email, age, occupation, cc;
+        public String phone, email, age, occupation, cc;
         public Dwelling dwelling = new Dwelling();
+        private Address address = new Address();
 
         @Override
         public String toString() {

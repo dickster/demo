@@ -1,5 +1,7 @@
 package forms.config;
 
+import forms.widgets.AddressConfig;
+
 public class FormAConfig extends FormConfig {
 
     public static final String FORM_CONFIG_A = "FORM-A";
@@ -21,10 +23,12 @@ public class FormAConfig extends FormConfig {
 
 
         with(new GroupConfig("2")
-                    .withConfig(new LabelConfig("age"))
-                    .withConfig(new TextFieldConfig("insured.age"))
-                    .withConfig(new LabelConfig("occupation"))
-                    .withConfig(new TextFieldConfig("insured.occupation")));
+                .withConfig(new LabelConfig("address"))
+                .withConfig(new AddressConfig("insured.address"))
+                .withConfig(new LabelConfig("age"))
+                .withConfig(new TextFieldConfig("insured.age"))
+                .withConfig(new LabelConfig("occupation"))
+                .withConfig(new TextFieldConfig("insured.occupation")));
 
         with(new ButtonConfig("next"));
         with(new ButtonConfig("formB"));
