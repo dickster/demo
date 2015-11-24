@@ -1,24 +1,140 @@
 package forms.config;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import forms.WidgetTypeEnum;
 import org.apache.wicket.Component;
 import org.apache.wicket.MetaDataKey;
 
+import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.Map;
 
-public interface Config extends Serializable {
+public abstract class Config implements Serializable {
 
-    //public static MetaDataKey<String> NAME = new MetaDataKey<String>() {};
     public static MetaDataKey<Config> KEY = new MetaDataKey<Config>() {};
-    //public static MetaDataKey<String> PROPERTY = new MetaDataKey<String>() {};
 
-    // TODO : refactor this - rename it to getId(); not to be confused with wicketId.
-    String getName();
-    String getType();
-    String getProperty();
-    Map<String, String> getAttributes();
-    Map<String, Object> getOptions();
-    Component create(String id);
-    String getPluginName();
+    private static final String PLUGIN_NA = "n/a";
 
+    // TODO : make this a spring bean perhaps?
+    private static Gson gson;
+
+    private final String CLASS="class";
+
+    // need annotations to figure out which options are json worthy.
+    private String name;
+    private String type;
+    private String property;
+    private final String pluginName;
+    private Map<String, String> attributes = Maps.newHashMap();
+    private Map<String, Object> options = Maps.newHashMap();  // a place to store custom options.
+
+    public Config(@Nonnull String property, @Nonnull String type, String pluginName) {
+        this.property = property;
+        this.name = property; // use property as name by default.
+        this.type = type;
+        this.pluginName = pluginName;
+    }
+
+    public Config(@Nonnull String property, @Nonnull String type) {
+        this(property, type, PLUGIN_NA);
+    }
+
+    public Config(@Nonnull String property, WidgetTypeEnum type) {
+        this(property, type.toString(), type.getPluginName());
+    }
+
+    private Gson getGson() {
+        if (gson==null) {
+            // TODO : skip empty collections & arrays!
+            ExclusionStrategy skipUnexposedFieldsStrategy = new ExclusionStrategy() {
+                @Override public boolean shouldSkipField(FieldAttributes f) {
+                    return f.getAnnotation(DontSendInJson.class) != null;
+                }
+                @Override public boolean shouldSkipClass(Class<?> clazz) {
+                    return false;
+                }
+            };
+            gson = new GsonBuilder()
+                    .addSerializationExclusionStrategy(skipUnexposedFieldsStrategy)
+                    .create();
+        }
+        return gson;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getProperty() {
+        return property;
+    }
+
+    public Config name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Config withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getCss() {
+        return attributes.get(CLASS);
+    }
+
+    public Config withCss(String css) {
+        withAttribute(CLASS, css);
+        return this;
+    }
+
+    public Config withAttribute(String key, String value) {
+        attributes.put(key, value);
+        return this;
+    }
+
+    public Config appendAttribute(String key, String value) {
+        String v = attributes.get(key);
+        attributes.put(key, Joiner.on(" ").join(v, value));
+        return this;
+    }
+
+    public Config appendCss(String css) {
+        appendAttribute(CLASS, css);
+        return this;
+    }
+
+    public Map<String, String> getAttributes() {
+        return ImmutableMap.copyOf(attributes);
+    }
+
+    public Map<String, Object> getOptions() {
+        return ImmutableMap.copyOf(options);
+    }
+
+    public Config withOption(String key, Object value) {
+        options.put(key, value);
+        return this;
+    }
+
+    public String getPluginName() {
+        return pluginName;
+    }
+
+    public String asJson() {
+        return getGson().toJson(this);
+    }
+
+    public abstract Component create(String id);
 }
+

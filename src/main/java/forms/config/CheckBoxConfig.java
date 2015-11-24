@@ -4,7 +4,7 @@ import forms.WidgetTypeEnum;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 
-public class CheckBoxConfig extends WidgetConfig {
+public class CheckBoxConfig extends FormComponentConfig {
 
     public CheckBoxConfig(String property) {
         super(property, WidgetTypeEnum.CHECKBOX);

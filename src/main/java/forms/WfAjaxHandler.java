@@ -1,11 +1,17 @@
 package forms;
 
-/**
- * Created with IntelliJ IDEA.
- * User: derek.dick
- * Date: 11/23/15
- * Time: 10:53 AM
- * To change this template use File | Settings | File Templates.
- */
-public class WfAjaxHandler {
+import forms.util.WfAjaxEventPropagation;
+import forms.util.WfUtil;
+
+import javax.inject.Inject;
+import java.io.Serializable;
+
+public abstract class WfAjaxHandler implements Serializable {
+
+    private @Inject WfUtil wfUtil;
+
+    public WfAjaxEventPropagation handleAjax(WfAjaxEvent event) {
+        System.out.println("ajax event occurred " + wfUtil.getComponentName(event.getComponent()));
+        return WfAjaxEventPropagation.CONTINUE;
+    }
 }

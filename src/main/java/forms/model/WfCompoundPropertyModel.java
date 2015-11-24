@@ -13,7 +13,7 @@ public class WfCompoundPropertyModel<T> extends CompoundPropertyModel<T> {
 
     @Override
     protected String propertyExpression(Component component) {
-        return WfUtil.getComponentProperty(component);
+        return new WfUtil().getComponentProperty(component);
     }
 
 }

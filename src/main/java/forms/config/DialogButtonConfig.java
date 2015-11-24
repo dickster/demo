@@ -4,7 +4,7 @@ import forms.WidgetTypeEnum;
 import forms.widgets.DialogButton;
 import org.apache.wicket.Component;
 
-public class DialogButtonConfig extends WidgetConfig {
+public class DialogButtonConfig extends FormComponentConfig {
 
     private final String dialogName;
 

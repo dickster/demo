@@ -1,11 +1,18 @@
 package forms.impl;
 
-/**
- * Created with IntelliJ IDEA.
- * User: derek.dick
- * Date: 11/23/15
- * Time: 12:25 PM
- * To change this template use File | Settings | File Templates.
- */
-public class DemoAjaxHandler {
+import forms.WfAjaxEvent;
+import forms.WfAjaxHandler;
+import forms.util.WfAjaxEventPropagation;
+import forms.util.WfUtil;
+
+import javax.inject.Inject;
+
+public class DemoAjaxHandler extends WfAjaxHandler {
+    private @Inject WfUtil wfUtil;
+
+    @Override
+    public WfAjaxEventPropagation handleAjax(WfAjaxEvent event) {
+        System.out.println("DEMO HANDLER CALLED FOR " + wfUtil.getComponentName(event.getComponent()));
+        return WfAjaxEventPropagation.CONTINUE;
+    }
 }

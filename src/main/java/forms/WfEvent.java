@@ -2,7 +2,6 @@ package forms;
 
 import com.google.common.collect.Maps;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.util.Map;
@@ -17,9 +16,9 @@ public class WfEvent<T> implements Serializable /* ApplicationContextAware, Appl
     private String onSuccessState;
     private Map<String, String> errorState = Maps.newHashMap();
 
-    public WfEvent(@Nonnull T obj) {
+    public WfEvent(@Nullable T obj) {
         this.obj = obj;
-        this.name = obj.toString();
+        this.name = obj==null ? "null event" : obj.toString();
     }
 
     public <T extends WfEvent> T withNextState(String state) {

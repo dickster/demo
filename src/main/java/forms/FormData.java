@@ -32,7 +32,7 @@ public class FormData {
 
     private void addOptions(Component component) {
         Config data = component.getMetaData(Config.KEY);
-        if (data!=null) {
+        if (data!=null && component.isVisible()) {
             String markupId = component.getMarkupId();
             idToData.put(markupId, data);
             nameToId.put(data.getName(), markupId);

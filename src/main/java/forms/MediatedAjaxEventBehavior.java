@@ -8,7 +8,7 @@ import java.util.EnumSet;
 
 
 
-public class MediatedAjaxEventBehavior extends AjaxEventBehavior{
+public class MediatedAjaxEventBehavior extends AjaxEventBehavior {
 
     private EnumSet<Advice> advice = EnumSet.of(Advice.BEFORE);
 
@@ -27,8 +27,17 @@ public class MediatedAjaxEventBehavior extends AjaxEventBehavior{
 
 
     @Override
-    protected void onEvent(AjaxRequestTarget target) {
-        new WorkflowManager().mediate(this, target, getComponent(), advice);
+    protected final void onEvent(final AjaxRequestTarget target) {
+        WfAjaxEvent event = new WfAjaxEvent(getEvent(), target, getComponent());
+        new Mediator().mediate(event, advice, new Runnable() {
+            @Override public void run() {
+                handleEvent(target);
+            }
+        });
     }
 
+    protected void handleEvent(AjaxRequestTarget target) {
+        // override this to do something if you want.  typically you will just want mediator
+        // to handle all the biz logic methinks.
+    }
 }

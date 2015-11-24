@@ -12,8 +12,8 @@ public class FormCConfig extends FormConfig {
     }
 
     private void  addConfigs() {
-        with(new LabelConfig("two selectpickers with different configurations"));
-
+        with(new LabelConfig("(two selectpickers with different configurations)"));
+        with(new LabelConfig("what kind of roof do you have?"));
         with(new SelectPickerConfig("insured.dwelling.roofType")
                 .withChoices(Lists.newArrayList("shingles", "metal", "tin", "tile", "slate"))
                 .withAttribute("title", "my title")
@@ -27,7 +27,6 @@ public class FormCConfig extends FormConfig {
 
         with(new LabelConfig("do you have a pool"));
         with(new TextFieldConfig("insured.dwelling.pool"));
-        with(new LabelConfig("what kind of roof do you have?"));
         with(new ButtonConfig("ok"));
     }
 }

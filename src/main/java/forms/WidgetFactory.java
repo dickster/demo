@@ -2,7 +2,7 @@ package forms;
 
 import com.google.common.collect.Maps;
 import forms.config.Config;
-import forms.config.WidgetConfig;
+import forms.config.FormComponentConfig;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.Model;
@@ -29,15 +29,16 @@ public abstract class WidgetFactory implements Serializable {
 
     protected void postCreate(final Component component, Config config) {
         setMetaData(component, config);
-        if (component instanceof FormComponent) {
+        if (config instanceof FormComponentConfig && component instanceof FormComponent) {
             FormComponent fc = (FormComponent) component;
-            addValidators(fc, config);
-            addAjax(fc, config);
-            setLabel(fc, config);
+            FormComponentConfig fcc = (FormComponentConfig) config;
+            addValidators(fc, fcc);
+            addAjax(fc, fcc);
+            setLabel(fc, fcc);
         }
     }
 
-    protected void setLabel(FormComponent component, Config config) {
+    protected void setLabel(FormComponent component, FormComponentConfig config) {
             component.setLabel(Model.of(config.getName()));
     }
 
@@ -46,28 +47,20 @@ public abstract class WidgetFactory implements Serializable {
         component.setOutputMarkupId(true);
     }
 
-    private void addValidators(FormComponent fc, Config config) {
-        if (config instanceof WidgetConfig) {
-            WidgetConfig c = (WidgetConfig) config;
-            // yuck.   fix this shit!  can you add validators to a panel?
-            for (IValidator<?> validator:c.getValidators()) {
-                fc.add(validator);
-            }
-            if (c.isRequired()) {
-                fc.setRequired(true);
-            }
+    private void addValidators(FormComponent fc, FormComponentConfig config) {
+        // yuck.   fix this shit!  can you add validators to a panel?
+        for (IValidator<?> validator:config.getValidators()) {
+            fc.add(validator);
+        }
+        if (config.isRequired()) {
+            fc.setRequired(true);
         }
     }
 
-    private void addAjax(FormComponent component, Config config) {
-        //        Preconditions.checkArgument(component instanceof FormComponent);
-        // if this is panel, how to add behaviour to underlying text field?
-//        final String event = "onchange";//TODO: config.getMediatedEvent();
-//        if (StringUtils.isNotBlank(event)) {
-//            if (StringUtils.isNotBlank(event)) {
-//                component.addMediatedBehavior(new MediatedAjaxEventBehavior(event));
-//            }
-//        }
+    private void addAjax(FormComponent component, FormComponentConfig config) {
+        for (String event:config.getMediatedAjaxEvents()) {
+            component.add(new MediatedAjaxEventBehavior(event));
+        }
     }
 
     protected void preCreate(Config config) {

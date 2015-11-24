@@ -14,7 +14,7 @@ import org.apache.wicket.markup.html.form.Form;
 
 import javax.annotation.Nonnull;
 
-public class ButtonConfig extends WidgetConfig {
+public class ButtonConfig extends FormComponentConfig {
 
     // add button options here.
     public ButtonConfig(@Nonnull String label) {
@@ -45,17 +45,16 @@ public class ButtonConfig extends WidgetConfig {
     }
 
     protected final void post(@Nonnull Component component, @Nonnull Object event) {
-        Workflow<?> workflow = getWorkflow(component);
+        Workflow workflow = getWorkflow(component);
         workflow.post(event);
     }
 
-    protected final @Nonnull Workflow<?> getWorkflow(@Nonnull Component component) {
+    protected final @Nonnull Workflow getWorkflow(@Nonnull Component component) {
         HasWorkflow parent = component.findParent(HasWorkflow.class);
         if (parent==null) {
             throw new IllegalStateException("uh oh, can't find workflow....this is not valid state of affairs!!");
         }
         return parent.getWorkflow();
     }
-
 
 }

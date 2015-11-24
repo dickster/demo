@@ -1,7 +1,6 @@
 package forms.model;
 
 import com.google.common.base.Preconditions;
-import forms.Property;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;

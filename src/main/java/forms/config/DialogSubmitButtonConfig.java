@@ -10,7 +10,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
-public class DialogSubmitButtonConfig extends WidgetConfig {
+public class DialogSubmitButtonConfig extends FormComponentConfig {
 
     private String HIDE_JS = "$('#%s').modal('hide');";
     private String dialogId;

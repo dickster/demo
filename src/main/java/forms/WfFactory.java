@@ -3,19 +3,46 @@ package forms;
 import forms.config.Config;
 import forms.config.GroupConfig;
 import forms.config.TextFieldConfig;
+import forms.impl.CommercialWorkflow;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.validation.validator.StringValidator;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
-public class WfFactory {
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import java.io.Serializable;
 
-    public boolean customTheme = true;
+public class WfFactory implements Serializable, ApplicationContextAware {
+
+    // important : note that workflow beans are PROTOTYPE scoped.
+
+    private @Inject CommercialWorkflow commercialWorkflow;
+
+    public boolean customTheme = true; // DEBUG ONLY!!
     public boolean customWidgets;
+    private ApplicationContext applicationContext;
 
-    public FormBasedWorkflow create(String workflowType) {
-        CommercialWorkflow workflow = new CommercialWorkflow();
+    public WfFactory() {
+        System.out.println("create wffactory");
+    }
+
+    @PostConstruct
+    public void foo() {
+        System.out.println(applicationContext);
+    }
+
+    public final FormBasedWorkflow create(String workflowType) {
+        FormBasedWorkflow workflow = createImpl(workflowType);
         workflow.withWidgetFactory(createWidgetFactory());
+        workflow.initialize();
         return workflow;
+    }
+
+    public FormBasedWorkflow createImpl(String workflowType) {
+        return commercialWorkflow;
     }
 
 
@@ -61,4 +88,8 @@ public class WfFactory {
     }
 
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 }

@@ -10,26 +10,26 @@ public class StateBeans {
 
     @Bean
     public WfAjaxHandler stateHandler() {
-        return new Sta StateAjaxHandler    }
+        return new StateAjaxHandler();    }
 
     @Bean
     public WfFormState stateA() {
-        return new Sta StateA               .withAjaxHandlers(stateHandler());
+        return new StateA().withAjaxHandlers(stateHandler());
     }
     @Bean
     public WfFormState stateC() {
-        return new Sta StateC    }
+        return new StateC();    }
     @Bean
     public WfFormState stateB() {
-        return new Sta StateB    }
+        return new StateB();    }
     @Bean
     public WfFormState stateAx() {
-        return new Sta StateAx    }
+        return new StateAx();    }
     @Bean
     public WfFormState stateAy() {
-        return new Sta StateAy    }
+        return new StateAy();    }
     @Bean
     public WfFormState stateError() {
-        return new Sta StateError    }
+        return new StateError();    }
 
 }

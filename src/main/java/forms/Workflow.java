@@ -7,52 +7,68 @@ import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import forms.model.WfCompoundPropertyModel;
-import org.apache.wicket.model.CompoundPropertyModel;
+import org.springframework.beans.factory.BeanNameAware;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.Map;
 
-public abstract class Workflow<T> extends EventBus implements Serializable {
+public abstract class Workflow<T, S extends WfState> extends EventBus implements Serializable, BeanNameAware {
 
     private Map<String, Object> context = Maps.newHashMap();
-    private CompoundPropertyModel<T> model;
+    private WfCompoundPropertyModel<T> model;
     private WidgetFactory widgetFactory = new DefaultWidgetFactory();
-    protected WfState currentState;
+    private S currentState;
     private boolean ended = false;
+    private boolean started = false;
+
+    private String beanName;
 
     public Workflow() {
         register(this);
     }
 
-    public Workflow<?> start() {
+    @Override
+    public void setBeanName(String name) {
+        this.beanName = name;
+    }
+
+    public Workflow<T,S> initialize() {
         Preconditions.checkState(context != null);
-        Preconditions.checkState(currentState != null);
+        Preconditions.checkState(getCurrentState() != null);
         Preconditions.checkState(context != null);
-        initialize();
+        init(); // allow implementation specific initialization.
+        started = true;
         return this;
+    }
+
+    protected void init() {
+        // override if you want....extension point for impl stuff here.
+    }
+
+    @Subscribe
+    public void handleAjaxEvent(@Nonnull WfAjaxEvent event) throws WorkflowException {
     }
 
     @Subscribe
     public final void fire(@Nonnull WfSubmitEvent event) throws WorkflowException {
         try {
-            WfState nextState = (event instanceof WfSubmitErrorEvent) ?
-                    currentState.handleError(this, event) :
-                    currentState.handleEvent(this, event);
+            S nextState = (S) ((event instanceof WfSubmitErrorEvent) ?
+                                getCurrentState().handleError(this, event) :
+                                getCurrentState().handleEvent(this, event));
 System.out.println("changing to state " + nextState);
-Thread.sleep(1000);
             changeState(nextState, event);
         } catch (Throwable t) {
             throw new WorkflowException("workflow failed when handling event", event, t);
         }
     }
 
-    protected void changeState(WfState nextState, WfSubmitEvent event) {
+    protected void changeState(S nextState, WfSubmitEvent event) {
         validate(nextState);
-        currentState = nextState;
+        setCurrentState(nextState);
     }
 
-    protected void validate(WfState nextState) {
+    protected void validate(S nextState) {
         Preconditions.checkArgument(nextState != null, "can't have a null state for workflow.");
     }
 
@@ -60,8 +76,6 @@ Thread.sleep(1000);
     protected void unhandledEvent(DeadEvent event) {
         System.out.println("an event occurred with no listeners " + event);
     }
-
-    protected void initialize() {/*override if you want to do some pre-flight checks before workflow starts*/}
 
     public Object get(String key) {
         return context.get(key);
@@ -84,10 +98,7 @@ Thread.sleep(1000);
         return (W) this;
     }
 
-    public <T extends Workflow> T  withStartingState(WfState state) {
-        this.currentState = state;
-        return (T) this;
-    }
+    public abstract S getStartingState();
 
     public <T extends Workflow> T restoreContext(Map<String, Object> context) {
         this.context = context;
@@ -100,7 +111,7 @@ Thread.sleep(1000);
 
     protected abstract @Nonnull WfCompoundPropertyModel<T> createModel();
 
-    public CompoundPropertyModel<T> getModel() {
+    public WfCompoundPropertyModel<T> getModel() {
         if (model==null) {
             model = createModel();
         }
@@ -127,5 +138,24 @@ Thread.sleep(1000);
 
     public WidgetFactory getWidgetFactory() {
         return widgetFactory;
+    }
+
+    public String getBeanName() {
+        return beanName;
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public S getCurrentState() {
+        if (currentState==null) {
+            currentState=getStartingState();
+        }
+        return currentState;
+    }
+
+    public void setCurrentState(S currentState) {
+        this.currentState = currentState;
     }
 }

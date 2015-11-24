@@ -9,6 +9,8 @@ import java.util.EnumSet;
 // if you want to broadcast events to a parent mediator.
 public abstract class MediatedAbstractAjaxBehavior extends AbstractDefaultAjaxBehavior {
 
+    public static final String ABSTRACT_EVENT = "$ABSTRACT_EVENT$";
+
     private EnumSet<Advice> advice = EnumSet.of(Advice.BEFORE);
 
     public MediatedAbstractAjaxBehavior() {
@@ -25,8 +27,19 @@ public abstract class MediatedAbstractAjaxBehavior extends AbstractDefaultAjaxBe
     }
 
     @Override
-    protected final void respond(final AjaxRequestTarget target) {
-        new WorkflowManager().mediate(this, target, getComponent(), advice);
+    protected void respond(final AjaxRequestTarget target) {
+        WfAjaxEvent event = new WfAjaxEvent(ABSTRACT_EVENT, target, getComponent());
+        new Mediator().mediate(event, advice, new Runnable() {
+            @Override public void run() {
+                handleEvent(target);
+            }
+        });
     }
+
+    protected void handleEvent(AjaxRequestTarget target) {
+        // override this to do something if you want.  typically you will just want mediator
+        // to handle all the biz logic methinks.
+    }
+
 
 }

@@ -4,7 +4,7 @@ import forms.WidgetTypeEnum;
 import forms.widgets.TextField2;
 import org.apache.wicket.Component;
 
-public class TextFieldConfig extends WidgetConfig {
+public class TextFieldConfig extends FormComponentConfig {
 
     public TextFieldConfig(String property) {
         super(property, WidgetTypeEnum.TEXT_FIELD);

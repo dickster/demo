@@ -9,7 +9,7 @@ import org.apache.wicket.Component;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class GroupConfig extends AbstractConfig {
+public class GroupConfig extends Config {
 
     private String title;
     private Boolean renderBodyOnly = false;
@@ -23,19 +23,6 @@ public class GroupConfig extends AbstractConfig {
     public List<Config> getConfigs() {
         return ImmutableList.copyOf(configs);
     }
-
-//    protected List<WidgetConfig> getWidgetConfigs() {
-//        List<WidgetConfig> result = Lists.newArrayList();
-//        for (Config config:configs) {
-//            if (config instanceof WidgetConfig) {
-//                result.add((WidgetConfig)config);
-//            }
-//            else if (config instanceof GroupConfig) {
-//                result.addAll(((GroupConfig)config).getWidgetConfigs());
-//            }
-//        }
-//        return result;
-//    }
 
     public String getTitle() {
         return title;

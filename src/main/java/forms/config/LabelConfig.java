@@ -4,7 +4,7 @@ import forms.WidgetTypeEnum;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
 
-public class LabelConfig extends WidgetConfig {
+public class LabelConfig extends Config {
 
     private String text;  // this should be localized!
     private String associatedWidget;
@@ -29,7 +29,7 @@ public class LabelConfig extends WidgetConfig {
         return this;
     }
 
-    public LabelConfig forAssociatedWidget(WidgetConfig config) {
+    public LabelConfig forAssociatedWidget(FormComponentConfig config) {
         associatedWidget = config.getName();
         return this;
     }

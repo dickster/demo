@@ -20,6 +20,7 @@ public class Dialog extends Panel {
 
     private final DialogConfig config;
     private @Inject Toolkit toolkit;
+    private @Inject WfUtil wfUtil;
 
     public Dialog(String id, DialogConfig config) {
         super(id);
@@ -49,7 +50,7 @@ public class Dialog extends Panel {
     }
 
     protected Component createButton(String id, DialogSubmitButtonConfig config) {
-        WidgetFactory factory = WfUtil.getWidgetFactoryFor(this);
+        WidgetFactory factory = wfUtil.getWidgetFactoryFor(this);
         return factory.create(id, config);
     }
 }

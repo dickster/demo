@@ -6,7 +6,7 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 
 import java.util.Date;
 
-public class DatePickerConfig extends WidgetConfig {
+public class DatePickerConfig extends FormComponentConfig {
 
     private Date min;
     private Date max;

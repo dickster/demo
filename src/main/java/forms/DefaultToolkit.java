@@ -1,6 +1,8 @@
 package forms;
 
 
+import forms.impl.CustomTheme;
+
 import javax.inject.Inject;
 
 public class DefaultToolkit implements Toolkit {

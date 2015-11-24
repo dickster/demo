@@ -6,6 +6,7 @@ public class FormAConfig extends FormConfig {
 
     public static final String FORM_CONFIG_A = "FORM-A";
 
+
     public FormAConfig() {
         super(FORM_CONFIG_A);
         addConfigs();
@@ -26,12 +27,16 @@ public class FormAConfig extends FormConfig {
                 .withConfig(new LabelConfig("address"))
                 .withConfig(new AddressConfig("insured.address"))
                 .withConfig(new LabelConfig("age"))
-                .withConfig(new TextFieldConfig("insured.age"))
+                .withConfig(new TextFieldConfig("insured.age").addAjaxEvent("onchange"))
                 .withConfig(new LabelConfig("occupation"))
                 .withConfig(new TextFieldConfig("insured.occupation")));
 
         with(new ButtonConfig("next"));
+        with(new ButtonConfig("formAx"));
+        with(new ButtonConfig("formAy"));
         with(new ButtonConfig("formB"));
+        with(new ButtonConfig("formC"));
+        with(new ButtonConfig("formError"));
 
         with(new DialogConfig("myDialog")
                 .withButtons(new DialogSubmitButtonConfig("ok"),

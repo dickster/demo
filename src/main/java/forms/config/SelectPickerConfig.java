@@ -7,7 +7,7 @@ import org.apache.wicket.Component;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class SelectPickerConfig extends WidgetConfig {
+public class SelectPickerConfig extends FormComponentConfig {
 
     private List choices;
 

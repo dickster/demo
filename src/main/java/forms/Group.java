@@ -14,6 +14,7 @@ public class Group extends Panel {
   
     private GroupConfig config;
     private @Inject Toolkit toolkit; // change this to get factory from workflow.
+    private @Inject WfUtil wfUtil;
 
     public Group(String id, @Nonnull GroupConfig config) {
         super(id);
@@ -27,7 +28,7 @@ public class Group extends Panel {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        final WidgetFactory factory = WfUtil.getWidgetFactoryFor(this);
+        final WidgetFactory factory = wfUtil.getWidgetFactoryFor(this);
         add(new ListView<Config>("div", config.getConfigs()) {
             @Override
             protected void populateItem(ListItem<Config> item) {

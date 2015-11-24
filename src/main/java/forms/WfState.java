@@ -24,14 +24,13 @@ public class WfState implements Serializable {
         return this;
     }
 
-    public @Nonnull WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+    public @Nonnull WfState handleEvent(Workflow workflow, WfEvent event) {
         // typically something like...
         // switch ( Event.valueOf(event.getName()) ) {
         //    case SUBMIT : doThis();
         //    case BIND : doThat();
         //    etc...
         // }
-        // return  if null, workflow will just hang around and wait for next event.
         return this; //event.getOnSuccessState();
     }
 
@@ -44,4 +43,5 @@ public class WfState implements Serializable {
                 "name='" + getName() + '\'' +
                 '}';
     }
+
 }

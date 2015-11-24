@@ -46,6 +46,10 @@ public abstract class FormComponentConfig extends Config {
         return required;
     }
 
+    public List<String> getMediatedAjaxEvents() {
+        return mediatedAjaxEvents;
+    }
+
     public FormComponentConfig required(Boolean required) {
         this.required = required;
         return this;
