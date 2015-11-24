@@ -27,6 +27,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     public WfPage(final FormBasedWorkflow workflow) {
         super();
         this.workflow = workflow;
+        setDefaultModel(workflow.getModel());
         add( workflow.createForm("form", workflow.getCurrentFormConfig()) );
     }
 

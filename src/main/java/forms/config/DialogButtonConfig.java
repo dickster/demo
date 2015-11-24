@@ -2,9 +2,8 @@ package forms.config;
 
 import forms.WidgetTypeEnum;
 import forms.widgets.DialogButton;
-import org.apache.wicket.Component;
 
-public class DialogButtonConfig extends FormComponentConfig {
+public class DialogButtonConfig extends FormComponentConfig<DialogButton> {
 
     private final String dialogName;
 
@@ -15,7 +14,7 @@ public class DialogButtonConfig extends FormComponentConfig {
     }
 
     @Override
-    public Component create(String id) {
+    public DialogButton create(String id) {
         return new DialogButton(id, this);
     }
 

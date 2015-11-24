@@ -1,13 +1,11 @@
 package forms.config;
 
 import forms.WidgetTypeEnum;
-import org.apache.wicket.Component;
-import org.apache.wicket.markup.html.basic.Label;
+import forms.widgets.Label2;
 
-public class LabelConfig extends Config {
+public class LabelConfig extends Config<Label2> {
 
     private String text;  // this should be localized!
-    private String associatedWidget;
 
     public LabelConfig(String name) {
         super(name, WidgetTypeEnum.LABEL);
@@ -24,23 +22,9 @@ public class LabelConfig extends Config {
         return text;
     }
 
-    public LabelConfig forAssociatedWidget(String associatedWidgetName) {
-        associatedWidget = associatedWidgetName;
-        return this;
-    }
-
-    public LabelConfig forAssociatedWidget(FormComponentConfig config) {
-        associatedWidget = config.getName();
-        return this;
-    }
-
-    public String getAssociatedWidget() {
-        return associatedWidget;
-    }
-
     @Override
-    public Component create(String id) {
-        return new Label(id, getName());
+    public Label2 create(String id) {
+        return new Label2(id, this);
     }
 
 }

@@ -14,7 +14,7 @@ import org.apache.wicket.markup.html.form.Form;
 
 import javax.annotation.Nonnull;
 
-public class ButtonConfig extends FormComponentConfig {
+public class ButtonConfig extends FormComponentConfig<IndicatingAjaxSubmitLink> {
 
     // add button options here.
     public ButtonConfig(@Nonnull String label) {
@@ -23,7 +23,7 @@ public class ButtonConfig extends FormComponentConfig {
     }
 
     @Override
-    public Component create(String id) {
+    public IndicatingAjaxSubmitLink create(String id) {
         return createAjaxButton(id, this);
     }
 

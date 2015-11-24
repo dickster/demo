@@ -4,13 +4,12 @@ package forms.config;
 import forms.WidgetTypeEnum;
 import forms.WorkflowForm;
 import forms.widgets.DialogSubmitButton;
-import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
-public class DialogSubmitButtonConfig extends FormComponentConfig {
+public class DialogSubmitButtonConfig extends FormComponentConfig<DialogSubmitButton> {
 
     private String HIDE_JS = "$('#%s').modal('hide');";
     private String dialogId;
@@ -20,7 +19,7 @@ public class DialogSubmitButtonConfig extends FormComponentConfig {
     }
 
     @Override
-    public Component create(String id) {
+    public DialogSubmitButton create(String id) {
         return new DialogSubmitButton(id, this) {
             @Override
             protected void onSubmit(final AjaxRequestTarget target, final Form<?> form) {

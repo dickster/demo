@@ -35,8 +35,10 @@ public class GermanInsuranceObject implements Serializable {
 
     class Insured implements Serializable {
         public String phone, email, age, occupation, cc;
+        public boolean notifyMe = false;
         public Dwelling dwelling = new Dwelling();
         private Address address = new Address();
+        private Integer deductible = 0;
 
         @Override
         public String toString() {
@@ -52,8 +54,8 @@ public class GermanInsuranceObject implements Serializable {
     }
 
     class Dwelling implements Serializable {
-        public String pool, roofType = "";
-
+        public String roofType = "";
+        public boolean pool;
 
         @Override
         public String toString() {

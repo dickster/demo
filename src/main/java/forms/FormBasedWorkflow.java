@@ -73,7 +73,7 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
     }
 
     public WorkflowForm createForm(String id, FormConfig config) {
-        return new WorkflowForm(id, config, getModel());
+        return new WorkflowForm(id, config);
     }
 
     public List<WfAjaxHandler> getAjaxHandlers() {

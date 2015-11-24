@@ -2,17 +2,16 @@ package forms.config;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import forms.Group;
 import forms.WidgetTypeEnum;
 import org.apache.wicket.Component;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class GroupConfig extends Config {
+public abstract class GroupConfig<T extends Component & HasConfig> extends Config<T> {
 
     private String title;
-    private Boolean renderBodyOnly = false;
+    private @DontSendInJson boolean renderBodyOnly = false;
     private @DontSendInJson List<Config> configs = Lists.newArrayList();
 
 
@@ -81,9 +80,7 @@ public class GroupConfig extends Config {
     }
 
     @Override
-    public Component create(String id) {
-        return new Group(id, this);  //To change body of implemented methods use File | Settings | File Templates.
-    }
+    public abstract T create(String id);
 
     public Config getConfigWithName(@Nonnull String name) {
         List<Config> c = getConfigsDeep();

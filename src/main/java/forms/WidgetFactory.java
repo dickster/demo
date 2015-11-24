@@ -9,6 +9,7 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.validation.IValidator;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 public abstract class WidgetFactory implements Serializable {
@@ -43,12 +44,12 @@ public abstract class WidgetFactory implements Serializable {
     }
 
     protected void setMetaData(Component component, Config config) {
-        component.setMetaData(Config.KEY, config);
         component.setOutputMarkupId(true);
     }
 
-    private void addValidators(FormComponent fc, FormComponentConfig config) {
+    private void addValidators(FormComponent fc, FormComponentConfig<?> config) {
         // yuck.   fix this shit!  can you add validators to a panel?
+
         for (IValidator<?> validator:config.getValidators()) {
             fc.add(validator);
         }
@@ -57,7 +58,8 @@ public abstract class WidgetFactory implements Serializable {
         }
     }
 
-    private void addAjax(FormComponent component, FormComponentConfig config) {
+    private void addAjax(FormComponent component, FormComponentConfig<?> config) {
+        List mediatedAjaxEvents = config.getMediatedAjaxEvents();
         for (String event:config.getMediatedAjaxEvents()) {
             component.add(new MediatedAjaxEventBehavior(event));
         }

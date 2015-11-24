@@ -24,13 +24,17 @@ public class WfUtil implements Serializable {
     private @Inject ConfigGson gson;
 
     public @Nullable String getComponentName(@Nonnull Component component) {
-        Config config = component.getMetaData(Config.KEY);
-        return config==null ? null : config.getName();
+        if (component instanceof HasConfig) {
+            return ((HasConfig)component).getConfig().getName();
+        }
+        return null;
     }
 
     public String getComponentProperty(@Nonnull Component component) {
-        Config config = component.getMetaData(Config.KEY);
-        return config.getProperty();
+        if (component instanceof HasConfig) {
+            return ((HasConfig)component).getConfig().getProperty();
+        }
+        throw new IllegalArgumentException("component doesn't have a property");
     }
 
     public WidgetFactory getWidgetFactoryFor(Component component) {

@@ -1,17 +1,24 @@
 package forms.config;
 
 import forms.WidgetTypeEnum;
-import org.apache.wicket.Component;
-import org.apache.wicket.markup.html.WebMarkupContainer;
+import forms.widgets.CheckBox2;
 
-public class CheckBoxConfig extends FormComponentConfig {
+public class CheckBoxConfig extends FormComponentConfig<CheckBox2> {
 
-    public CheckBoxConfig(String property) {
+    private String label;
+
+    public CheckBoxConfig(String property, String label) {
         super(property, WidgetTypeEnum.CHECKBOX);
+        this.label = label;
+        withCss("");
+    }
+
+    public String getLabel() {
+        return label;
     }
 
     @Override
-    public Component create(String id) {
-        return new WebMarkupContainer(id);
+    public CheckBox2 create(String id) {
+        return new CheckBox2(id, this);
     }
 }

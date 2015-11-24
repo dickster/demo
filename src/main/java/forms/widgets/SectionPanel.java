@@ -68,7 +68,7 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
     public SectionPanel(final String id, SectionConfig config) {
         super(id);
         setOutputMarkupId(true);
-        this.header = Model.of(config.getTitle());
+      //  this.header = Model.of(config.getTitle());
     }
 
     private List<Tab<T>> createTabs() {

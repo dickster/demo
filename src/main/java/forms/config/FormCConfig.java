@@ -25,8 +25,8 @@ public class FormCConfig extends FormConfig {
                 .withChoices(Lists.newArrayList("shingles", "metal", "tin", "tile", "slate"))
                 .withAttribute("data-live-search","true"));
 
-        with(new LabelConfig("do you have a pool"));
-        with(new TextFieldConfig("insured.dwelling.pool"));
+
+        with(new CheckBoxConfig("insured.dwelling.pool", "I have an outdoor pool."));
         with(new ButtonConfig("ok"));
     }
 }

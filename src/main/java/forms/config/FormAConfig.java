@@ -12,7 +12,7 @@ public class FormAConfig extends FormConfig {
     }
 
     private void addConfigs() {
-        with(new GroupConfig("names")
+        with(new GrpConfig("names")
             .withConfig(new LabelConfig("first name"))
             .withConfig(new TextFieldConfig("name.first"))
             .withConfig(new LabelConfig("middle name"))
@@ -21,7 +21,7 @@ public class FormAConfig extends FormConfig {
             .withConfig(new TextFieldConfig("name.last")));
 
 
-        with(new GroupConfig("2")
+        with(new GrpConfig("2")
                 .withConfig(new LabelConfig("address"))
                 .withConfig(new AddressConfig("insured.address"))
                 .withConfig(new LabelConfig("age"))

@@ -1,10 +1,9 @@
 package forms.config;
 
 import forms.WidgetTypeEnum;
-import org.apache.wicket.Component;
-import org.apache.wicket.markup.html.WebMarkupContainer;
+import forms.widgets.DateLabel;
 
-public class DateLabelConfig extends FormComponentConfig {
+public class DateLabelConfig extends FormComponentConfig<DateLabel> {
 
     // add timeago options here.
     public DateLabelConfig(String property) {
@@ -12,8 +11,8 @@ public class DateLabelConfig extends FormComponentConfig {
     }
 
     @Override
-    public Component create(String id) {
-        return new WebMarkupContainer(id);
+    public DateLabel create(String id) {
+        return new DateLabel(id, this);
     }
 
 

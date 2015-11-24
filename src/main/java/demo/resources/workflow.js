@@ -42,9 +42,16 @@ var workflow = function() {
             };
 
             var initializePlugin = function() {
+                // THESE ARE HACKS AND WILL BE WRITTEN AS JQUERY UI PLUGINS.
                 if (options.config.type=="FORM") {
                     layout(); // TODO : turn this into a plugin.
                     return;
+                }
+                if (options.config.type=="TEXT_FIELD") {
+                    layoutTextField();
+                }
+                if (options.config.type=="CHECKBOX") {
+                    layoutCheckBox();
                 }
                 if ( options.config.type=="ADDRESS") {
                     options.config.id = '#'+options.markupId;
@@ -80,6 +87,22 @@ var workflow = function() {
                 }
                 console.log("the form is ---> " + $form[0].outerHTML);
             };
+
+            function layoutCheckBox() {
+                $('#'+options.markupId).wrap("<div class='checkbox'></div>");
+                $('#'+options.markupId).wrap("<label>" + options.config.label + "</label>");
+            }
+
+            function layoutTextField() {
+                var tf = $('#'+options.markupId);
+                tf.wrap("<div class='input-group'></div>");
+                if (options.config.prefix) {
+                    $( "<span class='input-group-addon'>"+options.config.prefix+"</span>").insertBefore(tf);
+                }
+                if (options.config.suffix) {
+                    $( "<span class='input-group-addon'>"+options.config.suffix+"</span>").insertAfter(tf);
+                }
+            }
 
             return {
                 addAttributes : addAttributes,

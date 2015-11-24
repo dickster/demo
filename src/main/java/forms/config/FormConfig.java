@@ -1,9 +1,10 @@
 package forms.config;
 
 import forms.WidgetTypeEnum;
+import forms.WorkflowForm;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
 
-public class FormConfig<T> extends GroupConfig {
+public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
     private IFormValidator validator;
 
@@ -11,6 +12,11 @@ public class FormConfig<T> extends GroupConfig {
         super(name, WidgetTypeEnum.FORM);
         withRenderBodyOnly(false);
         withCss("form");
+    }
+
+    @Override
+    public WorkflowForm create(String id) {
+        return new WorkflowForm(id, this);
     }
 
     public IFormValidator getValidator() {

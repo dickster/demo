@@ -19,7 +19,6 @@ import org.apache.wicket.markup.html.form.validation.IFormValidator;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.renderStrategy.DeepChildFirstVisitor;
-import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.util.visit.IVisit;
 
@@ -43,8 +42,8 @@ public class WorkflowForm extends Panel implements HasConfig {
     private final FeedbackPanel feedback;
     private FormConfig formConfig;
 
-    public WorkflowForm(@Nonnull String id, @Nonnull FormConfig config, @Nonnull CompoundPropertyModel model) {
-        super(id, model);
+    public WorkflowForm(@Nonnull String id, @Nonnull FormConfig config) {
+        super(id);
         withConfig(config);
         setOutputMarkupId(true);
         // placeholder to be replaced based on formConfig.

@@ -5,14 +5,14 @@ import com.google.common.collect.Lists;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class SectionConfig extends GroupConfig {
+public class SectionConfig {
 
     private int min=1, max = Integer.MAX_VALUE;
 
     private List<Config> configs = Lists.newArrayList();
 
     public SectionConfig(@Nonnull String name) {
-        super(name);
+       // super(name);
     }
 
     public SectionConfig withMin(int min) {

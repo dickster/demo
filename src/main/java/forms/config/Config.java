@@ -5,19 +5,17 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import forms.WidgetTypeEnum;
 import org.apache.wicket.Component;
-import org.apache.wicket.MetaDataKey;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.Map;
 
-public abstract class Config implements Serializable {
+public abstract class Config<T extends Component & HasConfig> implements Serializable {
 
-    public static MetaDataKey<Config> KEY = new MetaDataKey<Config>() {};
     private static final String CLASS = "class";
     private static final String PLUGIN_NA = "n/a";
 
-    private String name;
+    private String name; // TODO : refactor this. change name to "ID".
     private String type;
     private String property;
     private final String pluginName;
@@ -105,6 +103,6 @@ public abstract class Config implements Serializable {
         return pluginName;
     }
 
-    public abstract Component create(String id);
+    public abstract T create(String id);
 }
 

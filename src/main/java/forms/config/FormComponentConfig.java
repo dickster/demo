@@ -3,12 +3,13 @@ package forms.config;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import forms.WidgetTypeEnum;
+import org.apache.wicket.Component;
 import org.apache.wicket.validation.IValidator;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public abstract class FormComponentConfig extends Config {
+public abstract class FormComponentConfig<T extends Component & HasConfig> extends Config<T> {
 
     @DontSendInJson
     private List<IValidator> validators = Lists.newArrayList();

@@ -3,11 +3,10 @@ package forms.config;
 import demo.GpsLocation;
 import forms.WidgetTypeEnum;
 import forms.widgets.Address;
-import org.apache.wicket.Component;
 
 import javax.annotation.Nonnull;
 
-public class AddressConfig extends FormComponentConfig {
+public class AddressConfig extends FormComponentConfig<Address> {
 
     private GpsLocation location = new GpsLocation(43.650713, -79.377683);
     private Double latitude;
@@ -19,7 +18,7 @@ public class AddressConfig extends FormComponentConfig {
     }
 
     @Override
-    public Component create(String id) {
+    public Address create(String id) {
         return new Address(id, this);
     }
 

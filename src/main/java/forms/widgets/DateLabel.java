@@ -3,12 +3,12 @@ package forms.widgets;
 import com.google.gson.Gson;
 import demo.resources.Resource;
 import forms.config.Config;
+import forms.config.DateLabelConfig;
 import forms.config.HasConfig;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 import java.text.DateFormat;
@@ -24,8 +24,9 @@ public class DateLabel extends Label implements HasConfig {
     private transient Gson gson = new Gson();
 
     private Config config;
-    public DateLabel(String id, IModel<Date> model) {
-        super(id, model);
+    public DateLabel(String id, DateLabelConfig config) {
+        super(id);
+        this.config = config;
     }
 
     @Override

@@ -2,6 +2,7 @@ package forms;
 
 import forms.config.Config;
 import forms.config.GroupConfig;
+import forms.config.HasConfig;
 import forms.util.WfUtil;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
@@ -10,7 +11,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
-public class Group extends Panel {
+public class Group extends Panel implements HasConfig {
   
     private GroupConfig config;
     private @Inject Toolkit toolkit; // change this to get factory from workflow.
@@ -40,5 +41,8 @@ public class Group extends Panel {
 
     }
 
-
+    @Override
+    public Config getConfig() {
+        return config;
+    }
 }
