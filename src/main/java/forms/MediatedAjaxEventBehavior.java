@@ -1,14 +1,14 @@
 package forms;
 
 import com.google.common.base.Preconditions;
-import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 
 import java.util.EnumSet;
 
 
 
-public class MediatedAjaxEventBehavior extends AjaxEventBehavior {
+public class MediatedAjaxEventBehavior extends AjaxFormComponentUpdatingBehavior {
 
     private EnumSet<Advice> advice = EnumSet.of(Advice.BEFORE);
 
@@ -25,9 +25,8 @@ public class MediatedAjaxEventBehavior extends AjaxEventBehavior {
         return this;
     }
 
-
     @Override
-    protected final void onEvent(final AjaxRequestTarget target) {
+    protected void onUpdate(final AjaxRequestTarget target) {
         WfAjaxEvent event = new WfAjaxEvent(getEvent(), target, getComponent());
         new Mediator().mediate(event, advice, new Runnable() {
             @Override public void run() {

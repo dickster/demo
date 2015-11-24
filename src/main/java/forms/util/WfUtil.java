@@ -12,9 +12,9 @@ import org.apache.wicket.util.visit.IVisitor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.io.Serializable;
 
-public class WfUtil {
-
+public class WfUtil implements Serializable {
 
     public @Nullable String getComponentName(@Nonnull Component component) {
         Config config = component.getMetaData(Config.KEY);

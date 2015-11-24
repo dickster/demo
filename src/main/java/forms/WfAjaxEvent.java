@@ -4,12 +4,14 @@ package forms;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
+import javax.annotation.Nonnull;
+
 public class WfAjaxEvent extends WfEvent<String> {
     private AjaxRequestTarget target;
     private Component component;
     private boolean stopPropogation = false;
 
-    public WfAjaxEvent(String event, AjaxRequestTarget target, Component component) {
+    public WfAjaxEvent(String event, AjaxRequestTarget target, @Nonnull Component component) {
         super(event);
         this.target = target;
         this.component = component;

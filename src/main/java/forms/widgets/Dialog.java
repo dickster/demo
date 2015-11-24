@@ -32,8 +32,6 @@ public class Dialog extends Panel {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-
-        //final WidgetFactory factory = toolkit.createWidgetFactory(config);
         add(new Label("title", config.getTitle()));
         add(new Form("form")
                 .add(new Group("contents", config))

@@ -33,6 +33,7 @@ public class WorkflowForm extends Panel {
     private static final String INIT_FORM = "workflow.init(%s);";
     private static final JavaScriptResourceReference WORKFLOW_JS = new JavaScriptResourceReference(Resource.class, "workflow.js");
 
+    private @Inject WfUtil wfUtil;
     private @Inject Toolkit toolkit;
 
     private Component visitorKludge;
@@ -118,7 +119,7 @@ public class WorkflowForm extends Panel {
         visitChildren(Component.class, new DeepChildFirstVisitor() {
             @Override
             public void component(Component component, IVisit<Void> visit) {
-                String n = WfUtil.getComponentName(component);
+                String n = wfUtil.getComponentName(component);
                 if (name.equals(n)) {
                     visitorKludge = component;
                 }
