@@ -16,39 +16,51 @@ var workflow = function() {
             "col-md-1"
         ];
 
-        var init = function(options) {
-            var f = form(options);
-            f.layout();
-            f.addAttributes();
-            f.initializePlugins();
-            return form;
-        };
+        var initWidget = function(options) {
+           var w = widget(options);
+            w.addAttributes();
+            w.initializePlugin();
+        }
 
-        function form(opts) {
-            // TODO : $.extend(defaultOptions);
+        function widget(opts)   {
             var options = opts;
 
             var addAttributes = function() {
                 // note that this DOESN'T do properties like checked, selected, or disabled
-                for (var id in options.idToData) {
-                    var config = options.idToData[id];
-                    addAttributesFor(id, config.attributes);
+                var id = options.markupId;
+                var attributes = options.config.attributes;
+
+                if (!attributes) {
+                    return;
                 }
+                // TODO : need to handle appending attributes for ones that exist.
+                for (var attr in attributes) {
+                    var value = attributes[attr];
+                    document.getElementById(id).setAttribute(attr, value);
+                }
+
             };
 
-            var initializePlugins = function() {
-                for (var id in options.idToData) {
-                    var config = options.idToData[id];
-                    var $widget = $('#'+id);
-                    var plugin = config.pluginName;
-                    if (!plugin) continue;
-                    console.log('about to initialize widget ' + name + ' with plugin ' + plugin + ' and options ' + config.options);
-                    $widget[plugin](config.options);
+            var initializePlugin = function() {
+                if (options.config.type=="FORM") {
+                    layout(); // TODO : turn this into a plugin.
+                    return;
                 }
+                if ( options.config.type=="ADDRESS") {
+                    options.config.id = '#'+options.markupId;
+                    easy.address.create(options.config);
+                    return;
+                }
+                var config = options.config;
+                var $widget = $('#'+options.markupId);
+                var plugin = config.pluginName;
+                if (!plugin) return;
+                console.log('about to initialize widget ' + config.name + ' with plugin ' + plugin + ' and options ' + config.options);
+                $widget[plugin](config.options);
             };
 
-            var layout = function() {
-                var $form = $('#'+options.formId).find('form');
+             var layout = function() {
+                var $form = $('#'+options.markupId).find('form');
                 var layout = layoutDef[options.formName];
                 if (!layout) return;
 
@@ -69,30 +81,20 @@ var workflow = function() {
                 console.log("the form is ---> " + $form[0].outerHTML);
             };
 
-            function addAttributesFor(id, attributes) {
-                if (!id || !attributes) {
-                    return;
-                }
-                // TODO : need to handle appending attributes for ones that exist.
-                for (var attr in attributes) {
-                    var value = attributes[attr];
-                    document.getElementById(id).setAttribute(attr, value);
-                }
-
-            }
-
             return {
-                layout: layout,
                 addAttributes : addAttributes,
-                initializePlugins : initializePlugins
+                layout : layout,
+                initializePlugin : initializePlugin
             }
+
+
 
         };
 
 
 
     return {
-            init: init
+            initWidget : initWidget
         };
 
 

@@ -2,6 +2,8 @@ package forms.widgets;
 
 import com.google.gson.Gson;
 import demo.resources.Resource;
+import forms.config.Config;
+import forms.config.HasConfig;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
@@ -14,13 +16,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class DateLabel extends Label {
+public class DateLabel extends Label implements HasConfig {
 
     private JavaScriptResourceReference TIMEAGO_JS = new JavaScriptResourceReference(Resource.class,"timeago/timeago-1.4.1.js");
     private JavaScriptResourceReference JS = new JavaScriptResourceReference(DateLabel.class,"datelabel.js");
     private String INIT_JS = "easy.datelabel().init(%s);"; //TODO : turn this into jquery widget?
     private transient Gson gson = new Gson();
 
+    private Config config;
     public DateLabel(String id, IModel<Date> model) {
         super(id, model);
     }
@@ -34,6 +37,11 @@ public class DateLabel extends Label {
 
     protected DateLabelOptions getOptions() {
         return new DateLabelOptions();
+    }
+
+    @Override
+    public Config getConfig() {
+        return config;
     }
 
     public class DateLabelOptions {

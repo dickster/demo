@@ -1,7 +1,10 @@
 package forms.widgets;
 
 import demo.resources.Resource;
+import forms.config.Config;
+import forms.config.HasConfig;
 import forms.config.SelectPickerConfig;
+import forms.util.WfUtil;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ComponentTag;
@@ -15,18 +18,24 @@ import org.apache.wicket.request.handler.TextRequestHandler;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
+import javax.inject.Inject;
 
-public class SelectPicker extends DropDownChoice<String> {
+
+public class SelectPicker extends DropDownChoice<String> implements HasConfig {
 
 //    private static final JavaScriptResourceReference EASY_SELECT_JS = new JavaScriptResourceReference(SelectPicker.class, "selectPicker.js");
     private static final JavaScriptResourceReference SELECT_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-select.min.js");
     private static final CssResourceReference SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-select.css");
 
+    private @Inject WfUtil wfUtil;
+
     private AbstractDefaultAjaxBehavior ajaxHandler;
+    private Config config;
 
     public SelectPicker(String id, SelectPickerConfig config) {
         super(id, config.getChoices());
         setOutputMarkupId(true);
+        this.config = config;
         //add(ajaxHandler = createAjaxHandler());
     }
 
@@ -53,6 +62,11 @@ public class SelectPicker extends DropDownChoice<String> {
         super.renderHead(response);
         response.render(JavaScriptHeaderItem.forReference(SELECT_JS));
         response.render(CssHeaderItem.forReference(SELECT_CSS));
+        wfUtil.render(this, response);
     }
 
+    @Override
+    public Config getConfig() {
+        return config;
+    }
 }

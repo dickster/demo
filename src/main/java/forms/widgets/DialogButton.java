@@ -1,11 +1,19 @@
 package forms.widgets;
 
+import forms.config.Config;
 import forms.config.DialogButtonConfig;
+import forms.config.HasConfig;
+import forms.util.WfUtil;
 import org.apache.wicket.markup.ComponentTag;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.model.Model;
 
-public class DialogButton extends Button {
+import javax.inject.Inject;
+
+public class DialogButton extends Button implements HasConfig {
+
+    private @Inject WfUtil wfUtil;
 
     private final DialogButtonConfig config;
 
@@ -24,5 +32,15 @@ public class DialogButton extends Button {
         super.onComponentTag(tag);
     }
 
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
+        wfUtil.render(this, response);
+    }
+
+    @Override
+    public Config getConfig() {
+        return config;
+    }
 }
 

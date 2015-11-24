@@ -2,16 +2,16 @@ package forms;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.google.gson.Gson;
 import demo.resources.Resource;
+import forms.config.Config;
 import forms.config.FormConfig;
+import forms.config.HasConfig;
 import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
-import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
@@ -27,7 +27,7 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import java.util.List;
 
-public class WorkflowForm extends Panel {
+public class WorkflowForm extends Panel implements HasConfig {
 
     // this calls layout and initializes all widgets.
     private static final String INIT_FORM = "workflow.init(%s);";
@@ -99,9 +99,8 @@ public class WorkflowForm extends Panel {
         for (HeaderItem item:getTheme().getHeaderItems()) {
             response.render(item);
         }
+        wfUtil.render(this, response);
         response.render(JavaScriptReferenceHeaderItem.forReference(WORKFLOW_JS));
-        String optionsJson = new Gson().toJson(new FormData(this));
-        response.render(OnDomReadyHeaderItem.forScript(String.format(INIT_FORM, optionsJson)));
     }
 
     public Form getForm() {
@@ -133,4 +132,8 @@ public class WorkflowForm extends Panel {
         return visitorKludge;
     }
 
+    @Override
+    public Config getConfig() {
+        return formConfig;
+    }
 }

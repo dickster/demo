@@ -1,7 +1,5 @@
 package forms.config;
 
-import forms.widgets.AddressConfig;
-
 public class FormAConfig extends FormConfig {
 
     public static final String FORM_CONFIG_A = "FORM-A";

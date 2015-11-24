@@ -1,5 +1,6 @@
 package forms.config;
 
+import forms.WidgetTypeEnum;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
 
 public class FormConfig<T> extends GroupConfig {
@@ -7,7 +8,7 @@ public class FormConfig<T> extends GroupConfig {
     private IFormValidator validator;
 
     public FormConfig(String name) {
-        super(name);
+        super(name, WidgetTypeEnum.FORM);
         withRenderBodyOnly(false);
         withCss("form");
     }

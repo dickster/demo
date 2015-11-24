@@ -25,12 +25,11 @@ public class StateAjaxHandler extends WfAjaxHandler {
             } catch (NumberFormatException e) {
                 ; // don't do anything. it's not a number.
             }
-            if (age>=65) {
-                Component component = workflowForm.getComponent("insured.occupation");
-                IModel<String> model = (IModel<String>) component.getDefaultModel();
-                model.setObject("retired");
-                event.getTarget().add(component);
-            }
+            String value = age>=65 ? "retired" : "youngin";
+            Component component = workflowForm.getComponent("insured.occupation");
+            IModel<String> model = (IModel<String>) component.getDefaultModel();
+            model.setObject(value);
+            event.getTarget().add(component);
         }
         return WfAjaxEventPropagation.CONTINUE;
     }

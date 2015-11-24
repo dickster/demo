@@ -3,11 +3,14 @@ package forms.widgets;
 import forms.Group;
 import forms.Toolkit;
 import forms.WidgetFactory;
+import forms.config.Config;
 import forms.config.DialogConfig;
 import forms.config.DialogSubmitButtonConfig;
+import forms.config.HasConfig;
 import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.behavior.AttributeAppender;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -16,7 +19,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import javax.inject.Inject;
 
-public class Dialog extends Panel {
+public class Dialog extends Panel implements HasConfig {
 
     private final DialogConfig config;
     private @Inject Toolkit toolkit;
@@ -50,5 +53,16 @@ public class Dialog extends Panel {
     protected Component createButton(String id, DialogSubmitButtonConfig config) {
         WidgetFactory factory = wfUtil.getWidgetFactoryFor(this);
         return factory.create(id, config);
+    }
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
+        wfUtil.render(this, response);
+    }
+
+    @Override
+    public Config getConfig() {
+        return config;
     }
 }

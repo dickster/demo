@@ -1,13 +1,13 @@
 package forms.widgets;
 
-import com.google.gson.GsonBuilder;
 import demo.GpsLocation;
-import forms.config.HasPluginOptions;
-import org.apache.wicket.RuntimeConfigurationType;
+import forms.config.AddressConfig;
+import forms.config.Config;
+import forms.config.HasConfig;
+import forms.util.WfUtil;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
-import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.HiddenField;
 import org.apache.wicket.markup.html.form.ILabelProvider;
 import org.apache.wicket.markup.html.form.TextField;
@@ -18,19 +18,26 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 
+import javax.inject.Inject;
 import java.math.BigDecimal;
 
-public class Address extends Panel implements ILabelProvider<String>, HasPluginOptions {
+public class Address extends Panel implements ILabelProvider<String>, HasConfig {
+
+    // TODO : write this as a plugin.
 
     private static final String GOOGLE_MAPS_URL = "https://maps.googleapis.com/maps/api/js?sensor=false";
     private static final String CREATE_ADDRESS_JS = "easy.address.create(%s);";
     private static ResourceReference ADDRESS_JS = new JavaScriptResourceReference(Address.class, "address.js");
+    private final AddressConfig config;
 
     private TextField<String> text;
     private GpsLocation location;
 
+    private @Inject WfUtil wfUtil;
+
     public Address(String id, AddressConfig config) {
         super(id);
+        this.config = config;
     }
 
     @Override
@@ -59,11 +66,8 @@ public class Address extends Panel implements ILabelProvider<String>, HasPluginO
         super.renderHead(response);
         response.render(JavaScriptHeaderItem.forUrl(GOOGLE_MAPS_URL));
         response.render(JavaScriptReferenceHeaderItem.forReference(ADDRESS_JS));
-        response.render(OnDomReadyHeaderItem.forScript(String.format(CREATE_ADDRESS_JS, new GsonBuilder().create().toJson(getOptions()))));
-    }
-
-    public Options getOptions() {
-        return new Options();
+        wfUtil.render(this, response);
+//        response.render(OnDomReadyHeaderItem.forScript(String.format(CREATE_ADDRESS_JS, new GsonBuilder().create().toJson(getOptions()))));
     }
 
     @Override
@@ -85,25 +89,8 @@ public class Address extends Panel implements ILabelProvider<String>, HasPluginO
     }
 
     @Override
-    public Object getPluginOptions() {
-        return new Options();
-    }
-
-    public class Options {
-        String id = "#"+Address.this.getMarkupId();
-        Double latitude;
-        Double longitude;
-
-        Options() {
-            if (Address.this.getApplication().getConfigurationType().equals(RuntimeConfigurationType.DEVELOPMENT) && location==null) {
-                location = new GpsLocation(43.650713, -79.377683);
-                }
-            if (location!=null) {
-                latitude = location.getLatitude().doubleValue();
-                longitude = location.getLongitude().doubleValue();
-            }
-        }
-
+    public Config getConfig() {
+        return this.config;
     }
 
 

@@ -1,6 +1,13 @@
 package forms.config;
 
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
 public @interface DontSendInJson {
     // marker annotation.  all fields in config will be serialized unless you add this annotation.
     // as a measure to reduce payload size of json, you should only include configuration options relevant to

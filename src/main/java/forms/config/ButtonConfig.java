@@ -30,9 +30,9 @@ public class ButtonConfig extends FormComponentConfig {
 
     protected IndicatingAjaxSubmitLink createAjaxButton(final String id, final ButtonConfig config) {
         Preconditions.checkArgument(config.getName() != null);
-        return new IndicatingAjaxSubmitLink(id, config.getName()) {
+        return new IndicatingAjaxSubmitLink(id, config) {
             @Override
-            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+            protected void onSubmit(AjaxRequestTarget target, Form <?> form) {
                 //refactor this into this class...don't need to post anywhere else.
                 post(form, new WfSubmitEvent(target, this, form));
             }

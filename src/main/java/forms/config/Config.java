@@ -3,10 +3,6 @@ package forms.config;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import forms.WidgetTypeEnum;
 import org.apache.wicket.Component;
 import org.apache.wicket.MetaDataKey;
@@ -18,15 +14,9 @@ import java.util.Map;
 public abstract class Config implements Serializable {
 
     public static MetaDataKey<Config> KEY = new MetaDataKey<Config>() {};
-
+    private static final String CLASS = "class";
     private static final String PLUGIN_NA = "n/a";
 
-    // TODO : make this a spring bean perhaps?
-    private static Gson gson;
-
-    private final String CLASS="class";
-
-    // need annotations to figure out which options are json worthy.
     private String name;
     private String type;
     private String property;
@@ -49,23 +39,7 @@ public abstract class Config implements Serializable {
         this(property, type.toString(), type.getPluginName());
     }
 
-    private Gson getGson() {
-        if (gson==null) {
-            // TODO : skip empty collections & arrays!
-            ExclusionStrategy skipUnexposedFieldsStrategy = new ExclusionStrategy() {
-                @Override public boolean shouldSkipField(FieldAttributes f) {
-                    return f.getAnnotation(DontSendInJson.class) != null;
-                }
-                @Override public boolean shouldSkipClass(Class<?> clazz) {
-                    return false;
-                }
-            };
-            gson = new GsonBuilder()
-                    .addSerializationExclusionStrategy(skipUnexposedFieldsStrategy)
-                    .create();
-        }
-        return gson;
-    }
+
 
     public String getName() {
         return name;
@@ -129,10 +103,6 @@ public abstract class Config implements Serializable {
 
     public String getPluginName() {
         return pluginName;
-    }
-
-    public String asJson() {
-        return getGson().toJson(this);
     }
 
     public abstract Component create(String id);

@@ -13,12 +13,17 @@ public class GroupConfig extends Config {
 
     private String title;
     private Boolean renderBodyOnly = false;
-    private /*don't emit this in json*/ List<Config> configs = Lists.newArrayList();
+    private @DontSendInJson List<Config> configs = Lists.newArrayList();
 
 
     public GroupConfig(@Nonnull String name) {
         super(name, WidgetTypeEnum.CONTAINER);
     }
+
+    public GroupConfig(@Nonnull String name, WidgetTypeEnum type) {
+        super(name, type);
+    }
+
 
     public List<Config> getConfigs() {
         return ImmutableList.copyOf(configs);

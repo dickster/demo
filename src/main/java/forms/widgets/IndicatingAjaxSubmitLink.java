@@ -1,29 +1,33 @@
 package forms.widgets;
 
 import forms.config.Config;
+import forms.config.HasConfig;
+import forms.util.WfUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.ComponentTag;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 
-public class IndicatingAjaxSubmitLink extends AjaxButton implements IAjaxIndicatorAware {
+public class IndicatingAjaxSubmitLink extends AjaxButton implements IAjaxIndicatorAware, HasConfig {
 
+    private @Inject WfUtil wfUtil;
+
+    private final Config config;
     private String ajaxIndicatorMarkupId = null;
-
-    public IndicatingAjaxSubmitLink(String id, String label) {
-        super(id, Model.of(label));
-    }
 
     public IndicatingAjaxSubmitLink(String id, Config config) {
         super(id, Model.of(config.getName()));
+        this.config = config;
     }
 
     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
@@ -53,5 +57,16 @@ public class IndicatingAjaxSubmitLink extends AjaxButton implements IAjaxIndicat
             });
         }
         return ajaxIndicatorMarkupId;
+    }
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
+        wfUtil.render(this, response);
+    }
+
+    @Override
+    public Config getConfig() {
+        return config;
     }
 }
