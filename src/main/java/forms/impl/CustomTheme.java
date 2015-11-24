@@ -1,8 +1,9 @@
-package forms;
+package forms.impl;
 
 
 import com.google.common.collect.Lists;
 import demo.resources.Resource;
+import forms.DefaultTheme;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.HeaderItem;

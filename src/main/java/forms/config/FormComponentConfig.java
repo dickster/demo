@@ -8,7 +8,7 @@ import org.apache.wicket.validation.IValidator;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public abstract class WidgetConfig extends AbstractConfig {
+public abstract class FormComponentConfig extends Config {
 
     @DontSendInJson
     private List<IValidator> validators = Lists.newArrayList();
@@ -19,21 +19,21 @@ public abstract class WidgetConfig extends AbstractConfig {
     @DontSendInJson
     private boolean required;
 
-    public WidgetConfig(@Nonnull String property, @Nonnull String type, String pluginName) {
+    public FormComponentConfig(@Nonnull String property, @Nonnull String type, String pluginName) {
         super(property, type, pluginName);
         withCss("form-control");
     }
 
-    public WidgetConfig(@Nonnull String property, WidgetTypeEnum type) {
+    public FormComponentConfig(@Nonnull String property, WidgetTypeEnum type) {
         this(property, type.toString(), type.getPluginName());
     }
 
-    public WidgetConfig addAjaxEvent(String event) {
+    public FormComponentConfig addAjaxEvent(String event) {
         mediatedAjaxEvents.add(event);
         return this;
     }
 
-    public WidgetConfig addValidator(IValidator<?> validator) {
+    public FormComponentConfig addValidator(IValidator<?> validator) {
         validators.add(validator);
         return this;
     }
@@ -46,18 +46,18 @@ public abstract class WidgetConfig extends AbstractConfig {
         return required;
     }
 
-    public WidgetConfig required(Boolean required) {
+    public FormComponentConfig required(Boolean required) {
         this.required = required;
         return this;
     }
 
-    public WidgetConfig required() {
+    public FormComponentConfig required() {
         return required(true);
     }
 
     @Override
     public String toString() {
-        return "WidgetConfig{" +
+        return "FormComponentConfig{" +
                 "validators=" + validators +
                 ", mediatedAjaxEvents=" + mediatedAjaxEvents +
                 ", required=" + required +

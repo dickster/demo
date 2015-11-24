@@ -1,5 +1,15 @@
-package forms;
+package forms.impl;
 
+import forms.FormBasedWorkflow;
+import forms.StartingPoint;
+import forms.WfAjaxEvent;
+import forms.WfAjaxHandler;
+import forms.WfEvent;
+import forms.WfFormState;
+import forms.WfState;
+import forms.WfSubmitEvent;
+import forms.Workflow;
+import forms.WorkflowException;
 import forms.config.FormAAnotherNewLayoutConfig;
 import forms.config.FormAConfig;
 import forms.config.FormANewLayoutConfig;
@@ -10,16 +20,22 @@ import forms.model.GermanInsuranceObject;
 import forms.model.WfCompoundPropertyModel;
 
 import javax.annotation.Nonnull;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.Locale;
 
 public class CommercialWorkflow extends FormBasedWorkflow {
 
-    private WfState stateA = new StateA();
-    private WfState stateAx = new StateAx();
-    private WfState stateAy = new StateAy();
-    private WfState stateB = new StateB();
-    private WfState stateC = new StateC();
-    private WfState stateError = new StateError();
+    private @Inject @Named("demoHandler")
+    WfAjaxHandler handler;
+
+    private @Inject @Named("stateA")
+    WfFormState stateA;
+    private @Inject @Named("stateAx") WfFormState stateAx;
+    private @Inject @Named("stateAy") WfFormState stateAy;
+    private @Inject @Named("stateB") WfFormState stateB;
+    private @Inject @Named("stateC") WfFormState stateC;
+    private @Inject @Named("stateError") WfFormState stateError;
 
     public CommercialWorkflow() {
         super();
@@ -29,6 +45,14 @@ public class CommercialWorkflow extends FormBasedWorkflow {
 
     protected void initialize() {
         ; //override if you want some workflow startup stuff to happen.
+    }
+
+    @Override
+    public void handleAjaxEvent(@Nonnull WfAjaxEvent event) throws WorkflowException {
+        if (handler.handleAjax(event)) {
+            return;
+        }
+        super.handleAjaxEvent(event);
     }
 
     @Override
@@ -44,13 +68,16 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     // ------------------------------------------------------------------------------
     // states.  typically declared in another file?   whatevs.
     // ------------------------------------------------------------------------------
-    class StateA extends WfFormState {
+    public static class StateA extends WfFormState {
+        private @Inject @Named("stateAx") WfFormState stateAx;
+        private @Inject @Named("stateB") WfFormState stateB;
+
         StateA() {
             super(new FormAConfig());
         }
 
         @Override
-        public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+        public WfFormState handleEvent(Workflow workflow, WfEvent event) {
             if ("next".equals(event.getName())) {
                 return stateAx;
             }
@@ -61,13 +88,15 @@ public class CommercialWorkflow extends FormBasedWorkflow {
         }
     }
 
-    class StateAx extends WfFormState {
+    public static class StateAx extends WfFormState {
+        private @Inject @Named("stateAy") WfFormState stateAy;
+
         StateAx() {
             super(new FormANewLayoutConfig());
         }
 
         @Override
-        public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+        public WfState handleEvent(Workflow workflow, WfEvent event) {
             if ("next".equals(event.getName())) {
                 return stateAy;
             }
@@ -75,13 +104,16 @@ public class CommercialWorkflow extends FormBasedWorkflow {
         }
     }
 
-    class StateAy extends WfFormState {
+    public static class StateAy extends WfFormState {
+        private @Inject @Named("stateB") WfFormState stateB;
+        private @Inject @Named("stateError") WfFormState stateError;
+
         StateAy() {
             super(new FormAAnotherNewLayoutConfig());
         }
 
         @Override
-        public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+        public WfState handleEvent(Workflow workflow, WfEvent event) {
             if ("next".equals(event.getName())) {
                 return stateB;
             }
@@ -94,13 +126,15 @@ public class CommercialWorkflow extends FormBasedWorkflow {
         }
     }
 
-    class StateB extends WfFormState {
+    public static class StateB extends WfFormState {
+        private @Inject @Named("stateC") WfFormState stateC;
+
         StateB() {
             super(new FormBConfig());
         }
 
         @Override
-        public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+        public WfState handleEvent(Workflow workflow, WfEvent event) {
             if ("next".equals(event.getName())) {
                 return stateC;
             }
@@ -109,12 +143,12 @@ public class CommercialWorkflow extends FormBasedWorkflow {
 
     }
 
-    class StateC extends WfFormState {
+    public static class StateC extends WfFormState {
         StateC() {
             super(new FormCConfig());
         }
         @Override
-        public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+        public WfState handleEvent(Workflow workflow, WfEvent event) {
             if ("ok".equals(event.getName())) {
                 workflow.end();
             }
@@ -122,13 +156,15 @@ public class CommercialWorkflow extends FormBasedWorkflow {
         }
     }
 
-    class StateError extends WfFormState {
+    public static class StateError extends WfFormState {
+        private @Inject @Named("stateA") WfFormState stateA;
+
         public StateError() {
             super(new FormErrorConfig());
         }
 
         @Override
-        public WfState handleEvent(Workflow<?> workflow, WfEvent event) {
+        public WfState handleEvent(Workflow workflow, WfEvent event) {
             if ("ok".equals(event.getName())) {
                 return stateA;
             }
