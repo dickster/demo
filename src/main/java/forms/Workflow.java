@@ -21,8 +21,8 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     private S currentState;
     private boolean ended = false;
     private boolean started = false;
-
     private String beanName;
+    protected transient Map<String, S> statesVisited = Maps.newHashMap();
 
     public Workflow() {
         register(this);
@@ -64,8 +64,13 @@ System.out.println("changing to state " + nextState);
     }
 
     protected void changeState(S nextState, WfSubmitEvent event) {
+        changeState(nextState);
+    }
+
+    protected final void changeState(S nextState) {
         validate(nextState);
         setCurrentState(nextState);
+        statesVisited.put(getCurrentStateName(), getCurrentState());
     }
 
     protected void validate(S nextState) {
@@ -148,14 +153,20 @@ System.out.println("changing to state " + nextState);
         return started;
     }
 
-    public S getCurrentState() {
+    protected final S getCurrentState() {
         if (currentState==null) {
-            currentState=getStartingState();
+            setCurrentState(getStartingState());
         }
         return currentState;
     }
 
-    public void setCurrentState(S currentState) {
-        this.currentState = currentState;
+    public void setCurrentState(S state) {
+        this.currentState = state;
+        statesVisited.put(getCurrentStateName(), currentState);
     }
+
+    public String getCurrentStateName() {
+        return currentState.getStateName();
+    }
+
 }

@@ -41,8 +41,7 @@ public class StartingPoint extends WebPage {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                         super.onSubmit(target, form);
-                        FormBasedWorkflow wf = workflowFactory.create("commercial");
-                        setResponsePage(new WfPage(wf));
+                        setResponsePage(new WfPage("commercial"));
                     }
                 }));
 

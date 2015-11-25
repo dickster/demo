@@ -5,6 +5,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forms.StartingPoint;
+import forms.WfPage;
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -74,6 +75,7 @@ this.getMarkupSettings().setStripWicketTags(true);
 
         mountPage("widgets", HomePage.class);
         mountPage("tabs", HomeTabPage.class);
+        mountPage("workflow", WfPage.class);
 
         if (getConfigurationType().equals(RuntimeConfigurationType.DEVELOPMENT)) {
             getComponentInitializationListeners().add(new PerformanceListener());

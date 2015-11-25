@@ -8,6 +8,7 @@ import demo.FeedbackListener;
 import demo.FeedbackState;
 import demo.ISection;
 import demo.IndexedModel;
+import forms.config.HasConfig;
 import forms.config.SectionConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Application;
@@ -20,7 +21,11 @@ import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.feedback.FeedbackMessage;
-import org.apache.wicket.markup.head.*;
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
@@ -35,6 +40,7 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
+import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -43,7 +49,7 @@ import java.util.List;
 // assume array for now. requires GroupConfig with min/max etc...
 // based on inherited model
 
-public abstract class SectionPanel<T extends Serializable> extends Panel implements FeedbackListener, ISection {
+public abstract class SectionPanel<T extends Serializable> extends Panel implements FeedbackListener, ISection, HasConfig {
 
     private static final String SELECT_LAST_TAB_JS = "$('#%s').tabPanel.selectLastTab()";
     private static final String BLANK_SLATE_ID = "blankSlate";
@@ -53,6 +59,7 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
 
     private static final JavaScriptHeaderItem TAB_PANEL_JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(SectionPanel.class, "sectionPanel.js"));
     private static final CssHeaderItem TAB_PANEL_CSS = CssHeaderItem.forReference(new CssResourceReference(SectionPanel.class,"sectionPanel.css"));
+    private final SectionConfig config;
 
     //private final IndexedModel<T> model;
 
@@ -67,6 +74,7 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
 
     public SectionPanel(final String id, SectionConfig config) {
         super(id);
+        this.config = config;
         setOutputMarkupId(true);
       //  this.header = Model.of(config.getTitle());
     }
@@ -153,6 +161,7 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
 
     private IModel<String> getStatusModel() {
         return new Model<String>() {
+            @Nullable
             @Override public String getObject() {
                 return getStatusCss(status);
             }
@@ -161,17 +170,20 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
 
     private Model<String> getStatusCssModel() {
         return new Model<String>() {
+            @Nullable
             @Override public String getObject() {
                 return getStatusCss();
             }
         };
     }
 
+    @Nullable
     private String getStatusCss() {
         return getStatusCss(status);
     }
 
-    private String getStatusCss(Enum <?> status) {
+    private @Nullable
+    String getStatusCss(Enum <?> status) {
         // turn status into css class.
         if (status==null) {
             return null;
@@ -269,6 +281,7 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
         return FeedbackState.LOADING;
     }
 
+    @Nullable
     private String getAddTooltip() {
         if (addTooltip!=null) return addTooltip;
         String hdr = header.getObject();
@@ -340,7 +353,7 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
 
     @Override
     public Integer getOrdinal() {
-        return null;
+        return 0;
     }
 
     public String getHref() {

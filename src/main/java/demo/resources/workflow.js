@@ -1,4 +1,6 @@
-var workflow = function() {
+var workflow = workflow ? workflow : function() {
+
+        var url = "?";
 
         var rowsCss = [
             null, //"can't have zero colsPerRow!!!",
@@ -15,6 +17,20 @@ var workflow = function() {
             "col-md-1",
             "col-md-1"
         ];
+
+        var pushHistory = function() {
+            var state = $('#state').val();
+            window.history.pushState({name:state, time:new Date()}, "ignored title", state );
+        }
+
+        var init = function() {
+            window.onpopstate = function(event) {
+                var u = url + "&state=" + window.history.state.name;
+                Wicket.Ajax.get({u:u});
+            };
+            var state = $('#state').val();
+            history.replaceState({name:state,time:new Date()}, "huh", state);
+        }
 
         var initWidget = function(options) {
            var w = widget(options);
@@ -44,6 +60,7 @@ var workflow = function() {
             var initializePlugin = function() {
                 // THESE ARE HACKS AND WILL BE WRITTEN AS JQUERY UI PLUGINS.
                 if (options.config.type=="FORM") {
+                    url = options.config.url;  // required for history support.
                     layout(); // TODO : turn this into a plugin.
                     return;
                 }
@@ -110,17 +127,14 @@ var workflow = function() {
                 initializePlugin : initializePlugin
             }
 
-
-
         };
-
 
 
     return {
-            initWidget : initWidget
+            initWidget : initWidget,
+            init : init,
+            pushHistory : pushHistory
         };
-
-
 
 }();
 

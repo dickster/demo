@@ -26,18 +26,6 @@ public class DialogSubmitButton extends AjaxSubmitLink implements HasConfig {
         this.config = config;
     }
 
-//    public DialogSubmitButton(String id, Config config) {
-//        super(id);
-//    }
-
-
-//    public void onSubmit() {
-//        super.onSubmit();
-//        System.out.println("dialog submitted! (override this method to do something!");
-//
-//    }
-
-
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
@@ -52,8 +40,6 @@ public class DialogSubmitButton extends AjaxSubmitLink implements HasConfig {
     @Override
     protected void onComponentTag(ComponentTag tag) {
         super.onComponentTag(tag);
-       // tag.setName("button");
-        // TODO : add data-dismiss as needed.
     }
 
     @Override
@@ -61,8 +47,4 @@ public class DialogSubmitButton extends AjaxSubmitLink implements HasConfig {
         return config;
     }
 
-//    @Override
-//    public void onClick(AjaxRequestTarget target) {
-//        //To change body of implemented methods use File | Settings | File Templates.
-//    }
 }

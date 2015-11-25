@@ -29,7 +29,9 @@ public class Dialog extends Panel implements HasConfig {
         super(id);
         // TODO add options for fade, close button. ajax handlers?
         setMarkupId(config.getName());
+        setOutputMarkupPlaceholderTag(true);
         this.config = config;
+        setVisible(false);
     }
 
     @Override

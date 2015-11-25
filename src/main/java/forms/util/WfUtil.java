@@ -52,6 +52,19 @@ public class WfUtil implements Serializable {
 
     }
 
+    public Workflow getWorkflowFor(Component component) {
+        Workflow workflow = component.visitParents(WfPage.class, new IVisitor<WfPage, Workflow>() {
+            @Override
+            public void component(WfPage wf, IVisit visit) {
+                visit.stop(wf.getWorkflow());
+            }
+        });
+        if (workflow==null) {
+            throw new IllegalStateException("can't find workflow for component " + component.getId() + getComponentName(component));
+        }
+        return workflow;
+    }
+
     public WorkflowForm getWorkflowForm(@Nonnull Component component) {
         return component.visitParents(MarkupContainer.class, new IVisitor<MarkupContainer, WorkflowForm>() {
             @Override public void component(MarkupContainer container, IVisit<WorkflowForm> visit) {

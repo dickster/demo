@@ -44,4 +44,9 @@ public class WfState implements Serializable {
                 '}';
     }
 
+    // used w.r.t. browser history.  this is put in the url as you ajax-navigate through workflow.
+    // if you want your urls to be prettier, then change this method.
+    public String getStateName() {
+        return getClass().getSimpleName();
+    }
 }

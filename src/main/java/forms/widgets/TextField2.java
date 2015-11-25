@@ -12,6 +12,10 @@ import javax.inject.Inject;
 
 public class TextField2 extends TextField implements HasConfig {
 
+    // TODO : for all widgets.  i should include the config in the class.
+    // api = TextField2.config(blah, blah);   (reduces scattered classes).
+    // should config and widgets be in same package?
+
     private @Inject WfUtil wfUtil;
 
     private Config config;

@@ -7,6 +7,7 @@ import org.apache.wicket.markup.html.form.validation.IFormValidator;
 public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
     private IFormValidator validator;
+    private String url;
 
     public FormConfig(String name) {
         super(name, WidgetTypeEnum.FORM);
@@ -28,4 +29,7 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
         return this;
     }
 
+    public void setCallbackUrl(String url) {
+        this.url = url;
+    }
 }

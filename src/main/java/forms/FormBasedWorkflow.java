@@ -1,18 +1,23 @@
 package forms;
 
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import forms.config.FormConfig;
 import forms.util.WfAjaxEventPropagation;
+import forms.util.WfUtil;
+import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.cycle.RequestCycle;
 
 import javax.annotation.Nonnull;
+import javax.inject.Inject;
 import java.util.List;
 
 public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
 
     private List<WfAjaxHandler> ajaxHandlers;
+    private @Inject WfUtil wfUtil;
 
     public FormBasedWorkflow() {
         super();
@@ -45,7 +50,7 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
             updateErrorViaAjax((WfSubmitErrorEvent) event);
             return;
         }
-        super.changeState(nextState, event);
+        changeState(nextState);
         updateFormViaAjax(event);
     }
 
@@ -56,11 +61,14 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
 
     protected void updateFormViaAjax(WfSubmitEvent event) {
         WorkflowForm form = event.getForm().findParent(WorkflowForm.class);
-        if (form!=null) {
-            WorkflowForm newForm = createForm(form.getId(), getCurrentFormConfig());
-            form.replaceWith(newForm);
-            event.getTarget().add(newForm);
-        }
+        updateFormViaAjax(form, event.getTarget());
+        event.getTarget().appendJavaScript("workflow.pushHistory();");
+    }
+
+    protected void updateFormViaAjax(WorkflowForm form, AjaxRequestTarget target) {
+        WorkflowForm newForm = createForm(form.getId(), getCurrentFormConfig());
+        form.replaceWith(newForm);
+        target.add(newForm);
     }
 
     protected void updatePage(WebPage page) {
@@ -84,4 +92,14 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
         ajaxHandlers = Lists.newArrayList(handlers);
         return this;
     }
+
+    public void gotoState(String state, AjaxRequestTarget target, WorkflowForm form) {
+        // note that we don't allow user to go to states that he hasn't been in.
+        // that means if you paste in a history generated url after session expires you will probably bomb here....
+        // not sure how to handle it gracefully...just go to starting state? or any visitedState?
+        Preconditions.checkState(statesVisited.get(state) != null, " can't go to state " + state + " because you haven't been to it yet? {" + statesVisited.keySet() + "}");
+        super.changeState(statesVisited.get(state));
+        updateFormViaAjax(form, target);
+    }
+
 }
