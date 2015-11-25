@@ -1,9 +1,9 @@
 package forms.config;
 
 import forms.WidgetTypeEnum;
-import forms.widgets.CheckBox2;
+import forms.widgets.CheckBox_;
 
-public class CheckBoxConfig extends FormComponentConfig<CheckBox2> {
+public class CheckBoxConfig extends FormComponentConfig<CheckBox_> {
 
     private String label;
 
@@ -18,7 +18,7 @@ public class CheckBoxConfig extends FormComponentConfig<CheckBox2> {
     }
 
     @Override
-    public CheckBox2 create(String id) {
-        return new CheckBox2(id, this);
+    public CheckBox_ create(String id) {
+        return new CheckBox_(id, this);
     }
 }
