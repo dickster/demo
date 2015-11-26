@@ -9,13 +9,16 @@
                              http://www.springframework.org/schema/lang
                              http://www.springframework.org/schema/lang/spring-lang-3.0.xsd">
 
+
+                 <!--refresh-check-delay="2000" BLARGH : i can't get this to work!!  causes serialization exception.-->
+    <lang:groovy id="demoAjaxHandler"
+                 script-source="classpath:forms/util/DemoAjaxHandler.groovy"/>
+
     <context:annotation-config/>
     <context:component-scan base-package="forms.spring" />
 
     <!--ALL GROOVY BEANS ARE FOR DEVELOPMENT ONLY.  NEVER PRODUCTION. -->
-    <lang:groovy id="testing"
-                 refresh-check-delay="2000"
-                 script-source="classpath:forms/spring/groovy/MyGroovyBean.groovy"/>
+
 
     <context:property-placeholder location="classpath:/demo/application.properties" />
 

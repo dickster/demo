@@ -10,7 +10,7 @@ import org.apache.wicket.model.IModel;
 
 import javax.inject.Inject;
 
-public class StateAjaxHandler extends WfAjaxHandler {
+public class StateAjaxHandler implements WfAjaxHandler {
 
     private @Inject WfUtil wfUtil;
 

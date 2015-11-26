@@ -8,7 +8,6 @@ import forms.WfState;
 import forms.WorkflowException;
 import forms.model.GermanInsuranceObject;
 import forms.model.WfCompoundPropertyModel;
-import forms.util.ITest;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -18,7 +17,6 @@ import java.util.Locale;
 public class CommercialWorkflow extends FormBasedWorkflow {
 
     private @Inject @Named("stateA") WfFormState stateA;
-    private @Inject @Named("testing") ITest huh;
 
     public CommercialWorkflow() {
         super();
@@ -27,7 +25,6 @@ public class CommercialWorkflow extends FormBasedWorkflow {
 
     @Override
     protected void init() {
-        huh.hello();
         //override if you want some workflow startup stuff to happen.
     }
 

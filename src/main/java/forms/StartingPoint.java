@@ -28,7 +28,6 @@ public class StartingPoint extends WebPage {
 
     private @SpringBean WfFactory workflowFactory;
     private @SpringBean Toolkit toolkit;
-    //private @SpringBean ITest doesItWork;
 
     private boolean customWidgets;
 

@@ -4,7 +4,6 @@ import forms.config.Config;
 import forms.config.GroupConfig;
 import forms.config.TextFieldConfig;
 import forms.impl.CommercialWorkflow;
-import forms.util.ITest;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.validation.validator.StringValidator;
@@ -21,7 +20,6 @@ public class WfFactory implements Serializable, ApplicationContextAware {
     // important : note that workflow beans are PROTOTYPE scoped.
 
     private @Inject CommercialWorkflow commercialWorkflow;
-    private @Inject ITest testing;
 
     public boolean customTheme = true; // DEBUG ONLY!!
     public boolean customWidgets;

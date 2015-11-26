@@ -7,14 +7,25 @@ import forms.Toolkit;
 import forms.WfAjaxHandler;
 import forms.WfFactory;
 import forms.impl.CommercialWorkflow;
-import forms.impl.DemoAjaxHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
+
+//import javax.inject.Inject;
+//import javax.inject.Scope;
+
 
 @Configuration
 public class Application {
+
+//    private @Autowired StateBeans stateBeans;
+//    private @Autowired Utils utils;
+    //
+    private @Inject @Named("demoAjaxHandler") WfAjaxHandler demoHandler;
 
     @Bean
     public Toolkit toolkit() {
@@ -22,14 +33,10 @@ public class Application {
     }
 
     @Bean
-    public WfAjaxHandler demoHandler() {
-        return new DemoAjaxHandler();
-    }
-
-    @Bean @Scope("prototype")
+    @Scope("prototype")
     public CommercialWorkflow commercialWorkflow() {
         CommercialWorkflow workflow = new CommercialWorkflow();
-        workflow.withAjaxHandlers(demoHandler());
+        workflow.withAjaxHandlers(demoHandler);
         return workflow;
     }
 
@@ -38,7 +45,8 @@ public class Application {
         return new DefaultTheme();
     }
 
-    @Bean @Scope("prototype")
+    @Bean
+    //@Scope("prototype")
     public WfFactory WorkflowFactory() {
         return new WfFactory();
     }

@@ -2,7 +2,14 @@ package forms.spring;
 
 import forms.WfAjaxHandler;
 import forms.WfFormState;
-import forms.impl.StateA;import forms.impl.StateAjaxHandler;import forms.impl.StateAx;import forms.impl.StateAy;import forms.impl.StateB;import forms.impl.StateC;import forms.impl.StateError;import org.springframework.context.annotation.Bean;
+import forms.impl.StateA;
+import forms.impl.StateAjaxHandler;
+import forms.impl.StateAx;
+import forms.impl.StateAy;
+import forms.impl.StateB;
+import forms.impl.StateC;
+import forms.impl.StateError;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
