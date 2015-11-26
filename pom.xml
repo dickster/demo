@@ -37,6 +37,12 @@
         <!--</dependency>-->
 
         <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>2.4.5</version>
+        </dependency>
+
+        <dependency>
             <groupId>opensymphony</groupId>
             <artifactId>sitemesh</artifactId>
             <version>2.4.2</version>
@@ -251,6 +257,24 @@
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 			</plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <compilerId>groovy-eclipse-compiler</compilerId>
+                    <verbose>true</verbose>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>utf-8</encoding>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-compiler</artifactId>
+                        <version>2.6.0-01</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
 		</plugins>
 	</build>
 
