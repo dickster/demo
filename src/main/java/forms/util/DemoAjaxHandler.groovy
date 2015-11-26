@@ -12,7 +12,7 @@ class DemoAjaxHandler implements WfAjaxHandler {
     @Override
     public WfAjaxEventPropagation handleAjax(WfAjaxEvent event) {
         Page page = event.getComponent().getPage();
-        event.getTarget().prependJavaScript('$("#progress span").text("XXgroovy!"); $("#progress").show();');
+        event.getTarget().prependJavaScript('$("#progress span").text("groovy!"); $("#progress").show();');
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
