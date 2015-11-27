@@ -5,7 +5,6 @@ import forms.WfFormState;
 import forms.WfState;
 import forms.WfSubmitEvent;
 import forms.Workflow;
-import forms.config.FormAAnotherNewLayoutConfig;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;

@@ -1,4 +1,14 @@
-package forms.config;
+package forms.impl;
+
+import forms.config.AddressConfig;
+import forms.config.ButtonConfig;
+import forms.config.DialogButtonConfig;
+import forms.config.DialogConfig;
+import forms.config.DialogSubmitButtonConfig;
+import forms.config.FormConfig;
+import forms.config.GrpConfig;
+import forms.config.LabelConfig;
+import forms.config.TextFieldConfig;
 
 public class FormAConfig extends FormConfig {
 

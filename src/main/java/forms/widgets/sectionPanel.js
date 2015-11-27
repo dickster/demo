@@ -1,7 +1,6 @@
 
 var easy = easy ? easy : {};
 
-
 easy.sectionPanel = (function() {
 
     var defaultOptions = {
@@ -14,21 +13,21 @@ easy.sectionPanel = (function() {
         }
     };
 
-    var init = function(options) {
-        document.getElementById(options.id).tabPanel = tabPanel($.extend(defaultOptions,options));
+    var init = function(data) {
+        document.getElementById(data.markupId).tabPanel = tabPanel($.extend(defaultOptions,data.config));
     }
 
     var expandAll = function() {
-        $('#'+options.id + ' .tab-panels').show();
+        $('#'+options.markupId + ' .tab-panels').show();
     }
 
     var collapseAll = function() {
-        $('#'+options.id + ' .tab-panels').hide();
+        $('#'+options.markupId + ' .tab-panels').hide();
     }
 
 
     function tabPanel(options) {
-        var id = options.id;
+        var id = options.markupId;
         var $tabPanel = $('#'+id);
         var options = options;
         var current = options.current;

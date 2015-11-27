@@ -1,4 +1,9 @@
-package forms.config;
+package forms.impl;
+
+import forms.config.ButtonConfig;
+import forms.config.FormConfig;
+import forms.config.LabelConfig;
+import forms.config.TextFieldConfig;
 
 public class FormANewLayoutConfig extends FormConfig {
 

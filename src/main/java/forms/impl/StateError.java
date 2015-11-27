@@ -3,7 +3,6 @@ package forms.impl;
 import forms.WfEvent;
 import forms.WfFormState;
 import forms.Workflow;
-import forms.config.FormErrorConfig;
 
 import javax.inject.Inject;
 import javax.inject.Named;

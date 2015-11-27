@@ -52,6 +52,8 @@ public class WorkflowForm extends Panel implements HasConfig {
         setupHistory();
         // placeholder to be replaced based on formConfig.
         add(new WebMarkupContainer("form").add(new WebMarkupContainer("content")));
+
+        // TODO : put feedback as fixed part of widget factory.  i.e. getFeedbackPanel();
         add(feedback = new FeedbackPanel("feedback"));
         feedback.setOutputMarkupPlaceholderTag(true);
         add(new Label("subheader", config.getTitle()));

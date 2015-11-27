@@ -1,6 +1,11 @@
-package forms.config;
+package forms.impl;
 
 import com.google.common.collect.Lists;
+import forms.config.ButtonConfig;
+import forms.config.CheckBoxConfig;
+import forms.config.FormConfig;
+import forms.config.LabelConfig;
+import forms.config.SelectPickerConfig;
 
 public class FormCConfig extends FormConfig {
 

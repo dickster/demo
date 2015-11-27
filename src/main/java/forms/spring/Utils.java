@@ -5,6 +5,8 @@ import forms.util.ConfigGson;
 import forms.util.WfUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+
 
 
 @Configuration
@@ -15,7 +17,7 @@ public class Utils {
         return new ConfigGson();
     }
 
-    @Bean
+    @Bean @Scope("prototype")
     public WfUtil wfUtil() {
         return new WfUtil();
     }

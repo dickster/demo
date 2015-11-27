@@ -12,7 +12,15 @@
 
                  <!--refresh-check-delay="2000" BLARGH : i can't get this to work!!  causes serialization exception.-->
     <lang:groovy id="demoAjaxHandler"
+                 scope="prototype"
+                 refresh-check-delay="2000"
                  script-source="classpath:forms/util/DemoAjaxHandler.groovy"/>
+               <!--refresh-check-delay="2000" BLARGH : i can't get this to work!!  causes serialization exception.-->
+
+    <lang:groovy id="hello"
+                 scope="prototype"
+                 refresh-check-delay="2000"
+                 script-source="classpath:forms/util/Hello.groovy"/>
 
     <context:annotation-config/>
     <context:component-scan base-package="forms.spring" />

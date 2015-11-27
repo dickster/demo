@@ -11,6 +11,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
+// rename this to....? DIV? BasicPanel, Container, ?? dunno.
 public class Group extends Panel implements HasConfig {
   
     private GroupConfig config;

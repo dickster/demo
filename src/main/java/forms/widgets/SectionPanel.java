@@ -2,14 +2,15 @@ package forms.widgets;
 
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
-import com.google.gson.Gson;
 import demo.FeedbackListener;
 import demo.FeedbackState;
 import demo.ISection;
 import demo.IndexedModel;
+import forms.Group;
+import forms.config.Config;
 import forms.config.HasConfig;
-import forms.config.SectionConfig;
+import forms.config.SectionPanelConfig;
+import forms.util.WfUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
@@ -25,7 +26,6 @@ import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
-import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
@@ -39,6 +39,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
@@ -49,7 +50,7 @@ import java.util.List;
 // assume array for now. requires GroupConfig with min/max etc...
 // based on inherited model
 
-public abstract class SectionPanel<T extends Serializable> extends Panel implements FeedbackListener, ISection, HasConfig {
+public class SectionPanel<T extends Serializable> extends Panel implements FeedbackListener, ISection, HasConfig {
 
     private static final String SELECT_LAST_TAB_JS = "$('#%s').tabPanel.selectLastTab()";
     private static final String BLANK_SLATE_ID = "blankSlate";
@@ -59,7 +60,7 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
 
     private static final JavaScriptHeaderItem TAB_PANEL_JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(SectionPanel.class, "sectionPanel.js"));
     private static final CssHeaderItem TAB_PANEL_CSS = CssHeaderItem.forReference(new CssResourceReference(SectionPanel.class,"sectionPanel.css"));
-    private final SectionConfig config;
+    private final SectionPanelConfig config;
 
     //private final IndexedModel<T> model;
 
@@ -70,26 +71,15 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
     private Enum<?> status = FeedbackState.VOID;
     private Component statusIcon;
     private WebMarkupContainer panel;
+    private @SpringBean WfUtil wfUtil;
 
 
-    public SectionPanel(final String id, SectionConfig config) {
+    public SectionPanel(final String id, SectionPanelConfig config) {
         super(id);
         this.config = config;
         setOutputMarkupId(true);
-      //  this.header = Model.of(config.getTitle());
+        this.header = Model.of(config.getTitle());
     }
-
-    private List<Tab<T>> createTabs() {
-        List<Tab<T>> result = Lists.newArrayList();
-        for (int i = 0; i<getIndexedModel().size(); i++) {
-            result.add(createTab(getIndexedModel().getObject(i), i));
-        }
-        return result;
-    }
-
-
-
-    protected abstract Tab<T> createTab(T model, int index);
 
     protected int getInitialIndex() {
         return 0;
@@ -150,14 +140,17 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
         tabsContainer.add(statusIcon = new WebMarkupContainer("status").setOutputMarkupId(true).add(new AttributeAppender("class", getStatusCssModel())));
 
         // TODO : take this method out of tab.
-        form.add(panel = createPanel(TAB_PANEL_ID, getIndexedModel()));
+        form.add(panel = createPanel(TAB_PANEL_ID));
         panel.setOutputMarkupId(true);
 
 //        panelContainer.add(createBlankSlate(BLANK_SLATE_ID));
     }
 
 
-    protected abstract WebMarkupContainer createPanel(String id, IModel<T> model);
+    protected WebMarkupContainer createPanel(String id) {
+        return new Group(id, config.getPanelConfig());
+
+    }
 
     private IModel<String> getStatusModel() {
         return new Model<String>() {
@@ -266,11 +259,7 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
         response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
         response.render(TAB_PANEL_JS);
         response.render(TAB_PANEL_CSS);
-        response.render(OnDomReadyHeaderItem.forScript(String.format(TAB_PANEL_INIT, new Gson().toJson(getOptions()))));
-    }
-
-    protected SectionPanelOptions getOptions() {
-        return new SectionPanelOptions();
+        wfUtil.render(this, response);
     }
 
     protected Component newTitle(final String titleId, final String title, final int index) {
@@ -360,6 +349,11 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
         return "#"+getId();
     }
 
+    @Override
+    public Config getConfig() {
+        return config;
+    }
+
 
     // ---------------------------------------------------------------
     // ---- INNER CLASSES --------------------------------------------
@@ -374,28 +368,6 @@ public abstract class SectionPanel<T extends Serializable> extends Panel impleme
         }
     }
 
-
-
-    public class SectionPanelOptions implements Serializable {
-        public String id = SectionPanel.this.getMarkupId();
-        public Boolean mandatory = isMandatory();
-        public List<String> titleInputs;
-        public String addTooltip = getAddTooltip();
-        public Boolean canAdd = SectionPanel.this.canAdd;
-        public Boolean collapsed;
-        public Boolean tooltipOnAdd;
-        public int current = getIndexedModel().getIndex();
-        public HeaderOptions header = new HeaderOptions();
-
-
-        public SectionPanelOptions() {
-            titleInputs = Lists.newArrayList();
-//            for (Tab<T> tab:tabs) {
-            // TODO : reimplement this.
-//                titleInputs.add(tab.getTitleInput());
-//            }
-        }
-    }
 
     public class HeaderOptions implements Serializable {
         public String minWidth = "7em";

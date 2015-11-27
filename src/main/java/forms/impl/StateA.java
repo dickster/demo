@@ -4,7 +4,6 @@ import forms.WfAjaxEvent;
 import forms.WfEvent;
 import forms.WfFormState;
 import forms.Workflow;
-import forms.config.FormAConfig;
 
 import javax.inject.Inject;
 import javax.inject.Named;

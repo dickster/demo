@@ -13,6 +13,14 @@ import java.util.List;
 public abstract class WfFormState extends WfState {
 
     private FormConfig formConfig;
+    // TODO : don't use list.  rather, just inject listeners? will solve serializable thing?
+    // each AjaxHandler should have getName/Id(),  getEvent();
+    // forms should validate that components with ajax turned on have listeners &
+    // listeners for events have components that trigger.
+    // ****that is redundant, just need a "add ajax" phase after form is built.
+    // done by widgetFactory.ajaxify(form);  need access to state & workflow.
+    // (workflow specific) event handlers need to be passed form to help decide?
+    //  nah, then they should just make it form specific.
     private List<WfAjaxHandler> handlers = Lists.newArrayList();
 
     public WfFormState(@Nonnull FormConfig formConfig) {

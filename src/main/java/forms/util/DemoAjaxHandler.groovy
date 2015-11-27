@@ -1,7 +1,7 @@
 package forms.util
+
 import forms.WfAjaxEvent
 import forms.WfAjaxHandler
-import org.apache.wicket.Page
 
 import javax.inject.Inject
 
@@ -11,7 +11,6 @@ class DemoAjaxHandler implements WfAjaxHandler {
 
     @Override
     public WfAjaxEventPropagation handleAjax(WfAjaxEvent event) {
-        Page page = event.getComponent().getPage();
         event.getTarget().prependJavaScript('$("#progress span").text("groovy!"); $("#progress").show();');
         try {
             Thread.sleep(500);

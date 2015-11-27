@@ -1,12 +1,14 @@
 package forms;
 
 import demo.resources.Resource;
+import forms.util.IHello;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.PropertyModel;
@@ -28,11 +30,14 @@ public class StartingPoint extends WebPage {
 
     private @SpringBean WfFactory workflowFactory;
     private @SpringBean Toolkit toolkit;
+    private @SpringBean IHello hello;
 
     private boolean customWidgets;
 
     public StartingPoint() {
         super(new PageParameters());
+
+        add(new Label("greeting", hello.greeting()));
 
         add(new Form("form")
                 .add(new CheckBox("customTheme", new PropertyModel(toolkit, "customTheme")))
