@@ -5,8 +5,8 @@ import forms.config.ButtonConfig;
 import forms.config.DialogButtonConfig;
 import forms.config.DialogConfig;
 import forms.config.DialogSubmitButtonConfig;
+import forms.config.DivConfig;
 import forms.config.FormConfig;
-import forms.config.GrpConfig;
 import forms.config.LabelConfig;
 import forms.config.TextFieldConfig;
 
@@ -22,7 +22,7 @@ public class FormAConfig extends FormConfig {
     }
 
     private void addConfigs() {
-        with(new GrpConfig("names")
+        with(new DivConfig("names")
             .withConfig(new LabelConfig("first name"))
             .withConfig(new TextFieldConfig("name.first"))
             .withConfig(new LabelConfig("middle name"))
@@ -31,7 +31,7 @@ public class FormAConfig extends FormConfig {
             .withConfig(new TextFieldConfig("name.last")));
 
 
-        with(new GrpConfig("2")
+        with(new DivConfig("2")
                 .withConfig(new LabelConfig("address"))
                 .withConfig(new AddressConfig("insured.address"))
                 .withConfig(new LabelConfig("age"))

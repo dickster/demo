@@ -1,6 +1,6 @@
 package forms.widgets;
 
-import forms.Group;
+import forms.Div;
 import forms.Toolkit;
 import forms.WidgetFactory;
 import forms.config.Config;
@@ -39,7 +39,7 @@ public class Dialog extends Panel implements HasConfig {
         super.onInitialize();
         add(new Label("title", config.getTitle()));
         add(new Form("form")
-                .add(new Group("contents", config))
+                .add(new Div("contents", config))
                 .add(new ListView<DialogSubmitButtonConfig>("buttons", config.getButtons()) {
                     @Override
                     protected void populateItem(ListItem<DialogSubmitButtonConfig> item) {

@@ -1,9 +1,11 @@
 package demo;
 
 import com.google.gson.Gson;
+import org.apache.wicket.Application;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.model.IModel;
@@ -43,6 +45,7 @@ public class SelectPicker extends DropDownChoice<String> {
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
         String optionsJson = new Gson().toJson(getOptions());
+        response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
         response.render(OnDomReadyHeaderItem.forScript(String.format(INIT, optionsJson)));
     }
 

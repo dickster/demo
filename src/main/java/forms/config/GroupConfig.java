@@ -69,8 +69,8 @@ public abstract class GroupConfig<T extends Component & HasConfig> extends Confi
         return this;
     }
     // ALIAS - maybe this short form is better?
-    public GroupConfig with(Config config) {
-        return withConfig(config);
+    public <T extends GroupConfig>  T  with(Config config) {
+        return (T) withConfig(config);
     }
 
 

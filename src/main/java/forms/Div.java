@@ -12,13 +12,12 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
 // rename this to....? DIV? BasicPanel, Container, ?? dunno.
-public class Group extends Panel implements HasConfig {
+public class Div extends Panel implements HasConfig {
   
     private GroupConfig config;
-    private @Inject Toolkit toolkit; // change this to get factory from workflow.
     private @Inject WfUtil wfUtil;
 
-    public Group(String id, @Nonnull GroupConfig config) {
+    public Div(String id, @Nonnull GroupConfig config) {
         super(id);
         this.config = config;
 

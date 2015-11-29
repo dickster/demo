@@ -22,11 +22,11 @@ public class SectionPanelConfig extends GroupConfig<SectionPanel> {
     // TODO : put widget factory access here.
     private int min=1, max = Integer.MAX_VALUE;
 
-    private @DontSendInJson GroupConfig panelConfig;
+    private @DontSendInJson DivConfig panelConfig;
 
-    public SectionPanelConfig(@Nonnull String name, GroupConfig panel) {
+    public SectionPanelConfig(@Nonnull String name, DivConfig panelConfig) {
         super(name, WidgetTypeEnum.SECTION);
-        this.panelConfig = panel;
+        this.panelConfig = panelConfig;
     }
 
     public GroupConfig getPanelConfig() {

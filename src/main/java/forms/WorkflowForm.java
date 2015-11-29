@@ -118,7 +118,7 @@ public class WorkflowForm extends Panel implements HasConfig {
     private void update(FormConfig formConfig) {
         form = new Form("form");
         form.setOutputMarkupId(true);
-        form.add(new Group("content", formConfig));
+        form.add(new Div("content", formConfig));
         addOrReplace(form);
     }
 

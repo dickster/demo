@@ -75,6 +75,10 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return this;
     }
 
+    public Config withAttribute(String key) {
+        return withAttribute("");
+    }
+
     public Config appendAttribute(String key, String value) {
         String v = attributes.get(key);
         attributes.put(key, Joiner.on(" ").join(v, value));
@@ -99,9 +103,13 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return this;
     }
 
+//    public void setPluginName(String pluginName) {
+//        this.pluginName = pluginName;
+//    }
     public String getPluginName() {
         return pluginName;
     }
+
 
     public abstract T create(String id);
 }

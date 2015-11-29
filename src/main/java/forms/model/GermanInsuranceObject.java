@@ -1,14 +1,18 @@
 package forms.model;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import demo.Address;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class GermanInsuranceObject implements Serializable {
 
     // this could include an acord object, an ibis object., a collection of objects like
     //  temp, misc, ai, acord & errors or whatever you like.
 
+    private List<Name> names = Lists.newArrayList(new Name("derek","william", "dick"));
     private Name name = new Name();
     private Insured insured = new Insured();
 
@@ -23,13 +27,18 @@ public class GermanInsuranceObject implements Serializable {
     class Name implements Serializable {
         public String first, middle, last;
 
+        Name() {
+        }
+
+        Name(String first, String middle, String last) {
+            this.first = first;
+            this.middle = middle;
+            this.last = last;
+        }
+
         @Override
         public String toString() {
-            return "Name{" +
-                    "first='" + first + '\'' +
-                    ", middle='" + middle + '\'' +
-                    ", last='" + last + '\'' +
-                    '}';
+           return Joiner.on(" ").skipNulls().join(first, middle, last);
         }
     }
 

@@ -1,6 +1,5 @@
 package forms.impl;
 
-import forms.WfAjaxEvent;
 import forms.WfEvent;
 import forms.WfFormState;
 import forms.Workflow;
@@ -21,11 +20,6 @@ public class StateA extends WfFormState {
     }
 
     @Override
-    public void handleAjaxEvent(WfAjaxEvent event) {
-        super.handleAjaxEvent(event);
-    }
-
-    @Override
     public WfFormState handleEvent(Workflow workflow, WfEvent event) {
         try {
             Thread.sleep(1200);
@@ -35,12 +29,6 @@ public class StateA extends WfFormState {
         if ("next".equals(event.getName())) {
             return stateAx;
         }
-//        with(new ButtonConfig("next"));
-//        with(new ButtonConfig("formAx"));
-//        with(new ButtonConfig("formAy"));
-//        with(new ButtonConfig("formB"));
-//        with(new ButtonConfig("formC"));
-//        with(new ButtonConfig("formError"));
 
         if ("formAy".equals(event.getName())) {
             return stateAy;

@@ -1,4 +1,4 @@
-var workflow = workflow ? workflow : function() {
+var workflow = function() {
 
         var url = "?";
 
@@ -38,7 +38,7 @@ var workflow = workflow ? workflow : function() {
             w.initializePlugin();
         }
 
-        function widget(opts)   {
+        function widget(opts) {
             var options = opts;
 
             var addAttributes = function() {
@@ -54,7 +54,6 @@ var workflow = workflow ? workflow : function() {
                     var value = attributes[attr];
                     document.getElementById(id).setAttribute(attr, value);
                 }
-
             };
 
             var initializePlugin = function() {
@@ -75,6 +74,11 @@ var workflow = workflow ? workflow : function() {
                     easy.address.create(options.config);
                     return;
                 }
+                if (options.config.type=="SECTION") {
+                    options.config.markupId = options.markupId;
+                    ez.sectionPanel.init(options.config);
+                    return;
+                }
                 var config = options.config;
                 var $widget = $('#'+options.markupId);
                 var plugin = config.pluginName;
@@ -83,7 +87,7 @@ var workflow = workflow ? workflow : function() {
                 $widget[plugin](config.options);
             };
 
-             var layout = function() {
+            var layout = function() {
                 var $form = $('#'+options.markupId).find('form');
                 var layout = layoutDef[options.formName];
                 if (!layout) return;

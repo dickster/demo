@@ -1,7 +1,7 @@
 
-var easy = easy ? easy : {};
+var ez = ez ? ez : {};
 
-easy.sectionPanel = (function() {
+ez.sectionPanel = (function() {
 
     var defaultOptions = {
         emptyText:'\u00a0',
@@ -24,6 +24,7 @@ easy.sectionPanel = (function() {
     var collapseAll = function() {
         $('#'+options.markupId + ' .tab-panels').hide();
     }
+
 
 
     function tabPanel(options) {
@@ -167,6 +168,7 @@ easy.sectionPanel = (function() {
 
     }
 
+
     return {
         init : init,
         expandAll : expandAll,
@@ -175,4 +177,5 @@ easy.sectionPanel = (function() {
 
 
 
-});
+})();
+

@@ -11,6 +11,7 @@ class DemoAjaxHandler implements WfAjaxHandler {
 
     @Override
     public WfAjaxEventPropagation handleAjax(WfAjaxEvent event) {
+        println('hello;');
         event.getTarget().prependJavaScript('$("#progress span").text("groovy!"); $("#progress").show();');
         try {
             Thread.sleep(500);

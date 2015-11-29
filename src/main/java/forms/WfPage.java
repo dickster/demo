@@ -1,9 +1,11 @@
 package forms;
 
 import demo.resources.Resource;
+import org.apache.wicket.Application;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
@@ -63,11 +65,11 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
+        response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
         response.render(JavaScriptReferenceHeaderItem.forReference(JQUERY_UI_JS));
         response.render(CssHeaderItem.forReference(JQUERY_UI_CSS));
         response.render(JavaScriptReferenceHeaderItem.forReference(BOOTSTRAP_JS));
         response.render(CssHeaderItem.forReference(BOOTSTRAP_CSS));
-        response.render(JavaScriptReferenceHeaderItem.forReference(TYPEAHEAD_JS));
         response.render(JavaScriptReferenceHeaderItem.forReference(LAYOUTDEF_JS));
         response.render(OnDomReadyHeaderItem.forScript(INIT));
     }

@@ -13,6 +13,11 @@ public class LabelConfig extends Config<Label2> {
         withCss("");
     }
 
+    public LabelConfig(String name, boolean foo) {
+        super(name, WidgetTypeEnum.LABEL);
+        withCss("");
+    }
+
     public LabelConfig text(String value) {
         this.text = value;
         return this;

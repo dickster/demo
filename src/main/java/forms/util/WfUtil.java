@@ -75,6 +75,8 @@ public class WfUtil implements Serializable {
         });
     }
 
+
+    // TODO : refactor this out into spring bean = component renderer.
     public <T extends Component & HasConfig> void render(T widget, IHeaderResponse response) {
         String js = String.format(INIT_WIDGET_JS, gson.toJson(new WidgetData(widget)));
         response.render(OnDomReadyHeaderItem.forScript(js));

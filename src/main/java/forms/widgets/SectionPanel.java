@@ -5,11 +5,11 @@ import com.google.common.base.Preconditions;
 import demo.FeedbackListener;
 import demo.FeedbackState;
 import demo.ISection;
-import demo.IndexedModel;
-import forms.Group;
+import forms.Div;
 import forms.config.Config;
 import forms.config.HasConfig;
 import forms.config.SectionPanelConfig;
+import forms.model.SectionModel;
 import forms.util.WfUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Application;
@@ -55,7 +55,7 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
     private static final String SELECT_LAST_TAB_JS = "$('#%s').tabPanel.selectLastTab()";
     private static final String BLANK_SLATE_ID = "blankSlate";
     private static final String TAB_PANEL_ID = "panel";
-    private static final String TAB_PANEL_INIT = "easy.tabPanel().init(%s)";
+    private static final String TAB_PANEL_INIT = "ez.tabPanel().init(%s)";
     private static final String SET_STATUS_JS = "document.getElementById('%s').tabPanel.setStatus('%s');";
 
     private static final JavaScriptHeaderItem TAB_PANEL_JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(SectionPanel.class, "sectionPanel.js"));
@@ -79,7 +79,9 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
         this.config = config;
         setOutputMarkupId(true);
         this.header = Model.of(config.getTitle());
-    }
+        // assumes we are getting a list here...need another constructor for single entities.
+        // if supermodel is !instanceof List, setDefaultModel(FixedIndexedModel(blah); etc...
+           }
 
     protected int getInitialIndex() {
         return 0;
@@ -117,7 +119,7 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
 
         final IModel<Integer> tabCount = new AbstractReadOnlyModel<Integer>() {
             @Override public Integer getObject() {
-                int size = getIndexedModel().size();
+                int size = getSectionModel().size();
                 return canAdd ? size + 1 : size;   // make room for one tab to house the add button.
             }
         };
@@ -127,7 +129,7 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
             @Override protected void populateItem(final LoopItem item) {
                 final int index = item.getIndex();
                 // note : the "Add" tab is the last item added in this loop.
-                item.add(index < getIndexedModel().size() ? new EasyTab("tab", index) : new EasyAdditionTab("tab", index));
+                item.add(index < getSectionModel().size() ? new EasyTab("tab", index) : new EasyAdditionTab("tab", index));
             }
 
             @Override
@@ -147,8 +149,13 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
     }
 
 
+    @Override
+    protected IModel<?> initModel() {
+        return new SectionModel<T>((IModel<List<T>>) super.initModel());
+    }
+
     protected WebMarkupContainer createPanel(String id) {
-        return new Group(id, config.getPanelConfig());
+        return new Div(id, config.getPanelConfig());
 
     }
 
@@ -194,7 +201,7 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
     }
 
     protected void addTab(AjaxRequestTarget target) {
-        getIndexedModel().add(createNewTabData(getCurrentData()));
+        getSectionModel().add(createNewTabData(getCurrentData()));
         target.add(SectionPanel.this);
     }
 
@@ -209,13 +216,13 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
     }
 
     protected T getCurrentData() {
-        return getIndexedModel().getObject();
+        return getSectionModel().getObject();
     }
 
     private Component newDeleteButton(String id, final int index) {
         return new AjaxLink(id) {
             @Override public boolean isVisible() {
-                return getIndexedModel().size()>1 || !isMandatory();   // if tab is last one and it's a mandatory field then don't show this button.  e.g. can't delete only driver. (but you can delete only conviction).
+                return getSectionModel().size()>1 || !isMandatory();   // if tab is last one and it's a mandatory field then don't show this button.  e.g. can't delete only driver. (but you can delete only conviction).
             }
             @Override public void onClick(AjaxRequestTarget target) {
 // for DEBUGGING only.....
@@ -232,21 +239,15 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
     }
 
     protected void deleteTab(AjaxRequestTarget target, int index) {
-        getIndexedModel().delete(index);
+        getSectionModel().delete(index);
     }
 
     protected boolean isMandatory() {
         return mandatory;
     }
 
-    @Override
-    protected IModel<?> initModel() {
-        IModel<List<T>> inheritedModel = (IModel<List<T>>) super.initModel();
-        return new IndexedModel<T>(inheritedModel);
-    }
-
-    private IndexedModel<T> getIndexedModel() {
-        return (IndexedModel<T>) getDefaultModel();
+    private SectionModel<T> getSectionModel() {
+        return (SectionModel<T>) getDefaultModel();
     }
 
     protected LoopItem newTabContainer(final int index) {
@@ -283,7 +284,7 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
     public IModel<String> getHeaderModel() {
         return new Model<String>() {
             @Override public String getObject() {
-                int tabCount = getIndexedModel().size();
+                int tabCount = getSectionModel().size();
                 return String.format("%s%s", header.getObject(), (tabCount > 1 ? " (" + tabCount + ")" : ""));
             }
         };
@@ -416,13 +417,13 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
 
         public EasyTab(String id, int index) {
             super(id, "tabFragment", SectionPanel.this);
-            this.label = getIndexedModel().getObject(index).toString();
+            this.label = getSectionModel().getObject(index).toString();
             this.index = index;
 
             final AjaxSubmitLink titleLink = new AjaxSubmitLink("link") {
                 @Override
                 protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                    getIndexedModel().setIndex(EasyTab.this.index);
+                    getSectionModel().setIndex(EasyTab.this.index);
                     target.add(SectionPanel.this);
                 }
 

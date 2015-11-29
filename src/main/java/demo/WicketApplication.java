@@ -6,7 +6,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forms.StartingPoint;
 import forms.WfPage;
+import forms.config.HasConfig;
+import org.apache.wicket.Component;
 import org.apache.wicket.RuntimeConfigurationType;
+import org.apache.wicket.application.IComponentOnAfterRenderListener;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
@@ -80,6 +83,15 @@ this.getMarkupSettings().setStripWicketTags(true);
         if (getConfigurationType().equals(RuntimeConfigurationType.DEVELOPMENT)) {
             getComponentInitializationListeners().add(new PerformanceListener());
         }
+        getComponentOnAfterRenderListeners().add(new IComponentOnAfterRenderListener() {
+            @Override
+            public void onAfterRender(Component component) {
+                if ( component instanceof HasConfig) {
+                    String name = ((HasConfig) component).getConfig().getName();
+                    System.out.println(name + " is is rendered");
+                }
+            }
+        });
 
     }
 

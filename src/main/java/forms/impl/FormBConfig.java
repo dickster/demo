@@ -2,8 +2,8 @@ package forms.impl;
 
 import forms.config.ButtonConfig;
 import forms.config.CheckBoxConfig;
+import forms.config.DivConfig;
 import forms.config.FormConfig;
-import forms.config.GrpConfig;
 import forms.config.LabelConfig;
 import forms.config.TextFieldConfig;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
@@ -17,7 +17,7 @@ public class FormBConfig extends FormConfig {
     }
 
     private void addConfigs() {
-        with( new GrpConfig("deets")
+        with( new DivConfig("deets")
                 .withConfig(new LabelConfig("Phone"))
                 .withConfig(new TextFieldConfig("insured.phone").withPrefix("(647)"))
                 .withConfig(new LabelConfig("Deductible"))

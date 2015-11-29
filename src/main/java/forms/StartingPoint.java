@@ -42,11 +42,18 @@ public class StartingPoint extends WebPage {
         add(new Form("form")
                 .add(new CheckBox("customTheme", new PropertyModel(toolkit, "customTheme")))
                 .add(new CheckBox("customWidgets", new PropertyModel(workflowFactory, "customWidgets")))
-                .add(new AjaxSubmitLink("start") {
+                .add(new AjaxSubmitLink("simple") {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                         super.onSubmit(target, form);
                         setResponsePage(new WfPage("commercial"));
+                    }
+                })
+                .add(new AjaxSubmitLink("order") {
+                    @Override
+                    protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                        super.onSubmit(target, form);
+                        setResponsePage(new WfPage("pizza"));
                     }
                 }));
 

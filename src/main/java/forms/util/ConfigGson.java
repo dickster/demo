@@ -9,7 +9,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import forms.config.Config;
 import forms.config.DontSendInJson;
 
 import javax.annotation.Nullable;
@@ -28,7 +27,7 @@ public class ConfigGson implements Serializable {
 
         ExclusionStrategy skipUnexposedFieldsStrategy = new ExclusionStrategy() {
             @Override public boolean shouldSkipField(FieldAttributes f) {
-                return f.getAnnotation(DontSendInJson.class) != null || f.getDeclaredClass().isAssignableFrom(Config.class);
+                return f.getAnnotation(DontSendInJson.class) != null;
             }
             @Override public boolean shouldSkipClass(Class<?> clazz) {
                 return false;

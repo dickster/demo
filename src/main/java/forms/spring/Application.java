@@ -4,15 +4,12 @@ import forms.DefaultTheme;
 import forms.DefaultToolkit;
 import forms.Theme;
 import forms.Toolkit;
-import forms.WfAjaxHandler;
 import forms.WfFactory;
 import forms.impl.CommercialWorkflow;
+import forms.impl.PizzaWorkflow;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 
 
 //import javax.inject.Inject;
@@ -25,7 +22,7 @@ public class Application {
 //    private @Autowired StateBeans stateBeans;
 //    private @Autowired Utils utils;
     //
-    private @Inject @Named("demoAjaxHandler") WfAjaxHandler demoHandler;
+ //   private @Inject @Named("demoAjaxHandler") WfAjaxHandler demoHandler;
 
     @Bean
     public Toolkit toolkit() {
@@ -36,7 +33,14 @@ public class Application {
     @Scope("prototype")
     public CommercialWorkflow commercialWorkflow() {
         CommercialWorkflow workflow = new CommercialWorkflow();
-        workflow.withAjaxHandlers(demoHandler);
+       // workflow.withAjaxHandlers(demoHandler);
+        return workflow;
+    }
+
+    @Bean
+    @Scope("prototype")
+    public PizzaWorkflow pizzaWorkflow() {
+        PizzaWorkflow workflow = new PizzaWorkflow();
         return workflow;
     }
 
@@ -46,7 +50,7 @@ public class Application {
     }
 
     @Bean
-    //@Scope("prototype")
+    @Scope("prototype")
     public WfFactory WorkflowFactory() {
         return new WfFactory();
     }

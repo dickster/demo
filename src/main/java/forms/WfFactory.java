@@ -4,6 +4,7 @@ import forms.config.Config;
 import forms.config.GroupConfig;
 import forms.config.TextFieldConfig;
 import forms.impl.CommercialWorkflow;
+import forms.impl.PizzaWorkflow;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.validation.validator.StringValidator;
@@ -20,6 +21,7 @@ public class WfFactory implements Serializable, ApplicationContextAware {
     // important : note that workflow beans are PROTOTYPE scoped.
 
     private @Inject CommercialWorkflow commercialWorkflow;
+    private @Inject PizzaWorkflow pizzaWorkflow;
 
     public boolean customTheme = true; // DEBUG ONLY!!
     public boolean customWidgets;
@@ -35,6 +37,7 @@ public class WfFactory implements Serializable, ApplicationContextAware {
     }
 
     public final FormBasedWorkflow create(String workflowType) {
+
         FormBasedWorkflow workflow = createImpl(workflowType);
         workflow.withWidgetFactory(createWidgetFactory());
         workflow.initialize();
@@ -42,7 +45,11 @@ public class WfFactory implements Serializable, ApplicationContextAware {
     }
 
     public FormBasedWorkflow createImpl(String workflowType) {
-        return commercialWorkflow;
+        if ("pizza".equals(workflowType)) {
+            return pizzaWorkflow;
+        } else {
+            return commercialWorkflow;
+        }
     }
 
 
