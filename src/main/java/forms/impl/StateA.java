@@ -26,20 +26,24 @@ public class StateA extends WfFormState {
         } catch (InterruptedException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        if ("next".equals(event.getName())) {
+        String name = event.getName();
+        if ("next".equals(name)) {
             return stateAx;
         }
 
-        if ("formAy".equals(event.getName())) {
+        if ("formAx".equals(name)) {
+            return stateAx;
+        }
+        if ("formAy".equals(name)) {
             return stateAy;
         }
-        if ("formB".equals(event.getName())) {
+        if ("formB".equals(name)) {
             return stateB;
         }
-        if ("formC".equals(event.getName())) {
+        if ("formC".equals(name)) {
             return stateC;
         }
-        if ("formError".equals(event.getName())) {
+        if ("formError".equals(name)) {
             return stateAx;
         }
         return this;

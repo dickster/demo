@@ -15,6 +15,8 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private static final String CLASS = "class";
     private static final String PLUGIN_NA = "n/a";
 
+    private String markupId;  // this is injected by the framework...don't set this yourself.
+
     private String name; // TODO : refactor this. change name to "ID".
     private String type;
     private String property;
@@ -110,6 +112,10 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return pluginName;
     }
 
+    public Config<T> withMarkupId(String markupId) {
+        this.markupId = markupId;
+        return this;
+    }
 
     public abstract T create(String id);
 }

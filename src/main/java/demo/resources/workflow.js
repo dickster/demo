@@ -58,9 +58,13 @@ var workflow = function() {
             var initializePlugin = function() {
                 // THESE ARE HACKS AND WILL BE WRITTEN AS JQUERY UI PLUGINS.
                 if (options.config.type=="FORM") {
-                    url = options.config.url;  // required for history support.
-                    layout(); // TODO : turn this into a plugin.
-                    return;
+                    try {
+                        url = options.config.url;  // required for history support.
+                        layout(); // TODO : turn this into a plugin.
+                        return;
+                    } catch (err) {
+                        console.log("can't layout form.  maybe your layout definition is wrong?");
+                    }
                 }
                 if (options.config.type=="CHECKBOX") {
                     layoutCheckBox();
@@ -82,24 +86,30 @@ var workflow = function() {
                 config.options.markupId = options.markupId;
                 var $widget = $('#'+options.markupId);
                 console.log('about to initialize widget ' + config.name + ' with plugin ' + config.pluginName + ' and options ' + config.options);
-                $widget[config.pluginName](config.options);
+                try {
+                    $widget[config.pluginName](config.options);
+                }
+                catch (err) {
+                    console.log("error launching plugin " + config.pluginName + err);
+                }
             };
 
             var layout = function() {
                 var $form = $('#'+options.markupId).find('form');
-                var layout = layoutDef[options.formName];
+                var layout = layoutDef[options.config.name];
                 if (!layout) return;
 
                 for (var i = 0; i < layout.rows.length; i++) {
                     var $row = $('<div class="row"></div>');
                     $form.append($row);
                     for (var j = 0; j < layout.rows[i].length; j++) {
-                        var rowCss = rowsCss[layout.rows[i].length];
-                        var $formGroup = $('<div class="form-group"></div>').addClass(rowCss);
+//                        var rowCss = rowsCss[layout.rows[i].length];
+                        var colClass = layout.rows[i][j].css;
+                        var $formGroup = $('<div></div>').addClass(colClass);
                         $row.append($formGroup);
-                        for (var k = 0; k<layout.rows[i][j].length; k++) {
-                            var colName = layout.rows[i][j][k];
-                            var $el = $('#'+options.nameToId[layout.rows[i][j][k]]);
+                        for (var k = 0; k<layout.rows[i][j].col.length; k++) {
+                            var colName = layout.rows[i][j].col[k];
+                            var $el = $( '#' + options.config.nameToId[colName]);
                             $formGroup.append($el);
                         }
                     }
