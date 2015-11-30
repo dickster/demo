@@ -38,9 +38,8 @@ var workflow = function() {
             w.initializePlugin();
         }
 
-        function widget(opts) {
-            var options = opts;
-
+        function widget(d) {
+            var options = d;
             var addAttributes = function() {
                 // note that this DOESN'T do properties like checked, selected, or disabled
                 var id = options.markupId;
@@ -63,9 +62,6 @@ var workflow = function() {
                     layout(); // TODO : turn this into a plugin.
                     return;
                 }
-                if (options.config.type=="TEXT_FIELD") {
-                    layoutTextField();
-                }
                 if (options.config.type=="CHECKBOX") {
                     layoutCheckBox();
                 }
@@ -79,12 +75,14 @@ var workflow = function() {
                     ez.sectionPanel.init(options.config);
                     return;
                 }
+
                 var config = options.config;
+                if (!config.pluginName) return;
+
+                config.options.markupId = options.markupId;
                 var $widget = $('#'+options.markupId);
-                var plugin = config.pluginName;
-                if (!plugin) return;
-                console.log('about to initialize widget ' + config.name + ' with plugin ' + plugin + ' and options ' + config.options);
-                $widget[plugin](config.options);
+                console.log('about to initialize widget ' + config.name + ' with plugin ' + config.pluginName + ' and options ' + config.options);
+                $widget[config.pluginName](config.options);
             };
 
             var layout = function() {
@@ -112,17 +110,6 @@ var workflow = function() {
             function layoutCheckBox() {
                 $('#'+options.markupId).wrap("<div class='checkbox'></div>");
                 $('#'+options.markupId).wrap("<label>" + options.config.label + "</label>");
-            }
-
-            function layoutTextField() {
-                var tf = $('#'+options.markupId);
-                tf.wrap("<div class='input-group'></div>");
-                if (options.config.prefix) {
-                    $( "<span class='input-group-addon'>"+options.config.prefix+"</span>").insertBefore(tf);
-                }
-                if (options.config.suffix) {
-                    $( "<span class='input-group-addon'>"+options.config.suffix+"</span>").insertAfter(tf);
-                }
             }
 
             return {

@@ -5,9 +5,6 @@ import forms.widgets.TextField2;
 
 public class TextFieldConfig extends FormComponentConfig<TextField2> {
 
-    private String prefix;
-    private String suffix;
-
     public TextFieldConfig(String property) {
         super(property, WidgetTypeEnum.TEXT_FIELD);
     }
@@ -18,16 +15,13 @@ public class TextFieldConfig extends FormComponentConfig<TextField2> {
     }
 
     public TextFieldConfig withPrefix(String prefix) {
-        this.prefix = prefix;
+        withOption("prefix", prefix);
         return this;
     }
 
     public TextFieldConfig withSuffix(String suffix) {
-        this.suffix = suffix;
+        withOption("suffix", suffix);
         return this;
     }
-
-
-
 
 }

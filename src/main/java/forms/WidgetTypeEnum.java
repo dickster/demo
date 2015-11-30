@@ -2,7 +2,7 @@ package forms;
 
 public enum WidgetTypeEnum {
 
-    TEXT_FIELD(),
+    TEXT_FIELD("inputGroup"), // TODO : make this a separate widget.
     DATE(),
     DATE_LABEL(),
     YES_NO(),
