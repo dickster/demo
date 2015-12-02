@@ -39,11 +39,11 @@ public class FormAConfig extends FormConfig {
                 .withConfig(new TextFieldConfig("insured.occupation")));
 
         with(new ButtonConfig("next"));
-        with(new ButtonConfig("formAx"));
-        with(new ButtonConfig("formAy"));
-        with(new ButtonConfig("formB"));
-        with(new ButtonConfig("formC"));
-        with(new ButtonConfig("formError"));
+//        with(new ButtonConfig("formAx"));
+//        with(new ButtonConfig("formAy"));
+//        with(new ButtonConfig("formB"));
+//        with(new ButtonConfig("formC"));
+//        with(new ButtonConfig("formError"));
 
         DialogConfig dialogConfig = new DialogConfig("myDialog");
 
