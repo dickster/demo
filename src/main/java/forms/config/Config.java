@@ -83,7 +83,12 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     public Config appendAttribute(String key, String value) {
         String v = attributes.get(key);
-        attributes.put(key, Joiner.on(" ").join(v, value));
+        if (v!=null) {
+            attributes.put(key, Joiner.on(" ").join(v, value));
+        }
+        else {
+            attributes.put(key, v);
+        }
         return this;
     }
 

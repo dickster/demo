@@ -161,12 +161,13 @@ public class WorkflowForm extends Panel implements HasConfig {
                 String n = wfUtil.getComponentName(component);
                 if (name.equals(n)) {
                     visitorKludge = component;
+                    visit.stop();
                 }
             }
 
             @Override
             public boolean preCheck(Component component) {
-                return visitorKludge!=null;
+                return true;
             }
         });
         return visitorKludge;

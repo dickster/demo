@@ -2,7 +2,6 @@ package forms.impl;
 
 import forms.config.AddressConfig;
 import forms.config.ButtonConfig;
-import forms.config.DialogButtonConfig;
 import forms.config.DialogConfig;
 import forms.config.DialogSubmitButtonConfig;
 import forms.config.DivConfig;
@@ -46,18 +45,18 @@ public class FormAConfig extends FormConfig {
         with(new ButtonConfig("formC"));
         with(new ButtonConfig("formError"));
 
-        with(new DialogConfig("myDialog")
+        DialogConfig dialogConfig = new DialogConfig("myDialog");
+
+        dialogConfig
                 .withButtons(new DialogSubmitButtonConfig("ok"),
                         new DialogSubmitButtonConfig("cancel"),
-                        new DialogSubmitButtonConfig("save") )
-                 .withTitle("Hello!")
-                 .withConfigs(new LabelConfig("First Name").name("fnlbl"),
-                           new TextFieldConfig("name.first").name("fname"),
-                           new LabelConfig("Last Name").name("lnlbl"),
-                           new TextFieldConfig("name.last").name("lname"))
-
-        );
-//        dialog.with(new AjaxButtonConfig("Ok"));
-        with(new DialogButtonConfig("test", "myDialog"));
+                        new DialogSubmitButtonConfig("save"))
+                .withTitle("Hello!")
+                .withConfigs(new LabelConfig("First Name").name("fnlbl"),
+                        new TextFieldConfig("name.first").name("fname"),
+                        new LabelConfig("Last Name").name("lnlbl"),
+                        new TextFieldConfig("name.last").name("lname"));
+        with(dialogConfig);
+        with(dialogConfig.createInvokingButtonConfig("test"));
     }
 }

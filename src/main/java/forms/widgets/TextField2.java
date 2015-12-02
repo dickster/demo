@@ -15,12 +15,6 @@ import javax.inject.Inject;
 
 public class TextField2 extends TextField implements HasConfig {
 
-    // TODO : for all widgets.  i should include the config in the class.
-    // api = TextField2.config(blah, blah);   (reduces scattered classes).
-    // should config and widgets be in same package?
-
-    private static final JavaScriptResourceReference INPUTGROUP_JS = new JavaScriptResourceReference(Resource.class, "inputgroup.js");
-
     private @Inject WfUtil wfUtil;
 
     private Config config;
@@ -40,7 +34,6 @@ public class TextField2 extends TextField implements HasConfig {
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
-        response.render(JavaScriptHeaderItem.forReference(INPUTGROUP_JS));
         wfUtil.render(this, response);
     }
 

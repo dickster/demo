@@ -3,6 +3,7 @@ package forms.widgets;
 import forms.config.Config;
 import forms.config.DialogSubmitButtonConfig;
 import forms.config.HasConfig;
+import forms.util.ComponentFinder;
 import forms.util.WfUtil;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
@@ -33,18 +34,28 @@ public class DialogSubmitButton extends AjaxSubmitLink implements HasConfig {
     }
 
     @Override
-    protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-        System.out.println("dialog submitted! (override this method to do something!");
+    public Config getConfig() {
+        return config;
     }
+
+    @Override
+    protected void onSubmit(final AjaxRequestTarget target, final Form<?> form) {
+        Dialog dialog = new ComponentFinder<Dialog>().find(target.getPage(), config.getDialogName());
+        dialog.hide(target);
+        // post ajax event to workflow.
+//        form.visitParents(WorkflowForm.class, new IVisitor<WorkflowForm,Void>() {
+//            @Override public void component(WorkflowForm wf, IVisit visit) {
+//                target.add(wf);
+//                wf.getForm().clearInput();
+//                visit.stop();
+//            }
+//        });
+    }
+
 
     @Override
     protected void onComponentTag(ComponentTag tag) {
         super.onComponentTag(tag);
-    }
-
-    @Override
-    public Config getConfig() {
-        return config;
     }
 
 }

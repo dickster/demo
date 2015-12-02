@@ -2,42 +2,27 @@ package forms.config;
 
 
 import forms.WidgetTypeEnum;
-import forms.WorkflowForm;
 import forms.widgets.DialogSubmitButton;
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.util.visit.IVisit;
-import org.apache.wicket.util.visit.IVisitor;
 
 public class DialogSubmitButtonConfig extends FormComponentConfig<DialogSubmitButton> {
 
-    private String HIDE_JS = "$('#%s').modal('hide');";
-    private String dialogId;
+    private String dialogName;
 
     public DialogSubmitButtonConfig(String name) {
         super(name, WidgetTypeEnum.DIALOG_SUBMIT_BUTTON);
+        withCss("btn");
     }
 
     @Override
     public DialogSubmitButton create(String id) {
-        return new DialogSubmitButton(id, this) {
-            @Override
-            protected void onSubmit(final AjaxRequestTarget target, final Form<?> form) {
-                target.prependJavaScript(String.format(HIDE_JS, dialogId));
-                // post ajax event to workflow.
-                form.visitParents(WorkflowForm.class, new IVisitor<WorkflowForm,Void>() {
-                    @Override public void component(WorkflowForm wf, IVisit visit) {
-                       target.add(wf);
-                        wf.getForm().clearInput();
-                        visit.stop();
-                    }
-                });
-            }
-        };
+        return new DialogSubmitButton(id, this);
     }
 
-    public void setDialogId(String dialogId) {
-        this.dialogId = dialogId;
+    public void setDialogName(String dialogName) {
+        this.dialogName = dialogName;
     }
 
+    public String getDialogName() {
+        return dialogName;
+    }
 }

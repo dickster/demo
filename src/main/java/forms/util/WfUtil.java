@@ -81,6 +81,7 @@ public class WfUtil implements Serializable {
         response.render(OnDomReadyHeaderItem.forScript(js));
     }
 
+
     class WidgetData {
         String markupId;
         Config config;

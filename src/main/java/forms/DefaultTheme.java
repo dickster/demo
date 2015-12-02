@@ -6,9 +6,11 @@ import demo.resources.Resource;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.HeaderItem;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.request.resource.CssResourceReference;
+import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
@@ -25,6 +27,8 @@ public class DefaultTheme implements Theme {
     // default locale, settings.
 
     private static final ResourceReference BRAND_CSS = new CssResourceReference(Resource.class,"brand.css");
+    private static final JavaScriptResourceReference INPUTGROUP_JS = new JavaScriptResourceReference(Resource.class, "inputgroup.js");
+
 
     @Override
     public String getCssClass() {
@@ -57,7 +61,8 @@ public class DefaultTheme implements Theme {
     }
 
     public List<? extends HeaderItem> getHeaderItems() {
-        return Lists.newArrayList(getBodyClassHeaderItem(), CssHeaderItem.forReference(BRAND_CSS));
+        return Lists.newArrayList(getBodyClassHeaderItem(), CssHeaderItem.forReference(BRAND_CSS),
+                JavaScriptHeaderItem.forReference(INPUTGROUP_JS));
     }
 
     protected HeaderItem getBodyClassHeaderItem() {

@@ -16,7 +16,7 @@ import java.util.Locale;
 
 public class CommercialWorkflow extends FormBasedWorkflow {
 
-    private @Inject @Named("state1") WfFormState state1;
+    private @Inject @Named("stateA") WfFormState stateA;
 
     public CommercialWorkflow() {
         super();
@@ -30,7 +30,7 @@ public class CommercialWorkflow extends FormBasedWorkflow {
 
     @Override
     public WfState getStartingState() {
-        return state1;
+        return stateA;
     }
 
     @Override

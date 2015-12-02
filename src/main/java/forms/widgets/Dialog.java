@@ -9,6 +9,7 @@ import forms.config.DialogSubmitButtonConfig;
 import forms.config.HasConfig;
 import forms.util.WfUtil;
 import org.apache.wicket.Component;
+import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.basic.Label;
@@ -21,24 +22,26 @@ import javax.inject.Inject;
 
 public class Dialog extends Panel implements HasConfig {
 
+    private String SHOW_JS = "$('#%s').modal('show');";
+    private String HIDE_JS = "$('#%s').modal('hide');";
+
     private final DialogConfig config;
     private @Inject Toolkit toolkit;
     private @Inject WfUtil wfUtil;
+    private Component form;
 
     public Dialog(String id, DialogConfig config) {
         super(id);
         // TODO add options for fade, close button. ajax handlers?
-        setMarkupId(config.getName());
-        setOutputMarkupPlaceholderTag(true);
+        setOutputMarkupId(true);
         this.config = config;
-        setVisible(false);
     }
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
         add(new Label("title", config.getTitle()));
-        add(new Form("form")
+        add(form = new Form("form")
                 .add(new Div("contents", config))
                 .add(new ListView<DialogSubmitButtonConfig>("buttons", config.getButtons()) {
                     @Override
@@ -50,11 +53,13 @@ public class Dialog extends Panel implements HasConfig {
         );
         add(new AttributeAppender("class", "modal"));
         add(new AttributeAppender("role", "dialog"));
+    //    form.setVisible(false);
+        form.setOutputMarkupPlaceholderTag(true);
     }
 
-    protected Component createButton(String id, DialogSubmitButtonConfig config) {
+    protected Component createButton(String id, DialogSubmitButtonConfig buttonConfig) {
         WidgetFactory factory = wfUtil.getWidgetFactoryFor(this);
-        return factory.create(id, config);
+        return factory.create(id, buttonConfig);
     }
 
     @Override
@@ -66,5 +71,21 @@ public class Dialog extends Panel implements HasConfig {
     @Override
     public Config getConfig() {
         return config;
+    }
+
+    public Dialog show(AjaxRequestTarget target) {
+        target.appendJavaScript(String.format(SHOW_JS, getMarkupId()));
+//        target.add(this);
+        form.setVisible(true);
+        return this;
+    }
+
+    // refactor this to use workflow events.  post WfDialog.
+    // that way everyone will get a crack at it...who knows what we want to add to target when dialog is closed.
+    public Dialog hide(AjaxRequestTarget target) {
+        target.appendJavaScript(String.format(HIDE_JS, getMarkupId()));
+//        target.add(this);
+//        form.setVisible(false);
+        return this;
     }
 }

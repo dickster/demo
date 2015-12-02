@@ -8,36 +8,26 @@ import forms.impl.PizzaWorkflow;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.validation.validator.StringValidator;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.io.Serializable;
 
-public class WfFactory implements Serializable, ApplicationContextAware {
+public class WfFactory implements Serializable {
 
-    // important : note that workflow beans are PROTOTYPE scoped.
+    // important : note that workflow beans are PROTOTYPE scoped, so this bean must be prototype too.
+    // (or ask bean factory directly programmatically instead of relying on injection).
 
     private @Inject CommercialWorkflow commercialWorkflow;
     private @Inject PizzaWorkflow pizzaWorkflow;
 
     public boolean customTheme = true; // DEBUG ONLY!!
     public boolean customWidgets;
-    private ApplicationContext applicationContext;
 
     public WfFactory() {
-        System.out.println("create wffactory");
-    }
 
-    @PostConstruct
-    public void foo() {
-        System.out.println(applicationContext);
     }
 
     public final FormBasedWorkflow create(String workflowType) {
-
         FormBasedWorkflow workflow = createImpl(workflowType);
         workflow.withWidgetFactory(createWidgetFactory());
         workflow.initialize();
@@ -95,8 +85,4 @@ public class WfFactory implements Serializable, ApplicationContextAware {
     }
 
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
 }
