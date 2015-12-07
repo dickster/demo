@@ -28,7 +28,6 @@ public class StartingPoint extends WebPage {
     private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/typeahead.bundle.js");
     private static final CssResourceReference TYPEAHEAD_CSS = new CssResourceReference(Resource.class,"bootstrap-3.1.1-dist/css/typeahead.bootstrap.css");
 
-    private @SpringBean WfFactory workflowFactory;
     private @SpringBean Toolkit toolkit;
     private @SpringBean IHello hello;
 
@@ -41,19 +40,19 @@ public class StartingPoint extends WebPage {
 
         add(new Form("form")
                 .add(new CheckBox("customTheme", new PropertyModel(toolkit, "customTheme")))
-                .add(new CheckBox("customWidgets", new PropertyModel(workflowFactory, "customWidgets")))
+                .add(new CheckBox("customWidgets", new PropertyModel(this, "customWidgets")))
                 .add(new AjaxSubmitLink("simple") {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                         super.onSubmit(target, form);
-                        setResponsePage(new WfPage("commercial"));
+                        setResponsePage(new WfPage("commercial", customWidgets));
                     }
                 })
                 .add(new AjaxSubmitLink("order") {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                         super.onSubmit(target, form);
-                        setResponsePage(new WfPage("pizza"));
+                        setResponsePage(new WfPage("pizza", customWidgets));
                     }
                 }));
 

@@ -38,6 +38,8 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         Preconditions.checkState(getCurrentState() != null);
         Preconditions.checkState(context != null);
         init(); // allow implementation specific initialization.
+
+        // do prevals here...
         started = true;
         return this;
     }

@@ -29,7 +29,6 @@ public class FormAConfig extends FormConfig {
             .withConfig(new LabelConfig("last name"))
             .withConfig(new TextFieldConfig("name.last")));
 
-
         with(new DivConfig("2")
                 .withConfig(new LabelConfig("address"))
                 .withConfig(new AddressConfig("insured.address"))
