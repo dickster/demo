@@ -9,12 +9,12 @@ public abstract class AbstractValidation<T, R> implements IValidation<R> {
     public ValidationAdapter<?,T> adapter;
 
     @Override
-    public final ValidationResult<R> validate(@Nonnull Object obj) {
+    public ValidationResult<R> validate(@Nonnull Object obj) {
         T input = adaptInput(obj);
         return doValidation(input);
     }
 
-    protected abstract ValidationResult<R> newResult();
+//    public abstract ValidationResult<R> newResult();
 
     public AbstractValidation<T,R> withAdapter(ValidationAdapter<?,T> fn) {
         this.adapter = fn;

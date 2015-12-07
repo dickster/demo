@@ -41,4 +41,13 @@ public class ValidationResult<T> {
         errors.addAll(validate.getErrors());
         return this;
     }
+
+
+    @Override
+    public String toString() {
+        return "ValidationResult{" +
+                "errors=" + errors +
+                "success=" + (errors.size()==0) +
+                '}';
+    }
 }

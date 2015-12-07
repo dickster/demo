@@ -25,7 +25,7 @@ public class AgeVehicleTypeValidation extends AbstractValidation<AgeVehicleTypeF
     }
 
     @Override
-    protected ValidationResult<Integer> newResult() {
+    public ValidationResult<Integer> newResult() {
         return new ValidationResult<Integer>();
     }
 

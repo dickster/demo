@@ -12,15 +12,15 @@ public abstract class ValidationAdapter<F, T> {
         this.clazz = clazz;
     }
 
-    public boolean supports(@Nonnull Object obj) {
+    public final boolean supports(@Nonnull Object obj) {
         return getSourceClass().isAssignableFrom(obj.getClass());
     }
 
-    public Class<F> getSourceClass() {
+    public final Class<F> getSourceClass() {
         return clazz;
     }
 
-    public T convertAndAdapt(Object obj) {
+    public final T convertAndAdapt(Object obj) {
         Preconditions.checkState(supports(obj), "this adapter is meant for " + getSourceClass().getSimpleName() + " but you have passed an object of type " + obj.getClass().getSimpleName());
         F cast = getSourceClass().cast(obj);
         return adapt(cast);
