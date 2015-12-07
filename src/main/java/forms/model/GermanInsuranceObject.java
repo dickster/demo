@@ -15,16 +15,27 @@ public class GermanInsuranceObject implements Serializable {
     private List<Name> names = Lists.newArrayList(new Name("derek","william", "dick"));
     private Name name = new Name();
     private Insured insured = new Insured();
+    private Vehicle vehicle = new Vehicle();
 
     @Override
     public String toString() {
         return "GermanInsuranceObject{" +
                 "name=" + name +
                 ", insured=" + insured +
+                ", vehicle=" + vehicle +
                 '}';
     }
 
-    class Name implements Serializable {
+    public Insured getInsured() {
+        return insured;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+
+    public class Name implements Serializable {
         public String first, middle, last;
 
         Name() {
@@ -42,8 +53,9 @@ public class GermanInsuranceObject implements Serializable {
         }
     }
 
-    class Insured implements Serializable {
-        public String phone, email, age, occupation, cc;
+    public class Insured implements Serializable {
+        public String phone, email, occupation, cc;
+        public Integer age;
         public boolean notifyMe = false;
         public Dwelling dwelling = new Dwelling();
         private Address address = new Address();
@@ -60,9 +72,13 @@ public class GermanInsuranceObject implements Serializable {
                     ", dwelling=" + dwelling +
                     '}';
         }
+
+        public Integer getAge() {
+            return age;
+        }
     }
 
-    class Dwelling implements Serializable {
+    public class Dwelling implements Serializable {
         public String roofType = "";
         public boolean pool;
 
@@ -72,6 +88,21 @@ public class GermanInsuranceObject implements Serializable {
                     "pool='" + pool + '\'' +
                     ", roofType='" + roofType + '\'' +
                     '}';
+        }
+    }
+
+    public class Vehicle implements Serializable {
+        public String type;
+
+        @Override
+        public String toString() {
+            return "Vehicle{" +
+                    "type='" + type + '\'' +
+                    '}';
+        }
+
+        public String getType() {
+            return type;
         }
     }
 
