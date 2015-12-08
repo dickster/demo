@@ -1,5 +1,6 @@
 package forms.validation;
 
+<<<<<<< Updated upstream
 import com.google.common.base.Preconditions;
 
 import javax.annotation.Nonnull;
@@ -29,3 +30,31 @@ public abstract class AbstractValidation<T, R> implements IValidation<R> {
 
     protected abstract ValidationResult<R> doValidation(T input);
 }
+=======
+import com.google.common.base.Function;
+
+public abstract class AbstractValidation<T,F,R> implements IValidation<T,R> {
+
+    protected Function<T,F> adapter;
+
+    public AbstractValidation(Function<T,F> adapter) {
+    }
+
+    protected ValidationResult<R> invalid(Object o) {
+        return newResult(o).invalid();
+    }
+
+    protected ValidationResult<R> valid(Object o) {
+        return newResult(o).valid();
+    }
+
+    protected ValidationResult<R> newResult(Object s) {
+        return new ValidationResult(s);
+    }
+
+}
+
+
+
+
+>>>>>>> Stashed changes

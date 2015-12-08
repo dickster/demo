@@ -1,5 +1,6 @@
 package forms.validation;
 
+<<<<<<< Updated upstream
 import forms.validation.AgeVehicleTypeValidation.AgeVehicleTypeFields;
 
 public class AgeVehicleTypeValidation extends AbstractValidation<AgeVehicleTypeFields, Integer> {
@@ -41,4 +42,42 @@ public class AgeVehicleTypeValidation extends AbstractValidation<AgeVehicleTypeF
         public Integer getAge() { return age; }
         public String getVehicleType() { return vehicleType; }
     }
+=======
+import com.google.common.base.Function;
+
+public class AgeVehicleTypeValidation<T,R> extends AbstractValidation<T, AgeVehicleTypeValidation.AgeVehicleFields,R> {
+
+    public AgeVehicleTypeValidation(Function<T, AgeVehicleFields> adapter) {
+        super(adapter);
+    }
+
+    public ValidationResult validate(T obj) {
+        AgeVehicleFields input = adapter.apply(obj);
+        return doValidation(input);
+    }
+
+    protected ValidationResult doValidation(AgeVehicleFields input) {
+        if (input.getAge()>30 && input.getType().equalsIgnoreCase("FORD")) {
+            return invalid("30 year old can't drive a Ford.");
+        }
+        return valid("validation passed.");
+    }
+
+
+
+
+    public static class AgeVehicleFields {
+        Integer age;
+        String type;
+
+        public AgeVehicleFields(Integer age, String type) {
+            this.age = age;
+            this.type = type;
+        }
+
+        public Integer getAge() { return age; }
+        public String getType() { return type; }
+    }
+
+>>>>>>> Stashed changes
 }

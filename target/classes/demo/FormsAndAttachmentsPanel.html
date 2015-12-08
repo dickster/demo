@@ -1,0 +1,33 @@
+<wicket:panel xmlns:wicket="http://www.w3.org/1999/html">
+
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav list-group">
+
+            <li wicket:id="forms" class="">
+                <a wicket:id="form" class="list-group-item"><i wicket:id="icon" class="fa "/><span wicket:id="label"/></a>
+            </li>
+
+            <wicket:remove>
+                <li class="sidebar-brand"><a> Business Owners Policy </a></li>
+                <li><i class="fa fa-times"/><a>Acord #432</a></li>
+                <li><i class="fa fa-times"/><a>Restaurant Supplement</a></li>
+                <li><i class="fa fa-times"/><a>Attachments</a></li>
+            </wicket:remove>
+        </ul>
+
+        <div class="add-form">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <select>
+                <option value="Acord #123">Acord #123</option>
+                <option value="form B">form B</option>
+                <option value="another Form">another Form</option>
+                <option value="restaurant supplement">restaurant supplement</option>
+            </select>
+        </div>
+
+        <div wicket:id="dropzone" class="dropzone text-center">
+            <p>drag files here</p>
+        </div>
+    </div>
+</wicket:panel>
+

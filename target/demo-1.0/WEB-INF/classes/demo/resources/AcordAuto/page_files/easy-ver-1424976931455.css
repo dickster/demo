@@ -1,0 +1,596 @@
+/******************************************************************************/
+/* JQuery */
+
+.ui-dialog, .ui-dialog-titlebar {
+    border-radius: 0 !important;
+    padding : 0px !important;
+}
+
+.ui-dialog-titlebar {
+    font-size: 12pt !important;
+	padding: 5px 12px !important;
+}
+
+.ui-dialog-content {
+    color: #5A5A5A !important;
+    font-size: 11pt;
+}
+
+.ui-dialog-buttonpane {
+	border: 0 !important;
+}
+
+/******************************************************************************/
+/* Confirm Ajax Link  */
+
+.confirm-button {
+    background-color: #FFFFFF !important;
+    background-image: none !important;    
+    border: 0.1em solid #767171 !important;
+    border-radius: 0 !important;    
+    color: #5B9BD5 !important;
+    height: 30px;
+    letter-spacing: 0.05em;
+    padding-left: 15px;
+    padding-right: 15px;
+    min-width: 75px;
+}
+
+/******************************************************************************/
+/* Banner */
+
+.easy-banner {
+    font-weight: bold;
+    font-size: 24px;
+    text-align: left;
+    padding-left: 0px;
+}
+
+/******************************************************************************/
+/* Footer */
+
+.easy-footer {
+    font-weight: bold;
+    font-size: 10px;
+    text-align: left;
+    padding-top: 0px;
+    padding-left: 0px;
+}
+
+.easy-footer-label {
+    text-align: left;
+    padding-top: 10px;
+}
+
+.easy-footer-logo {
+}
+
+/******************************************************************************/
+/* Section */
+
+.easy-section {
+    display: block;
+    float: left;
+    clear: both;
+    width: 100%;
+    overflow: visible;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: 1px solid #BFBFBF;
+}
+
+.easy-section-heading {
+    border-bottom: 1px solid #BFBFBF;
+    margin: 0;
+    min-height: 25px;
+    position: relative;
+    background: #e4e8f0;
+}
+
+
+.easy-section-heading-topleft {
+    background-image: url("../resources/easy_section_corner_topleft.png");
+    float: left;
+    height: 8px;
+    left: -1px;
+    position: relative;
+    top: -1px;
+    width: 8px;
+}
+
+.easy-section-heading-label {
+    float: left;
+    height: 20px;
+    margin: 0 0 0 5px;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    top: 3px;
+    white-space: nowrap;
+    width: 85%;
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.easy-section-heading-topright {
+    background-image: url("../resources/easy_section_corner_topright.png");
+    float: right;
+    height: 8px;
+    position: relative;
+    right: -1px;
+    top: -1px;
+    width: 8px;
+}
+
+.easy-section-error {
+    background-color: #DC143C !important;
+}
+
+.easy-section-minmax {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 60% auto;
+    cursor: pointer;
+    float: left;
+    height: 25px;
+    position: relative;
+    width: 25px;
+}
+
+.easy-section-minmax.maximized {
+    background-image: url("../resources/Open_State_Grey.png");
+}
+
+.easy-section-minmax.minimized {
+    background-image: url("../resources/Closed_State_Grey.png");
+}
+
+.easy-section-summary, 
+.easy-section-content {
+    float: left;
+    padding: 0 2%;
+    width: 96%;
+    margin-top: 5px;    
+}
+
+.easy-section-summary p {
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+}
+
+.easy-section-bottomleft {
+    background-image: url("../resources/easy_section_corner_bottomleft.png");
+    float: left;
+    height: 8px;
+    left: -1px;
+    position: relative;
+    bottom: -1px;
+    width: 8px;
+}
+
+.easy-section-bottomright {
+    background-image: url("../resources/easy_section_corner_bottomright.png");
+    float: right;
+    height: 8px;
+    position: relative;
+    right: -1px;
+    bottom: -1px;
+    width: 8px;
+}
+
+.easy-section-edit {
+    background: url("../resources/edit_white.png") no-repeat scroll 0 0 / 100% auto transparent;
+    float: right;
+    height: 22px;
+    position: relative;
+    top: 2px;
+    width: 22px;
+    margin-right: 5px;    
+}
+
+/******************************************************************************/
+/* Message section */
+
+.easy-message-section {
+}
+
+.easy-message-section li {
+    color: black;
+    cursor: default;
+    list-style: none outside none;
+    overflow: visible;
+}
+
+.easy-message-section ul {
+    overflow: visible;
+    padding: 0px;
+    margin: 0px;
+}
+
+.easy-message-section-category {
+    background-color: lightgray;
+    font-weight: bold;
+    padding: 2px;
+}
+
+.easy-message-section-message {
+    margin: 2px;
+    width: 830px;
+    font-size: 12px;
+}
+
+.easy-message-section-level {
+    margin: 2px;
+    height: 12px;
+    width: 45px;
+}
+
+.easy-message-section-level-priority2 {
+    background: url(../resources/easy_message_section_icon_alert.png) no-repeat scroll right top transparent;
+}
+
+.easy-message-section-level-priority3,
+.easy-message-section-level-priority4,
+.easy-message-section-level-priority5,
+.easy-message-section-level-priority6 {
+    background: url(../resources/easy_message_section_icon_error.png) no-repeat scroll right top transparent;
+}
+
+/******************************************************************************/
+/* Feedback Controls */
+
+.easy-progress {
+    display: none;
+    color: #fff;
+    width: 200px;
+    height: 200px;
+    margin: 0 10px;
+    text-align: center;
+    overflow: hidden;
+    z-index: 1006;
+    position: fixed;
+    top: 50%;
+    margin-top:-100px;
+    left: 50%;
+    margin-left:-100px;
+}
+
+.easy-progress span {
+    position: absolute;
+    left: -50px; /* hide spans until initialized */
+    top: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+/******************************************************************************/
+/* Input Controls */
+
+.easy-input.error,
+.easy-text-area-input.error,
+.easy-combo-box-options-filter.error {
+    background-color: #ffd0d0;
+}
+
+/******************************************************************************/
+/* Text Field Control */
+
+.easy-data-label {
+    height: 15px;
+    display: inline;
+    margin-top: 2px;
+}
+
+.easy-text-field {
+    position: relative;
+}
+
+.easy-text-field-input {
+    position: relative;
+}
+
+/******************************************************************************/
+/* Date Field Control */
+
+.easy-date-field {
+    position: relative;
+}
+
+.yui-skin-sam {
+    vertical-align: middle;
+}
+
+/******************************************************************************/
+/* Calendar Control */
+
+.ui-datepicker-header {
+    background: repeat-x scroll 50% 50% #FFFFFF !important;
+    border: 1px solid #000000 !important;
+}
+
+/******************************************************************************/
+/* Select Control */
+
+.easy-select {
+    position: relative;
+}
+
+.easy-select-input {
+    position: relative;
+}
+
+/******************************************************************************/
+/* Combo Box Control */
+
+.easy-combo-box-options {
+    display: inline-block;
+    overflow: hide;
+    z-index: 999;
+}
+
+.easy-combo-box-options-list {
+    border: 1px solid #AAAAAA;
+    background: white;
+    max-height: 150px;
+    min-width: 200px;
+    overflow: auto;
+    max-width: 500px;
+}
+
+.easy-combo-box-input {
+/*    border: 1px solid #999999;
+    box-sizing: border-box;*/
+    cursor: default;
+    text-shadow: 0 0 0 #000;
+}
+
+.easy-combo-box-option {
+    cursor: default;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+
+.easy-combo-box-options-filter {
+    cursor: default;
+/*    height: 19px;*/
+    border: 1px solid #999999;
+    border-radius: 4px 4px 4px 4px;
+/*    padding-right: 16px;*/
+    padding-left: 6px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.easy-combo-box-option.highlight {
+    background-color: #3775d7;
+    color: #FFFFFF;
+}
+
+/******************************************************************************/
+/* Radio Control */
+
+.easy-radio {
+    position: relative;
+    clear: both; /* fixes select boxes getting covered up */
+}
+
+.easy-radio-container {
+/*    float: left;*/
+}
+
+.easy-radio-input {
+/*    float: left;*/
+}
+
+/******************************************************************************/
+/* Check Control */
+
+.easy-check {
+    position: relative;
+}
+
+.easy-check-container {
+    /*float: left;*/
+}
+
+.easy-check-container {
+    /*float: left;*/
+}
+
+.easy-check label {
+/*    float: left;
+    max-width: none;
+    line-height: 1.5;*/
+}
+
+/******************************************************************************/
+/* Text Area Control */
+
+.easy-text-area {
+    position: relative;
+    width: 100%;
+    margin:1px;    
+}
+
+.easy-text-area-input {
+    border: 1px solid #b7b7b7;
+    width: 100%;
+}
+
+/******************************************************************************/
+/* Errors */
+
+.easy-field-error {
+    background-color: transparent;
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    width: 16px;
+    height: 1em; /* We have to specify the height so IE won't collapse the div when there's no content. */
+    display: inline-block;
+    cursor: default;
+}
+
+.easy-text-field-error-message {
+    border: 1px dotted grey;
+    background-color: lightgrey;
+    color: black;
+    cursor: help;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/******************************************************************************/
+/* Tooltips */
+
+.easy-tooltip {
+    background-color: Khaki;
+    border: 1px solid lightgray;
+    color: sienna;
+    font-size: 12px;
+    height: 12px;
+    left: -9999px;
+    padding: 5px;
+    position: absolute;
+    width: 200px;
+    z-index: 999;
+    text-align: left;
+}
+
+
+/** Override some of the calendar styles. **/
+
+.yui-calcontainer {
+    width: 160px
+}
+
+a.calnav {
+    width: 110px;
+    padding: 0 !important;
+    display: inline-block;
+    text-align: middle;
+    text-decoration: underline !important;
+    color: blue !important;
+}
+
+/** EasyListPanel styles **/
+
+.easy-list-panel-remove-section {
+    background: url("../resources/delete_grey.png") no-repeat scroll 0 0 / 100% auto transparent;
+    float: right;
+    height: 22px;
+    position: relative;
+    top: 2px;
+    width: 22px;
+}
+
+.easy-list-panel-add-section {
+    float: left;
+    border-width: thin;
+    border-style: dashed;
+    border-color: #bfbfbf;
+    width: 99%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;    
+}
+
+.easy-list-panel-add-button {
+    width: 50%;
+    text-align: center;
+    color: #55555f;
+    background-color: #E6E6E6;
+    border-width: thin;
+    border-style: solid;
+    border-color: #BFBFBF;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 25%; 
+    margin-right: 25%;
+}
+
+.easy-list-panel-add-button .easy-list-panel-add-button-left-cell {
+    background-image: url("../resources/plus_grey.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width:20% !important;
+}
+
+.easy-list-panel-add-button-right-cell {
+    font-size: 12pt;
+    width: 80%;
+}
+
+.easy-list-panel-add-row {
+    float: left;   
+    margin-bottom: 15px;
+}
+
+.easy-list-panel-add-row .easy-list-panel-add-button {
+    width: 100%;
+    text-align: left;
+    color: #939598;
+    background-color: transparent;
+    border: none;
+    margin: 0;
+}
+
+.easy-list-panel-add-row .easy-list-panel-add-button-left-cell {
+    display: none;
+}
+
+.easy-list-panel-add-row .easy-list-panel-add-button-right-cell {
+    font-size: 11pt;
+    color: #4e91ce;
+    width: 300px;
+    padding-left: 5px;
+}
+
+.easy-list-panel-remove-row {
+    background: url("../resources/delete_blue.png") no-repeat scroll 0 0 / 100% auto transparent;
+    float: right;
+    height: 17px;
+    position: relative;
+    top: 3px;
+    width: 17px;
+}
+
+.row {
+    width: 100%;
+    float: left; /* Force the div to size to contents. */
+    clear: both; /* Don't allow anything else on this line */
+    border-radius: 0 0 0 0;    
+}
+
+.striped .evenRow {
+    background-color: #E4E1DA;
+}
+
+.striped .oddRow {
+    background-color: #F2EFE9;
+}
+
+.disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.easyJSComboCodeCol {
+    width: 80px;
+    display: block;
+    float: left;
+}
+
+/* Allow blank list entries. */
+.easy-combo-box-options-list div {
+    min-height: 1em;
+}
+
+
+

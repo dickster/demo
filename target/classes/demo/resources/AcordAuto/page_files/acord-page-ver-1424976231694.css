@@ -1,0 +1,48 @@
+/******************************************************************************/
+/* Dialogs */
+
+.ui-widget-overlay {
+    background: none repeat scroll 0 0 black !important;
+    opacity: 0.7 !important;
+}
+
+.ui-dialog .ui-widget-header {
+    background: repeat-x scroll 50% 50% #4B90D0;
+    border: none;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.ui-dialog .ui-state-default .ui-icon {
+    background-image: url("ui-icons_222222_256x240.png");
+}
+
+.dialog-buttons {
+    bottom: 10px;
+    right: 10px;
+    position: absolute;
+    float: right;
+}
+
+/******************************************************************************/
+/* Easy */
+
+.progress-easy-progress {
+    background: none repeat scroll 0 0 grey;
+    opacity: .8;
+    border-radius: 5px;
+}
+
+.progress-easy-progress span {
+    color: lightGray !important;
+}
+
+.progress-easy-progress-label {
+    bottom: 0;
+    opacity: 1;
+    position: absolute;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}

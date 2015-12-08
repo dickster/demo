@@ -1,0 +1,128 @@
+options
+{
+    LOOKAHEAD=4;
+    FORCE_LA_CHECK=true;
+    STATIC=false;
+    IGNORE_CASE=true;
+    USER_TOKEN_MANAGER=false;
+    USER_CHAR_STREAM=false;
+}
+
+PARSER_BEGIN(NameParser)
+package demo;
+
+import java.io.*;
+import java.util.*;
+import demo.Name;
+
+
+public class NameParser {
+
+    NameResult names;
+
+    public NameParser() {
+        this(new ByteArrayInputStream("".getBytes()));
+    }
+
+    // use this method...don't call parse() directly!
+    // because need to re-init variables and reset input.
+    public NameResult parseName(String text) throws ParseException, TokenMgrError {
+        System.out.print("parsing..." + text + " : ");
+        init();
+        ReInit(new StringReader(text));
+        _$$parse();
+        return names;
+    }
+
+    private void init() {
+        names = new NameResult();
+        names.push(new Name());
+    }
+
+    public Name getName() {
+        return names.peek();
+    }
+
+}
+PARSER_END(NameParser)
+
+SKIP :
+{
+    " "
+    | "\t"
+    | "\r"
+    | "\n"
+}
+
+TOKEN:
+{
+    <AND:"+"|"&"|"'n"|"and"> |
+    <MR:"mister"|"mr"(".")?> |
+    <MRS:"misses"|"mrs"(".")?> |
+    <MISS:"miss"> |
+    <MADAM:("madam"|"maam"|"mdm"|"mm")> |
+    <SIR:"sir"> |
+    <MS:"ms"(".")?> |
+    <DOCTOR:"doctor"|"dr"(".")?> |
+    <ROMAN_NUMERALS:(["m","c","d","l","i","x","v"])+> |
+    <SENIOR:"sr"(".")?|"senior"> |
+    <JUNIOR:"jr"(".")?|"junior">
+}
+// TODO:refactor nick_name.
+TOKEN : {
+    <NICK_NAME: "\"" (~["\""])+ "\"" > |
+    <NAME : (["a"-"z","-","'","."])+ >
+}
+
+void _$$parse() : {}
+{
+    LOOKAHEAD(shortOrLongName() and())
+       shortOrLongName() and() fullName() end() |
+       fullName() end()
+}
+
+void end() : {}
+{
+    (<EOF>) {names.peek().endParse();}
+}
+
+void shortOrLongName() : {}
+{
+    LOOKAHEAD(salutation())
+        salutation() (name())* (relation())? |
+        (name())+ (relation())?
+}
+
+
+void fullName() : {}
+{
+    (salutation())?
+    (name())+
+    (relation())?
+}
+
+
+void and() : {} {
+    (<AND>)  {
+        names.peek().endParse();
+        names.push(new Name());
+    }
+}
+
+void salutation() : {}
+{
+    (<MR>|<MRS>|<MISS>|<MS>|<SIR>|<MADAM>|<DOCTOR>) {getName().setSalutation(token.image);}
+}
+
+void relation() : {} {
+    (<SENIOR>|<JUNIOR>|<ROMAN_NUMERALS>) {getName().setRelation(token.image);}
+}
+
+void name() : {}
+{
+    LOOKAHEAD(<NICK_NAME>)
+        <NICK_NAME>  { getName().add(token.image); }
+    |
+        <NAME>  { getName().add(token.image); }
+}
+

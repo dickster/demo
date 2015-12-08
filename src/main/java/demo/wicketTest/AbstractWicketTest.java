@@ -4,7 +4,6 @@ import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import junit.framework.Assert;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
@@ -24,6 +23,7 @@ import org.apache.wicket.util.tester.TagTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
+import org.junit.Assert;
 import org.junit.Before;
 
 import javax.annotation.Nonnull;
@@ -37,10 +37,7 @@ import java.util.Map;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public abstract class AbstractWicketTest {
 	
@@ -95,6 +92,8 @@ public abstract class AbstractWicketTest {
 	public BrovadaWicketTester initialize() {
 		if (wicketTester==null) {
 			ComponentTestInjector injector = createTestInjector();
+
+//            new ServletContext();
 			wicketTester = new BrovadaWicketTester(createApp(injector), injector);
 			Application.get().getResourceSettings().getStringResourceLoaders().add(new IStringResourceLoader() {
 	            @Override

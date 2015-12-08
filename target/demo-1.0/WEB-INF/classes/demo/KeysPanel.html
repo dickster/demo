@@ -1,0 +1,40 @@
+<wicket:panel>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-10 col-md-offset-1">
+            <form wicket:id="form" class="form-horizontal">
+                <fieldset>
+                    <legend><span>Active Key:</span><span wicket:id="current"></span></legend>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <select wicket:id="keys" data-live-search="true" class="selectpicker"/>
+                        </div>
+                        <div class="col-md-6">
+                            <input wicket:id="filter" type="checkbox">
+                                <p style="display:inline;">hide inactive keys that have already been used.</p> <!--<wicket:message key="label.hideInactiveKeys"/>-->
+                            </input>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <a wicket:id="activate" class="form-control btn btn-primary">Activate Selected Key</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3" style="text-align: center">  <!-- <-put this in css..not inline!-->
+                            <h5>OR</h5>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <a wicket:id="create" class="form-control btn btn-primary">Create New Key</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            </div>
+        </div>
+    </div>
+</wicket:panel>
+
+

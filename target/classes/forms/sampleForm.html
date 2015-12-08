@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body style="padding:50px;">
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="inputEmail" class="col-xs-12 ">Email</label>
+        <div class="col-xs-12">
+            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword" class="col-xs-12">Password</label>
+        <div class="col-xs-12">
+            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-12">
+            <div class="checkbox">
+                <label><input type="checkbox"> Remember me</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-12">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </div>
+</form>
+
+<label id="l1">Label1</label>
+<input id="t1"  class="form-control" type="text"/>
+<label id="l2">Label2</label>
+<input id="t2" class="form-control" type="text"/>
+<label id="l3" >Label3</label>
+<input id="t3" class="form-control" type="text"/>
+<label id="l4" >Label4</label>
+<input id="t4" class="form-control" type="text"/>
+
+
+<!--{ colsPerRow : 3, groups : {[l1,t1]}, {[l2,t2]}-->
+
+<!--for (int i=0; i<numCols; i++) {-->
+    <!--var css = numCols==2 ? "col-md-6" : blah;-->
+    <!--var formGroup = $('<div class="col-md-6 form-group"></div>');-->
+    <!--//append formGroup to form parent.-->
+    <!--formGroup.append(col1 ids);-->
+
+
+
+    <div class="col-xs-6 form-group">
+        <label>Label1</label>
+        <input class="form-control" type="text"/>
+    </div>
+    <div class="col-xs-6 form-group">
+        <label>Label2</label>
+        <input class="form-control" type="text"/>
+    </div>
+    <div class="col-xs-6 form-group">
+        <label >Label3</label>
+        <input class="form-control" type="text"/>
+    </div>
+    <div class="col-xs-6 form-group">
+        <label>Label4</label>
+        <input class="form-control" type="text"/>
+    </div>
+
+
+
+<!--
+1: apply "form" class to <form>
+
+$('form').addClass('form');
+
+2: all groups, apply form-group.   (default).
+addClass('form-group');
+
+3: add col-md-12 default class to all widgets.
+
+4: optionally add title.  (use tabPanel?)
+-->
+<!--<form id="f1" class="form-horizontal">-->
+    <!--<div id="g1" class="form-group">-->
+        <!--<label id="l1" for="inputEmail" class="col-xs-12 ">Email</label>-->
+        <!--<div id="t1" class="col-xs-12">-->
+            <!--<input type="email" class="form-control" id="inputEmail" placeholder="Email">-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<label for="inputPassword" class="col-xs-12">Password</label>-->
+        <!--<div class="col-xs-12">-->
+            <!--<input type="password" class="form-control" id="inputPassword" placeholder="Password">-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+            <!--<div class="checkbox">-->
+                <!--<label><input type="checkbox"> Remember me</label>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+            <!--<button type="submit" class="btn btn-primary">Login</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</form>-->
+
+</body>
+</html>
+
