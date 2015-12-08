@@ -39,23 +39,38 @@ public class ChainedValidationTest extends TestCase {
 
             ValidationResult<Integer> result;
             result = chain.validate(new TestData(33, "PICKUP", 1));
-            System.out.println(result);
+            assertTrue(result.isSuccess());
+
             result = chain.validate(new TestData(19, "PICKUP", 1));
-            System.out.println(result);
+            assertTrue(result.isSuccess());
+
             result = chain.validate(new TestData(19, "PICKUP", 2));
-            System.out.println(result);
+            assertFalse(result.isSuccess());
+            assertTrue(result.getNumberErrors()==1);
+            assertTrue(result.getErrors().get(0)==-1);
+
             result = chain.validate(new TestData(35, "SPORTS", 0));
-            System.out.println(result);
+            assertTrue(result.isSuccess());
+
             result = chain.validate(new TestData(17, "SPORTS", 1));
-            System.out.println(result);
+            assertFalse(result.isSuccess());
+
             result = chain.validate(new TestData(88, "PICKUP", 1));
-            System.out.println(result);
+            assertFalse(result.isSuccess());
+            assertTrue(result.getNumberErrors() == 1);
+            assertTrue(result.getErrors().contains(999));
+
             result = chain.validate(new TestData(88, "PICKUP", 0));
-            System.out.println(result);
+            assertFalse(result.isSuccess());
+            assertTrue(result.getNumberErrors()==1);
+            assertTrue(result.getErrors().contains(999));
+
             result = chain.validate(new TestData(88, "PICKUP", 2));
+            assertFalse(result.isSuccess());
             System.out.println(result);
-
-
+            assertTrue(result.getNumberErrors()==2);
+            assertTrue(result.getErrors().contains(999));
+            assertTrue(result.getErrors().contains(-1));
         }
 
 
