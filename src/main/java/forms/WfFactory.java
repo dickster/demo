@@ -49,8 +49,8 @@ public class WfFactory implements Serializable {
             return new DefaultWidgetFactory() {
                 @Override
                 public Component create(String id, Config config) {
-                    if ("name.first".equals(config.getName())) {
-                        return new Label(id, config.getName() + " (custom widget)");
+                    if ("name.first".equals(config.getId())) {
+                        return new Label(id, config.getId() + " (custom widget)");
                     }
                     return super.create(id, config);
                 }

@@ -23,7 +23,7 @@ public class DialogConfig extends GroupConfig<Dialog> {
         for (DialogSubmitButtonConfig config:configs) {
             config.appendCss(i==0 ? "btn-primary" :"btn-default");
             buttons.add(config);
-            config.setDialogName(getName());
+            config.setDialogName(getId());
             i++;
         }
         return this;

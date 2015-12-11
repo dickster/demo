@@ -33,7 +33,6 @@ public class ChainedValidationTest extends TestCase {
                 }
             }.withAdapter(new TestDataNumberOfAccientsAdapter());
 
-
             ChainedValidation<TestData, Integer> chain = new ChainedValidation<TestData, Integer>();
             chain.add(ageTypeValidation, customValidation);
 
@@ -68,7 +67,7 @@ public class ChainedValidationTest extends TestCase {
             result = chain.validate(new TestData(88, "PICKUP", 2));
             assertFalse(result.isSuccess());
             System.out.println(result);
-            assertTrue(result.getNumberErrors()==2);
+            assertTrue(result.getNumberErrors() == 2);
             assertTrue(result.getErrors().contains(999));
             assertTrue(result.getErrors().contains(-1));
         }
@@ -81,9 +80,11 @@ public class ChainedValidationTest extends TestCase {
             }
 
             @Override
-            public AgeVehicleTypeFields adapt(TestData obj) {
-                return new AgeVehicleTypeFields(obj.getAge(),
-                        obj.getType());
+            public AgeVehicleTypeFields adapt(final TestData obj) {
+                return new AgeVehicleTypeFields() {
+                    @Override public Integer getAge() { return obj.getAge(); }
+                    @Override public String getVehicleType() { return obj.getType(); }
+                };
             }
 
         }

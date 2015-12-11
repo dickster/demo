@@ -29,4 +29,18 @@ public class WfSubmitEvent extends WfEvent {
     public Component getComponent() {
         return component;
     }
+
+    public boolean is(String name) {
+        // note : technically, i shouldn't
+        if (getName().equalsIgnoreCase(name)) {
+            if (!getName().equals(name)) System.out.println("hmmm...i'm assuming you meant " + getName() + " but you passed a similar button name of " + name);
+            return true;
+        }
+        return false;
+    }
+
+    // ALIAS for is.
+    public boolean isButton(String name) {
+        return is(name);
+    }
 }

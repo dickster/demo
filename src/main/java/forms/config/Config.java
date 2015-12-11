@@ -17,7 +17,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     private String markupId;  // this is injected by the framework...don't set this yourself.
 
-    private String name; // TODO : refactor this. change name to "ID".
+    private String id; // TODO : refactor this. change id to "ID".
     private String type;
     private String property;
     private final String pluginName;
@@ -26,7 +26,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     public Config(@Nonnull String property, @Nonnull String type, String pluginName) {
         this.property = property;
-        this.name = property; // use property as name by default.
+        this.id = property; // use property as id by default.
         this.type = type;
         this.pluginName = pluginName;
     }
@@ -41,8 +41,8 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
 
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
     public String getProperty() {
@@ -50,12 +50,12 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     }
 
     public Config name(String name) {
-        this.name = name;
+        this.id = name;
         return this;
     }
 
     public Config withName(String name) {
-        this.name = name;
+        this.id = name;
         return this;
     }
 

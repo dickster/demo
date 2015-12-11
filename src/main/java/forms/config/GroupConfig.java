@@ -76,7 +76,7 @@ public abstract class GroupConfig<T extends Component & HasConfig> extends Confi
 
     @Override
     public String getProperty() {
-        return getName();
+        return getId();
     }
 
     @Override
@@ -85,7 +85,7 @@ public abstract class GroupConfig<T extends Component & HasConfig> extends Confi
     public Config getConfigWithName(@Nonnull String name) {
         List<Config> c = getConfigsDeep();
         for (Config config:c) {
-            if (name.equals(config.getName())) {
+            if (name.equals(config.getId())) {
                 return config;
             }
         }

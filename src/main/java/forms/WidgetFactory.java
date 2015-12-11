@@ -37,10 +37,11 @@ public abstract class WidgetFactory implements Serializable {
             addAjax(fc, fcc);
             setLabel(fc, fcc);
         }
+        component.add(new RenderingBehaviour());
     }
 
     protected void setLabel(FormComponent component, FormComponentConfig config) {
-            component.setLabel(Model.of(config.getName()));
+            component.setLabel(Model.of(config.getId()));
     }
 
     protected void setMetaData(Component component, Config config) {
@@ -67,7 +68,7 @@ public abstract class WidgetFactory implements Serializable {
 
     protected void preCreate(Config config) {
         // do nothing by default.  you might want to filter config options based on user/settings.
-        //if (config.getName().equals("someSpecialEmail")) { config.addAjaxEvent("onchange"); config.addValidator(EmailAddressValidator.getInstance()); }
+        //if (config.getId().equals("someSpecialEmail")) { config.addAjaxEvent("onchange"); config.addValidator(EmailAddressValidator.getInstance()); }
     }
 
 }

@@ -58,7 +58,6 @@ public class Address extends Panel implements ILabelProvider<String>, HasConfig 
         add(new HiddenField<BigDecimal>("latitude", new PropertyModel(model, "gpsLocation.latitude")));
         add(new HiddenField<BigDecimal>("longitude", new PropertyModel(model, "gpsLocation.latitude")));
         add(new HiddenField<String>("country", new PropertyModel(model, "country")));
-
     }
 
     @Override
@@ -66,7 +65,6 @@ public class Address extends Panel implements ILabelProvider<String>, HasConfig 
         super.renderHead(response);
         response.render(JavaScriptHeaderItem.forUrl(GOOGLE_MAPS_URL));
         response.render(JavaScriptReferenceHeaderItem.forReference(ADDRESS_JS));
-        wfUtil.render(this, response);
 //        response.render(OnDomReadyHeaderItem.forScript(String.format(CREATE_ADDRESS_JS, new GsonBuilder().create().toJson(getOptions()))));
     }
 

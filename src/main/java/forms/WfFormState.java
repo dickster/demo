@@ -14,7 +14,7 @@ public abstract class WfFormState extends WfState {
 
     private FormConfig formConfig;
     // TODO : don't use list.  rather, just inject listeners? will solve serializable thing?
-    // each AjaxHandler should have getName/Id(),  getEvent();
+    // each AjaxHandler should have getId/Id(),  getEvent();
     // forms should validate that components with ajax turned on have listeners &
     // listeners for events have components that trigger.
     // ****that is redundant, just need a "add ajax" phase after form is built.

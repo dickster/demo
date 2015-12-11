@@ -24,9 +24,9 @@ public class WfState implements Serializable {
         return this;
     }
 
-    public @Nonnull WfState handleEvent(Workflow workflow, WfEvent event) {
+    public @Nonnull WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
         // typically something like...
-        // switch ( Event.valueOf(event.getName()) ) {
+        // switch ( Event.valueOf(event.getId()) ) {
         //    case SUBMIT : doThis();
         //    case BIND : doThat();
         //    etc...

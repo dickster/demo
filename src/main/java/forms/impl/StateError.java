@@ -1,7 +1,7 @@
 package forms.impl;
 
-import forms.WfEvent;
 import forms.WfFormState;
+import forms.WfSubmitEvent;
 import forms.Workflow;
 
 import javax.inject.Inject;
@@ -16,7 +16,7 @@ public class StateError extends WfFormState {
     }
 
     @Override
-    public WfFormState handleEvent(Workflow workflow, WfEvent event) {
+    public WfFormState handleEvent(Workflow workflow, WfSubmitEvent event) {
         if ("ok".equals(event.getName())) {
             return stateA;
         }

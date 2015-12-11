@@ -1,7 +1,7 @@
 package forms.impl;
 
-import forms.WfEvent;
 import forms.WfFormState;
+import forms.WfSubmitEvent;
 import forms.Workflow;
 
 public class PizzaState2 extends WfFormState {
@@ -11,7 +11,7 @@ public class PizzaState2 extends WfFormState {
     }
 
     @Override
-    public WfFormState handleEvent(Workflow workflow, WfEvent event) {
+    public WfFormState handleEvent(Workflow workflow, WfSubmitEvent event) {
         if ("Thanks, Come again".equals(event.getName())) {
             workflow.end();
         }

@@ -7,14 +7,19 @@ import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import forms.model.WfCompoundPropertyModel;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import javax.annotation.Nonnull;
+import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.Map;
 
-public abstract class Workflow<T, S extends WfState> extends EventBus implements Serializable, BeanNameAware {
+public abstract class Workflow<T, S extends WfState> extends EventBus implements Serializable, BeanNameAware, ApplicationContextAware {
 
+    private transient ApplicationContext applicationContext;
     private Map<String, Object> context = Maps.newHashMap();
     private WfCompoundPropertyModel<T> model;
     private WidgetFactory widgetFactory = new DefaultWidgetFactory();
@@ -24,8 +29,17 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     private String beanName;
     protected transient Map<String, S> statesVisited = Maps.newHashMap();
 
+
     public Workflow() {
         register(this);
+    }
+
+    @PostConstruct
+    public void ensurePrototypeBean() {
+        Preconditions.checkState(applicationContext.isPrototype(beanName), "workflow beans must be of @Scope('prototype') " + getClass().getSimpleName());
+        // note : don't use application context after this.  it's just a transient var used at construction time.
+        // it is NOT meant to be serialized by Wicket.
+        applicationContext = null; //invalidate this just to make the point clear.
     }
 
     @Override
@@ -35,10 +49,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
 
     public Workflow<T,S> initialize() {
         Preconditions.checkState(context != null);
-        Preconditions.checkState(getCurrentState() != null);
-        Preconditions.checkState(context != null);
         init(); // allow implementation specific initialization.
-
         // do prevals here...
         started = true;
         return this;
@@ -58,7 +69,6 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
             S nextState = (S) ((event instanceof WfSubmitErrorEvent) ?
                                 getCurrentState().handleError(this, event) :
                                 getCurrentState().handleEvent(this, event));
-System.out.println("changing to state " + nextState);
             changeState(nextState, event);
         } catch (Throwable t) {
             throw new WorkflowException("workflow failed when handling event", event, t);
@@ -171,4 +181,8 @@ System.out.println("changing to state " + nextState);
         return currentState.getStateName();
     }
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 }

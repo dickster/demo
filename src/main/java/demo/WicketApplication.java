@@ -6,26 +6,18 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forms.StartingPoint;
 import forms.WfPage;
-import forms.config.HasConfig;
-import org.apache.wicket.Component;
-import org.apache.wicket.Page;
 import org.apache.wicket.RuntimeConfigurationType;
-import org.apache.wicket.application.IComponentOnAfterRenderListener;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.head.ResourceAggregator;
 import org.apache.wicket.markup.html.IHeaderResponseDecorator;
-import org.apache.wicket.markup.html.TransparentWebMarkupContainer;
-import org.apache.wicket.markup.html.internal.HtmlHeaderContainer;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Response;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.time.Duration;
-import org.apache.wicket.util.visit.IVisit;
-import org.apache.wicket.util.visit.IVisitor;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -38,6 +30,7 @@ public class WicketApplication extends WebApplication {
 
     private CompiledJavaScriptBundleReference bundle;
     private Set<String> unbundledItems = Collections.synchronizedSet(new HashSet<String>());
+
 
     public WicketApplication() {
         super();
@@ -88,30 +81,6 @@ this.getMarkupSettings().setStripWicketTags(true);
         if (getConfigurationType().equals(RuntimeConfigurationType.DEVELOPMENT)) {
             getComponentInitializationListeners().add(new PerformanceListener());
         }
-        getComponentOnAfterRenderListeners().add(new IComponentOnAfterRenderListener() {
-            @Override
-            public void onAfterRender(Component component) {
-                if ( component instanceof HasConfig) {
-                    String name = ((HasConfig) component).getConfig().getName();
-
-                    Page page = component.getPage();
-
-                    // should only have to get this once in request.
-                    HtmlHeaderContainer header = page.visitChildren(new IVisitor<Component, HtmlHeaderContainer>() {
-                        @Override
-                        public void component(final Component component, final IVisit<HtmlHeaderContainer> visit) {
-                            if (component instanceof HtmlHeaderContainer) {
-                                visit.stop((HtmlHeaderContainer) component);
-                            } else if (component instanceof TransparentWebMarkupContainer == false) {
-                                visit.dontGoDeeper();
-                            }
-                        }
-                    });
-                    //new WfUtil().render(((Component &  HasConfig)component), header.getHeaderResponse());
-                    System.out.println(name + " is is rendered");
-                }
-            }
-        });
 
     }
 

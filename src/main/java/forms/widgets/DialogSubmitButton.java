@@ -23,14 +23,13 @@ public class DialogSubmitButton extends AjaxSubmitLink implements HasConfig {
 
     public DialogSubmitButton(String id, DialogSubmitButtonConfig config) {
         super(id);
-        add(new Label("label", Model.of(config.getName())));
+        add(new Label("label", Model.of(config.getId())));
         this.config = config;
     }
 
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
-        wfUtil.render(this, response);
     }
 
     @Override

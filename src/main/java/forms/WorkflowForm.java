@@ -139,7 +139,6 @@ public class WorkflowForm extends Panel implements HasConfig {
         for (HeaderItem item:getTheme().getHeaderItems()) {
             response.render(item);
         }
-        wfUtil.render(this, response);
         response.render(JavaScriptReferenceHeaderItem.forReference(WORKFLOW_JS));
     }
 

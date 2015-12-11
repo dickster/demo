@@ -33,7 +33,7 @@ public class Div extends Panel implements HasConfig {
         add(new ListView<Config>("div", config.getConfigs()) {
             @Override
             protected void populateItem(ListItem<Config> item) {
-                System.out.println(config.getName() + "[" +item.getIndex() + "] - " + item.getModelObject().getName());
+                System.out.println(config.getId() + "[" +item.getIndex() + "] - " + item.getModelObject().getId());
                 item.add(factory.createWidget("el", item.getModelObject()));
                 item.setRenderBodyOnly(true);
             }

@@ -14,7 +14,7 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
     private IFormValidator validator;
     private String url;
-    private Map<String, String> nameToId = Maps.newHashMap();
+    private Map<String, String> idToMarkupId = Maps.newHashMap();
 
     public FormConfig(String name) {
         super(name, WidgetTypeEnum.FORM);
@@ -41,14 +41,14 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
     }
 
     public void updateNameToId(WorkflowForm form) {
-        nameToId = Maps.newHashMap();
+        idToMarkupId = Maps.newHashMap();
         form.visitChildren(Component.class, new IVisitor<Component, Void>() {
             @Override
             public void component(Component component, IVisit<Void> visit) {
                 if (component instanceof HasConfig) {
-                    String name = ((HasConfig)component).getConfig().getName();
+                    String name = ((HasConfig)component).getConfig().getId();
                     System.out.println("adding " + name + " --> " + component.getMarkupId());
-                    nameToId.put(name, component.getMarkupId());
+                    idToMarkupId.put(name, component.getMarkupId());
                 }
             }
         });

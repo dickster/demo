@@ -260,7 +260,6 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
         response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
         response.render(TAB_PANEL_JS);
         response.render(TAB_PANEL_CSS);
-        wfUtil.render(this, response);
     }
 
     protected Component newTitle(final String titleId, final String title, final int index) {

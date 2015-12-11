@@ -1,6 +1,5 @@
 package forms.impl;
 
-import forms.WfEvent;
 import forms.WfFormState;
 import forms.WfState;
 import forms.WfSubmitEvent;
@@ -20,7 +19,7 @@ public class StateAy extends WfFormState {
     }
 
     @Override
-    public WfState handleEvent(Workflow workflow, WfEvent event) {
+    public WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
         if ("next".equals(event.getName())) {
             return stateB;
         }

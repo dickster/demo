@@ -47,6 +47,7 @@
     <orderEntry type="library" name="Maven: com.googlecode.libphonenumber:libphonenumber:6.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.wicket:wicket-extensions:6.20.0" level="project" />
     <orderEntry type="library" name="Maven: org.mortbay.jetty:servlet-api-2.5:6.1.4" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:3.2.8.RELEASE" level="project" />
   </component>
 </module>
 

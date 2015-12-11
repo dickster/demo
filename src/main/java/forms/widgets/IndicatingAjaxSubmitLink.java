@@ -26,7 +26,7 @@ public class IndicatingAjaxSubmitLink extends AjaxButton implements IAjaxIndicat
     private String ajaxIndicatorMarkupId = null;
 
     public IndicatingAjaxSubmitLink(String id, Config config) {
-        super(id, Model.of(config.getName()));
+        super(id, Model.of(config.getId()));
         this.config = config;
     }
 
@@ -62,7 +62,6 @@ public class IndicatingAjaxSubmitLink extends AjaxButton implements IAjaxIndicat
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
-        wfUtil.render(this, response);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class ButtonConfig extends FormComponentConfig<IndicatingAjaxSubmitLink> 
 
 
     protected IndicatingAjaxSubmitLink createAjaxButton(final String id, final ButtonConfig config) {
-        Preconditions.checkArgument(config.getName() != null);
+        Preconditions.checkArgument(config.getId() != null);
         return new IndicatingAjaxSubmitLink(id, config) {
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form <?> form) {

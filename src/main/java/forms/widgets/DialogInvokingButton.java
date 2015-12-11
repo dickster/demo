@@ -22,12 +22,12 @@ public class DialogInvokingButton extends Button implements HasConfig {
 
 
     public DialogInvokingButton(String id, final DialogInvokingButtonConfig config) {
-        super(id, Model.of(config.getName()));
+        super(id, Model.of(config.getId()));
         this.config = config;
         add(new AjaxEventBehavior("onclick") {
             @Override
             protected void onEvent(AjaxRequestTarget target) {
-                Dialog dialog = new ComponentFinder<Dialog>().find(getPage(), config.getDialogConfig().getName());
+                Dialog dialog = new ComponentFinder<Dialog>().find(getPage(), config.getDialogConfig().getId());
                 dialog.show(target);
             }
         });
@@ -43,7 +43,6 @@ public class DialogInvokingButton extends Button implements HasConfig {
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
-        wfUtil.render(this, response);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package forms.impl;
 
-import forms.WfEvent;
 import forms.WfFormState;
 import forms.WfState;
+import forms.WfSubmitEvent;
 import forms.Workflow;
 
 import javax.inject.Inject;
@@ -16,7 +16,7 @@ public class StateB  extends WfFormState {
     }
 
     @Override
-    public WfState handleEvent(Workflow workflow, WfEvent event) {
+    public WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
         if ("next".equals(event.getName())) {
             return stateC;
         }

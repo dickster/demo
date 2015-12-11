@@ -18,7 +18,7 @@ public class ComponentFinder<T extends Component> {
             @Override
             public void component(Component component, IVisit<Void> visit) {
                 if (component instanceof HasConfig) {
-                    String n = ((HasConfig)component).getConfig().getName();
+                    String n = ((HasConfig)component).getConfig().getId();
                     if (name.equals(n)) {
                         visitorKludge = (T) component;
                         visit.stop();

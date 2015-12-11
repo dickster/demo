@@ -1,0 +1,53 @@
+config has options. put them in component meta data.
+PHASE 2:
+VALIDATIONS, chained, reused. one off.  go back to same page with message?
+ (error handling).
+NO BRANCHING!!!,
+SPRING RE-USABLE BEHAVIORS.
+NULLSAFE MODEL via ASPECT???
+DISABLE BUTTON on CHANGE.
+PAYMENT EXAMPLE.
+DYNAMIC SELECT VALUES via SPRING SERVICE.
+
+Input Data = GermanInsuranceObject.
+		inludes Country : Canada/Mexico/USA.
+
+Form 1A:   Canada
+	Salutation[mr,mrs...] Name (First, Middle, Last)
+	address [google]
+	contact [enter phone or email or website]  +contact-->phone
+	drivers licence #
+	favourite type of pop?
+	type of vehicle
+	age
+	smoking
+	year
+	# of accidents
+
+Form 1B:
+	same as Form1A except different drivers license # validation.
+	and different header?
+	favourite type of soda?
+	type of vehicle
+	age
+	smoking
+	year
+	# of accidents
+*both have multiple car/age/etc.. validations performed.
+Bind is primary button unless blah, then it changes to Refer (bind is disabled)
+
+Form 1C :
+	we don not offer our services in Mexico at this time.
+
+
+Form 2:
+	payment method.   CC, cash.    if CC, show images and cc info.
+	credit card number.   (auto detect and call moneris when length is 8)
+	expiry/security code.    ajax button.
+	expiry dates are configurable (withOptions[springBean])  OptionProvider<Date>  look for beans of that class.
+	pay everymonth/year/6 months.   (ajax calculates amount)
+	submit button disabled until
+
+	lay it out properly.
+	add a new custom theme.  (Dereks' Toy Insurance Co.)
+	NullSafeModel object.  just plop it in model.nullsafe and annotate the creators if need be. --otherwise it is newIntance()

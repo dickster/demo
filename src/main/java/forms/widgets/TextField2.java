@@ -1,15 +1,12 @@
 package forms.widgets;
 
-import demo.resources.Resource;
 import forms.config.Config;
 import forms.config.HasConfig;
 import forms.config.TextFieldConfig;
 import forms.util.WfUtil;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 import javax.inject.Inject;
 
@@ -34,7 +31,6 @@ public class TextField2 extends TextField implements HasConfig {
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
-        wfUtil.render(this, response);
     }
 
     @Override

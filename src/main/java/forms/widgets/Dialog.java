@@ -65,7 +65,6 @@ public class Dialog extends Panel implements HasConfig {
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
-        wfUtil.render(this, response);
     }
 
     @Override

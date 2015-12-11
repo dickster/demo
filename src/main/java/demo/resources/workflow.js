@@ -109,7 +109,7 @@ var workflow = function() {
                         $row.append($formGroup);
                         for (var k = 0; k<layout.rows[i][j].col.length; k++) {
                             var colName = layout.rows[i][j].col[k];
-                            var $el = $( '#' + options.config.nameToId[colName]);
+                            var $el = $( '#' + options.config.idToMarkupId[colName]);
                             $formGroup.append($el);
                         }
                     }

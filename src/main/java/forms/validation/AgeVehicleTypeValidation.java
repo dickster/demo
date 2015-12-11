@@ -1,6 +1,5 @@
 package forms.validation;
 
-<<<<<<< Updated upstream
 import forms.validation.AgeVehicleTypeValidation.AgeVehicleTypeFields;
 
 public class AgeVehicleTypeValidation extends AbstractValidation<AgeVehicleTypeFields, Integer> {
@@ -8,7 +7,6 @@ public class AgeVehicleTypeValidation extends AbstractValidation<AgeVehicleTypeF
     private static final Integer ERROR_43 = 43;
     private static final Integer ERROR_202 = 202;
     private static final Integer ERROR_999 = 999;
-    private static final Integer SUCCESS = 0;
 
     @Override
     protected ValidationResult<Integer> doValidation(AgeVehicleTypeFields input) {
@@ -30,54 +28,9 @@ public class AgeVehicleTypeValidation extends AbstractValidation<AgeVehicleTypeF
         return new ValidationResult<Integer>();
     }
 
-    public static class AgeVehicleTypeFields {
-        public Integer age;
-        public String vehicleType;
-
-        public AgeVehicleTypeFields(Integer age, String type) {
-            this.age = age;
-            this.vehicleType = type;
-        }
-
-        public Integer getAge() { return age; }
-        public String getVehicleType() { return vehicleType; }
-    }
-=======
-import com.google.common.base.Function;
-
-public class AgeVehicleTypeValidation<T,R> extends AbstractValidation<T, AgeVehicleTypeValidation.AgeVehicleFields,R> {
-
-    public AgeVehicleTypeValidation(Function<T, AgeVehicleFields> adapter) {
-        super(adapter);
+    public static interface AgeVehicleTypeFields {
+        public Integer getAge();
+        public String getVehicleType();
     }
 
-    public ValidationResult validate(T obj) {
-        AgeVehicleFields input = adapter.apply(obj);
-        return doValidation(input);
-    }
-
-    protected ValidationResult doValidation(AgeVehicleFields input) {
-        if (input.getAge()>30 && input.getType().equalsIgnoreCase("FORD")) {
-            return invalid("30 year old can't drive a Ford.");
-        }
-        return valid("validation passed.");
-    }
-
-
-
-
-    public static class AgeVehicleFields {
-        Integer age;
-        String type;
-
-        public AgeVehicleFields(Integer age, String type) {
-            this.age = age;
-            this.type = type;
-        }
-
-        public Integer getAge() { return age; }
-        public String getType() { return type; }
-    }
-
->>>>>>> Stashed changes
 }

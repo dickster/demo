@@ -10,9 +10,16 @@ public class AgeVehicleTypeValidationAdapter extends ValidationAdapter<GermanIns
     }
 
     @Override
-    public AgeVehicleTypeFields adapt(GermanInsuranceObject obj) {
-        return new AgeVehicleTypeFields(obj.getInsured().getAge(),
-                    obj.getVehicle().getType());
+    public AgeVehicleTypeFields adapt(final GermanInsuranceObject obj) {
+        return new AgeVehicleTypeFields() {
+            @Override public Integer getAge() {
+                return obj.getInsured().getAge();
+            }
+
+            @Override public String getVehicleType() {
+                return obj.getVehicle().getType();
+            }
+        };
     }
 
 }

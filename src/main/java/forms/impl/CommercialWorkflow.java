@@ -30,6 +30,7 @@ public class CommercialWorkflow extends FormBasedWorkflow {
 
     @Override
     public WfState getStartingState() {
+        // if (somePreval) return stateB else..
         return stateA;
     }
 

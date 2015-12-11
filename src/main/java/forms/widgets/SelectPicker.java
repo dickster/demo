@@ -64,7 +64,6 @@ public class SelectPicker extends DropDownChoice<String> implements HasConfig {
         response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
         response.render(JavaScriptHeaderItem.forReference(SELECT_JS));
         response.render(CssHeaderItem.forReference(SELECT_CSS));
-        wfUtil.render(this, response);
     }
 
     @Override

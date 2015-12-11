@@ -1,6 +1,6 @@
 package forms.validation;
 
-<<<<<<< Updated upstream
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
@@ -51,36 +51,4 @@ public class ValidationResult<T> {
                 "success=" + (errors.size()==0) +
                 '}';
     }
-=======
-import com.google.common.base.Preconditions;
-
-public class ValidationResult<R>  {
-
-    private Boolean valid = null;
-    private R result;
-
-    public ValidationResult(R r) {
-    }
-
-    public R getResult() {
-        return result;
-    }
-
-    public boolean isValid() {
-        Preconditions.checkState(valid==null, "result value hasn't been set yet.");
-        return valid;
-    }
-
-    public ValidationResult<R> invalid() {
-        Preconditions.checkState(valid==null, "can't change immutable result");
-        this.valid = false;
-        return this;
-    }
-
-    public ValidationResult<R> valid() {
-        Preconditions.checkState(valid==null, "can't change immutable result");
-        this.valid = true;
-        return this;
-    }
->>>>>>> Stashed changes
 }

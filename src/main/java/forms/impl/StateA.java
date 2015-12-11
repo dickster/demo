@@ -1,7 +1,7 @@
 package forms.impl;
 
-import forms.WfEvent;
 import forms.WfFormState;
+import forms.WfSubmitEvent;
 import forms.Workflow;
 
 import javax.inject.Inject;
@@ -20,7 +20,7 @@ public class StateA extends WfFormState {
     }
 
     @Override
-    public WfFormState handleEvent(Workflow workflow, WfEvent event) {
+    public WfFormState handleEvent(Workflow workflow, WfSubmitEvent event) {
         try {
             Thread.sleep(1200);
         } catch (InterruptedException e) {
