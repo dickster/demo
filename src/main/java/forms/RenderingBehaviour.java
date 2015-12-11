@@ -21,21 +21,10 @@ public class RenderingBehaviour extends Behavior {
         Preconditions.checkState(component instanceof HasConfig, "only workflow components (created by widget factory) can use this behaviour");
         if ( component instanceof HasConfig) {
             Config config = ((HasConfig) component).getConfig();
-            WidgetData data = new WidgetData(component.getMarkupId(), config);
-            String js = String.format(INIT_WIDGET_JS, gson.toJson(data));
+            // inject the markup id (need to do this everytime 'cause it's always changing).
+            config.withMarkupId(component.getMarkupId());
+            String js = String.format(INIT_WIDGET_JS, gson.toJson(config));
             response.render(OnDomReadyHeaderItem.forScript(js));
-        }
-    }
-
-    class WidgetData {
-        @Deprecated // should use the markup injected into config.
-        String markupId;
-        Config config;
-
-        public WidgetData(String markupId, Config config) {
-            this.markupId = markupId;
-            this.config = config;
-            config.withMarkupId(markupId);
         }
     }
 

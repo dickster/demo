@@ -32,18 +32,18 @@ var workflow = function() {
             history.replaceState({name:state,time:new Date()}, "huh", state);
         }
 
-        var initWidget = function(options) {
-           var w = widget(options);
+        var initWidget = function(config) {
+           var w = widget(config);
             w.addAttributes();
             w.initializePlugin();
         }
 
-        function widget(d) {
-            var options = d;
+        function widget(conf) {
+            var config= conf;
             var addAttributes = function() {
                 // note that this DOESN'T do properties like checked, selected, or disabled
-                var id = options.markupId;
-                var attributes = options.config.attributes;
+                var id = config.markupId;
+                var attributes = config.attributes;
 
                 if (!attributes) {
                     return;
@@ -57,35 +57,32 @@ var workflow = function() {
 
             var initializePlugin = function() {
                 // THESE ARE HACKS AND WILL BE WRITTEN AS JQUERY UI PLUGINS.
-                if (options.config.type=="FORM") {
+                if (config.type=="FORM") {
                     try {
-                        url = options.config.url;  // required for history support.
+                        url = config.url;  // required for history support.
                         layout(); // TODO : turn this into a plugin.
                         return;
                     } catch (err) {
                         console.log("can't layout form.  maybe your layout definition is wrong?");
                     }
                 }
-                if (options.config.type=="CHECKBOX") {
+                if (config.type=="CHECKBOX") {
                     layoutCheckBox();
                 }
-                if ( options.config.type=="ADDRESS") {
-                    options.config.id = '#'+options.markupId;
-                    easy.address.create(options.config);
+                if ( config.type=="ADDRESS") {
+                    config.id = '#'+config.markupId;
+                    easy.address.create(config);
                     return;
                 }
-                if (options.config.type=="SECTION") {
-                    options.config.markupId = options.markupId;
-                    ez.sectionPanel.init(options.config);
+                if (config.type=="SECTION") {
+                    ez.sectionPanel.init(config);
                     return;
                 }
 
-                var config = options.config;
                 if (!config.pluginName) return;
 
-                config.options.markupId = options.markupId;
-                var $widget = $('#'+options.markupId);
-                console.log('about to initialize widget ' + config.name + ' with plugin ' + config.pluginName + ' and options ' + config.options);
+                var $widget = $('#'+config.markupId);
+                console.log('about to initialize widget ' + config.name + ' with plugin ' + config.pluginName + ' and options ' + config);
                 try {
                     $widget[config.pluginName](config.options);
                 }
@@ -95,8 +92,8 @@ var workflow = function() {
             };
 
             var layout = function() {
-                var $form = $('#'+options.markupId).find('form');
-                var layout = layoutDef[options.config.name];
+                var $form = $('#'+config.markupId).find('form');
+                var layout = layoutDef[config.name];
                 if (!layout) return;
 
                 for (var i = 0; i < layout.rows.length; i++) {
@@ -109,7 +106,7 @@ var workflow = function() {
                         $row.append($formGroup);
                         for (var k = 0; k<layout.rows[i][j].col.length; k++) {
                             var colName = layout.rows[i][j].col[k];
-                            var $el = $( '#' + options.config.idToMarkupId[colName]);
+                            var $el = $( '#' + config.idToMarkupId[colName]);
                             $formGroup.append($el);
                         }
                     }
@@ -118,8 +115,8 @@ var workflow = function() {
             };
 
             function layoutCheckBox() {
-                $('#'+options.markupId).wrap("<div class='checkbox'></div>");
-                $('#'+options.markupId).wrap("<label>" + options.config.label + "</label>");
+                $('#'+config.markupId).wrap("<div class='checkbox'></div>");
+                $('#'+config.markupId).wrap("<label>" + config.label + "</label>");
             }
 
             return {

@@ -9,7 +9,7 @@ public class DialogInvokingButtonConfig extends FormComponentConfig<DialogInvoki
 
     public DialogInvokingButtonConfig(String id, DialogConfig dialogConfig) {
         super(id, WidgetTypeEnum.DIALOG_BUTTON);
-        withCss("btn");
+        withCss("btn btn-default");
         this.dialogConfig = dialogConfig;
     }
 
