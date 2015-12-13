@@ -54,12 +54,15 @@ public class GermanInsuranceObject implements Serializable {
     }
 
     public class Insured implements Serializable {
+        private String country;
+        private String salutation;
         public String phone, email, occupation, cc;
         public Integer age;
         public boolean notifyMe = false;
         public Dwelling dwelling = new Dwelling();
         private Address address = new Address();
         private Integer deductible = 0;
+        private Contact contact = new Contact();
 
         @Override
         public String toString() {
@@ -76,6 +79,12 @@ public class GermanInsuranceObject implements Serializable {
         public Integer getAge() {
             return age;
         }
+    }
+
+    public class Contact implements Serializable {
+        String email;
+        String phone;
+        String website;
     }
 
     public class Dwelling implements Serializable {

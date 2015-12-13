@@ -22,7 +22,8 @@ public class Pizza1Config extends FormConfig {
 
         with(new LabelConfig("Toppings"));
         with(new MultipleSelectPickerConfig("toppings")
-                .withChoices(Lists.newArrayList("pepperoni", "cheese", "sausage", "onions", "bacon", "pineapple", "mushrooms", "jello", "spinach"))
+               // .withChoices(Lists.newArrayList("pepperoni", "cheese", "sausage", "onions", "bacon", "pineapple", "mushrooms", "jello", "spinach"))
+                .withChoices(new ToppingsService())
                 .withAttribute("title", "pizza toppings")
                 .withAttribute("data-size", "3")
                 .withAttribute("data-selected-text-format", "count>2"));

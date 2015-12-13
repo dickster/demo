@@ -3,6 +3,10 @@
     padding-bottom:25px;
 }
 
+.btn-debug { position:absolute;
+    top:20px;
+    right:20px;
+}
 .btn-primary, .btn-default {
     margin-top:20px;
 }

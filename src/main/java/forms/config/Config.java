@@ -3,7 +3,9 @@ package forms.config;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import forms.HasWorkflow;
 import forms.WidgetTypeEnum;
+import forms.Workflow;
 import org.apache.wicket.Component;
 
 import javax.annotation.Nonnull;
@@ -110,9 +112,6 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return this;
     }
 
-//    public void setPluginName(String pluginName) {
-//        this.pluginName = pluginName;
-//    }
     public String getPluginName() {
         return pluginName;
     }
@@ -123,5 +122,19 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     }
 
     public abstract T create(String id);
+
+
+    protected final void post(@Nonnull Component component, @Nonnull Object event) {
+        Workflow workflow = getWorkflow(component);
+        workflow.post(event);
+    }
+
+    protected final @Nonnull Workflow getWorkflow(@Nonnull Component component) {
+        HasWorkflow parent = component.findParent(HasWorkflow.class);
+        if (parent==null) {
+            throw new IllegalStateException("uh oh, can't find workflow....this is not valid state of affairs!!");
+        }
+        return parent.getWorkflow();
+    }
 }
 

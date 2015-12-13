@@ -53,4 +53,5 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
             }
         });
     }
+
 }

@@ -16,6 +16,8 @@ import java.io.Serializable;
 
 public class WfUtil implements Serializable {
 
+    // TODO: can i just make this a static method?  or will that
+    // screw up any attempts to test?? hmmm....
     public @Nullable String getComponentName(@Nonnull Component component) {
         if (component instanceof HasConfig) {
             return ((HasConfig)component).getConfig().getId();

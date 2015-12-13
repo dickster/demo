@@ -23,13 +23,10 @@ public class MultipleSelectPicker extends ListMultipleChoice<String> implements 
     private static final JavaScriptResourceReference SELECT_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-select.min.js");
     private static final CssResourceReference SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-select.css");
 
-    private @Inject WfUtil wfUtil;
-
-    private AbstractDefaultAjaxBehavior ajaxHandler;
-    private Config config;
+    private MultipleSelectPickerConfig config;
 
     public MultipleSelectPicker(String id, MultipleSelectPickerConfig config) {
-        super(id, config.getChoices());
+        super(id, config.getService().getChoices());
         setOutputMarkupId(true);
         this.config = config;
     }

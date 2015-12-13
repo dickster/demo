@@ -1,9 +1,8 @@
 package forms;
 
-import forms.config.Config;
-import forms.config.GroupConfig;
-import forms.config.HasConfig;
+import forms.config.*;
 import forms.util.WfUtil;
+import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -38,7 +37,10 @@ public class Div extends Panel implements HasConfig {
                 item.setRenderBodyOnly(true);
             }
         }.setReuseItems(true));
-
+        // if DEBUG MODE!
+        Component refresh = factory.createWidget("refresh", new DebugRefreshButtonConfig("REFRESH"));
+        add(refresh);
+        refresh.setVisible(config instanceof FormConfig);
     }
 
     @Override

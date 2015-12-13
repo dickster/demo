@@ -3,6 +3,12 @@
     padding-bottom:45px;
 }
 
+.btn-debug {
+    position:absolute;
+    top:20px;
+    right:20px;
+}
+
 body.derek {
     width:500px;
     background:#f0f0f0;

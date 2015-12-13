@@ -64,6 +64,12 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     }
 
     @Subscribe
+    public void debug(@Nonnull WfDebugEvent event) {
+        ; //  override this if you want to handle debug events.
+        // should assert that you only get these in debug mode!!!
+    }
+
+    @Subscribe
     public final void fire(@Nonnull WfSubmitEvent event) throws WorkflowException {
         try {
             S nextState = (S) ((event instanceof WfSubmitErrorEvent) ?

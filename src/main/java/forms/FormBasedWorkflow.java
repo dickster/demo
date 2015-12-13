@@ -43,6 +43,17 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
     }
 
     @Override
+    public void debug(@Nonnull WfDebugEvent event) {
+        refreshForm(event);
+    }
+
+    private void refreshForm(WfDebugEvent event) {
+        WorkflowForm form = event.getComponent().findParent(WorkflowForm.class);
+        updateFormViaAjax(form, event.getTarget());
+    }
+
+
+    @Override
     protected void changeState(WfFormState nextState, WfSubmitEvent event) {
         if (event instanceof WfSubmitErrorEvent && getCurrentState().equals(nextState)) {
             // do you want to stay on this page? we'll notify form so you can add

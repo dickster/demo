@@ -1,8 +1,8 @@
 package forms.widgets;
 
+import forms.config.ButtonConfig;
 import forms.config.Config;
 import forms.config.HasConfig;
-import forms.util.WfUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -16,16 +16,13 @@ import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
-public class IndicatingAjaxSubmitLink extends AjaxButton implements IAjaxIndicatorAware, HasConfig {
-
-    private @Inject WfUtil wfUtil;
+public class WfButton extends AjaxButton implements IAjaxIndicatorAware, HasConfig {
 
     private final Config config;
     private String ajaxIndicatorMarkupId = null;
 
-    public IndicatingAjaxSubmitLink(String id, Config config) {
+    public WfButton(String id, ButtonConfig config) {
         super(id, Model.of(config.getId()));
         this.config = config;
     }

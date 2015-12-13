@@ -18,7 +18,9 @@ public enum WidgetTypeEnum {
     DIALOG_SUBMIT_BUTTON(),
     ADDRESS(),
     FORM(),
-    SECTION(), MULTIPLE_SELECT("selectpicker");
+    SECTION(),
+    MULTIPLE_SELECT("selectpicker"),
+    DEBUG_BUTTON();
 
     String pluginName;
 
