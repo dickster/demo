@@ -1,4 +1,4 @@
-config has options. put them in component meta data.
+Xconfig has options. put them in component meta data.
 PHASE 2:
 VALIDATIONS, chained, reused. one off.  go back to same page with message?
  (error handling).
@@ -7,12 +7,13 @@ SPRING RE-USABLE BEHAVIORS.
 NULLSAFE MODEL via ASPECT???
 DISABLE BUTTON on CHANGE.
 PAYMENT EXAMPLE.
+CUSTOM THEME with logos/header/width/footer etc..
 DYNAMIC SELECT VALUES via SPRING SERVICE.
 
 Input Data = GermanInsuranceObject.
 		inludes Country : Canada/Mexico/USA.
 
-Form 1A:   Canada
+
 	Salutation[mr,mrs...] Name (First, Middle, Last)
 	address [google]
 	contact [enter phone or email or website]  +contact-->phone

@@ -3,6 +3,10 @@
     padding-bottom:25px;
 }
 
+.btn-primary, .btn-default {
+    margin-top:20px;
+}
+
 .wf-progress {
     bottom: 10px;
     font-size: 32px;

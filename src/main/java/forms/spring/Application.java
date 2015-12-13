@@ -1,13 +1,12 @@
 package forms.spring;
 
-import forms.DefaultTheme;
-import forms.DefaultToolkit;
-import forms.Theme;
-import forms.Toolkit;
-import forms.WfAjaxHandler;
-import forms.WfFactory;
+import forms.*;
+import forms.config.Config;
 import forms.impl.CommercialWorkflow;
 import forms.impl.PizzaWorkflow;
+import org.apache.wicket.Component;
+import org.apache.wicket.markup.html.basic.Label;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -21,6 +20,7 @@ import javax.inject.Named;
 
 @Configuration
 public class Application {
+
 
 //    private @Autowired StateBeans stateBeans;
 //    private @Autowired Utils utils;
@@ -45,6 +45,25 @@ public class Application {
     public PizzaWorkflow pizzaWorkflow() {
         PizzaWorkflow workflow = new PizzaWorkflow();
         return workflow;
+    }
+
+    @Bean
+    public WidgetFactory customWidgetFactory() {
+        return new DefaultWidgetFactory() {
+            @Override
+            public Component create(String id, Config config) {
+                if ("toppings".equals(config.getId())) {
+                    config.withAttribute("title", "this is a custom widget factory tooltip");
+                    config.withAttribute("style", "border:1px solid blue;");
+                }
+                return super.create(id, config);
+            }
+        };
+    }
+
+    @Bean
+    public WidgetFactory widgetFactory() {
+        return new DefaultWidgetFactory();
     }
 
     @Bean

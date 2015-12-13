@@ -26,7 +26,6 @@ public class Address extends Panel implements ILabelProvider<String>, HasConfig 
     // TODO : write this as a plugin.
 
     private static final String GOOGLE_MAPS_URL = "https://maps.googleapis.com/maps/api/js?sensor=false";
-    private static final String CREATE_ADDRESS_JS = "easy.address.create(%s);";
     private static ResourceReference ADDRESS_JS = new JavaScriptResourceReference(Address.class, "address.js");
     private final AddressConfig config;
 

@@ -1,10 +1,7 @@
 package forms;
 
-import forms.config.Config;
 import forms.impl.CommercialWorkflow;
 import forms.impl.PizzaWorkflow;
-import org.apache.wicket.Component;
-import org.apache.wicket.markup.html.basic.Label;
 
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -25,7 +22,6 @@ public class WfFactory implements Serializable {
 
     public final FormBasedWorkflow create(String workflowType) {
         FormBasedWorkflow workflow = createImpl(workflowType);
-        workflow.withWidgetFactory(createWidgetFactory());
         workflow.initialize();
         return workflow;
     }
@@ -37,27 +33,5 @@ public class WfFactory implements Serializable {
             return commercialWorkflow;
         }
     }
-
-
-    // just for debugging purposes only to show custom widget factories.
-    public WidgetFactory createWidgetFactory() {
-        // example for debugging only.
-        if (!customWidgets) {
-            return new DefaultWidgetFactory();
-        }
-
-            return new DefaultWidgetFactory() {
-                @Override
-                public Component create(String id, Config config) {
-                    if ("name.first".equals(config.getId())) {
-                        return new Label(id, config.getId() + " (custom widget)");
-                    }
-                    return super.create(id, config);
-                }
-            };
-
-    }
-
-
 
 }

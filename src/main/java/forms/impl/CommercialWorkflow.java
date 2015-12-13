@@ -1,11 +1,6 @@
 package forms.impl;
 
-import forms.FormBasedWorkflow;
-import forms.StartingPoint;
-import forms.WfAjaxEvent;
-import forms.WfFormState;
-import forms.WfState;
-import forms.WorkflowException;
+import forms.*;
 import forms.model.GermanInsuranceObject;
 import forms.model.WfCompoundPropertyModel;
 
@@ -16,7 +11,8 @@ import java.util.Locale;
 
 public class CommercialWorkflow extends FormBasedWorkflow {
 
-    private @Inject @Named("stateA") WfFormState stateA;
+    @Inject @Named("stateA") private WfFormState stateA;
+    @Inject @Named("widgetFactory") private WidgetFactory widgetFactory;
 
     public CommercialWorkflow() {
         super();
@@ -42,6 +38,11 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     @Override
     public void end() {
         updatePage(new StartingPoint());
+    }
+
+    @Override
+    public WidgetFactory getWidgetFactory() {
+        return widgetFactory;
     }
 
     @Override

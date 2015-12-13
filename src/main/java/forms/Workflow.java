@@ -22,7 +22,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     private transient ApplicationContext applicationContext;
     private Map<String, Object> context = Maps.newHashMap();
     private WfCompoundPropertyModel<T> model;
-    private WidgetFactory widgetFactory = new DefaultWidgetFactory();
+    private WidgetFactory widgetFactory;
     private S currentState;
     private boolean ended = false;
     private boolean started = false;
@@ -144,18 +144,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         return ended;
     }
 
-    public WidgetFactory widgetFactory() {
-        return widgetFactory;
-    }
-
-    public <T extends Workflow> T withWidgetFactory(WidgetFactory factory) {
-        this.widgetFactory = factory;
-        return (T) this;
-    }
-
-    public WidgetFactory getWidgetFactory() {
-        return widgetFactory;
-    }
+    public abstract WidgetFactory getWidgetFactory();
 
     public String getBeanName() {
         return beanName;

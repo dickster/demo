@@ -1,17 +1,10 @@
 package forms;
 
 import demo.resources.Resource;
-import forms.config.Config;
 import org.apache.wicket.Application;
-import org.apache.wicket.Component;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
-import org.apache.wicket.markup.head.CssHeaderItem;
-import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.head.JavaScriptHeaderItem;
-import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
-import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
+import org.apache.wicket.markup.head.*;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
@@ -47,18 +40,6 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     public WfPage(String workflowType, boolean customWidgets) {
         super();
         this.workflow = wfFactory.create(workflowType);
-        if (customWidgets) {
-            workflow.withWidgetFactory( new DefaultWidgetFactory() {
-                @Override
-                public Component create(String id, Config config) {
-                    if ("name.first".equals(config.getId())) {
-                        return new Label(id, config.getId() + " (custom widget)");
-                    }
-                    return super.create(id, config);
-                }
-                }
-            );
-        }
         setDefaultModel(workflow.getModel());
         add( workflow.createForm(FORM_ID, workflow.getCurrentFormConfig()) );
     }

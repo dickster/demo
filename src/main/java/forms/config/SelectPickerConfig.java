@@ -1,6 +1,7 @@
 package forms.config;
 
 import forms.WidgetTypeEnum;
+import forms.spring.SelectChoicesService;
 import forms.widgets.SelectPicker;
 
 import javax.annotation.Nonnull;
@@ -21,6 +22,11 @@ public class SelectPickerConfig extends FormComponentConfig<SelectPicker> {
 
     public SelectPickerConfig withChoices(List<?> choices) {
         this.choices = choices;
+        return this;
+    }
+
+    public SelectPickerConfig withChoices(SelectChoicesService service) {
+        this.choices = service.getChoices();
         return this;
     }
 

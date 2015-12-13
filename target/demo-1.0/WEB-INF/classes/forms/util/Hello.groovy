@@ -7,6 +7,6 @@ class Hello implements IHello {
 
     @Override
     String greeting() {
-        return "xxx";
+        return "(hello from groovy land!)";
     }
 }

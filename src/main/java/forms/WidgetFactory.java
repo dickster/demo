@@ -31,6 +31,7 @@ public abstract class WidgetFactory implements Serializable {
     protected void postCreate(final Component component, Config config) {
         setMetaData(component, config);
         // TODO : register all widgets so they can @Post & @Subscribe.
+
         if (config instanceof FormComponentConfig && component instanceof FormComponent) {
             FormComponent fc = (FormComponent) component;
             FormComponentConfig fcc = (FormComponentConfig) config;
