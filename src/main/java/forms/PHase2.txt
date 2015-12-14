@@ -4,7 +4,7 @@ VALIDATIONS, chained, reused. one off.  go back to same page with message?
  (error handling).
 NO BRANCHING!!!,
 SPRING RE-USABLE BEHAVIORS.
-NULLSAFE MODEL via ASPECT???
+NULLSAFE MODEL via ASPECT???-fugit.
 DISABLE BUTTON on CHANGE.
 PAYMENT EXAMPLE.
 CUSTOM THEME with logos/header/width/footer etc..

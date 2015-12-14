@@ -10,17 +10,14 @@ public class LabelConfig extends Config<Label2> {
     public LabelConfig(String name) {
         super(name, WidgetTypeEnum.LABEL);
         text(name);
-        withCss("");
     }
 
     public LabelConfig(String name, boolean property) {
         super(name, WidgetTypeEnum.LABEL);
-        withCss("");
     }
 
     public LabelConfig(String name, String format, String... property) {
         super(name, WidgetTypeEnum.LABEL);
-        withCss("");
     }
 
     public LabelConfig text(String value) {

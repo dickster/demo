@@ -12,8 +12,9 @@ public class PaymentFormConfig extends FormConfig {
     }
 
     private void addConfigs() {
+        with(new LabelConfig("payment method"));
         withConfig(new SelectPickerConfig("payment.method")
-                .withChoices(Lists.newArrayList("Credit Card", "Cash", "Direct Billing")));
+                .withOptions(Lists.newArrayList("Credit Card", "Cash", "Direct Billing")));
     // TODO : add some kind of ajax listener here...when # of digits is 12 then do ajax call?
     // and enable submit button otherwise show error!
 
@@ -28,8 +29,9 @@ public class PaymentFormConfig extends FormConfig {
         withConfig(new LabelConfig("security code"));
         withConfig(new TextFieldConfig<Integer>("payment.securityCode"));
 
+        withConfig(new LabelConfig("payment frequency"));
         withConfig(new SelectPickerConfig<String>("payment.frequency")
-                .withChoices(Lists.newArrayList(
+                .withOptions(Lists.newArrayList(
                         "6 months",
                         "1 year",
                         "montly",

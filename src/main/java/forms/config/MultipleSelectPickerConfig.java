@@ -1,7 +1,7 @@
 package forms.config;
 
 import forms.WidgetTypeEnum;
-import forms.spring.SelectChoicesService;
+import forms.spring.SelectOptionsService;
 import forms.widgets.MultipleSelectPicker;
 
 import javax.annotation.Nonnull;
@@ -10,7 +10,7 @@ import java.util.List;
 // TODO : this should extend SelectPickerConfig????
 public class MultipleSelectPickerConfig<T> extends FormComponentConfig<MultipleSelectPicker> {
 
-    private SelectChoicesService<T> service;
+    private SelectOptionsService<T> service;
 
     public MultipleSelectPickerConfig(@Nonnull String property) {
         super(property, WidgetTypeEnum.MULTIPLE_SELECT);
@@ -18,20 +18,20 @@ public class MultipleSelectPickerConfig<T> extends FormComponentConfig<MultipleS
     }
 
     public MultipleSelectPickerConfig withChoices(List<T> choices) {
-        this.service = new SelectChoicesService<T>() {
-            @Override public List<T> getChoices() {
-                return service.getChoices();
+        this.service = new SelectOptionsService<T>() {
+            @Override public List<T> getOptions() {
+                return service.getOptions();
             }
         };
         return this;
     }
 
-    public MultipleSelectPickerConfig withChoices(SelectChoicesService<T> service) {
+    public MultipleSelectPickerConfig withChoices(SelectOptionsService<T> service) {
         this.service = service;
         return this;
     }
 
-    public SelectChoicesService<T> getService() {
+    public SelectOptionsService<T> getService() {
         return service;
     }
 

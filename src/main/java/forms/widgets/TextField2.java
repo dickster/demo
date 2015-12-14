@@ -1,17 +1,14 @@
 package forms.widgets;
 
-import forms.config.Config;
 import forms.config.HasConfig;
 import forms.config.TextFieldConfig;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.form.TextField;
 
-public class TextField2<T> extends TextField<T> implements HasConfig {
+public class TextField2<T> extends TextField<T> implements HasConfig<TextFieldConfig> {
 
-
-
-    private Config config;
+    private TextFieldConfig config;
 
     public TextField2(String id, TextFieldConfig config) {
         super(id);
@@ -20,9 +17,9 @@ public class TextField2<T> extends TextField<T> implements HasConfig {
 
     @Override
     protected void onComponentTag(ComponentTag tag) {
-        tag.setName("input");
-        tag.getAttributes().put("type", "text");
-        super.onComponentTag(tag);
+//        tag.setName("input");
+//        tag.getAttributes().put("type", "text");
+//        super.onComponentTag(tag);
     }
 
     @Override
@@ -31,7 +28,7 @@ public class TextField2<T> extends TextField<T> implements HasConfig {
     }
 
     @Override
-    public Config getConfig() {
+    public TextFieldConfig getConfig() {
         return this.config;
     }
 

@@ -22,7 +22,7 @@ public class SelectPicker<T> extends DropDownChoice<T> implements HasConfig {
     private Config config;
 
     public SelectPicker(String id, SelectPickerConfig config) {
-        super(id, config.getChoicesService().getChoices());
+        super(id, config.getOptionsService().getOptions());
         setOutputMarkupId(true);
         this.config = config;
     }

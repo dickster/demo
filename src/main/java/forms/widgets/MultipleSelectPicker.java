@@ -4,9 +4,7 @@ import demo.resources.Resource;
 import forms.config.Config;
 import forms.config.HasConfig;
 import forms.config.MultipleSelectPickerConfig;
-import forms.util.WfUtil;
 import org.apache.wicket.Application;
-import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -14,8 +12,6 @@ import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.form.ListMultipleChoice;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
-
-import javax.inject.Inject;
 
 
 public class MultipleSelectPicker extends ListMultipleChoice<String> implements HasConfig {
@@ -26,7 +22,7 @@ public class MultipleSelectPicker extends ListMultipleChoice<String> implements 
     private MultipleSelectPickerConfig config;
 
     public MultipleSelectPicker(String id, MultipleSelectPickerConfig config) {
-        super(id, config.getService().getChoices());
+        super(id, config.getService().getOptions());
         setOutputMarkupId(true);
         this.config = config;
     }

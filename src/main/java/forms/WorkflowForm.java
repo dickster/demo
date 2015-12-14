@@ -139,7 +139,7 @@ public class WorkflowForm extends Panel implements HasConfig {
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
         getFormConfig().setCallbackUrl(historyMaker.getCallbackUrl().toString());
-        getFormConfig().updateIdToMarkupId(this);
+//        getFormConfig().updateIdToMarkupId(this);
         for (HeaderItem item:getTheme().getHeaderItems()) {
             response.render(item);
         }

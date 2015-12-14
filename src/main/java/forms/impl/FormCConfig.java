@@ -20,14 +20,14 @@ public class FormCConfig extends FormConfig {
         with(new LabelConfig("(two selectpickers with different configurations)"));
         with(new LabelConfig("what kind of roof do you have?"));
         with(new SelectPickerConfig("insured.dwelling.roofType")
-                .withChoices(Lists.newArrayList("shingles", "metal", "tin", "tile", "slate"))
+                .withOptions(Lists.newArrayList("shingles", "metal", "tin", "tile", "slate"))
                 .withAttribute("title", "my title")
                 .withAttribute("multiple", "")
                 .withAttribute("data-selected-text-format","count>2")
                 .withOption("header", "this is a custom header"));
 
         with(new SelectPickerConfig("insured.dwelling.roofType")
-                .withChoices(Lists.newArrayList("shingles", "metal", "tin", "tile", "slate"))
+                .withOptions(Lists.newArrayList("shingles", "metal", "tin", "tile", "slate"))
                 .withAttribute("data-live-search","true"));
 
 

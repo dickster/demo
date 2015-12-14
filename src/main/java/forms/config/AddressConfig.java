@@ -14,7 +14,7 @@ public class AddressConfig extends FormComponentConfig<Address> {
 
     public AddressConfig(@Nonnull String property) {
         super(property, WidgetTypeEnum.ADDRESS);
-        withCss("");
+        removeCss("form-control");
     }
 
     @Override

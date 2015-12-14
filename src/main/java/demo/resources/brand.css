@@ -5,6 +5,10 @@
     right:20px;
 }
 
+body.defaultTheme .container  {
+    width:970px;
+}
+
 .header {
     position:relative;
     border-bottom: 3px solid #777;

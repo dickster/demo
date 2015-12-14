@@ -3,17 +3,14 @@ package forms.widgets;
 import forms.config.CheckBoxConfig;
 import forms.config.Config;
 import forms.config.HasConfig;
-import forms.util.WfUtil;
-import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
 
-import javax.inject.Inject;
-
-public class CheckBox_ extends CheckBox implements HasConfig {
+public class CheckBox_ extends Panel implements HasConfig {
     private final CheckBoxConfig config;
-
-    private @Inject WfUtil wfUtil;
 
     public CheckBox_(String id, CheckBoxConfig config) {
         super(id);
@@ -26,11 +23,19 @@ public class CheckBox_ extends CheckBox implements HasConfig {
     }
 
     @Override
-    protected void onComponentTag(ComponentTag tag) {
-        tag.setName("input");
-        tag.getAttributes().put("type", "checkbox");
-        super.onComponentTag(tag);
+    protected void onInitialize() {
+        super.onInitialize();
+        add(new Label("label", config.getLabel()));
+        add(new CheckBox("checkbox", (IModel<Boolean>) getDefaultModel()));
     }
+
+//
+//    @Override
+//    protected void onComponentTag(ComponentTag tag) {
+//        tag.setName("input");
+//        tag.getAttributes().put("type", "checkbox");
+//        super.onComponentTag(tag);
+//    }
 
     @Override
     public Config getConfig() {

@@ -23,6 +23,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private String type;
     private String property;
     private final String pluginName;
+    private boolean wrapHtmlOutput = false;
     private Map<String, String> attributes = Maps.newHashMap();
     private Map<String, Object> options = Maps.newHashMap();  // a place to store custom options.
 
@@ -56,7 +57,6 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     public Config withId(String name) {
         this.id = name;
-        withAttribute("data-wf", this.id);
         return this;
     }
 
@@ -70,6 +70,22 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     public Config withCss(String css) {
         withAttribute(CLASS, css);
+        return this;
+    }
+
+    public Config<T> removeCss(String s) {
+        String css = attributes.get(CLASS);
+        if (css!=null) {
+            attributes.put(CLASS, css.replace(s,""));
+        }
+        return this;
+    }
+
+    public Config removeAttribute(String attribute) {
+        if (!attributes.containsKey(attribute)) {
+            System.out.println("hmmm...you are trying to remove an attribute that doesn't exist : " + attribute);
+        }
+        attributes.remove(attribute);
         return this;
     }
 
@@ -134,6 +150,15 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
             throw new IllegalStateException("uh oh, can't find workflow....this is not valid state of affairs!!");
         }
         return parent.getWorkflow();
+    }
+
+    public boolean isWrapHtmlOutput() {
+        return wrapHtmlOutput;
+    }
+
+    public Config withWrappedHtmlOutput() {
+        wrapHtmlOutput = true;
+        return this;
     }
 }
 

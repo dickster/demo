@@ -13,12 +13,12 @@ import org.springframework.context.annotation.Scope;
 public class Utils {
 
     @Bean
-    public SelectChoicesService<String> northAmericaCountryOptions() {
+    public SelectOptionsService<String> northAmericaCountryOptions() {
         return new CountryOptionService();
     }
 
     @Bean
-    public SelectChoicesService<String> defaultCountryOptions() {
+    public SelectOptionsService<String> defaultCountryOptions() {
         return new CountryOptionService()
                 .withChoices("Germany", "France", "Russia", "Italy", "Switzerland", "Cambodia", "Chile", "North Korea", "Australia");
     }

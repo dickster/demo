@@ -30,23 +30,23 @@ public class Pizza1Config extends FormConfig {
 
         with(new LabelConfig("City"));
         with(new SelectPickerConfig("city")
-                .withChoices(Lists.newArrayList("new york", "chicago", "sydney", "riyadh", "mumbai"))
+                .withOptions(Lists.newArrayList("new york", "chicago", "sydney", "riyadh", "mumbai"))
                 .withAttribute("dropup", "")
                 .withAttribute("data-live-search", "true"));
 
         with(new LabelConfig("Pizza Size"));
         with(new SelectPickerConfig("size")
-                .withChoices(Lists.newArrayList("small", "medium", "large"))
+                .withOptions(Lists.newArrayList("small", "medium", "large"))
                 .withCss("show-menu-arrow"));
 
         with(new LabelConfig("Tip"));
         with(new SelectPickerConfig("tip")
-                .withChoices(Lists.newArrayList("10%", "15%", "20%"))
+                .withOptions(Lists.newArrayList("10%", "15%", "20%"))
                 .withAttribute("data-width", "100px"));
 
         with(new LabelConfig("Food Allergies"));
         with(new SelectPickerConfig("tip")
-                .withChoices(Lists.newArrayList("10%", "15%", "20%"))
+                .withOptions(Lists.newArrayList("10%", "15%", "20%"))
                 .withAttribute("disabled", "")
                 .withAttribute("data-width", "100px"));
 

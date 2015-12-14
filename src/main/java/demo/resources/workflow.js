@@ -36,26 +36,15 @@ var workflow = function() {
 
         var initWidget = function(config) {
            var w = widget(config);
-            w.addAttributes();
             w.initializePlugin();
         }
 
         function widget(conf) {
             var config= conf;
-            var addAttributes = function() {
-                // note that this DOESN'T do properties like checked, selected, or disabled
-                var id = config.markupId;
-                var attributes = config.attributes;
 
-                if (!attributes) {
-                    return;
-                }
-                // TODO : need to handle appending attributes for ones that exist.
-                for (var attr in attributes) {
-                    var value = attributes[attr];
-                    document.getElementById(id).setAttribute(attr, value);
-                }
-            };
+            function get(id) {
+                return $("[data-wf='"+id+"']");
+            }
 
             var initializePlugin = function() {
                 // THESE ARE HACKS AND WILL BE WRITTEN AS JQUERY UI PLUGINS.
@@ -72,19 +61,19 @@ var workflow = function() {
                     layoutCheckBox();
                 }
                 if ( config.type=="ADDRESS") {
-                    config.id = '#'+config.markupId;
+                    config.id = config.markupId;
                     easy.address.create(config);
                     return;
                 }
-                if (config.type=="SECTION") {
-                    ez.sectionPanel.init(config);
-                    return;
-                }
+//                if (config.type=="SECTION") {
+//                    ez.sectionPanel.init(config);
+//                    return;
+//                }
 
                 if (!config.pluginName) return;
 
                 var $widget = $('#'+config.markupId);
-                console.log('about to initialize widget ' + config.id + ' with plugin ' + config.pluginName + ' and options ' + JSON.stringify(config));
+                console.log('about to initialize widget ' + config.id + ' with plugin ' + config.pluginName + ' and options ' + JSON.stringify(config.options));
                 try {
                     $widget[config.pluginName](config.options);
                 }
@@ -93,13 +82,21 @@ var workflow = function() {
                 }
             };
 
+            var layoutDefault = function (form) {
+                form.find('[data-wf]').each(function(i,e) {
+                    $(e).wrap('<div class="form-group"></div>')
+                        .wrap('<div class="row"></div>')
+                        .wrap('<div class="col-md-4"></div>');
+                });
+            };
+
             var layout = function() {
-                var $form = $('#'+config.markupId).find('form');
+                var $form = get(config.id).find('form');
                 var layout = layoutDef[config.id];
-                if (!layout) return;
+                if (!layout) layoutDefault($form);
 
                 for (var section = 0; section<layout.sections.length; section++) {
-                    var $sec = $('<section></section>');
+                    var $sec = $('<fieldset></fieldset>');
                     $form.append($sec);
                     layoutSection(layout.sections[section], $sec);
                 }
@@ -109,7 +106,8 @@ var workflow = function() {
             function layoutSection(section, parent) {
                 for (var row = 0; row < section.rows.length; row++) {
                     var $row = $('<div class="row"></div>');
-                    parent.append($row);
+                    $row.wrap('<div class="form-group"></div>');
+                    parent.append($row.parent());
                     layoutRow(section.rows[row], $row);
                 }
             }
@@ -119,21 +117,27 @@ var workflow = function() {
                     var colClass = row[col].css;
                     var $formGroup = $('<div></div>').addClass(colClass);
                     parent.append($formGroup);
-                    for (var colGroup = 0; colGroup<row[col].col.length; colGroup++) {
-                        var colName = row[col].col[colGroup];
-                        var $el = $( '#' + config.idToMarkupId[colName]);
-                        $formGroup.append($el);
-                    }
+                    layoutColGroup($formGroup, row[col]);
                 }
             }
 
-            function layoutCheckBox() {
-                $('#'+config.markupId).wrap("<div class='checkbox'></div>");
-                $('#'+config.markupId).wrap("<label>" + config.label + "</label>");
+            function layoutColGroup(parent, colGroup) {
+                for (var c = 0; c<colGroup.col.length; c++) {
+                    var colName = colGroup.col[c];
+                    var $el = get(colName);
+                    parent.append($el);
+                }
+            }
+
+            function layoutCheckBox() {   // do this in behaviour??? or else ajax will muck it up with duplicated html.
+                var $cb = get(config.id);
+                // if not already wrapped then... { } else leave it...
+                // should just write a panel checkbox class styled like this.
+//                $cb.wrap("<div class='checkbox'></div>");
+//                $cb.wrap("<label>" + config.label + "</label>");
             }
 
             return {
-                addAttributes : addAttributes,
                 layout : layout,
                 initializePlugin : initializePlugin
             }

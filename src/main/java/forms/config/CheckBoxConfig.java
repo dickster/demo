@@ -10,7 +10,8 @@ public class CheckBoxConfig extends FormComponentConfig<CheckBox_> {
     public CheckBoxConfig(String property, String label) {
         super(property, WidgetTypeEnum.CHECKBOX);
         this.label = label;
-        withCss("");
+        removeCss("form-control");
+        withCss("checkbox");
     }
 
     public String getLabel() {

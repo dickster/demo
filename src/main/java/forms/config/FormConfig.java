@@ -1,25 +1,18 @@
 package forms.config;
 
-import com.google.common.collect.Maps;
 import forms.WidgetTypeEnum;
 import forms.WorkflowForm;
-import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
-import org.apache.wicket.util.visit.IVisit;
-import org.apache.wicket.util.visit.IVisitor;
-
-import java.util.Map;
 
 public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
     private @DontSendInJson IFormValidator validator;
     private String url;
-    private Map<String, String> idToMarkupId = Maps.newHashMap();
+//    private Map<String, String> idToMarkupId = Maps.newHashMap();
 
     public FormConfig(String name) {
         super(name, WidgetTypeEnum.FORM);
         withRenderBodyOnly(false);
-        withCss("form");
     }
 
     @Override
@@ -40,18 +33,18 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
         this.url = url;
     }
 
-    public void updateIdToMarkupId(WorkflowForm form) {
-        idToMarkupId = Maps.newHashMap();
-        form.visitChildren(Component.class, new IVisitor<Component, Void>() {
-            @Override
-            public void component(Component component, IVisit<Void> visit) {
-                if (component instanceof HasConfig) {
-                    String name = ((HasConfig)component).getConfig().getId();
-                    System.out.println("adding " + name + " --> " + component.getMarkupId());
-                    idToMarkupId.put(name, component.getMarkupId());
-                }
-            }
-        });
-    }
+//    public void updateIdToMarkupId(WorkflowForm form) {
+//        idToMarkupId = Maps.newHashMap();
+//        form.visitChildren(Component.class, new IVisitor<Component, Void>() {
+//            @Override
+//            public void component(Component component, IVisit<Void> visit) {
+//                if (component instanceof HasConfig) {
+//                    String name = ((HasConfig)component).getConfig().getId();
+//                    System.out.println("adding " + name + " --> " + component.getMarkupId());
+//                    idToMarkupId.put(name, component.getMarkupId());
+//                }
+//            }
+//        });
+//    }
 
 }

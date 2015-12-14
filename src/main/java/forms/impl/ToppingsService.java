@@ -3,12 +3,12 @@ package forms.impl;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import forms.spring.SelectChoicesService;
+import forms.spring.SelectOptionsService;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ToppingsService implements SelectChoicesService<String> {
+public class ToppingsService implements SelectOptionsService<String> {
 
     List<String> toppings = Lists.newArrayList(
             "pepperoni",
@@ -30,7 +30,7 @@ public class ToppingsService implements SelectChoicesService<String> {
     );
 
     @Override
-    public List<String> getChoices() {
+    public List<String> getOptions() {
         Predicate<String> randomToppingsPredicate = new Predicate<String>() {
             @Override
             public boolean apply(@Nullable String input) {

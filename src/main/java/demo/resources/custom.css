@@ -5,6 +5,10 @@
     right:20px;
 }
 
+body.derek .container  {
+    width:970px;
+}
+
 .logo {
     background-image: url("/images/logo2.png");
     background: no-repeat;
