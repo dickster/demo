@@ -1,4 +1,4 @@
-package forms.spring;
+package forms.impl;
 
 import forms.config.ButtonConfig;
 import forms.config.FormConfig;

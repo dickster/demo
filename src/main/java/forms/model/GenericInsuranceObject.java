@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import demo.Address;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class GenericInsuranceObject implements Serializable {
@@ -47,6 +48,7 @@ public class GenericInsuranceObject implements Serializable {
         public String expiry;
         public String method;
         public String frequency;
+        public BigDecimal total = new BigDecimal(1932.34);
     }
 
     public class Name implements Serializable {

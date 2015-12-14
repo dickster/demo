@@ -1,4 +1,4 @@
-package forms.spring;
+package forms.impl;
 
 import forms.WfFormState;
 import forms.WfState;

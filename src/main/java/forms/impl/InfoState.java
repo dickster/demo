@@ -4,7 +4,6 @@ import forms.WfFormState;
 import forms.WfState;
 import forms.WfSubmitEvent;
 import forms.Workflow;
-import forms.impl.InfoFormConfig;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
