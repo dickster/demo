@@ -1,19 +1,16 @@
 package forms.model;
 
 import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
 import demo.Address;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
 public class GenericInsuranceObject implements Serializable {
 
     // this could include an acord object, an ibis object., a collection of objects like
     //  temp, misc, ai, acord & errors or whatever you like.
 
-    private List<Name> names = Lists.newArrayList(new Name("derek","william", "dick"));
     private Name name = new Name();
     private Insured insured = new Insured();
     private Vehicle vehicle = new Vehicle();
@@ -43,8 +40,8 @@ public class GenericInsuranceObject implements Serializable {
     public Payment getPayment() { return payment; }
 
     public class Payment implements Serializable {
-        public Integer cc;
-        private Integer securityCode;
+        public int cc;
+        private int securityCode;
         public String expiry;
         public String method;
         public String frequency;
@@ -55,7 +52,7 @@ public class GenericInsuranceObject implements Serializable {
         public String first ="derek";
         public String middle = "william";
         public String last = "dick";
-        public String salutation;
+        public String salutation = "Mr.";
 
         Name() {
         }
@@ -74,20 +71,19 @@ public class GenericInsuranceObject implements Serializable {
 
     public class Insured implements Serializable {
         private String country;
-        private Integer accidents;
-        private String drinks;
+        private int accidents = 2;
+        private String drinks = "coke";
         private String salutation;
-        private Boolean smokes;
-        public String phone, email, occupation, cc;
-        public Integer age;
+        private boolean smokes = true;
+        public String phone, email="foo@bar.com", occupation, cc="123123123";
+        public int age = 55;
         public boolean notifyMe = false;
         public Dwelling dwelling = new Dwelling();
         private Address address = new Address();
         private String address2;
-        private Integer deductible = 0;
+        private int deductible = 0;
         private Contact contact = new Contact();
         private String driversLicense;
-
 
         public String getCountry() {
             return country;
@@ -105,7 +101,7 @@ public class GenericInsuranceObject implements Serializable {
                     '}';
         }
 
-        public Integer getAge() {
+        public int getAge() {
             return age;
         }
     }
@@ -131,7 +127,7 @@ public class GenericInsuranceObject implements Serializable {
 
     public class Vehicle implements Serializable {
         public String type = "Buick";
-        public Integer year;
+        public int year = 1978;
 
         @Override
         public String toString() {

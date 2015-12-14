@@ -41,15 +41,14 @@ public class StartingPoint extends WebPage {
         add(new Label("greeting", hello.greeting()));
 
         add(new Form("form")
-                .add(new CheckBox("customTheme", new PropertyModel(toolkit, "customTheme")))
                 .add(new CheckBox("invalidData", new PropertyModel(this, "invalidData")))
+                .add(new CheckBox("customTheme", new PropertyModel(toolkit, "customTheme")))
                 .add(new CheckBox("customWidgets", new PropertyModel(this, "customWidgets")))
                 .add(new AjaxSubmitLink("simple") {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                         super.onSubmit(target, form);
                         GenericInsuranceObject obj = new GenericInsuranceObject();
-                        obj.getVehicle();
                         if (invalidData) obj.invalid();
                         setResponsePage(new WfPage("test", obj));
                     }

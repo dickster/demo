@@ -3,6 +3,7 @@ package forms;
 import forms.impl.CommercialWorkflow;
 import forms.impl.PizzaWorkflow;
 import forms.impl.TestWorkflow;
+import forms.model.WfCompoundPropertyModel;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -20,9 +21,9 @@ public class WfFactory implements Serializable {
     public WfFactory() {
     }
 
-    public final FormBasedWorkflow create(String workflowType) {
+    public final FormBasedWorkflow create(String workflowType, WfCompoundPropertyModel model) {
         FormBasedWorkflow workflow = createImpl(workflowType);
-        workflow.initialize();
+        workflow.withModel(model).initialize();
         return workflow;
     }
 

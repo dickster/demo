@@ -10,10 +10,6 @@ import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
-import org.apache.wicket.markup.html.form.Button;
-import org.apache.wicket.markup.html.form.CheckBox;
-import org.apache.wicket.markup.html.form.DropDownChoice;
-import org.apache.wicket.markup.html.form.TextField;
 
 import java.util.Map;
 
@@ -28,7 +24,7 @@ public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdP
 
     @Override
     public void onComponentTag(Component component, ComponentTag tag) {
-        fixTagsIfNecessary(component, tag);
+        super.onComponentTag(component, tag);
         addAttributes(component, tag);
     }
 
@@ -44,23 +40,23 @@ public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdP
         }
     }
 
-    private void fixTagsIfNecessary(Component component, ComponentTag tag) {
-        if (component instanceof TextField) {
-            tag.setName("input");
-            tag.getAttributes().put("type", "text");
-        }
-        else if (component instanceof DropDownChoice) {
-            tag.setName("select");
-        }
-        else if (component instanceof Button) {
-            tag.setName("input");
-            tag.getAttributes().put("type", "button");
-        }
-        else if (component instanceof CheckBox) {
-            tag.setName("input");
-            tag.getAttributes().put("type", "checkbox");
-        }
-    }
+//    private void fixTagsIfNecessary(Component component, ComponentTag tag) {
+//        if (component instanceof TextField) {
+//            tag.setName("input");
+//            tag.getAttributes().put("type", "text");
+//        }
+//        else if (component instanceof DropDownChoice) {
+//            tag.setName("select");
+//        }
+//        else if (component instanceof Button) {
+//            tag.setName("input");
+//            tag.getAttributes().put("type", "button");
+//        }
+//        else if (component instanceof CheckBox) {
+//            tag.setName("input");
+//            tag.getAttributes().put("type", "checkbox");
+//        }
+//    }
 
     @Override
     public void renderHead(Component component, IHeaderResponse response) {

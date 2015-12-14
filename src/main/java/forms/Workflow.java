@@ -48,16 +48,16 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         this.beanName = name;
     }
 
-    public Workflow<T,S> initialize() {
+    public final Workflow<T,S> initialize() {
         Preconditions.checkState(context != null);
         init(); // allow implementation specific initialization.
-        // do prevals here...
         started = true;
         return this;
     }
 
     protected void init() {
         // override if you want....extension point for impl stuff here.
+        // do prevals here...
     }
 
     @Subscribe

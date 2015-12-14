@@ -25,7 +25,7 @@ public class TestWorkflow extends FormBasedWorkflow<GenericInsuranceObject> {
     @Override
     protected void init() {
         GenericInsuranceObject obj = getModel().getObject();
-        rejected = "MEXICO".equals(obj.getInsured().getCountry());
+        rejected = "MEXICO".equalsIgnoreCase(obj.getInsured().getCountry());
     }
 
     @Override

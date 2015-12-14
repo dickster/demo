@@ -1,10 +1,15 @@
 package forms;
 
 import demo.resources.Resource;
+import forms.model.GenericInsuranceObject;
 import forms.model.WfCompoundPropertyModel;
 import org.apache.wicket.Application;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
-import org.apache.wicket.markup.head.*;
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.IModel;
@@ -47,13 +52,37 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
 
     public WfPage(String workflowType, Object obj) {
         super();
-        this.workflow = wfFactory.create(workflowType);
+
+        WfCompoundPropertyModel model = new WfCompoundPropertyModel(new GenericInsuranceObject());
         if (obj != null) {
-            workflow.withModel(new WfCompoundPropertyModel(obj));
+            model = new WfCompoundPropertyModel(obj);
         }
+        this.workflow = wfFactory.create(workflowType, model);
         setDefaultModel(workflow.getModel());
         add(workflow.createForm(FORM_ID, workflow.getCurrentFormConfig()));
+
+
+        testModel(workflow.getModel());
+
+
         add(new Label("subheader", getSubHeader()));
+    }
+
+    private void testModel(WfCompoundPropertyModel model) {
+//        Object x = new PropertyModel(model, "name.first").getObject();
+//        System.out.println(x);
+//         x = new PropertyModel(model, "vehicle.type").getObject();
+//        System.out.println(x);
+//         x = new PropertyModel(model, "insured.contact.email").getObject();
+//        System.out.println(x);
+//         x = new PropertyModel(model, "insured.age").getObject();
+//        System.out.println(x);
+//         x = new PropertyModel(model, "name.middle").getObject();
+//        System.out.println(x);
+//         x = new PropertyModel(model, "name.last").getObject();
+//        System.out.println(x);
+//         x = new PropertyModel(model, "name.salutation").getObject();
+//        System.out.println(x);
     }
 
     private WorkflowForm getWorkflowForm() {

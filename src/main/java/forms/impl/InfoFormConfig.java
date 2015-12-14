@@ -31,11 +31,11 @@ public class InfoFormConfig extends FormConfig {
 
         withConfig(new CheckBoxConfig("insured.smokes", "i smoke cigarettes"));
 
-        withConfig(new LabelConfig("address"));
-        withConfig(new AddressConfig("insured.address"));
-
-        withConfig(new LabelConfig("address 2"));
-        withConfig(new AddressConfig("insured.address2"));
+//        withConfig(new LabelConfig("address"));
+//        withConfig(new AddressConfig("insured.address"));
+//
+//        withConfig(new LabelConfig("address 2"));
+//        withConfig(new AddressConfig("insured.address2"));
 
         withConfig(new LabelConfig("contact info"));
         withConfig(new TextFieldConfig("insured.contact.email"));
