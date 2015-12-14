@@ -4,9 +4,8 @@ import forms.*;
 import forms.config.Config;
 import forms.impl.CommercialWorkflow;
 import forms.impl.PizzaWorkflow;
+import forms.impl.TestWorkflow;
 import org.apache.wicket.Component;
-import org.apache.wicket.markup.html.basic.Label;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -37,6 +36,14 @@ public class Application {
     public CommercialWorkflow commercialWorkflow() {
         CommercialWorkflow workflow = new CommercialWorkflow();
         workflow.withAjaxHandlers(ageOccupationAjaxHandler);
+        return workflow;
+    }
+
+    @Bean
+    @Scope("prototype")
+    public TestWorkflow testWorkflow() {
+        TestWorkflow workflow = new TestWorkflow();
+        // add ajax handlers.
         return workflow;
     }
 

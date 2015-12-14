@@ -5,19 +5,16 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import forms.config.FormConfig;
 import forms.util.WfAjaxEventPropagation;
-import forms.util.WfUtil;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.cycle.RequestCycle;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import java.util.List;
 
 public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
 
     private List<WfAjaxHandler> ajaxHandlers;
-    private @Inject WfUtil wfUtil;
 
     public FormBasedWorkflow() {
         super();

@@ -2,7 +2,9 @@ package forms;
 
 import forms.impl.CommercialWorkflow;
 import forms.impl.PizzaWorkflow;
+import forms.impl.TestWorkflow;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import java.io.Serializable;
 
@@ -13,11 +15,9 @@ public class WfFactory implements Serializable {
 
     private @Inject CommercialWorkflow commercialWorkflow;
     private @Inject PizzaWorkflow pizzaWorkflow;
-
-    public boolean customWidgets;
+    private @Inject TestWorkflow testWorkflow;
 
     public WfFactory() {
-
     }
 
     public final FormBasedWorkflow create(String workflowType) {
@@ -26,12 +26,15 @@ public class WfFactory implements Serializable {
         return workflow;
     }
 
-    public FormBasedWorkflow createImpl(String workflowType) {
+    public FormBasedWorkflow createImpl(@Nonnull String workflowType) {
         if ("pizza".equals(workflowType)) {
             return pizzaWorkflow;
-        } else {
+        } else if ("test".equals(workflowType)) {
+            return testWorkflow;
+        } else if ("commercial".equals(workflowType)){
             return commercialWorkflow;
         }
+        throw new IllegalArgumentException("workflow type not supported : " + workflowType);
     }
 
 }

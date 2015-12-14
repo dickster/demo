@@ -1,6 +1,7 @@
 package forms;
 
 import demo.resources.Resource;
+import forms.model.GenericInsuranceObject;
 import forms.util.IHello;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
@@ -32,6 +33,7 @@ public class StartingPoint extends WebPage {
     private @SpringBean IHello hello;
 
     private boolean customWidgets;
+    private boolean invalidData = false;
 
     public StartingPoint() {
         super(new PageParameters());
@@ -40,19 +42,23 @@ public class StartingPoint extends WebPage {
 
         add(new Form("form")
                 .add(new CheckBox("customTheme", new PropertyModel(toolkit, "customTheme")))
+                .add(new CheckBox("invalidData", new PropertyModel(this, "invalidData")))
                 .add(new CheckBox("customWidgets", new PropertyModel(this, "customWidgets")))
                 .add(new AjaxSubmitLink("simple") {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                         super.onSubmit(target, form);
-                        setResponsePage(new WfPage("commercial", customWidgets));
+                        GenericInsuranceObject obj = new GenericInsuranceObject();
+                        obj.getVehicle();
+                        if (invalidData) obj.invalid();
+                        setResponsePage(new WfPage("test", obj));
                     }
                 })
                 .add(new AjaxSubmitLink("order") {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                         super.onSubmit(target, form);
-                        setResponsePage(new WfPage("pizza", customWidgets));
+                        setResponsePage(new WfPage("pizza", null));
                     }
                 }));
 

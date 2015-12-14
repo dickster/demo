@@ -1,14 +1,31 @@
-.group {
-    padding-top:0px;
-    padding-bottom:25px;
-}
 
-.btn-debug { position:absolute;
+.btn-debug {
+    position:fixed;
     top:20px;
     right:20px;
 }
-.btn-primary, .btn-default {
-    margin-top:20px;
+
+.header {
+    position:relative;
+    border-bottom: 3px solid #777;
+    height: 103px;
+}
+
+.logo {
+    height: 100px;
+    background-repeat: no-repeat;
+    background-image: url("/images/logo1.png");
+    width: 100px;
+}
+
+.logo-text {
+    position: absolute;
+    top: 25%;
+    font-size: 40px;
+    color: #666;
+    font-style: italic;
+    padding-left: 18px;
+    height: 50px;
 }
 
 .wf-progress {

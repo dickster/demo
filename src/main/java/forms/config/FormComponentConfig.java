@@ -22,7 +22,7 @@ public abstract class FormComponentConfig<T extends Component & HasConfig> exten
 
     public FormComponentConfig(@Nonnull String property, @Nonnull String type, String pluginName) {
         super(property, type, pluginName);
-        withCss("");
+        withCss("form-component");
     }
 
     public FormComponentConfig(@Nonnull String property, WidgetTypeEnum type) {

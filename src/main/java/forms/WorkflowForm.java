@@ -13,7 +13,6 @@ import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.HiddenField;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
@@ -48,15 +47,20 @@ public class WorkflowForm extends Panel implements HasConfig {
         super(id);
         withConfig(config);
         setOutputMarkupId(true);
+        add(new RenderingBehaviour());
 
         setupHistory();
+
         // placeholder to be replaced based on formConfig.
         add(new WebMarkupContainer("form").add(new WebMarkupContainer("content")));
 
         // TODO : put feedback as fixed part of widget factory.  i.e. getFeedbackPanel();
         add(feedback = new FeedbackPanel("feedback"));
         feedback.setOutputMarkupPlaceholderTag(true);
-        add(new Label("subheader", config.getTitle()));
+    }
+
+    public String getSubHeader() {
+        return formConfig.getTitle();
     }
 
     private void setupHistory() {
@@ -135,7 +139,7 @@ public class WorkflowForm extends Panel implements HasConfig {
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
         getFormConfig().setCallbackUrl(historyMaker.getCallbackUrl().toString());
-        getFormConfig().updateNameToId(this);
+        getFormConfig().updateIdToMarkupId(this);
         for (HeaderItem item:getTheme().getHeaderItems()) {
             response.render(item);
         }

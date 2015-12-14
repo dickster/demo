@@ -3,16 +3,13 @@ package forms.widgets;
 import forms.config.Config;
 import forms.config.HasConfig;
 import forms.config.TextFieldConfig;
-import forms.util.WfUtil;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.form.TextField;
 
-import javax.inject.Inject;
+public class TextField2<T> extends TextField<T> implements HasConfig {
 
-public class TextField2 extends TextField implements HasConfig {
 
-    private @Inject WfUtil wfUtil;
 
     private Config config;
 

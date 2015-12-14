@@ -3,7 +3,7 @@ package forms.config;
 import forms.WidgetTypeEnum;
 import forms.widgets.TextField2;
 
-public class TextFieldConfig extends FormComponentConfig<TextField2> {
+public class TextFieldConfig<T> extends FormComponentConfig<TextField2<T>> {
 
     public TextFieldConfig(String property) {
         super(property, WidgetTypeEnum.TEXT_FIELD);
@@ -11,7 +11,7 @@ public class TextFieldConfig extends FormComponentConfig<TextField2> {
 
     @Override
     public TextField2 create(String id) {
-        return new TextField2(id, this);
+        return new TextField2<T>(id, this);
     }
 
     public TextFieldConfig withPrefix(String prefix) {

@@ -7,21 +7,21 @@ import forms.widgets.SelectPicker;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class SelectPickerConfig extends FormComponentConfig<SelectPicker> {
+public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
 
     // TODO : should this be transient or serializable???
-    private transient SelectChoicesService service;
+    private transient SelectChoicesService<T> service;
 
 
     public SelectPickerConfig(@Nonnull String property) {
         super(property, WidgetTypeEnum.SELECT);
     }
 
-    public SelectChoicesService getChoicesService() {
+    public SelectChoicesService<T> getChoicesService() {
         return service;
     }
 
-    public SelectPickerConfig withChoices(final List<?> choices) {
+    public SelectPickerConfig withChoices(final List<T> choices) {
         this.service = new SelectChoicesService() {
             @Override
             public List getChoices() {
@@ -31,14 +31,14 @@ public class SelectPickerConfig extends FormComponentConfig<SelectPicker> {
         return this;
     }
 
-    public SelectPickerConfig withChoices(SelectChoicesService service) {
+    public SelectPickerConfig withChoices(SelectChoicesService<T> service) {
         this.service = service;
         return this;
     }
 
     @Override
-    public SelectPicker create(String id) {
-        return new SelectPicker(id, this);
+    public SelectPicker<T> create(String id) {
+        return new SelectPicker<T>(id, this);
     }
 
 }

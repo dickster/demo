@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
-    private IFormValidator validator;
+    private @DontSendInJson IFormValidator validator;
     private String url;
     private Map<String, String> idToMarkupId = Maps.newHashMap();
 
@@ -40,7 +40,7 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
         this.url = url;
     }
 
-    public void updateNameToId(WorkflowForm form) {
+    public void updateIdToMarkupId(WorkflowForm form) {
         idToMarkupId = Maps.newHashMap();
         form.visitChildren(Component.class, new IVisitor<Component, Void>() {
             @Override

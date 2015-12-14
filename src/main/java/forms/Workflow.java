@@ -19,10 +19,10 @@ import java.util.Map;
 
 public abstract class Workflow<T, S extends WfState> extends EventBus implements Serializable, BeanNameAware, ApplicationContextAware {
 
+    private WidgetFactory widgetFactory;
     private transient ApplicationContext applicationContext;
     private Map<String, Object> context = Maps.newHashMap();
     private WfCompoundPropertyModel<T> model;
-    private WidgetFactory widgetFactory;
     private S currentState;
     private boolean ended = false;
     private boolean started = false;
@@ -32,6 +32,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
 
     public Workflow() {
         register(this);
+        this.widgetFactory = getWidgetFactory();
     }
 
     @PostConstruct
@@ -141,6 +142,11 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         return model;
     }
 
+    public Workflow withModel(WfCompoundPropertyModel<T> model) {
+        this.model = model;
+        return this;
+    }
+
     public void end() {
         //currentState=null;
         ended = true;
@@ -151,6 +157,13 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     }
 
     public abstract WidgetFactory getWidgetFactory();
+
+    public Workflow withWidgetFactory(WidgetFactory widgetFactory) {
+        // NOTE : only use this if you really want to override default factory.
+        //  typically, using the default is the smart thing to do.
+        this.widgetFactory = widgetFactory;
+        return this;
+    }
 
     public String getBeanName() {
         return beanName;

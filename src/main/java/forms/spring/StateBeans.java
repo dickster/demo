@@ -2,16 +2,7 @@ package forms.spring;
 
 import forms.WfAjaxHandler;
 import forms.WfFormState;
-import forms.impl.AgeOccupationAjaxHandler;
-import forms.impl.PizzaState1;
-import forms.impl.PizzaState2;
-import forms.impl.State1;
-import forms.impl.StateA;
-import forms.impl.StateAx;
-import forms.impl.StateAy;
-import forms.impl.StateB;
-import forms.impl.StateC;
-import forms.impl.StateError;
+import forms.impl.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,6 +14,14 @@ public class StateBeans {
         return new AgeOccupationAjaxHandler();
     }
 
+    @Bean
+    public WfFormState infoState() { return new InfoState();}
+    @Bean
+    public WfFormState paymentState() { return new PaymentState();}
+    @Bean
+    public WfFormState rejectedState() { return new RejectedState();}
+    @Bean
+    public WfFormState confirmationState() { return new ConfirmationState();}
     @Bean
     public WfFormState stateA() {
         return new StateA().withAjaxHandlers(ageOccupationAjaxHandler());

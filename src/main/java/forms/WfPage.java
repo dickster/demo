@@ -1,10 +1,14 @@
 package forms;
 
 import demo.resources.Resource;
+import forms.model.WfCompoundPropertyModel;
 import org.apache.wicket.Application;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.markup.head.*;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
@@ -31,17 +35,25 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     private FormBasedWorkflow workflow;
 
     private @Inject WfFactory wfFactory;
+    private IModel<?> subHeader;
 
     public WfPage(PageParameters params) {
-//        Preconditions.checkArgument(StringUtils.isNotBlank(params.get(WORKFLOW_PARAM).toString()));
-        this(params.get(WORKFLOW_PARAM).toString(), false);
+        this(params.get(WORKFLOW_PARAM).toString(), null);
     }
 
-    public WfPage(String workflowType, boolean customWidgets) {
+    public WfPage(String workflowType) {
+        this(workflowType, null);
+    }
+
+    public WfPage(String workflowType, Object obj) {
         super();
         this.workflow = wfFactory.create(workflowType);
+        if (obj != null) {
+            workflow.withModel(new WfCompoundPropertyModel(obj));
+        }
         setDefaultModel(workflow.getModel());
-        add( workflow.createForm(FORM_ID, workflow.getCurrentFormConfig()) );
+        add(workflow.createForm(FORM_ID, workflow.getCurrentFormConfig()));
+        add(new Label("subheader", getSubHeader()));
     }
 
     private WorkflowForm getWorkflowForm() {
@@ -70,9 +82,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
         response.render(OnDomReadyHeaderItem.forScript(INIT));
     }
 
-
+    public IModel<?> getSubHeader() {
+        return Model.of(getWorkflowForm().getSubHeader());
+    }
 }
-
-
-
-

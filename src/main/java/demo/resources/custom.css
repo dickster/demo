@@ -1,12 +1,14 @@
-.group {
-    padding-top:0px;
-    padding-bottom:45px;
-}
 
 .btn-debug {
     position:absolute;
     top:20px;
     right:20px;
+}
+
+.logo {
+    background-image: url("/images/logo2.png");
+    background: no-repeat;
+    background-color: lightsalmon;
 }
 
 body.derek {
@@ -35,10 +37,5 @@ body.derek form {
     font-size:25px;
     font-weight: bold;
     font-family:"Tahoma";
-}
-
-
-.btn-primary, .btn-default {
-    margin-top:20px;
 }
 

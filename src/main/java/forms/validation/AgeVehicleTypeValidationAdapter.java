@@ -1,16 +1,16 @@
 package forms.validation;
 
-import forms.model.GermanInsuranceObject;
+import forms.model.GenericInsuranceObject;
 import forms.validation.AgeVehicleTypeValidation.AgeVehicleTypeFields;
 
-public class AgeVehicleTypeValidationAdapter extends ValidationAdapter<GermanInsuranceObject, AgeVehicleTypeFields> {
+public class AgeVehicleTypeValidationAdapter extends ValidationAdapter<GenericInsuranceObject, AgeVehicleTypeFields> {
 
     protected AgeVehicleTypeValidationAdapter() {
-        super(GermanInsuranceObject.class);
+        super(GenericInsuranceObject.class);
     }
 
     @Override
-    public AgeVehicleTypeFields adapt(final GermanInsuranceObject obj) {
+    public AgeVehicleTypeFields adapt(final GenericInsuranceObject obj) {
         return new AgeVehicleTypeFields() {
             @Override public Integer getAge() {
                 return obj.getInsured().getAge();

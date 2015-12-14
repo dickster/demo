@@ -49,4 +49,9 @@ public class WfState implements Serializable {
     public String getStateName() {
         return getClass().getSimpleName();
     }
+
+    protected WfState unhandledEvent(WfSubmitEvent event) {
+        throw new IllegalArgumentException("the event " + event.getName() + " is not handled in state " + getClass().getSimpleName());
+    }
+
 }

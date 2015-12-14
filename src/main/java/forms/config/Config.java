@@ -19,7 +19,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     private String markupId;  // this is injected by the framework...don't set this yourself.
 
-    private String id; // TODO : refactor this. change id to "ID".
+    private String id;
     private String type;
     private String property;
     private final String pluginName;
@@ -41,8 +41,6 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         this(property, type.toString(), type.getPluginName());
     }
 
-
-
     public String getId() {
         return id;
     }
@@ -51,13 +49,14 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return property;
     }
 
+    // ALIAS for withId();
     public Config name(String name) {
-        this.id = name;
-        return this;
+        return withId(name);
     }
 
-    public Config withName(String name) {
+    public Config withId(String name) {
         this.id = name;
+        withAttribute("data-wf", this.id);
         return this;
     }
 

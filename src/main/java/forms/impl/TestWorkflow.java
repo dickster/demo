@@ -9,25 +9,31 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Locale;
 
-public class CommercialWorkflow extends FormBasedWorkflow {
+public class TestWorkflow extends FormBasedWorkflow<GenericInsuranceObject> {
 
-    @Inject @Named("stateA") private WfFormState stateA;
+    @Inject @Named("infoState") private WfFormState infoState;
+    @Inject @Named("rejectedState") private WfFormState rejectedState;
     @Inject @Named("widgetFactory") private WidgetFactory widgetFactory;
 
-    public CommercialWorkflow() {
+    private boolean rejected = false;
+
+    public TestWorkflow() {
         super();
         withValue("defaultCountry", Locale.US);
     }
 
     @Override
     protected void init() {
-        //override if you want some workflow startup stuff to happen.
+        GenericInsuranceObject obj = getModel().getObject();
+        rejected = "MEXICO".equals(obj.getInsured().getCountry());
     }
 
     @Override
-    public WfState getStartingState() {
-        // if (somePreval) return stateB else..
-        return stateA;
+    public WfFormState getStartingState() {
+        if (rejected) {
+            return rejectedState;
+        }
+        return infoState;
     }
 
     @Override

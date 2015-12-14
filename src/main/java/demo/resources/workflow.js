@@ -1,3 +1,5 @@
+// TODO : rename this to shorten strings...make js output smaller.
+
 var workflow = function() {
 
         var url = "?";
@@ -82,7 +84,7 @@ var workflow = function() {
                 if (!config.pluginName) return;
 
                 var $widget = $('#'+config.markupId);
-                console.log('about to initialize widget ' + config.name + ' with plugin ' + config.pluginName + ' and options ' + config);
+                console.log('about to initialize widget ' + config.id + ' with plugin ' + config.pluginName + ' and options ' + JSON.stringify(config));
                 try {
                     $widget[config.pluginName](config.options);
                 }
@@ -93,26 +95,37 @@ var workflow = function() {
 
             var layout = function() {
                 var $form = $('#'+config.markupId).find('form');
-                var layout = layoutDef[config.name];
+                var layout = layoutDef[config.id];
                 if (!layout) return;
 
-                for (var i = 0; i < layout.rows.length; i++) {
-                    var $row = $('<div class="row"></div>');
-                    $form.append($row);
-                    for (var j = 0; j < layout.rows[i].length; j++) {
-//                        var rowCss = rowsCss[layout.rows[i].length];
-                        var colClass = layout.rows[i][j].css;
-                        var $formGroup = $('<div></div>').addClass(colClass);
-                        $row.append($formGroup);
-                        for (var k = 0; k<layout.rows[i][j].col.length; k++) {
-                            var colName = layout.rows[i][j].col[k];
-                            var $el = $( '#' + config.idToMarkupId[colName]);
-                            $formGroup.append($el);
-                        }
-                    }
+                for (var section = 0; section<layout.sections.length; section++) {
+                    var $sec = $('<section></section>');
+                    $form.append($sec);
+                    layoutSection(layout.sections[section], $sec);
                 }
                 console.log("the form is ---> " + $form[0].outerHTML);
             };
+
+            function layoutSection(section, parent) {
+                for (var row = 0; row < section.rows.length; row++) {
+                    var $row = $('<div class="row"></div>');
+                    parent.append($row);
+                    layoutRow(section.rows[row], $row);
+                }
+            }
+
+            function layoutRow(row, parent) {
+                for (var col = 0; col < row.length; col++) {
+                    var colClass = row[col].css;
+                    var $formGroup = $('<div></div>').addClass(colClass);
+                    parent.append($formGroup);
+                    for (var colGroup = 0; colGroup<row[col].col.length; colGroup++) {
+                        var colName = row[col].col[colGroup];
+                        var $el = $( '#' + config.idToMarkupId[colName]);
+                        $formGroup.append($el);
+                    }
+                }
+            }
 
             function layoutCheckBox() {
                 $('#'+config.markupId).wrap("<div class='checkbox'></div>");
