@@ -27,17 +27,17 @@ public class Div extends Panel implements HasConfig {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        final WidgetFactory factory = wfUtil.getWidgetFactoryFor(this);
+        final Workflow workflow = wfUtil.getWorkflowFor(this);
         add(new ListView<Config>("div", config.getConfigs()) {
             @Override
             protected void populateItem(ListItem<Config> item) {
                 System.out.println(config.getId() + "[" +item.getIndex() + "] - " + item.getModelObject().getId());
-                item.add(factory.createWidget("el", item.getModelObject()));
+                item.add(workflow.createWidget("el", item.getModelObject()));
                 item.setRenderBodyOnly(true);
             }
         }.setReuseItems(true));
         // if DEBUG MODE!
-        Component refresh = factory.createWidget("refresh", new DebugRefreshButtonConfig("REFRESH"));
+        Component refresh = workflow.createWidget("refresh", new DebugRefreshButtonConfig("REFRESH"));
         add(refresh);
         refresh.setVisible(config instanceof FormConfig);
     }

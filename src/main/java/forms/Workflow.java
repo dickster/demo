@@ -6,8 +6,10 @@ import com.google.common.collect.Maps;
 import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import forms.config.Config;
 import forms.model.WfCompoundPropertyModel;
 import forms.validation.ValidationResult;
+import org.apache.wicket.Component;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.context.ApplicationContext;
@@ -109,10 +111,14 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         changeState(nextState);
     }
 
-    protected final void changeState(S nextState) {
+    protected final boolean changeState(S nextState) {
+        if (nextState.equals(getCurrentState())) {
+            return false;
+        }
         validate(nextState);
         setCurrentState(nextState);
         statesVisited.put(getCurrentStateName(), getCurrentState());
+        return true;
     }
 
     protected void validate(S nextState) {
@@ -219,5 +225,11 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+    }
+
+    public Component createWidget(String id, Config config) {
+        Component widget = getWidgetFactory().createWidget(id, config);
+        register(widget);
+        return widget;
     }
 }

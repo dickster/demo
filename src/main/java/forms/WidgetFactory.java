@@ -8,8 +8,8 @@ import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.validation.IValidator;
 
+import javax.annotation.Nonnull;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 public abstract class WidgetFactory implements Serializable {
@@ -19,9 +19,10 @@ public abstract class WidgetFactory implements Serializable {
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
 
+    @Nonnull
     public abstract Component create(String id, Config config);
 
-    public Component createWidget(String id, Config config) {
+    /*package protected*/ Component createWidget(String id, Config config) {
         preCreate(config);
         Component component = create(id, config);
         postCreate(component, config);
@@ -37,11 +38,16 @@ public abstract class WidgetFactory implements Serializable {
             addAjax(fc, fcc);
             setLabel(fc, fcc);
         }
-        component.add(new RenderingBehaviour());
+        addBehaviors(component);
+    }
+
+    protected void addBehaviors(Component c) {
+        // need to make rendering behaviour configurable/extendable.
+        c.add(new RenderingBehaviour());
     }
 
     protected void setLabel(FormComponent component, FormComponentConfig config) {
-            component.setLabel(Model.of(config.getId()));
+        component.setLabel(Model.of(config.getId()));
     }
 
     protected void setMetaData(Component component, Config config) {
@@ -60,7 +66,6 @@ public abstract class WidgetFactory implements Serializable {
     }
 
     private void addAjax(FormComponent component, FormComponentConfig<?> config) {
-        List mediatedAjaxEvents = config.getMediatedAjaxEvents();
         for (String event:config.getMediatedAjaxEvents()) {
             component.add(new MediatedAjaxEventBehavior(event));
         }

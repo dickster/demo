@@ -58,19 +58,9 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
 
     @Override
     protected void changeState(WfFormState nextState, WfSubmitEvent event) {
-//        if (event instanceof WfSubmitErrorEvent && getCurrentState().equals(nextState)) {
-//            // do you want to stay on this page? we'll notify form so you can add
-//            //  to the ajax target.
-//            updateErrorViaAjax((WfSubmitErrorEvent) event);
-//            return;
-//        }
-        changeState(nextState);
-        updateFormViaAjax(event);
-    }
-
-    private void updateErrorViaAjax(WfSubmitErrorEvent event) {
-        WorkflowForm form = event.getForm().findParent(WorkflowForm.class);
-        form.handleError(event);
+        if (changeState(nextState)) {;
+            updateFormViaAjax(event);
+        }
     }
 
     protected void updateFormViaAjax(WfSubmitEvent event) {

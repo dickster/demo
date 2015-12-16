@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -57,8 +58,9 @@ public class Application {
     @Bean
     public WidgetFactory customWidgetFactory() {
         return new DefaultWidgetFactory() {
+            @Nonnull
             @Override
-            public Component create(String id, Config config) {
+            public Component create(String id, @Nonnull Config config) {
                 if ("toppings".equals(config.getId())) {
                     config.withAttribute("title", "this is a custom widget factory tooltip");
                     config.withAttribute("style", "border:1px solid blue;");

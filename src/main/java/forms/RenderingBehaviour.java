@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import forms.config.Config;
 import forms.config.HasConfig;
 import forms.util.ConfigGson;
-import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.IAjaxRegionMarkupIdProvider;
 import org.apache.wicket.behavior.Behavior;
@@ -21,7 +20,6 @@ public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdP
 
     // TODO : make this class a bean handled by container.  (and therefore allow injection of this gson).
     private ConfigGson gson = new ConfigGson();
-    private boolean registered = false;
 
     @Override
     public void onComponentTag(Component component, ComponentTag tag) {
@@ -63,17 +61,8 @@ public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdP
     }
 
     public void beforeRender(Component c) {
-        registerOnce(c);// blargh----put this in widget factory where it belongs.
         if (needsToBeWrapped(c)) {
             c.getResponse().write("<div id='" + getWrappedId(c) + "' " + getDataWf(c) + ">");
-        }
-    }
-
-    private void registerOnce(Component c) {
-        if (!registered) {
-            Workflow workflow = new WfUtil().getWorkflowFor(c);
-            workflow.register(c);
-            registered = true;
         }
     }
 

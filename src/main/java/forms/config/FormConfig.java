@@ -8,9 +8,7 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
     private @DontSendInJson IFormValidator validator;
     private String url;
-    // need to add feedback panel/error message component to every form.
-    //  with(new FeedbackConfig("feedback",......));
-    // override your factory to customize.
+    private @DontSendInJson FeedbackPanelConfig feedbackConfig;
 
     public FormConfig(String name) {
         super(name, WidgetTypeEnum.FORM);
@@ -33,6 +31,10 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
     public void setCallbackUrl(String url) {
         this.url = url;
+    }
+
+    public FeedbackPanelConfig getFeedbackConfig() {
+        return feedbackConfig;
     }
 
 //    public void updateIdToMarkupId(WorkflowForm form) {

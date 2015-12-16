@@ -1,6 +1,7 @@
 package forms.validation;
 
 import com.google.common.base.Preconditions;
+import demo.Address;
 import forms.model.GenericInsuranceObject;
 import forms.validation.HealthValidation.HealthFields;
 import forms.validation.NameValidation.NameFields;
@@ -8,6 +9,7 @@ import forms.validation.VehicleValidation.VehicleFields;
 
 import javax.annotation.Nonnull;
 
+// turn workflow data in interfaced objects used by validators.
 public class ValidationAdapterFactory implements IValidationAdapters<GenericInsuranceObject> {
 
     @Override @Nonnull
@@ -24,7 +26,19 @@ public class ValidationAdapterFactory implements IValidationAdapters<GenericInsu
         else if (clazz.isAssignableFrom(VehicleFields.class)) {
             return (ValidationAdapter<GenericInsuranceObject, I>) forVehicleFields();
         }
+        else if (clazz.isAssignableFrom(Address.class)) {
+            return (ValidationAdapter<GenericInsuranceObject, I>) forAddress();
+        }
         throw new IllegalArgumentException("can't find validation adapter for " + clazz.getSimpleName());
+    }
+
+    private ValidationAdapter<GenericInsuranceObject, Address> forAddress() {
+        return new ValidationAdapter<GenericInsuranceObject, Address>(GenericInsuranceObject.class) {
+            @Override
+            protected Address adapt(GenericInsuranceObject input) {
+                return input.getInsured().address;
+            }
+        };
     }
 
     private ValidationAdapter<GenericInsuranceObject, NameFields> forNameFields() {
@@ -49,7 +63,7 @@ public class ValidationAdapterFactory implements IValidationAdapters<GenericInsu
     }
 
 
-    private  ValidationAdapter<GenericInsuranceObject, ?> forHealthFields() {
+    private ValidationAdapter<GenericInsuranceObject, ?> forHealthFields() {
         return new ValidationAdapter<GenericInsuranceObject, HealthFields>(GenericInsuranceObject.class) {
             @Override
             protected HealthFields adapt(final GenericInsuranceObject input) {
@@ -70,7 +84,7 @@ public class ValidationAdapterFactory implements IValidationAdapters<GenericInsu
         };
     }
 
-    private  ValidationAdapter<GenericInsuranceObject, VehicleFields> forVehicleFields() {
+    private ValidationAdapter<GenericInsuranceObject, VehicleFields> forVehicleFields() {
         return new ValidationAdapter<GenericInsuranceObject, VehicleFields>(GenericInsuranceObject.class) {
             @Override
             protected VehicleFields adapt(final GenericInsuranceObject input) {

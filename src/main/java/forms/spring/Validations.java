@@ -1,6 +1,8 @@
 package forms.spring;
 
+import demo.Address;
 import forms.model.GenericInsuranceObject;
+import forms.validation.AddressValidation;
 import forms.validation.ChainedValidation;
 import forms.validation.HealthValidation;
 import forms.validation.HealthValidation.HealthFields;
@@ -29,6 +31,11 @@ public class Validations {
     @Bean
     public NameValidation nameValidation() {
         return new NameValidation(adapterFactory().on(NameFields.class));
+    }
+
+    @Bean
+    public AddressValidation addressValidation() {
+        return new AddressValidation(adapterFactory().on(Address.class));
     }
 
     @Bean
