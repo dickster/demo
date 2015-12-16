@@ -31,11 +31,6 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     }
 
     @Override
-    public void handleAjaxEvent(@Nonnull WfAjaxEvent event) throws WorkflowException {
-        super.handleAjaxEvent(event);
-    }
-
-    @Override
     public void end() {
         updatePage(new StartingPoint());
     }

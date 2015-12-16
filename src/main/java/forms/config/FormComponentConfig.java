@@ -14,9 +14,6 @@ public abstract class FormComponentConfig<T extends Component & HasConfig> exten
     @DontSendInJson
     private List<IValidator> validators = Lists.newArrayList();
 
-    @DontSendInJson  // don't include in gson - not required by .js side.
-    private List<String> mediatedAjaxEvents = Lists.newArrayList();
-
     @DontSendInJson
     private boolean required;
 
@@ -30,7 +27,7 @@ public abstract class FormComponentConfig<T extends Component & HasConfig> exten
     }
 
     public FormComponentConfig addAjaxEvent(String event) {
-        mediatedAjaxEvents.add(event);
+        ajaxHandlers.add(event);
         return this;
     }
 
@@ -47,10 +44,6 @@ public abstract class FormComponentConfig<T extends Component & HasConfig> exten
         return required;
     }
 
-    public List<String> getMediatedAjaxEvents() {
-        return mediatedAjaxEvents;
-    }
-
     public FormComponentConfig required(Boolean required) {
         this.required = required;
         return this;
@@ -64,7 +57,7 @@ public abstract class FormComponentConfig<T extends Component & HasConfig> exten
     public String toString() {
         return "FormComponentConfig{" +
                 "validators=" + validators +
-                ", mediatedAjaxEvents=" + mediatedAjaxEvents +
+                ", ajaxHandlers=" + ajaxHandlers +
                 ", required=" + required +
                 ", options=" + getOptions() +
                 '}';

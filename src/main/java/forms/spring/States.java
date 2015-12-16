@@ -1,9 +1,7 @@
 package forms.spring;
 
-import forms.WfAjaxHandler;
 import forms.WfFormState;
 import forms.WfState;
-import forms.impl.AgeOccupationAjaxHandler;
 import forms.impl.ConfirmationState;
 import forms.impl.InfoState;
 import forms.impl.PaymentState;
@@ -23,11 +21,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class States {
-
-    @Bean
-    public WfAjaxHandler ageOccupationAjaxHandler() {
-        return new AgeOccupationAjaxHandler();
-    }
 
     @Bean
     public WfFormState infoState() {
@@ -56,7 +49,7 @@ public class States {
 
     @Bean
     public WfFormState stateA() {
-        return new StateA().withAjaxHandlers(ageOccupationAjaxHandler());
+        return new StateA();
     }
 
     @Bean

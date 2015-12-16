@@ -2,7 +2,7 @@ package forms.widgets;
 
 import forms.Div;
 import forms.Toolkit;
-import forms.WidgetFactory;
+import forms.Workflow;
 import forms.config.Config;
 import forms.config.DialogConfig;
 import forms.config.DialogSubmitButtonConfig;
@@ -58,8 +58,8 @@ public class Dialog extends Panel implements HasConfig {
     }
 
     protected Component createButton(String id, DialogSubmitButtonConfig buttonConfig) {
-        WidgetFactory factory = wfUtil.getWidgetFactoryFor(this);
-        return factory.create(id, buttonConfig);
+        Workflow workflow = wfUtil.getWorkflowFor(this);
+        return workflow.createWidget(id, buttonConfig);
     }
 
     @Override

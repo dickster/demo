@@ -8,6 +8,10 @@ import java.util.EnumSet;
 
 
 
+// TODO : This behavior does not work on Choices or Groups. need to allow for that.
+// will need to refactor an interface and allow for two types of behaviors.
+
+@Deprecated
 public class MediatedAjaxEventBehavior extends AjaxFormComponentUpdatingBehavior {
 
     private EnumSet<Advice> advice = EnumSet.of(Advice.BEFORE);

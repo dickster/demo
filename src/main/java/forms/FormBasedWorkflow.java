@@ -4,7 +4,6 @@ package forms;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import forms.config.FormConfig;
-import forms.util.WfAjaxEventPropagation;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.cycle.RequestCycle;
@@ -27,16 +26,6 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
     @Override
     protected void validate(WfFormState nextState) {
         super.validate(nextState);
-    }
-
-    @Override
-    public void handleAjaxEvent(@Nonnull WfAjaxEvent event) throws WorkflowException {
-        for (WfAjaxHandler handler:ajaxHandlers) {
-            if (WfAjaxEventPropagation.STOP.equals(handler.handleAjax(event))) {
-                return;
-            }
-        }
-        getCurrentState().handleAjaxEvent(event);
     }
 
     @Override

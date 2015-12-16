@@ -19,9 +19,8 @@ public class Div extends Panel implements HasConfig {
     public Div(String id, @Nonnull GroupConfig config) {
         super(id);
         this.config = config;
-        setOutputMarkupId(false);
-        setOutputMarkupId(!config.getRenderBodyOnly());
-        setRenderBodyOnly(config.getRenderBodyOnly());
+        setVisible(config.isInitialyVisibile());
+        setOutputMarkupPlaceholderTag(true);
     }
 
     @Override
@@ -31,7 +30,6 @@ public class Div extends Panel implements HasConfig {
         add(new ListView<Config>("div", config.getConfigs()) {
             @Override
             protected void populateItem(ListItem<Config> item) {
-                System.out.println(config.getId() + "[" +item.getIndex() + "] - " + item.getModelObject().getId());
                 item.add(workflow.createWidget("el", item.getModelObject()));
                 item.setRenderBodyOnly(true);
             }
@@ -40,6 +38,8 @@ public class Div extends Panel implements HasConfig {
         Component refresh = workflow.createWidget("refresh", new DebugRefreshButtonConfig("REFRESH"));
         add(refresh);
         refresh.setVisible(config instanceof FormConfig);
+        // TODO : just add webmarkupcontainer if debug||!formConfig.
+        // OR!! add a refresh button to the WorkflowForm page itself!!
     }
 
     @Override

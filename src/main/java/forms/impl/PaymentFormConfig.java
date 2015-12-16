@@ -14,30 +14,34 @@ public class PaymentFormConfig extends FormConfig {
     private void addConfigs() {
         with(new LabelConfig("payment method"));
         withConfig(new SelectPickerConfig("payment.method")
-                .withOptions(Lists.newArrayList("Credit Card", "Cash", "Direct Billing")));
+                .withOptions(Lists.newArrayList("Credit Card", "Cash", "Direct Billing"))
+                .withAjaxHandler("creditCardAjaxHandler"));
     // TODO : add some kind of ajax listener here...when # of digits is 12 then do ajax call?
     // and enable submit button otherwise show error!
-
     // need to write a field error widget in jquery Ui/bootstrap
 
-        withConfig(new LabelConfig("credit card number"));
-        withConfig(new TextFieldConfig<Integer>("payment.cc"));
+        with( new DivConfig("creditCardDiv")
+                .withConfigs(
+                        new LabelConfig("credit card number"),
+                        new TextFieldConfig<Integer>("payment.cc"),
 
-        withConfig(new LabelConfig("expiry date"));
-        withConfig(new TextFieldConfig("payment.expiry"));  // TODO : change to date picker!!!
+                        new LabelConfig("expiry date"),
+                        new TextFieldConfig("payment.expiry"),
 
-        withConfig(new LabelConfig("security code"));
-        withConfig(new TextFieldConfig<Integer>("payment.securityCode"));
+                        new LabelConfig("security code"),
+                        new TextFieldConfig<Integer>("payment.securityCode"),
 
-        withConfig(new LabelConfig("payment frequency"));
-        withConfig(new SelectPickerConfig<String>("payment.frequency")
-                .withOptions(Lists.newArrayList(
-                        "6 months",
-                        "1 year",
-                        "montly",
-                        "daily",
-                        "send the bill to my mother in law"
-                )));
+                        new LabelConfig("payment frequency"),
+                        new SelectPickerConfig<String>("payment.frequency")
+                                .withOptions(Lists.newArrayList(
+                                        "6 months",
+                                        "1 year",
+                                        "montly",
+                                        "daily",
+                                        "send the bill to my mother in law"
+                                )))
+                    .initiallyVisible(false)
+                );
 
         with(new ButtonConfig("next"));
     }

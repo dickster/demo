@@ -63,10 +63,6 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         // do prevals here...
     }
 
-    @Subscribe
-    public void handleAjaxEvent(@Nonnull WfAjaxEvent event) throws WorkflowException {
-    }
-
     @Subscribe void handleSubmitErrorEvent(WfSubmitErrorEvent event) throws WorkflowException {
     }
 

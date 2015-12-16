@@ -32,12 +32,12 @@ public class InfoState extends WfFormState {
                 workflow.post(new WfValidationEvent<String>(result, event.getTarget(), event.getForm()));
                 return this;
             }
-            result = infoValidation.validate(workflow.getObject());
-            if (!result.isSuccess()) {
-                workflow.addValidationErrors(result);
-                return referState;
-                //return this;
-            }
+//            result = infoValidation.validate(workflow.getObject());
+//            if (!result.isSuccess()) {
+//                workflow.addValidationErrors(result);
+//                return referState;
+//                //return this;
+//            }
             return paymentState;
         }
         return unhandledEvent(workflow, event);

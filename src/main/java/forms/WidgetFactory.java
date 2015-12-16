@@ -1,20 +1,20 @@
 package forms;
 
-import com.google.common.collect.Maps;
 import forms.config.Config;
 import forms.config.FormComponentConfig;
+import forms.spring.AjaxHandlerFactory;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.validation.IValidator;
 
 import javax.annotation.Nonnull;
+import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.Map;
 
 public abstract class WidgetFactory implements Serializable {
 
-    private Map<String, String> pluginNames = Maps.newHashMap();
+    private @Inject AjaxHandlerFactory ajaxHandlerFactory;
 
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
@@ -35,7 +35,7 @@ public abstract class WidgetFactory implements Serializable {
             FormComponent fc = (FormComponent) component;
             FormComponentConfig fcc = (FormComponentConfig) config;
             addValidators(fc, fcc);
-            addAjax(fc, fcc);
+            addAjaxHandlers(fc, fcc);
             setLabel(fc, fcc);
         }
         addBehaviors(component);
@@ -65,9 +65,9 @@ public abstract class WidgetFactory implements Serializable {
         }
     }
 
-    private void addAjax(FormComponent component, FormComponentConfig<?> config) {
-        for (String event:config.getMediatedAjaxEvents()) {
-            component.add(new MediatedAjaxEventBehavior(event));
+    private final void addAjaxHandlers(FormComponent component, FormComponentConfig<?> config) {
+        for (String handlerName:config.getAjaxHandlers()) {
+            component.add(ajaxHandlerFactory.create(handlerName));
         }
     }
 

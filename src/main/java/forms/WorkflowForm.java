@@ -158,7 +158,7 @@ public class WorkflowForm extends Panel implements HasConfig {
         return formConfig;
     }
 
-    public Component getComponent(final String name) {
+    public Component getWfComponent(final String id) {
         // argh...because the visitor doesn't support generics we have to work around getting a return value.
         // suggest : make a copy that supports generics = EZDeepChildFirstVisitor<Component, Component>();
         visitorKludge = null;   // unfortunately, can't use a local var for this...boo!
@@ -166,7 +166,7 @@ public class WorkflowForm extends Panel implements HasConfig {
             @Override
             public void component(Component component, IVisit<Void> visit) {
                 String n = wfUtil.getComponentName(component);
-                if (name.equals(n)) {
+                if (id.equals(n)) {
                     visitorKludge = component;
                     visit.stop();
                 }

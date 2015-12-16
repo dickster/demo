@@ -33,7 +33,7 @@ public class FormAConfig extends FormConfig {
                 .withConfig(new LabelConfig("address"))
                 .withConfig(new AddressConfig("insured.address"))
                 .withConfig(new LabelConfig("age"))
-                .withConfig(new TextFieldConfig("insured.age").addAjaxEvent("inputchange change"))
+                .withConfig(new TextFieldConfig("insured.age"))
                 .withConfig(new LabelConfig("occupation"))
                 .withConfig(new TextFieldConfig("insured.occupation")));
 
