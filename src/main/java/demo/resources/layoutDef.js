@@ -62,10 +62,10 @@ layoutDef['INFO_FORM'] = {
         {
             title : "client information",
             rows : [
-                   [{col:['spacer', 'name.salutation'],css:'col-md-1'},
+                   [{col:['spacer', 'name.salutation'],css:'col-md-2'},
                        {col:['first name','name.first'],css:'col-md-3'},
                        {col:['middle name', 'name.middle'], css:'col-md-3'},
-                       {col:['last name', 'name.last'],css:'col-md-5'}],
+                       {col:['last name', 'name.last'],css:'col-md-4'}],
                     [{col:['address', 'insured.address'], css:'col-md-6'},
                      {col:['address 2', 'insured.address2'], css:'col-md-6'}],
                     [{col: ['contact info', 'insured.contact.email'], css:'col-md-4'}],

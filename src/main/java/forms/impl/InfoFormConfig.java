@@ -16,7 +16,7 @@ public class InfoFormConfig extends FormConfig {
     }
 
     private void addConfigs() {
-        withConfig(new LabelConfig("x").name("spacer"));
+        withConfig(new LabelConfig(".").name("spacer"));
         withConfig(new SelectPickerConfig<String>("name.salutation")
                 .withOptions(Lists.newArrayList("Mr.", "Mrs.", "Ms", "Dr.")));
 

@@ -61,7 +61,7 @@ var workflow = function() {
                     layoutCheckBox();
                 }
                 if ( config.type=="ADDRESS") {
-                    config.id = config.markupId;
+                    config.id = '#'+config.markupId;
                     easy.address.create(config);
                     return;
                 }
