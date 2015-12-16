@@ -13,6 +13,7 @@ import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class CustomTheme extends DefaultTheme {
@@ -24,6 +25,7 @@ public class CustomTheme extends DefaultTheme {
         return "derek";
     }
 
+    @Nonnull
     @Override
     public String getName() {
         return getCssClass();
@@ -44,6 +46,7 @@ public class CustomTheme extends DefaultTheme {
         });
     }
 
+    @Nonnull
     public List<? extends HeaderItem> getHeaderItems() {
         return Lists.newArrayList(getBodyClassHeaderItem(), CssHeaderItem.forReference(CSS));
     }

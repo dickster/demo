@@ -1,12 +1,12 @@
-package forms.impl;
+package forms.ajax;
 
 import forms.WfAjaxHandler;
 import forms.WorkflowForm;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
-public class CreditCardAjaxHandler extends WfAjaxHandler {
+public class PaymentMethodAjaxHandler extends WfAjaxHandler {
 
-    public CreditCardAjaxHandler() {
+    public PaymentMethodAjaxHandler() {
         super("change inputchange");
     }
 

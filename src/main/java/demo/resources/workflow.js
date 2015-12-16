@@ -93,7 +93,10 @@ var workflow = function() {
             var layout = function() {
                 var $form = get(config.id).find('form');
                 var layout = layoutDef[config.id];
-                if (!layout) layoutDefault($form);
+                if (!layout) {
+                    layoutDefault($form);
+                    return;
+                }
 
                 for (var section = 0; section<layout.sections.length; section++) {
                     var $sec = $('<fieldset></fieldset>');

@@ -1,4 +1,4 @@
-package forms.impl;
+package forms.ajax;
 
 import forms.WfAjaxHandler;
 import forms.WorkflowForm;

@@ -22,6 +22,8 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     @DontSendInJson  // don't include in gson - not required by .js side.
     protected Set<String> ajaxHandlers = Sets.newHashSet();
+    private @DontSendInJson boolean wrapHtmlOutput = false;
+    private @DontSendInJson boolean initiallyVisibile = true;
 
     private String markupId;  // this is injected by the framework...don't set this yourself.
 
@@ -29,10 +31,8 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private String type;
     private String property;
     private final String pluginName;
-    private boolean wrapHtmlOutput = false;
     private Map<String, String> attributes = Maps.newHashMap();
     private Map<String, Object> options = Maps.newHashMap();  // a place to store custom options.
-    private boolean initiallyVisibile = true;
 
     public Config(@Nonnull String property, @Nonnull String type, String pluginName) {
         this.property = property;

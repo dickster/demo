@@ -1,8 +1,9 @@
 package forms.spring;
 
 import forms.WfAjaxHandler;
-import forms.impl.AgeOccupationAjaxHandler;
-import forms.impl.CreditCardAjaxHandler;
+import forms.ajax.AgeOccupationAjaxHandler;
+import forms.ajax.PaymentMethodAjaxHandler;
+import forms.ajax.WfDelayedEventAjaxHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -25,7 +26,12 @@ public class AjaxHandlers {
 
     @Bean @Scope("prototype")
     public WfAjaxHandler creditCardAjaxHandler() {
-        return new CreditCardAjaxHandler();
+        return new WfDelayedEventAjaxHandler("change inputchange");
+    }
+
+    @Bean @Scope("prototype")
+    public WfAjaxHandler paymentMethodAjaxHandler() {
+        return new PaymentMethodAjaxHandler();
     }
 
 }
