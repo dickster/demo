@@ -114,8 +114,8 @@ public class WorkflowForm extends Panel implements HasConfig {
     protected void onInitialize() {
         Preconditions.checkNotNull(formConfig);
         super.onInitialize();
+        getWorkflow().register(this);
         update(formConfig);
-
         getTheme().apply(form);
     }
 

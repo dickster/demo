@@ -5,12 +5,14 @@ import demo.Address;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class GenericInsuranceObject implements Serializable {
 
     // this could include an acord object, an ibis object., a collection of objects like
     //  temp, misc, ai, acord & errors or whatever you like.
 
+    private Errors errors = new Errors();
     private Name name = new Name();
     private Insured insured = new Insured();
     private Vehicle vehicle = new Vehicle();
@@ -31,6 +33,19 @@ public class GenericInsuranceObject implements Serializable {
 
     public Vehicle getVehicle() {
         return vehicle;
+    }
+
+    public Name getName() {
+        return name;
+    }
+
+    public Errors getErrors() {
+        return errors;
+    }
+
+    public GenericInsuranceObject clearErrors() {
+        errors = new Errors();
+        return this;
     }
 
     public void invalid() {
@@ -70,20 +85,20 @@ public class GenericInsuranceObject implements Serializable {
     }
 
     public class Insured implements Serializable {
-        private String country;
-        private int accidents = 2;
-        private String drinks = "coke";
-        private String salutation;
-        private boolean smokes = true;
-        public String phone, email="foo@bar.com", occupation, cc="123123123";
+        public String country;
+        public int accidents = 2;
+        public String drinks = "coke";
+        public String salutation;
+        public boolean smokes = true;
+        public String phone, occupation, cc="123123123";
         public int age = 55;
         public boolean notifyMe = false;
         public Dwelling dwelling = new Dwelling();
-        private Address address = new Address();
-        private String address2;
-        private int deductible = 0;
-        private Contact contact = new Contact();
-        private String driversLicense;
+        public Address address = new Address();
+        public String address2;
+        public int deductible = 0;
+        public Contact contact = new Contact();
+        public String driversLicense;
 
         public String getCountry() {
             return country;
@@ -92,12 +107,22 @@ public class GenericInsuranceObject implements Serializable {
         @Override
         public String toString() {
             return "Insured{" +
-                    "address='" + address + '\'' +
-                    ", email='" + email + '\'' +
-                    ", age='" + age + '\'' +
+                    "country='" + country + '\'' +
+                    ", accidents=" + accidents +
+                    ", drinks='" + drinks + '\'' +
+                    ", salutation='" + salutation + '\'' +
+                    ", smokes=" + smokes +
+                    ", phone='" + phone + '\'' +
                     ", occupation='" + occupation + '\'' +
                     ", cc='" + cc + '\'' +
+                    ", age=" + age +
+                    ", notifyMe=" + notifyMe +
                     ", dwelling=" + dwelling +
+                    ", address=" + address +
+                    ", address2='" + address2 + '\'' +
+                    ", deductible=" + deductible +
+                    ", contact=" + contact +
+                    ", driversLicense='" + driversLicense + '\'' +
                     '}';
         }
 
@@ -138,6 +163,17 @@ public class GenericInsuranceObject implements Serializable {
 
         public String getType() {
             return type;
+        }
+    }
+
+    public class Errors extends ArrayList<String> implements Serializable {
+        @Override
+        public boolean add(String s) {
+            return super.add(s);
+        }
+
+        public String getHtml() {
+            return Joiner.on("<br>").skipNulls().join(this);
         }
     }
 

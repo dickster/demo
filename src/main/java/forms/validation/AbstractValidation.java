@@ -8,6 +8,10 @@ public abstract class AbstractValidation<T, R> implements IValidation<R> {
 
     public ValidationAdapter<?,T> adapter;
 
+    protected AbstractValidation(ValidationAdapter<?, T> adapter) {
+        this.adapter = adapter;
+    }
+
     @Override
     public ValidationResult<R> validate(@Nonnull Object obj) {
         T input = adaptInput(obj);
@@ -15,11 +19,6 @@ public abstract class AbstractValidation<T, R> implements IValidation<R> {
     }
 
     public abstract ValidationResult<R> newResult();
-
-    public AbstractValidation<T,R> withAdapter(ValidationAdapter<?,T> fn) {
-        this.adapter = fn;
-        return this;
-    }
 
     protected T adaptInput(@Nonnull Object obj) {
         Preconditions.checkArgument(adapter.supports(obj), "the adapter does not handle class of type " + obj.getClass());

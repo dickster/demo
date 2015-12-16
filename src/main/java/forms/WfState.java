@@ -9,9 +9,11 @@ public class WfState implements Serializable {
     private String name;
 
     public WfState() {
+        this.name = getClass().getSimpleName();
     }
 
     public WfState(String name) {
+        this();
         this.name = name;
     }
 
@@ -50,8 +52,10 @@ public class WfState implements Serializable {
         return getClass().getSimpleName();
     }
 
-    protected WfState unhandledEvent(WfSubmitEvent event) {
-        throw new IllegalArgumentException("the event " + event.getName() + " is not handled in state " + getClass().getSimpleName());
+    protected WfState unhandledEvent(Workflow workflow, WfSubmitEvent event) {
+        workflow.post(new UnhandledEvent(event));
+        return this;
+//        throw new IllegalArgumentException("the event " + event.getName() + " is not handled in state " + getClass().getSimpleName());
     }
 
 }

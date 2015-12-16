@@ -16,7 +16,7 @@ public class InfoFormConfig extends FormConfig {
     }
 
     private void addConfigs() {
-        withConfig(new LabelConfig("salutation"));
+        withConfig(new LabelConfig("x").name("spacer"));
         withConfig(new SelectPickerConfig<String>("name.salutation")
                 .withOptions(Lists.newArrayList("Mr.", "Mrs.", "Ms", "Dr.")));
 
@@ -31,11 +31,11 @@ public class InfoFormConfig extends FormConfig {
 
         withConfig(new CheckBoxConfig("insured.smokes", "i smoke cigarettes"));
 
-//        withConfig(new LabelConfig("address"));
-//        withConfig(new AddressConfig("insured.address"));
-//
-//        withConfig(new LabelConfig("address 2"));
-//        withConfig(new AddressConfig("insured.address2"));
+        withConfig(new LabelConfig("address"));
+        withConfig(new AddressConfig("insured.address"));
+
+        withConfig(new LabelConfig("address 2"));
+        withConfig(new AddressConfig("insured.address2"));
 
         withConfig(new LabelConfig("contact info"));
         withConfig(new TextFieldConfig("insured.contact.email"));
@@ -63,7 +63,7 @@ public class InfoFormConfig extends FormConfig {
                 })
                 .withAttribute("data-live-search","true")
         );
-        withConfig(new LabelConfig("how many accidents have you had in the last 5 years?"));
+        withConfig(new LabelConfig("# of accidents"));
         withConfig(new SelectPickerConfig<Integer>("insured.accidents")
                 .withOptions(Lists.newArrayList(1, 2, 3, 4, 5))
                 .withAttribute("data-live-search","true")

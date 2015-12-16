@@ -12,14 +12,13 @@ import javax.inject.Inject;
 
 // rename this to....? DIV? BasicPanel, Container, ?? dunno.
 public class Div extends Panel implements HasConfig {
-  
+
     private GroupConfig config;
     private @Inject WfUtil wfUtil;
 
     public Div(String id, @Nonnull GroupConfig config) {
         super(id);
         this.config = config;
-
         setOutputMarkupId(false);
         setOutputMarkupId(!config.getRenderBodyOnly());
         setRenderBodyOnly(config.getRenderBodyOnly());

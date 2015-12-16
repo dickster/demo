@@ -11,8 +11,7 @@ public class AgeVehicleTypeValidationTest extends TestCase {
 
         @Test
         public void testDoValidation() {
-            AgeVehicleTypeValidation validation = (AgeVehicleTypeValidation) new AgeVehicleTypeValidation()
-                    .withAdapter(new PassthruValidationAdapter<AgeVehicleTypeFields>(AgeVehicleTypeFields.class));
+            AgeVehicleTypeValidation validation = (AgeVehicleTypeValidation) new AgeVehicleTypeValidation(new PassthruValidationAdapter<AgeVehicleTypeFields>(AgeVehicleTypeFields.class));
 
             ValidationResult<Integer> result;
             result = validation.validate(testData(35, "Sports"));

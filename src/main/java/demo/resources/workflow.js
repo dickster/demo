@@ -100,7 +100,7 @@ var workflow = function() {
                     $form.append($sec);
                     layoutSection(layout.sections[section], $sec);
                 }
-                console.log("the form is ---> " + $form[0].outerHTML);
+//                console.log("the form is ---> " + $form[0].outerHTML);
             };
 
             function layoutSection(section, parent) {

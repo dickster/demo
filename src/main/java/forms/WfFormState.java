@@ -24,6 +24,7 @@ public abstract class WfFormState extends WfState {
     private List<WfAjaxHandler> handlers = Lists.newArrayList();
 
     public WfFormState(@Nonnull FormConfig formConfig) {
+        super();
         this.formConfig = formConfig;
     }
 

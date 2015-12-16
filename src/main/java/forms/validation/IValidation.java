@@ -1,6 +1,8 @@
 package forms.validation;
 
-public interface IValidation<R> {
+import java.io.Serializable;
+
+public interface IValidation<R> extends Serializable {
 
     ValidationResult<R> validate(Object obj);
     

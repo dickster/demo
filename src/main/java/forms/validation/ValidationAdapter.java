@@ -6,6 +6,12 @@ import javax.annotation.Nonnull;
 
 public abstract class ValidationAdapter<F, T> {
 
+    public static final ValidationAdapter NA = new ValidationAdapter(String.class) {
+        @Override protected Object adapt(Object input) {
+            throw new UnsupportedOperationException("this should never be called. just used as a placeholder");
+        }
+    };
+
     private Class<F> clazz;
 
     protected ValidationAdapter(Class<F> clazz) {
@@ -27,4 +33,5 @@ public abstract class ValidationAdapter<F, T> {
     }
 
     protected abstract T adapt(F input);
+
 }

@@ -8,7 +8,9 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
     private @DontSendInJson IFormValidator validator;
     private String url;
-//    private Map<String, String> idToMarkupId = Maps.newHashMap();
+    // need to add feedback panel/error message component to every form.
+    //  with(new FeedbackConfig("feedback",......));
+    // override your factory to customize.
 
     public FormConfig(String name) {
         super(name, WidgetTypeEnum.FORM);

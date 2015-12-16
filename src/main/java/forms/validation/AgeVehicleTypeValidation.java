@@ -8,6 +8,10 @@ public class AgeVehicleTypeValidation extends AbstractValidation<AgeVehicleTypeF
     private static final Integer ERROR_202 = 202;
     private static final Integer ERROR_999 = 999;
 
+    public AgeVehicleTypeValidation(ValidationAdapter<?, AgeVehicleTypeFields> adapter) {
+        super(adapter);
+    }
+
     @Override
     protected ValidationResult<Integer> doValidation(AgeVehicleTypeFields input) {
         ValidationResult<Integer> result = newResult();

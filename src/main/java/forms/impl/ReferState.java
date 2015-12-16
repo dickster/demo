@@ -7,10 +7,10 @@ import forms.Workflow;
 
 import javax.annotation.Nonnull;
 
-public class RejectedState extends WfFormState {
+public class ReferState extends WfFormState {
 
-    public RejectedState() {
-        super(new RejectedFormConfig());
+    public ReferState() {
+        super(new ReferFormConfig());
     }
 
     @Nonnull
@@ -21,5 +21,4 @@ public class RejectedState extends WfFormState {
         }
         return unhandledEvent(workflow, event);
     }
-
 }

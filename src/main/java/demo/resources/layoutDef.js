@@ -62,21 +62,21 @@ layoutDef['INFO_FORM'] = {
         {
             title : "client information",
             rows : [
-                   [{col:['salutation', 'name.salutation'],css:'col-md-2'},
+                   [{col:['spacer', 'name.salutation'],css:'col-md-1'},
                        {col:['first name','name.first'],css:'col-md-3'},
                        {col:['middle name', 'name.middle'], css:'col-md-3'},
-                       {col:['last name', 'name.last'],css:'col-md-4'}],
+                       {col:['last name', 'name.last'],css:'col-md-5'}],
                     [{col:['address', 'insured.address'], css:'col-md-6'},
                      {col:['address 2', 'insured.address2'], css:'col-md-6'}],
                     [{col: ['contact info', 'insured.contact.email'], css:'col-md-4'}],
-                    [{col:['age', 'insured.age'],css:'col-md-2'}],
+                    [{col:['age', 'insured.age'],css:'col-md-1'}],
                     [{col:['insured.smokes'],css:'col-md-4'}],
 //                    // add vertical space here...?  put it in another section....?
                      [{col:['vehicle year', 'vehicle.year'],css:'col-md-2'},
                         {col:['vehicle type', 'vehicle.type'],css:'col-md-4'}],
-                    [{col:['how many accidents have you had in the last 5 years?', 'insured.accidents'],css:'col-md-6'}],
-                    [{col:['what type of pop do you drink?', 'insured.drinks'],css:'col-md-4'}],
-                     [{col:['drivers license', 'insured.driversLicense'],css:'col-md-4'}],
+                    [{col:['# of accidents', 'insured.accidents'],css:'col-md-1'}],
+                    [{col:['what type of pop do you drink?', 'insured.drinks'],css:'col-md-3'},
+                     {col:['drivers license', 'insured.driversLicense'],css:'col-md-4'}],
 
                    [{col:['next'], css:'col-md-3'}]
                 ]
@@ -86,13 +86,33 @@ layoutDef['INFO_FORM'] = {
 
 layoutDef['formA-3 (required field)'] = {
 
-    rows : [
-        [{col:['first name','name.first'],css:'col-md-3'},
-            {col:['middle name', 'name.middle'], css:'col-md-3'},
-            {col:['last name', 'name.last'], css:'col-md-3'}],
-        [{col:['age', 'insured.age'],css:'col-md-1'}],
-        [{col: ['occupation', 'insured.occupation'], css:'col-md-2'}],
-        [{col:['next'], css:'col-md-4'}]
-    ]
+    sections : [
+        {title : 'oops',
+        rows : [
+            [{col:['first name','name.first'],css:'col-md-3'},
+                {col:['middle name', 'name.middle'], css:'col-md-3'},
+                {col:['last name', 'name.last'], css:'col-md-3'}],
+            [{col:['age', 'insured.age'],css:'col-md-1'}],
+            [{col: ['occupation', 'insured.occupation'], css:'col-md-2'}],
+            [{col:['next'], css:'col-md-4'}]
+        ]
 
-}
+    }]
+
+};
+
+layoutDef['REFER_FORM'] = {
+    sections : [
+        {title : 'oops',
+        rows : [
+            [{col:['l1'],css:'col-md-12'}],
+            [{col:['l2'],css:'col-md-12'}],
+            [{col:['l3'],css:'col-md-12'}],
+            [{col:['l4'],css:'col-md-12'}],
+            [{col:['l5'],css:'col-md-12'}],
+            [{col:['ok'],css:'col-md-3'}]
+        ]
+
+    }]
+
+};
