@@ -6,7 +6,10 @@ import com.google.common.collect.Maps;
 import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import forms.config.Config;
 import forms.model.WfCompoundPropertyModel;
+import forms.validation.ValidationResult;
+import org.apache.wicket.Component;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.context.ApplicationContext;
@@ -60,8 +63,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         // do prevals here...
     }
 
-    @Subscribe
-    public void handleAjaxEvent(@Nonnull WfAjaxEvent event) throws WorkflowException {
+    @Subscribe void handleSubmitErrorEvent(WfSubmitErrorEvent event) throws WorkflowException {
     }
 
     @Subscribe
@@ -73,23 +75,46 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     @Subscribe
     public final void fire(@Nonnull WfSubmitEvent event) throws WorkflowException {
         try {
-            S nextState = (S) ((event instanceof WfSubmitErrorEvent) ?
-                                getCurrentState().handleError(this, event) :
-                                getCurrentState().handleEvent(this, event));
+            clearErrors();
+            S nextState = (S) getCurrentState().handleEvent(this, event);
             changeState(nextState, event);
         } catch (Throwable t) {
             throw new WorkflowException("workflow failed when handling event", event, t);
         }
     }
 
+    protected void clearErrors() {
+        //
+    }
+
+    public void addValidationErrors(ValidationResult<?> result) {
+        Preconditions.checkArgument(!result.isSuccess(), "you are adding errors for a validation that passed?");
+        for (Object error:result.getErrors()) {
+            addError(error);
+        }
+    }
+
+    public void addError(Object error) {
+        throw new UnsupportedOperationException("you need to implement this method in order to support error handling (and clearErrors() too!)");
+    }
+
+    @Subscribe
+    public void handleValidation(WfValidationEvent event) throws WorkflowException {
+        // override to handle validation errors.
+    }
+
     protected void changeState(S nextState, WfSubmitEvent event) {
         changeState(nextState);
     }
 
-    protected final void changeState(S nextState) {
+    protected final boolean changeState(S nextState) {
+        if (nextState.equals(getCurrentState())) {
+            return false;
+        }
         validate(nextState);
         setCurrentState(nextState);
         statesVisited.put(getCurrentStateName(), getCurrentState());
+        return true;
     }
 
     protected void validate(S nextState) {
@@ -142,6 +167,10 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         return model;
     }
 
+    public T getObject() {
+        return getModel().getObject();
+    }
+
     public Workflow withModel(WfCompoundPropertyModel<T> model) {
         this.model = model;
         return this;
@@ -192,5 +221,11 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+    }
+
+    public Component createWidget(String id, Config config) {
+        Component widget = getWidgetFactory().createWidget(id, config);
+        register(widget);
+        return widget;
     }
 }

@@ -19,7 +19,7 @@ public class RejectedState extends WfFormState {
         if (event.is("ok")) {
             workflow.end();
         }
-        return unhandledEvent(event);
+        return unhandledEvent(workflow, event);
     }
 
 }

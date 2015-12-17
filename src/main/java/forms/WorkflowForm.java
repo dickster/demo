@@ -3,6 +3,7 @@ package forms;
 import com.google.common.base.Preconditions;
 import demo.resources.Resource;
 import forms.config.Config;
+import forms.config.FeedbackPanelConfig;
 import forms.config.FormConfig;
 import forms.config.HasConfig;
 import forms.util.WfUtil;
@@ -39,7 +40,7 @@ public class WorkflowForm extends Panel implements HasConfig {
     private Component visitorKludge;
 
     private Form form;
-    private final FeedbackPanel feedback;
+    private FeedbackPanel feedback;
     private FormConfig formConfig;
     private AbstractDefaultAjaxBehavior historyMaker;
 
@@ -53,10 +54,6 @@ public class WorkflowForm extends Panel implements HasConfig {
 
         // placeholder to be replaced based on formConfig.
         add(new WebMarkupContainer("form").add(new WebMarkupContainer("content")));
-
-        // TODO : put feedback as fixed part of widget factory.  i.e. getFeedbackPanel();
-        add(feedback = new FeedbackPanel("feedback"));
-        feedback.setOutputMarkupPlaceholderTag(true);
     }
 
     public String getSubHeader() {
@@ -96,10 +93,6 @@ public class WorkflowForm extends Panel implements HasConfig {
         return (FormBasedWorkflow) wfUtil.getWorkflowFor(this);
     }
 
-    public void handleError(WfSubmitErrorEvent event) {
-        event.getTarget().add(feedback);
-    }
-
     public WorkflowForm withConfig(FormConfig config) {
         this.formConfig = config;
         return this;
@@ -114,9 +107,20 @@ public class WorkflowForm extends Panel implements HasConfig {
     protected void onInitialize() {
         Preconditions.checkNotNull(formConfig);
         super.onInitialize();
+        getWorkflow().register(this);
+        add(createFeedbackPanel());
         update(formConfig);
-
         getTheme().apply(form);
+    }
+
+    private Component createFeedbackPanel() {
+        FeedbackPanelConfig config = formConfig.getFeedbackConfig();
+        if (config==null) {
+            System.out.println("using default feedback panel. you probably should supply your own. ");
+            config = new FeedbackPanelConfig();
+        }
+        Component panel = getWorkflow().createWidget(config.getId(), config);
+        return panel;
     }
 
     private void update(FormConfig formConfig) {
@@ -154,7 +158,7 @@ public class WorkflowForm extends Panel implements HasConfig {
         return formConfig;
     }
 
-    public Component getComponent(final String name) {
+    public Component getWfComponent(final String id) {
         // argh...because the visitor doesn't support generics we have to work around getting a return value.
         // suggest : make a copy that supports generics = EZDeepChildFirstVisitor<Component, Component>();
         visitorKludge = null;   // unfortunately, can't use a local var for this...boo!
@@ -162,7 +166,7 @@ public class WorkflowForm extends Panel implements HasConfig {
             @Override
             public void component(Component component, IVisit<Void> visit) {
                 String n = wfUtil.getComponentName(component);
-                if (name.equals(n)) {
+                if (id.equals(n)) {
                     visitorKludge = component;
                     visit.stop();
                 }

@@ -13,7 +13,6 @@ import javax.annotation.Nonnull;
 
 public class ButtonConfig extends FormComponentConfig<WfButton> {
 
-    // add button options here.
     public ButtonConfig(@Nonnull String label) {
         super(label, WidgetTypeEnum.BUTTON);
         withCss("btn btn-primary");
@@ -23,7 +22,6 @@ public class ButtonConfig extends FormComponentConfig<WfButton> {
     public WfButton create(String id) {
         return createAjaxButton(id, this);
     }
-
 
     protected WfButton createAjaxButton(final String id, final ButtonConfig config) {
         Preconditions.checkArgument(config.getId() != null);

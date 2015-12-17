@@ -1,6 +1,10 @@
 package forms.impl;
 
-import forms.*;
+import com.google.common.base.Preconditions;
+import forms.FormBasedWorkflow;
+import forms.StartingPoint;
+import forms.WfFormState;
+import forms.WidgetFactory;
 import forms.model.GenericInsuranceObject;
 import forms.model.WfCompoundPropertyModel;
 
@@ -37,11 +41,6 @@ public class TestWorkflow extends FormBasedWorkflow<GenericInsuranceObject> {
     }
 
     @Override
-    public void handleAjaxEvent(@Nonnull WfAjaxEvent event) throws WorkflowException {
-        super.handleAjaxEvent(event);
-    }
-
-    @Override
     public void end() {
         updatePage(new StartingPoint());
     }
@@ -52,8 +51,18 @@ public class TestWorkflow extends FormBasedWorkflow<GenericInsuranceObject> {
     }
 
     @Override
-    protected WfCompoundPropertyModel createModel() {
+    protected @Nonnull WfCompoundPropertyModel createModel() {
         return new WfCompoundPropertyModel(new GenericInsuranceObject());
     }
 
+    @Override
+    protected void clearErrors() {
+        getObject().clearErrors();
+    }
+
+    @Override
+    public void addError(Object error) {
+        Preconditions.checkArgument(error!=null,"can't use null as an error.");
+        getObject().getErrors().add(error==null?"": error.toString());
+    }
 }

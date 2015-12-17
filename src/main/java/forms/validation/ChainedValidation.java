@@ -6,9 +6,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ChainedValidation<T,R> extends AbstractValidation<T,R> {
+public class ChainedValidation<T,R> implements IValidation<R> {
 
     private List<IValidation<R>> validations = Lists.newArrayList();
+
+    public ChainedValidation() {
+        super();
+    }
 
     @Override
     public @Nonnull ValidationResult<R> validate(@Nonnull Object obj) {
@@ -22,21 +26,11 @@ public class ChainedValidation<T,R> extends AbstractValidation<T,R> {
         return result;
     }
 
-    @Override
-    public ValidationResult<R> newResult() {
-        throw new UnsupportedOperationException("this validation should never create results directly.  it will delegate that to it's contained validations.");
-    }
-
     private ValidationResult<R> merge(@Nullable ValidationResult<R> r1, ValidationResult<R> r2) {
         return r1==null ? r2 : r1.merge(r2);
     }
 
-    @Override
-    protected ValidationResult<R> doValidation(T input) {
-        throw new UnsupportedOperationException("this should not be called for chained validations because it's done by added delegates. ");
-    }
-
-    public ChainedValidation add(IValidation<R>... validation) {
+    public ChainedValidation<T, R> add(IValidation<R>... validation) {
         validations.addAll(Lists.newArrayList(validation));
         return this;
     }

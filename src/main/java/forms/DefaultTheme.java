@@ -15,9 +15,11 @@ import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Locale;
 
+// TODO : introduce a "CORE" theme with final methods of stuff that *must* be there.
 public class DefaultTheme implements Theme {
 
     // css references,
@@ -28,6 +30,7 @@ public class DefaultTheme implements Theme {
 
     private static final ResourceReference BRAND_CSS = new CssResourceReference(Resource.class,"brand.css");
     private static final JavaScriptResourceReference INPUTGROUP_JS = new JavaScriptResourceReference(Resource.class, "inputgroup.js");
+    private static final JavaScriptResourceReference DELAYEDEVENT_JS = new JavaScriptResourceReference(Resource.class, "delayedEvent.js");
 
 
     @Override
@@ -35,6 +38,7 @@ public class DefaultTheme implements Theme {
         return getName();
     }
 
+    @Nonnull
     @Override
     public String getName() {
         return "defaultTheme";
@@ -60,9 +64,12 @@ public class DefaultTheme implements Theme {
         });
     }
 
+    @Nonnull
     public List<? extends HeaderItem> getHeaderItems() {
         return Lists.newArrayList(getBodyClassHeaderItem(), CssHeaderItem.forReference(BRAND_CSS),
-                JavaScriptHeaderItem.forReference(INPUTGROUP_JS));
+                JavaScriptHeaderItem.forReference(DELAYEDEVENT_JS),
+                JavaScriptHeaderItem.forReference(INPUTGROUP_JS)
+        );
     }
 
     protected HeaderItem getBodyClassHeaderItem() {

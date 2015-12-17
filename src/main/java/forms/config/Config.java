@@ -2,7 +2,9 @@ package forms.config;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import forms.HasWorkflow;
 import forms.WidgetTypeEnum;
 import forms.Workflow;
@@ -11,11 +13,17 @@ import org.apache.wicket.Component;
 import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.Map;
+import java.util.Set;
 
 public abstract class Config<T extends Component & HasConfig> implements Serializable {
 
     private static final String CLASS = "class";
     private static final String PLUGIN_NA = "n/a";
+
+    @DontSendInJson  // don't include in gson - not required by .js side.
+    protected Set<String> ajaxHandlers = Sets.newHashSet();
+    private @DontSendInJson boolean wrapHtmlOutput = false;
+    private @DontSendInJson boolean initiallyVisibile = true;
 
     private String markupId;  // this is injected by the framework...don't set this yourself.
 
@@ -23,7 +31,6 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private String type;
     private String property;
     private final String pluginName;
-    private boolean wrapHtmlOutput = false;
     private Map<String, String> attributes = Maps.newHashMap();
     private Map<String, Object> options = Maps.newHashMap();  // a place to store custom options.
 
@@ -138,7 +145,6 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     public abstract T create(String id);
 
-
     protected final void post(@Nonnull Component component, @Nonnull Object event) {
         Workflow workflow = getWorkflow(component);
         workflow.post(event);
@@ -158,6 +164,26 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     public Config withWrappedHtmlOutput() {
         wrapHtmlOutput = true;
+        return this;
+    }
+
+    public Set<String> getAjaxHandlers() {
+        return ImmutableSet.copyOf(ajaxHandlers);
+    }
+
+    public Config withAjaxHandler(String handlerName) {
+        ajaxHandlers.add(handlerName);
+        return this;
+    }
+
+    // CAVEAT : if you use this, and you update the component via ajax, then you probably want to
+    // call setOutputMarkupPlaceholderTag(true);
+    public boolean isInitialyVisibile() {
+        return initiallyVisibile;
+    }
+
+    public Config initiallyVisible(boolean vis) {
+        this.initiallyVisibile = vis;
         return this;
     }
 }

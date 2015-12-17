@@ -4,7 +4,7 @@ import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
-public class WfDebugEvent extends WfEvent {
+public class WfDebugEvent extends WfEvent<String> {
 
     private final Component component;
     private final AjaxRequestTarget target;

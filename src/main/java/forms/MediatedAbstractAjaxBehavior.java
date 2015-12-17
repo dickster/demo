@@ -7,6 +7,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import java.util.EnumSet;
 
 // if you want to broadcast events to a parent mediator.
+@Deprecated
 public abstract class MediatedAbstractAjaxBehavior extends AbstractDefaultAjaxBehavior {
 
     public static final String ABSTRACT_EVENT = "$ABSTRACT_EVENT$";

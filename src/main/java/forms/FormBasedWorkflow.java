@@ -4,7 +4,6 @@ package forms;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import forms.config.FormConfig;
-import forms.util.WfAjaxEventPropagation;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.cycle.RequestCycle;
@@ -30,16 +29,6 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
     }
 
     @Override
-    public void handleAjaxEvent(@Nonnull WfAjaxEvent event) throws WorkflowException {
-        for (WfAjaxHandler handler:ajaxHandlers) {
-            if (WfAjaxEventPropagation.STOP.equals(handler.handleAjax(event))) {
-                return;
-            }
-        }
-        getCurrentState().handleAjaxEvent(event);
-    }
-
-    @Override
     public void debug(@Nonnull WfDebugEvent event) {
         refreshForm(event);
     }
@@ -49,22 +38,18 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
         updateFormViaAjax(form, event.getTarget());
     }
 
+    @Override
+    public void handleValidation(WfValidationEvent event) {
+
+    }
+
+
 
     @Override
     protected void changeState(WfFormState nextState, WfSubmitEvent event) {
-        if (event instanceof WfSubmitErrorEvent && getCurrentState().equals(nextState)) {
-            // do you want to stay on this page? we'll notify form so you can add
-            //  to the ajax target.
-            updateErrorViaAjax((WfSubmitErrorEvent) event);
-            return;
+        if (changeState(nextState)) {;
+            updateFormViaAjax(event);
         }
-        changeState(nextState);
-        updateFormViaAjax(event);
-    }
-
-    private void updateErrorViaAjax(WfSubmitErrorEvent event) {
-        WorkflowForm form = event.getForm().findParent(WorkflowForm.class);
-        form.handleError(event);
     }
 
     protected void updateFormViaAjax(WfSubmitEvent event) {

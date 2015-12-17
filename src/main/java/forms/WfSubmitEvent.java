@@ -5,7 +5,7 @@ import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.form.Form;
 
-public class WfSubmitEvent extends WfEvent {
+public class WfSubmitEvent extends WfEvent<String> {
 
     private final AjaxRequestTarget target;
     private final Form<?> form;

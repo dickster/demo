@@ -12,35 +12,34 @@ import javax.inject.Inject;
 
 // rename this to....? DIV? BasicPanel, Container, ?? dunno.
 public class Div extends Panel implements HasConfig {
-  
+
     private GroupConfig config;
     private @Inject WfUtil wfUtil;
 
     public Div(String id, @Nonnull GroupConfig config) {
         super(id);
         this.config = config;
-
-        setOutputMarkupId(false);
-        setOutputMarkupId(!config.getRenderBodyOnly());
-        setRenderBodyOnly(config.getRenderBodyOnly());
+        setVisible(config.isInitialyVisibile());
+        setOutputMarkupPlaceholderTag(true);
     }
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        final WidgetFactory factory = wfUtil.getWidgetFactoryFor(this);
+        final Workflow workflow = wfUtil.getWorkflowFor(this);
         add(new ListView<Config>("div", config.getConfigs()) {
             @Override
             protected void populateItem(ListItem<Config> item) {
-                System.out.println(config.getId() + "[" +item.getIndex() + "] - " + item.getModelObject().getId());
-                item.add(factory.createWidget("el", item.getModelObject()));
+                item.add(workflow.createWidget("el", item.getModelObject()));
                 item.setRenderBodyOnly(true);
             }
         }.setReuseItems(true));
         // if DEBUG MODE!
-        Component refresh = factory.createWidget("refresh", new DebugRefreshButtonConfig("REFRESH"));
+        Component refresh = workflow.createWidget("refresh", new DebugRefreshButtonConfig("REFRESH"));
         add(refresh);
         refresh.setVisible(config instanceof FormConfig);
+        // TODO : just add webmarkupcontainer if debug||!formConfig.
+        // OR!! add a refresh button to the WorkflowForm page itself!!
     }
 
     @Override

@@ -1,27 +1,28 @@
 package forms;
 
-import com.google.common.collect.Maps;
 import forms.config.Config;
 import forms.config.FormComponentConfig;
+import forms.spring.AjaxHandlerFactory;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.validation.IValidator;
 
+import javax.annotation.Nonnull;
+import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 
 public abstract class WidgetFactory implements Serializable {
 
-    private Map<String, String> pluginNames = Maps.newHashMap();
+    private @Inject AjaxHandlerFactory ajaxHandlerFactory;
 
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
 
+    @Nonnull
     public abstract Component create(String id, Config config);
 
-    public Component createWidget(String id, Config config) {
+    /*package protected*/ Component createWidget(String id, Config config) {
         preCreate(config);
         Component component = create(id, config);
         postCreate(component, config);
@@ -34,14 +35,19 @@ public abstract class WidgetFactory implements Serializable {
             FormComponent fc = (FormComponent) component;
             FormComponentConfig fcc = (FormComponentConfig) config;
             addValidators(fc, fcc);
-            addAjax(fc, fcc);
+            addAjaxHandlers(fc, fcc);
             setLabel(fc, fcc);
         }
-        component.add(new RenderingBehaviour());
+        addBehaviors(component);
+    }
+
+    protected void addBehaviors(Component c) {
+        // need to make rendering behaviour configurable/extendable.
+        c.add(new RenderingBehaviour());
     }
 
     protected void setLabel(FormComponent component, FormComponentConfig config) {
-            component.setLabel(Model.of(config.getId()));
+        component.setLabel(Model.of(config.getId()));
     }
 
     protected void setMetaData(Component component, Config config) {
@@ -59,10 +65,9 @@ public abstract class WidgetFactory implements Serializable {
         }
     }
 
-    private void addAjax(FormComponent component, FormComponentConfig<?> config) {
-        List mediatedAjaxEvents = config.getMediatedAjaxEvents();
-        for (String event:config.getMediatedAjaxEvents()) {
-            component.add(new MediatedAjaxEventBehavior(event));
+    private final void addAjaxHandlers(FormComponent component, FormComponentConfig<?> config) {
+        for (String handlerName:config.getAjaxHandlers()) {
+            component.add(ajaxHandlerFactory.create(handlerName));
         }
     }
 

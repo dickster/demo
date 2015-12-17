@@ -15,7 +15,6 @@ public class TextField2<T> extends TextField<T> implements HasConfig<TextFieldCo
         this.config = config;
     }
 
-
     @Override
     protected void onInitialize() {
         super.onInitialize();
@@ -37,6 +36,5 @@ public class TextField2<T> extends TextField<T> implements HasConfig<TextFieldCo
     public TextFieldConfig<T> getConfig() {
         return this.config;
     }
-
 
 }

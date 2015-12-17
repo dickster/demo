@@ -4,6 +4,7 @@ import forms.validation.AbstractValidation;
 import forms.validation.AgeVehicleTypeValidation;
 import forms.validation.AgeVehicleTypeValidation.AgeVehicleTypeFields;
 import forms.validation.ChainedValidation;
+import forms.validation.IValidation;
 import forms.validation.ValidationAdapter;
 import forms.validation.ValidationResult;
 import junit.framework.TestCase;
@@ -14,10 +15,9 @@ public class ChainedValidationTest extends TestCase {
         @Test
         public void testDoValidation() {
 
-            AgeVehicleTypeValidation ageTypeValidation = (AgeVehicleTypeValidation) new AgeVehicleTypeValidation()
-                    .withAdapter(new TestDataAgeTypeAdapter());
+            IValidation<Integer> ageTypeValidation = new AgeVehicleTypeValidation(new TestDataAgeTypeAdapter());
 
-            AbstractValidation<TestData, Integer> customValidation = new AbstractValidation<TestData, Integer>() {
+            IValidation<Integer> customValidation = new AbstractValidation<TestData, Integer>(new TestDataNumberOfAccientsAdapter()) {
                 @Override
                 protected ValidationResult<Integer> doValidation(TestData input) {
                     ValidationResult<Integer> result = newResult();
@@ -31,10 +31,11 @@ public class ChainedValidationTest extends TestCase {
                 public ValidationResult<Integer> newResult() {
                     return new ValidationResult<Integer>();
                 }
-            }.withAdapter(new TestDataNumberOfAccientsAdapter());
 
-            ChainedValidation<TestData, Integer> chain = new ChainedValidation<TestData, Integer>();
-            chain.add(ageTypeValidation, customValidation);
+            };
+
+            IValidation<Integer> chain = new ChainedValidation<TestData, Integer>()
+                                                    .add(ageTypeValidation, customValidation);
 
             ValidationResult<Integer> result;
             result = chain.validate(new TestData(33, "PICKUP", 1));

@@ -2,7 +2,6 @@ package forms;
 
 import com.google.common.collect.Lists;
 import forms.config.FormConfig;
-import forms.util.WfAjaxEventPropagation;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
@@ -24,6 +23,7 @@ public abstract class WfFormState extends WfState {
     private List<WfAjaxHandler> handlers = Lists.newArrayList();
 
     public WfFormState(@Nonnull FormConfig formConfig) {
+        super();
         this.formConfig = formConfig;
     }
 
@@ -31,14 +31,7 @@ public abstract class WfFormState extends WfState {
         return formConfig;
     }
 
-    public void handleAjaxEvent(WfAjaxEvent event) {
-        for (WfAjaxHandler handler:handlers) {
-            if (WfAjaxEventPropagation.STOP.equals(handler.handleAjax(event))) {
-                return;
-            }
-        }
-    }
-
+    @Deprecated
     private WorkflowForm getWorkflowForm(WfAjaxEvent event) {
         return event.getComponent().visitParents(MarkupContainer.class, new IVisitor<MarkupContainer, WorkflowForm>() {
             @Override public void component(MarkupContainer object, IVisit<WorkflowForm> visit) {

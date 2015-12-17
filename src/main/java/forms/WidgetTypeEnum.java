@@ -20,7 +20,8 @@ public enum WidgetTypeEnum {
     FORM(),
     SECTION(),
     MULTIPLE_SELECT("selectpicker"),
-    DEBUG_BUTTON();
+    DEBUG_BUTTON(),
+    FEEDBACK();
 
     String pluginName;
 

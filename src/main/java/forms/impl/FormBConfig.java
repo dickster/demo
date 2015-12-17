@@ -23,7 +23,7 @@ public class FormBConfig extends FormConfig {
                 .withConfig(new LabelConfig("Deductible"))
                 .withConfig(new TextFieldConfig("insured.deductible").withPrefix("$").withSuffix(".00"))
                 .withConfig(new LabelConfig("Email"))
-                .withConfig(new TextFieldConfig("insured.email")
+                .withConfig(new TextFieldConfig("insured.contact.email")
                                 .required()
                                 .addValidator(EmailAddressValidator.getInstance()))
                 .withConfig(new CheckBoxConfig("insured.notifyMe", "email me when policy is about to expire.")));

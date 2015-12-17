@@ -10,10 +10,9 @@ import java.util.List;
 
 public abstract class GroupConfig<T extends Component & HasConfig> extends Config<T> {
 
-    private String title;
     private @DontSendInJson boolean renderBodyOnly = false;
     private @DontSendInJson List<Config> configs = Lists.newArrayList();
-
+    private String title;
 
     public GroupConfig(@Nonnull String name) {
         super(name, WidgetTypeEnum.CONTAINER);
@@ -22,7 +21,6 @@ public abstract class GroupConfig<T extends Component & HasConfig> extends Confi
     public GroupConfig(@Nonnull String name, WidgetTypeEnum type) {
         super(name, type);
     }
-
 
     public List<Config> getConfigs() {
         return ImmutableList.copyOf(configs);

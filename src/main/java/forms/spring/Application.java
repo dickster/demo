@@ -1,6 +1,12 @@
 package forms.spring;
 
-import forms.*;
+import forms.DefaultTheme;
+import forms.DefaultToolkit;
+import forms.DefaultWidgetFactory;
+import forms.Theme;
+import forms.Toolkit;
+import forms.WfFactory;
+import forms.WidgetFactory;
 import forms.config.Config;
 import forms.impl.CommercialWorkflow;
 import forms.impl.PizzaWorkflow;
@@ -10,8 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.annotation.Nonnull;
 
 //import javax.inject.Inject;
 //import javax.inject.Scope;
@@ -19,12 +24,6 @@ import javax.inject.Named;
 
 @Configuration
 public class Application {
-
-
-//    private @Autowired StateBeans stateBeans;
-//    private @Autowired Utils utils;
-
-    private @Inject @Named("ageOccupationAjaxHandler") WfAjaxHandler ageOccupationAjaxHandler;
 
     @Bean
     public Toolkit toolkit() {
@@ -35,7 +34,6 @@ public class Application {
     @Scope("prototype")
     public CommercialWorkflow commercialWorkflow() {
         CommercialWorkflow workflow = new CommercialWorkflow();
-        workflow.withAjaxHandlers(ageOccupationAjaxHandler);
         return workflow;
     }
 
@@ -43,7 +41,6 @@ public class Application {
     @Scope("prototype")
     public TestWorkflow testWorkflow() {
         TestWorkflow workflow = new TestWorkflow();
-        // add ajax handlers.
         return workflow;
     }
 
@@ -57,8 +54,9 @@ public class Application {
     @Bean
     public WidgetFactory customWidgetFactory() {
         return new DefaultWidgetFactory() {
+            @Nonnull
             @Override
-            public Component create(String id, Config config) {
+            public Component create(String id, @Nonnull Config config) {
                 if ("toppings".equals(config.getId())) {
                     config.withAttribute("title", "this is a custom widget factory tooltip");
                     config.withAttribute("style", "border:1px solid blue;");
@@ -83,6 +81,7 @@ public class Application {
     public WfFactory WorkflowFactory() {
         return new WfFactory();
     }
+
 
 }
 

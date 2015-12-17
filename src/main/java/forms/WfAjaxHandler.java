@@ -1,9 +1,29 @@
 package forms;
 
-import forms.util.WfAjaxEventPropagation;
+import forms.util.WfUtil;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
+import org.springframework.context.annotation.Scope;
 
-import java.io.Serializable;
+import javax.inject.Inject;
 
-public interface WfAjaxHandler extends Serializable {
-    public WfAjaxEventPropagation handleAjax(WfAjaxEvent event);
+// TODO : This behavior does not work on Choices or Groups. need to allow for that.
+// will need to refactor an interface and allow for two types of behaviors.
+@Scope("prototype")
+public abstract class WfAjaxHandler extends AjaxFormComponentUpdatingBehavior {
+
+    @Inject
+    protected WfUtil wfUtil;
+
+    public WfAjaxHandler(String event) {
+        super(event);
+    }
+
+    @Override
+    protected void onUpdate(final AjaxRequestTarget target) {
+    }
+
+    protected WorkflowForm getWorkflowForm() {
+        return wfUtil.getWorkflowForm(getComponent());
+    }
 }

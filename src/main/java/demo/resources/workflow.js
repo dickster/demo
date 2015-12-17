@@ -61,7 +61,7 @@ var workflow = function() {
                     layoutCheckBox();
                 }
                 if ( config.type=="ADDRESS") {
-                    config.id = config.markupId;
+                    config.id = '#'+config.markupId;
                     easy.address.create(config);
                     return;
                 }
@@ -93,14 +93,17 @@ var workflow = function() {
             var layout = function() {
                 var $form = get(config.id).find('form');
                 var layout = layoutDef[config.id];
-                if (!layout) layoutDefault($form);
+                if (!layout) {
+                    layoutDefault($form);
+                    return;
+                }
 
                 for (var section = 0; section<layout.sections.length; section++) {
                     var $sec = $('<fieldset></fieldset>');
                     $form.append($sec);
                     layoutSection(layout.sections[section], $sec);
                 }
-                console.log("the form is ---> " + $form[0].outerHTML);
+//                console.log("the form is ---> " + $form[0].outerHTML);
             };
 
             function layoutSection(section, parent) {

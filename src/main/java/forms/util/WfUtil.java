@@ -1,7 +1,6 @@
 package forms.util;
 
 import forms.WfPage;
-import forms.WidgetFactory;
 import forms.Workflow;
 import forms.WorkflowForm;
 import forms.config.HasConfig;
@@ -30,21 +29,6 @@ public class WfUtil implements Serializable {
             return ((HasConfig)component).getConfig().getProperty();
         }
         throw new IllegalArgumentException("component doesn't have a property");
-    }
-
-    public WidgetFactory getWidgetFactoryFor(Component component) {
-
-        Workflow workflow = component.visitParents(WfPage.class, new IVisitor<WfPage, Workflow>() {
-            @Override
-            public void component(WfPage wf, IVisit visit) {
-                visit.stop(wf.getWorkflow());
-            }
-        });
-        if (workflow!=null) {
-            return workflow.getWidgetFactory();
-        }
-        throw new IllegalStateException("can't find workflow required to get widget factory for component " + component.getId() + getComponentName(component));
-
     }
 
     public Workflow getWorkflowFor(Component component) {

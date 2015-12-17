@@ -3,12 +3,16 @@ package forms;
 
 import javax.annotation.Nullable;
 
-public class WorkflowException extends Exception {
+public class WorkflowException extends RuntimeException {
     private WfEvent transitionEvent;
 
     public WorkflowException(WfEvent event, String message) {
         super(message);
         this.transitionEvent = event;
+    }
+
+    public WorkflowException(String message) {
+        super(message);
     }
 
     public WorkflowException(String message, Throwable cause) {

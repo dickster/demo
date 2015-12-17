@@ -90,6 +90,6 @@ public class Address implements Serializable {
 
     @Override
     public String toString() {
-        return formattedAddress;
+        return formattedAddress==null ? "N/A" : formattedAddress;
     }
 }
