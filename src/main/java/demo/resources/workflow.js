@@ -73,6 +73,7 @@ var workflow = function() {
                 if (!config.pluginName) return;
 
                 var $widget = $('#'+config.markupId);
+                config.options.markupId = config.markupId;
                 console.log('about to initialize widget ' + config.id + ' with plugin ' + config.pluginName + ' and options ' + JSON.stringify(config.options));
                 try {
                     $widget[config.pluginName](config.options);
@@ -83,11 +84,12 @@ var workflow = function() {
             };
 
             var layoutDefault = function (form) {
-                form.find('[data-wf]').each(function(i,e) {
-                    $(e).wrap('<div class="form-group"></div>')
-                        .wrap('<div class="row"></div>')
-                        .wrap('<div class="col-md-4"></div>');
-                });
+                form.css('width:300px');
+                //form.find('[data-wf]').each(function(i,e) {
+                //    $(e).wrap('<div class="form-group"></div>')
+                //        .wrap('<div class="row"></div>')
+                //        .wrap('<div class="col-md-4"></div>');
+                //});
             };
 
             var layout = function() {

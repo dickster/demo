@@ -26,11 +26,6 @@ public abstract class FormComponentConfig<T extends Component & HasConfig> exten
         this(property, type.toString(), type.getPluginName());
     }
 
-    public FormComponentConfig addAjaxEvent(String event) {
-        ajaxHandlers.add(event);
-        return this;
-    }
-
     public FormComponentConfig addValidator(IValidator<?> validator) {
         validators.add(validator);
         return this;
@@ -57,7 +52,6 @@ public abstract class FormComponentConfig<T extends Component & HasConfig> exten
     public String toString() {
         return "FormComponentConfig{" +
                 "validators=" + validators +
-                ", ajaxHandlers=" + ajaxHandlers +
                 ", required=" + required +
                 ", options=" + getOptions() +
                 '}';

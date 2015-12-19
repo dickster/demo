@@ -1,18 +1,18 @@
 package forms.ajax;
 
-import forms.WfAjaxHandler;
+import forms.WfAjaxBehavior;
 import forms.WorkflowForm;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.model.IModel;
 
-public class AgeOccupationAjaxHandler extends WfAjaxHandler {
+public class AgeOccupationAjaxBehavior extends WfAjaxBehavior {
 
-    public AgeOccupationAjaxHandler() {
+    public AgeOccupationAjaxBehavior() {
         super("inputchange change");
     }
 
-    public AgeOccupationAjaxHandler(String event) {
+    public AgeOccupationAjaxBehavior(String event) {
         super(event);
     }
 

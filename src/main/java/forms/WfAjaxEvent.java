@@ -6,7 +6,6 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 
 import javax.annotation.Nonnull;
 
-@Deprecated
 public class WfAjaxEvent extends WfEvent<String> {
     private AjaxRequestTarget target;
     private Component component;

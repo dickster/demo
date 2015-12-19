@@ -59,7 +59,7 @@ public abstract class GroupConfig<T extends Component & HasConfig> extends Confi
     }
 
     public GroupConfig withConfig(Config config) {
-        configs.add(config);
+        configs.add(config.withParent(this));
         return this;
     }
     public GroupConfig withConfig(Config config, int index) {

@@ -3,8 +3,9 @@ package forms.validation;
 import com.google.common.base.Preconditions;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 
-public abstract class ValidationAdapter<F, T> {
+public abstract class ValidationAdapter<F, T> implements Serializable {
 
     public static final ValidationAdapter NA = new ValidationAdapter(String.class) {
         @Override protected Object adapt(Object input) {

@@ -24,6 +24,7 @@ Input Data = GermanInsuranceObject.
 	smoking
 	year
 	# of accidents
+	snow tires?
 
 Form 1B:
 	same as Form1A except different drivers license # validation.
@@ -34,6 +35,8 @@ Form 1B:
 	smoking
 	year
 	# of accidents
+	earthquake zone
+
 *both have multiple car/age/etc.. validations performed.
 Bind is primary button unless blah, then it changes to Refer (bind is disabled)
 

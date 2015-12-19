@@ -4,7 +4,6 @@ import demo.GpsLocation;
 import forms.config.AddressConfig;
 import forms.config.Config;
 import forms.config.HasConfig;
-import forms.util.WfUtil;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
@@ -18,7 +17,6 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 
-import javax.inject.Inject;
 import java.math.BigDecimal;
 
 public class Address extends Panel implements ILabelProvider<String>, HasConfig {
@@ -31,8 +29,6 @@ public class Address extends Panel implements ILabelProvider<String>, HasConfig 
 
     private TextField<String> text;
     private GpsLocation location;
-
-    private @Inject WfUtil wfUtil;
 
     public Address(String id, AddressConfig config) {
         super(id);

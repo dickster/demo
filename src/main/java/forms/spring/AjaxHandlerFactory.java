@@ -1,7 +1,7 @@
 package forms.spring;
 
 import com.google.common.base.Preconditions;
-import forms.WfAjaxHandler;
+import forms.WfAjaxBehavior;
 import forms.WorkflowException;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -10,9 +10,9 @@ public class AjaxHandlerFactory implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
-    public WfAjaxHandler create(String handlerName) {
+    public WfAjaxBehavior create(String handlerName) {
         try {
-            WfAjaxHandler handler = applicationContext.getBean(handlerName, WfAjaxHandler.class);
+            WfAjaxBehavior handler = applicationContext.getBean(handlerName, WfAjaxBehavior.class);
             boolean prototype = applicationContext.isPrototype(handlerName);
             Preconditions.checkState(prototype, "ajax handlers must be @Scope('prototype').   i.e. a new instance created each time.");
             return handler;

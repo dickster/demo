@@ -63,17 +63,17 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         // do prevals here...
     }
 
-    @Subscribe void handleSubmitErrorEvent(WfSubmitErrorEvent event) throws WorkflowException {
+    @Subscribe void onSubmitError(WfSubmitErrorEvent event) throws WorkflowException {
     }
 
     @Subscribe
-    public void debug(@Nonnull WfDebugEvent event) {
+    public void onDebug(@Nonnull WfDebugEvent event) {
         ; //  override this if you want to handle debug events.
         // should assert that you only get these in debug mode!!!
     }
 
     @Subscribe
-    public final void fire(@Nonnull WfSubmitEvent event) throws WorkflowException {
+    public final void onSubmit(@Nonnull WfSubmitEvent event) throws WorkflowException {
         try {
             clearErrors();
             S nextState = (S) getCurrentState().handleEvent(this, event);
@@ -99,7 +99,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     }
 
     @Subscribe
-    public void handleValidation(WfValidationEvent event) throws WorkflowException {
+    public void onValidation(WfValidationEvent event) throws WorkflowException {
         // override to handle validation errors.
     }
 

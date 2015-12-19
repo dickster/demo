@@ -20,7 +20,7 @@ public abstract class WfFormState extends WfState {
     // done by widgetFactory.ajaxify(form);  need access to state & workflow.
     // (workflow specific) event handlers need to be passed form to help decide?
     //  nah, then they should just make it form specific.
-    private List<WfAjaxHandler> handlers = Lists.newArrayList();
+    private List<WfAjaxBehavior> handlers = Lists.newArrayList();
 
     public WfFormState(@Nonnull FormConfig formConfig) {
         super();
@@ -42,7 +42,7 @@ public abstract class WfFormState extends WfState {
         });
     }
 
-    public WfFormState withAjaxHandlers(WfAjaxHandler... handlers) {
+    public WfFormState withAjaxHandlers(WfAjaxBehavior... handlers) {
         this.handlers.addAll(Lists.newArrayList(handlers));
         return this;
     }

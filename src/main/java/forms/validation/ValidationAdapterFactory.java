@@ -12,6 +12,9 @@ import javax.annotation.Nonnull;
 // turn workflow data in interfaced objects used by validators.
 public class ValidationAdapterFactory implements IValidationAdapters<GenericInsuranceObject> {
 
+    // TODO : inner classes are not serializable.  either need to fix this or i could
+    //  just store the class and get the adapter whenever i need it from factory.
+
     @Override @Nonnull
     public <I> ValidationAdapter<GenericInsuranceObject,I> on(Class<I> clazz) {
         Preconditions.checkNotNull(clazz, "can't have adapter for null interface class");

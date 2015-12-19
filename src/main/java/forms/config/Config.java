@@ -20,8 +20,8 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private static final String CLASS = "class";
     private static final String PLUGIN_NA = "n/a";
 
-    @DontSendInJson  // don't include in gson - not required by .js side.
-    protected Set<String> ajaxHandlers = Sets.newHashSet();
+    private @DontSendInJson GroupConfig parent;
+    private @DontSendInJson Set<String> ajaxHandlers = Sets.newHashSet();
     private @DontSendInJson boolean wrapHtmlOutput = false;
     private @DontSendInJson boolean initiallyVisibile = true;
 
@@ -32,6 +32,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private String property;
     private final String pluginName;
     private Map<String, String> attributes = Maps.newHashMap();
+    // TODO : replace with a single object?
     private Map<String, Object> options = Maps.newHashMap();  // a place to store custom options.
 
     public Config(@Nonnull String property, @Nonnull String type, String pluginName) {
@@ -185,6 +186,15 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     public Config initiallyVisible(boolean vis) {
         this.initiallyVisibile = vis;
         return this;
+    }
+
+    public Config withParent(GroupConfig groupConfig) {
+        this.parent = groupConfig;
+        return this;
+    }
+
+    public GroupConfig getParent() {
+        return parent;
     }
 }
 

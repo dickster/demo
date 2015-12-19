@@ -15,23 +15,21 @@ import java.io.Serializable;
 
 public class WfUtil implements Serializable {
 
-    // TODO: can i just make this a static method?  or will that
-    // screw up any attempts to test?? hmmm....
-    public @Nullable String getComponentName(@Nonnull Component component) {
+    public static @Nullable String getComponentName(@Nonnull Component component) {
         if (component instanceof HasConfig) {
             return ((HasConfig)component).getConfig().getId();
         }
         return null;
     }
 
-    public String getComponentProperty(@Nonnull Component component) {
+    public static String getComponentProperty(@Nonnull Component component) {
         if (component instanceof HasConfig) {
             return ((HasConfig)component).getConfig().getProperty();
         }
         throw new IllegalArgumentException("component doesn't have a property");
     }
 
-    public Workflow getWorkflowFor(Component component) {
+    public static Workflow getWorkflow(Component component) {
         Workflow workflow = component.visitParents(WfPage.class, new IVisitor<WfPage, Workflow>() {
             @Override
             public void component(WfPage wf, IVisit visit) {
@@ -44,7 +42,7 @@ public class WfUtil implements Serializable {
         return workflow;
     }
 
-    public WorkflowForm getWorkflowForm(@Nonnull Component component) {
+    public static WorkflowForm getWorkflowForm(@Nonnull Component component) {
         return component.visitParents(MarkupContainer.class, new IVisitor<MarkupContainer, WorkflowForm>() {
             @Override public void component(MarkupContainer container, IVisit<WorkflowForm> visit) {
                 if (container instanceof WorkflowForm) {

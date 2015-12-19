@@ -8,13 +8,11 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 
 // rename this to....? DIV? BasicPanel, Container, ?? dunno.
 public class Div extends Panel implements HasConfig {
 
     private GroupConfig config;
-    private @Inject WfUtil wfUtil;
 
     public Div(String id, @Nonnull GroupConfig config) {
         super(id);
@@ -26,7 +24,7 @@ public class Div extends Panel implements HasConfig {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        final Workflow workflow = wfUtil.getWorkflowFor(this);
+        final Workflow workflow = WfUtil.getWorkflow(this);
         add(new ListView<Config>("div", config.getConfigs()) {
             @Override
             protected void populateItem(ListItem<Config> item) {

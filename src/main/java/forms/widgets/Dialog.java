@@ -27,7 +27,6 @@ public class Dialog extends Panel implements HasConfig {
 
     private final DialogConfig config;
     private @Inject Toolkit toolkit;
-    private @Inject WfUtil wfUtil;
     private Component form;
 
     public Dialog(String id, DialogConfig config) {
@@ -58,7 +57,7 @@ public class Dialog extends Panel implements HasConfig {
     }
 
     protected Component createButton(String id, DialogSubmitButtonConfig buttonConfig) {
-        Workflow workflow = wfUtil.getWorkflowFor(this);
+        Workflow workflow = WfUtil.getWorkflow(this);
         return workflow.createWidget(id, buttonConfig);
     }
 

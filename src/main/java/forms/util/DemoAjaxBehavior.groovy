@@ -1,10 +1,10 @@
 package forms.util
-import forms.WfAjaxHandler
+import forms.WfAjaxBehavior
 import org.apache.wicket.ajax.AjaxRequestTarget
 
-class DemoAjaxHandler extends WfAjaxHandler {
+class DemoAjaxBehavior extends WfAjaxBehavior {
 
-    DemoAjaxHandler(String event) {
+    DemoAjaxBehavior(String event) {
         super(event)
     }
 

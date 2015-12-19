@@ -10,7 +10,6 @@ import forms.config.Config;
 import forms.config.HasConfig;
 import forms.config.SectionPanelConfig;
 import forms.model.SectionModel;
-import forms.util.WfUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
@@ -39,7 +38,6 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
@@ -71,7 +69,6 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
     private Enum<?> status = FeedbackState.VOID;
     private Component statusIcon;
     private WebMarkupContainer panel;
-    private @SpringBean WfUtil wfUtil;
 
 
     public SectionPanel(final String id, SectionPanelConfig config) {

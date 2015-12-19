@@ -3,6 +3,7 @@ package forms;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.google.common.eventbus.Subscribe;
 import forms.config.FormConfig;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.WebPage;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
 
-    private List<WfAjaxHandler> ajaxHandlers;
+    private List<WfAjaxBehavior> ajaxHandlers;
 
     public FormBasedWorkflow() {
         super();
@@ -29,7 +30,7 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
     }
 
     @Override
-    public void debug(@Nonnull WfDebugEvent event) {
+    public void onDebug(@Nonnull WfDebugEvent event) {
         refreshForm(event);
     }
 
@@ -39,11 +40,13 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
     }
 
     @Override
-    public void handleValidation(WfValidationEvent event) {
-
+    public void onValidation(WfValidationEvent event) {
     }
 
+    @Subscribe
+    public void onAjax(WfAjaxEvent event) {
 
+    }
 
     @Override
     protected void changeState(WfFormState nextState, WfSubmitEvent event) {
@@ -77,11 +80,11 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
         return new WorkflowForm(id, config);
     }
 
-    public List<WfAjaxHandler> getAjaxHandlers() {
+    public List<WfAjaxBehavior> getAjaxHandlers() {
         return Lists.newArrayList(ajaxHandlers);
     }
 
-    public FormBasedWorkflow<T> withAjaxHandlers(WfAjaxHandler... handlers) {
+    public FormBasedWorkflow<T> withAjaxHandlers(WfAjaxBehavior... handlers) {
         ajaxHandlers = Lists.newArrayList(handlers);
         return this;
     }

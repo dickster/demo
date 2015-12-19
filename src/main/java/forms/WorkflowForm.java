@@ -34,7 +34,6 @@ public class WorkflowForm extends Panel implements HasConfig {
     // this calls layout and initializes all widgets.
     private static final JavaScriptResourceReference WORKFLOW_JS = new JavaScriptResourceReference(Resource.class, "workflow.js");
 
-    private @Inject WfUtil wfUtil;
     private @Inject Toolkit toolkit;
 
     private Component visitorKludge;
@@ -90,7 +89,7 @@ public class WorkflowForm extends Panel implements HasConfig {
     }
 
     private FormBasedWorkflow getWorkflow() {
-        return (FormBasedWorkflow) wfUtil.getWorkflowFor(this);
+        return (FormBasedWorkflow) WfUtil.getWorkflow(this);
     }
 
     public WorkflowForm withConfig(FormConfig config) {
@@ -165,7 +164,7 @@ public class WorkflowForm extends Panel implements HasConfig {
         visitChildren(Component.class, new DeepChildFirstVisitor() {
             @Override
             public void component(Component component, IVisit<Void> visit) {
-                String n = wfUtil.getComponentName(component);
+                String n = WfUtil.getComponentName(component);
                 if (id.equals(n)) {
                     visitorKludge = component;
                     visit.stop();

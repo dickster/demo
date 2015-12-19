@@ -23,7 +23,7 @@ public class PaymentFormConfig extends FormConfig {
         with( new DivConfig("creditCardDiv")
                 .withConfigs(
                         new LabelConfig("credit card number"),
-                        new TextFieldConfig<Integer>("payment.cc").withAjaxHandler("creditCardAjaxHandler"),
+                        new CreditCardTextFieldConfig("payment.cc"),
 
                         new LabelConfig("expiry date"),
                         new TextFieldConfig("payment.expiry"),

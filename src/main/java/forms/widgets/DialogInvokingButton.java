@@ -4,7 +4,6 @@ import forms.config.Config;
 import forms.config.DialogInvokingButtonConfig;
 import forms.config.HasConfig;
 import forms.util.ComponentFinder;
-import forms.util.WfUtil;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ComponentTag;
@@ -12,11 +11,7 @@ import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.model.Model;
 
-import javax.inject.Inject;
-
 public class DialogInvokingButton extends Button implements HasConfig {
-
-    private @Inject WfUtil wfUtil;
 
     private final DialogInvokingButtonConfig config;
 

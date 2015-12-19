@@ -21,7 +21,8 @@ public enum WidgetTypeEnum {
     SECTION(),
     MULTIPLE_SELECT("selectpicker"),
     DEBUG_BUTTON(),
-    FEEDBACK();
+    FEEDBACK(),
+    CREDIT_CARD("creditCard");
 
     String pluginName;
 

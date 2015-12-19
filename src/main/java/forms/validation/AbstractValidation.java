@@ -3,8 +3,9 @@ package forms.validation;
 import com.google.common.base.Preconditions;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 
-public abstract class AbstractValidation<T, R> implements IValidation<R> {
+public abstract class AbstractValidation<T, R> implements Serializable, IValidation<R> {
 
     public ValidationAdapter<?,T> adapter;
 

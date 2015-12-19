@@ -4,7 +4,6 @@ import forms.config.Config;
 import forms.config.DialogSubmitButtonConfig;
 import forms.config.HasConfig;
 import forms.util.ComponentFinder;
-import forms.util.WfUtil;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.ComponentTag;
@@ -13,11 +12,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.Model;
 
-import javax.inject.Inject;
-
 public class DialogSubmitButton extends AjaxSubmitLink implements HasConfig {
-
-    private @Inject WfUtil wfUtil;
 
     private final DialogSubmitButtonConfig config;
 

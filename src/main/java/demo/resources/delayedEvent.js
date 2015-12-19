@@ -3,26 +3,25 @@ $(function() {
 
     $.widget( "brovada.delayedEvent", {
 
-        options : { },
+        defaultOptions : { },
 
         _create: function() {
-            var opts = this.options;
+            var opts = this.options;   // TODO : extend default options
             var dirty = false;
             var when = new Date();
             var $el = $('#'+opts.markupId);
             var poll;
 
             function maybeTrigger() {
-                if (new Date()-when>300) {  // TODO : use options.threshold
-                    console.log('triggering delayed event');
+                if (new Date()-when > opts.threshold) {
                     $el.trigger(opts.delayedEvent);
                 }
                 clearTimeout(poll);
+                poll=null;
                 dirty = false;
             }
 
             $el.on(opts.event, function(e) {
-                console.log('changed....');
                 when = new Date();
                 dirty = true;
                 if (poll) {
