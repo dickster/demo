@@ -55,8 +55,6 @@ public abstract class WidgetFactory implements Serializable {
     }
 
     private void addValidators(FormComponent fc, FormComponentConfig<?> config) {
-        // yuck.   fix this shit!  can you add validators to a panel?
-
         for (IValidator<?> validator:config.getValidators()) {
             fc.add(validator);
         }

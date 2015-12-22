@@ -1,7 +1,6 @@
 package forms;
 
 import demo.resources.Resource;
-import forms.model.GenericInsuranceObject;
 import forms.model.WfCompoundPropertyModel;
 import org.apache.wicket.Application;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
@@ -52,15 +51,13 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
 
     public WfPage(String workflowType, Object obj) {
         super();
-
-        WfCompoundPropertyModel model = new WfCompoundPropertyModel(new GenericInsuranceObject());
-        if (obj != null) {
-            model = new WfCompoundPropertyModel(obj);
+        this.workflow = wfFactory.create(workflowType);
+        if (obj!=null) {
+            this.workflow.withModel(new WfCompoundPropertyModel(obj));
         }
-        this.workflow = wfFactory.create(workflowType, model);
+        this.workflow.initialize();
         setDefaultModel(workflow.getModel());
         add(workflow.createForm(FORM_ID, workflow.getCurrentFormConfig()));
-
 
         testModel(workflow.getModel());
 

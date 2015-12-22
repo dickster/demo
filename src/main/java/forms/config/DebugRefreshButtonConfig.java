@@ -2,6 +2,7 @@ package forms.config;
 
 
 import forms.WfDebugEvent;
+import forms.util.WfUtil;
 import forms.widgets.WfButton;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.form.Form;
@@ -19,7 +20,8 @@ public class DebugRefreshButtonConfig extends ButtonConfig {
 
     @Override
     public WfButton create(String id) {
-        return new WfButton(id, this) {
+        WfButton button = new WfButton(id, this) {
+            // put this stuff inside the button...not here???
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                 post(form, new WfDebugEvent(target, this));
@@ -30,6 +32,8 @@ public class DebugRefreshButtonConfig extends ButtonConfig {
                 post(form, new WfDebugEvent(target, this));
             }
         };
+        button.setVisible(WfUtil.isDebug());
+        return button;
     }
 
 }

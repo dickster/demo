@@ -4,8 +4,10 @@ import forms.WfPage;
 import forms.Workflow;
 import forms.WorkflowForm;
 import forms.config.HasConfig;
+import org.apache.wicket.Application;
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
+import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
@@ -24,11 +26,14 @@ public class WfUtil implements Serializable {
 
     public static String getComponentProperty(@Nonnull Component component) {
         if (component instanceof HasConfig) {
-            return ((HasConfig)component).getConfig().getProperty();
+            return ((HasConfig) component).getConfig().getFullProperty();
         }
         throw new IllegalArgumentException("component doesn't have a property");
     }
 
+    // blargh : i need a better way to access workflow.
+    // in session?  nah, multiples allowed. attached to page?  reference injected into each component?
+    // can it be a spring bean?
     public static Workflow getWorkflow(Component component) {
         Workflow workflow = component.visitParents(WfPage.class, new IVisitor<WfPage, Workflow>() {
             @Override
@@ -52,4 +57,16 @@ public class WfUtil implements Serializable {
         });
     }
 
+    public static boolean isDebug() {
+        Application application = Application.get();
+        if (application instanceof WebApplication) {
+            switch (((WebApplication)application).getConfigurationType()) {
+                case DEVELOPMENT:
+                    return true;
+                case DEPLOYMENT:
+                    return false;
+            }
+        }
+        return false;
+    }
 }

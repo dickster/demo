@@ -7,12 +7,18 @@ import org.apache.wicket.markup.html.form.validation.IFormValidator;
 public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
     private @DontSendInJson IFormValidator validator;
-    private String url;
     private @DontSendInJson FeedbackPanelConfig feedbackConfig;
+    private String url; //historyCallbackUrl;
 
     public FormConfig(String name) {
         super(name, WidgetTypeEnum.FORM);
+        // if DEBUG...
+        addDebugStuff();
         withRenderBodyOnly(false);
+    }
+
+    private void addDebugStuff() {
+        with(new DebugRefreshButtonConfig("refresh"));
     }
 
     @Override
@@ -29,26 +35,11 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
         return this;
     }
 
-    public void setCallbackUrl(String url) {
-        this.url = url;
-    }
-
     public FeedbackPanelConfig getFeedbackConfig() {
         return feedbackConfig;
     }
 
-//    public void updateIdToMarkupId(WorkflowForm form) {
-//        idToMarkupId = Maps.newHashMap();
-//        form.visitChildren(Component.class, new IVisitor<Component, Void>() {
-//            @Override
-//            public void component(Component component, IVisit<Void> visit) {
-//                if (component instanceof HasConfig) {
-//                    String name = ((HasConfig)component).getConfig().getId();
-//                    System.out.println("adding " + name + " --> " + component.getMarkupId());
-//                    idToMarkupId.put(name, component.getMarkupId());
-//                }
-//            }
-//        });
-//    }
-
+    public void setHistoryCallbackUrl(String url) {
+        this.url = url;
+    }
 }

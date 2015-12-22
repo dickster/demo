@@ -11,6 +11,8 @@ import java.util.List;
 
 public class LabelConfig extends Config<Label2> {
 
+
+    // TODO : clean up all this crap and put logic into the component.
     private List<String> properties = Lists.newArrayList();
     private String text = null;  // this should be localized!
     private boolean htmlStrings = false;

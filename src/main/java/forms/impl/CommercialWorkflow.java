@@ -41,7 +41,7 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     }
 
     @Override
-    protected WfCompoundPropertyModel createModel() {
+    protected @Nonnull WfCompoundPropertyModel createModel() {
         return new WfCompoundPropertyModel(new GenericInsuranceObject());
     }
 

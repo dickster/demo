@@ -20,10 +20,12 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private static final String CLASS = "class";
     private static final String PLUGIN_NA = "n/a";
 
+    private @DontSendInJson Class<T> clazz;
     private @DontSendInJson GroupConfig parent;
     private @DontSendInJson Set<String> ajaxHandlers = Sets.newHashSet();
+    private @DontSendInJson String prefix;
     private @DontSendInJson boolean wrapHtmlOutput = false;
-    private @DontSendInJson boolean initiallyVisibile = true;
+    private @DontSendInJson boolean initiallyVisible = true;
 
     private String markupId;  // this is injected by the framework...don't set this yourself.
 
@@ -56,6 +58,10 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     public String getProperty() {
         return property;
+    }
+
+    public String getFullProperty() {
+        return Joiner.on(".").skipNulls().join(getPrefix(), getProperty());
     }
 
     // ALIAS for withId();
@@ -180,11 +186,11 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     // CAVEAT : if you use this, and you update the component via ajax, then you probably want to
     // call setOutputMarkupPlaceholderTag(true);
     public boolean isInitialyVisibile() {
-        return initiallyVisibile;
+        return initiallyVisible;
     }
 
     public Config initiallyVisible(boolean vis) {
-        this.initiallyVisibile = vis;
+        this.initiallyVisible = vis;
         return this;
     }
 
@@ -195,6 +201,15 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     public GroupConfig getParent() {
         return parent;
+    }
+
+    public void setPropertyPrefix(String prefix) {
+        this.prefix = prefix;
+
+    }
+
+    public String getPrefix() {
+        return prefix;
     }
 }
 

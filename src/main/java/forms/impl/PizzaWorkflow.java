@@ -5,6 +5,7 @@ import forms.WfState;
 import forms.WidgetFactory;
 import forms.model.WfCompoundPropertyModel;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -18,9 +19,8 @@ public class PizzaWorkflow extends FormBasedWorkflow {
         return pizza1;
     }
 
-
     @Override
-    protected WfCompoundPropertyModel createModel() {
+    protected @Nonnull WfCompoundPropertyModel createModel() {
         return new WfCompoundPropertyModel(new PizzaModel());
     }
 

@@ -125,7 +125,7 @@ public class WorkflowForm extends Panel implements HasConfig {
     private void update(FormConfig formConfig) {
         form = new Form("form");
         form.setOutputMarkupId(true);
-        form.add(new Div("content", formConfig));
+        form.add(new Div("content", formConfig).setRenderBodyOnly(true));
         addOrReplace(form);
     }
 
@@ -141,7 +141,7 @@ public class WorkflowForm extends Panel implements HasConfig {
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
-        getFormConfig().setCallbackUrl(historyMaker.getCallbackUrl().toString());
+        getFormConfig().setHistoryCallbackUrl(historyMaker.getCallbackUrl().toString());
 //        getFormConfig().updateIdToMarkupId(this);
         for (HeaderItem item:getTheme().getHeaderItems()) {
             response.render(item);
