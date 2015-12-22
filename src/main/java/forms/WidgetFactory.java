@@ -4,6 +4,7 @@ import forms.config.Config;
 import forms.config.FormComponentConfig;
 import forms.spring.AjaxHandlerFactory;
 import org.apache.wicket.Component;
+import org.apache.wicket.MetaDataKey;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.validation.IValidator;
@@ -14,6 +15,8 @@ import java.io.Serializable;
 
 public abstract class WidgetFactory implements Serializable {
 
+    public static final MetaDataKey<String> MODEL_PREFIX = new MetaDataKey<String>(){};
+
     private @Inject AjaxHandlerFactory ajaxHandlerFactory;
 
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
@@ -22,7 +25,7 @@ public abstract class WidgetFactory implements Serializable {
     @Nonnull
     public abstract Component create(String id, Config config);
 
-    /*package protected*/ Component createWidget(String id, Config config) {
+    /*package protected*/ Component createWidget(String id, Config config, String... prefix) {
         preCreate(config);
         Component component = create(id, config);
         postCreate(component, config);

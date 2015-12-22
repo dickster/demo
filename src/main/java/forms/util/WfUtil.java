@@ -1,6 +1,8 @@
 package forms.util;
 
+import com.google.common.base.Joiner;
 import forms.WfPage;
+import forms.WidgetFactory;
 import forms.Workflow;
 import forms.WorkflowForm;
 import forms.config.HasConfig;
@@ -26,7 +28,10 @@ public class WfUtil implements Serializable {
 
     public static String getComponentProperty(@Nonnull Component component) {
         if (component instanceof HasConfig) {
-            return ((HasConfig) component).getConfig().getFullProperty();
+            // check meta data...
+            String prefix = component.getMetaData(WidgetFactory.MODEL_PREFIX);
+            String property = ((HasConfig) component).getConfig().getProperty();
+            return Joiner.on('.').skipNulls().join(prefix, property);
         }
         throw new IllegalArgumentException("component doesn't have a property");
     }

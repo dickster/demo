@@ -60,10 +60,6 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return property;
     }
 
-    public String getFullProperty() {
-        return Joiner.on(".").skipNulls().join(getPrefix(), getProperty());
-    }
-
     // ALIAS for withId();
     public Config name(String name) {
         return withId(name);
@@ -203,13 +199,5 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return parent;
     }
 
-    public void setPropertyPrefix(String prefix) {
-        this.prefix = prefix;
-
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
 }
 

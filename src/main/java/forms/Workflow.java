@@ -32,7 +32,6 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     private String beanName;
     protected transient Map<String, S> statesVisited = Maps.newHashMap();
 
-
     public Workflow() {
         register(this);
         this.widgetFactory = getWidgetFactory();

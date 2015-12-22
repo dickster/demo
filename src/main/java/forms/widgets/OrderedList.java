@@ -1,11 +1,13 @@
 package forms.widgets;
 
 import com.google.common.base.Preconditions;
+import forms.WidgetFactory;
 import forms.Workflow;
 import forms.config.Config;
 import forms.config.HasConfig;
 import forms.config.ListConfig;
 import forms.util.WfUtil;
+import org.apache.wicket.Component;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.AbstractPropertyModel;
 import org.apache.wicket.model.IModel;
@@ -66,8 +68,11 @@ public class OrderedList extends RepeatingView implements HasConfig {
             for (int i=0; i<configs.size();i++) {
                 // need to clone configs??? or augment widget factory....
                 Config config = configs.get(i);
-                config.setPropertyPrefix(String.format(nestedPropertyFormat, property, index));
-                add(workflow.createWidget(newChildId(), config));
+                Component widget = workflow.createWidget(newChildId(), config);
+                // give factory a clue as to who the parent is.  will generate the correct ognl in compound property models.
+                String prefix = String.format(String.format(nestedPropertyFormat, property, index));
+                widget.setMetaData(WidgetFactory.MODEL_PREFIX, prefix);
+                add(widget);
             }
         }
 

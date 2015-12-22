@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import forms.config.Config;
 import forms.config.HasConfig;
 import forms.util.ConfigGson;
+import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.IAjaxRegionMarkupIdProvider;
 import org.apache.wicket.behavior.Behavior;
@@ -35,7 +36,7 @@ public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdP
         }
         if (!needsToBeWrapped(component)) {
             // this should EITHER be put on component markup OR it's wrapped parent's markup.  (not both).
-            tag.getAttributes().put("data-wf", config.getFullProperty());
+            tag.getAttributes().put("data-wf", getDataWf(component));
         }
     }
 
@@ -62,14 +63,14 @@ public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdP
 
     public void beforeRender(Component c) {
         if (needsToBeWrapped(c)) {
-            c.getResponse().write("<div id='" + getWrappedId(c) + "' " + getDataWf(c) + ">");
+            c.getResponse().write("<div id='" + getWrappedId(c) + "' data-wf='" + getDataWf(c) + "'>");
         }
     }
 
     private String getDataWf(Component c) {
         // TODO : as optimization, i might want not to always spit this out???
         // it will add significantly to the payload.
-        return "data-wf='"+getConfig(c).getFullProperty()+"'";
+        return WfUtil.getComponentProperty(c);
     }
 
     private boolean needsToBeWrapped(Component c) {
