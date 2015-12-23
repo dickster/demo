@@ -19,7 +19,7 @@ import java.io.Serializable;
 
 public class WfUtil implements Serializable {
 
-    public static @Nullable String getComponentName(@Nonnull Component component) {
+    public static @Nullable String getComponentId(@Nonnull Component component) {
         if (component instanceof HasConfig) {
             return ((HasConfig)component).getConfig().getId();
         }
@@ -27,6 +27,17 @@ public class WfUtil implements Serializable {
     }
 
     public static String getComponentProperty(@Nonnull Component component) {
+        if (component instanceof HasConfig) {
+            // check meta data...
+            String prefix = component.getMetaData(WidgetFactory.MODEL_PREFIX);
+            String property = ((HasConfig) component).getConfig().getProperty();
+            return Joiner.on('.').skipNulls().join(prefix, property);
+        }
+        throw new IllegalArgumentException("component doesn't have a property");
+    }
+
+
+    public static String getComponentShortId(@Nonnull Component component) {
         if (component instanceof HasConfig) {
             // check meta data...
             String prefix = component.getMetaData(WidgetFactory.MODEL_PREFIX);
@@ -47,7 +58,7 @@ public class WfUtil implements Serializable {
             }
         });
         if (workflow==null) {
-            throw new IllegalStateException("can't find workflow for component " + component.getId() + getComponentName(component));
+            throw new IllegalStateException("can't find workflow for component " + component.getId() + getComponentId(component));
         }
         return workflow;
     }

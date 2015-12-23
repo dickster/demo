@@ -85,27 +85,32 @@ var workflow = function() {
 
             // TODO : layout a single widget...look only for specific data-wf-idsdata-
 
+            function moveTargetIntoTemplate(source, target) {
+                if (target.length>0) {
+                    target.insertAfter(source);
+                    copyAttributes(source, target);
+                    source.attr('data-wf-rendered',true).hide();
+                }
+                else {
+                    console.log("WARNING : you have " + source.attr('data-wf') + " in your template but can't find it in your form. it will be ignored.");
+                    source.addClass('undefined');
+                }
+            }
+
             var layoutWithTemplate = function() {
                 var form = $(document).find('form .raw-content');//get(config.id).find('form');
                 // TODO : maybe i need to clone this?
                 var t = $('form .template');
                 t.find('[data-wf]').each(function(i,v) {
-                    var templateElement = $(v);
-                    var id=templateElement.attr('data-wf');
+                    var source = $(v);
+                    var id=source.attr('data-wf');
                     // TODO : copy all css classes and attributes.
-                    var replaceWithThis = form.find('[data-wf="'+ id +'"]');
-                    if (replaceWithThis.length>0) {
-                        replaceWithThis.insertAfter(templateElement);
-                        templateElement.attr('data-wf-rendered',true).hide();
-                    }
-                    else {
-                        console.log("WARNING : you have " + id + " in your template but can't find it in your form. ignoring this field.");
-                        templateElement.addClass('undefined');
-                    }
+                    var target = form.find('[data-wf="'+ id +'"]');
+                    moveTargetIntoTemplate(source, target);
                 });
-                t.prepend(form.find('[data-wf="refresh"]'));
+                // the debug button we'll always move over. no need to include it in template.
+                t.prepend(form.find('.btn-debug'));
 
-                // TODO : copy attributes from tempateSource-->target
                 var untemplatedIds = '';
                 form.find('[data-wf]').each(function(i,v) {
                     var $el = $(v);
@@ -116,15 +121,21 @@ var workflow = function() {
                 if (untemplatedIds.length>0) {
                     console.log("WARNING: you have stuff in your form that you haven't included in your template --> " + untemplatedIds);
                 }
-                //form.hide();  // form should be empty at this point.
             }
 
             function copyAttributes(source, destination) {
-                for (i = 0; i < source.attributes.length; i++) {
-                    var a = source.attributes[i];
-//                    skip "style" and "id".
-// TODO : make sure tag type is the same <input?>   <div etc...>
-                    destination.attr(a.name, a.value);
+                var src = source.get(0);
+                var dest = destination.get(0);
+                for (i = 0; i < src.attributes.length; i++) {
+                    var a = src.attributes[i];
+                    if ('id'=== a.name || 'style'=== a.name || 'type'=== a.name) continue;
+                    dest.setAttribute(a.name,a.value);
+                }
+                var sourceType = src.nodeName;
+                var destType = dest.nodeName;
+                if (!(sourceType===destType)) {
+                    console.log('WARNING : for "' +src.getAttribute('data-wf') +'" the template has a type of ' + sourceType + ' but the form is using ' + destType + '.   ' +
+                        'It is recommended that you use the same types to avoid styling inconsistencies.');
                 }
             }
 

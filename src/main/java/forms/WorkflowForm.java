@@ -168,7 +168,7 @@ public class WorkflowForm extends Panel implements HasConfig {
         visitChildren(Component.class, new DeepChildFirstVisitor() {
             @Override
             public void component(Component component, IVisit<Void> visit) {
-                String n = WfUtil.getComponentName(component);
+                String n = WfUtil.getComponentId(component);
                 if (id.equals(n)) {
                     visitorKludge = component;
                     visit.stop();

@@ -19,7 +19,6 @@ public abstract class FormComponentConfig<T extends Component & HasConfig> exten
 
     public FormComponentConfig(@Nonnull String property, @Nonnull String type, String pluginName) {
         super(property, type, pluginName);
-        withCss("form-control");
     }
 
     public FormComponentConfig(@Nonnull String property, WidgetTypeEnum type) {
