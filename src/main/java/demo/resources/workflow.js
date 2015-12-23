@@ -94,11 +94,11 @@ var workflow = function() {
                     return;
                 }
                 var l = formTemplate.clone();
-                l.find('[data-wf-id]').each(function(i,v) {
+                l.find('[data-wf]').each(function(i,v) {
                     var templateElement = $(v);
-                    var id=templateElement.attr('data-wf-id');
+                    var id=templateElement.attr('data-wf');
                     // TODO : copy all css classes and attributes.
-                    var replaceWithThis = form.find('[data-wf-id="'+ id +'"]');
+                    var replaceWithThis = form.find('[data-wf="'+ id +'"]');
                     replaceWithThis.insertAfter(templateElement);
                     templateElement.attr('data-wf-rendered',true).hide();
                 });

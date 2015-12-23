@@ -4,6 +4,7 @@ import forms.WfFormState;
 import forms.WfSubmitEvent;
 import forms.Workflow;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,13 +20,14 @@ public class StateA extends WfFormState {
         super(new FormAConfig());
     }
 
+    @Nonnull
     @Override
     public WfFormState handleEvent(Workflow workflow, WfSubmitEvent event) {
-        try {
-            Thread.sleep(1200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+//        try {
+//            Thread.sleep(1200);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//        }
         String name = event.getName();
         if ("next".equals(name)) {
             return stateAx;
