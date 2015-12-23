@@ -6,8 +6,10 @@ import org.apache.wicket.markup.html.form.validation.IFormValidator;
 
 public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
+    // TODO : should make 'DontSendInJson' the default value.
     private @DontSendInJson IFormValidator validator;
     private @DontSendInJson FeedbackPanelConfig feedbackConfig;
+    private @DontSendInJson String template;
     private String url; //historyCallbackUrl;
 
     public FormConfig(String name) {

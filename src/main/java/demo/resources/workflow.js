@@ -88,8 +88,7 @@ var workflow = function() {
             var layoutWithTemplate = function() {
                 var form = $(document).find('form .raw-content');//get(config.id).find('form');
                 // TODO : maybe i need to clone this?
-                var t = $('#template');
-                t.show();
+                var t = $('form .template');
                 t.find('[data-wf]').each(function(i,v) {
                     var templateElement = $(v);
                     var id=templateElement.attr('data-wf');
@@ -109,11 +108,13 @@ var workflow = function() {
                 // TODO : copy attributes from tempateSource-->target
                 var untemplatedIds = '';
                 form.find('[data-wf]').each(function(i,v) {
-                    untemplatedIds = $(v).attr('data-wf') + ',' + untemplatedIds;
-                    $(v).addClass('untemplated');
+                    var $el = $(v);
+                    var dataWf = $el.attr('data-wf');
+                    untemplatedIds = dataWf + ',' + untemplatedIds;
+                    $el.addClass('untemplated').attr('placeholder',dataWf + ': is not in template');
                 });
                 if (untemplatedIds.length>0) {
-                    console.log("WARNING: you have stuff in your form that you haven't included in your template --> " + untemplatedIds)
+                    console.log("WARNING: you have stuff in your form that you haven't included in your template --> " + untemplatedIds);
                 }
                 //form.hide();  // form should be empty at this point.
             }

@@ -5,44 +5,7 @@
 
     <form wicket:id="form" role="form" class="form">
         <div wicket:id="content" class="raw-content"></div>
-
-        <!-- TODO : control template via wicket???-->
-
-        <div class="container" id="template" style="outline:1px dashed #D3D3D3">
-            <div class="row">
-                <div class="col-xs-6 form-group">
-                    <div class="row">
-                        <label data-wf="first name" class="col-xs-12">First</label>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6">
-                            <input data-wf="name.first" class="form-control" type="text"/>
-                        </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <input class="form-control" data-wf="name.middle" type="text"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 form-group">
-                    <label data-wf="last name">Last</label>
-                    <input data-wf="name.last" class="form-control" type="text"/>
-                </div>
-                <div class="col-xs-6 form-group">
-                    <label data-wf="address">Address</label>
-                    <input data-wf="insured.address" class="form-control" type="text"/>
-                </div>
-                <div class="col-xs-6 form-group">
-                    <label data-wf="age">Age</label>
-                    <input data-wf="insured.age" class="form-control" type="text"/>
-                </div>
-                <div class="col-xs-6 form-group">
-                    <label data-wf="occupation">occupation</label>
-                    <input data-wf="insured.occupation" class="form-control" type="text"/>
-                </div>
-            </div>
-            <a data-wf="next" class="btn btn-primary">next</a>
-        </div>
-
+        <div wicket:id="template" class="container template" style="outline:1px dotted blue;"></div>
     </form>
 
 </wicket:panel>

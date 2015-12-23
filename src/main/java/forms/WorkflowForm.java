@@ -7,6 +7,7 @@ import forms.config.FeedbackPanelConfig;
 import forms.config.FormConfig;
 import forms.config.HasConfig;
 import forms.util.WfUtil;
+
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -126,6 +127,9 @@ public class WorkflowForm extends Panel implements HasConfig {
         form = new Form("form");
         form.setOutputMarkupId(true);
         form.add(new Div("content", formConfig).setRenderBodyOnly(false));
+        // get this from form config.
+        // try this out on ajax!!!
+        form.add(new Template("template", "f1.html").setRenderBodyOnly(false));
         addOrReplace(form);
     }
 
@@ -183,4 +187,5 @@ public class WorkflowForm extends Panel implements HasConfig {
     public Config getConfig() {
         return formConfig;
     }
+
 }

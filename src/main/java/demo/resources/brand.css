@@ -5,12 +5,20 @@
     right:20px;
 }
 
-.untemplated:after {
+.untemplated:not([type='input']):after {
     color:#888;
-    font-size:10px;
+    font-size:12px;
     font-style:italic;
-    content:'<--element not included in template';
+    content:'<--this is not included in template';
 }
+
+/* in form but not in template.*/
+.untemplated {
+    background:#fee;
+    color:#444;
+    outline:1px solid #dbb;
+}
+
 /* in form but not in template.*/
 .untemplated {
     background:#fee;
@@ -28,7 +36,7 @@
     font-style:italic;
     font-family:"courier new";
     font-size:10px;
-    content:'<--element in template but not in form';
+    content:'<--this is in the template but not in form';
 }
 
 body.defaultTheme .container  {
