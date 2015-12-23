@@ -9,9 +9,8 @@ import java.util.List;
 
 public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
 
-    // TODO : should this be transient or serializable???
+    // TODO : should this be transient or serializable?
     private transient SelectOptionsService<T> service;
-
 
     public SelectPickerConfig(@Nonnull String property) {
         super(property, WidgetTypeEnum.SELECT);

@@ -83,6 +83,28 @@ var workflow = function() {
                 }
             };
 
+            // TODO : layout a single widget...look only for specific data-wf-idsdata-
+
+            var layoutWithTemplate = function() {
+                alert('huh');
+                var form = $(document).find('form');//get(config.id).find('form');
+                // do i really need to clone this?  if i use it once, i'm ok right?
+                while (typeof(formTemplate)==='undefined') {
+                    setTimeout(layoutWithTemplate, 1500);
+                    return;
+                }
+                var l = formTemplate.clone();
+                l.find('[data-wf-id]').each(function(i,v) {
+                    var templateElement = $(v);
+                    var id=templateElement.attr('data-wf-id');
+                    // TODO : copy all css classes and attributes.
+                    var replaceWithThis = form.find('[data-wf-id="'+ id +'"]');
+                    replaceWithThis.insertAfter(templateElement);
+                    templateElement.attr('data-wf-rendered',true).hide();
+                });
+                form.append(l);
+            }
+
             var layoutDefault = function (form) {
                 form.css('width:300px');
                 //form.find('[data-wf]').each(function(i,e) {
@@ -94,6 +116,8 @@ var workflow = function() {
 
             var layout = function() {
                 var $form = get(config.id).find('form');
+                layoutWithTemplate($form);
+                return;
                 var layout = layoutDef[config.id];
                 if (!layout) {
                     layoutDefault($form);

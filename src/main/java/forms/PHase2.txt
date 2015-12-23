@@ -1,14 +1,14 @@
 Xconfig has options. put them in component meta data.
 PHASE 2:
-VALIDATIONS, chained, reused. one off.  go back to same page with message?
+xVALIDATIONS, chained, reused. one off.  go back to same page with message?
  (error handling).
 NO BRANCHING!!!,
-SPRING RE-USABLE BEHAVIORS.
+xSPRING RE-USABLE BEHAVIORS.
 NULLSAFE MODEL via ASPECT???-fugit.
-DISABLE BUTTON on CHANGE.
-PAYMENT EXAMPLE.
-CUSTOM THEME with logos/header/width/footer etc..
-DYNAMIC SELECT VALUES via SPRING SERVICE.
+xDISABLE BUTTON on CHANGE.
+xPAYMENT EXAMPLE.
+xCUSTOM THEME with logos/header/width/footer etc..
+xDYNAMIC SELECT VALUES via SPRING SERVICE.
 
 Input Data = GermanInsuranceObject.
 		inludes Country : Canada/Mexico/USA.

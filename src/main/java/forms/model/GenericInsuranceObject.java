@@ -56,7 +56,7 @@ public class GenericInsuranceObject implements Serializable {
 
     public class Payment implements Serializable {
         public Integer cc;
-        private int securityCode;
+        private Integer securityCode;
         public String expiry;
         public String method;
         public String frequency;
