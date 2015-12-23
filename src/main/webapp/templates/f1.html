@@ -15,13 +15,11 @@
 </head>
 <body>
 
-
-
-<div class="container">
+<div class="container" id="template" style="outline:1px dashed royalblue">
     <div class="row">
         <div class="col-xs-6 form-group">
             <div class="row">
-                <label data-tmpl-id="first name" class="col-xs-12">First</label>
+                <label data-wf="first name" class="col-xs-12">First</label>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
@@ -32,22 +30,27 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-6 form-group">                   `
+        <div class="col-xs-6 form-group">
             <label data-wf="last name">Last</label>
-            <input class="form-control" type="text"/>
+            <input data-wf="name.last" class="form-control" type="text"/>
         </div>
         <div class="col-xs-6 form-group">
             <label data-wf="address">Address</label>
             <input data-wf="insured.address" class="form-control" type="text"/>
         </div>
         <div class="col-xs-6 form-group">
+            <label data-wf="age">Age</label>
+            <input data-wf="insured.age" class="form-control" type="text"/>
+        </div>
+        <div class="col-xs-6 form-group">
             <label data-wf="occupation">occupation</label>
             <input data-wf="insured.occupation" class="form-control" type="text"/>
         </div>
     </div>
+    <a data-wf="next" class="btn btn-primary">next</a>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>

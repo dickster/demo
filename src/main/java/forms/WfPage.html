@@ -18,15 +18,18 @@
         }
     </style>
 
-    <script type="text/javascript">
-        var formTemplate;
-        $(document).ready(function() {
-            $.get('/templates/f1.html', function(data) {
-                formTemplate = $(data);
-                alert(data.substr(0,300));
-            })
-        });
-    </script>
+    <!--<link rel="import" href="/templates/f1.html" >-->
+
+    <!--<script type="text/javascript">-->
+        <!--var formTemplate;-->
+        <!--var importing = document.querySelector('link[rel="import"]');-->
+        <!--importing.addEventListener('load', function(e) {-->
+            <!--formTemplate = link.import;-->
+        <!--});-->
+    <!--</script>-->
+
+
+
 </head>
 
 <body>

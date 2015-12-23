@@ -86,23 +86,45 @@ var workflow = function() {
             // TODO : layout a single widget...look only for specific data-wf-idsdata-
 
             var layoutWithTemplate = function() {
-                alert('huh');
-                var form = $(document).find('form');//get(config.id).find('form');
-                // do i really need to clone this?  if i use it once, i'm ok right?
-                while (typeof(formTemplate)==='undefined') {
-                    setTimeout(layoutWithTemplate, 1500);
-                    return;
-                }
-                var l = formTemplate.clone();
-                l.find('[data-wf]').each(function(i,v) {
+                var form = $(document).find('form .raw-content');//get(config.id).find('form');
+                // TODO : maybe i need to clone this?
+                var t = $('#template');
+                t.show();
+                t.find('[data-wf]').each(function(i,v) {
                     var templateElement = $(v);
                     var id=templateElement.attr('data-wf');
                     // TODO : copy all css classes and attributes.
                     var replaceWithThis = form.find('[data-wf="'+ id +'"]');
-                    replaceWithThis.insertAfter(templateElement);
-                    templateElement.attr('data-wf-rendered',true).hide();
+                    if (replaceWithThis.length>0) {
+                        replaceWithThis.insertAfter(templateElement);
+                        templateElement.attr('data-wf-rendered',true).hide();
+                    }
+                    else {
+                        console.log("WARNING : you have " + id + " in your template but can't find it in your form. ignoring this field.");
+                        templateElement.addClass('undefined');
+                    }
                 });
-                form.append(l);
+                t.prepend(form.find('[data-wf="refresh"]'));
+
+                // TODO : copy attributes from tempateSource-->target
+                var untemplatedIds = '';
+                form.find('[data-wf]').each(function(i,v) {
+                    untemplatedIds = $(v).attr('data-wf') + ',' + untemplatedIds;
+                    $(v).addClass('untemplated');
+                });
+                if (untemplatedIds.length>0) {
+                    console.log("WARNING: you have stuff in your form that you haven't included in your template --> " + untemplatedIds)
+                }
+                //form.hide();  // form should be empty at this point.
+            }
+
+            function copyAttributes(source, destination) {
+                for (i = 0; i < source.attributes.length; i++) {
+                    var a = source.attributes[i];
+//                    skip "style" and "id".
+// TODO : make sure tag type is the same <input?>   <div etc...>
+                    destination.attr(a.name, a.value);
+                }
             }
 
             var layoutDefault = function (form) {
