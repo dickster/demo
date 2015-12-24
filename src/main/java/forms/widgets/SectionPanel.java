@@ -44,9 +44,13 @@ import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.List;
 
-// new SectionPanel(id);   inherit model = new PropertyModel("foo.bar") ---> foo.bar[]
+// new SectionPanel(id);
+//
+// inherit model = new PropertyModel("foo.bar") ---> foo.bar[]
 // assume array for now. requires GroupConfig with min/max etc...
 // based on inherited model
+//
+
 
 public class SectionPanel<T extends Serializable> extends Panel implements FeedbackListener, ISection, HasConfig {
 

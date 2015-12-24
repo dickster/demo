@@ -26,18 +26,7 @@ public class WfUtil implements Serializable {
         return null;
     }
 
-    public static String getComponentProperty(@Nonnull Component component) {
-        if (component instanceof HasConfig) {
-            // check meta data...
-            String prefix = component.getMetaData(WidgetFactory.MODEL_PREFIX);
-            String property = ((HasConfig) component).getConfig().getProperty();
-            return Joiner.on('.').skipNulls().join(prefix, property);
-        }
-        throw new IllegalArgumentException("component doesn't have a property");
-    }
-
-
-    public static String getComponentShortId(@Nonnull Component component) {
+    public static String getComponentFullProperty(@Nonnull Component component) {
         if (component instanceof HasConfig) {
             // check meta data...
             String prefix = component.getMetaData(WidgetFactory.MODEL_PREFIX);

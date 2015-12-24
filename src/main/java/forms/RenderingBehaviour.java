@@ -73,7 +73,7 @@ public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdP
     private String getDataWf(Component c) {
         // TODO : as optimization, i might want not to always spit this out???
         // it will add significantly to the payload.
-        return WfUtil.getComponentProperty(c);
+        return WfUtil.getComponentId(c);
     }
 
     private boolean needsToBeWrapped(Component c) {

@@ -12,6 +12,7 @@ public class InfoFormConfig extends FormConfig {
         super("INFO_FORM");
         addConfigs();
         withTitle("Client Information");
+        withTemplate("f1.html");  //withTemplate("f1");/
     }
 
     private void addConfigs() {

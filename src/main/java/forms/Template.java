@@ -43,7 +43,7 @@ public class Template extends Panel {
     public Markup getAssociatedMarkup() {
         try {
             if (source==null) {
-                return Markup.of("<div class='raw-content'>empty default template</div>");
+                return Markup.of("<wicket:panel><div class='raw-content'>empty default template</div></wicket:panel>");
             }
             InputStream stream = new ClassPathResource(getFullPath()).getInputStream();
             String content = CharStreams.toString(new InputStreamReader(stream, Charsets.UTF_8));
@@ -51,7 +51,7 @@ public class Template extends Panel {
             return Markup.of(content);
         } catch (IOException e) {
             e.printStackTrace();  // TODO : how to handle
-            return Markup.of("<div class='raw-content template-error'>error reading markup for "+getFullPath()+"</div>");
+            return Markup.of("<wicket:panel><div class='raw-content template-error'>error reading markup for "+getFullPath()+"</div></wicket:panel>");
         }
     }
 

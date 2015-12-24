@@ -184,6 +184,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         return ended;
     }
 
+    // hmm...i should still use a factory to create this???
     public abstract WidgetFactory getWidgetFactory();
 
     public String getBeanName() {

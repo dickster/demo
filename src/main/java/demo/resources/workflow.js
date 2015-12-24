@@ -130,8 +130,18 @@ var workflow = function() {
             }
 
             var layout = function() {
-                layoutWithTemplate();
+                var t = $('form .template');
+                if (t.size()==0) {
+                    layoutDefault();
+                }
+                else {
+                    layoutWithTemplate();
+                }
                 return;
+            };
+
+            var layoutDefault = function (form) {
+                form.css('width:300px');
             };
 
             return {

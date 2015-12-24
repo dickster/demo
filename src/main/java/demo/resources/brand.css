@@ -9,7 +9,7 @@
     color:#888;
     font-size:12px;
     font-style:italic;
-    content:'<--this is not included in template';
+    content:'<--not included in template';
 }
 
 .template-error:after {
@@ -49,7 +49,7 @@
     font-style:italic;
     font-family:"courier new";
     font-size:10px;
-    content:'<--this is in the template but not in form';
+    content:'<--in template but not in form';
 }
 
 body.defaultTheme .container  {
