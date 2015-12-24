@@ -12,6 +12,19 @@
     content:'<--this is not included in template';
 }
 
+.template-error:after {
+    /* assumes code plops the template name into the title attribute! see Template.java*/
+    content:'cant find the template '  attr(title);
+}
+
+.template-error {
+    height:50px;
+    width:100%;
+    color:#ddd;
+    background:#733;
+    outline:1px solid black;
+}
+
 /* in form but not in template.*/
 .untemplated {
     background:#fee;

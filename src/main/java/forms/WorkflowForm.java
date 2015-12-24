@@ -129,7 +129,7 @@ public class WorkflowForm extends Panel implements HasConfig {
         form.add(new Div("content", formConfig).setRenderBodyOnly(false));
         // get this from form config.
         // try this out on ajax!!!
-        form.add(new Template("template", "f1.html").setRenderBodyOnly(false));
+        form.add(new Template("template", formConfig.getTemplate()).setRenderBodyOnly(false));
         addOrReplace(form);
     }
 
