@@ -31,6 +31,7 @@ public class AgeOccupationAjaxBehavior extends WfAjaxBehavior {
         Component occupation = workflowForm.getWfComponent("insured.occupation");
         IModel<String> model = (IModel<String>) occupation.getDefaultModel();
         model.setObject(value);
+        // only update if model changes.
         target.add(occupation);
     }
 

@@ -4,22 +4,6 @@ var workflow = function() {
 
         var url = "?";
 
-        var rowsCss = [
-            null, //"can't have zero colsPerRow!!!",
-            "col-md-12",
-            "col-md-6",
-            "col-md-4",
-            "col-md-3",
-            "col-md-2",
-            "col-md-2",
-            "col-md-1",
-            "col-md-1",
-            "col-md-1",
-            "col-md-1",
-            "col-md-1",
-            "col-md-1"
-        ];
-
         var pushHistory = function() {
             var state = $('#state').val();
             window.history.pushState({name:state, time:new Date()}, "ignored title", state );
@@ -36,10 +20,10 @@ var workflow = function() {
 
         var initWidget = function(config) {
            var w = widget(config);
-            w.initializePlugin();
             if (config.isAjax) {
                 w.updateLayout();
             }
+            w.initializePlugin();
         }
 
         function widget(conf) {
@@ -123,11 +107,19 @@ var workflow = function() {
             function copyAttributes(source, destination) {
                 var src = source.get(0);
                 var dest = destination.get(0);
-                for (i = 0; i < src.attributes.length; i++) {
+                var attrs = [];
+                for (var i = 0; i < src.attributes.length; i++) {
                     var a = src.attributes[i];
                     // skip some key attributes that might adversely affect wicket or framework...copy the rest.
-                    if ('id'=== a.name || 'style'=== a.name || 'type'=== a.name || 'data-wf-template'=== a.name) continue;
-                    dest.setAttribute(a.name,a.value);
+                    // maybe i should just copy class???
+                    if ('id'=== a.name || 'style'=== a.name || 'type'=== a.name || 'data-wf'=== a.name || 'data-wf-template'=== a.name)
+                        continue;
+                    attrs.push(a);
+                }
+                // in a feeble attempt to reduce reflow problems, i'm isolating reads/writes to DOM.  this can cause a flicker.
+                // in general, it's better to have these sent via config if this problem is serious.
+                for (var i = 0; i<attrs.length; i++) {
+                    dest.setAttribute(attrs[i].name,attrs[i].value);
                 }
                 var sourceType = src.nodeName;
                 var destType = dest.nodeName;
@@ -156,6 +148,25 @@ var workflow = function() {
             init : init,
             pushHistory : pushHistory
         };
+
+
+
+    var rowsCss = [
+        null, //"can't have zero colsPerRow!!!",
+        "col-md-12",
+        "col-md-6",
+        "col-md-4",
+        "col-md-3",
+        "col-md-2",
+        "col-md-2",
+        "col-md-1",
+        "col-md-1",
+        "col-md-1",
+        "col-md-1",
+        "col-md-1",
+        "col-md-1"
+    ];
+
 
 }();
 
