@@ -44,4 +44,9 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
     public void setHistoryCallbackUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public Config withAjaxBehavior(String name) {
+        throw new UnsupportedOperationException("you shouldn't be adding ajax behaviors to the form...add them to the contained components directly please and thank you.");
+    }
 }

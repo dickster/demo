@@ -15,7 +15,7 @@ public class PaymentFormConfig extends FormConfig {
         with(new LabelConfig("payment method"));
         withConfig(new SelectPickerConfig("payment.method")
                 .withOptions(Lists.newArrayList("Credit Card", "Cash", "Direct Billing"))
-                .withAjaxHandler("paymentMethodAjaxHandler"));
+                .withAjaxBehavior("paymentMethodAjaxBehavior"));
     // TODO : add some kind of ajax listener here...when # of digits is 12 then do ajax call?
     // and enable submit button otherwise show error!
     // need to write a field error widget in jquery Ui/bootstrap

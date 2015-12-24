@@ -2,7 +2,7 @@ package forms;
 
 import forms.config.Config;
 import forms.config.FormComponentConfig;
-import forms.spring.AjaxHandlerFactory;
+import forms.spring.AjaxBehaviorFactory;
 import org.apache.wicket.Component;
 import org.apache.wicket.MetaDataKey;
 import org.apache.wicket.markup.html.form.FormComponent;
@@ -17,7 +17,7 @@ public abstract class WidgetFactory implements Serializable {
 
     public static final MetaDataKey<String> MODEL_PREFIX = new MetaDataKey<String>(){};
 
-    private @Inject AjaxHandlerFactory ajaxHandlerFactory;
+    private @Inject AjaxBehaviorFactory ajaxBehaviorFactory;
 
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
@@ -38,9 +38,9 @@ public abstract class WidgetFactory implements Serializable {
             FormComponent fc = (FormComponent) component;
             FormComponentConfig fcc = (FormComponentConfig) config;
             addValidators(fc, fcc);
-            addAjaxHandlers(fc, fcc);
             setLabel(fc, fcc);
         }
+        addAjaxBehaviors(component, config);
         addBehaviors(component);
     }
 
@@ -66,9 +66,9 @@ public abstract class WidgetFactory implements Serializable {
         }
     }
 
-    private final void addAjaxHandlers(FormComponent component, FormComponentConfig<?> config) {
-        for (String handlerName:config.getAjaxHandlers()) {
-            component.add(ajaxHandlerFactory.create(handlerName));
+    private final void addAjaxBehaviors(Component component, Config<?> config) {
+        for (String handlerName:config.getAjaxBehaviors()) {
+            component.add(ajaxBehaviorFactory.create(handlerName));
         }
     }
 

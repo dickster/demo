@@ -21,15 +21,15 @@ public class SelectPicker extends DropDownChoice<String> {
 //    private static final JavaScriptResourceReference EASY_SELECT_JS = new JavaScriptResourceReference(SelectPicker.class, "selectPicker.js");
 
     private static final String INIT = "$('.selectpicker').selectpicker();";
-    private AbstractDefaultAjaxBehavior ajaxHandler;
+    private AbstractDefaultAjaxBehavior ajaxBehavior;
 
     public SelectPicker(String id, IModel<String> model, List<String> options) {
         super(id, model, options );
         setOutputMarkupId(true);
-        //add(ajaxHandler = createAjaxHandler());
+        //add(ajaxBehavior = createAjaxHandler());
     }
 
-    public AbstractDefaultAjaxBehavior createAjaxHandler() {
+    public AbstractDefaultAjaxBehavior createAjaxBehavior() {
         return new AbstractDefaultAjaxBehavior() {
             protected void respond(final AjaxRequestTarget target) {
                 IRequestParameters params = RequestCycle.get().getRequest().getRequestParameters();
@@ -54,7 +54,7 @@ public class SelectPicker extends DropDownChoice<String> {
     }
 
     public class SelectPickerOptions {
-       // String url = ajaxHandler.getCallbackUrl().toString();
+       // String url = ajaxBehavior.getCallbackUrl().toString();
         String id = getMarkupId();
     }
 }

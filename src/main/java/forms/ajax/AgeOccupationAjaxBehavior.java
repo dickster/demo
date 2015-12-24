@@ -26,7 +26,8 @@ public class AgeOccupationAjaxBehavior extends WfAjaxBehavior {
         } catch (NumberFormatException e) {
             ; // don't do anything. it's not a number.
         }
-        String value = age>=65 ? "retired" : "youngin";
+        String value = age>=65 ? "senior" :
+                age > 18 ? "adult" : "youth";
         Component occupation = workflowForm.getWfComponent("insured.occupation");
         IModel<String> model = (IModel<String>) occupation.getDefaultModel();
         model.setObject(value);

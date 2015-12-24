@@ -26,7 +26,10 @@ public class InfoFormConfig extends FormConfig {
         withConfig(new LabelConfig("last name"));
         withConfig(new TextFieldConfig("name.last"));
         withConfig(new LabelConfig("age"));
-        withConfig(new TextFieldConfig<Integer>("insured.age"));
+        withConfig(new TextFieldConfig<Integer>("insured.age").withAjaxBehavior("ageOccupationAjaxBehavior"));
+        withConfig(new LabelConfig("occupation"));
+        withConfig(new TextFieldConfig<Integer>("insured.occupation"));
+
 
 //        withConfig(new CheckBoxConfig("insured.smokes", "i smoke cigarettes"));
 

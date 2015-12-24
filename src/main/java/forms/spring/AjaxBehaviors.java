@@ -8,23 +8,23 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
-public class AjaxHandlers {
+public class AjaxBehaviors {
 
-    // NOTE : *all* ajax handlers MUST be of Scope("prototype")!!!!!
+    // NOTE : *all* ajax behaviors MUST be of Scope("prototype")!!
     //   e.g. @Bean @Scope("prototype") public Foo foo() {...}
 
     @Bean
-    public AjaxHandlerFactory ajaxHandlerFactory() {
-        return new AjaxHandlerFactory();
+    public AjaxBehaviorFactory AjaxBehaviorFactory() {
+        return new AjaxBehaviorFactory();
     }
 
     @Bean @Scope("prototype")
-    public WfAjaxBehavior ageOccupationAjaxHandler() {
+    public WfAjaxBehavior ageOccupationAjaxBehavior() {
         return new AgeOccupationAjaxBehavior();
     }
 
     @Bean @Scope("prototype")
-    public WfAjaxBehavior paymentMethodAjaxHandler() {
+    public WfAjaxBehavior paymentMethodAjaxBehavior() {
         return new PaymentMethodAjaxBehavior();
     }
 }

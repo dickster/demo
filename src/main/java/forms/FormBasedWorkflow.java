@@ -14,7 +14,7 @@ import java.util.List;
 
 public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
 
-    private List<WfAjaxBehavior> ajaxHandlers;
+    private List<WfAjaxBehavior> ajaxBehaviors;
 
     public FormBasedWorkflow() {
         super();
@@ -80,12 +80,12 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
         return new WorkflowForm(id, config);
     }
 
-    public List<WfAjaxBehavior> getAjaxHandlers() {
-        return Lists.newArrayList(ajaxHandlers);
+    public List<WfAjaxBehavior> getAjaxBehaviors() {
+        return Lists.newArrayList(ajaxBehaviors);
     }
 
-    public FormBasedWorkflow<T> withAjaxHandlers(WfAjaxBehavior... handlers) {
-        ajaxHandlers = Lists.newArrayList(handlers);
+    public FormBasedWorkflow<T> withAjaxBehaviors(WfAjaxBehavior... behaviors) {
+        ajaxBehaviors = Lists.newArrayList(behaviors);
         return this;
     }
 

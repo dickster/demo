@@ -37,13 +37,18 @@ var workflow = function() {
         var initWidget = function(config) {
            var w = widget(config);
             w.initializePlugin();
+            if (config.isAjax) {
+                w.updateLayout();
+            }
         }
 
         function widget(conf) {
             var config= conf;
+            var $widget = $('#'+config.markupId);
 
-            function get(id) {
-                return $("[data-wf='"+id+"']");
+            var updateLayout = function() {
+                // should assert that previous node is the template?
+                copyAttributes($widget.prev(), $widget);
             }
 
             var initializePlugin = function() {
@@ -57,22 +62,14 @@ var workflow = function() {
                         console.log("can't layout form.  maybe your layout definition is wrong?");
                     }
                 }
-                if (config.type=="CHECKBOX") {
-                    layoutCheckBox();
-                }
                 if ( config.type=="ADDRESS") {
                     config.id = '#'+config.markupId;
                     easy.address.create(config);
                     return;
                 }
-//                if (config.type=="SECTION") {
-//                    ez.sectionPanel.init(config);
-//                    return;
-//                }
 
                 if (!config.pluginName) return;
 
-                var $widget = $('#'+config.markupId);
                 config.options.markupId = config.markupId;
                 console.log('about to initialize widget ' + config.id + ' with plugin ' + config.pluginName + ' and options ' + JSON.stringify(config.options));
                 try {
@@ -89,7 +86,7 @@ var workflow = function() {
                 if (target.length>0) {
                     target.insertAfter(source);
                     copyAttributes(source, target);
-                    source.attr('data-wf-rendered',true).hide();
+                    source.attr('data-wf-template','').hide();
                 }
                 else {
                     console.log("WARNING : you have " + source.attr('data-wf') + " in your template but can't find it in your form. it will be ignored.");
@@ -128,7 +125,8 @@ var workflow = function() {
                 var dest = destination.get(0);
                 for (i = 0; i < src.attributes.length; i++) {
                     var a = src.attributes[i];
-                    if ('id'=== a.name || 'style'=== a.name || 'type'=== a.name) continue;
+                    // skip some key attributes that might adversely affect wicket or framework...copy the rest.
+                    if ('id'=== a.name || 'style'=== a.name || 'type'=== a.name || 'data-wf-template'=== a.name) continue;
                     dest.setAttribute(a.name,a.value);
                 }
                 var sourceType = src.nodeName;
@@ -139,68 +137,13 @@ var workflow = function() {
                 }
             }
 
-            var layoutDefault = function (form) {
-                form.css('width:300px');
-                //form.find('[data-wf]').each(function(i,e) {
-                //    $(e).wrap('<div class="form-group"></div>')
-                //        .wrap('<div class="row"></div>')
-                //        .wrap('<div class="col-md-4"></div>');
-                //});
-            };
-
             var layout = function() {
-                var $form = get(config.id).find('form');
-                layoutWithTemplate($form);
+                layoutWithTemplate();
                 return;
-                var layout = layoutDef[config.id];
-                if (!layout) {
-                    layoutDefault($form);
-                    return;
-                }
-
-                for (var section = 0; section<layout.sections.length; section++) {
-                    var $sec = $('<fieldset></fieldset>');
-                    $form.append($sec);
-                    layoutSection(layout.sections[section], $sec);
-                }
-//                console.log("the form is ---> " + $form[0].outerHTML);
             };
-
-            function layoutSection(section, parent) {
-                for (var row = 0; row < section.rows.length; row++) {
-                    var $row = $('<div class="row"></div>');
-                    $row.wrap('<div class="form-group"></div>');
-                    parent.append($row.parent());
-                    layoutRow(section.rows[row], $row);
-                }
-            }
-
-            function layoutRow(row, parent) {
-                for (var col = 0; col < row.length; col++) {
-                    var colClass = row[col].css;
-                    var $formGroup = $('<div></div>').addClass(colClass);
-                    parent.append($formGroup);
-                    layoutColGroup($formGroup, row[col]);
-                }
-            }
-
-            function layoutColGroup(parent, colGroup) {
-                for (var c = 0; c<colGroup.col.length; c++) {
-                    var colName = colGroup.col[c];
-                    var $el = get(colName);
-                    parent.append($el);
-                }
-            }
-
-            function layoutCheckBox() {   // do this in behaviour??? or else ajax will muck it up with duplicated html.
-                var $cb = get(config.id);
-                // if not already wrapped then... { } else leave it...
-                // should just write a panel checkbox class styled like this.
-//                $cb.wrap("<div class='checkbox'></div>");
-//                $cb.wrap("<label>" + config.label + "</label>");
-            }
 
             return {
+                updateLayout : updateLayout,
                 layout : layout,
                 initializePlugin : initializePlugin
             }

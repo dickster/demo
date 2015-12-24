@@ -22,12 +22,13 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     private @DontSendInJson Class<T> clazz;
     private @DontSendInJson GroupConfig parent;
-    private @DontSendInJson Set<String> ajaxHandlers = Sets.newHashSet();
+    private @DontSendInJson Set<String> ajaxBehaviors = Sets.newHashSet();
     private @DontSendInJson String prefix;
     private @DontSendInJson boolean wrapHtmlOutput = false;
     private @DontSendInJson boolean initiallyVisible = true;
 
-    private String markupId;  // this is injected by the framework...don't set this yourself.
+    private String markupId;    // this is injected by the framework...don't set this yourself.
+    private boolean isAjax;     // this is injected by the framework...don't set this yourself.
 
     private String id;
     private String type;
@@ -170,12 +171,14 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return this;
     }
 
-    public Set<String> getAjaxHandlers() {
-        return ImmutableSet.copyOf(ajaxHandlers);
+    public Set<String> getAjaxBehaviors() {
+        return ImmutableSet.copyOf(ajaxBehaviors);
     }
 
-    public Config withAjaxHandler(String handlerName) {
-        ajaxHandlers.add(handlerName);
+    public Config withAjaxBehavior(String name) {
+        // check name.  if endsWith("ajaxBehavior") otherwise add it.
+        // look for spelling errors.
+        ajaxBehaviors.add(name);
         return this;
     }
 
@@ -199,5 +202,8 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return parent;
     }
 
+    public void setIsAjax(boolean ajax) {
+        this.isAjax = ajax;
+    }
 }
 
