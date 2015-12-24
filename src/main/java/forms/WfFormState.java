@@ -1,7 +1,8 @@
 package forms;
 
 import com.google.common.collect.Lists;
-import forms.config.FormConfig;
+import forms.spring.WfAjaxBehavior;
+import forms.widgets.config.FormConfig;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;

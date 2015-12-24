@@ -1,6 +1,7 @@
-package forms.config;
+package forms.widgets.config;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
@@ -30,15 +31,21 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private String markupId;    // this is injected by the framework...don't set this yourself.
     private boolean isAjax;     // this is injected by the framework...don't set this yourself.
 
+    // because two components can have the same property, we need two values.
+    // ID which is (developer enforced) unique across the form, and property.
+    // eg. two textFields could be bound to "address.country", their names might
+    // be "country" & "nation".  Id's must be unique because in the DOM, this is the
+    // value we use to find them.  (stuffed into data-wf attribute)
     private String id;
-    private final String type;
     private final String property;
+    private final String type;
     private final String pluginName;
     private final Map<String, String> attributes = Maps.newHashMap();
     // TODO : replace with a single object?
     private final Map<String, Object> options = Maps.newHashMap();  // a place to store custom options.
 
     public Config(@Nonnull String property, @Nonnull String type, String pluginName) {
+        Preconditions.checkNotNull(property);
         this.property = property;
         this.id = makeIdFrom(property); // use property as id by default.
         this.type = type;

@@ -1,11 +1,11 @@
 package forms.impl;
 
-import forms.config.ButtonConfig;
-import forms.config.CheckBoxConfig;
-import forms.config.DivConfig;
-import forms.config.FormConfig;
-import forms.config.LabelConfig;
-import forms.config.TextFieldConfig;
+import forms.widgets.config.ButtonConfig;
+import forms.widgets.config.CheckBoxConfig;
+import forms.widgets.config.DivConfig;
+import forms.widgets.config.FormConfig;
+import forms.widgets.config.LabelConfig;
+import forms.widgets.config.TextFieldConfig;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
 
 public class FormBConfig extends FormConfig {

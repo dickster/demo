@@ -1,4 +1,4 @@
-package forms.config;
+package forms.widgets.config;
 
 import forms.Div;
 

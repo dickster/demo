@@ -1,6 +1,6 @@
 package forms;
 
-import forms.config.Config;
+import forms.widgets.config.Config;
 import org.apache.wicket.Component;
 
 import javax.annotation.Nonnull;

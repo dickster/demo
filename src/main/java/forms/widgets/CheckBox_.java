@@ -1,8 +1,8 @@
 package forms.widgets;
 
-import forms.config.CheckBoxConfig;
-import forms.config.Config;
-import forms.config.HasConfig;
+import forms.widgets.config.CheckBoxConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.HasConfig;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;

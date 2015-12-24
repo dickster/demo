@@ -1,8 +1,8 @@
 package forms;
 
-import forms.config.Config;
-import forms.config.GroupConfig;
-import forms.config.HasConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.GroupConfig;
+import forms.widgets.config.HasConfig;
 import forms.util.WfUtil;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;

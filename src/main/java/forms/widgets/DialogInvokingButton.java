@@ -1,8 +1,8 @@
 package forms.widgets;
 
-import forms.config.Config;
-import forms.config.DialogInvokingButtonConfig;
-import forms.config.HasConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.DialogInvokingButtonConfig;
+import forms.widgets.config.HasConfig;
 import forms.util.ComponentFinder;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;

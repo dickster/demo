@@ -1,9 +1,9 @@
 package forms.impl;
 
-import forms.config.ButtonConfig;
-import forms.config.FormConfig;
-import forms.config.LabelConfig;
-import forms.config.TextFieldConfig;
+import forms.widgets.config.ButtonConfig;
+import forms.widgets.config.FormConfig;
+import forms.widgets.config.LabelConfig;
+import forms.widgets.config.TextFieldConfig;
 
 public class FormErrorConfig extends FormConfig {
 

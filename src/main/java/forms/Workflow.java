@@ -6,7 +6,7 @@ import com.google.common.collect.Maps;
 import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import forms.config.Config;
+import forms.widgets.config.Config;
 import forms.model.WfCompoundPropertyModel;
 import forms.validation.ValidationResult;
 import org.apache.wicket.Component;

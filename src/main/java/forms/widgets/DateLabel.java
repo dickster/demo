@@ -2,9 +2,9 @@ package forms.widgets;
 
 import com.google.gson.Gson;
 import demo.resources.Resource;
-import forms.config.Config;
-import forms.config.DateLabelConfig;
-import forms.config.HasConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.DateLabelConfig;
+import forms.widgets.config.HasConfig;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;

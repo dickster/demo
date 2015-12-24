@@ -23,7 +23,8 @@ public enum WidgetTypeEnum {
     DEBUG_BUTTON(),
     FEEDBACK(),
     CREDIT_CARD("creditCard"),
-    LIST();
+    LIST(),
+    TAB_PANEL();
 
     String pluginName;
 

@@ -1,7 +1,7 @@
 package forms.widgets;
 
-import forms.config.HasConfig;
-import forms.config.TextFieldConfig;
+import forms.widgets.config.HasConfig;
+import forms.widgets.config.TextFieldConfig;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.form.TextField;

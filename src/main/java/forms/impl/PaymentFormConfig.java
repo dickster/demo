@@ -1,7 +1,7 @@
 package forms.impl;
 
 import com.google.common.collect.Lists;
-import forms.config.*;
+import forms.widgets.config.*;
 
 public class PaymentFormConfig extends FormConfig {
 

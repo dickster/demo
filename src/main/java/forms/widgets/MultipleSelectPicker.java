@@ -1,9 +1,9 @@
 package forms.widgets;
 
 import demo.resources.Resource;
-import forms.config.Config;
-import forms.config.HasConfig;
-import forms.config.MultipleSelectPickerConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.HasConfig;
+import forms.widgets.config.MultipleSelectPickerConfig;
 import org.apache.wicket.Application;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.CssHeaderItem;

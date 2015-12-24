@@ -1,4 +1,4 @@
-package forms.config;
+package forms.widgets.config;
 
 import com.google.common.collect.Lists;
 import forms.WidgetTypeEnum;

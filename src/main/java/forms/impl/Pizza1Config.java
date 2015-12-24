@@ -1,9 +1,9 @@
 package forms.impl;
 
-import forms.config.ButtonConfig;
-import forms.config.FormConfig;
-import forms.config.LabelConfig;
-import forms.config.ListConfig;
+import forms.widgets.config.ButtonConfig;
+import forms.widgets.config.FormConfig;
+import forms.widgets.config.LabelConfig;
+import forms.widgets.config.ListConfig;
 
 public class Pizza1Config extends FormConfig {
 

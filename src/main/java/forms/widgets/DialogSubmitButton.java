@@ -1,8 +1,8 @@
 package forms.widgets;
 
-import forms.config.Config;
-import forms.config.DialogSubmitButtonConfig;
-import forms.config.HasConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.DialogSubmitButtonConfig;
+import forms.widgets.config.HasConfig;
 import forms.util.ComponentFinder;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;

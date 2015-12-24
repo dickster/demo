@@ -1,4 +1,4 @@
-package forms.config;
+package forms.widgets.config;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;

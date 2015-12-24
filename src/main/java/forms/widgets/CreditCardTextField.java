@@ -1,8 +1,8 @@
 package forms.widgets;
 
-import forms.config.Config;
-import forms.config.CreditCardTextFieldConfig;
-import forms.config.HasConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.CreditCardTextFieldConfig;
+import forms.widgets.config.HasConfig;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.form.TextField;
 

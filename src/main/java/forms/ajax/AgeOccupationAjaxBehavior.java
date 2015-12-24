@@ -1,6 +1,6 @@
 package forms.ajax;
 
-import forms.WfAjaxBehavior;
+import forms.spring.WfAjaxBehavior;
 import forms.WorkflowForm;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;

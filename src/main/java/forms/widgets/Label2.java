@@ -1,21 +1,22 @@
 package forms.widgets;
 
-import forms.config.Config;
-import forms.config.HasConfig;
-import forms.config.LabelConfig;
+import forms.spring.LabelFormatter;
+import forms.spring.LabelFormatterFactory;
+import forms.widgets.config.Config;
+import forms.widgets.config.HasConfig;
+import forms.widgets.config.LabelConfig;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
 
-import java.text.Format;
+import javax.inject.Inject;
 
 public class Label2 extends Label implements HasConfig {
+
+    private @Inject LabelFormatterFactory formatterFactory;
 
     // need way to configure any kind of calculated string here.
     // formatted string with model ognls passed???
     private final LabelConfig config;
-    // TODO : should use an iconConfig object for this
-    // or just do it in javascript.
-    private String iconFormat = "<i class='%s'></i>";
 
     public Label2(String id, LabelConfig config) {
         super(id);
@@ -26,23 +27,8 @@ public class Label2 extends Label implements HasConfig {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        String text = null;
-        if (config.getText()!=null) {
-            text = config.getText();
-        }
-        else {
-            Format format = config.getFormat();
-            String formattedValue;
-            if (format!=null) {
-                text = format.format(getDefaultModelObject());
-            }
-            else {
-                text = getDefaultModelObjectAsString();
-            }
-        }
-        if (config.getIcon()!=null) {
-            text = String.format(iconFormat, config.getIcon()) + text;
-        }
+        LabelFormatter formatter = formatterFactory.create(config.getFormatter());
+        String text = formatter.format(this, config);//
         setDefaultModel(Model.of(text));
     }
 

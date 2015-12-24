@@ -1,6 +1,6 @@
 package forms.util;
 
-import forms.config.HasConfig;
+import forms.widgets.config.HasConfig;
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
 import org.apache.wicket.markup.renderStrategy.DeepChildFirstVisitor;

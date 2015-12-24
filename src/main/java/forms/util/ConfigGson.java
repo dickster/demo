@@ -9,7 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import forms.config.DontSendInJson;
+import forms.widgets.config.DontSendInJson;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;

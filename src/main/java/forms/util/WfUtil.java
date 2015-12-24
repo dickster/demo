@@ -5,7 +5,7 @@ import forms.WfPage;
 import forms.WidgetFactory;
 import forms.Workflow;
 import forms.WorkflowForm;
-import forms.config.HasConfig;
+import forms.widgets.config.HasConfig;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;

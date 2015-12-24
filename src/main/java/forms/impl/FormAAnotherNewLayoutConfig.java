@@ -1,7 +1,7 @@
 package forms.impl;
 
-import forms.config.LabelConfig;
-import forms.config.TextFieldConfig;
+import forms.widgets.config.LabelConfig;
+import forms.widgets.config.TextFieldConfig;
 
 public class FormAAnotherNewLayoutConfig extends FormANewLayoutConfig {
 

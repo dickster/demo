@@ -1,8 +1,8 @@
 package forms.widgets;
 
-import forms.config.ButtonConfig;
-import forms.config.Config;
-import forms.config.HasConfig;
+import forms.widgets.config.ButtonConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.HasConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;

@@ -7,7 +7,7 @@ import forms.Theme;
 import forms.Toolkit;
 import forms.WfFactory;
 import forms.WidgetFactory;
-import forms.config.Config;
+import forms.widgets.config.Config;
 import forms.impl.CommercialWorkflow;
 import forms.impl.PizzaWorkflow;
 import forms.impl.TestWorkflow;
@@ -28,6 +28,23 @@ public class Application {
     @Bean
     public Toolkit toolkit() {
         return new DefaultToolkit();
+    }
+
+    @Bean
+    public StringLoader stringLoader() {
+        return new StringLoader();
+    }
+
+    @Bean
+    public LabelFormatterFactory labelFormatterFactory() {
+        LabelFormatterFactory factory = new LabelFormatterFactory();
+        factory.allowForNulls(defaultLabelFormatter());
+        return factory;
+    }
+
+    @Bean
+    protected LabelFormatter defaultLabelFormatter() {
+        return new LabelFormatter();
     }
 
     @Bean

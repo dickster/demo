@@ -2,9 +2,9 @@ package forms.widgets;
 
 import com.google.common.eventbus.Subscribe;
 import forms.WfValidationEvent;
-import forms.config.Config;
-import forms.config.FeedbackPanelConfig;
-import forms.config.HasConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.FeedbackPanelConfig;
+import forms.widgets.config.HasConfig;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
 public class WfFeedbackPanel extends FeedbackPanel implements HasConfig {

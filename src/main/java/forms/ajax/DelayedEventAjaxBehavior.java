@@ -1,7 +1,7 @@
 package forms.ajax;
 
 import com.google.gson.Gson;
-import forms.WfAjaxBehavior;
+import forms.spring.WfAjaxBehavior;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.head.IHeaderResponse;

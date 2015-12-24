@@ -1,13 +1,13 @@
 package forms.impl;
 
-import forms.config.AddressConfig;
-import forms.config.ButtonConfig;
-import forms.config.DialogConfig;
-import forms.config.DialogSubmitButtonConfig;
-import forms.config.DivConfig;
-import forms.config.FormConfig;
-import forms.config.LabelConfig;
-import forms.config.TextFieldConfig;
+import forms.widgets.config.AddressConfig;
+import forms.widgets.config.ButtonConfig;
+import forms.widgets.config.DialogConfig;
+import forms.widgets.config.DialogSubmitButtonConfig;
+import forms.widgets.config.DivConfig;
+import forms.widgets.config.FormConfig;
+import forms.widgets.config.LabelConfig;
+import forms.widgets.config.TextFieldConfig;
 
 public class FormAConfig extends FormConfig {
 

@@ -1,8 +1,8 @@
 package forms;
 
 import com.google.common.base.Preconditions;
-import forms.config.Config;
-import forms.config.HasConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.HasConfig;
 import forms.util.ConfigGson;
 import forms.util.WfUtil;
 import org.apache.wicket.Component;

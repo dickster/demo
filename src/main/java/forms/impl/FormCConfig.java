@@ -1,11 +1,11 @@
 package forms.impl;
 
 import com.google.common.collect.Lists;
-import forms.config.ButtonConfig;
-import forms.config.CheckBoxConfig;
-import forms.config.FormConfig;
-import forms.config.LabelConfig;
-import forms.config.SelectPickerConfig;
+import forms.widgets.config.ButtonConfig;
+import forms.widgets.config.CheckBoxConfig;
+import forms.widgets.config.FormConfig;
+import forms.widgets.config.LabelConfig;
+import forms.widgets.config.SelectPickerConfig;
 
 public class FormCConfig extends FormConfig {
 

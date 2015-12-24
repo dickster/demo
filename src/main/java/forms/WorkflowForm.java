@@ -2,10 +2,10 @@ package forms;
 
 import com.google.common.base.Preconditions;
 import demo.resources.Resource;
-import forms.config.Config;
-import forms.config.FeedbackPanelConfig;
-import forms.config.FormConfig;
-import forms.config.HasConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.FeedbackPanelConfig;
+import forms.widgets.config.FormConfig;
+import forms.widgets.config.HasConfig;
 import forms.util.WfUtil;
 
 import org.apache.wicket.Component;

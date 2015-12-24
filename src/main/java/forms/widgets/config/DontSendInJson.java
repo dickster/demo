@@ -1,4 +1,4 @@
-package forms.config;
+package forms.widgets.config;
 
 
 import java.lang.annotation.ElementType;

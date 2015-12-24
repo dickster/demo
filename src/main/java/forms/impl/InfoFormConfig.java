@@ -1,10 +1,10 @@
 package forms.impl;
 
-import forms.config.AddressConfig;
-import forms.config.ButtonConfig;
-import forms.config.FormConfig;
-import forms.config.LabelConfig;
-import forms.config.TextFieldConfig;
+import forms.widgets.config.AddressConfig;
+import forms.widgets.config.ButtonConfig;
+import forms.widgets.config.FormConfig;
+import forms.widgets.config.LabelConfig;
+import forms.widgets.config.TextFieldConfig;
 
 public class InfoFormConfig extends FormConfig {
 
@@ -31,6 +31,9 @@ public class InfoFormConfig extends FormConfig {
         withConfig(new LabelConfig("occupation"));
         withConfig(new TextFieldConfig<Integer>("insured.occupation"));
 
+        withConfig(new LabelConfig("l1", "name.first"));
+        withConfig(new LabelConfig("{0} is {1}").withData("name.first", "name.last"));
+        withConfig(new LabelConfig("label.bogus"));
 
 //        withConfig(new CheckBoxConfig("insured.smokes", "i smoke cigarettes"));
 

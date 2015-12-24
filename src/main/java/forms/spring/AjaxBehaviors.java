@@ -1,6 +1,5 @@
 package forms.spring;
 
-import forms.WfAjaxBehavior;
 import forms.ajax.AgeOccupationAjaxBehavior;
 import forms.ajax.PaymentMethodAjaxBehavior;
 import org.springframework.context.annotation.Bean;

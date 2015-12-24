@@ -1,5 +1,5 @@
 package forms.util
-import forms.WfAjaxBehavior
+import forms.spring.WfAjaxBehavior
 import org.apache.wicket.ajax.AjaxRequestTarget
 
 class DemoAjaxBehavior extends WfAjaxBehavior {

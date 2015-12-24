@@ -1,6 +1,6 @@
 package forms;
 
-import forms.config.HasConfig;
+import forms.widgets.config.HasConfig;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.form.Form;

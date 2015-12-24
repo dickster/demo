@@ -1,6 +1,9 @@
-package forms;
+package forms.spring;
 
 import com.google.common.base.Preconditions;
+import forms.WfAjaxEvent;
+import forms.Workflow;
+import forms.WorkflowForm;
 import forms.util.WfUtil;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;

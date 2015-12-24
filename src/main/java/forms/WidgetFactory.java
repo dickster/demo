@@ -1,7 +1,7 @@
 package forms;
 
-import forms.config.Config;
-import forms.config.FormComponentConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.FormComponentConfig;
 import forms.spring.AjaxBehaviorFactory;
 import org.apache.wicket.Component;
 import org.apache.wicket.MetaDataKey;

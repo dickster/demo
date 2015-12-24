@@ -1,9 +1,9 @@
 package forms.widgets;
 
 import demo.GpsLocation;
-import forms.config.AddressConfig;
-import forms.config.Config;
-import forms.config.HasConfig;
+import forms.widgets.config.AddressConfig;
+import forms.widgets.config.Config;
+import forms.widgets.config.HasConfig;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
