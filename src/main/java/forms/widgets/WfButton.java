@@ -1,5 +1,6 @@
 package forms.widgets;
 
+import forms.spring.StringLoader;
 import forms.widgets.config.ButtonConfig;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
@@ -16,14 +17,17 @@ import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 
 public class WfButton extends AjaxButton implements IAjaxIndicatorAware, HasConfig {
 
+    private @Inject StringLoader stringLoader;
     private final Config config;
     private String ajaxIndicatorMarkupId = null;
 
     public WfButton(String id, ButtonConfig config) {
-        super(id, Model.of(config.getId()));
+        super(id);
+        setDefaultModel(Model.of(stringLoader.get(config.getId())));
         this.config = config;
     }
 

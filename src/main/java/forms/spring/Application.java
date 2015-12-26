@@ -26,8 +26,11 @@ import javax.annotation.Nonnull;
 public class Application {
 
     @Bean
-    public Toolkit toolkit() {
-        return new DefaultToolkit();
+    public Toolkit toolkit() { return new DefaultToolkit(); }
+
+    @Bean
+    public SpecialFormatter specialFormatter() {
+        return new SpecialFormatter();
     }
 
     @Bean

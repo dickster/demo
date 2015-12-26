@@ -20,7 +20,7 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
     }
 
     private void addDebugStuff() {
-        with(new DebugRefreshButtonConfig("refresh"));
+        with(new DebugRefreshButtonConfig("button.refresh"));
     }
 
     @Override

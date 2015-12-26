@@ -19,10 +19,7 @@ var workflow = function() {
         }
 
         var initWidget = function(config) {
-           var w = widget(config);
-            if (config.isAjax) {
-                w.updateLayout();
-            }
+            var w = widget(config);
             w.initializePlugin();
         }
 
@@ -97,7 +94,10 @@ var workflow = function() {
                     var $el = $(v);
                     var dataWf = $el.attr('data-wf');
                     untemplatedIds = dataWf + ',' + untemplatedIds;
-                    $el.addClass('untemplated').attr('placeholder',dataWf + ': is not in template');
+                    if ($el.is('input[type="input"]')) {
+                        $el.attr('placeholder', dataWf + ': is not in template');
+                    }
+                    $el.addClass('untemplated')
                 });
                 if (untemplatedIds.length>0) {
                     console.log("WARNING: you have stuff in your form that you haven't included in your template --> " + untemplatedIds);

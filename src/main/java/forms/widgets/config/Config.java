@@ -16,6 +16,8 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
+// DB NOTE : these entities should be detached after they are read.
+// you would never want to update these...only in editor.
 public abstract class Config<T extends Component & HasConfig> implements Serializable {
 
     private static final String CLASS = "class";
@@ -53,17 +55,18 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     }
 
     private String makeIdFrom(String property) {
-        // turn acord.policy.insuredOrPrincipal.name.first ---> apin.first
-        // what about []'s?  need to maintain these?
-        String[] tokens = property.split("\\.");
-        if (tokens.length==1) return property;
-        StringBuilder result = new StringBuilder();
-        for (int i=0;i<tokens.length-1;i++) {
-            result.append(tokens[i].toLowerCase().charAt(0));
-        }
-        result.append('.');
-        result.append(tokens[tokens.length - 1]);
-        return result.toString();
+        return property;
+//        // turn acord.policy.insuredOrPrincipal.name.first ---> apin.first
+//        // what about []'s?  need to maintain these?
+//        String[] tokens = property.split("\\.");
+//        if (tokens.length==1) return property;
+//        StringBuilder result = new StringBuilder();
+//        for (int i=0;i<tokens.length-1;i++) {
+//            result.append(tokens[i].toLowerCase().charAt(0));
+//        }
+//        result.append('.');
+//        result.append(tokens[tokens.length - 1]);
+//        return result.toString();
     }
 
     public Config(@Nonnull String property, @Nonnull String type) {

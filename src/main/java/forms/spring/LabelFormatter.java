@@ -14,16 +14,10 @@ public class LabelFormatter {
     private @Inject StringLoader stringLoader;
 
     public String format(Component component, LabelConfig config) {
-        String property = config.getProperty();
 
         if (config.isUseParentModel()) {
             return component.getDefaultModelObjectAsString();
         }
-
-//        if (property.indexOf(".")==-1) {
-//            System.out.println("hmm...you should probably use keys.  using literal value " + property + " for now");
-//            return literal(property);
-//        }
 
         String text = stringLoader.get(config.getProperty());
         if (!config.getData().isEmpty()) {
@@ -34,7 +28,7 @@ public class LabelFormatter {
         return text;
     }
 
-    private String[] getArgs(Component component, LabelConfig config) {
+    protected String[] getArgs(Component component, LabelConfig config) {
         Object model = WfUtil.getWorkflow(component).getModel();
         List<String> data = config.getData();
         String[] result = new String[data.size()];

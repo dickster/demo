@@ -20,24 +20,24 @@ public class InfoFormConfig extends FormConfig {
 //        withConfig(new SelectPickerConfig<String>("name.salutation")
 //                .withOptions(Lists.newArrayList("Mr.", "Mrs.", "Ms", "Dr.")));
 
-        withConfig(new LabelConfig("first name"));
+        withConfig(new LabelConfig("label.first"));
         withConfig(new TextFieldConfig("name.first"));
-        withConfig(new LabelConfig("middle name"));
+        withConfig(new LabelConfig("label.middle"));
         withConfig(new TextFieldConfig("name.middle"));
-        withConfig(new LabelConfig("last name"));
+        withConfig(new LabelConfig("label.last"));
         withConfig(new TextFieldConfig("name.last"));
-        withConfig(new LabelConfig("age"));
+        withConfig(new LabelConfig("label.age"));
         withConfig(new TextFieldConfig<Integer>("insured.age").withAjaxBehavior("ageOccupationAjaxBehavior"));
-        withConfig(new LabelConfig("occupation"));
+        withConfig(new LabelConfig("label.occupation"));
         withConfig(new TextFieldConfig<Integer>("insured.occupation"));
 
         withConfig(new LabelConfig("l1", "name.first"));
-        withConfig(new LabelConfig("{0} is {1}").withData("name.first", "name.last"));
-        withConfig(new LabelConfig("label.bogus"));
+        withConfig(new LabelConfig("label.names").withData("name.first", "name.last"));
+        withConfig(new LabelConfig("label.bogus").withData("name.first").withFormatter("specialFormatter"));
 
 //        withConfig(new CheckBoxConfig("insured.smokes", "i smoke cigarettes"));
 
-        withConfig(new LabelConfig("address"));
+        withConfig(new LabelConfig("label.address"));
         withConfig(new AddressConfig("insured.address"));
 
 //        withConfig(new LabelConfig("address 2"));
@@ -90,7 +90,7 @@ public class InfoFormConfig extends FormConfig {
 //                .withAttribute("data-live-search","true")
 //        );
 
-        with(new ButtonConfig("next"));
+        with(new ButtonConfig("button.next"));
     }
 
     private String getDrinkQuestion() {

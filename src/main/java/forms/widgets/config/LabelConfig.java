@@ -63,4 +63,9 @@ public class LabelConfig extends Config<Label2> {
     public List<String> getData() {
         return data;
     }
+
+    public LabelConfig withFormatter(String formatter) {
+        this.formatter = formatter;
+        return this;
+    }
 }
