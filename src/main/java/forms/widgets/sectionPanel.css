@@ -1,3 +1,7 @@
+.nav-tabs .tab-status {
+    float: right;
+    padding-top: 10px;
+}
 
 .nav-tabs .tab-x {
     position: absolute;
@@ -31,7 +35,7 @@
 .tab-header {
     float: left;
     margin-top: 13px;
-    max-width: 10em;
+    max-width: 13em;
     min-width: 7em;
     text-overflow: ellipsis;
     overflow: hidden;

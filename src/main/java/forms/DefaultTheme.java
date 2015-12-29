@@ -1,8 +1,10 @@
 package forms;
 
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import demo.resources.Resource;
+import org.apache.wicket.Application;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.HeaderItem;
@@ -37,13 +39,23 @@ public class DefaultTheme implements Theme {
 
     @Override
     public String getCssClass() {
-        return getName();
+        return Joiner.on(' ').skipNulls().join(getName(), getDebugClass());
     }
 
     @Nonnull
     @Override
     public String getName() {
         return "defaultTheme";
+    }
+
+    protected String getDebugClass() {
+        switch (Application.get().getConfigurationType()) {
+            case DEVELOPMENT:
+                return "debugMode";
+            case DEPLOYMENT:
+            default:
+                return null;
+        }
     }
 
     @Override

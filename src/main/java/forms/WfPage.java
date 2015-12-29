@@ -37,9 +37,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     private static final String FORM_ID = "form";
 
     private FormBasedWorkflow workflow;
-
     private @Inject WfFactory wfFactory;
-    private IModel<?> subHeader;
 
     public WfPage(PageParameters params) {
         this(params.get(WORKFLOW_PARAM).toString(), null);
@@ -51,6 +49,8 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
 
     public WfPage(String workflowType, Object obj) {
         super();
+        // NOTE : what to do if page times out? is workflow saved as a draft?
+        // do i throw it away?
         this.workflow = wfFactory.create(workflowType);
         if (obj!=null) {
             this.workflow.withModel(new WfCompoundPropertyModel(obj));

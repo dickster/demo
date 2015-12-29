@@ -42,7 +42,7 @@ import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SectionPanel extends Panel implements FeedbackListener, ISection, HasConfig {
+public class SectionPanel<T extends Component> extends Panel implements FeedbackListener, ISection, HasConfig {
 
     private static final String SELECT_LAST_TAB_JS = "$('#%s').tabPanel.selectLastTab()";
     private static final String BLANK_SLATE_ID = "blankSlate";
@@ -55,11 +55,11 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
 
 
 //---------------------------------------------------------------------------------
-// TODO : status, blank slate, one, zero, min/max, tooltip configs.
-// write plugin.  expand/collapse option, canAdd?
+// TODO : Xstatus, blank slate, one, zero, min/max, Xtooltip configs.
+// Xwrite plugin.  expand/collapse option, XcanAdd?
 // current tab.
-// when adding new, if blank what value  "new person", "(unnamed person)"
-// associate input & formatter.  title = fields[a,b,c,d]
+// Xwhen adding new, if blank what value  "new person", "(unnamed person)"
+// Xassociate input & formatter.  title = fields[a,b,c,d]
 // for blank slate, have the template include an id of element to be used.
 // it must be styled to fit in same size??
 // .: blank slate only works IFF you have template.
@@ -69,7 +69,7 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
     private int currentIndex;
     private SectionPanelConfig config;
     private Model<String> header;
-    private Enum<?> status = FeedbackState.VOID;
+    private Enum status = FeedbackState.HAS_WARNING;
     private Component statusIcon;
     private Component panel;
 
@@ -77,23 +77,29 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
         super(id);
         this.config = config;
         this.header = Model.of(config.getTitle());
+        this.currentIndex = 0;
     }
 
-//    protected int getInitialIndex() {
-//        return 0;
-//    }  // does this ever need to be configurable?
-//
-//    public Enum<?> getStatus() {
-//        return status;
-//    }
+    // this should listen for section panel events and retrieve status from them.
+    public Enum<?> getStatus() {
+        return status;
+    }
 
-//    public SectionPanel<T> setStatus(Enum <?> status) {
-//        this.status = status;
-//        return this;
+    public SectionPanel<T> setStatus(Enum <?> status) {
+        this.status = status;
+        return this;
+    }
+
+
+//    @Subscribe
+//    public void onSectionEvent(WfSectionEvent event) {
+//        event.getStatus();
+//              blah blah blah...
 //    }
 
     private void setIndex(int index) {
         this.currentIndex = index;
+        // this might be redundant except for calling in onInitialize()?
         Object obj = getList().get(currentIndex);
         panel.setDefaultModel(new WfCompoundPropertyModel(obj));
     }
@@ -134,11 +140,9 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
         });
 
         // TODO : put css class responsibility in .js? remove attribute appender.
-//        tabsContainer.add(statusIcon = new WebMarkupContainer("status").setOutputMarkupId(true).add(new AttributeAppender("class", getStatusCssModel())));
-
-        // TODO : take this method out of tab.
+        tabsContainer.add(statusIcon = new WebMarkupContainer("status").setOutputMarkupId(true).add(new AttributeAppender("class", getStatusCssModel())));
         form.add(panel = createPanel());
-        setIndex(0); // getInitialIndex()...maybe based on current value?
+        setIndex(currentIndex);
         panel.setOutputMarkupId(true);
     }
 
@@ -164,49 +168,25 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
         return container;
     }
 
-//    private IModel<String> getStatusModel() {
-//        return new Model<String>() {
-//            @Nullable
-//            @Override public String getObject() {
-//                return getStatusCss(status);
-//            }
-//        };
-//    }
+    private Model<String> getStatusCssModel() {
+        return new Model<String>() {
+            @Nullable @Override public String getObject() {
+                return getStatusCss();
+            }
+        };
+    }
 
-//    private Model<String> getStatusCssModel() {
-//        return new Model<String>() {
-//            @Nullable
-//            @Override public String getObject() {
-//                return getStatusCss();
-//            }
-//        };
-//    }
-
-//    @Nullable
-//    private String getStatusCss() {
-//        return getStatusCss(status);
-//    }
-
-//    private @Nullable
-//    String getStatusCss(Enum <?> status) {
-//        // turn status into css class.
-//        if (status==null) {
-//            return null;
-//        }
-//        try {
-//            Method method = status.getClass().getDeclaredMethod("getCss");
-//            return (String)method.invoke(status);
-//        } catch (Exception e) {
-//            return getStatusCssFor(status);
-//        }
-//    }
-
-//    protected String getStatusCssFor(Enum<?> state) {
-//        throw new IllegalAccessError("if your state class " + state.getClass().getSimpleName() + " doesn't implement 'getCss' then you need to override this method");
-//    }
+    @Nullable
+    private String getStatusCss() {
+        if (status instanceof HasCss) {
+            return ((HasCss)status).getCss();
+        }
+        return status.name().toLowerCase();
+    }
 
     protected void addTab(AjaxRequestTarget target) {
         getList().add(createNewTabData(getCurrentData()));
+        setIndex(getList().size()-1);
         target.add(SectionPanel.this);
     }
 
@@ -382,6 +362,15 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
                 }
 
                 @Override
+                protected void onComponentTag(ComponentTag tag) {
+                    super.onComponentTag(tag);
+                    String tooltip = getAddTooltip();
+                    if (tooltip!=null) {
+                        tag.getAttributes().put("title", tooltip);
+                    }
+                }
+
+                @Override
                 protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
                     super.updateAjaxAttributes(attributes);
 //                    attributes.getAjaxCallListeners().add(new AjaxLoadingListener());
@@ -401,18 +390,16 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
     }
 
     public class SectionTab extends Fragment {
-        private int index;
         private String label;
 
-        public SectionTab(String id, int index) {
+        public SectionTab(String id, final int index) {
             super(id, "tabFragment", SectionPanel.this);
             this.label = getList().get(index).toString();
-            this.index = index;
 
             final AjaxSubmitLink titleLink = new AjaxSubmitLink("link") {
                 @Override
                 protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                    setIndex(SectionTab.this.index);
+                    setIndex(index);
                     target.add(SectionPanel.this);
                 }
 
@@ -424,7 +411,7 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
             };
             String title = label;
             if (StringUtils.isBlank(title)) {
-                title = config.titleForNewValues;
+                title = config.getTitleForNewValues();
             }
             titleLink.add(newTitle("title", title, index));
             add(newDeleteButton("delete", index));

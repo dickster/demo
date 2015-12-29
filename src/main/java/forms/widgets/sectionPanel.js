@@ -7,6 +7,7 @@ $(function() {
 
         _create: function() {
             var $panel = $('#'+this.options.markupId);
+            var newValueTitle = this.options.titleForNewValues;
 
             var dependentFields = [];
             $.each(this.options.titleInputs,function(index,input) {
@@ -22,7 +23,11 @@ $(function() {
                     $.each(dependentFields, function(i,f) {
                         text.push(f.val());
                     });
-                    $tabTitle.text(text.join(' '));
+                    var title = text.join(' ').trim();
+                    if (!title) {
+                        title = '<i>'+newValueTitle+'</>';
+                    }
+                    $tabTitle.html(title);
                 });
             });
         }
