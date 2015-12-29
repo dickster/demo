@@ -13,7 +13,7 @@ public class DefaultWidgetFactory extends WidgetFactory {
 
     @Override
     public @Nonnull Component create(String id, @Nonnull Config config) {
-        return config.create(id);
+        return config.validateAndCreate(id);
     }
 
 }

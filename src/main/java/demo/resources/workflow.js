@@ -142,7 +142,7 @@ var workflow = function() {
 
             var layoutDefault = function () {
                 var form = $(document).find('form .raw-content');
-                form.attr('style','width:430px');
+//                form.attr('style','width:430px');
             };
 
             return {

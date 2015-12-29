@@ -17,6 +17,9 @@ public class InfoFormConfig extends FormConfig {
 //                .withOptions(Lists.newArrayList("Mr.", "Mrs.", "Ms", "Dr.")));
 
         with(new SectionPanelConfig("names")
+                .withAddTooltip("Add Person")
+                .withTitleForNewValues("New Person")
+                .withTitleInputs("first", "last")
                 .withTitle("People")
                 .withConfigs(
 // TODO : how to layout these puppies???

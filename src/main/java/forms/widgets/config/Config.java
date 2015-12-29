@@ -38,6 +38,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     // eg. two textFields could be bound to "address.country", their names might
     // be "country" & "nation".  Id's must be unique because in the DOM, this is the
     // value we use to find them.  (stuffed into data-wf attribute)
+    //----these SHOULD be sent to client side.  everything else is ignored ------
     private String id;
     private final String property;
     private final String type;
@@ -162,6 +163,11 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return this;
     }
 
+    // ALIAS.  more descriptive.   these options are sent to client. others are not.
+    public Config withJsonOption(String key, Object value) {
+        return withOption(key, value);
+    }
+
     public String getPluginName() {
         return pluginName;
     }
@@ -172,6 +178,10 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     }
 
     public abstract T create(String id);
+
+    public void validate() {
+        // override this if you want a chance to ensure your data is good before creating.
+    }
 
     protected final void post(@Nonnull Component component, @Nonnull Object event) {
         Workflow workflow = getWorkflow(component);
@@ -228,6 +238,11 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     public void setIsAjax(boolean ajax) {
         this.isAjax = ajax;
+    }
+
+    public Component validateAndCreate(String id) {
+        validate();
+        return create(id);
     }
 }
 

@@ -2,7 +2,7 @@
     <form wicket:id="form">
 
         <!--do i need this container any more???-->
-        <div wicket:id="tabsContainer" class="tabs" role="tabpanel">
+        <div wicket:id="tabsContainer" role="tabpanel">
 
             <ul class="nav nav-tabs" role="tablist">
                 <span class="tab-header"><span wicket:id="header"/>:</span>
@@ -12,7 +12,7 @@
                 <!--add "active" class to selected tab.-->
                 <!--<li class="active"><a data-toggle="tab" href="#menu1">Menu 1</a></li>-->
                 <!--add HREF to tab-content href="#tab-contents" for all -->
-                <li wicket:id="tabs"  role="presentation">
+                <li wicket:id="tabs">
                     <div wicket:id="tab"/>
                 </li>
             </ul>
@@ -34,7 +34,7 @@
 </wicket:fragment>
 
 <wicket:fragment wicket:id="additionTabFragment">
-    <a wicket:id="add" data-toggle="tab" title="add stuff" class="tab-add"><i class="fa fa-plus-circle"/></a>
+    <a wicket:id="add" data-toggle="tab" class="tab-add"><i class="fa fa-plus-circle"/></a>
 </wicket:fragment>
 
 

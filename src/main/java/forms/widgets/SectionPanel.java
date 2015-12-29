@@ -18,8 +18,10 @@ import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
+import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.feedback.FeedbackMessage;
-import org.apache.wicket.markup.MarkupCache;
+import org.apache.wicket.markup.ComponentTag;
+import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
@@ -34,17 +36,11 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 import javax.annotation.Nullable;
 import java.util.List;
-
-// new SectionPanel(id);
-//
-// inherit model = new PropertyModel("foo.bar") ---> foo.bar[]
-// assume array for now. requires GroupConfig with min/max etc...
-// based on inherited model
-
 
 public class SectionPanel extends Panel implements FeedbackListener, ISection, HasConfig {
 
@@ -55,22 +51,27 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
     private static final String SET_STATUS_JS = "document.getElementById('%s').tabPanel.setStatus('%s');";
 
     private static final JavaScriptHeaderItem TAB_PANEL_JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(SectionPanel.class, "sectionPanel.js"));
-//    private static final CssHeaderItem TAB_PANEL_CSS = CssHeaderItem.forReference(new CssResourceReference(SectionPanel.class,"sectionPanel.css"));
+    private static final CssHeaderItem TAB_PANEL_CSS = CssHeaderItem.forReference(new CssResourceReference(SectionPanel.class,"sectionPanel.css"));
 
-    // TODO : for blank slate, have the template include an id of element to be used.
-    // it must be styled to fit in same size???
-    // .: blank slate only works IFF you have template.
+
+//---------------------------------------------------------------------------------
+// TODO : status, blank slate, one, zero, min/max, tooltip configs.
+// write plugin.  expand/collapse option, canAdd?
+// current tab.
+// when adding new, if blank what value  "new person", "(unnamed person)"
+// associate input & formatter.  title = fields[a,b,c,d]
+// for blank slate, have the template include an id of element to be used.
+// it must be styled to fit in same size??
+// .: blank slate only works IFF you have template.
+// sketch out SectionHandler interface and refactor this code to use it.   create a default one.
+//---------------------------------------------------------------------------------
 
     private int currentIndex;
     private SectionPanelConfig config;
     private Model<String> header;
-//    private boolean mandatory = config.mandatory;
-//    private boolean canAdd = true;
-//    private String addTooltip;
     private Enum<?> status = FeedbackState.VOID;
     private Component statusIcon;
     private Component panel;
-    private MarkupCache list;
 
     public SectionPanel(final String id, SectionPanelConfig config) {
         super(id);
@@ -123,7 +124,7 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
             protected void populateItem(final LoopItem item) {
                 final int index = item.getIndex();
                 // note : the "Add" tab is the last item added in this loop.
-                item.add(index < getList().size() ? new EasyTab("tab", index) : new EasyAdditionTab("tab", index));
+                item.add(index < getList().size() ? new SectionTab("tab", index) : new AddSectionTab("tab", index));
             }
 
             @Override
@@ -213,6 +214,8 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
     // it will handle data creation, status, ajax, etc...
     protected Object createNewTabData(Object data) {
         try {
+            // TODO : should also look for a new?? method or create?? method.
+            // otherwise lookup data factory. in SectionHandler
             return data.getClass().newInstance();
         } catch (Exception e) {
             throw new IllegalStateException("can't create new tab for class " + data.getClass().getSimpleName());
@@ -230,7 +233,7 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
             }
             @Override public void onClick(AjaxRequestTarget target) {
 // for DEBUGGING only.....
-                try { Thread.sleep(500);  } catch (InterruptedException e) { }
+//                try { Thread.sleep(500);  } catch (InterruptedException e) { }
 // ........
                 deleteTab(target, index);
                 target.add(SectionPanel.this);
@@ -251,15 +254,19 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
     }
 
     protected LoopItem newTabContainer(final int index) {
-        return new LoopItem(index);
+        LoopItem item = new LoopItem(index);
+        if (index==currentIndex) {
+            item.add(new AttributeAppender("class", "active"));
+        }
+        return item;
     }
 
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
         response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
-//        response.render(TAB_PANEL_JS);
- //       response.render(TAB_PANEL_CSS);
+        response.render(TAB_PANEL_JS);
+        response.render(TAB_PANEL_CSS);
     }
 
     protected Component newTitle(final String titleId, final String title, final int index) {
@@ -357,26 +364,20 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
 //        public String minWidth = "7em";
 //        public String maxWidth = "10em";
 //    }
-//
 
-    public class EasyAdditionTab extends Fragment {
 
-        private EasyAdditionTab(String id, int index) {
+    public class AddSectionTab extends Fragment {
+
+        private AddSectionTab(String id, int index) {
             super(id, "additionTabFragment", SectionPanel.this);
             add(new AjaxButton("add") {
-                @Override
-                public boolean isVisible() {
+                @Override public boolean isVisible() {
                     return config.canAdd;
                 }
 
                 @Override
                 protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                     super.onSubmit(target, form);
-// for DEBUGGING only...
-                    try {
-                        Thread.sleep(1300);
-                    } catch (InterruptedException e) {
-                    }
                     addTab(target);
                 }
 
@@ -390,14 +391,20 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
             setRenderBodyOnly(true);
         }
 
+        @Override
+        protected void onComponentTag(ComponentTag tag) {
+            super.onComponentTag(tag);
+            if (StringUtils.isNotBlank(config.addTooltip)) {
+                tag.getAttributes().put("title", config.addTooltip);
+            }
+        }
     }
 
-    public class EasyTab extends Fragment {
-
+    public class SectionTab extends Fragment {
         private int index;
         private String label;
 
-        public EasyTab(String id, int index) {
+        public SectionTab(String id, int index) {
             super(id, "tabFragment", SectionPanel.this);
             this.label = getList().get(index).toString();
             this.index = index;
@@ -405,7 +412,7 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
             final AjaxSubmitLink titleLink = new AjaxSubmitLink("link") {
                 @Override
                 protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                    setIndex(EasyTab.this.index);
+                    setIndex(SectionTab.this.index);
                     target.add(SectionPanel.this);
                 }
 
@@ -413,10 +420,13 @@ public class SectionPanel extends Panel implements FeedbackListener, ISection, H
                 protected void onError(AjaxRequestTarget target, Form<?> form) {
                     //TODO : handle validation here...?
                     target.add(this);
-
                 }
             };
-            titleLink.add(newTitle("title", label, index));
+            String title = label;
+            if (StringUtils.isBlank(title)) {
+                title = config.titleForNewValues;
+            }
+            titleLink.add(newTitle("title", title, index));
             add(newDeleteButton("delete", index));
             add(titleLink);
             setRenderBodyOnly(true);

@@ -5,25 +5,20 @@ import forms.WidgetTypeEnum;
 import forms.widgets.SectionPanel;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 
 public class SectionPanelConfig extends GroupConfig<SectionPanel> {
 
     public Boolean mandatory = true;
-    public List<String> titleInputs = Lists.newArrayList();
     public String addTooltip = null;
     public boolean canAdd = true;
     public boolean collapsed;
-    public boolean tooltipOnAdd;
     public int current = 0;
-
     private int min=1, max = Integer.MAX_VALUE;
+    public String titleForNewValues;
 
     public SectionPanelConfig(@Nonnull String name) {
         super(name, WidgetTypeEnum.SECTION);
     }
-
-    // blank slate?? whaaaa....?
 
     @Override
     public SectionPanel create(String id) {
@@ -44,6 +39,20 @@ public class SectionPanelConfig extends GroupConfig<SectionPanel> {
         this.min = 0;
         this.max = Integer.MAX_VALUE;
         return this;
+    }
+
+    public SectionPanelConfig withAddTooltip(String tooltip) {
+        this.addTooltip = tooltip;
+        return this;
+    }
+
+    public SectionPanelConfig withTitleForNewValues(String title) {
+        this.titleForNewValues = title;
+        return this;
+    }
+
+    public SectionPanelConfig withTitleInputs(String... inputs) {
+        return (SectionPanelConfig) withOption("titleInputs", Lists.newArrayList(inputs));
     }
 
 }
