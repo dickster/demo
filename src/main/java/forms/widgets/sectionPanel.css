@@ -3,6 +3,10 @@
     padding-top: 10px;
 }
 
+.tab-pane.active.container {
+    margin-top:15px;
+}
+
 .nav-tabs .tab-x {
     position: absolute;
     top: 0;

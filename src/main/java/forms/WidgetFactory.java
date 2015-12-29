@@ -46,6 +46,7 @@ public abstract class WidgetFactory implements Serializable {
 
     protected void addBehaviors(Component c) {
         // need to make rendering behaviour configurable/extendable.
+        // make this a bean... .: i need a factory for this.
         c.add(new RenderingBehaviour());
     }
 

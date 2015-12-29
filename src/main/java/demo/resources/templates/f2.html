@@ -1,0 +1,102 @@
+<wicket:panel>
+
+    <div class="row">
+        <div  class="col-md-6">
+            <span data-template="name.first">hello</span>
+            <input value="foo"/>  // <-- target.
+        </div>
+        <div class="col-md-6">
+            <span data-template="name.last">world</span>
+        </div>
+    </div>
+
+    <div data-template="names">
+        <blah></blah>    // now treat this as template. relayout.
+    </div>
+    <div> stuff</div>  // <-- target.
+
+<!--THIS IS THE SOURCE FOR NAMES-->
+    1:move this from raw into templated.
+    2:look for contained data-wf's.
+    -- find '.templated' class in source.   apply there.
+    -- copy template source into that .templated element.
+    -- mark orginal as "raw.source". look for data-wf's.  move them into template.
+    -- template(this, this);
+
+    -- template()
+    3:for each, find matching element in template.
+    4:copy the template over. beside
+    5:hide the template (attr:data-template)
+    6:copy css & attrs
+    <!--<div id="el16" data-wf="names">-->
+        <!--<div id="form9">-->
+
+    <!--specify where template is applied.  hERE!!-->
+            <!--<div role="tabpanel" id="tabsContainer1b">-->
+                <!--<ul class="nav nav-tabs" role="tablist">-->
+                    <!--<span class="tab-header"><span>Drivers (3)</span>:</span>-->
+                    <!--<div class="tab-status">--> <!--<i id="status1c" class="fa fa-exclamation-circle text-warning"></i>--> <!--</div>-->
+                    <!--<li class="active">-->
+                        <!--<a aria-controls="home" role="tab" data-toggle="tab" id="linka" href="javascript:;"><span>john doe</span></a>-->
+                        <!--<div class="tab-x"><a href="javascript:;" id="delete8"><i class="fa fa-times"></i></a></div>-->
+                    <!--</li><li>-->
+                    <!--<a aria-controls="home" role="tab" data-toggle="tab" id="linkc" href="javascript:;"><span>susy jones</span></a>-->
+                    <!--<div class="tab-x"><a href="javascript:;" id="deleteb"><i class="fa fa-times"></i></a></div>-->
+                <!--</li><li>-->
+                    <!--<a data-toggle="tab" class="tab-add" name="content:div:3:el:form:tabsContainer:tabs:3:tab:add" id="addf" title="Add Person"><i class="fa fa-plus-circle"></i></a>-->
+                <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+            <!--<div class="tab-content ">-->
+                <!--<div class="tab-pane  templated container fade in active" id="container1d">-->
+                    <!--<div id="id110" data-wf="label.first">first</div><input type="text" value="john" name="content:div:3:el:form:container:panel:2" id="id211" data-wf="first"><div id="id312" data-wf="label.middle">middle</div><input type="text" value="" name="content:div:3:el:form:container:panel:4" id="id413" data-wf="middle"><div id="id514" data-wf="label.last">last</div><input type="text" value="doe" name="content:div:3:el:form:container:panel:6" id="id615" data-wf="last">-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--requirements : view in html as template must look good. -->
+    <!--handle panels/containers???-->
+
+    <!--this is for section : "names"-->
+    <div data-wf-template="names" class="section-template-only-for-looking-at-preview-html">
+        <!--put whatever you want here...need a wicket:ignore section-->
+        <div class="row">
+            <div class="col-md-3">
+                <div id="id110" data-template="label.first" class="">first</div>
+            </div>
+            <div class="col-md-3">
+                <div id="id312" data-template="label.middle" class="">middle</div>
+            </div>
+            <div class="col-md-3"><div id="id514" data-template="label.last">last</div></div></div>
+        <div class="row">
+            <div class="col-md-3"><input type="text" value="john" name="content:div:3:el:form:container:panel:2" id="id211" data-template="first" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <input type="text" value="" name="content:div:3:el:form:container:panel:4" id="id413" data-template="middle" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <input type="text" value="doe" name="content:div:3:el:form:container:panel:6" id="id615" data-template="last" class="form-control">
+            </div></div>
+        <p></p>
+        <div class="btn-group">
+            <input type="button" name="content:div:4:el" id="el17" value="next" class="btn btn-primary btn-submit" data-wf="button.next">
+        </div>
+
+    </div>
+
+    <div class="wf-buttons btn-group">
+        <a data-template="button.next" class="btn btn-primary">next</a>
+    </div>
+
+</wicket:panel>
+
+
+
+
+
+
+
+
+
+

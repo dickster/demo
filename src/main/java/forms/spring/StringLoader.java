@@ -12,6 +12,7 @@ public class StringLoader {
                     .put("label.names", "my name is {1}, {0}.")
                     .put("label.age", "age")
                     .put("label.middle", "middle")
+                    .put("label.address", "address")
                     .put("label.first", "first")
                     .put("label.last", "last")
                     .put("label.occupation", "occupation")

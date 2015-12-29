@@ -75,35 +75,6 @@ var workflow = function() {
                 }
             }
 
-            var layoutWithTemplate = function() {
-                var form = $(document).find('form .raw-content');//get(config.id).find('form');
-                // TODO : maybe i need to clone this?
-                var t = $('form .template');
-                t.find('[data-wf]').each(function(i,v) {
-                    var source = $(v);
-                    var id=source.attr('data-wf');
-                    // TODO : copy all css classes and attributes.
-                    var target = form.find('[data-wf="'+ id +'"]');
-                    moveTargetIntoTemplate(source, target);
-                });
-                // the debug button we'll always move over. no need to include it in template.
-                t.prepend(form.find('.btn-debug'));
-
-                var untemplatedIds = '';
-                form.find('[data-wf]').each(function(i,v) {
-                    var $el = $(v);
-                    var dataWf = $el.attr('data-wf');
-                    untemplatedIds = dataWf + ',' + untemplatedIds;
-                    if ($el.is('input[type="input"]')) {
-                        $el.attr('placeholder', dataWf + ': is not in template');
-                    }
-                    $el.addClass('untemplated')
-                });
-                if (untemplatedIds.length>0) {
-                    console.log("WARNING: you have stuff in your form that you haven't included in your template --> " + untemplatedIds);
-                }
-            }
-
             function copyAttributes(source, destination) {
                 var src = source.get(0);
                 var dest = destination.get(0);
@@ -139,6 +110,51 @@ var workflow = function() {
                 }
                 return;
             };
+
+
+            var template = function() {
+                var $form = $('#'+config.markupId);
+                var $source = $('#'+config.markupId + ' .raw-content');
+                var $template = $form.find('.template');
+                $template.find('[data-template]').each(function(i,t) {
+                    var id = t.getAttribute('data-template');
+                    var target = $form.find('[data-wf="'+ id +'"]');
+                    // if more than one...log it.
+                    moveTargetIntoTemplate(t, target);
+                });
+                // the debug button we'll always move over. no need to include it in template.
+                t.prepend(form.find('.btn-debug'));
+            }
+
+
+            var layoutWithTemplate = function() {
+                var form = $(document).find('form .raw-content');//get(config.id).find('form');
+                // TODO : maybe i need to clone this?
+                var t = $('form .template');
+                t.find('[data-wf]').each(function(i,v) {
+                    var source = $(v);
+                    var id=source.attr('data-wf');
+                    // TODO : copy all css classes and attributes.
+                    var target = form.find('[data-wf="'+ id +'"]');
+                    moveTargetIntoTemplate(source, target);
+                });
+                // the debug button we'll always move over. no need to include it in template.
+                t.prepend(form.find('.btn-debug'));
+
+                var untemplatedIds = '';
+                form.find('[data-wf]').each(function(i,v) {
+                    var $el = $(v);
+                    var dataWf = $el.attr('data-wf');
+                    untemplatedIds = dataWf + ',' + untemplatedIds;
+                    if ($el.is('input[type="input"]')) {
+                        $el.attr('placeholder', dataWf + ': is not in template');
+                    }
+                    $el.addClass('untemplated')
+                });
+                if (untemplatedIds.length>0) {
+                    console.log("WARNING: you have stuff in your form that you haven't included in your template --> " + untemplatedIds);
+                }
+            }
 
             var layoutDefault = function () {
                 var form = $(document).find('form .raw-content');

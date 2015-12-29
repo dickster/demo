@@ -1,6 +1,11 @@
 package forms.impl;
 
-import forms.widgets.config.*;
+import forms.widgets.config.AddressConfig;
+import forms.widgets.config.ButtonConfig;
+import forms.widgets.config.FormConfig;
+import forms.widgets.config.LabelConfig;
+import forms.widgets.config.SectionPanelConfig;
+import forms.widgets.config.TextFieldConfig;
 
 public class InfoFormConfig extends FormConfig {
 
@@ -16,6 +21,9 @@ public class InfoFormConfig extends FormConfig {
 //        withConfig(new SelectPickerConfig<String>("name.salutation")
 //                .withOptions(Lists.newArrayList("Mr.", "Mrs.", "Ms", "Dr.")));
 
+        withConfig(new LabelConfig("label.address"));
+        withConfig(new AddressConfig("insured.address"));
+
         with(new SectionPanelConfig("names")
                 .withAddTooltip("Add Person")
                 .withTitleForNewValues("New Person")
@@ -23,12 +31,12 @@ public class InfoFormConfig extends FormConfig {
                 .withTitle("Drivers")
                 .withConfigs(
 // TODO : how to layout these puppies???
-                            new LabelConfig("label.first"),
-                            new TextFieldConfig("first"),
-                            new LabelConfig("label.middle"),
-                            new TextFieldConfig("middle"),
-                            new LabelConfig("label.last"),
-                            new TextFieldConfig("last")));
+                        new LabelConfig("label.first"),
+                        new TextFieldConfig("first"),
+                        new LabelConfig("label.middle"),
+                        new TextFieldConfig("middle"),
+                        new LabelConfig("label.last"),
+                        new TextFieldConfig("last")));
 
 //        withConfig(new LabelConfig("label.first"));
 //        withConfig(new TextFieldConfig("name.first"));

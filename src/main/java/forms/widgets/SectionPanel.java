@@ -90,10 +90,9 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
         return this;
     }
 
-
-//    @Subscribe
+//    @Subscribe   TODO : allow for workflow events to be posted.
 //    public void onSectionEvent(WfSectionEvent event) {
-//        event.getStatus();
+//        event.getStatus();  if (event.is(thisSection))
 //              blah blah blah...
 //    }
 
@@ -212,9 +211,6 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
                 return getList().size()>1 || !isMandatory();   // if tab is last one and it's a mandatory field then don't show this button.  e.g. can't delete only driver. (but you can delete only conviction).
             }
             @Override public void onClick(AjaxRequestTarget target) {
-// for DEBUGGING only.....
-//                try { Thread.sleep(500);  } catch (InterruptedException e) { }
-// ........
                 deleteTab(target, index);
                 target.add(SectionPanel.this);
             }
@@ -324,27 +320,6 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
     public List getList() {
         return getListModel().getObject();
     }
-
-
-// ---------------------------------------------------------------
-    // ---- INNER CLASSES --------------------------------------------
-    // ---------------------------------------------------------------
-
-//    public class AjaxLoadingListener extends AjaxCallListener {
-//        private String css;
-//
-//        public AjaxLoadingListener() {
-//            css = getStatusCss(getLoadingState());
-//            onBefore(String.format(SET_STATUS_JS, SectionPanel.this.getMarkupId(), css));
-//        }
-//    }
-
-
-//    public class HeaderOptions implements Serializable {
-//        public String minWidth = "7em";
-//        public String maxWidth = "10em";
-//    }
-
 
     public class AddSectionTab extends Fragment {
 
