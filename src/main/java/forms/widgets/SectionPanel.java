@@ -1,47 +1,42 @@
 package forms.widgets;
 
 
-import com.google.common.base.Preconditions;
 import demo.FeedbackListener;
 import demo.FeedbackState;
 import demo.ISection;
-import forms.Div;
+import forms.Workflow;
+import forms.model.WfCompoundPropertyModel;
+import forms.util.WfUtil;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.SectionPanelConfig;
-import forms.model.SectionModel;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.attributes.AjaxCallListener;
 import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
-import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.feedback.FeedbackMessage;
-import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.MarkupCache;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.list.Loop;
 import org.apache.wicket.markup.html.list.LoopItem;
 import org.apache.wicket.markup.html.panel.Fragment;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 import javax.annotation.Nullable;
-import java.io.Serializable;
-import java.lang.reflect.Method;
 import java.util.List;
 
 // new SectionPanel(id);
@@ -49,62 +44,57 @@ import java.util.List;
 // inherit model = new PropertyModel("foo.bar") ---> foo.bar[]
 // assume array for now. requires GroupConfig with min/max etc...
 // based on inherited model
-//
 
 
-public class SectionPanel<T extends Serializable> extends Panel implements FeedbackListener, ISection, HasConfig {
+public class SectionPanel extends Panel implements FeedbackListener, ISection, HasConfig {
 
     private static final String SELECT_LAST_TAB_JS = "$('#%s').tabPanel.selectLastTab()";
     private static final String BLANK_SLATE_ID = "blankSlate";
-    private static final String TAB_PANEL_ID = "panel";
     private static final String TAB_PANEL_INIT = "ez.tabPanel().init(%s)";
+    // change this to jquery ui code.    tabPanel('setStatus', '<value>');
     private static final String SET_STATUS_JS = "document.getElementById('%s').tabPanel.setStatus('%s');";
 
     private static final JavaScriptHeaderItem TAB_PANEL_JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(SectionPanel.class, "sectionPanel.js"));
-    private static final CssHeaderItem TAB_PANEL_CSS = CssHeaderItem.forReference(new CssResourceReference(SectionPanel.class,"sectionPanel.css"));
-    private final SectionPanelConfig config;
+//    private static final CssHeaderItem TAB_PANEL_CSS = CssHeaderItem.forReference(new CssResourceReference(SectionPanel.class,"sectionPanel.css"));
 
-    //private final IndexedModel<T> model;
+    // TODO : for blank slate, have the template include an id of element to be used.
+    // it must be styled to fit in same size???
+    // .: blank slate only works IFF you have template.
 
+    private int currentIndex;
+    private SectionPanelConfig config;
     private Model<String> header;
-    private boolean mandatory;
-    private boolean canAdd = true;
-    private String addTooltip;
+//    private boolean mandatory = config.mandatory;
+//    private boolean canAdd = true;
+//    private String addTooltip;
     private Enum<?> status = FeedbackState.VOID;
     private Component statusIcon;
-    private WebMarkupContainer panel;
-
+    private Component panel;
+    private MarkupCache list;
 
     public SectionPanel(final String id, SectionPanelConfig config) {
         super(id);
         this.config = config;
-        setOutputMarkupId(true);
         this.header = Model.of(config.getTitle());
-        // assumes we are getting a list here...need another constructor for single entities.
-        // if supermodel is !instanceof List, setDefaultModel(FixedIndexedModel(blah); etc...
-           }
-
-    protected int getInitialIndex() {
-        return 0;
     }
 
-    public SectionPanel withHeader(String header) {
-        this.header = Model.of(header);
-        return this;
-    }
+//    protected int getInitialIndex() {
+//        return 0;
+//    }  // does this ever need to be configurable?
+//
+//    public Enum<?> getStatus() {
+//        return status;
+//    }
 
-    protected WebMarkupContainer createBlankSlate(String id) {
-        // override to provide your own panel when you have no tabs.
-        return new WebMarkupContainer(id);
-    }
+//    public SectionPanel<T> setStatus(Enum <?> status) {
+//        this.status = status;
+//        return this;
+//    }
 
-    public Enum<?> getStatus() {
-        return status;
-    }
-
-    public SectionPanel<T> setStatus(Enum <?> status) {
-        this.status = status;
-        return this;
+    private void setIndex(int index) {
+        this.currentIndex = index;
+        Object obj = getList().get(currentIndex);
+        panel.setDefaultModel(new WfCompoundPropertyModel(obj));
     }
 
     @Override
@@ -119,18 +109,21 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
         form.add(tabsContainer);
 
         final IModel<Integer> tabCount = new AbstractReadOnlyModel<Integer>() {
-            @Override public Integer getObject() {
-                int size = getSectionModel().size();
-                return canAdd ? size + 1 : size;   // make room for one tab to house the add button.
+            @Override
+            public Integer getObject() {
+                int size = getList().size();
+                // make room for one tab to house the add button.
+                return config.canAdd ? size + 1 : size;
             }
         };
 
         tabsContainer.add(new Label("header", getHeaderModel()));
         tabsContainer.add(new Loop("tabs", tabCount) {
-            @Override protected void populateItem(final LoopItem item) {
+            @Override
+            protected void populateItem(final LoopItem item) {
                 final int index = item.getIndex();
                 // note : the "Add" tab is the last item added in this loop.
-                item.add(index < getSectionModel().size() ? new EasyTab("tab", index) : new EasyAdditionTab("tab", index));
+                item.add(index < getList().size() ? new EasyTab("tab", index) : new EasyAdditionTab("tab", index));
             }
 
             @Override
@@ -140,90 +133,100 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
         });
 
         // TODO : put css class responsibility in .js? remove attribute appender.
-        tabsContainer.add(statusIcon = new WebMarkupContainer("status").setOutputMarkupId(true).add(new AttributeAppender("class", getStatusCssModel())));
+//        tabsContainer.add(statusIcon = new WebMarkupContainer("status").setOutputMarkupId(true).add(new AttributeAppender("class", getStatusCssModel())));
 
         // TODO : take this method out of tab.
-        form.add(panel = createPanel(TAB_PANEL_ID));
+        form.add(panel = createPanel());
+        setIndex(0); // getInitialIndex()...maybe based on current value?
         panel.setOutputMarkupId(true);
-
-//        panelContainer.add(createBlankSlate(BLANK_SLATE_ID));
     }
-
 
     @Override
     protected IModel<?> initModel() {
-        return new SectionModel<T>((IModel<List<T>>) super.initModel());
+        return super.initModel();
     }
 
-    protected WebMarkupContainer createPanel(String id) {
-        return new Div(id, config.getPanelConfig());
-
-    }
-
-    private IModel<String> getStatusModel() {
-        return new Model<String>() {
-            @Nullable
-            @Override public String getObject() {
-                return getStatusCss(status);
+    protected Component createPanel() {
+        WebMarkupContainer container = new WebMarkupContainer("container");
+        RepeatingView panel = new RepeatingView("panel") {
+            @Override
+            protected void onInitialize() {
+                super.onInitialize();
+                Workflow workflow = WfUtil.getWorkflow(this);
+                for (int i=0; i<config.getConfigs().size(); i++) {
+                    Config c = config.getConfigs().get(i);
+                    add(workflow.createWidget(newChildId(), c));
+                }
             }
         };
+        container.add(panel);
+        return container;
     }
 
-    private Model<String> getStatusCssModel() {
-        return new Model<String>() {
-            @Nullable
-            @Override public String getObject() {
-                return getStatusCss();
-            }
-        };
-    }
+//    private IModel<String> getStatusModel() {
+//        return new Model<String>() {
+//            @Nullable
+//            @Override public String getObject() {
+//                return getStatusCss(status);
+//            }
+//        };
+//    }
 
-    @Nullable
-    private String getStatusCss() {
-        return getStatusCss(status);
-    }
+//    private Model<String> getStatusCssModel() {
+//        return new Model<String>() {
+//            @Nullable
+//            @Override public String getObject() {
+//                return getStatusCss();
+//            }
+//        };
+//    }
 
-    private @Nullable
-    String getStatusCss(Enum <?> status) {
-        // turn status into css class.
-        if (status==null) {
-            return null;
-        }
-        try {
-            Method method = status.getClass().getDeclaredMethod("getCss");
-            return (String)method.invoke(status);
-        } catch (Exception e) {
-            return getStatusCssFor(status);
-        }
-    }
+//    @Nullable
+//    private String getStatusCss() {
+//        return getStatusCss(status);
+//    }
 
-    protected String getStatusCssFor(Enum<?> state) {
-        throw new IllegalAccessError("if your state class " + state.getClass().getSimpleName() + " doesn't implement 'getCss' then you need to override this method");
-    }
+//    private @Nullable
+//    String getStatusCss(Enum <?> status) {
+//        // turn status into css class.
+//        if (status==null) {
+//            return null;
+//        }
+//        try {
+//            Method method = status.getClass().getDeclaredMethod("getCss");
+//            return (String)method.invoke(status);
+//        } catch (Exception e) {
+//            return getStatusCssFor(status);
+//        }
+//    }
+
+//    protected String getStatusCssFor(Enum<?> state) {
+//        throw new IllegalAccessError("if your state class " + state.getClass().getSimpleName() + " doesn't implement 'getCss' then you need to override this method");
+//    }
 
     protected void addTab(AjaxRequestTarget target) {
-        getSectionModel().add(createNewTabData(getCurrentData()));
+        getList().add(createNewTabData(getCurrentData()));
         target.add(SectionPanel.this);
     }
 
-    protected T createNewTabData(T data) {
+    // TODO : replace this with a spring bean = "sectionPanelHandler".
+    // it will handle data creation, status, ajax, etc...
+    protected Object createNewTabData(Object data) {
         try {
-            Class<T> clazz = (Class<T>) data.getClass();
-            return clazz.newInstance();
-        } catch (InstantiationException e) {
-        } catch (IllegalAccessException e) {
+            return data.getClass().newInstance();
+        } catch (Exception e) {
+            throw new IllegalStateException("can't create new tab for class " + data.getClass().getSimpleName());
         }
-        throw new IllegalStateException("can't create new tab for class " + data.getClass().getSimpleName());
     }
 
-    protected T getCurrentData() {
-        return getSectionModel().getObject();
+    protected Object getCurrentData() {
+        return getList().get(currentIndex);
     }
 
     private Component newDeleteButton(String id, final int index) {
         return new AjaxLink(id) {
             @Override public boolean isVisible() {
-                return getSectionModel().size()>1 || !isMandatory();   // if tab is last one and it's a mandatory field then don't show this button.  e.g. can't delete only driver. (but you can delete only conviction).
+                return getList().size()>1 || !isMandatory();   // if tab is last one and it's a mandatory field then don't show this button.  e.g. can't delete only driver. (but you can delete only conviction).
             }
             @Override public void onClick(AjaxRequestTarget target) {
 // for DEBUGGING only.....
@@ -234,21 +237,17 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
             }
             @Override protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
                 super.updateAjaxAttributes(attributes);
-                attributes.getAjaxCallListeners().add(new AjaxLoadingListener());
+//                attributes.getAjaxCallListeners().add(new AjaxLoadingListener());
             }
         };
     }
 
     protected void deleteTab(AjaxRequestTarget target, int index) {
-        getSectionModel().delete(index);
+        getList().remove(index);
     }
 
     protected boolean isMandatory() {
-        return mandatory;
-    }
-
-    private SectionModel<T> getSectionModel() {
-        return (SectionModel<T>) getDefaultModel();
+        return config.mandatory;
     }
 
     protected LoopItem newTabContainer(final int index) {
@@ -259,21 +258,18 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
         response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
-        response.render(TAB_PANEL_JS);
-        response.render(TAB_PANEL_CSS);
+//        response.render(TAB_PANEL_JS);
+ //       response.render(TAB_PANEL_CSS);
     }
 
     protected Component newTitle(final String titleId, final String title, final int index) {
         return new Label(titleId, title);
     }
 
-    private Enum<?> getLoadingState() {
-        return FeedbackState.LOADING;
-    }
-
     @Nullable
     private String getAddTooltip() {
-        if (addTooltip!=null) return addTooltip;
+        if (config.addTooltip!=null) return config.addTooltip;
+        //try to hack together a default value. (*not localized*)
         String hdr = header.getObject();
         if (StringUtils.isNotBlank(hdr)) {
             return "Add " + hdr;
@@ -284,45 +280,24 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
     public IModel<String> getHeaderModel() {
         return new Model<String>() {
             @Override public String getObject() {
-                int tabCount = getSectionModel().size();
+                int tabCount = getList().size();
                 return String.format("%s%s", header.getObject(), (tabCount > 1 ? " (" + tabCount + ")" : ""));
             }
         };
-    }
-
-    public <X extends SectionPanel> X allowingOneOrMore() {
-        mandatory = true;
-        return (X) this;
-    }
-
-    public <X extends SectionPanel> X allowingZeroOrMore() {
-        mandatory = false;
-        return (X) this;
-    }
-
-    public <X extends SectionPanel> X allowingOnlyOne() {
-        canAdd = false;
-        return (X) this;
-    }
-
-    public <T extends SectionPanel> T withAddTooltip(String tooltip) {
-        Preconditions.checkState(canAdd, "you must be able to add for this tooltip to show up.");
-        addTooltip = tooltip;
-        return (T) this;
     }
 
     @Override
     public void hasError(AjaxRequestTarget target, FeedbackMessage msg) {
         // TODO : generate useful error message. put status on proper tab etc... give focus to that tab?
         if (contains(msg.getReporter(),true) ) {
-            setStatus(FeedbackState.HAS_ERROR);
+           // setStatus(FeedbackState.HAS_ERROR);
             target.add(statusIcon);
         }
     }
 
     @Override
     public void resetErrors(AjaxRequestTarget target) {
-        setStatus(FeedbackState.VOID);
+       // setStatus(FeedbackState.VOID);
         target.add(statusIcon);
     }
 
@@ -355,26 +330,34 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
         return config;
     }
 
+    public IModel<List> getListModel() {
+        return (IModel<List>) getDefaultModel();
+    }
 
-    // ---------------------------------------------------------------
+    public List getList() {
+        return getListModel().getObject();
+    }
+
+
+// ---------------------------------------------------------------
     // ---- INNER CLASSES --------------------------------------------
     // ---------------------------------------------------------------
 
-    public class AjaxLoadingListener extends AjaxCallListener {
-        private String css;
+//    public class AjaxLoadingListener extends AjaxCallListener {
+//        private String css;
+//
+//        public AjaxLoadingListener() {
+//            css = getStatusCss(getLoadingState());
+//            onBefore(String.format(SET_STATUS_JS, SectionPanel.this.getMarkupId(), css));
+//        }
+//    }
 
-        public AjaxLoadingListener() {
-            css = getStatusCss(getLoadingState());
-            onBefore(String.format(SET_STATUS_JS, SectionPanel.this.getMarkupId(), css));
-        }
-    }
 
-
-    public class HeaderOptions implements Serializable {
-        public String minWidth = "7em";
-        public String maxWidth = "10em";
-    }
-
+//    public class HeaderOptions implements Serializable {
+//        public String minWidth = "7em";
+//        public String maxWidth = "10em";
+//    }
+//
 
     public class EasyAdditionTab extends Fragment {
 
@@ -383,13 +366,13 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
             add(new AjaxButton("add") {
                 @Override
                 public boolean isVisible() {
-                    return canAdd;
+                    return config.canAdd;
                 }
 
                 @Override
                 protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                     super.onSubmit(target, form);
-// for DEBUGGING only....
+// for DEBUGGING only...
                     try {
                         Thread.sleep(1300);
                     } catch (InterruptedException e) {
@@ -400,7 +383,7 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
                 @Override
                 protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
                     super.updateAjaxAttributes(attributes);
-                    attributes.getAjaxCallListeners().add(new AjaxLoadingListener());
+//                    attributes.getAjaxCallListeners().add(new AjaxLoadingListener());
                 }
 
             });
@@ -413,17 +396,16 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
 
         private int index;
         private String label;
-        private String titleInput;
 
         public EasyTab(String id, int index) {
             super(id, "tabFragment", SectionPanel.this);
-            this.label = getSectionModel().getObject(index).toString();
+            this.label = getList().get(index).toString();
             this.index = index;
 
             final AjaxSubmitLink titleLink = new AjaxSubmitLink("link") {
                 @Override
                 protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                    getSectionModel().setIndex(EasyTab.this.index);
+                    setIndex(EasyTab.this.index);
                     target.add(SectionPanel.this);
                 }
 
@@ -445,17 +427,7 @@ public class SectionPanel<T extends Serializable> extends Panel implements Feedb
             return label;
         }
 
-        protected FormComponent usingAsTitle(FormComponent input) {
-            titleInput = "#"+input.setOutputMarkupId(true).getMarkupId();  // set the jquery selector of this component.
-            return input;
-        }
-
-        public String getTitleInput() {
-            return titleInput;
-        }
-
     }
-
 
 }
 

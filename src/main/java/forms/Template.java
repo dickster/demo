@@ -24,6 +24,11 @@ public class Template extends Panel {
         this.source = normalize(source);
     }
 
+    @Override
+    public boolean isVisible() {
+        return source!=null;
+    }
+
     private String normalize(String source) {
         if (source==null) {
             return null;

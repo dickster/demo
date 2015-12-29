@@ -55,3 +55,24 @@ Form 2:
 	lay it out properly.
 	add a new custom theme.  (Dereks' Toy Insurance Co.)
 	NullSafeModel object.  just plop it in model.nullsafe and annotate the creators if need be. --otherwise it is newIntance()
+
+
+
+PHASE 3
+-------
+make a widget post custom event. e.g. WfPrintEvent.
+workflow will listen to said event. -either the wf or state(s) and react.
+YesNo widget. with dependent fields (optionally grouped in Div).
+template ajax handling? is it needed? how to avoid reflow?
+add icon formatter for label (TLBR, icon name)
+add link widget (config URL and parameters).
+mock out a session spring bean with request scoped spring bean with user info.
+
+maybe save config as json object?
+need a replacement for SoapUI.  use GSON?
+get groovy working again?  do i need it for states? workflows?
+fix validationAdapterFactory serialization issue. (don't use inner classes in @configuration file).
+make all configs call generic newInstance(id, this) constructor.
+make all variables NOT send in json by default.  you have to explicity include them via @IncludeConfigInJson  //boolean value default true
+
+

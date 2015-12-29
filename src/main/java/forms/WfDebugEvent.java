@@ -10,7 +10,7 @@ public class WfDebugEvent extends WfEvent<String> {
     private final AjaxRequestTarget target;
 
     public WfDebugEvent(AjaxRequestTarget target, Component component) {
-        super(new WfUtil().getComponentId(component));
+        super(WfUtil.getComponentId(component));
         this.target = target;
         this.component = component;
     }

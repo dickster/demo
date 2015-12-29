@@ -127,8 +127,6 @@ public class WorkflowForm extends Panel implements HasConfig {
         form = new Form("form");
         form.setOutputMarkupId(true);
         form.add(new Div("content", formConfig).setRenderBodyOnly(false));
-        // get this from form config.
-        // try this out on ajax!!!
         form.add(new Template("template", formConfig.getTemplate()).setRenderBodyOnly(false));
         addOrReplace(form);
     }

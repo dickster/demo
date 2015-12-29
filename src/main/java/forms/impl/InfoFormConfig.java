@@ -1,10 +1,6 @@
 package forms.impl;
 
-import forms.widgets.config.AddressConfig;
-import forms.widgets.config.ButtonConfig;
-import forms.widgets.config.FormConfig;
-import forms.widgets.config.LabelConfig;
-import forms.widgets.config.TextFieldConfig;
+import forms.widgets.config.*;
 
 public class InfoFormConfig extends FormConfig {
 
@@ -12,7 +8,7 @@ public class InfoFormConfig extends FormConfig {
         super("INFO_FORM");
         addConfigs();
         withTitle("Client Information");
-        withTemplate("f1.html");  //withTemplate("f1");/
+        //withTemplate("f1.html");  //withTemplate("f1");
     }
 
     private void addConfigs() {
@@ -20,25 +16,36 @@ public class InfoFormConfig extends FormConfig {
 //        withConfig(new SelectPickerConfig<String>("name.salutation")
 //                .withOptions(Lists.newArrayList("Mr.", "Mrs.", "Ms", "Dr.")));
 
-        withConfig(new LabelConfig("label.first"));
-        withConfig(new TextFieldConfig("name.first"));
-        withConfig(new LabelConfig("label.middle"));
-        withConfig(new TextFieldConfig("name.middle"));
-        withConfig(new LabelConfig("label.last"));
-        withConfig(new TextFieldConfig("name.last"));
-        withConfig(new LabelConfig("label.age"));
-        withConfig(new TextFieldConfig<Integer>("insured.age").withAjaxBehavior("ageOccupationAjaxBehavior"));
-        withConfig(new LabelConfig("label.occupation"));
-        withConfig(new TextFieldConfig<Integer>("insured.occupation"));
+        with(new SectionPanelConfig("names")
+                .withTitle("People")
+                .withConfigs(
+// TODO : how to layout these puppies???
+                            new LabelConfig("label.first"),
+                            new TextFieldConfig("first"),
+                            new LabelConfig("label.middle"),
+                            new TextFieldConfig("middle"),
+                            new LabelConfig("label.last"),
+                            new TextFieldConfig("last")));
 
-        withConfig(new LabelConfig("l1", "name.first"));
-        withConfig(new LabelConfig("label.names").withData("name.first", "name.last"));
-        withConfig(new LabelConfig("label.bogus").withData("name.first").withFormatter("specialFormatter"));
+//        withConfig(new LabelConfig("label.first"));
+//        withConfig(new TextFieldConfig("name.first"));
+//        withConfig(new LabelConfig("label.middle"));
+//        withConfig(new TextFieldConfig("name.middle"));
+//        withConfig(new LabelConfig("label.last"));
+//        withConfig(new TextFieldConfig("name.last"));
+//        withConfig(new LabelConfig("label.age"));
+//        withConfig(new TextFieldConfig<Integer>("insured.age").withAjaxBehavior("ageOccupationAjaxBehavior"));
+//        withConfig(new LabelConfig("label.occupation"));
+//        withConfig(new TextFieldConfig<Integer>("insured.occupation"));
 
-//        withConfig(new CheckBoxConfig("insured.smokes", "i smoke cigarettes"));
-
-        withConfig(new LabelConfig("label.address"));
-        withConfig(new AddressConfig("insured.address"));
+//        withConfig(new LabelConfig("l1", "name.first"));
+//        withConfig(new LabelConfig("label.names").withData("name.first", "name.last"));
+//        withConfig(new LabelConfig("label.bogus").withData("name.first").withFormatter("specialFormatter"));
+//
+////        withConfig(new CheckBoxConfig("insured.smokes", "i smoke cigarettes"));
+//
+//        withConfig(new LabelConfig("label.address"));
+//        withConfig(new AddressConfig("insured.address"));
 
 //        withConfig(new LabelConfig("address 2"));
 //        withConfig(new AddressConfig("insured.address2"));

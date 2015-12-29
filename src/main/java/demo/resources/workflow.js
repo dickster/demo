@@ -131,7 +131,7 @@ var workflow = function() {
 
             var layout = function() {
                 var t = $('form .template');
-                if (t.size()==0) {
+                if (t.length==0) {
                     layoutDefault();
                 }
                 else {
@@ -140,8 +140,9 @@ var workflow = function() {
                 return;
             };
 
-            var layoutDefault = function (form) {
-                form.css('width:300px');
+            var layoutDefault = function () {
+                var form = $(document).find('form .raw-content');
+                form.attr('style','width:430px');
             };
 
             return {

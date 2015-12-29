@@ -4,7 +4,7 @@ import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.CompoundPropertyModel;
 
-// model that bases on component meta data instead of id.
+// model that bases on component workflow id instead of wicket id.
 public class WfCompoundPropertyModel<T> extends CompoundPropertyModel<T> {
 
     public WfCompoundPropertyModel(T object) {
@@ -13,7 +13,7 @@ public class WfCompoundPropertyModel<T> extends CompoundPropertyModel<T> {
 
     @Override
     protected String propertyExpression(Component component) {
-        return new WfUtil().getComponentFullProperty(component);
+        return WfUtil.getComponentFullProperty(component);
     }
 
 }

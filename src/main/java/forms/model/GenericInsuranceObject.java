@@ -1,11 +1,13 @@
 package forms.model;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import demo.Address;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GenericInsuranceObject implements Serializable {
 
@@ -17,6 +19,11 @@ public class GenericInsuranceObject implements Serializable {
     private Insured insured = new Insured();
     private Vehicle vehicle = new Vehicle();
     private Payment payment = new Payment();
+    private List<Name> names = Lists.newArrayList(
+                                new Name("john", "doe"),
+                                new Name("susy", "jones"),
+                                new Name("bob", "smith")
+                            );
 
     @Override
     public String toString() {
@@ -43,6 +50,8 @@ public class GenericInsuranceObject implements Serializable {
         return errors;
     }
 
+    public List<Name> getNames() { return names; }
+
     public GenericInsuranceObject clearErrors() {
         errors = new Errors();
         return this;
@@ -63,26 +72,7 @@ public class GenericInsuranceObject implements Serializable {
         public BigDecimal total = new BigDecimal(1932.34);
     }
 
-    public class Name implements Serializable {
-        public String first ="derek";
-        public String middle = "william";
-        public String last = "dick";
-        public String salutation = "Mr.";
 
-        Name() {
-        }
-
-        Name(String first, String middle, String last) {
-            this.first = first;
-            this.middle = middle;
-            this.last = last;
-        }
-
-        @Override
-        public String toString() {
-           return Joiner.on(" ").skipNulls().join(first, middle, last);
-        }
-    }
 
     public class Insured implements Serializable {
         public String country;

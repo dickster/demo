@@ -56,7 +56,7 @@ body.defaultTheme .container  {
     width:970px;
 }
 body.defaultTheme form {
-    width:270px;
+    /*width:270px;*/
 }
 
 .header {

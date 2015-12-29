@@ -2,13 +2,16 @@ package forms.spring;
 
 import com.google.common.collect.ImmutableMap;
 
+import java.util.Map;
+
 public class StringLoader {
     //just a temp stash for strings... this really should be in db somewhere.
-    static final ImmutableMap<String, String> STRINGS =
+    static final Map<String, String> STRINGS =
             new ImmutableMap.Builder<String, String>()
                     .put("label.bogus", "blah")
                     .put("label.names", "my name is {1}, {0}.")
                     .put("label.age", "age")
+                    .put("label.middle", "middle")
                     .put("label.first", "first")
                     .put("label.last", "last")
                     .put("label.occupation", "occupation")
@@ -16,7 +19,7 @@ public class StringLoader {
                     .put("button.ok", "ok")
                     .put("button.refresh", "refresh")
                     .put("button.submit", "submit")
-                    .build();
+            .build();
 
     public String get(String key) {
         // it will probably have to be prototype bean that has sessionBean injected into to access user & locale.
