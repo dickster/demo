@@ -5,7 +5,7 @@ import forms.widgets.DialogInvokingButton;
 
 public class DialogInvokingButtonConfig extends FormComponentConfig<DialogInvokingButton> {
 
-    private @DontSendInJson final DialogConfig dialogConfig;
+    private final DialogConfig dialogConfig;
 
     public DialogInvokingButtonConfig(String id, DialogConfig dialogConfig) {
         super(id, WidgetTypeEnum.DIALOG_BUTTON);

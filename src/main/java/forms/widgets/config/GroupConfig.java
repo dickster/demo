@@ -10,9 +10,9 @@ import java.util.List;
 
 public abstract class GroupConfig<T extends Component & HasConfig> extends Config<T> {
 
-    private @DontSendInJson boolean renderBodyOnly = false;
-    private @DontSendInJson List<Config> configs = Lists.newArrayList();
-    private String title;
+    private boolean renderBodyOnly = false;
+    private List<Config> configs = Lists.newArrayList();
+    private @IncludeInJson String title;
 
     public GroupConfig(@Nonnull String name) {
         super(name, WidgetTypeEnum.CONTAINER);

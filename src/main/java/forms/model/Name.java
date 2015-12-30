@@ -5,9 +5,9 @@ import com.google.common.base.Joiner;
 import java.io.Serializable;
 
 public class Name implements Serializable {
-    public String first ="derek";
-    public String middle = "william";
-    public String last = "dick";
+    public String first ="";
+    public String middle ;
+    public String last;
     public String salutation = "Mr.";
 
     public Name() {

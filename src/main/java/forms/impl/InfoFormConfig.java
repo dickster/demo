@@ -25,18 +25,18 @@ public class InfoFormConfig extends FormConfig {
         withConfig(new AddressConfig("insured.address"));
 
         with(new SectionPanelConfig("names")
-                .withAddTooltip("Add Person")
-                .withTitleForNewValues("New Person")
-                .withTitleInputs("first", "last")
-                .withTitle("Drivers")
-                .withConfigs(
-// TODO : how to layout these puppies???
-                        new LabelConfig("label.first"),
-                        new TextFieldConfig("first"),
-                        new LabelConfig("label.middle"),
-                        new TextFieldConfig("middle"),
-                        new LabelConfig("label.last"),
-                        new TextFieldConfig("last")));
+                    .withAddTooltip("Add Person")
+                    .withTitleForNewValues("New Person")
+                    .withTitleInputs("first", "last")
+                    .withTemplate("_names")
+                    .withConfigs(
+                            new LabelConfig("label.first"),
+                            new TextFieldConfig("first"),
+                            new LabelConfig("label.middle"),
+                            new TextFieldConfig("middle"),
+                            new LabelConfig("label.last"),
+                            new TextFieldConfig("last"))
+                    .withTitle("Drivers"));
 
 //        withConfig(new LabelConfig("label.first"));
 //        withConfig(new TextFieldConfig("name.first"));

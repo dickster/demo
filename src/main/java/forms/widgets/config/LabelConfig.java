@@ -8,9 +8,9 @@ import java.util.List;
 
 public class LabelConfig extends Config<Label2> {
 
-    private @DontSendInJson List<String> data = Lists.newArrayList();
-    private @DontSendInJson String /*name of spring bean*/ formatter;
-    private @DontSendInJson boolean useParentModel;
+    private List<String> data = Lists.newArrayList();
+    private String /*name of spring bean*/ formatter;
+    private boolean useParentModel;
     private boolean htmlStrings = false;
 
     public LabelConfig(String id) {

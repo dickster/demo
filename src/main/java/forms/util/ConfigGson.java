@@ -9,7 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import forms.widgets.config.DontSendInJson;
+import forms.widgets.config.IncludeInJson;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
@@ -27,13 +27,13 @@ public class ConfigGson implements Serializable {
 
         ExclusionStrategy skipUnexposedFieldsStrategy = new ExclusionStrategy() {
             @Override public boolean shouldSkipField(FieldAttributes f) {
-                return f.getAnnotation(DontSendInJson.class) != null;
+                IncludeInJson include = f.getAnnotation(IncludeInJson.class);
+                return include==null || include.value()==false;
             }
             @Override public boolean shouldSkipClass(Class<?> clazz) {
                 return false;
             }
         };
-
 
         JsonSerializer<Collection<?>> skipEmptyCollections = new JsonSerializer<Collection<?>>() {
             @Override

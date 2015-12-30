@@ -1,0 +1,28 @@
+<wicket:panel>
+    <rp>
+        <!-- put whatever you want here...need a wicket:ignore section -->
+        <!-- javascript code should  $('.template details').hide/remove() -->
+    </rp>
+    <div class="row">
+        <div class="col-md-3">
+            <div data-template="label.first">First</div>
+        </div>
+        <div class="col-md-3">
+            <div data-template="label.middle">Middle</div>
+        </div>
+        <div class="col-md-3">
+            <div data-template="label.last">Last</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><input type="text" value="[template]" data-template="first" class="form-control">
+        </div>
+        <div class="col-md-3">
+            <input type="text" value="[template]" data-template="middle" class="form-control">
+        </div>
+        <div class="col-md-3">
+            <input type="text" value="[template]" data-template="last" class="form-control">
+        </div>
+    </div>
+
+</wicket:panel>

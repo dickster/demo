@@ -6,7 +6,7 @@ import forms.widgets.SectionPanel;
 
 import javax.annotation.Nonnull;
 
-public class SectionPanelConfig extends GroupConfig<SectionPanel> {
+public class SectionPanelConfig extends GroupConfig<SectionPanel> implements HasTemplate {
 
     public static final String TITLEFOR_NEW_VALUES = "titleForNewValues";
     public static final String TITLE_INPUTS = "titleInputs";
@@ -17,6 +17,7 @@ public class SectionPanelConfig extends GroupConfig<SectionPanel> {
     public boolean collapsed;
     public int current = 0;
     private int min=1, max = Integer.MAX_VALUE;
+    private String template = null;
 
     public SectionPanelConfig(@Nonnull String name) {
         super(name, WidgetTypeEnum.SECTION);
@@ -58,5 +59,15 @@ public class SectionPanelConfig extends GroupConfig<SectionPanel> {
 
     public String getTitleForNewValues() {
         return (String) getOptions().get(TITLEFOR_NEW_VALUES);
+    }
+
+    @Override
+    public String getTemplate() {
+        return template;
+    }
+
+    public SectionPanelConfig withTemplate(String template) {
+        this.template = template;
+        return this;
     }
 }

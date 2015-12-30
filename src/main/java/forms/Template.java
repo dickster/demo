@@ -21,6 +21,7 @@ public class Template extends Panel {
 
     public Template(String id, String source) {
         super(id);
+        setRenderBodyOnly(false);
         this.source = normalize(source);
     }
 

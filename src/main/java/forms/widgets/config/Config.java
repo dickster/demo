@@ -23,29 +23,28 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private static final String CLASS = "class";
     private static final String PLUGIN_NA = "n/a";
 
-    private @DontSendInJson Class<T> clazz;
-    private @DontSendInJson GroupConfig parent;
-    private @DontSendInJson Set<String> ajaxBehaviors = Sets.newHashSet();
-    private @DontSendInJson String prefix;
-    private @DontSendInJson boolean wrapHtmlOutput = false;
-    private @DontSendInJson boolean initiallyVisible = true;
+    private Class<T> clazz;
+    private GroupConfig parent;
+    private Set<String> ajaxBehaviors = Sets.newHashSet();
+    private String prefix;
+    private boolean wrapHtmlOutput = false;
+    private boolean initiallyVisible = true;
 
-    private String markupId;    // this is injected by the framework...don't set this yourself.
-    private boolean isAjax;     // this is injected by the framework...don't set this yourself.
+    private @IncludeInJson String markupId;    // this is injected by the framework...don't set this yourself.
+    private @IncludeInJson boolean isAjax;     // this is injected by the framework...don't set this yourself.
 
     // because two components can have the same property, we need two values.
     // ID which is (developer enforced) unique across the form, and property.
-    // eg. two textFields could be bound to "address.country", their names might
-    // be "country" & "nation".  Id's must be unique because in the DOM, this is the
+    // eg. two textFields could be bound to the same property "address.country", their id would have to be unique
+    // values like "country1" & "country2".
+    // Id's must be unique because in the DOM, this is the
     // value we use to find them.  (stuffed into data-wf attribute)
-    //----these SHOULD be sent to client side.  everything else is ignored ------
-    private String id;
-    private final String property;
-    private final String type;
-    private final String pluginName;
+    private @IncludeInJson String id;
+    private @IncludeInJson final String property;
+    private @IncludeInJson final String type;
+    private @IncludeInJson final String pluginName;
+    private @IncludeInJson final Map<String, Object> options = Maps.newHashMap();  // a place to store custom options.
     private final Map<String, String> attributes = Maps.newHashMap();
-    // TODO : replace with a single object?
-    private final Map<String, Object> options = Maps.newHashMap();  // a place to store custom options.
 
     public Config(@Nonnull String property, @Nonnull String type, String pluginName) {
         Preconditions.checkNotNull(property);

@@ -1,4 +1,8 @@
 
+.template-source {
+    display:none;
+}
+
 .btn-debug {
     position:fixed;
     top:20px;

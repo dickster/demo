@@ -10,6 +10,7 @@ import java.util.List;
 public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
 
     // TODO : should this be transient or serializable?
+    // make this the name of a spring bean.
     private transient SelectOptionsService<T> service;
 
     public SelectPickerConfig(@Nonnull String property) {

@@ -4,13 +4,12 @@ import forms.WidgetTypeEnum;
 import forms.WorkflowForm;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
 
-public class FormConfig<T> extends GroupConfig<WorkflowForm> {
+public class FormConfig<T> extends GroupConfig<WorkflowForm> implements HasTemplate {
 
-    // TODO : should make 'DontSendInJson' the default value.
-    private @DontSendInJson IFormValidator validator;
-    private @DontSendInJson FeedbackPanelConfig feedbackConfig;
-    private @DontSendInJson String template;
-    private String url; //historyCallbackUrl;
+    private IFormValidator validator;
+    private FeedbackPanelConfig feedbackConfig;
+    private String template;
+    private @IncludeInJson String url; //historyCallbackUrl;
 
     public FormConfig(String name) {
         super(name, WidgetTypeEnum.FORM);

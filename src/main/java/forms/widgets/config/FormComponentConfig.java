@@ -11,10 +11,7 @@ import java.util.List;
 
 public abstract class FormComponentConfig<T extends Component & HasConfig> extends Config<T> {
 
-    @DontSendInJson
     private List<IValidator> validators = Lists.newArrayList();
-
-    @DontSendInJson
     private boolean required;
 
     public FormComponentConfig(@Nonnull String property, @Nonnull String type, String pluginName) {

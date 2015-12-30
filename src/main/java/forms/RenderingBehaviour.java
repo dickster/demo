@@ -5,6 +5,7 @@ import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
 import forms.util.ConfigGson;
 import forms.util.WfUtil;
+import forms.widgets.config.HasTemplate;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.IAjaxRegionMarkupIdProvider;
@@ -45,9 +46,13 @@ public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdP
     @Override
     public void renderHead(Component component, IHeaderResponse response) {
         Config config = getConfig(component);
-        // inject the markup id (need to do this everytime 'cause it's always changing).
+
         boolean isAjax = RequestCycle.get().find(AjaxRequestTarget.class)!=null;
-        config.withMarkupId(component.getMarkupId()).setIsAjax(isAjax);
+        // inject the markup id (need to do this everytime 'cause it's always changing).
+        config.withMarkupId(component.getMarkupId())
+                .withOption("hasTemplate", config instanceof HasTemplate)
+                .setIsAjax(isAjax);
+
         String js = String.format(INIT_WIDGET_JS, gson.toJson(config));
         response.render(OnDomReadyHeaderItem.forScript(js));
     }
