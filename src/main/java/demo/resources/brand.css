@@ -1,6 +1,6 @@
 /*for debugging only*/
 .template-source {
-    outline:1px dotted pink;
+    outline:1px dotted aliceblue;
 }
 
 [data-template].unreferenced-template {
@@ -22,7 +22,7 @@
 
 
 .unreferenced-template:after {
-    content:'\a cant find the template : ' attr(data-template) ;
+    content:'\a cant find the template : ' attr(data-template);
     white-space:pre;
 }
 
@@ -36,14 +36,12 @@
 .not-in-template {
     background:#fee;
     color:#aaa;
-    font-size:12px;
-    font-family:'verdana';
     outline:1px solid #dbb;
 }
 
-.not-in-template:before {
-    content:'these are not included in template';
-    text-decoration:underline;
+.not-in-template:after {
+    content: '\a"' attr(data-wf) '" is not found in template';
+    white-space:pre;
 }
 
 /* in template but not in form*/

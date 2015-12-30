@@ -21,6 +21,7 @@ public class SectionPanelConfig extends GroupConfig<SectionPanel> {
 
     public SectionPanelConfig(@Nonnull String name) {
         super(name, WidgetTypeEnum.SECTION);
+        withCss("section");
     }
 
     @Override

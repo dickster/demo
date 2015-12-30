@@ -21,7 +21,10 @@ var workflow = function() {
         var initWidget = function(config) {
             var w = widget(config);
             w.initializePlugin();
-            // if ajax, updateLayout.
+            if (config.type=="FORM") {
+                w.layout();  // <-- TODO : move this outside of widget.
+            }
+            // TODO : if ajax, update layout for widget only...do this by intercepting Wicket.AJAX.event.
         }
 
     function widget(conf) {
@@ -30,15 +33,6 @@ var workflow = function() {
 
             var initializePlugin = function() {
                 // THESE ARE HACKS AND WILL BE WRITTEN AS JQUERY UI PLUGINS.
-                if (config.type=="FORM") {
-                    try {
-                        url = config.url;  // required for history support.
-                        layout();
-                        return;
-                    } catch (err) {
-                        console.log("can't layout form.  maybe your layout definition is wrong?");
-                    }
-                }
                 if ( config.type=="ADDRESS") {
                     config.id = '#'+config.markupId;
                     easy.address.create(config);
@@ -56,18 +50,8 @@ var workflow = function() {
                     console.log("error launching plugin " + config.pluginName + err);
                 }
 
-            };
+                // TODO : all widgets should update layouts.
 
-            var layout = function() {
-                if (layoutWithTemplate()) {
-                    layoutDefault();
-                }
-                return;
-            };
-
-            var layoutDefault = function () {
-                var form = $(document).find('form .raw-content');
-//                form.attr('style','width:430px');
             };
 
             function validateTemplateElement($t, $original) {
@@ -97,10 +81,10 @@ var workflow = function() {
                 });
 
                 // just for debugging reasons, mark any unused elements as "untemplated".
-                if ($template_data.find('[data-wf]').length>0) {
-                    console.log("WARNING: there are elements in your component that weren't included in the template.")
-                    $template_data.addClass('not-in-template');
-                }
+                $template_data.find('[data-wf]').each(function(index, data) {
+                    console.log("WARNING: " + data.getAttribute('data-wf') + " is not in template");
+                    $(data).addClass('not-in-template');
+                });
 
             }
 
@@ -122,7 +106,7 @@ var workflow = function() {
             }
 
             return {
-                layout : layout,
+                layout : layoutWithTemplate,
                 initializePlugin : initializePlugin
             }
 
