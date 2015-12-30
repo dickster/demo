@@ -26,14 +26,10 @@
     white-space:pre;
 }
 
-
-
 .unreferenced-template {
-    height:50px;
-    width:100%;
-    color:#ddd;
-    background:#733;
-    outline:1px solid black;
+    color: #336;
+    background: #f4f4f4;
+    outline: 1px dashed #ddd;
 }
 
 /* in form but not in template.*/

@@ -21,7 +21,7 @@ var workflow = function() {
         var initWidget = function(config) {
             var w = widget(config);
             w.initializePlugin();
-            w.layout();
+            // if ajax, updateLayout.
         }
 
     function widget(conf) {
@@ -33,6 +33,7 @@ var workflow = function() {
                 if (config.type=="FORM") {
                     try {
                         url = config.url;  // required for history support.
+                        layout();
                         return;
                     } catch (err) {
                         console.log("can't layout form.  maybe your layout definition is wrong?");
@@ -102,6 +103,9 @@ var workflow = function() {
                 }
 
             }
+
+        // only do this once per request....  if form, do layout.
+        // if ajax, only do the component.
 
             var layoutWithTemplate = function() {
                 // the debug button we'll always move over. no need to include it in template.
