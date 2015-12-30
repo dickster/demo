@@ -1,7 +1,18 @@
-
+/*for debugging only*/
 .template-source {
-    display:none;
+    outline:1px dotted pink;
 }
+
+[data-template].unreferenced-template {
+    display:inline-block !important;
+}
+
+[data-template] {
+    display:none !important;
+}
+
+
+/*--------------------*/
 
 .btn-debug {
     position:fixed;
@@ -9,19 +20,15 @@
     right:20px;
 }
 
-.untemplated:not([type='input']):after {
-    color:#888;
-    font-size:12px;
-    font-style:italic;
-    content:'<--not included in template';
+
+.unreferenced-template:after {
+    content:'\a cant find the template : ' attr(data-template) ;
+    white-space:pre;
 }
 
-.template-error:after {
-    /* assumes code plops the template name into the title attribute! see Template.java*/
-    content:'cant find the template '  attr(title);
-}
 
-.template-error {
+
+.unreferenced-template {
     height:50px;
     width:100%;
     color:#ddd;
@@ -30,17 +37,17 @@
 }
 
 /* in form but not in template.*/
-.untemplated {
+.not-in-template {
     background:#fee;
-    color:#444;
+    color:#aaa;
+    font-size:12px;
+    font-family:'verdana';
     outline:1px solid #dbb;
 }
 
-/* in form but not in template.*/
-.untemplated {
-    background:#fee;
-    color:#444;
-    outline:1px solid #dbb;
+.not-in-template:before {
+    content:'these are not included in template';
+    text-decoration:underline;
 }
 
 /* in template but not in form*/

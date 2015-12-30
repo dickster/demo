@@ -47,11 +47,20 @@ public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdP
     public void renderHead(Component component, IHeaderResponse response) {
         Config config = getConfig(component);
 
-        boolean isAjax = RequestCycle.get().find(AjaxRequestTarget.class)!=null;
+        // this is our chance to inject/alter a bunch of stuff that we send to the browser.
+
         // inject the markup id (need to do this everytime 'cause it's always changing).
-        config.withMarkupId(component.getMarkupId())
-                .withOption("hasTemplate", config instanceof HasTemplate)
-                .setIsAjax(isAjax);
+        // the .js code will typically need this to find the element.
+        config.withMarkupId(component.getMarkupId());
+
+        if (RequestCycle.get().find(AjaxRequestTarget.class)!=null) {
+            config.setIsAjax(true);
+        }
+
+        // TODO : unit test to make sure no components contain Templates without implementing the HasTemplate interface.
+        // could do this as a "debug mode only" validation.
+        String templateId = (component instanceof HasTemplate) ? ((HasTemplate)component).getTemplateId() : null;
+        config.setTemplateId(templateId);
 
         String js = String.format(INIT_WIDGET_JS, gson.toJson(config));
         response.render(OnDomReadyHeaderItem.forScript(js));

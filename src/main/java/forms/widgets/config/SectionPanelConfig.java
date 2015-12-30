@@ -6,7 +6,7 @@ import forms.widgets.SectionPanel;
 
 import javax.annotation.Nonnull;
 
-public class SectionPanelConfig extends GroupConfig<SectionPanel> implements HasTemplate {
+public class SectionPanelConfig extends GroupConfig<SectionPanel> {
 
     public static final String TITLEFOR_NEW_VALUES = "titleForNewValues";
     public static final String TITLE_INPUTS = "titleInputs";
@@ -61,7 +61,6 @@ public class SectionPanelConfig extends GroupConfig<SectionPanel> implements Has
         return (String) getOptions().get(TITLEFOR_NEW_VALUES);
     }
 
-    @Override
     public String getTemplate() {
         return template;
     }

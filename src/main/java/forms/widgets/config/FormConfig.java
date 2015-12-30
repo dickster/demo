@@ -4,7 +4,7 @@ import forms.WidgetTypeEnum;
 import forms.WorkflowForm;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
 
-public class FormConfig<T> extends GroupConfig<WorkflowForm> implements HasTemplate {
+public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
     private IFormValidator validator;
     private FeedbackPanelConfig feedbackConfig;
@@ -13,14 +13,9 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> implements HasTempl
 
     public FormConfig(String name) {
         super(name, WidgetTypeEnum.FORM);
-        // if DEBUG...
-        addDebugStuff();
         withRenderBodyOnly(false);
     }
 
-    private void addDebugStuff() {
-        with(new DebugRefreshButtonConfig("button.refresh"));
-    }
 
     @Override
     public WorkflowForm create(String id) {
@@ -57,4 +52,5 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> implements HasTempl
     public String getTemplate() {
         return template;
     }
+
 }

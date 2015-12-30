@@ -1,6 +1,7 @@
 package forms.util;
 
 import com.google.common.base.Joiner;
+import forms.WfEvent;
 import forms.WfPage;
 import forms.WidgetFactory;
 import forms.Workflow;
@@ -73,5 +74,9 @@ public class WfUtil implements Serializable {
             }
         }
         return false;
+    }
+
+    public static void post(Component component, WfEvent event) {
+        getWorkflow(component).post(event);
     }
 }

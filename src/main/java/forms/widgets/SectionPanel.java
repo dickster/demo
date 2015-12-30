@@ -10,6 +10,7 @@ import forms.model.WfCompoundPropertyModel;
 import forms.util.WfUtil;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
+import forms.widgets.config.HasTemplate;
 import forms.widgets.config.SectionPanelConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Application;
@@ -43,7 +44,7 @@ import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SectionPanel<T extends Component> extends Panel implements FeedbackListener, ISection, HasConfig {
+public class SectionPanel<T extends Component> extends Panel implements FeedbackListener, ISection, HasConfig, HasTemplate {
 
     private static final String SELECT_LAST_TAB_JS = "$('#%s').tabPanel.selectLastTab()";
     private static final String BLANK_SLATE_ID = "blankSlate";
@@ -165,7 +166,6 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
             }
         };
         container.add(panel);
-        container.add(template = new Template("template", config.getTemplate()));
         return container;
     }
 
@@ -321,6 +321,11 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
 
     public List getList() {
         return getListModel().getObject();
+    }
+
+    @Override
+    public String getTemplateId() {
+        return template.getMarkupId();
     }
 
     public class AddSectionTab extends Fragment {

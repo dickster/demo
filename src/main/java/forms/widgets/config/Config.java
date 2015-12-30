@@ -16,22 +16,23 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
-// DB NOTE : these entities should be detached after they are read.
+// DB NOTE : these entities should be "detached" after they are read.
 // you would never want to update these...only in editor.
 public abstract class Config<T extends Component & HasConfig> implements Serializable {
 
     private static final String CLASS = "class";
     private static final String PLUGIN_NA = "n/a";
 
-    private Class<T> clazz;
     private GroupConfig parent;
     private Set<String> ajaxBehaviors = Sets.newHashSet();
-    private String prefix;
     private boolean wrapHtmlOutput = false;
     private boolean initiallyVisible = true;
 
-    private @IncludeInJson String markupId;    // this is injected by the framework...don't set this yourself.
-    private @IncludeInJson boolean isAjax;     // this is injected by the framework...don't set this yourself.
+    // this is injected by the framework...don't set this yourself.
+    private @IncludeInJson String markupId;
+    private @IncludeInJson Boolean isAjax;
+    private @IncludeInJson String templateId;
+
 
     // because two components can have the same property, we need two values.
     // ID which is (developer enforced) unique across the form, and property.
@@ -39,12 +40,13 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     // values like "country1" & "country2".
     // Id's must be unique because in the DOM, this is the
     // value we use to find them.  (stuffed into data-wf attribute)
-    private @IncludeInJson String id;
-    private @IncludeInJson final String property;
+    private String id;
+    private final String property;
+    private final Map<String, String> attributes = Maps.newHashMap();
+
     private @IncludeInJson final String type;
     private @IncludeInJson final String pluginName;
     private @IncludeInJson final Map<String, Object> options = Maps.newHashMap();  // a place to store custom options.
-    private final Map<String, String> attributes = Maps.newHashMap();
 
     public Config(@Nonnull String property, @Nonnull String type, String pluginName) {
         Preconditions.checkNotNull(property);
@@ -242,6 +244,10 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     public Component validateAndCreate(String id) {
         validate();
         return create(id);
+    }
+
+    public void setTemplateId(String templateId) {
+        this.templateId = templateId;
     }
 }
 

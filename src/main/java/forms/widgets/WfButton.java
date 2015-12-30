@@ -1,6 +1,9 @@
 package forms.widgets;
 
+import forms.WfSubmitErrorEvent;
+import forms.WfSubmitEvent;
 import forms.spring.StringLoader;
+import forms.util.WfUtil;
 import forms.widgets.config.ButtonConfig;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
@@ -10,7 +13,6 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.ComponentTag;
-import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.util.visit.IVisit;
@@ -22,6 +24,7 @@ import javax.inject.Inject;
 public class WfButton extends AjaxButton implements IAjaxIndicatorAware, HasConfig {
 
     private @Inject StringLoader stringLoader;
+
     private final Config config;
     private String ajaxIndicatorMarkupId = null;
 
@@ -31,7 +34,14 @@ public class WfButton extends AjaxButton implements IAjaxIndicatorAware, HasConf
         this.config = config;
     }
 
-    protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+    @Override
+    protected void onSubmit(AjaxRequestTarget target, Form <?> form) {
+        WfUtil.post(form, new WfSubmitEvent(target, this, form));
+    }
+
+    @Override
+    protected void onError(AjaxRequestTarget target, Form<?> form) {
+        WfUtil.post(form, new WfSubmitErrorEvent(target, this, form));
     }
 
     @Override
@@ -58,11 +68,6 @@ public class WfButton extends AjaxButton implements IAjaxIndicatorAware, HasConf
             });
         }
         return ajaxIndicatorMarkupId;
-    }
-
-    @Override
-    public void renderHead(IHeaderResponse response) {
-        super.renderHead(response);
     }
 
     @Override

@@ -21,23 +21,18 @@ var workflow = function() {
         var initWidget = function(config) {
             var w = widget(config);
             w.initializePlugin();
+            w.layout();
         }
 
-        function widget(conf) {
+    function widget(conf) {
             var config= conf;
             var $widget = $('#'+config.markupId);
-
-            var updateLayout = function() {
-                // should assert that previous node is the template?
-                copyAttributes($widget.prev(), $widget);
-            }
 
             var initializePlugin = function() {
                 // THESE ARE HACKS AND WILL BE WRITTEN AS JQUERY UI PLUGINS.
                 if (config.type=="FORM") {
                     try {
                         url = config.url;  // required for history support.
-                        layout(); // TODO : turn this into a plugin.
                         return;
                     } catch (err) {
                         console.log("can't layout form.  maybe your layout definition is wrong?");
@@ -59,110 +54,70 @@ var workflow = function() {
                 catch (err) {
                     console.log("error launching plugin " + config.pluginName + err);
                 }
+
             };
 
-            // TODO : layout a single widget...look only for specific data-wf-idsdata-
-
-            function moveTargetIntoTemplate(source, target) {
-                if (target.length>0) {
-                    target.insertAfter(source);
-                    copyAttributes(source, target);
-                    source.attr('data-wf-template','').hide();
-                }
-                else {
-                    console.log("WARNING : you have " + source.attr('data-wf') + " in your template but can't find it in your form. it will be ignored.");
-                    source.addClass('undefined');
-                }
-            }
-
-            function copyAttributes(source, destination) {
-                var src = source.get(0);
-                var dest = destination.get(0);
-                var attrs = [];
-                for (var i = 0; i < src.attributes.length; i++) {
-                    var a = src.attributes[i];
-                    // skip some key attributes that might adversely affect wicket or framework...copy the rest.
-                    // maybe i should just copy class???
-                    if ('id'=== a.name || 'style'=== a.name || 'type'=== a.name || 'data-wf'=== a.name || 'data-wf-template'=== a.name)
-                        continue;
-                    attrs.push(a);
-                }
-                // in a feeble attempt to reduce reflow problems, i'm isolating reads/writes to DOM.  this can cause a flicker.
-                // in general, it's better to have these sent via config if this problem is serious.
-                for (var i = 0; i<attrs.length; i++) {
-                    dest.setAttribute(attrs[i].name,attrs[i].value);
-                }
-                var sourceType = src.nodeName;
-                var destType = dest.nodeName;
-                if (!(sourceType===destType)) {
-                    console.log('WARNING : for "' +src.getAttribute('data-wf') +'" the template has a type of ' + sourceType + ' but the form is using ' + destType + '.   ' +
-                        'It is recommended that you use the same types to avoid styling inconsistencies.');
-                }
-            }
-
             var layout = function() {
-                var t = $('form .template');
-                if (t.length==0) {
+                if (layoutWithTemplate()) {
                     layoutDefault();
-                }
-                else {
-                    layoutWithTemplate();
                 }
                 return;
             };
-
-
-            var template = function() {
-                var $form = $('#'+config.markupId);
-                var $source = $('#'+config.markupId + ' .raw-content');
-                var $template = $form.find('.template');
-                $template.find('[data-template]').each(function(i,t) {
-                    var id = t.getAttribute('data-template');
-                    var target = $form.find('[data-wf="'+ id +'"]');
-                    // if more than one...log it.
-                    moveTargetIntoTemplate(t, target);
-                });
-                // the debug button we'll always move over. no need to include it in template.
-                t.prepend(form.find('.btn-debug'));
-            }
-
-
-            var layoutWithTemplate = function() {
-                var form = $(document).find('form .raw-content');//get(config.id).find('form');
-                // TODO : maybe i need to clone this?
-                var t = $('form .template');
-                t.find('[data-wf]').each(function(i,v) {
-                    var source = $(v);
-                    var id=source.attr('data-wf');
-                    // TODO : copy all css classes and attributes.
-                    var target = form.find('[data-wf="'+ id +'"]');
-                    moveTargetIntoTemplate(source, target);
-                });
-                // the debug button we'll always move over. no need to include it in template.
-                t.prepend(form.find('.btn-debug'));
-
-                var untemplatedIds = '';
-                form.find('[data-wf]').each(function(i,v) {
-                    var $el = $(v);
-                    var dataWf = $el.attr('data-wf');
-                    untemplatedIds = dataWf + ',' + untemplatedIds;
-                    if ($el.is('input[type="input"]')) {
-                        $el.attr('placeholder', dataWf + ': is not in template');
-                    }
-                    $el.addClass('untemplated')
-                });
-                if (untemplatedIds.length>0) {
-                    console.log("WARNING: you have stuff in your form that you haven't included in your template --> " + untemplatedIds);
-                }
-            }
 
             var layoutDefault = function () {
                 var form = $(document).find('form .raw-content');
 //                form.attr('style','width:430px');
             };
 
+            function validateTemplateElement($t, $original) {
+                // TODO : only do this in debug mode??
+                if ($t.prop('tagName')!=$original.prop('tagName')) {
+                    console.log("Warning: your template uses different tag types for " + $t.attr('data-template') +
+                        ".  One is a " + $t.prop('tagName') + " while the other is " + $original.prop('tagName'));
+                    // this may cause the template to look different when it's populated for realsy.  it's best to use the same types.
+                }
+            }
+
+            var template = function($template_source, $template_data) {
+                $template_source.find('[data-template]').each(function(i,t) {
+                    var id = t.getAttribute('data-template');
+                    var $original = $template_data.find('[data-wf="'+ id +'"]');
+                    var $t = $(t);
+                    // now copy the original into the template.
+                    if ($original.length>0) {
+                        $original.insertAfter($t);  // TODO : does it copy if it already exists?  does it overwrite existing?
+                        $original.addClass($t.attr('class'));
+                        validateTemplateElement($t, $original);
+                    }
+                    else {
+                        console.log("WARNING : you have " + id + " in your template but can't find it in your form. it will be ignored.");
+                        $t.addClass('unreferenced-template');
+                    }
+                });
+
+                // just for debugging reasons, mark any unused elements as "untemplated".
+                if ($template_data.find('[data-wf]').length>0) {
+                    console.log("WARNING: there are elements in your component that weren't included in the template.")
+                    $template_data.addClass('not-in-template');
+                }
+
+            }
+
+            var layoutWithTemplate = function() {
+                // the debug button we'll always move over. no need to include it in template.
+//                t.prepend(form.find('.btn-debug'));
+                var hasTemplates = false;
+                var $component = $('#'+config.markupId);
+                $component.find('.template-source').each(function(index,tmpl) {
+                    var $template = $(tmpl);
+                    var $data = $template.prev('.template-data');
+                    template($template, $data);
+                    hasTemplates = true;
+                });
+                return hasTemplates;
+            }
+
             return {
-                updateLayout : updateLayout,
                 layout : layout,
                 initializePlugin : initializePlugin
             }

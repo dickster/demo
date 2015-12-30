@@ -72,6 +72,7 @@ public class ConfigGson implements Serializable {
 
         };
         return new GsonBuilder()
+                // should skip null values in maps too!
                 .registerTypeHierarchyAdapter(Collection.class,skipEmptyMaps)
                 .registerTypeHierarchyAdapter(Collection.class,skipEmptyCollections)
                 .addSerializationExclusionStrategy(skipUnexposedFieldsStrategy)
