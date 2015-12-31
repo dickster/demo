@@ -65,7 +65,6 @@ public class Template extends Panel {
         }
         return source;
     }
-
     @Override
     public Markup getAssociatedMarkup() {
         try {

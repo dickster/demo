@@ -76,3 +76,11 @@ make all configs call generic newInstance(id, this) constructor.
 make all variables NOT send in json by default.  you have to explicity include them via @IncludeConfigInJson  //boolean value default true
 
 
+
+assuming we can leave classes alone.  for example, sectionpanel.
+
+ajax:
+1:if element has data-template beside it, copy css.  updateCss($el); <-- recursive.
+calls $.find('[data-template]') and calls updateCss() on each.
+2:if element contains template-source, the call layout().
+3:

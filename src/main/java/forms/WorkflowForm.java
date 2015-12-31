@@ -136,6 +136,8 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
         target.add(form);
     }
 
+
+
     private Theme getTheme() {
         return toolkit.getTheme();
     }
@@ -144,7 +146,6 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
         getFormConfig().setHistoryCallbackUrl(historyMaker.getCallbackUrl().toString());
-//        getFormConfig().updateIdToMarkupId(this);
         for (HeaderItem item:getTheme().getHeaderItems()) {
             response.render(item);
         }
