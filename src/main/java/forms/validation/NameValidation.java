@@ -1,12 +1,10 @@
 package forms.validation;
 
-import forms.model.GenericInsuranceObject;
 import forms.validation.NameValidation.NameFields;
 
 public class NameValidation extends AbstractValidation<NameFields, String> {
 
-    public NameValidation(ValidationAdapter<GenericInsuranceObject, NameFields> adapter) {
-        super(adapter);
+    public NameValidation() {
     }
 
     @Override
@@ -22,6 +20,11 @@ public class NameValidation extends AbstractValidation<NameFields, String> {
             result.fail("your last name is dick");
         }
         return result;
+    }
+
+    @Override
+    public ValidationAdapter<?, NameFields> getAdapter(Object obj) {
+        return adapterFactory.adapt(obj, NameFields.class);
     }
 
     @Override

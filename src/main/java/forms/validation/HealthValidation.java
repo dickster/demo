@@ -2,10 +2,11 @@ package forms.validation;
 
 import forms.validation.HealthValidation.HealthFields;
 
+// A --> B
+
 public class HealthValidation extends AbstractValidation<HealthFields, String> {
 
-    public HealthValidation(ValidationAdapter<?,HealthFields> adapter) {
-        super(adapter);
+    public HealthValidation() {
     }
 
     @Override
@@ -28,6 +29,10 @@ public class HealthValidation extends AbstractValidation<HealthFields, String> {
         return new ValidationResult<String>();
     }
 
+    @Override
+    public ValidationAdapter<?, HealthFields> getAdapter(Object obj) {
+        return adapterFactory.adapt(obj, HealthFields.class);
+    }
 
     public static interface HealthFields {
         public boolean getSmokes();

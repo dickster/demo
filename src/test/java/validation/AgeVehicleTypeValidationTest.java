@@ -3,6 +3,7 @@ package validation;
 import forms.validation.AgeVehicleTypeValidation;
 import forms.validation.AgeVehicleTypeValidation.AgeVehicleTypeFields;
 import forms.validation.PassthruValidationAdapter;
+import forms.validation.ValidationAdapter;
 import forms.validation.ValidationResult;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -11,7 +12,12 @@ public class AgeVehicleTypeValidationTest extends TestCase {
 
         @Test
         public void testDoValidation() {
-            AgeVehicleTypeValidation validation = (AgeVehicleTypeValidation) new AgeVehicleTypeValidation(new PassthruValidationAdapter<AgeVehicleTypeFields>(AgeVehicleTypeFields.class));
+            AgeVehicleTypeValidation validation = new AgeVehicleTypeValidation() {
+                @Override
+                public ValidationAdapter<?, AgeVehicleTypeFields> getAdapter(Object obj) {
+                    return new PassthruValidationAdapter<AgeVehicleTypeFields>(AgeVehicleTypeFields.class);
+                }
+            };
 
             ValidationResult<Integer> result;
             result = validation.validate(testData(35, "Sports"));

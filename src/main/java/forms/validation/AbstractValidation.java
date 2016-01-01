@@ -3,15 +3,16 @@ package forms.validation;
 import com.google.common.base.Preconditions;
 
 import javax.annotation.Nonnull;
+import javax.inject.Inject;
 import java.io.Serializable;
 
 public abstract class AbstractValidation<T, R> implements Serializable, IValidation<R> {
 
-    private ValidationAdapter<?,T> adapter;
+    @Inject
+    protected GenericValidationAdapterFactory adapterFactory;
 
-    @Deprecated // take out adapter...make it transient spring injected thing.
-    protected AbstractValidation(ValidationAdapter<?, T> adapter) {
-        this.adapter = adapter;
+    @Deprecated
+    protected AbstractValidation() {
     }
 
     @Override
@@ -23,14 +24,12 @@ public abstract class AbstractValidation<T, R> implements Serializable, IValidat
     public abstract ValidationResult<R> newResult();
 
     protected T adaptInput(@Nonnull Object obj) {
-        Preconditions.checkArgument(getAdapter().supports(obj), "the adapter does not handle class of type " + obj.getClass());
-        T result = getAdapter().convertAndAdapt(obj);
+        Preconditions.checkArgument(getAdapter(obj).supports(obj), "the adapter does not handle class of type " + obj.getClass());
+        T result = getAdapter(obj).convertAndAdapt(obj);
         return result;
     }
 
     protected abstract ValidationResult<R> doValidation(T input);
 
-    public ValidationAdapter<?, T> getAdapter() {
-        return adapter;
-    }
+    public abstract ValidationAdapter<?, T> getAdapter(Object obj);
 }

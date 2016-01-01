@@ -2,6 +2,7 @@ package forms.validation;
 
 import javax.annotation.Nonnull;
 
-public interface IValidationAdapters<T> {
-    public @Nonnull <I> ValidationAdapter<T,I> on(Class<I> clazz);
+public interface IValidationAdapters<F> {
+
+    @Nonnull <T> ValidationAdapter<?,T> adapt(Object from, Class<T> to);
 }

@@ -1,17 +1,7 @@
 package forms.spring;
 
-import demo.Address;
 import forms.model.GenericInsuranceObject;
-import forms.validation.AddressValidation;
-import forms.validation.ChainedValidation;
-import forms.validation.HealthValidation;
-import forms.validation.HealthValidation.HealthFields;
-import forms.validation.IValidation;
-import forms.validation.NameValidation;
-import forms.validation.NameValidation.NameFields;
-import forms.validation.ValidationAdapterFactory;
-import forms.validation.VehicleValidation;
-import forms.validation.VehicleValidation.VehicleFields;
+import forms.validation.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,28 +9,28 @@ import org.springframework.context.annotation.Configuration;
 public class Validations {
 
     @Bean
-    public ValidationAdapterFactory adapterFactory() {
-        return new ValidationAdapterFactory();
+    public GenericValidationAdapterFactory adapterFactory() {
+        return new GenericValidationAdapterFactory();
     }
 
     @Bean
     public HealthValidation healthValidation() {
-        return new HealthValidation(adapterFactory().on(HealthFields.class));
+        return new HealthValidation();
     }
 
     @Bean
     public NameValidation nameValidation() {
-        return new NameValidation(adapterFactory().on(NameFields.class));
+        return new NameValidation();
     }
 
     @Bean
     public AddressValidation addressValidation() {
-        return new AddressValidation(adapterFactory().on(Address.class));
+        return new AddressValidation();
     }
 
     @Bean
     public VehicleValidation vehicleValidation() {
-        return new VehicleValidation(adapterFactory().on(VehicleFields.class));
+        return new VehicleValidation();
     }
 
     @Bean

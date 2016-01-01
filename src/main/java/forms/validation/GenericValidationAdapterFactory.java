@@ -1,6 +1,7 @@
 package forms.validation;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 import demo.Address;
 import forms.model.GenericInsuranceObject;
 import forms.validation.HealthValidation.HealthFields;
@@ -8,37 +9,36 @@ import forms.validation.NameValidation.NameFields;
 import forms.validation.VehicleValidation.VehicleFields;
 
 import javax.annotation.Nonnull;
+import java.util.Map;
 
-// turn workflow data in interfaced objects used by validators.
-public class ValidationAdapterFactory implements IValidationAdapters<GenericInsuranceObject> {
+// turns workflow data in interfaced objects used by validators.
+public class GenericValidationAdapterFactory implements IValidationAdapters<GenericInsuranceObject> {
 
-    // TODO : inner classes are not serializable.  either need to fix this or i could
-    //  just store the class and get the adapter whenever i need it from factory.
+    private final Map<Class, ValidationAdapter<GenericInsuranceObject,?>> adapters = Maps.newHashMap();
+
+    public GenericValidationAdapterFactory() {
+        adapters.put(HealthFields.class, forHealthFields());
+        adapters.put(Address.class, forAddress());
+        adapters.put(HealthFields.class, forNameFields());
+        adapters.put(HealthFields.class, forVehicleFields());
+
+    }
 
     @Override @Nonnull
-    public <I> ValidationAdapter<GenericInsuranceObject,I> on(Class<I> clazz) {
-        Preconditions.checkNotNull(clazz, "can't have adapter for null interface class");
-//        assert(clazz.isInterface())
-        ValidationAdapter< ?, ? > result = null;
-        if (clazz.isAssignableFrom(HealthFields.class)) {
-            return (ValidationAdapter<GenericInsuranceObject, I>) forHealthFields();
+    public <I> ValidationAdapter<GenericInsuranceObject,I> adapt(Object from, Class<I> to) {
+        Preconditions.checkArgument(from instanceof GenericInsuranceObject);
+        Preconditions.checkNotNull(to, "can't have adapter for null target class");
+        ValidationAdapter<GenericInsuranceObject, I> adapter = (ValidationAdapter<GenericInsuranceObject, I>) adapters.get(to);
+        if (adapter==null) {
+            throw new IllegalArgumentException("can't find validation adapter for " + to.getSimpleName());
         }
-        else if (clazz.isAssignableFrom(NameFields.class)) {
-            return (ValidationAdapter<GenericInsuranceObject, I>) forNameFields();
-        }
-        else if (clazz.isAssignableFrom(VehicleFields.class)) {
-            return (ValidationAdapter<GenericInsuranceObject, I>) forVehicleFields();
-        }
-        else if (clazz.isAssignableFrom(Address.class)) {
-            return (ValidationAdapter<GenericInsuranceObject, I>) forAddress();
-        }
-        throw new IllegalArgumentException("can't find validation adapter for " + clazz.getSimpleName());
+        return adapter;
     }
 
     private ValidationAdapter<GenericInsuranceObject, Address> forAddress() {
         return new ValidationAdapter<GenericInsuranceObject, Address>(GenericInsuranceObject.class) {
             @Override
-            protected Address adapt(GenericInsuranceObject input) {
+            public Address apply(GenericInsuranceObject input) {
                 return input.getInsured().address;
             }
         };
@@ -47,7 +47,7 @@ public class ValidationAdapterFactory implements IValidationAdapters<GenericInsu
     private ValidationAdapter<GenericInsuranceObject, NameFields> forNameFields() {
         return new ValidationAdapter<GenericInsuranceObject, NameFields>(GenericInsuranceObject.class) {
             @Override
-            protected NameFields adapt(final GenericInsuranceObject obj) {
+            public NameFields apply(final GenericInsuranceObject obj) {
                 return new NameFields() {
                     @Override public String getFirstName() {
                         return obj.getName().first;
@@ -66,10 +66,10 @@ public class ValidationAdapterFactory implements IValidationAdapters<GenericInsu
     }
 
 
-    private ValidationAdapter<GenericInsuranceObject, ?> forHealthFields() {
+    private ValidationAdapter<GenericInsuranceObject,HealthFields> forHealthFields() {
         return new ValidationAdapter<GenericInsuranceObject, HealthFields>(GenericInsuranceObject.class) {
             @Override
-            protected HealthFields adapt(final GenericInsuranceObject input) {
+            public HealthFields apply(final GenericInsuranceObject input) {
                 return new HealthFields() {
                     @Override public boolean getSmokes() {
                         return input.getInsured().smokes;
@@ -90,7 +90,7 @@ public class ValidationAdapterFactory implements IValidationAdapters<GenericInsu
     private ValidationAdapter<GenericInsuranceObject, VehicleFields> forVehicleFields() {
         return new ValidationAdapter<GenericInsuranceObject, VehicleFields>(GenericInsuranceObject.class) {
             @Override
-            protected VehicleFields adapt(final GenericInsuranceObject input) {
+            public VehicleFields apply(final GenericInsuranceObject input) {
                 return new VehicleFields() {
                     @Override public String getType() {
                         return input.getVehicle().getType();

@@ -10,7 +10,7 @@ public class AgeVehicleTypeValidationAdapter extends ValidationAdapter<GenericIn
     }
 
     @Override
-    public AgeVehicleTypeFields adapt(final GenericInsuranceObject obj) {
+    public AgeVehicleTypeFields apply(final GenericInsuranceObject obj) {
         return new AgeVehicleTypeFields() {
             @Override public Integer getAge() {
                 return obj.getInsured().getAge();

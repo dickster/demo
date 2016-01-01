@@ -8,8 +8,7 @@ public class AgeVehicleTypeValidation extends AbstractValidation<AgeVehicleTypeF
     private static final Integer ERROR_202 = 202;
     private static final Integer ERROR_999 = 999;
 
-    public AgeVehicleTypeValidation(ValidationAdapter<?, AgeVehicleTypeFields> adapter) {
-        super(adapter);
+    public AgeVehicleTypeValidation() {
     }
 
     @Override
@@ -25,6 +24,11 @@ public class AgeVehicleTypeValidation extends AbstractValidation<AgeVehicleTypeF
             result.fail(ERROR_999);
         }
         return result;
+    }
+
+    @Override
+    public ValidationAdapter<?, AgeVehicleTypeFields> getAdapter(Object obj) {
+        return adapterFactory.adapt(obj,AgeVehicleTypeFields.class);
     }
 
     @Override

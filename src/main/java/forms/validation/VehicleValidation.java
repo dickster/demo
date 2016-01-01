@@ -1,11 +1,9 @@
 package forms.validation;
-import forms.model.GenericInsuranceObject;
 import forms.validation.VehicleValidation.VehicleFields;
 
 public class VehicleValidation extends AbstractValidation<VehicleFields, String> {
 
-    public VehicleValidation(ValidationAdapter<GenericInsuranceObject, VehicleFields> adapter) {
-        super(adapter);
+    public VehicleValidation() {
     }
 
     @Override
@@ -21,6 +19,11 @@ public class VehicleValidation extends AbstractValidation<VehicleFields, String>
             result.fail("you have more than 2 accidents");
         }
         return result;
+    }
+
+    @Override
+    public ValidationAdapter<?, VehicleFields> getAdapter(Object obj) {
+        return adapterFactory.adapt(obj, VehicleFields.class);
     }
 
     @Override

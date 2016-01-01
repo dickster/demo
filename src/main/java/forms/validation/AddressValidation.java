@@ -1,12 +1,10 @@
 package forms.validation;
 
 import demo.Address;
-import forms.model.GenericInsuranceObject;
 
 public class AddressValidation extends AbstractValidation<Address, String> {
 
-    public AddressValidation(ValidationAdapter<GenericInsuranceObject, Address> adapter) {
-        super(adapter);
+    public AddressValidation() {
     }
 
     @Override
@@ -21,6 +19,11 @@ public class AddressValidation extends AbstractValidation<Address, String> {
             result.fail("coverage not provided in Ontario");
         }
         return result;
+    }
+
+    @Override
+    public ValidationAdapter<?, Address> getAdapter(Object obj) {
+        return adapterFactory.adapt(obj, Address.class);
     }
 
 
