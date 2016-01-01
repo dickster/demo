@@ -21,7 +21,6 @@ public class GenericValidationAdapterFactory implements IValidationAdapters<Gene
         adapters.put(Address.class, forAddress());
         adapters.put(HealthFields.class, forNameFields());
         adapters.put(HealthFields.class, forVehicleFields());
-
     }
 
     @Override @Nonnull

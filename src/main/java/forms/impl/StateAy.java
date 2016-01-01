@@ -18,6 +18,7 @@ public class StateAy extends WfFormState {
         super(new FormAAnotherNewLayoutConfig());
     }
 
+    @Nonnull
     @Override
     public WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
         if ("next".equals(event.getName())) {

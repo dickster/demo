@@ -5,6 +5,7 @@ import forms.WfState;
 import forms.WfSubmitEvent;
 import forms.Workflow;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -16,6 +17,7 @@ public class StateAx extends WfFormState{
         super(new FormANewLayoutConfig());
     }
 
+    @Nonnull
     @Override
     public WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
         if ("next".equals(event.getName())) {

@@ -4,6 +4,7 @@ import forms.WfFormState;
 import forms.WfSubmitEvent;
 import forms.Workflow;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
 public class PizzaState1 extends WfFormState {
@@ -15,6 +16,7 @@ public class PizzaState1 extends WfFormState {
         super(new Pizza1Config());
     }
 
+    @Nonnull
     @Override
     public WfFormState handleEvent(Workflow workflow, WfSubmitEvent event) {
         if (event.is("Place Order")) {

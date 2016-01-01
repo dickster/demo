@@ -4,6 +4,7 @@ import forms.WfFormState;
 import forms.WfSubmitEvent;
 import forms.Workflow;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,6 +16,7 @@ public class StateError extends WfFormState {
         super(new FormErrorConfig());
     }
 
+    @Nonnull
     @Override
     public WfFormState handleEvent(Workflow workflow, WfSubmitEvent event) {
         if ("ok".equals(event.getName())) {

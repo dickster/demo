@@ -19,6 +19,7 @@ var workflow = function() {
             }
         }
 
+            // TODO : copy classes from template data to source!
         var template = function($template_source, $template_data) {
             // find matching data-tempate= X =data-wf values.   copy the data-wf element over next to the template.
             $template_source.find('[data-template]').each(function(i,t) {

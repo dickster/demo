@@ -9,9 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class Validations {
 
     @Bean
-    public GenericValidationAdapterFactory adapterFactory() {
-        return new GenericValidationAdapterFactory();
-    }
+    public GenericValidationAdapterFactory adapterFactory() { return new GenericValidationAdapterFactory(); }
 
     @Bean
     public HealthValidation healthValidation() {
