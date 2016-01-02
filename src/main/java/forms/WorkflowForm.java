@@ -64,7 +64,6 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
     private void setupHistory() {
         // any stuff needed for html 5 history/ajax/back button related code.
 
-
         Model<String> model = new Model<String>() {
             // model just for debugging until i'm sure it's never being set.
             // then replace it with std property model.

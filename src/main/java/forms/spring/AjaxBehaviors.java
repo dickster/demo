@@ -2,6 +2,7 @@ package forms.spring;
 
 import forms.ajax.AgeOccupationAjaxBehavior;
 import forms.ajax.PaymentMethodAjaxBehavior;
+import forms.model.Name;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -18,12 +19,17 @@ public class AjaxBehaviors {
     }
 
     @Bean @Scope("prototype")
-    public WfAjaxBehavior ageOccupationAjaxBehavior() {
+    public AgeOccupationAjaxBehavior ageOccupationAjaxBehavior() {
         return new AgeOccupationAjaxBehavior();
     }
 
     @Bean @Scope("prototype")
-    public WfAjaxBehavior paymentMethodAjaxBehavior() {
+    public PaymentMethodAjaxBehavior paymentMethodAjaxBehavior() {
         return new PaymentMethodAjaxBehavior();
+    }
+
+    @Bean
+    public Name foo() {
+        return new Name();
     }
 }

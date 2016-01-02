@@ -41,7 +41,6 @@ public class Application {
     @Bean
     public LabelFormatterFactory labelFormatterFactory() {
         LabelFormatterFactory factory = new LabelFormatterFactory();
-        factory.allowForNulls(defaultLabelFormatter());
         return factory;
     }
 

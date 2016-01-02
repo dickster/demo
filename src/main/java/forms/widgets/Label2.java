@@ -5,17 +5,18 @@ import forms.spring.LabelFormatterFactory;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.LabelConfig;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 public class Label2 extends Label implements HasConfig {
 
     private @Inject LabelFormatterFactory formatterFactory;
+    private @Inject @Named("defaultLabelFormatter") LabelFormatter defaultFormatter;
 
-    // need way to configure any kind of calculated string here.
-    // formatted string with model ognls passed???
     private final LabelConfig config;
 
     public Label2(String id, LabelConfig config) {
@@ -27,14 +28,16 @@ public class Label2 extends Label implements HasConfig {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        LabelFormatter formatter = formatterFactory.create(config.getFormatter());
-        String text = formatter.format(this, config);//
+        String text = getFormatter().format(this, config);
         setDefaultModel(Model.of(text));
     }
 
-    private Object getFormatValues() {
-        // TODO : if messageFormat, allow returning of multiple properties.
-        return getDefaultModelObject();
+    public LabelFormatter getFormatter() {
+        String formatterName = config.getFormatter();
+        if (StringUtils.isNotBlank(formatterName)) {
+            return formatterFactory.create(formatterName);
+        }
+        return defaultFormatter;
     }
 
     @Override

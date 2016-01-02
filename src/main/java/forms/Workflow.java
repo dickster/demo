@@ -6,23 +6,23 @@ import com.google.common.collect.Maps;
 import com.google.common.eventbus.DeadEvent;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import forms.widgets.config.Config;
 import forms.model.WfCompoundPropertyModel;
 import forms.validation.ValidationResult;
+import forms.widgets.config.Config;
 import org.apache.wicket.Component;
-import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Map;
 
-public abstract class Workflow<T, S extends WfState> extends EventBus implements Serializable, BeanNameAware, ApplicationContextAware {
+public abstract class Workflow<T, S extends WfState> extends EventBus implements Serializable, BeanNameAware {
 
-    private transient ApplicationContext applicationContext;
+    private @Inject BeanFactory beanFactory;
+
     // used for history (back/fwd buttons)
     protected transient Map<String, S> statesVisited = Maps.newHashMap();
 
@@ -39,10 +39,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
 
     @PostConstruct
     public void ensurePrototypeBean() {
-        Preconditions.checkState(applicationContext.isPrototype(beanName), "workflow beans must be of @Scope('prototype') " + getClass().getSimpleName());
-        // note : don't use application context after this.  it's just a transient var used at construction time.
-        // it is NOT meant to be serialized by Wicket.
-        applicationContext = null; //invalidate this just to make the point clear.
+        Preconditions.checkState(beanFactory.isPrototype(beanName), "workflow beans must be of @Scope('prototype') " + getClass().getSimpleName());
     }
 
     @Override
@@ -209,11 +206,6 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
 
     public String getCurrentStateName() {
         return currentState.getStateName();
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
     }
 
     public Component createWidget(String id, Config config) {

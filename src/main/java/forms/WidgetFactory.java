@@ -1,8 +1,9 @@
 package forms;
 
+import forms.ajax.AgeOccupationAjaxBehavior;
+import forms.spring.AjaxBehaviorFactory;
 import forms.widgets.config.Config;
 import forms.widgets.config.FormComponentConfig;
-import forms.spring.AjaxBehaviorFactory;
 import org.apache.wicket.Component;
 import org.apache.wicket.MetaDataKey;
 import org.apache.wicket.markup.html.form.FormComponent;
@@ -18,7 +19,7 @@ public abstract class WidgetFactory implements Serializable {
     public static final MetaDataKey<String> MODEL_PREFIX = new MetaDataKey<String>(){};
 
     private @Inject AjaxBehaviorFactory ajaxBehaviorFactory;
-
+    private @Inject AgeOccupationAjaxBehavior ageOccupationAjaxBehavior;
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
 

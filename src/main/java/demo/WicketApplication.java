@@ -7,11 +7,7 @@ import com.google.common.collect.Lists;
 import forms.StartingPoint;
 import forms.WfPage;
 import org.apache.wicket.RuntimeConfigurationType;
-import org.apache.wicket.markup.head.HeaderItem;
-import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.head.JavaScriptHeaderItem;
-import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
-import org.apache.wicket.markup.head.ResourceAggregator;
+import org.apache.wicket.markup.head.*;
 import org.apache.wicket.markup.html.IHeaderResponseDecorator;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Response;
@@ -30,7 +26,6 @@ public class WicketApplication extends WebApplication {
 
     private CompiledJavaScriptBundleReference bundle;
     private Set<String> unbundledItems = Collections.synchronizedSet(new HashSet<String>());
-
 
     public WicketApplication() {
         super();

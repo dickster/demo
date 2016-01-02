@@ -3,54 +3,51 @@ package forms.spring;
 import com.google.common.base.Preconditions;
 import forms.WorkflowException;
 import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.BeanFactory;
 
 import javax.annotation.Nonnull;
+import javax.inject.Inject;
+import java.io.Serializable;
 
-public class WfBeanFactory<T> implements ApplicationContextAware {
+public abstract class WfBeanFactory<T> implements Serializable {
 
-    private ApplicationContext applicationContext;
-
+    private final String scope;
     private Class<T> clazz;
-    private T defaultForNull;
+    private @Inject BeanFactory beanFactory;
 
     public WfBeanFactory(Class<T> clazz) {
-        Preconditions.checkNotNull(clazz, "can't have null type for bean factory.");
-        this.clazz = clazz;
+        this(clazz, null);
     }
 
+    public WfBeanFactory(Class<T> clazz, String scope) {
+        Preconditions.checkNotNull(clazz, "can't have null type for bean factory.");
+        this.clazz = clazz;
+        this.scope = scope;
+    }
 
     public @Nonnull T create(String name) {
         if (name==null) {
-            return defaultValue();
+            throw new UnsupportedOperationException("null bean name specified. you must give a non-null name for the class of type " + clazz.getSimpleName());
         }
 
         try {
-            T bean = applicationContext.getBean(name, clazz);
-            Preconditions.checkState(bean!=null, "factory can't find bean named " + name + " of type " + clazz.getSimpleName());
+            T bean = beanFactory.getBean(name, clazz);
+            ensureScope(name);
             return bean;
         } catch (BeansException e) {
             ;// not sure how to handle error handling here...
-            // if DEBUG. add debug error message?  print message.  else fail hard.!
+            // if DEBUG. add debug error message?  print message.  else fail hard!
             throw new WorkflowException("can't find "+clazz.getSimpleName()+" with name " + name);
         }
     }
 
-    private T defaultValue() {
-        if (defaultForNull==null) {
-            throw new UnsupportedOperationException("can't return null bean...either specify a default value or use a bean name that exists");
+    private void ensureScope(String name) {
+        if ("prototype".equalsIgnoreCase(scope)) {
+            Preconditions.checkState(beanFactory.isPrototype(name));
         }
-        return defaultForNull;
+        else if ("singleton".equalsIgnoreCase(scope)){
+            Preconditions.checkState(beanFactory.isSingleton(name));
+        }
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
-
-    public T allowForNulls(T bean) {
-        this.defaultForNull = bean;
-        return (T) this;
-    }
 }

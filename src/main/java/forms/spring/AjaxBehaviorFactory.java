@@ -3,7 +3,7 @@ package forms.spring;
 public class AjaxBehaviorFactory extends WfBeanFactory<WfAjaxBehavior> {
 
     public AjaxBehaviorFactory() {
-        super(WfAjaxBehavior.class);
+        super(WfAjaxBehavior.class, "prototype");
     }
 
 }

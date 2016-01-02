@@ -9,10 +9,11 @@ import forms.validation.NameValidation.NameFields;
 import forms.validation.VehicleValidation.VehicleFields;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 import java.util.Map;
 
 // turns workflow data in interfaced objects used by validators.
-public class GenericValidationAdapterFactory implements IValidationAdapters<GenericInsuranceObject> {
+public class GenericValidationAdapterFactory implements IValidationAdapters<GenericInsuranceObject>, Serializable {
 
     private final Map<Class, ValidationAdapter<GenericInsuranceObject,?>> adapters = Maps.newHashMap();
 
