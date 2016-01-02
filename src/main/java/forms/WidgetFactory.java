@@ -1,6 +1,5 @@
 package forms;
 
-import forms.ajax.AgeOccupationAjaxBehavior;
 import forms.spring.AjaxBehaviorFactory;
 import forms.widgets.config.Config;
 import forms.widgets.config.FormComponentConfig;
@@ -16,10 +15,14 @@ import java.io.Serializable;
 
 public abstract class WidgetFactory implements Serializable {
 
+    // note : this isn't serialized so might break when page is de-serialized.
+    // find a better way to do this...check out SectionPanel???
+    // set the parent component to have a model with prefix and work from there???
     public static final MetaDataKey<String> MODEL_PREFIX = new MetaDataKey<String>(){};
+    // ----------------------
 
     private @Inject AjaxBehaviorFactory ajaxBehaviorFactory;
-    private @Inject AgeOccupationAjaxBehavior ageOccupationAjaxBehavior;
+
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
 
