@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import forms.HasWorkflow;
@@ -13,6 +14,7 @@ import org.apache.wicket.Component;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,6 +34,8 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private @IncludeInJson String markupId;
     private @IncludeInJson Boolean isAjax;
     private @IncludeInJson String templateId;
+
+    private @IncludeInJson Map<Object, List<String>> dependents = Maps.newHashMap();
 
 
     // because two components can have the same property, we need two values.
@@ -250,6 +254,24 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     public void setTemplateId(String templateId) {
         this.templateId = templateId;
+    }
+
+    // these methods assume you are using a checkbox/radio button which has only stores boolean values.
+    //  for more control about which values are shown when, use other methods.
+    public Config withDependents(String... dependents) {
+        return withDependents(Lists.newArrayList(dependents));
+    }
+
+    public Config withDependents(List<String> dependents) {
+        this.dependents.put(Boolean.TRUE, dependents);
+        return this;
+    }
+    // -----------------
+
+
+    public Config withDependents(Object key, String... dependents) {
+        this.dependents.put(key, Lists.newArrayList(dependents));
+        return this;
     }
 }
 

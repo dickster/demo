@@ -1,10 +1,12 @@
 package forms.impl;
 
+import com.google.common.collect.Lists;
 import forms.widgets.config.AddressConfig;
 import forms.widgets.config.ButtonConfig;
 import forms.widgets.config.FormConfig;
 import forms.widgets.config.LabelConfig;
 import forms.widgets.config.SectionPanelConfig;
+import forms.widgets.config.SelectPickerConfig;
 import forms.widgets.config.TextFieldConfig;
 
 public class InfoFormConfig extends FormConfig {
@@ -21,6 +23,16 @@ public class InfoFormConfig extends FormConfig {
 //        withConfig(new SelectPickerConfig<String>("name.salutation")
 //                .withOptions(Lists.newArrayList("Mr.", "Mrs.", "Ms", "Dr.")));
 
+        with(new LabelConfig("label.paymentMethod"));
+        withConfig(new SelectPickerConfig("payment.method")
+                .withOptions(Lists.newArrayList("Credit Card", "Cash", "Direct Billing"))
+                .withDependents(0, "label.one")
+                .withDependents(1, "label.two")
+                .withDependents(2, "label.three"));
+
+        with(new LabelConfig("label.one"));
+        with(new LabelConfig("label.two"));
+        with(new LabelConfig("label.three"));
 
         with(new SectionPanelConfig("names")
                     .withAddTooltip("Add Person")
@@ -76,7 +88,7 @@ public class InfoFormConfig extends FormConfig {
 //        withConfig(new LabelConfig("vehicle year"));
 //        withConfig(new SelectPickerConfig<Integer>("vehicle.year")
 //                // this would typically be in a spring bean/ NOT inlined.
-//                .withOptions(new SelectOptionsService<Integer>() {
+//                .withOptions(new SelectOptionsProvider<Integer>() {
 //                    @Override
 //                    public List<Integer> getOptions() {
 //                        int startYear = (int) (Math.random() * 20 + 1950);

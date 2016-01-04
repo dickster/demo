@@ -1,7 +1,7 @@
 package forms.widgets.config;
 
 import forms.WidgetTypeEnum;
-import forms.spring.SelectOptionsService;
+import forms.spring.SelectOptionsProvider;
 import forms.widgets.SelectPicker;
 
 import javax.annotation.Nonnull;
@@ -11,19 +11,19 @@ public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
 
     // TODO : should this be transient or serializable?
     // make this the name of a spring bean.
-    private transient SelectOptionsService<T> service;
+    private transient SelectOptionsProvider<T> provider;
 
     public SelectPickerConfig(@Nonnull String property) {
         super(property, WidgetTypeEnum.SELECT);
         withWrappedHtmlOutput();
     }
 
-    public SelectOptionsService<T> getOptionsService() {
-        return service;
+    public SelectOptionsProvider<T> getOptionsService() {
+        return provider;
     }
 
     public SelectPickerConfig withOptions(final List<T> choices) {
-        this.service = new SelectOptionsService() {
+        this.provider = new SelectOptionsProvider() {
             @Override
             public List getOptions() {
                 return choices;
@@ -32,8 +32,8 @@ public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
         return this;
     }
 
-    public SelectPickerConfig withOptions(SelectOptionsService<T> service) {
-        this.service = service;
+    public SelectPickerConfig withOptions(SelectOptionsProvider<T> service) {
+        this.provider = service;
         return this;
     }
 

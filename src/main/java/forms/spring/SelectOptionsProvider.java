@@ -2,6 +2,6 @@ package forms.spring;
 
 import java.util.List;
 
-public interface SelectOptionsService<T> {
+public interface SelectOptionsProvider<T> {
     List<T> getOptions();
 }
