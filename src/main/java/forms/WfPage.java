@@ -1,7 +1,9 @@
 package forms;
 
+import com.google.common.eventbus.Subscribe;
 import demo.resources.Resource;
 import forms.model.WfCompoundPropertyModel;
+import forms.widgets.WfPostalCodeChangedEvent;
 import org.apache.wicket.Application;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.markup.head.CssHeaderItem;
@@ -52,6 +54,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
         // NOTE : what to do if page times out? is workflow saved as a draft?
         // do i throw it away?
         this.workflow = wfFactory.create(workflowType);
+        workflow.register(this);
         if (obj!=null) {
             this.workflow.withModel(new WfCompoundPropertyModel(obj));
         }
@@ -59,27 +62,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
         setDefaultModel(workflow.getModel());
         add(workflow.createForm(FORM_ID, workflow.getCurrentFormConfig()));
 
-        testModel(workflow.getModel());
-
-
         add(new Label("subheader", getSubHeader()));
-    }
-
-    private void testModel(WfCompoundPropertyModel model) {
-//        Object x = new PropertyModel(model, "name.first").getObject();
-//        System.out.println(x);
-//         x = new PropertyModel(model, "vehicle.type").getObject();
-//        System.out.println(x);
-//         x = new PropertyModel(model, "insured.contact.email").getObject();
-//        System.out.println(x);
-//         x = new PropertyModel(model, "insured.age").getObject();
-//        System.out.println(x);
-//         x = new PropertyModel(model, "name.middle").getObject();
-//        System.out.println(x);
-//         x = new PropertyModel(model, "name.last").getObject();
-//        System.out.println(x);
-//         x = new PropertyModel(model, "name.salutation").getObject();
-//        System.out.println(x);
     }
 
     private WorkflowForm getWorkflowForm() {
@@ -110,5 +93,10 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
 
     public IModel<?> getSubHeader() {
         return Model.of(getWorkflowForm().getSubHeader());
+    }
+
+    @Subscribe
+    public void onPostalCodeChange(WfPostalCodeChangedEvent event) {
+
     }
 }

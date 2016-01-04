@@ -1,12 +1,14 @@
 package forms.impl;
 
 import com.google.common.base.Preconditions;
+import com.google.common.eventbus.Subscribe;
 import forms.FormBasedWorkflow;
 import forms.StartingPoint;
 import forms.WfFormState;
 import forms.WidgetFactory;
 import forms.model.GenericInsuranceObject;
 import forms.model.WfCompoundPropertyModel;
+import forms.widgets.WfPostalCodeChangedEvent;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -48,6 +50,12 @@ public class TestWorkflow extends FormBasedWorkflow<GenericInsuranceObject> {
     @Override
     public WidgetFactory getWidgetFactory() {
         return widgetFactory;
+    }
+
+    @Subscribe
+    public void onPostalCodeChange(WfPostalCodeChangedEvent event) {
+        event.getTarget().appendJavaScript("alert('the postal code changed!');");
+        System.out.println(event.getName());
     }
 
     @Override
