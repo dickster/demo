@@ -7,7 +7,6 @@ import forms.widgets.config.Config;
 import forms.widgets.config.FeedbackPanelConfig;
 import forms.widgets.config.FormConfig;
 import forms.widgets.config.HasConfig;
-import forms.widgets.config.HasTemplate;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -30,7 +29,7 @@ import org.apache.wicket.util.visit.IVisit;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
-public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
+public class WorkflowForm extends Panel implements HasConfig {
 
     // this calls layout and initializes all widgets.
     private static final JavaScriptResourceReference WORKFLOW_JS = new JavaScriptResourceReference(Resource.class, "workflow.js");
@@ -186,8 +185,4 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
         return formConfig;
     }
 
-    @Override
-    public String getTemplateId() {
-        return template.getMarkupId();
-    }
 }

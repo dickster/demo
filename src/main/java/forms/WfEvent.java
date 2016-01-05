@@ -8,17 +8,18 @@ import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.util.Map;
 
-public class WfEvent<T> implements Serializable /* ApplicationContextAware, ApplicationContextBeanNameAware*/ {
+public class WfEvent<T> implements Serializable {
 
     private Component component;
     private AjaxRequestTarget target;
     private T obj;
     private String name;
+    private Map<String, String> errorState = Maps.newHashMap();
+
     // this is really just the next suggested state or happy-path state typically set by BA's.
     //  dev's can override & return whatever they see fit in the getOnSuccessState() method.
     //  e.g. getOnSuccessState() { if (date>today) return "FUTURE" else return "SUCCESS"; }
     private String onSuccessState;
-    private Map<String, String> errorState = Maps.newHashMap();
 
     public WfEvent(@Nullable T obj) {
         this(obj, null, null);

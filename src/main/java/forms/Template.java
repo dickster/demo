@@ -3,12 +3,8 @@ package forms;
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Closeables;
-import forms.widgets.config.HasTemplate;
-import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.markup.Markup;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.util.visit.IVisit;
-import org.apache.wicket.util.visit.IVisitor;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
@@ -35,20 +31,6 @@ public class Template extends Panel {
     @Override
     public boolean isVisible() {
         return source!=null;
-    }
-
-    @Override
-    protected void onInitialize() {
-        super.onInitialize();
-        Boolean owner = visitParents(MarkupContainer.class, new IVisitor<MarkupContainer, Boolean>() {
-            @Override
-            public void component(MarkupContainer object, IVisit<Boolean> visit) {
-                if (object instanceof HasTemplate) visit.stop(true);
-            }
-        });
-        if (!owner) {
-            throw new IllegalStateException("you can't have a template in a component that doesn't implement the " + HasTemplate.class.getSimpleName() + " interface.  This is required so the .js code can find the template and do it's layout duties.");
-        }
     }
 
     private String normalize(String source) {

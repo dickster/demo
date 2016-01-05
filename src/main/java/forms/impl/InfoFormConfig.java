@@ -25,7 +25,7 @@ public class InfoFormConfig extends FormConfig {
 
         with(new LabelConfig("label.paymentMethod"));
         withConfig(new SelectPickerConfig("payment.method")
-                .withOptions(Lists.newArrayList("Credit Card", "Cash", "Direct Billing"))
+                .withOptions(Lists.newArrayList("Alpha", "Baker", "Charlie"))
                 .withDependents(0, "label.one")
                 .withDependents(1, "label.two")
                 .withDependents(2, "label.three"));
@@ -60,7 +60,7 @@ public class InfoFormConfig extends FormConfig {
         withConfig(new LabelConfig("label.address"));
         withConfig(new AddressConfig("insured.address"));
         withConfig(new LabelConfig("label.age"));
-        withConfig(new TextFieldConfig<Integer>("insured.age").withAjaxBehavior("paymentMethodAjaxBehavior"));
+        withConfig(new TextFieldConfig<Integer>("insured.age").withAjaxBehavior("ageOccupationAjaxBehavior"));
         withConfig(new LabelConfig("label.occupation"));
         withConfig(new TextFieldConfig<Integer>("insured.occupation"));
 

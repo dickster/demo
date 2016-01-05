@@ -1,20 +1,12 @@
 package forms.util;
 
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
+import com.google.gson.*;
 import forms.widgets.config.IncludeInJson;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.lang.reflect.Type;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public class ConfigGson implements Serializable {
@@ -35,9 +27,9 @@ public class ConfigGson implements Serializable {
             }
         };
 
-        JsonSerializer<Collection<?>> skipEmptyCollections = new JsonSerializer<Collection<?>>() {
+        JsonSerializer<List<?>> skipEmptyLists = new JsonSerializer<List<?>>() {
             @Override
-            public @Nullable JsonElement serialize(Collection <?> src, Type typeOfSrc, JsonSerializationContext context) {
+            public @Nullable JsonElement serialize(List <?> src, Type typeOfSrc, JsonSerializationContext context) {
                 if (src == null || src.isEmpty())
                     return null;
 
@@ -73,8 +65,8 @@ public class ConfigGson implements Serializable {
         };
         return new GsonBuilder()
                 // should skip null values in maps too!
-                .registerTypeHierarchyAdapter(Collection.class,skipEmptyMaps)
-                .registerTypeHierarchyAdapter(Collection.class,skipEmptyCollections)
+                .registerTypeHierarchyAdapter(Map.class,skipEmptyMaps)
+                .registerTypeHierarchyAdapter(List.class,skipEmptyLists)
                 .addSerializationExclusionStrategy(skipUnexposedFieldsStrategy)
                 .create();
     }

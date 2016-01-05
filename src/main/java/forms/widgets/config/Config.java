@@ -31,9 +31,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private boolean initiallyVisible = true;
 
     // this is injected by the framework...don't set this yourself.
-    private @IncludeInJson String markupId;
-    private @IncludeInJson Boolean isAjax;
-    private @IncludeInJson String templateId;
+//    private @IncludeInJson String templateId;
 
     private @IncludeInJson Map<Object, List<String>> dependents = Maps.newHashMap();
 
@@ -44,9 +42,9 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     // values like "country1" & "country2".
     // Id's must be unique because in the DOM, this is the
     // value we use to find them.  (stuffed into data-wf attribute)
-    private String id;
-    private final String property;
-    private final Map<String, String> attributes = Maps.newHashMap();
+    private @IncludeInJson String id;
+    private @IncludeInJson final String property;
+    private @IncludeInJson final Map<String, String> attributes = Maps.newHashMap();
 
     private @IncludeInJson final String type;
     private @IncludeInJson final String pluginName;
@@ -180,7 +178,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     }
 
     public Config<T> withMarkupId(String markupId) {
-        this.markupId = markupId;
+        withOption("markupId", markupId);
         return this;
     }
 
@@ -188,6 +186,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     public void validate() {
         // override this if you want a chance to ensure your data is good before creating.
+        // probably should check any spring bean names to see if they exist.
     }
 
     protected final void post(@Nonnull Component component, @Nonnull Object event) {
@@ -217,6 +216,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     }
 
     public Config withAjaxBehavior(String name) {
+        // check spring context here...need some
         // check name.  if endsWith("ajaxBehavior") otherwise add it.
         // look for spelling errors.
         ajaxBehaviors.add(name);
@@ -243,17 +243,9 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return parent;
     }
 
-    public void setIsAjax(boolean ajax) {
-        this.isAjax = ajax;
-    }
-
     public Component validateAndCreate(String id) {
         validate();
         return create(id);
-    }
-
-    public void setTemplateId(String templateId) {
-        this.templateId = templateId;
     }
 
     // these methods assume you are using a checkbox/radio button which has only stores boolean values.
