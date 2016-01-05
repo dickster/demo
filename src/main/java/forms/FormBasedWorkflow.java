@@ -43,7 +43,7 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
     public void onValidation(WfValidationEvent event) {
     }
 
-    @Subscribe
+    @Subscribe  //hmmm....i don't think i need this.
     public void onAjax(WfAjaxEvent event) {
 
     }

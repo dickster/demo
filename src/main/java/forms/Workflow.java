@@ -69,6 +69,16 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     }
 
     @Subscribe
+    public void onUnhandled(WfUnhandledEvent event) {
+        String js = String.format(
+                "alert('the state [%s] did not handle the submit event [%s]');",
+                event.getState(),
+                event.getObj().getName());
+        event.getTarget().appendJavaScript(js);
+
+    }
+
+    @Subscribe
     public final void onSubmit(@Nonnull WfSubmitEvent event) throws WorkflowException {
         try {
             clearErrors();
@@ -118,8 +128,9 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     }
 
     @Subscribe
-    protected void unhandledEvent(DeadEvent event) {
+    public void deadEvent(DeadEvent event) {
         System.out.println("an event occurred with no listeners " + event);
+        // TODO : somehow send this to current page...override in FormBasedWorkflow.
     }
 
     public Object get(String key) {

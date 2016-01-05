@@ -53,9 +53,8 @@ public class WfState implements Serializable {
     }
 
     protected WfState unhandledEvent(Workflow workflow, WfSubmitEvent event) {
-        workflow.post(new UnhandledEvent(event));
+        workflow.post(new WfUnhandledEvent(this, event));
         return this;
-//        throw new IllegalArgumentException("the event " + event.getName() + " is not handled in state " + getClass().getSimpleName());
     }
 
 }
