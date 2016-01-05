@@ -35,6 +35,7 @@ public class DefaultTheme implements Theme {
     private static final JavaScriptResourceReference CREDITCARD_JS = new JavaScriptResourceReference(Resource.class, "creditCard.js");
     private static final JavaScriptResourceReference INPUTGROUP_JS = new JavaScriptResourceReference(Resource.class, "inputgroup.js");
     private static final JavaScriptResourceReference DELAYEDEVENT_JS = new JavaScriptResourceReference(Resource.class, "delayedEvent.js");
+    private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "type_ahead.js");
 
 
     @Override
@@ -80,11 +81,13 @@ public class DefaultTheme implements Theme {
 
     @Nonnull
     public List<? extends HeaderItem> getHeaderItems() {
-        return Lists.newArrayList(getBodyClassHeaderItem(), CssHeaderItem.forReference(BRAND_CSS),
+        return Lists.newArrayList(getBodyClassHeaderItem(),
+                CssHeaderItem.forReference(BRAND_CSS),
                 JavaScriptHeaderItem.forReference(DELAYEDEVENT_JS),
                 JavaScriptHeaderItem.forReference(CREDITCARD_VALIDATOR_JS),
                 JavaScriptHeaderItem.forReference(CREDITCARD_JS),
-                JavaScriptHeaderItem.forReference(INPUTGROUP_JS)
+                JavaScriptHeaderItem.forReference(INPUTGROUP_JS),
+                JavaScriptHeaderItem.forReference(TYPEAHEAD_JS)
         );
     }
 

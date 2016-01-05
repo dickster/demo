@@ -21,6 +21,7 @@ public enum WidgetTypeEnum {
     SECTION("sectionPanel"),
     MULTIPLE_SELECT("selectpicker"),
     DEBUG_BUTTON(),
+    TYPEAHEAD("type_ahead"),
     FEEDBACK(),
     CREDIT_CARD("creditCard"),
     LIST(),

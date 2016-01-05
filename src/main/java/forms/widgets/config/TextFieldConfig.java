@@ -6,11 +6,12 @@ import forms.widgets.TextField2;
 public class TextFieldConfig<T> extends FormComponentConfig<TextField2<T>> {
 
     public TextFieldConfig(String property) {
-        super(property, WidgetTypeEnum.TEXT_FIELD);
+        super(property, WidgetTypeEnum.TYPEAHEAD);
     }
 
     @Override
     public TextField2 create(String id) {
+        // TODO : this should be automated. if widgetTypeEnum knows class of widget.
         return new TextField2<T>(id, this);
     }
 
