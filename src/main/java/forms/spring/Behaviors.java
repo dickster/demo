@@ -1,9 +1,9 @@
 package forms.spring;
 
 import forms.RenderingBehavior;
-import forms.ajax.AgeOccupationAjaxBehavior;
-import forms.ajax.PaymentMethodAjaxBehavior;
-import forms.ajax.TypeAheadBehavior;
+import forms.behavior.AgeOccupationAjaxBehavior;
+import forms.behavior.NameTypeAheadBehavior;
+import forms.behavior.VehicleTypeAheadBehavior;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -26,18 +26,18 @@ public class Behaviors {
     }
 
     @Bean @Scope("prototype")
-    public PaymentMethodAjaxBehavior paymentMethodAjaxBehavior() {
-        return new PaymentMethodAjaxBehavior();
-    }
-
-    @Bean @Scope("prototype")
-    public TypeAheadBehavior typeAheadBehavior() {
-        return new TypeAheadBehavior();
+    public NameTypeAheadBehavior nameTypeAheadBehavior() {
+        return new NameTypeAheadBehavior();
     }
 
     @Bean @Scope("prototype")
     public RenderingBehavior renderingBehavior() {
         return new RenderingBehavior();
+    }
+
+    @Bean @Scope("prototype")
+    public VehicleTypeAheadBehavior vehicleTypeAheadBehavior() {
+        return new VehicleTypeAheadBehavior();
     }
 
 }

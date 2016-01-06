@@ -54,7 +54,7 @@ public abstract class GroupConfig<T extends Component & HasConfig> extends Confi
     }
 
     public GroupConfig withConfigs(@Nonnull List<Config> configs) {
-        this.configs = configs;
+        this.configs.addAll(configs);
         return this;
     }
 

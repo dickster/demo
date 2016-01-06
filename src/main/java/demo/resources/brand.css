@@ -11,6 +11,14 @@
     display:none !important;
 }
 
+.push {
+    height:50px;
+}
+
+.navbar {
+    padding-top:10px;
+}
+
 
 /*--------------------*/
 
@@ -105,5 +113,11 @@ form.custom {
     font-size:30px;
 }
 
+/* this should be media size/width dependent...not for mobile.*/
+form .row > [class*="col-"] {
+    margin-bottom:1%;
+}
 
+.form-group {margin-bottom:1%!important;}
 
+.form-inline .form-control  {margin-bottom:2%;}

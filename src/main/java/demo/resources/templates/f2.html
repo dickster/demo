@@ -7,32 +7,33 @@
     </div>
 
     <p></p>
-
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <div data-template="label.vehicleType"/>
+        </div>
+        <div class="col-md-3">
+            <input type="text" data-template="vehicle.type" class="form-control"/>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-2">
             <div data-template="label.paymentMethod" class="">payment method</div>
         </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-6">
             <select data-template="payment.method" class=""></select>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-12">
             <div data-template="label.one">hello</div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2">
             <div data-template="label.two">world</div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2">
-            <div data-template="label.three">world</div>
+            <div data-template="label.three">three</div>
         </div>
     </div>
 
@@ -45,27 +46,37 @@
         <div class="col-md-3">
             <div data-template="label.occupation" class="">occupation</div>
         </div>
-        <div class="col-md-8">
-            <div data-template="label.address">address</div>
-        </div>
     </div>
 
     <div class="row">
         <div class="col-md-1">
-            <input type="text" data-template="insured.age" class="form-control">
+            <input type="text" data-template="insured.age" class="form-control"/>
         </div>
         <div class="col-md-3">
-            <input type="text" data-template="insured.occupation" class="form-control">
-        </div>
-        <div class="col-md-8">
-            <input type="text" data-template="insured.address">
+            <input type="text" data-template="insured.occupation" class="form-control"/>
         </div>
     </div>
 
-    <p></p>
+    <div class="row">
+        <div class="col-md-12">
+            <div data-template="label.address">address</div>
+        </div>
+        <div class="col-md-8">
+            <input type="text" data-template="insured.address"/>
+        </div>
+    </div>
 
-    <div class="btn-group-bottom">
-        <input type="button" class="btn btn-primary btn-submit" data-template="button.next" value="next">
+    <!--in order to compensate for footer-->
+    <p class="push"></p>
+
+
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <input type="button" class="btn btn-primary btn-submit" data-template="button.next" value="next">
+                <input type="button" class="btn btn-primary btn-submit" data-template="button.cancel" value="next">
+            </div>
+        </div>
     </div>
 
 </wicket:panel>

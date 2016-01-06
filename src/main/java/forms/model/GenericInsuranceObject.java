@@ -141,8 +141,8 @@ public class GenericInsuranceObject implements Serializable {
     }
 
     public class Vehicle implements Serializable {
-        public String type = "Buick";
-        public int year = 1978;
+        public String type;
+        public int year;
 
         @Override
         public String toString() {

@@ -1,15 +1,10 @@
-package forms.ajax;
+package forms.behavior;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Sets;
-import com.google.gson.Gson;
 import forms.FormBasedWorkflow;
-import forms.model.GenericInsuranceObject;
-import forms.model.Name;
 import forms.spring.WfNavigator;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxChannel;
@@ -19,14 +14,26 @@ import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.handler.TextRequestHandler;
 
 import javax.inject.Inject;
-import java.util.Set;
 
-public class TypeAheadBehavior extends AbstractDefaultAjaxBehavior {
+/**
+ TODO : using Typeahead's might be better suited for ResourceReference
+  UNLESS the response needs access to the workflow & it's data.  in that case you
+  need to use a behavior - & it's getComponet() method.
+
+ @see org.apache.wicket.request.resource.ResourceReference
+ */
+public abstract class TypeAheadBehavior extends AbstractDefaultAjaxBehavior {
 
     private @Inject WfNavigator wfNavigator;
+    private boolean cached = true;
 
     public TypeAheadBehavior() {
         super();
+    }
+
+    public TypeAheadBehavior uncached() {
+        this.cached = false;
+        return this;
     }
 
     @Override
@@ -49,17 +56,10 @@ public class TypeAheadBehavior extends AbstractDefaultAjaxBehavior {
         rc.replaceAllRequestHandlers(handler);
     }
 
-    protected String getJson() {
-        // TODO : this is implementation specific stuff...should not be in core behavior.
-        FormBasedWorkflow<GenericInsuranceObject> workflow = (FormBasedWorkflow<GenericInsuranceObject>) wfNavigator.getWorkflow(getComponent());
-        GenericInsuranceObject obj = workflow.getObject();
-        Set<Result> result = Sets.newHashSet();
-            for (Name name: obj.getNames()) {
-            if (StringUtils.isNotBlank(name.last))result.add(new Result(name.last));
-            if (StringUtils.isNotBlank(name.first))result.add(new Result(name.first));
-            if (StringUtils.isNotBlank(name.middle)) result.add(new Result(name.middle));
-        }
-        return new Gson().toJson(result);
+    protected abstract String getJson();
+
+    protected FormBasedWorkflow getWorkflow() {
+        return (FormBasedWorkflow) wfNavigator.getWorkflow(getComponent());
     }
 
     public class Result {

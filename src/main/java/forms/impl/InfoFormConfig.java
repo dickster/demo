@@ -26,9 +26,9 @@ public class InfoFormConfig extends FormConfig {
         with(new LabelConfig("label.paymentMethod"));
         withConfig(new SelectPickerConfig("payment.method")
                 .withOptions(Lists.newArrayList("Alpha", "Baker", "Charlie"))
-                .withDependents(0, "label.one")
-                .withDependents(1, "label.two")
-                .withDependents(2, "label.three"));
+                .withDependentsFor(0, "label.one")
+                .withDependentsFor(1, "label.two")
+                .withDependentsFor(2, "label.three"));
 
         with(new LabelConfig("label.one"));
         with(new LabelConfig("label.two"));
@@ -62,7 +62,10 @@ public class InfoFormConfig extends FormConfig {
         withConfig(new LabelConfig("label.age"));
         withConfig(new TextFieldConfig<Integer>("insured.age").withBehavior("ageOccupationAjaxBehavior"));
         withConfig(new LabelConfig("label.occupation"));
-        withConfig(new TextFieldConfig<Integer>("insured.occupation").withBehavior("typeAheadBehavior"));
+        withConfig(new TextFieldConfig<Integer>("insured.occupation").withBehavior("nameTypeAheadBehavior"));
+        withConfig(new LabelConfig("label.vehicleType"));
+        withConfig(new TextFieldConfig<Integer>("vehicle.type").withBehavior("vehicleTypeAheadBehavior"));
+
 
 //        withConfig(new LabelConfig("l1", "name.first"));
 //        withConfig(new LabelConfig("label.names").withData("name.first", "name.last"));
@@ -124,6 +127,7 @@ public class InfoFormConfig extends FormConfig {
 //        );
 
         with(new ButtonConfig("button.next"));
+        with(new ButtonConfig("button.cancel"));
     }
 
     private String getDrinkQuestion() {

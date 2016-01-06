@@ -6,10 +6,10 @@ $(function() {
 
     $.widget( "brovada.type_ahead", {
 
-        options : { foo:'bar'},
+//        options : { foo:'bar'},
 
         _create: function() {
-            var url = this.options.url;
+            var opts = this.options;
             var $widget = $('#'+this.options.markupId);
 
             // Instantiate the Bloodhound suggestion engine
@@ -20,16 +20,8 @@ $(function() {
                 },
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
-                    cache: false,  // TODO : make this a parameter.  true by default.
-                    url: url
-//                    filter: function (movies) {
-//                        // Map the remote source JSON array to a JavaScript object array
-//                        return $.map(movies.results, function (movie) {
-//                            return {
-//                                value: movie.original_title
-//                            };
-//                        });
-//                    }
+                    cache: opts.cache,
+                    url: opts.url
                 }
             });
 
@@ -40,12 +32,11 @@ $(function() {
             $widget.typeahead({
                 source: function(query, cb) {
                     data.search(query, cb, cb);
+                },
+                templates: {
+                    empty: '<div class="empty-message">No matches.</div>'
                 }
-//                templates: {
-//                    empty: '<div class="empty-message">No matches.</div>'
-//                }
             });
-               // .bind('typeahead:selected', select);
 
         }
 

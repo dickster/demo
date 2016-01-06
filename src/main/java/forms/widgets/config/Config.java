@@ -258,7 +258,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     // -----------------
 
 
-    public Config withDependents(Object key, String... dependents) {
+    public Config withDependentsFor(Object key, String... dependents) {
         this.dependents.put(key, Lists.newArrayList(dependents));
         return this;
     }

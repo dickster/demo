@@ -1,4 +1,4 @@
-package forms.ajax;
+package forms.behavior;
 
 import forms.spring.WfAjaxBehavior;
 import forms.WorkflowForm;

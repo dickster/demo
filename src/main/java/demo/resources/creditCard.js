@@ -17,7 +17,7 @@ $(function() {
                 else {
                     $submitButtons.removeAttr('disabled');
                 }
-                showMsg($(this), result);
+                if ($el.val().length>0) showMsg($(this), result);
             }
 
             function showMsg(el, result) {

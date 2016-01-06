@@ -1,4 +1,4 @@
-package forms.ajax;
+package forms.behavior;
 
 public class NameTypeaheadProvider extends TypeaheadProvider {
 

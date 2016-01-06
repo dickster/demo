@@ -1,4 +1,4 @@
-package forms.ajax;
+package forms.behavior;
 
 import org.apache.wicket.request.resource.AbstractResource;
 
