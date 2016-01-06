@@ -15,6 +15,6 @@ public class ConfirmationFormConfig extends FormConfig {
     private void addConfigs() {
         withConfig(new LabelConfig("label.thanks").withCss("h4"));
         withConfig(new LabelConfig("data.total","payment.total").withCss("h4"));
-        with(new ButtonConfig("finished"));
+        with(new ButtonConfig("button.finished"));
     }
 }

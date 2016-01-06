@@ -19,6 +19,14 @@ public class Name implements Serializable {
 
     List<String> names = Lists.newArrayList();
 
+    public Name() {
+    }
+
+    public Name(String first, String last) {
+        this.first.add(first);
+        this.last.add(last);
+    }
+
     @Override
     public String toString() {
         // CAVEAT : important not to change this. used by wicket models.
@@ -66,6 +74,7 @@ public class Name implements Serializable {
     }
 
     private String toString(List<String> name) {
+        if (name==null) return "";
         String text = Joiner.on(" ").skipNulls().join(name);
         return (name.size()>1) ?
                 "\"" + text + "\"" :

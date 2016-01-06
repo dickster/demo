@@ -26,7 +26,7 @@ public class WfButton extends AjaxButton implements IAjaxIndicatorAware, HasConf
     private @Inject StringLoader stringLoader;
     private @Inject WfNavigator wfNavigator;
 
-    private final Config config;
+    private final ButtonConfig config;
     private String ajaxIndicatorMarkupId = null;
 
     public WfButton(String id, ButtonConfig config) {

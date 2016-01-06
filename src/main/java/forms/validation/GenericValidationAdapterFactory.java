@@ -50,15 +50,15 @@ public class GenericValidationAdapterFactory implements IValidationAdapters<Gene
             public NameFields apply(final GenericInsuranceObject obj) {
                 return new NameFields() {
                     @Override public String getFirstName() {
-                        return obj.getName().first;
+                        return obj.getName().getFirst();
                     }
 
                     @Override public String getMiddleName() {
-                        return obj.getName().middle;
+                        return obj.getName().getMiddle();
                     }
 
                     @Override public String getLastName() {
-                        return obj.getName().last;
+                        return obj.getName().getLast();
                     }
                 };
             }

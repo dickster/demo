@@ -10,8 +10,9 @@ import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 
-public class WfNavigator {
+public class WfNavigator implements Serializable {
 
     // blargh : i need a better way to access workflow.
     // in session?  nah, multiples allowed. attached to page?  reference injected into each component?
