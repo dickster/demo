@@ -16,6 +16,7 @@ public class Behaviors {
         return new BehaviorFactory();
     }
 
+
     // NOTE : *all* behaviors MUST be of Scope("prototype")!!
     //   e.g. @Bean @Scope("prototype") public Foo foo() {...}
     // the factory itself doesn't have to be.

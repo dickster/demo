@@ -1,7 +1,6 @@
 package forms.widgets;
 
 import demo.resources.Resource;
-import forms.ajax.TypeAheadBehavior;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.TextFieldConfig;
 import org.apache.wicket.markup.ComponentTag;
@@ -29,9 +28,9 @@ public class TextField2<T> extends TextField<T> implements HasConfig<TextFieldCo
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        TypeAheadBehavior behavior = new TypeAheadBehavior();
-        add(behavior);
-        config.withOption("url", behavior.getCallbackUrl().toString());
+//        TypeAheadBehavior behavior = new TypeAheadBehavior();
+//        add(behavior);
+//        config.withOption("url", behavior.getCallbackUrl().toString());
     }
 
     @Override

@@ -1,12 +1,16 @@
 package forms.ajax;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import forms.FormBasedWorkflow;
 import forms.model.GenericInsuranceObject;
 import forms.model.Name;
 import forms.spring.WfNavigator;
+import forms.widgets.config.Config;
+import forms.widgets.config.HasConfig;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxChannel;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -23,6 +27,13 @@ public class TypeAheadBehavior extends AbstractDefaultAjaxBehavior {
 
     public TypeAheadBehavior() {
         super();
+    }
+
+    @Override
+    public void onConfigure(Component component) {
+        Preconditions.checkArgument(component instanceof HasConfig);
+        Config config = ((HasConfig)component).getConfig();
+        config.withOption("url", getCallbackUrl().toString());
     }
 
     @Override
