@@ -5,6 +5,8 @@ import forms.widgets.TextField2;
 
 public class TextFieldConfig<T> extends FormComponentConfig<TextField2<T>> {
 
+    private String typeAheadBehavior;
+
     public TextFieldConfig(String property) {
         super(property, WidgetTypeEnum.TYPEAHEAD);
     }

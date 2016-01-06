@@ -60,9 +60,9 @@ public class InfoFormConfig extends FormConfig {
         withConfig(new LabelConfig("label.address"));
         withConfig(new AddressConfig("insured.address"));
         withConfig(new LabelConfig("label.age"));
-        withConfig(new TextFieldConfig<Integer>("insured.age").withAjaxBehavior("ageOccupationAjaxBehavior"));
+        withConfig(new TextFieldConfig<Integer>("insured.age").withBehavior("ageOccupationAjaxBehavior"));
         withConfig(new LabelConfig("label.occupation"));
-        withConfig(new TextFieldConfig<Integer>("insured.occupation"));
+        withConfig(new TextFieldConfig<Integer>("insured.occupation").withBehavior("typeAheadBehavior"));
 
 //        withConfig(new LabelConfig("l1", "name.first"));
 //        withConfig(new LabelConfig("label.names").withData("name.first", "name.last"));

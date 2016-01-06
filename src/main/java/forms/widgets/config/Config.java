@@ -26,7 +26,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private static final String PLUGIN_NA = "n/a";
 
     private GroupConfig parent;
-    private Set<String> ajaxBehaviors = Sets.newHashSet();
+    private Set<String> behaviors = Sets.newHashSet();
     private boolean wrapHtmlOutput = false;
     private boolean initiallyVisible = true;
 
@@ -211,15 +211,12 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return this;
     }
 
-    public Set<String> getAjaxBehaviors() {
-        return ImmutableSet.copyOf(ajaxBehaviors);
+    public Set<String> getBehaviors() {
+        return ImmutableSet.copyOf(behaviors);
     }
 
-    public Config withAjaxBehavior(String name) {
-        // check spring context here...need some
-        // check name.  if endsWith("ajaxBehavior") otherwise add it.
-        // look for spelling errors.
-        ajaxBehaviors.add(name);
+    public Config withBehavior(String name) {
+        behaviors.add(name);
         return this;
     }
 

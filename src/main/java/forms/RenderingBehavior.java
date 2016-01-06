@@ -14,7 +14,7 @@ import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 
 import java.util.Map;
 
-public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdProvider {
+public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdProvider {
 
     // should shorten the .js name to reduce size of payload.    wf.widget(%s) ??
     private static final String INIT_WIDGET_JS = "workflow.initWidget(%s);";

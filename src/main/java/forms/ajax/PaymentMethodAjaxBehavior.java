@@ -1,10 +1,11 @@
 package forms.ajax;
 
-import forms.spring.WfAjaxBehavior;
 import forms.WorkflowForm;
+import forms.spring.WfAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
 // TODO : refactor this to be a simple MasterSlave options thang done via javascript?
+// can use the "dependents" feature.
 
 public class PaymentMethodAjaxBehavior extends WfAjaxBehavior {
 

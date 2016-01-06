@@ -50,7 +50,7 @@ public class WorkflowForm extends Panel implements HasConfig {
         super(id);
         withConfig(config);
         setOutputMarkupId(true);
-        add(new RenderingBehaviour());
+        add(new RenderingBehavior());
 
         setupHistory();
 
