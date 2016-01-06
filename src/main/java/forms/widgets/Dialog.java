@@ -3,6 +3,7 @@ package forms.widgets;
 import forms.Div;
 import forms.Toolkit;
 import forms.Workflow;
+import forms.spring.WfNavigator;
 import forms.widgets.config.Config;
 import forms.widgets.config.DialogConfig;
 import forms.widgets.config.DialogSubmitButtonConfig;
@@ -21,6 +22,8 @@ import org.apache.wicket.markup.html.panel.Panel;
 import javax.inject.Inject;
 
 public class Dialog extends Panel implements HasConfig {
+
+    private @Inject WfNavigator wfNavigator;
 
     private String SHOW_JS = "$('#%s').modal('show');";
     private String HIDE_JS = "$('#%s').modal('hide');";
@@ -57,7 +60,7 @@ public class Dialog extends Panel implements HasConfig {
     }
 
     protected Component createButton(String id, DialogSubmitButtonConfig buttonConfig) {
-        Workflow workflow = WfUtil.getWorkflow(this);
+        Workflow workflow = wfNavigator.getWorkflow(this);
         return workflow.createWidget(id, buttonConfig);
     }
 

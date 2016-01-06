@@ -18,12 +18,14 @@ import org.springframework.context.annotation.Scope;
 
 import javax.annotation.Nonnull;
 
-//import javax.inject.Inject;
-//import javax.inject.Scope;
-
 
 @Configuration
 public class Application {
+
+    @Bean
+    public WfNavigator wfNavigator() {
+        return new WfNavigator();
+    }
 
     @Bean
     public Toolkit toolkit() { return new DefaultToolkit(); }

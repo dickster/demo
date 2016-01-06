@@ -20,6 +20,7 @@ $(function() {
                 },
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
+                    cache: false,  // TODO : make this a parameter.  true by default.
                     url: url
 //                    filter: function (movies) {
 //                        // Map the remote source JSON array to a JavaScript object array

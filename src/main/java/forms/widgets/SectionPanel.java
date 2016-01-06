@@ -7,6 +7,7 @@ import demo.ISection;
 import forms.Template;
 import forms.Workflow;
 import forms.model.WfCompoundPropertyModel;
+import forms.spring.WfNavigator;
 import forms.util.WfUtil;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
@@ -41,6 +42,7 @@ import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 import java.util.List;
 
 public class SectionPanel<T extends Component> extends Panel implements FeedbackListener, ISection, HasConfig {
@@ -53,6 +55,8 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
 
     private static final JavaScriptHeaderItem TAB_PANEL_JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(SectionPanel.class, "sectionPanel.js"));
     private static final CssHeaderItem TAB_PANEL_CSS = CssHeaderItem.forReference(new CssResourceReference(SectionPanel.class,"sectionPanel.css"));
+
+    private @Inject WfNavigator wfNavigator;
 
 
 //---------------------------------------------------------------------------------
@@ -158,7 +162,7 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
             @Override
             protected void onInitialize() {
                 super.onInitialize();
-                Workflow workflow = WfUtil.getWorkflow(this);
+                Workflow workflow = wfNavigator.getWorkflow(this);
                 for (int i=0; i<config.getConfigs().size(); i++) {
                     Config c = config.getConfigs().get(i);
                     add(workflow.createWidget(newChildId(), c));

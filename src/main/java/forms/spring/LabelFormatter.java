@@ -1,6 +1,5 @@
 package forms.spring;
 
-import forms.util.WfUtil;
 import forms.widgets.config.LabelConfig;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.PropertyModel;
@@ -12,6 +11,7 @@ import java.util.List;
 public class LabelFormatter {
 
     private @Inject StringLoader stringLoader;
+    private @Inject WfNavigator wfNavigator;
 
     public String format(Component component, LabelConfig config) {
 
@@ -29,7 +29,7 @@ public class LabelFormatter {
     }
 
     protected String[] getArgs(Component component, LabelConfig config) {
-        Object model = WfUtil.getWorkflow(component).getModel();
+        Object model = wfNavigator.getWorkflow(component).getModel();
         List<String> data = config.getData();
         String[] result = new String[data.size()];
         for (int i=0;i<data.size();i++) {

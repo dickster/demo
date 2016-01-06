@@ -1,7 +1,7 @@
 package forms.widgets;
 
 import demo.GpsLocation;
-import forms.util.WfUtil;
+import forms.spring.WfNavigator;
 import forms.widgets.config.AddressConfig;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
@@ -17,11 +17,13 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.math.BigDecimal;
 
 public class Address extends Panel implements HasConfig {
 
+    private @SpringBean WfNavigator wfNavigator;
     // TODO : write this as a plugin.
 
     private static final String GOOGLE_MAPS_URL = "https://maps.googleapis.com/maps/api/js?sensor=false";
@@ -60,7 +62,7 @@ public class Address extends Panel implements HasConfig {
             @Override
             protected void onEvent(AjaxRequestTarget target) {
                 String country = postalCode.getDefaultModelObjectAsString();
-                WfUtil.getWorkflow(Address.this).post(new WfPostalCodeChangedEvent(country, target, postalCode));
+                wfNavigator.getWorkflow(Address.this).post(new WfPostalCodeChangedEvent(country, target, postalCode));
             }
         });
     }

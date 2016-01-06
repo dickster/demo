@@ -3,20 +3,23 @@ package forms.widgets;
 import com.google.common.base.Preconditions;
 import forms.WidgetFactory;
 import forms.Workflow;
+import forms.spring.WfNavigator;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.ListConfig;
-import forms.util.WfUtil;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.AbstractPropertyModel;
 import org.apache.wicket.model.IModel;
 
+import javax.inject.Inject;
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.List;
 
 public class OrderedList extends RepeatingView implements HasConfig {
+
+    private @Inject WfNavigator wfNavigator;
 
     private ListConfig config;
 
@@ -63,7 +66,7 @@ public class OrderedList extends RepeatingView implements HasConfig {
 
         public ListPanel(String id, int index, List<Config> configs) {
             super(id);
-            final Workflow workflow = WfUtil.getWorkflow(OrderedList.this);
+            final Workflow workflow = wfNavigator.getWorkflow(OrderedList.this);
             String property = ((AbstractPropertyModel)OrderedList.this.getDefaultModel()).getPropertyExpression();
             for (int i=0; i<configs.size();i++) {
                 // need to clone configs??? or augment widget factory....

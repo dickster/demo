@@ -3,7 +3,7 @@ package forms.widgets;
 import forms.WfSubmitErrorEvent;
 import forms.WfSubmitEvent;
 import forms.spring.StringLoader;
-import forms.util.WfUtil;
+import forms.spring.WfNavigator;
 import forms.widgets.config.ButtonConfig;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
@@ -24,6 +24,7 @@ import javax.inject.Inject;
 public class WfButton extends AjaxButton implements IAjaxIndicatorAware, HasConfig {
 
     private @Inject StringLoader stringLoader;
+    private @Inject WfNavigator wfNavigator;
 
     private final Config config;
     private String ajaxIndicatorMarkupId = null;
@@ -36,12 +37,14 @@ public class WfButton extends AjaxButton implements IAjaxIndicatorAware, HasConf
 
     @Override
     protected void onSubmit(AjaxRequestTarget target, Form <?> form) {
-        WfUtil.post(form, new WfSubmitEvent(target, this, form));
+        wfNavigator.getWorkflow(form)
+                .post(new WfSubmitEvent(target, this, form));
     }
 
     @Override
     protected void onError(AjaxRequestTarget target, Form<?> form) {
-        WfUtil.post(form, new WfSubmitErrorEvent(target, this, form));
+        wfNavigator.getWorkflow(form)
+                .post(new WfSubmitErrorEvent(target, this, form));
     }
 
     @Override

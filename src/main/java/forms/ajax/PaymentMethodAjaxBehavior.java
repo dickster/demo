@@ -9,7 +9,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 public class PaymentMethodAjaxBehavior extends WfAjaxBehavior {
 
     public PaymentMethodAjaxBehavior() {
-        super("change inputchange");
+        super("inputchange");
     }
 
     @Override

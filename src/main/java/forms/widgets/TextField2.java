@@ -14,7 +14,6 @@ public class TextField2<T> extends TextField<T> implements HasConfig<TextFieldCo
 
     private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-typeahead.js");
     private static final JavaScriptResourceReference BLOODHOUND_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/Bloodhound.js");
-//    private static final CssResourceReference TYPEAHEAD_CSS = new CssResourceReference(Resource.class,"bootstrap-3.1.1-dist/css/typeahead.bootstrap.css");
 
     private TextFieldConfig<T> config;
 

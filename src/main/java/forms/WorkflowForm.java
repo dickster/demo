@@ -2,6 +2,7 @@ package forms;
 
 import com.google.common.base.Preconditions;
 import demo.resources.Resource;
+import forms.spring.WfNavigator;
 import forms.util.WfUtil;
 import forms.widgets.config.Config;
 import forms.widgets.config.FeedbackPanelConfig;
@@ -35,6 +36,7 @@ public class WorkflowForm extends Panel implements HasConfig {
     private static final JavaScriptResourceReference WORKFLOW_JS = new JavaScriptResourceReference(Resource.class, "workflow.js");
 
     private @Inject Toolkit toolkit;
+    private @Inject WfNavigator wfNavigator;
 
     private Component visitorKludge;
 
@@ -88,7 +90,7 @@ public class WorkflowForm extends Panel implements HasConfig {
     }
 
     private FormBasedWorkflow getWorkflow() {
-        return (FormBasedWorkflow) WfUtil.getWorkflow(this);
+        return (FormBasedWorkflow) wfNavigator.getWorkflow(this);
     }
 
     public WorkflowForm withConfig(FormConfig config) {

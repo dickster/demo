@@ -1,10 +1,13 @@
 package forms.spring;
 
 import forms.WorkflowForm;
-import forms.util.WfUtil;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 
+import javax.inject.Inject;
+
 public abstract class WfAjaxBehavior extends AjaxFormComponentUpdatingBehavior {
+
+    private @Inject WfNavigator wfNavigator;
 
     public WfAjaxBehavior() {
         super("change");
@@ -15,7 +18,7 @@ public abstract class WfAjaxBehavior extends AjaxFormComponentUpdatingBehavior {
     }
 
     protected WorkflowForm getWorkflowForm() {
-        return WfUtil.getWorkflowForm(getComponent());
+        return wfNavigator.getWorkflowForm(getComponent());
     }
 
 }

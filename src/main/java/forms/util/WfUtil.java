@@ -1,7 +1,6 @@
 package forms.util;
 
 import com.google.common.base.Joiner;
-import forms.WfEvent;
 import forms.WfPage;
 import forms.WidgetFactory;
 import forms.Workflow;
@@ -53,16 +52,6 @@ public class WfUtil implements Serializable {
         return workflow;
     }
 
-    public static WorkflowForm getWorkflowForm(@Nonnull Component component) {
-        return component.visitParents(MarkupContainer.class, new IVisitor<MarkupContainer, WorkflowForm>() {
-            @Override public void component(MarkupContainer container, IVisit<WorkflowForm> visit) {
-                if (container instanceof WorkflowForm) {
-                    visit.stop((WorkflowForm)container);
-                }
-            }
-        });
-    }
-
     public static boolean isDebug() {
         Application application = Application.get();
         if (application instanceof WebApplication) {
@@ -76,7 +65,5 @@ public class WfUtil implements Serializable {
         return false;
     }
 
-    public static void post(Component component, WfEvent event) {
-        getWorkflow(component).post(event);
-    }
+
 }
