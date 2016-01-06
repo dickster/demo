@@ -222,6 +222,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     public Component createWidget(String id, Config config) {
         Component widget = getWidgetFactory().createWidget(id, config);
         register(widget);
+
         return widget;
     }
 }

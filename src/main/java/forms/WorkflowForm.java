@@ -114,7 +114,7 @@ public class WorkflowForm extends Panel implements HasConfig {
     private Component createFeedbackPanel() {
         FeedbackPanelConfig config = formConfig.getFeedbackConfig();
         if (config==null) {
-            System.out.println("using default feedback panel. you probably should supply your own. ");
+            System.out.println("WARNING : using default feedback panel. you probably should supply your own. ");
             config = new FeedbackPanelConfig();
         }
         Component panel = getWorkflow().createWidget(config.getId(), config);

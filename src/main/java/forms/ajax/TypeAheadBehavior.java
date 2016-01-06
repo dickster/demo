@@ -1,29 +1,62 @@
 package forms.ajax;
 
-import demo.resources.Resource;
-import org.apache.wicket.Component;
-import org.apache.wicket.behavior.Behavior;
-import org.apache.wicket.markup.head.CssHeaderItem;
-import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.head.JavaScriptHeaderItem;
-import org.apache.wicket.request.resource.CssResourceReference;
-import org.apache.wicket.request.resource.JavaScriptResourceReference;
+import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+import forms.FormBasedWorkflow;
+import forms.model.GenericInsuranceObject;
+import forms.model.Name;
+import forms.util.WfUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
+import org.apache.wicket.ajax.AjaxChannel;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
+import org.apache.wicket.request.cycle.RequestCycle;
+import org.apache.wicket.request.handler.TextRequestHandler;
 
-public class TypeAheadBehavior extends Behavior {
+import java.util.List;
 
-    private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/typeahead.bundle.js");
-    private static final CssResourceReference TYPEAHEAD_CSS = new CssResourceReference(Resource.class,"bootstrap-3.1.1-dist/css/typeahead.bootstrap.css");
-
-    private String url = "http://api.themoviedb.org/3/search/movie?query=%QUERY&api_key=f22e6ce68f5e5002e71c20bcba477e7d";
+public class TypeAheadBehavior extends AbstractDefaultAjaxBehavior {
 
     public TypeAheadBehavior() {
         super();
     }
 
     @Override
-    public void renderHead(Component component, IHeaderResponse response) {
-        super.renderHead(component, response);
-        response.render(JavaScriptHeaderItem.forReference(TYPEAHEAD_JS));
-        response.render(CssHeaderItem.forReference(TYPEAHEAD_CSS));
+    protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
+        super.updateAjaxAttributes(attributes);
+        attributes.setChannel(new AjaxChannel("json"));
     }
+
+
+
+    @Override
+    protected void respond(AjaxRequestTarget target) {
+        RequestCycle rc = RequestCycle.get();
+        TextRequestHandler handler = new TextRequestHandler("application/json","UTF-8", getJson());
+        rc.replaceAllRequestHandlers(handler);
+    }
+
+    protected String getJson() {
+        // TODO : this is implementation specific stuff...should not be in core behavior.
+        FormBasedWorkflow<GenericInsuranceObject> workflow = (FormBasedWorkflow<GenericInsuranceObject>) WfUtil.getWorkflow(getComponent());
+        GenericInsuranceObject obj = workflow.getObject();
+        List<Result> result = Lists.newArrayList();
+        for (Name name: obj.getNames()) {
+            if (StringUtils.isNotBlank(name.last))result.add(new Result(name.last));
+            if (StringUtils.isNotBlank(name.first))result.add(new Result(name.first));
+            if (StringUtils.isNotBlank(name.middle)) result.add(new Result(name.middle));
+        }
+        return new Gson().toJson(result);
+    }
+
+
+    public class Result {
+        String name="";  // make sure you don't return nulls!
+
+        public Result(String name) {
+            this.name = name;
+        }
+    }
+
 }
