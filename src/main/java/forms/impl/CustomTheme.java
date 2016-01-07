@@ -47,23 +47,12 @@ public class CustomTheme extends DefaultTheme {
     }
 
     @Nonnull
-    public List<? extends HeaderItem> getHeaderItems() {
-        return Lists.newArrayList(getBodyClassHeaderItem(), CssHeaderItem.forReference(CSS));
+    public List<? extends HeaderItem> getCustomHeaderItems() {
+        return Lists.newArrayList(CssHeaderItem.forReference(CSS));
     }
 
     public void apply(Component component) {
-        // examples of things to do...
-
-//        // what about apply?() methods for each specific type of component?
-//        component.add(new AttributeAppender("class", "motif"));
-//        if (component instanceof HasJsonOptions) {
-//            HasJsonOptions widget = (HasJsonOptions) component;
-//            widget.getOptions()
-//                        .withOption("color", "blue")
-//                        .withOption("spacing", "large");
-//        }
-        // typically add javascript to do layout, styling, adding classes, add attributes to widgets,
-        //   add listeners to facilitate overlays/dialogs/menus...whatever
+        // ; nothing here yet...
     }
 
 }

@@ -1,0 +1,86 @@
+/*for debugging only*/
+.template-source {
+    outline:1px dotted aliceblue;
+}
+
+[data-template].unreferenced-template {
+    display:inline-block !important;
+}
+
+[data-template] {
+    display:none !important;
+}
+
+.push {
+    height:50px;
+}
+
+.navbar {
+    padding-top:10px;
+}
+
+.btn-debug {
+    position:fixed;
+    top:20px;
+    right:20px;
+}
+
+
+.unreferenced-template:after {
+    content:'\a cant find the template : ' attr(data-template);
+    white-space:pre;
+}
+
+.unreferenced-template {
+    color: #336;
+    background: #f4f4f4;
+    outline: 1px dashed #ddd;
+}
+
+/* in form but not in template.*/
+.not-in-template {
+    background:#fee;
+    color:#aaa;
+    outline:1px solid #dbb;
+}
+
+.not-in-template:after {
+    content: '\a"' attr(data-wf) '" is not found in template';
+    white-space:pre;
+}
+
+/* in template but not in form*/
+.undefined {
+    color:#b88;
+}
+
+.undefined:after {
+    color:#aaa;
+    font-style:italic;
+    font-family:"courier new";
+    font-size:10px;
+    content:'<--in template but not in form';
+}
+
+.feedbackPanel { display: inline-block;}
+
+.wf-progress {
+    bottom: 10px;
+    font-size: 32px;
+    position: absolute;
+    right: 10px;
+}
+
+.error-message {
+    padding:50px;
+    font-size:30px;
+}
+
+/* this should be media size/width dependent...not for mobile.*/
+form .row > [class*="col-"] {
+    margin-bottom:1px;
+}
+
+.form-group {margin-bottom:1%!important;}
+
+.form-inline .form-control  {margin-bottom:2%;}

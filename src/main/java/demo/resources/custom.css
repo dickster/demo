@@ -9,15 +9,33 @@ body.derek .container  {
     width:970px;
 }
 
+
 .logo {
+    height: 100px;
+    width: 100px;
+    background-repeat: no-repeat;
     background-image: url("/images/logo2.png");
-    background: no-repeat;
-    background-color: lightsalmon;
+}
+
+
+.logo-text {
+    position: absolute;
+    font-size: 40px;
+    color: #478;
+    padding-left: 18px;
+    height: 50px;
+}
+
+.header { background: aliceblue;}
+
+.derek h1 {
+    border-bottom:1px solid #888;
+    margin-bottom:30px;
 }
 
 body.derek {
     width:500px;
-    background:#f0f0f0;
+    background:#f8f8f8;
     font-family: "Courier New";
 }
 
