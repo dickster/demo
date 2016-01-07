@@ -57,4 +57,9 @@ public class WfState implements Serializable {
         return this;
     }
 
+
+    public void enter() {
+        // override this if you want to do something when entering state.
+        // for example, you might want to hide/show some fields depending on incoming m
+    }
 }

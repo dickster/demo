@@ -38,6 +38,7 @@ public class Name implements Serializable {
         return Joiner.on(" ").skipNulls().join(nonBlankNames);
     }
 
+
     public Name withFirstName(String name) {
         this.first = Lists.newArrayList(name);
         return this;
@@ -59,6 +60,18 @@ public class Name implements Serializable {
 
     public String getFirst() {
         return toString(first);
+    }
+
+    public void setFirst(String name) {
+        this.first = Lists.newArrayList(name);
+    }
+
+    public void setLast(String name) {
+        this.last = Lists.newArrayList(name);
+    }
+
+    public void setMiddle(String name) {
+        this.middle = Lists.newArrayList(name);
     }
 
     public String getMiddle() {

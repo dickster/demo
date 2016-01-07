@@ -51,6 +51,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         Preconditions.checkState(context != null);
         init(); // allow implementation specific initialization.
         started = true;
+        changeState(getStartingState());
         return this;
     }
 
@@ -119,6 +120,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         }
         validate(nextState);
         setCurrentState(nextState);
+        nextState.enter();
         statesVisited.put(getCurrentStateName(), getCurrentState());
         return true;
     }
@@ -204,9 +206,6 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     }
 
     protected final S getCurrentState() {
-        if (currentState==null) {
-            setCurrentState(getStartingState());
-        }
         return currentState;
     }
 

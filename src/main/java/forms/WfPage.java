@@ -6,6 +6,7 @@ import forms.model.WfCompoundPropertyModel;
 import forms.widgets.WfPostalCodeChangedEvent;
 import org.apache.wicket.Application;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
+import org.apache.wicket.devutils.debugbar.DebugBar;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
@@ -60,6 +61,8 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
         this.workflow.initialize();
         setDefaultModel(workflow.getModel());
         add(workflow.createForm(FORM_ID, workflow.getCurrentFormConfig()));
+
+        add(new DebugBar("debugBar"));
 
         add(new Label("subheader", getSubHeader()));
     }

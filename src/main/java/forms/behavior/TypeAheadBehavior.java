@@ -41,6 +41,9 @@ public abstract class TypeAheadBehavior extends AbstractDefaultAjaxBehavior {
         Preconditions.checkArgument(component instanceof HasConfig);
         Config config = ((HasConfig)component).getConfig();
         config.withOption("url", getCallbackUrl().toString());
+        if (!cached) {
+            config.withOption("cache", false);
+        }
     }
 
     @Override
