@@ -19,18 +19,11 @@ public class TextField2<T> extends TextField<T> implements HasConfig<TextFieldCo
     public TextField2(String id, TextFieldConfig<T> config) {
         super(id);
         this.config = config;
-        // only if config has typeahead behavior spring bean.  // could be a resource too?
-        // in that case, just pass the url, don't need a spring bean? resource.getUrl();
-        // implements the IJsonResource interface.
-//        config.withOption("url", "http://api.themoviedb.org/3/search/movie?query=%QUERY&api_key=f22e6ce68f5e5002e71c20bcba477e7d");
     }
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
-//        TypeAheadBehavior behavior = new TypeAheadBehavior();
-//        add(behavior);
-//        config.withOption("url", behavior.getCallbackUrl().toString());
     }
 
     @Override
@@ -43,7 +36,6 @@ public class TextField2<T> extends TextField<T> implements HasConfig<TextFieldCo
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
-//        response.render(CssHeaderItem.forReference(TYPEAHEAD_CSS));
         response.render(JavaScriptHeaderItem.forReference(TYPEAHEAD_JS));
         response.render(JavaScriptHeaderItem.forReference(BLOODHOUND_JS));
     }

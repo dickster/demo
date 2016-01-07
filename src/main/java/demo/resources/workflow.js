@@ -120,6 +120,8 @@ var workflow = function() {
                         for (var i=0;i<config.dependents[key].length;i++){
                             var d = config.dependents[key][i];
                             $('[data-wf="'+d+'"]').toggle(val===key);
+                            // TODO : clear value when you hide the value.
+                            // if (val!=key) clearInput($('[data-wf="'+d+'"]'));
                         }
                         // TODO : should use text version which is...
                         // $widget.find('option[value="'+$widget.val()+'"]').text()

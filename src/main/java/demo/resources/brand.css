@@ -115,7 +115,7 @@ form.custom {
 
 /* this should be media size/width dependent...not for mobile.*/
 form .row > [class*="col-"] {
-    margin-bottom:1%;
+    margin-bottom:1px;
 }
 
 .form-group {margin-bottom:1%!important;}

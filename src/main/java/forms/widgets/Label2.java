@@ -6,6 +6,7 @@ import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.LabelConfig;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
 
@@ -31,6 +32,14 @@ public class Label2 extends Label implements HasConfig {
         String text = getFormatter().format(this, config);
         setDefaultModel(Model.of(text));
     }
+
+    @Override
+    protected void onComponentTag(ComponentTag tag) {
+        tag.setName("label");
+        super.onComponentTag(tag);
+    }
+
+
 
     public LabelFormatter getFormatter() {
         String formatterName = config.getFormatter();

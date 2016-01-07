@@ -29,7 +29,7 @@ public class CheckBox_ extends Panel implements HasConfig {
         add(new CheckBox("checkbox", (IModel<Boolean>) getDefaultModel()));
     }
 
-//
+
 //    @Override
 //    protected void onComponentTag(ComponentTag tag) {
 //        tag.setName("input");

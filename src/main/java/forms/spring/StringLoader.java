@@ -8,10 +8,8 @@ public class StringLoader {
     //just a temp stash for strings... this really should be in db somewhere.
     static final Map<String, String> STRINGS =
             new ImmutableMap.Builder<String, String>()
-                    .put("button.next", "next")
-                    .put("button.cancel", "cancel")
+                    .put("label.reject", "we currently do not do business in your country.")
                     .put("label.thanks", "thank you for your payment of...")
-                    .put("button.finished", "finished")
                     .put("label.paymentMethod", "payment method")
                     .put("label.bogus", "blah")
                     .put("label.names", "my name is {1}, {0}.")
@@ -31,6 +29,9 @@ public class StringLoader {
                     .put("label.three", "three")
                     .put("label.hello", "hello")
                     .put("label.world", "world")
+                    .put("button.next", "next")
+                    .put("button.cancel", "cancel")
+                    .put("button.finished", "finished")
                     .put("button.ok", "ok")
                     .put("button.refresh", "refresh")
                     .put("button.submit", "submit")
