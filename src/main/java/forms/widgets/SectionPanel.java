@@ -8,7 +8,6 @@ import forms.Template;
 import forms.Workflow;
 import forms.model.WfCompoundPropertyModel;
 import forms.spring.WfNavigator;
-import forms.util.WfUtil;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.SectionPanelConfig;
@@ -125,7 +124,7 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
             public Integer getObject() {
                 int size = getList().size();
                 // make room for one tab to house the add button.
-                return config.canAdd ? size + 1 : size;
+                return (config.canAdd & size<=config.max) ? size+1 : size;
             }
         };
 
@@ -229,6 +228,9 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
 
     protected void deleteTab(AjaxRequestTarget target, int index) {
         getList().remove(index);
+        if (index==currentIndex && getList().size()>0) {
+            setIndex(Math.max(0, index-1));
+        }
     }
 
     protected boolean isMandatory() {

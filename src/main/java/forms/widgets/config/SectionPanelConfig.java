@@ -16,7 +16,7 @@ public class SectionPanelConfig extends GroupConfig<SectionPanel> {
     public boolean canAdd = true;
     public boolean collapsed;
     public int current = 0;
-    private int min=1, max = Integer.MAX_VALUE;
+    public int min=1, max = Integer.MAX_VALUE;
     private String template = null;
 
     public SectionPanelConfig(@Nonnull String name) {

@@ -34,7 +34,10 @@ public class InfoFormConfig extends FormConfig {
         with(new LabelConfig("label.two"));
         with(new LabelConfig("label.three"));
 
+        // TODO : add section handler!
         with(new SectionPanelConfig("names")
+                    .withAtLeastOne()
+                    .withMax(4)
                     .withAddTooltip("Add Person")
                     .withTitleForNewValues("New Person")
                     .withTitleInputs("first", "last")

@@ -18,6 +18,7 @@ public class GenericInsuranceObject implements Serializable {
     private Errors errors = new Errors();
     private demo.Name name = new demo.Name("","");
     private Insured insured = new Insured();
+    private List<Vehicle> vehicles = Lists.newArrayList();
     private Vehicle vehicle = new Vehicle();
     private Payment payment = new Payment();
     private List<demo.Name> names = Lists.newArrayList(
@@ -41,6 +42,10 @@ public class GenericInsuranceObject implements Serializable {
 
     public Vehicle getVehicle() {
         return vehicle;
+    }
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
     }
 
     public Name getName() {

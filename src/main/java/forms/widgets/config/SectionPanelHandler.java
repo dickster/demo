@@ -13,4 +13,9 @@ public class SectionPanelHandler {
         return Markup.of("<div>blank slate</div>");
     }
 
+    public String getTabTitle(Object /* <T> */ obj) {
+        // will i know type of object?? nah.....
+        return obj.toString();
+    }
+
 }
