@@ -38,16 +38,14 @@
             <p>Demo to show a simple configurable multi form workflow. <small wicket:id="greeting"></small></p>
 
             <form wicket:id="form">
+                <label>
+                    <span>Country</span>
+                    <select wicket:id="country" type="checkbox"/>
+                </label>
                 <div class="checkbox">
                     <label>
                         <input wicket:id="customWidgets" type="checkbox">
                         <span>Custom Widget Factory</span>
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input wicket:id="invalidData" type="checkbox">
-                        <span>Start with invalid data (test prevals)</span>
                     </label>
                 </div>
                 <div class="checkbox">
