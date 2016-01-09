@@ -21,35 +21,53 @@ var workflow = function() {
         }
     }
 
-    // TODO : copy classes from template data to source!
+    function templateElement($raw, $templ) {
+        $raw.insertAfter($templ);
+        var subTemplate = $templ.find('[data-template]');
+        if (subTemplate.length>0) {
+            $raw.find('.inner-template').replaceWith($templ);
+            layoutWithTemplate($raw);  // just use template() function?
+            $templ.removeAttr('data-template');  // need to do this to force it to show due to !important styling.
+            return;
+        } else {
+            $raw.addClass($templ.attr('class'));
+            validateTemplateElement($templ, $raw);
+        };
+    }
+
     var template = function($template_source, $template_data) {
         // find matching data-tempate= X =data-wf values.   copy the data-wf element over next to the template.
         $template_source.find('[data-template]').each(function(i,t) {
             var id = t.getAttribute('data-template');
-            var $original = $template_data.find('[data-wf="'+ id +'"]');
-            var $t = $(t);
+            var $raw = $template_data.find('[data-wf="'+ id +'"]');
+            var $templ = $(t);
+
             // now copy the original into the template.
-            if ($original.length>0) {
-                $original.insertAfter($t);  // TODO : does it copy if it already exists?  does it overwrite existing?
-                $original.addClass($t.attr('class'));
-                validateTemplateElement($t, $original);
+            if ($raw.length>0) {
+                templateElement($raw, $templ);
             }
             else {
                 console.log("WARNING : you have " + id + " in your template but can't find it in your form. it will be ignored.");
-                $t.addClass('unreferenced-template');
+                //$templ.addClass('unreferenced-template');
             }
-        });
 
-        // just for debugging reasons, mark any unused elements as "untemplated".
-        $template_data.find('[data-wf]').each(function(index, data) {
-            console.log("WARNING: " + data.getAttribute('data-wf') + " is not in template");
-            $(data).addClass('not-in-template');
         });
 
     }
 
-    // only do this once per request....  if form, do layout.
-    // if ajax, only do the component.  make sure you do this last.   push this onto queue.
+    var layoutWithTemplate = function($el) {
+        $el.find('.template-source').each(function(index,tmpl) {
+            var $template = $(tmpl);
+            var $data = $template.prev('.template-data');
+            template($template, $data);
+        });
+
+        // just for debugging reasons, mark any unused elements as "untemplated".
+        $el.find('.template-data [data-wf]').each(function(index, data) {
+            console.log("WARNING: " + data.getAttribute('data-wf') + " is not in template");
+//            $(data).addClass('not-in-template');
+        });
+    }
 
     var updateLayout = function($components) {
         updateCss($components);
@@ -63,17 +81,6 @@ var workflow = function() {
             var clss = $el.prev('[data-template]').attr('class');
             $el.addClass(clss);
         });
-    }
-
-    var layoutWithTemplate = function($el) {
-        var hasTemplates = false;
-        $el.find('.template-source').each(function(index,tmpl) {
-            var $template = $(tmpl);
-            var $data = $template.prev('.template-data');
-            template($template, $data);
-            hasTemplates = true;
-        });
-        return hasTemplates;
     }
 
     var init = function() {

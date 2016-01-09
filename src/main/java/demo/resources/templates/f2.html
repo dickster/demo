@@ -4,9 +4,31 @@
 
     <div class="container"><a class="pull-right" href="http://www.google.com">Click here to Google!</a></div>
 
-    <div data-template="names" data-template-class="section">
-        <p>this is where the names section goes.</p>
+    <div data-template="names" class="template-source section">
+        <div class="row">
+            <div class="col-md-3">
+                <label data-template="label.first">First</label>
+            </div>
+            <div class="col-md-3">
+                <label data-template="label.middle">Middle</label>
+            </div>
+            <div class="col-md-3">
+                <label data-template="label.last">Last</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <input type="text" data-template="first" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <input type="text" data-template="middle" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <input type="text" data-template="last" class="form-control">
+            </div>
+        </div>
     </div>
+
 
     <p></p>
     <hr>
@@ -82,3 +104,6 @@
     </div>
 
 </wicket:panel>
+
+
+

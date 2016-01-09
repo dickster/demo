@@ -4,7 +4,6 @@ package forms.widgets;
 import demo.FeedbackListener;
 import demo.FeedbackState;
 import demo.ISection;
-import forms.Template;
 import forms.Workflow;
 import forms.model.WfCompoundPropertyModel;
 import forms.spring.WfNavigator;
@@ -76,7 +75,6 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
     private Enum status = FeedbackState.HAS_WARNING;
     private Component statusIcon;
     private Component panel;
-    private Template template;
 
     public SectionPanel(final String id, SectionPanelConfig config) {
         super(id);
@@ -146,7 +144,6 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
         // TODO : put css class responsibility in .js? remove attribute appender.
         tabsContainer.add(statusIcon = new WebMarkupContainer("status").setOutputMarkupId(true).add(new AttributeAppender("class", getStatusCssModel())));
         form.add(panel = createPanel());
-        form.add(template = new Template("template", config.getTemplate()));
         setIndex(currentIndex);
     }
 

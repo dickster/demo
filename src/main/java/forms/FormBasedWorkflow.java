@@ -52,7 +52,6 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
     protected void changeState(WfFormState nextState, WfSubmitEvent event) {
         if (changeState(nextState)) {
             updateFormViaAjax(event);
-//            nextState.enter();
         }
     }
 

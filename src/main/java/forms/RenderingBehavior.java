@@ -12,6 +12,7 @@ import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 
+import javax.inject.Inject;
 import java.util.Map;
 
 public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdProvider {
@@ -19,8 +20,7 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
     // should shorten the .js name to reduce size of payload.    wf.widget(%s) ??
     private static final String INIT_WIDGET_JS = "workflow.initWidget(%s);";
 
-    // TODO : make this class a bean handled by container.  (and therefore allow injection of this gson).
-    private ConfigGson gson = new ConfigGson();
+    private @Inject ConfigGson gson;
 
     @Override
     public void onComponentTag(Component component, ComponentTag tag) {
@@ -35,7 +35,7 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
             tag.getAttributes().put(key, attributes.get(key));
         }
         if (!needsToBeWrapped(component)) {
-            // this should EITHER be put on component markup OR it's wrapped parent's markup.  (not both).
+            // this should EITHER be put on component markup OR it's wrapped parent's markup. (not both).
             tag.getAttributes().put("data-wf", getDataWf(component));
         }
     }

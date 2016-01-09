@@ -18,7 +18,6 @@ public class NameTypeAheadBehavior extends TypeAheadBehavior {
 
     @Override
     protected String getJson() {
-        // TODO : this is implementation specific stuff...should not be in core behavior.
         FormBasedWorkflow<GenericInsuranceObject> workflow = (FormBasedWorkflow<GenericInsuranceObject>) getWorkflow();
         GenericInsuranceObject obj = workflow.getObject();
         Set<Result> result = Sets.newHashSet();

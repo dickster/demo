@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Locale;
 
-// TODO : introduce a "CORE" theme with final methods of stuff that *must* be there.
+
 public class DefaultTheme implements Theme {
 
     // css references,

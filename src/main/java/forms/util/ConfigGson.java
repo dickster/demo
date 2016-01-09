@@ -15,8 +15,6 @@ public class ConfigGson implements Serializable {
     }
 
     public Gson getGson() {
-        // TODO : skip empty collections/arrays[0]!
-
         ExclusionStrategy skipUnexposedFieldsStrategy = new ExclusionStrategy() {
             @Override public boolean shouldSkipField(FieldAttributes f) {
                 IncludeInJson include = f.getAnnotation(IncludeInJson.class);

@@ -41,7 +41,6 @@ public class InfoFormConfig extends FormConfig {
                     .withAddTooltip("Add Person")
                     .withTitleForNewValues("New Person")
                     .withTitleInputs("first", "last")
-                    .withTemplate("_names")
                     .withConfigs(
                             new LabelConfig("label.first"),
                             new TextFieldConfig("first"),
