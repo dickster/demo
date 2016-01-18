@@ -4,6 +4,7 @@
 }
 
 .tt-dropdown-menu {
+    outline:1px solid blue;
     min-width: 160px;
     margin-top: 2px;
     padding: 5px 0;

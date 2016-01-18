@@ -1,6 +1,5 @@
 package forms;
 
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
@@ -44,14 +43,14 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
     public void onValidation(WfValidationEvent event) {
     }
 
-    @Subscribe
+    @Subscribe  //hmmm....i don't think i need this.
     public void onAjax(WfAjaxEvent event) {
 
     }
 
     @Override
     protected void changeState(WfFormState nextState, WfSubmitEvent event) {
-        if (changeState(nextState)) {;
+        if (changeState(nextState)) {
             updateFormViaAjax(event);
         }
     }

@@ -11,7 +11,6 @@ public class Name implements Serializable {
     public String salutation = "Mr.";
 
     public Name() {
-        System.out.println("name created by section panel.");
     }
 
     Name(String first, String last) {

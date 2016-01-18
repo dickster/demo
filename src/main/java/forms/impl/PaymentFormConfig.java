@@ -9,40 +9,45 @@ public class PaymentFormConfig extends FormConfig {
         super("Payment-Form");
         addConfigs();
         withTitle("Payment Information");
+        withTemplate("payment.html");
     }
 
     private void addConfigs() {
-        with(new LabelConfig("payment method"));
+        with(new LabelConfig("label.paymentMethod"));
         withConfig(new SelectPickerConfig("payment.method")
                 .withOptions(Lists.newArrayList("Credit Card", "Cash", "Direct Billing"))
-                .withAjaxBehavior("paymentMethodAjaxBehavior"));
-    // TODO : add some kind of ajax listener here...when # of digits is 12 then do ajax call?
-    // and enable submit button otherwise show error!
-    // need to write a field error widget in jquery Ui/bootstrap
-
-        with( new DivConfig("creditCardDiv")
-                .withConfigs(
-                        new LabelConfig("credit card number"),
-                        new CreditCardTextFieldConfig("payment.cc"),
-
-                        new LabelConfig("expiry date"),
-                        new TextFieldConfig("payment.expiry"),
-
-                        new LabelConfig("security code"),
-                        new TextFieldConfig<Integer>("payment.securityCode"),
-
-                        new LabelConfig("payment frequency"),
-                        new SelectPickerConfig<String>("payment.frequency")
-                                .withOptions(Lists.newArrayList(
-                                        "6 months",
-                                        "1 year",
-                                        "montly",
-                                        "daily",
-                                        "send the bill to my mother in law"
-                                )))
-                    .initiallyVisible(false)
+                .withDependentsFor(0,
+                        "label.ccNumber",
+                        "payment.cc",
+                        "label.ccExpiry",
+                        "payment.expiry",
+                        "label.ccSecurity",
+                        "payment.securityCode",
+                        "label.paymentFrequency",
+                        "payment.frequency"
+                        )
                 );
 
-        with(new ButtonConfig("next"));
+        withConfigs(
+                new LabelConfig("label.ccNumber"),
+                new CreditCardTextFieldConfig("payment.cc"),
+
+                new LabelConfig("label.ccExpiry"),
+                new TextFieldConfig("payment.expiry"),
+
+                new LabelConfig("label.ccSecurity"),
+                new TextFieldConfig<Integer>("payment.securityCode"),
+
+                new LabelConfig("label.paymentFrequency"),
+                new SelectPickerConfig<String>("payment.frequency")
+                        .withOptions(Lists.newArrayList(
+                                "6 months",
+                                "1 year",
+                                "montly",
+                                "daily",
+                                "send the bill to my mother in law"
+                        )));
+
+        with(new ButtonConfig("button.next"));
     }
 }

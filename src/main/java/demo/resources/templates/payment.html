@@ -1,0 +1,56 @@
+<wicket:panel>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <label data-template="label.paymentMethod"/>
+        </div>
+        <div class="col-md-3">
+            <select data-template="payment.method" class=""/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label data-template="label.ccNumber"/>
+        </div>
+        <div class="col-md-3">
+            <select data-template="payment.cc" class="form-control"/>
+        </div>
+        <div class="col-md-3">
+            <label data-template="label.ccExpiry"/>
+        </div>
+        <div class="col-md-3">
+            <select data-template="payment.expiry" class="form-control"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label data-template="label.ccSecurity"/>
+        </div>
+        <div class="col-md-3">
+            <select data-template="payment.securityCode" class="form-control"/>
+        </div>
+        <div class="col-md-3">
+            <label data-template="label.paymentFrequency"/>
+        </div>
+        <div class="col-md-3">
+            <select data-template="payment.frequency" class=""/>
+        </div>
+    </div>
+
+      <!--in order to compensate for footer-->
+    <p class="push"></p>
+
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <input type="button" class="btn btn-primary btn-submit" data-template="button.next" value="next">
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+</wicket:panel>

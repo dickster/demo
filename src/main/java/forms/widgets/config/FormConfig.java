@@ -40,7 +40,7 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
     }
 
     @Override
-    public Config withAjaxBehavior(String name) {
+    public Config withBehavior(String name) {
         throw new UnsupportedOperationException("you shouldn't be adding ajax behaviors to the form...add them to the contained components directly please and thank you.");
     }
 

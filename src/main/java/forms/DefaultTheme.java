@@ -13,7 +13,6 @@ import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
-import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
@@ -21,7 +20,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Locale;
 
-// TODO : introduce a "CORE" theme with final methods of stuff that *must* be there.
+
 public class DefaultTheme implements Theme {
 
     // css references,
@@ -30,11 +29,14 @@ public class DefaultTheme implements Theme {
     // name
     // default locale, settings.
 
-    private static final ResourceReference BRAND_CSS = new CssResourceReference(Resource.class,"brand.css");
+    private static final CssResourceReference BRAND_CSS = new CssResourceReference(Resource.class,"brand.css");
+
+    private static final CssResourceReference RESET_CSS = new CssResourceReference(Resource.class,"reset.css");
     private static final JavaScriptResourceReference CREDITCARD_VALIDATOR_JS = new JavaScriptResourceReference(Resource.class, "/creditcard/jquery.creditCardValidator.js");
     private static final JavaScriptResourceReference CREDITCARD_JS = new JavaScriptResourceReference(Resource.class, "creditCard.js");
     private static final JavaScriptResourceReference INPUTGROUP_JS = new JavaScriptResourceReference(Resource.class, "inputgroup.js");
     private static final JavaScriptResourceReference DELAYEDEVENT_JS = new JavaScriptResourceReference(Resource.class, "delayedEvent.js");
+    private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "type_ahead.js");
 
 
     @Override
@@ -78,14 +80,30 @@ public class DefaultTheme implements Theme {
         });
     }
 
+    // CAVEAT : override this at your own risk!
+    // these files are ones that every implementation should need.
     @Nonnull
-    public List<? extends HeaderItem> getHeaderItems() {
-        return Lists.newArrayList(getBodyClassHeaderItem(), CssHeaderItem.forReference(BRAND_CSS),
+    protected /*final*/ List<HeaderItem> getCoreHeaderItems() {
+        return Lists.newArrayList(getBodyClassHeaderItem(),
+                CssHeaderItem.forReference(RESET_CSS),
                 JavaScriptHeaderItem.forReference(DELAYEDEVENT_JS),
                 JavaScriptHeaderItem.forReference(CREDITCARD_VALIDATOR_JS),
                 JavaScriptHeaderItem.forReference(CREDITCARD_JS),
-                JavaScriptHeaderItem.forReference(INPUTGROUP_JS)
+                JavaScriptHeaderItem.forReference(INPUTGROUP_JS),
+                JavaScriptHeaderItem.forReference(TYPEAHEAD_JS)
         );
+    }
+
+    @Nonnull
+    public final List<? extends HeaderItem> getHeaderItems() {
+        List<HeaderItem> result = getCoreHeaderItems();
+        result.addAll(getCustomHeaderItems());
+        return result;
+    }
+
+    @Nonnull
+    protected List<? extends HeaderItem> getCustomHeaderItems() {
+        return Lists.newArrayList(CssHeaderItem.forReference(BRAND_CSS));
     }
 
     protected HeaderItem getBodyClassHeaderItem() {

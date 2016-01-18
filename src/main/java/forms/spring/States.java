@@ -1,7 +1,5 @@
 package forms.spring;
 
-import forms.WfFormState;
-import forms.WfState;
 import forms.impl.ConfirmationState;
 import forms.impl.InfoState;
 import forms.impl.PaymentState;
@@ -23,32 +21,32 @@ import org.springframework.context.annotation.Configuration;
 public class States {
 
     @Bean
-    public WfFormState infoState() {
+    public InfoState infoState() {
         return new InfoState();
     }
 
     @Bean
-    public WfFormState paymentState() {
+    public PaymentState paymentState() {
         return new PaymentState();
     }
 
     @Bean
-    public WfState referState() {
+    public ReferState referState() {
         return new ReferState();
     }
 
     @Bean
-    public WfFormState rejectedState() {
+    public RejectedState rejectedState() {
         return new RejectedState();
     }
 
     @Bean
-    public WfFormState confirmationState() {
+    public ConfirmationState confirmationState() {
         return new ConfirmationState();
     }
 
     @Bean
-    public WfFormState stateA() {
+    public StateA stateA() {
         return new StateA();
     }
 
@@ -63,32 +61,32 @@ public class States {
     }
 
     @Bean
-    public WfFormState state1() {
+    public State1 state1() {
         return new State1();
     }
 
     @Bean
-    public WfFormState stateC() {
+    public StateC stateC() {
         return new StateC();
     }
 
     @Bean
-    public WfFormState stateB() {
+    public StateB stateB() {
         return new StateB();
     }
 
     @Bean
-    public WfFormState stateAx() {
+    public StateAx stateAx() {
         return new StateAx();
     }
 
     @Bean
-    public WfFormState stateAy() {
+    public StateAy stateAy() {
         return new StateAy();
     }
 
     @Bean
-    public WfFormState stateError() {
+    public StateError stateError() {
         return new StateError();
     }
 

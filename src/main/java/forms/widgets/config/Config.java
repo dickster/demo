@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import forms.HasWorkflow;
@@ -13,6 +14,7 @@ import org.apache.wicket.Component;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,14 +26,14 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private static final String PLUGIN_NA = "n/a";
 
     private GroupConfig parent;
-    private Set<String> ajaxBehaviors = Sets.newHashSet();
+    private Set<String> behaviors = Sets.newHashSet();
     private boolean wrapHtmlOutput = false;
     private boolean initiallyVisible = true;
 
     // this is injected by the framework...don't set this yourself.
-    private @IncludeInJson String markupId;
-    private @IncludeInJson Boolean isAjax;
-    private @IncludeInJson String templateId;
+//    private @IncludeInJson String templateId;
+
+    private @IncludeInJson Map<Object, List<String>> dependents = Maps.newHashMap();
 
 
     // because two components can have the same property, we need two values.
@@ -40,9 +42,9 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     // values like "country1" & "country2".
     // Id's must be unique because in the DOM, this is the
     // value we use to find them.  (stuffed into data-wf attribute)
-    private String id;
-    private final String property;
-    private final Map<String, String> attributes = Maps.newHashMap();
+    private @IncludeInJson String id;
+    private @IncludeInJson final String property;
+    private @IncludeInJson final Map<String, String> attributes = Maps.newHashMap();
 
     private @IncludeInJson final String type;
     private @IncludeInJson final String pluginName;
@@ -176,7 +178,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     }
 
     public Config<T> withMarkupId(String markupId) {
-        this.markupId = markupId;
+        withOption("markupId", markupId);
         return this;
     }
 
@@ -184,6 +186,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     public void validate() {
         // override this if you want a chance to ensure your data is good before creating.
+        // probably should check any spring bean names to see if they exist.
     }
 
     protected final void post(@Nonnull Component component, @Nonnull Object event) {
@@ -208,14 +211,12 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return this;
     }
 
-    public Set<String> getAjaxBehaviors() {
-        return ImmutableSet.copyOf(ajaxBehaviors);
+    public Set<String> getBehaviors() {
+        return ImmutableSet.copyOf(behaviors);
     }
 
-    public Config withAjaxBehavior(String name) {
-        // check name.  if endsWith("ajaxBehavior") otherwise add it.
-        // look for spelling errors.
-        ajaxBehaviors.add(name);
+    public Config withBehavior(String name) {
+        behaviors.add(name);
         return this;
     }
 
@@ -239,17 +240,27 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return parent;
     }
 
-    public void setIsAjax(boolean ajax) {
-        this.isAjax = ajax;
-    }
-
     public Component validateAndCreate(String id) {
         validate();
         return create(id);
     }
 
-    public void setTemplateId(String templateId) {
-        this.templateId = templateId;
+    // these methods assume you are using a checkbox/radio button which has only stores boolean values.
+    //  for more control about which values are shown when, use other methods.
+    public Config withDependents(String... dependents) {
+        return withDependents(Lists.newArrayList(dependents));
+    }
+
+    public Config withDependents(List<String> dependents) {
+        this.dependents.put(Boolean.TRUE, dependents);
+        return this;
+    }
+    // -----------------
+
+
+    public Config withDependentsFor(Object key, String... dependents) {
+        this.dependents.put(key, Lists.newArrayList(dependents));
+        return this;
     }
 }
 

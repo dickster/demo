@@ -115,18 +115,19 @@ easy.address = (function() {
                 $lng.val(null);
             }
 
+            // note: fire change event just in case someone's listening to hidden fields.
             if (addressInfo) {
-                $street_address.val(extractFromGeoCode(addressInfo, 'street_number') + ' ' + extractFromGeoCode(addressInfo, 'route'));
-                $city.val(extractFromGeoCode(addressInfo, 'locality'));
-                $country.val(extractFromGeoCode(addressInfo, 'country'));
-                $postalCode.val(extractFromGeoCode(addressInfo, 'postal_code'));
-                $state.val(extractFromGeoCode(addressInfo, 'administrative_area_level_1'));
+                $street_address.val(extractFromGeoCode(addressInfo, 'street_number') + ' ' + extractFromGeoCode(addressInfo, 'route')).change();
+                $city.val(extractFromGeoCode(addressInfo, 'locality')).change();
+                $country.val(extractFromGeoCode(addressInfo, 'country')).change();
+                $postalCode.val(extractFromGeoCode(addressInfo, 'postal_code')).change();
+                $state.val(extractFromGeoCode(addressInfo, 'administrative_area_level_1')).change();
             } else {
-                $street_address.val(null);
-                $city.val(null);
-                $country.val(null);
-                $postalCode.val(null);
-                $state.val(null);
+                $street_address.val(null).change();
+                $city.val(null).change();
+                $country.val(null).change();
+                $postalCode.val(null).change();
+                $state.val(null).change();
             }
 
             currentInput = $text.val();

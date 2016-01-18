@@ -1,10 +1,12 @@
 package forms.impl;
 
+import com.google.common.collect.Lists;
 import forms.widgets.config.AddressConfig;
 import forms.widgets.config.ButtonConfig;
 import forms.widgets.config.FormConfig;
 import forms.widgets.config.LabelConfig;
 import forms.widgets.config.SectionPanelConfig;
+import forms.widgets.config.SelectPickerConfig;
 import forms.widgets.config.TextFieldConfig;
 
 public class InfoFormConfig extends FormConfig {
@@ -21,12 +23,24 @@ public class InfoFormConfig extends FormConfig {
 //        withConfig(new SelectPickerConfig<String>("name.salutation")
 //                .withOptions(Lists.newArrayList("Mr.", "Mrs.", "Ms", "Dr.")));
 
+        with(new LabelConfig("label.paymentMethod"));
+        withConfig(new SelectPickerConfig("payment.method")
+                .withOptions(Lists.newArrayList("Alpha", "Baker", "Charlie"))
+                .withDependentsFor(0, "label.one")
+                .withDependentsFor(1, "label.two")
+                .withDependentsFor(2, "label.three"));
 
+        with(new LabelConfig("label.one"));
+        with(new LabelConfig("label.two"));
+        with(new LabelConfig("label.three"));
+
+        // TODO : add section handler!
         with(new SectionPanelConfig("names")
+                    .withAtLeastOne()
+                    .withMax(4)
                     .withAddTooltip("Add Person")
                     .withTitleForNewValues("New Person")
                     .withTitleInputs("first", "last")
-                    .withTemplate("_names")
                     .withConfigs(
                             new LabelConfig("label.first"),
                             new TextFieldConfig("first"),
@@ -48,9 +62,12 @@ public class InfoFormConfig extends FormConfig {
         withConfig(new LabelConfig("label.address"));
         withConfig(new AddressConfig("insured.address"));
         withConfig(new LabelConfig("label.age"));
-        withConfig(new TextFieldConfig<Integer>("insured.age").withAjaxBehavior("paymentMethodAjaxBehavior"));
+        withConfig(new TextFieldConfig<Integer>("insured.age").withBehavior("ageOccupationAjaxBehavior"));
         withConfig(new LabelConfig("label.occupation"));
-        withConfig(new TextFieldConfig<Integer>("insured.occupation"));
+        withConfig(new TextFieldConfig<Integer>("insured.occupation").withBehavior("nameTypeAheadBehavior"));
+        withConfig(new LabelConfig("label.vehicleType"));
+        withConfig(new TextFieldConfig<Integer>("vehicle.type").withBehavior("vehicleTypeAheadBehavior"));
+
 
 //        withConfig(new LabelConfig("l1", "name.first"));
 //        withConfig(new LabelConfig("label.names").withData("name.first", "name.last"));
@@ -76,7 +93,7 @@ public class InfoFormConfig extends FormConfig {
 //        withConfig(new LabelConfig("vehicle year"));
 //        withConfig(new SelectPickerConfig<Integer>("vehicle.year")
 //                // this would typically be in a spring bean/ NOT inlined.
-//                .withOptions(new SelectOptionsService<Integer>() {
+//                .withOptions(new SelectOptionsProvider<Integer>() {
 //                    @Override
 //                    public List<Integer> getOptions() {
 //                        int startYear = (int) (Math.random() * 20 + 1950);
@@ -112,6 +129,7 @@ public class InfoFormConfig extends FormConfig {
 //        );
 
         with(new ButtonConfig("button.next"));
+        with(new ButtonConfig("button.cancel"));
     }
 
     private String getDrinkQuestion() {

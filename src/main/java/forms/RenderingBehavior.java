@@ -1,29 +1,26 @@
 package forms;
 
 import com.google.common.base.Preconditions;
-import forms.widgets.config.Config;
-import forms.widgets.config.HasConfig;
 import forms.util.ConfigGson;
 import forms.util.WfUtil;
-import forms.widgets.config.HasTemplate;
+import forms.widgets.config.Config;
+import forms.widgets.config.HasConfig;
 import org.apache.wicket.Component;
-import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.IAjaxRegionMarkupIdProvider;
 import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
-import org.apache.wicket.request.cycle.RequestCycle;
 
+import javax.inject.Inject;
 import java.util.Map;
 
-public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdProvider {
+public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdProvider {
 
     // should shorten the .js name to reduce size of payload.    wf.widget(%s) ??
     private static final String INIT_WIDGET_JS = "workflow.initWidget(%s);";
 
-    // TODO : make this class a bean handled by container.  (and therefore allow injection of this gson).
-    private ConfigGson gson = new ConfigGson();
+    private @Inject ConfigGson gson;
 
     @Override
     public void onComponentTag(Component component, ComponentTag tag) {
@@ -38,7 +35,7 @@ public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdP
             tag.getAttributes().put(key, attributes.get(key));
         }
         if (!needsToBeWrapped(component)) {
-            // this should EITHER be put on component markup OR it's wrapped parent's markup.  (not both).
+            // this should EITHER be put on component markup OR it's wrapped parent's markup. (not both).
             tag.getAttributes().put("data-wf", getDataWf(component));
         }
     }
@@ -52,15 +49,6 @@ public class RenderingBehaviour extends Behavior implements IAjaxRegionMarkupIdP
         // inject the markup id (need to do this everytime 'cause it's always changing).
         // the .js code will typically need this to find the element.
         config.withMarkupId(component.getMarkupId());
-
-        if (RequestCycle.get().find(AjaxRequestTarget.class)!=null) {
-            config.setIsAjax(true);
-        }
-
-        // TODO : unit test to make sure no components contain Templates without implementing the HasTemplate interface.
-        // could do this as a "debug mode only" validation.
-        String templateId = (component instanceof HasTemplate) ? ((HasTemplate)component).getTemplateId() : null;
-        config.setTemplateId(templateId);
 
         String js = String.format(INIT_WIDGET_JS, gson.toJson(config));
         response.render(OnDomReadyHeaderItem.forScript(js));

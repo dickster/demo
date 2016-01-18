@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class CreditCardOptionService implements SelectOptionsService<String> {
+public class CreditCardOptionService implements SelectOptionsProvider<String> {
     private List<String> options = Lists.newArrayList("MasterCard", "AMEX", "VISA" );
 
     // TODO : create a service that will read these from a .js variable.

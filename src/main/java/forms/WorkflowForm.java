@@ -2,12 +2,12 @@ package forms;
 
 import com.google.common.base.Preconditions;
 import demo.resources.Resource;
+import forms.spring.WfNavigator;
 import forms.util.WfUtil;
 import forms.widgets.config.Config;
 import forms.widgets.config.FeedbackPanelConfig;
 import forms.widgets.config.FormConfig;
 import forms.widgets.config.HasConfig;
-import forms.widgets.config.HasTemplate;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -30,12 +30,13 @@ import org.apache.wicket.util.visit.IVisit;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
-public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
+public class WorkflowForm extends Panel implements HasConfig {
 
     // this calls layout and initializes all widgets.
     private static final JavaScriptResourceReference WORKFLOW_JS = new JavaScriptResourceReference(Resource.class, "workflow.js");
 
     private @Inject Toolkit toolkit;
+    private @Inject WfNavigator wfNavigator;
 
     private Component visitorKludge;
 
@@ -49,7 +50,7 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
         super(id);
         withConfig(config);
         setOutputMarkupId(true);
-        add(new RenderingBehaviour());
+        add(new RenderingBehavior());
 
         setupHistory();
 
@@ -89,7 +90,7 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
     }
 
     private FormBasedWorkflow getWorkflow() {
-        return (FormBasedWorkflow) WfUtil.getWorkflow(this);
+        return (FormBasedWorkflow) wfNavigator.getWorkflow(this);
     }
 
     public WorkflowForm withConfig(FormConfig config) {
@@ -115,7 +116,7 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
     private Component createFeedbackPanel() {
         FeedbackPanelConfig config = formConfig.getFeedbackConfig();
         if (config==null) {
-            System.out.println("using default feedback panel. you probably should supply your own. ");
+            System.out.println("WARNING : using default feedback panel. you probably should supply your own. ");
             config = new FeedbackPanelConfig();
         }
         Component panel = getWorkflow().createWidget(config.getId(), config);
@@ -186,8 +187,4 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
         return formConfig;
     }
 
-    @Override
-    public String getTemplateId() {
-        return template.getMarkupId();
-    }
 }

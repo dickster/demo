@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Configuration;
 public class Utils {
 
     @Bean
-    public SelectOptionsService<String> northAmericaCountryOptions() {
+    public SelectOptionsProvider<String> northAmericaCountryOptions() {
         return new CountryOptionService();
     }
 
     @Bean
-    public SelectOptionsService<String> defaultCountryOptions() {
+    public SelectOptionsProvider<String> defaultCountryOptions() {
         return new CountryOptionService()
                 .withChoices("Germany", "France", "Russia", "Italy", "Switzerland", "Cambodia", "Chile", "North Korea", "Australia");
     }

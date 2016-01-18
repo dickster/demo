@@ -1,6 +1,8 @@
 package forms;
 
+import com.google.common.collect.Lists;
 import demo.resources.Resource;
+import forms.impl.PizzaModel;
 import forms.model.GenericInsuranceObject;
 import forms.util.IHello;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -11,12 +13,15 @@ import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+
+import java.util.List;
 
 public class StartingPoint extends WebPage {
 
@@ -40,24 +45,23 @@ public class StartingPoint extends WebPage {
 
         add(new Label("greeting", hello.greeting()));
 
+        final GenericInsuranceObject obj = new GenericInsuranceObject();
+        List<String> countries = Lists.newArrayList("Canada", "USA", "Mexico");
+
         add(new Form("form")
-                .add(new CheckBox("invalidData", new PropertyModel(this, "invalidData")))
+                .add(new DropDownChoice<String>("country", new PropertyModel(obj, "insured.country"), countries))
                 .add(new CheckBox("customTheme", new PropertyModel(toolkit, "customTheme")))
                 .add(new CheckBox("customWidgets", new PropertyModel(this, "customWidgets")))
                 .add(new AjaxSubmitLink("simple") {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                        super.onSubmit(target, form);
-                        GenericInsuranceObject obj = new GenericInsuranceObject();
-                        if (invalidData) obj.invalid();
                         setResponsePage(new WfPage("test", obj));
                     }
                 })
                 .add(new AjaxSubmitLink("order") {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                        super.onSubmit(target, form);
-                        setResponsePage(new WfPage("pizza", null));
+                        setResponsePage(new WfPage("pizza", new PizzaModel()));
                     }
                 }));
 

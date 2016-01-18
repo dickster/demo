@@ -51,6 +51,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         Preconditions.checkState(context != null);
         init(); // allow implementation specific initialization.
         started = true;
+        changeState(getStartingState());
         return this;
     }
 
@@ -66,6 +67,16 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     public void onDebug(@Nonnull WfDebugEvent event) {
         ; //  override this if you want to handle debug events.
         // should assert that you only get these in debug mode!!!
+    }
+
+    @Subscribe
+    public void onUnhandled(WfUnhandledEvent event) {
+        String js = String.format(
+                "alert('the state [%s] did not handle the submit event [%s]');",
+                event.getState(),
+                event.getObj().getName());
+        event.getTarget().appendJavaScript(js);
+
     }
 
     @Subscribe
@@ -109,6 +120,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         }
         validate(nextState);
         setCurrentState(nextState);
+        nextState.enter();
         statesVisited.put(getCurrentStateName(), getCurrentState());
         return true;
     }
@@ -118,8 +130,9 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     }
 
     @Subscribe
-    protected void unhandledEvent(DeadEvent event) {
+    public void deadEvent(DeadEvent event) {
         System.out.println("an event occurred with no listeners " + event);
+        // TODO : somehow send this to current page...override in FormBasedWorkflow.
     }
 
     public Object get(String key) {
@@ -193,9 +206,6 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     }
 
     protected final S getCurrentState() {
-        if (currentState==null) {
-            setCurrentState(getStartingState());
-        }
         return currentState;
     }
 
@@ -211,6 +221,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     public Component createWidget(String id, Config config) {
         Component widget = getWidgetFactory().createWidget(id, config);
         register(widget);
+
         return widget;
     }
 }

@@ -6,20 +6,8 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 
 public class WfDebugEvent extends WfEvent<String> {
 
-    private final Component component;
-    private final AjaxRequestTarget target;
-
     public WfDebugEvent(AjaxRequestTarget target, Component component) {
-        super(WfUtil.getComponentId(component));
-        this.target = target;
-        this.component = component;
+        super(WfUtil.getComponentId(component), target, component);
     }
 
-    public AjaxRequestTarget getTarget() {
-        return target;
-    }
-
-    public Component getComponent() {
-        return component;
-    }
 }

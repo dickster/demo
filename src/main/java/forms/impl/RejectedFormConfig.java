@@ -7,7 +7,7 @@ import forms.widgets.config.LabelConfig;
 public class RejectedFormConfig extends FormConfig {
     public RejectedFormConfig() {
         super("REJECTED-FORM");
-        with(new LabelConfig("we currently do not do business in your country."));
-        with(new ButtonConfig("ok"));
+        with(new LabelConfig("label.reject"));
+        with(new ButtonConfig("button.ok"));
     }
 }

@@ -3,12 +3,12 @@ package forms.impl;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import forms.spring.SelectOptionsService;
+import forms.spring.SelectOptionsProvider;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ToppingsService implements SelectOptionsService<String> {
+public class ToppingsService implements SelectOptionsProvider<String> {
 
     List<String> toppings = Lists.newArrayList(
             "pepperoni",

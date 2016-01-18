@@ -1,4 +1,4 @@
-package forms.ajax;
+package forms.behavior;
 
 import forms.spring.WfAjaxBehavior;
 import forms.WorkflowForm;
@@ -9,7 +9,7 @@ import org.apache.wicket.model.IModel;
 public class AgeOccupationAjaxBehavior extends WfAjaxBehavior {
 
     public AgeOccupationAjaxBehavior() {
-        super("inputchange change");
+        super("inputchange");
     }
 
     public AgeOccupationAjaxBehavior(String event) {

@@ -1,6 +1,6 @@
 package forms;
 
-import forms.spring.AjaxBehaviorFactory;
+import forms.spring.BehaviorFactory;
 import forms.widgets.config.Config;
 import forms.widgets.config.FormComponentConfig;
 import org.apache.wicket.Component;
@@ -21,7 +21,7 @@ public abstract class WidgetFactory implements Serializable {
     public static final MetaDataKey<String> MODEL_PREFIX = new MetaDataKey<String>(){};
     // ----------------------
 
-    private @Inject AjaxBehaviorFactory ajaxBehaviorFactory;
+    private @Inject BehaviorFactory behaviorFactory;
 
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
@@ -44,14 +44,15 @@ public abstract class WidgetFactory implements Serializable {
             addValidators(fc, fcc);
             setLabel(fc, fcc);
         }
-        addAjaxBehaviors(component, config);
-        addBehaviors(component);
+        addBehaviors(component, config);
+        addRenderingBehavior(component);
     }
 
-    protected void addBehaviors(Component c) {
+    protected void addRenderingBehavior(Component c) {
         // need to make rendering behaviour configurable/extendable.
         // make this a bean... .: i need a factory for this.
-        c.add(new RenderingBehaviour());
+        // put this in behaviorFactory
+        c.add(behaviorFactory.create("renderingBehavior"));
     }
 
     protected void setLabel(FormComponent component, FormComponentConfig config) {
@@ -71,9 +72,9 @@ public abstract class WidgetFactory implements Serializable {
         }
     }
 
-    private final void addAjaxBehaviors(Component component, Config<?> config) {
-        for (String handlerName:config.getAjaxBehaviors()) {
-            component.add(ajaxBehaviorFactory.create(handlerName));
+    private final void addBehaviors(Component component, Config<?> config) {
+        for (String handlerName:config.getBehaviors()) {
+            component.add(behaviorFactory.create(handlerName));
         }
     }
 

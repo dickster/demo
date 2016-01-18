@@ -7,10 +7,8 @@ import forms.widgets.config.ListConfig;
 
 public class Pizza1Config extends FormConfig {
 
-    public static final String PIZZA_1_CONFIG = "PIZZA-1";
-
     public Pizza1Config() {
-        super(PIZZA_1_CONFIG);
+        super("PIZZA-1");
         addConfigs();
         withTitle("Delicious Pizza");
     }
@@ -19,7 +17,7 @@ public class Pizza1Config extends FormConfig {
         with(new ListConfig("pizzas")
             .with(new LabelConfig("desc", true))
             .with(new LabelConfig("price", true)));
-        with(new ButtonConfig("ok"));
+        with(new ButtonConfig("button.ok"));
 
 //        with(new MultipleSelectPickerConfig("toppings")
 //               // .withChoices(Lists.newArrayList("pepperoni", "cheese", "sausage", "onions", "bacon", "pineapple", "mushrooms", "jello", "spinach"))

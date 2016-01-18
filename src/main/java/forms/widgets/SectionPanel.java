@@ -4,10 +4,9 @@ package forms.widgets;
 import demo.FeedbackListener;
 import demo.FeedbackState;
 import demo.ISection;
-import forms.Template;
 import forms.Workflow;
 import forms.model.WfCompoundPropertyModel;
-import forms.util.WfUtil;
+import forms.spring.WfNavigator;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.SectionPanelConfig;
@@ -41,6 +40,7 @@ import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 import java.util.List;
 
 public class SectionPanel<T extends Component> extends Panel implements FeedbackListener, ISection, HasConfig {
@@ -53,6 +53,8 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
 
     private static final JavaScriptHeaderItem TAB_PANEL_JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(SectionPanel.class, "sectionPanel.js"));
     private static final CssHeaderItem TAB_PANEL_CSS = CssHeaderItem.forReference(new CssResourceReference(SectionPanel.class,"sectionPanel.css"));
+
+    private @Inject WfNavigator wfNavigator;
 
 
 //---------------------------------------------------------------------------------
@@ -73,7 +75,6 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
     private Enum status = FeedbackState.HAS_WARNING;
     private Component statusIcon;
     private Component panel;
-    private Template template;
 
     public SectionPanel(final String id, SectionPanelConfig config) {
         super(id);
@@ -121,7 +122,7 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
             public Integer getObject() {
                 int size = getList().size();
                 // make room for one tab to house the add button.
-                return config.canAdd ? size + 1 : size;
+                return (config.canAdd & size<=config.max) ? size+1 : size;
             }
         };
 
@@ -143,7 +144,6 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
         // TODO : put css class responsibility in .js? remove attribute appender.
         tabsContainer.add(statusIcon = new WebMarkupContainer("status").setOutputMarkupId(true).add(new AttributeAppender("class", getStatusCssModel())));
         form.add(panel = createPanel());
-        form.add(template = new Template("template", config.getTemplate()));
         setIndex(currentIndex);
     }
 
@@ -158,7 +158,7 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
             @Override
             protected void onInitialize() {
                 super.onInitialize();
-                Workflow workflow = WfUtil.getWorkflow(this);
+                Workflow workflow = wfNavigator.getWorkflow(this);
                 for (int i=0; i<config.getConfigs().size(); i++) {
                     Config c = config.getConfigs().get(i);
                     add(workflow.createWidget(newChildId(), c));
@@ -225,6 +225,9 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
 
     protected void deleteTab(AjaxRequestTarget target, int index) {
         getList().remove(index);
+        if (index==currentIndex && getList().size()>0) {
+            setIndex(Math.max(0, index-1));
+        }
     }
 
     protected boolean isMandatory() {

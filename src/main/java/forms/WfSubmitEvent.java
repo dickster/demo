@@ -10,28 +10,16 @@ import java.util.Set;
 
 public class WfSubmitEvent extends WfEvent<String> {
 
-    private final AjaxRequestTarget target;
     private final Form<?> form;
-    private final Component component;
 
 
     public WfSubmitEvent(AjaxRequestTarget target, Component component, Form<?> form) {
-        super(WfUtil.getComponentId(component));
-        this.target = target;
+        super(WfUtil.getComponentId(component), target, component);
         this.form = form;
-        this.component = component;
-    }
-
-    public AjaxRequestTarget getTarget() {
-        return target;
     }
 
     public Form<?> getForm() {
         return form;
-    }
-
-    public Component getComponent() {
-        return component;
     }
 
     public boolean is(String name) {

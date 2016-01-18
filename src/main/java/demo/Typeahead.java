@@ -21,7 +21,7 @@ import java.util.List;
 public class Typeahead<T> extends TextField<T> {
 
     private static final String INIT_TYPEAHEAD_JS = "easy.typeahead.init(%s)";
-    private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Typeahead.class,"typeahead.js");
+    private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Typeahead.class,"type_ahead.js");
 
     private transient Gson gson = new Gson();
 

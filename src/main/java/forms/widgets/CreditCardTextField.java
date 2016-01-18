@@ -6,7 +6,7 @@ import forms.widgets.config.HasConfig;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.form.TextField;
 
-public class CreditCardTextField extends TextField<Long> implements HasConfig {
+public class CreditCardTextField extends TextField<String> implements HasConfig {
 
     private final CreditCardTextFieldConfig config;
 

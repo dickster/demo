@@ -53,9 +53,13 @@ public class WfState implements Serializable {
     }
 
     protected WfState unhandledEvent(Workflow workflow, WfSubmitEvent event) {
-        workflow.post(new UnhandledEvent(event));
+        workflow.post(new WfUnhandledEvent(this, event));
         return this;
-//        throw new IllegalArgumentException("the event " + event.getName() + " is not handled in state " + getClass().getSimpleName());
     }
 
+
+    public void enter() {
+        // override this if you want to do something when entering state.
+        // for example, you might want to hide/show some fields depending on incoming m
+    }
 }

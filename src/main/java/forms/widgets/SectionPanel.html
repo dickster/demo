@@ -1,7 +1,7 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
     <form wicket:id="form">
 
-        <!--do i need this container any more???-->
+        <!--TODO : do i need this container any more???-->
         <div wicket:id="tabsContainer" role="tabpanel">
 
             <ul class="nav nav-tabs" role="tablist">
@@ -21,8 +21,8 @@
         <div wicket:id="container" class="template-data tab-pane container active">
             <div wicket:id="panel"/>
         </div>
-        <div wicket:id="template" class="template-source"/>
-
+        <!--this tells template engine to put its stuff here...-->
+        <div class="inner-template"/>
         <!--TODO : DD implement blank slate-->
     </form>
 </wicket:panel>

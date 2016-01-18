@@ -1,9 +1,12 @@
 package forms;
 
+import com.google.common.eventbus.Subscribe;
 import demo.resources.Resource;
 import forms.model.WfCompoundPropertyModel;
+import forms.widgets.WfPostalCodeChangedEvent;
 import org.apache.wicket.Application;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
+import org.apache.wicket.devutils.debugbar.DebugBar;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
@@ -31,7 +34,6 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     private static final CssResourceReference SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-select.css");
     private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/typeahead.bundle.js");
     private static final JavaScriptResourceReference LAYOUTDEF_JS = new JavaScriptResourceReference(Resource.class, "layoutDef.js");
-    private static final CssResourceReference TYPEAHEAD_CSS = new CssResourceReference(Resource.class,"bootstrap-3.1.1-dist/css/typeahead.bootstrap.css");
 
     private static final String INIT = "workflow.init();";
     private static final String FORM_ID = "form";
@@ -52,6 +54,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
         // NOTE : what to do if page times out? is workflow saved as a draft?
         // do i throw it away?
         this.workflow = wfFactory.create(workflowType);
+        workflow.register(this);
         if (obj!=null) {
             this.workflow.withModel(new WfCompoundPropertyModel(obj));
         }
@@ -59,27 +62,9 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
         setDefaultModel(workflow.getModel());
         add(workflow.createForm(FORM_ID, workflow.getCurrentFormConfig()));
 
-        testModel(workflow.getModel());
-
+        add(new DebugBar("debugBar"));
 
         add(new Label("subheader", getSubHeader()));
-    }
-
-    private void testModel(WfCompoundPropertyModel model) {
-//        Object x = new PropertyModel(model, "name.first").getObject();
-//        System.out.println(x);
-//         x = new PropertyModel(model, "vehicle.type").getObject();
-//        System.out.println(x);
-//         x = new PropertyModel(model, "insured.contact.email").getObject();
-//        System.out.println(x);
-//         x = new PropertyModel(model, "insured.age").getObject();
-//        System.out.println(x);
-//         x = new PropertyModel(model, "name.middle").getObject();
-//        System.out.println(x);
-//         x = new PropertyModel(model, "name.last").getObject();
-//        System.out.println(x);
-//         x = new PropertyModel(model, "name.salutation").getObject();
-//        System.out.println(x);
     }
 
     private WorkflowForm getWorkflowForm() {
@@ -110,5 +95,10 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
 
     public IModel<?> getSubHeader() {
         return Model.of(getWorkflowForm().getSubHeader());
+    }
+
+    @Subscribe
+    public void onPostalCodeChange(WfPostalCodeChangedEvent event) {
+
     }
 }
