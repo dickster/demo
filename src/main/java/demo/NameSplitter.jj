@@ -1,0 +1,82 @@
+options
+{
+    LOOKAHEAD=4;
+    FORCE_LA_CHECK=true;
+    STATIC=false;
+    IGNORE_CASE=true;
+    USER_TOKEN_MANAGER=false;
+    USER_CHAR_STREAM=false;
+}
+
+
+PARSER_BEGIN(NameSplitter)
+package demo;
+
+import java.io.*;
+import java.util.*;
+
+
+public class NameSplitter {
+
+    List<String> names;
+
+    public NameSplitter() {
+        this(new ByteArrayInputStream("".getBytes()));
+    }
+
+    // use this method...don't call parse() directly!
+    // because need to re-init variables and reset input.
+    public List<String> parseName(String text) throws ParseException, TokenMgrError {
+        System.out.print("parsing..." + text + " : " + "\n  ");
+        init();
+        ReInit(new StringReader(text));
+        _$$parse();
+        return names;
+    }
+
+    private void init() {
+        names = new ArrayList<String>();
+    }
+
+}
+PARSER_END(NameSplitter)
+
+SKIP :
+{
+    " "
+    | "\t"
+    | "\r"
+    | "\n"
+}
+
+TOKEN : {
+    <AND:"+"|"&"|"'n"|"and"|";"> |
+    <TEXT : (["\u00e0"-"\u0466"]|
+     ["a"-"z","\"","-","'","."])+ >
+}
+
+void end() : {}
+{
+    (<EOF>)
+}
+
+void _$$parse() : {}
+{
+    LOOKAHEAD(text() and())
+        text() (and() text()*)* |
+        text()
+}
+
+void and() : {}
+{
+    <AND>
+}
+
+void text() : {}
+{
+    <TEXT> { names.add(token.image); }
+}
+
+
+
+

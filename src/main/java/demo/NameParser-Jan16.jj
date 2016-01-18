@@ -52,9 +52,18 @@ public class NameParser {
     public NameResult parseName(String text) throws ParseException, TokenMgrError {
         System.out.print("parsing..." + text + " : " + "\n  ");
         init();
+        //text = normalizeForComma(text); // is it something like "Smith, Mr. John"?
         ReInit(new StringReader(text));
         _$$parse();
         return names.collate();
+    }
+
+    private String normalizeForComma(String text) {
+        int index = text.indexOf(",");
+        if (index==-1) return text;
+        String t = text.substring(index+1) + " " + text.substring(0,index);
+        System.out.println(" comma normalized " + text + " --> " + t);
+        return t;
     }
 
     private void init() {
@@ -126,14 +135,11 @@ TOKEN:
     <ROMAN_NUMERALS:(["m","c","d","l","i","x","v"])+> |
     <SECOND:"2nd"> |
     <THIRD:"3rd"> |
-    <LLB:"ll"(".")?"b"> |
     <ESQ:"esquire"|"esq"(".")?> |
     <JD:"jd"|"j.d."> |
     <PHD:"phd"|"ph.d"> |
     <BSC:"b"(".")?"sc"> |
-    <MD:"md"("d")| "m.d.d."> |
-    <DDS:"dds"> |
-    <DMD:"dmd"> |
+    <MD:"md"| "m.d."> |
     <CP:"cp"| "c.p."> |
     <SENIOR:"sr"(".")?|"senior"> |
     <JUNIOR:"jr"(".")?|"junior">
@@ -156,19 +162,22 @@ void end() : {}
 
 void _$$parse() : {}
 {
-    LOOKAHEAD(lastName() <COMMA>)
-        lastName() <COMMA> longName() end() |
-        longName() end()
+    LOOKAHEAD(shortOrLongName() and())
+       shortOrLongName() and() longName() end() |
+       longName() end()
 }
 
-void lastName() : {getName().setInverse(true);}
+void shortOrLongName() : {}
 {
-    (namePrefix())? nameRoot()
+    LOOKAHEAD(salutation())
+        salutation() (name())* (relation())* |
+        (longName())
 }
+
 
 void longName() : {}
 {
-    (salutation())* (name())+ ((<COMMA>)? relation())? (<COMMA>)? (title() (<COMMA>)?)*
+    (salutation())* (name())+ (relation())*
 }
 
 void and() : {} {
@@ -185,11 +194,8 @@ void salutation() : {}
 }
 
 void relation() : {} {
-    (<SECOND>|<THIRD>|<SENIOR>|<JUNIOR>|<ROMAN_NUMERALS>) {getName().addRelation(token.image);}
-}
-
-void title() : {} {
-    (<LLB>|<DDS>|<DMD>|<ESQ>|<JD>|<BSC>|<PHD>|<MD>|<CP>){getName().addTitle(token.image);}
+// TODO : allow for commas.  e.g. Joe blow, PHd, B.Sc
+    (<SECOND>|<THIRD>|<ESQ>|<JD>|<BSC>|<PHD>|<SENIOR>|<JUNIOR>|<ROMAN_NUMERALS>) {getName().addRelation(token.image);}
 }
 
 void name() : {}

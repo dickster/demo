@@ -50,11 +50,11 @@ public class NameParser {
     // use this method...don't call parse() directly!
     // because need to re-init variables and reset input.
     public NameResult parseName(String text) throws ParseException, TokenMgrError {
-        System.out.print("parsing..." + text + " : " + "\n  ");
+        System.out.print("parsing..." + text + " : ");
         init();
         ReInit(new StringReader(text));
         _$$parse();
-        return names.collate();
+        return names;
     }
 
     private void init() {
@@ -77,16 +77,17 @@ SKIP :
     | "\n"
 }
 
-
+//        "bar", "ben", "bin", "da", "dal",
+//        "de la", "de", "del", "der", "di", "ibn", "la", "le",
+//        "san", "st", "ste", "van", "van der", "van den", "vel",
+//        "von" );
 TOKEN:
 {
-    <COMMA:","> |
     <AND:"+"|"&"|"'n"|"and"> |
     // prefixes......
-    <HON:"hon"(".")?("orable")?> |
     <MR:"mister"|"mr"(".")?> |
     <MRS:"misses"|"mrs"(".")?> |
-    <MISS:"miss"(".")?> |
+    <MISS:"miss"> |
     <MS:"ms"(".")?> |
     <MADAM:("madam"|"maam"|"mdm"(".")?|"mm"(".")?)> |
     <SIR:"sir"> |
@@ -97,26 +98,20 @@ TOKEN:
     <BAR:"bar"> |
     <BEN:"ben"> |
     <BIN:"bin"> |
-    <BINTI:"binti"> |
-    <BINTE:"binte"> |
     <DA:"da"> |
-    <DE:"de"> |
     <DAL:"dal"> |
     <DELA:"dela"> |
-    <DE_LA:"de la"> |
     <DER:"der"> |
     <DI:"di"> |
     <IBN:"ibn"> |
     <LA:"la"> |
     <LE:"le"> |
-    <L_APOST:"l"("'")?> |
     <MAC:"mac"> |
     <MC:"mc"> |
-    <OH:"o'"> |
+    <OH:"o"("'")?> |
     <SAN:"san"> |
     <ST:"st"> |
     <STE:"ste"> |
-    <THE:"the"> |
     <VAN_DER:"van der"> |
     <VAN:"van"> |
     <VAN_DEN:"van den"> |
@@ -126,14 +121,10 @@ TOKEN:
     <ROMAN_NUMERALS:(["m","c","d","l","i","x","v"])+> |
     <SECOND:"2nd"> |
     <THIRD:"3rd"> |
-    <LLB:"ll"(".")?"b"> |
     <ESQ:"esquire"|"esq"(".")?> |
     <JD:"jd"|"j.d."> |
     <PHD:"phd"|"ph.d"> |
-    <BSC:"b"(".")?"sc"> |
-    <MD:"md"("d")| "m.d.d."> |
-    <DDS:"dds"> |
-    <DMD:"dmd"> |
+    <MD:"md"| "m.d."> |
     <CP:"cp"| "c.p."> |
     <SENIOR:"sr"(".")?|"senior"> |
     <JUNIOR:"jr"(".")?|"junior">
@@ -142,11 +133,17 @@ TOKEN:
 TOKEN : {
 // TODO : allow for brackets around nickname.
     <QUOTED_NICK_NAME: "\"" (~["\""])+ "\"" > |
-    <SINGLE_QUOTED_NICK_NAME: "'" (~["\""])+ "'" > |
     <PAREN_NICK_NAME: "(" (~[")"])+ ")" > |
 // TODO : make sure i have all accent chars.
     <NAME : (["\u00e0"-"\u0466"]|
      ["a"-"z","-","'","."])+ >
+}
+
+void _$$parse() : {}
+{
+    LOOKAHEAD(shortOrLongName() and())
+       shortOrLongName() and() fullName() end() |
+       fullName() end()
 }
 
 void end() : {}
@@ -154,22 +151,22 @@ void end() : {}
     (<EOF>) {names.peek().endParse();}
 }
 
-void _$$parse() : {}
+void shortOrLongName() : {}
 {
-    LOOKAHEAD(lastName() <COMMA>)
-        lastName() <COMMA> longName() end() |
-        longName() end()
+    LOOKAHEAD(salutation())
+        (salutation())+ (name())* (relation())* |
+        (name())+ (relation())*
 }
 
-void lastName() : {getName().setInverse(true);}
+
+void fullName() : {}
 {
-    (namePrefix())? nameRoot()
+    (salutation())*
+    // TODO : change this to name? nickname? name*
+    (name())+
+    (relation())*
 }
 
-void longName() : {}
-{
-    (salutation())* (name())+ ((<COMMA>)? relation())? (<COMMA>)? (title() (<COMMA>)?)*
-}
 
 void and() : {} {
     (<AND>)  {
@@ -180,40 +177,36 @@ void and() : {} {
 
 void salutation() : {}
 {
-    (<HON>|<MR>|<MRS>|<MISS>|<MS>|<SIR>|<MADAM>|<ATTY>|<DOCTOR>|<PROF>)
+    (<MR>|<MRS>|<MISS>|<MS>|<SIR>|<MADAM>|<ATTY>|<DOCTOR>|<PROF>)
      {getName().addSalutation(token.image);}
 }
 
 void relation() : {} {
-    (<SECOND>|<THIRD>|<SENIOR>|<JUNIOR>|<ROMAN_NUMERALS>) {getName().addRelation(token.image);}
-}
-
-void title() : {} {
-    (<LLB>|<DDS>|<DMD>|<ESQ>|<JD>|<BSC>|<PHD>|<MD>|<CP>){getName().addTitle(token.image);}
+    (<SECOND>|<THIRD>|<ESQ>|<JD>|<PHD>|<SENIOR>|<JUNIOR>|<ROMAN_NUMERALS>) {getName().addRelation(token.image);}
 }
 
 void name() : {}
 {
-    nickName() |
     (namePrefix())? nameRoot()
 }
+
 
 void nameRoot() : {}
 {
     (<NAME>) { getName().add(token.image); }
 }
 
+void nickName() : {}
+{
+    (<QUOTED_NICK_NAME>|<PAREN_NICK_NAME>) { getName().addNickName(token.image); }
+}
+
 void namePrefix() : {}
 {
-    (<BAR>|<BEN>|<BIN>|<BINTI>|<BINTE>|<DA>|<DAL>|<DE>|<DELA>|<DE_LA>|<DER>|<DI>|<IBN>|<LA>|<L_APOST>|<LE>|<MAC>|<MC>|<OH>|<SAN>|<ST>|<STE>|<THE>|<VAN_DER>|<VAN>|<VAN_DEN>|<VEL>|<VON>)
+    (<BAR>|<BEN>|<BIN>|<DA>|<DAL>|<DELA>|<DER>|<DI>|<IBN>|<LA>|<LE>|<MAC>|<MC>|<OH>|<SAN>|<ST>|<STE>|<VAN_DER>|<VAN>|<VAN_DEN>|<VEL>|<VON>)
         { getName().pushPrefix(token.image); }
 }
 
-
-void nickName() : {}
-{
-    (<SINGLE_QUOTED_NICK_NAME>|<QUOTED_NICK_NAME>|<PAREN_NICK_NAME>) { getName().addNickName(token.image); }
-}
 
 
 

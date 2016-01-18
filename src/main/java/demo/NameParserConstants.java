@@ -11,31 +11,121 @@ public interface NameParserConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int AND = 5;
+  int COMMA = 5;
   /** RegularExpression Id. */
-  int MR = 6;
+  int AND = 6;
   /** RegularExpression Id. */
-  int MRS = 7;
+  int HON = 7;
   /** RegularExpression Id. */
-  int MISS = 8;
+  int MR = 8;
   /** RegularExpression Id. */
-  int MADAM = 9;
+  int MRS = 9;
   /** RegularExpression Id. */
-  int SIR = 10;
+  int MISS = 10;
   /** RegularExpression Id. */
   int MS = 11;
   /** RegularExpression Id. */
-  int DOCTOR = 12;
+  int MADAM = 12;
   /** RegularExpression Id. */
-  int ROMAN_NUMERALS = 13;
+  int SIR = 13;
   /** RegularExpression Id. */
-  int SENIOR = 14;
+  int ATTY = 14;
   /** RegularExpression Id. */
-  int JUNIOR = 15;
+  int PROF = 15;
   /** RegularExpression Id. */
-  int NICK_NAME = 16;
+  int DOCTOR = 16;
   /** RegularExpression Id. */
-  int NAME = 17;
+  int BAR = 17;
+  /** RegularExpression Id. */
+  int BEN = 18;
+  /** RegularExpression Id. */
+  int BIN = 19;
+  /** RegularExpression Id. */
+  int BINTI = 20;
+  /** RegularExpression Id. */
+  int BINTE = 21;
+  /** RegularExpression Id. */
+  int DA = 22;
+  /** RegularExpression Id. */
+  int DE = 23;
+  /** RegularExpression Id. */
+  int DAL = 24;
+  /** RegularExpression Id. */
+  int DELA = 25;
+  /** RegularExpression Id. */
+  int DE_LA = 26;
+  /** RegularExpression Id. */
+  int DER = 27;
+  /** RegularExpression Id. */
+  int DI = 28;
+  /** RegularExpression Id. */
+  int IBN = 29;
+  /** RegularExpression Id. */
+  int LA = 30;
+  /** RegularExpression Id. */
+  int LE = 31;
+  /** RegularExpression Id. */
+  int L_APOST = 32;
+  /** RegularExpression Id. */
+  int MAC = 33;
+  /** RegularExpression Id. */
+  int MC = 34;
+  /** RegularExpression Id. */
+  int OH = 35;
+  /** RegularExpression Id. */
+  int SAN = 36;
+  /** RegularExpression Id. */
+  int ST = 37;
+  /** RegularExpression Id. */
+  int STE = 38;
+  /** RegularExpression Id. */
+  int THE = 39;
+  /** RegularExpression Id. */
+  int VAN_DER = 40;
+  /** RegularExpression Id. */
+  int VAN = 41;
+  /** RegularExpression Id. */
+  int VAN_DEN = 42;
+  /** RegularExpression Id. */
+  int VEL = 43;
+  /** RegularExpression Id. */
+  int VON = 44;
+  /** RegularExpression Id. */
+  int ROMAN_NUMERALS = 45;
+  /** RegularExpression Id. */
+  int SECOND = 46;
+  /** RegularExpression Id. */
+  int THIRD = 47;
+  /** RegularExpression Id. */
+  int LLB = 48;
+  /** RegularExpression Id. */
+  int ESQ = 49;
+  /** RegularExpression Id. */
+  int JD = 50;
+  /** RegularExpression Id. */
+  int PHD = 51;
+  /** RegularExpression Id. */
+  int BSC = 52;
+  /** RegularExpression Id. */
+  int MD = 53;
+  /** RegularExpression Id. */
+  int DDS = 54;
+  /** RegularExpression Id. */
+  int DMD = 55;
+  /** RegularExpression Id. */
+  int CP = 56;
+  /** RegularExpression Id. */
+  int SENIOR = 57;
+  /** RegularExpression Id. */
+  int JUNIOR = 58;
+  /** RegularExpression Id. */
+  int QUOTED_NICK_NAME = 59;
+  /** RegularExpression Id. */
+  int SINGLE_QUOTED_NICK_NAME = 60;
+  /** RegularExpression Id. */
+  int PAREN_NICK_NAME = 61;
+  /** RegularExpression Id. */
+  int NAME = 62;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -47,18 +137,63 @@ public interface NameParserConstants {
     "\"\\t\"",
     "\"\\r\"",
     "\"\\n\"",
+    "\",\"",
     "<AND>",
+    "<HON>",
     "<MR>",
     "<MRS>",
-    "\"miss\"",
+    "<MISS>",
+    "<MS>",
     "<MADAM>",
     "\"sir\"",
-    "<MS>",
+    "<ATTY>",
+    "<PROF>",
     "<DOCTOR>",
+    "\"bar\"",
+    "\"ben\"",
+    "\"bin\"",
+    "\"binti\"",
+    "\"binte\"",
+    "\"da\"",
+    "\"de\"",
+    "\"dal\"",
+    "\"dela\"",
+    "\"de la\"",
+    "\"der\"",
+    "\"di\"",
+    "\"ibn\"",
+    "\"la\"",
+    "\"le\"",
+    "<L_APOST>",
+    "\"mac\"",
+    "\"mc\"",
+    "\"o\\\'\"",
+    "\"san\"",
+    "\"st\"",
+    "\"ste\"",
+    "\"the\"",
+    "\"van der\"",
+    "\"van\"",
+    "\"van den\"",
+    "\"vel\"",
+    "\"von\"",
     "<ROMAN_NUMERALS>",
+    "\"2nd\"",
+    "\"3rd\"",
+    "<LLB>",
+    "<ESQ>",
+    "<JD>",
+    "<PHD>",
+    "<BSC>",
+    "<MD>",
+    "\"dds\"",
+    "\"dmd\"",
+    "<CP>",
     "<SENIOR>",
     "<JUNIOR>",
-    "<NICK_NAME>",
+    "<QUOTED_NICK_NAME>",
+    "<SINGLE_QUOTED_NICK_NAME>",
+    "<PAREN_NICK_NAME>",
     "<NAME>",
   };
 

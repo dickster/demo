@@ -9,20 +9,15 @@ import java.util.Stack;
 
 public class NameResult extends Stack<Name> {
 
-    public Name getName() {
-        return merge();
-    }
-
     public Collection<Name> getNames() {
         return this;
     }
 
-    private final Name merge() {
-        Preconditions.checkState(size()==1 || size()==2, "can't merge if there are no names or too many names : " + size());
-        if (size()==1) {
-            return get(0);
+    public NameResult collate() {
+        if (size()==2) {
+            get(0).merge(get(1));
         }
-        return get(0).merge(get(1));
+        return this;
     }
 
     public boolean isTwoPeople() {
@@ -37,4 +32,5 @@ public class NameResult extends Stack<Name> {
         });
         return ambiguous.iterator().hasNext();
     }
+
 }
