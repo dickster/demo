@@ -2,10 +2,19 @@
     <input wicket:id="state" type="hidden"/>
     <div wicket:id="feedback" class="bg-danger"/>
 
-    <form wicket:id="form" role="form" class="form">
-        <div wicket:id="content" class="template-data"></div>
-        <div wicket:id="template" class="template-source"></div>
+    <form wicket:id="form" role="form" class="form template-model">
+        <!--the model is injected into the layout.-->
+        <div wicket:id="content"/>
+        <div wicket:id="template" class="template-layout"/>
     </form>
+
+<!-- dont' need ajax listener? -->
+    <!--plugin for forms = layout .form-layout/.form-model -->
+    <!--plugin for section panel includes layout (common code based on selectors)-->
+    <!--layout(.model-selector).-->
+    <!--.: add a common template selector id option to all configs.-->
+    <!--withTemplate("f2"); setOutputMarkupId("$f2$") -->
+    <!--will add template string and setOption("tmpl", ??)-->
 
 </wicket:panel>
 

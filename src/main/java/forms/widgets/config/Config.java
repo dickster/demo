@@ -92,11 +92,11 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     }
 
     // ALIAS for withId();
-    public Config name(String name) {
+    public Config<T> name(String name) {
         return withId(name);
     }
 
-    public Config withId(String id) {
+    public Config<T> withId(String id) {
         this.id = id;
         return this;
     }
@@ -109,7 +109,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return attributes.get(CLASS);
     }
 
-    public Config withCss(String css) {
+    public Config<T> withCss(String css) {
         withAttribute(CLASS, css);
         return this;
     }
@@ -130,16 +130,16 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return this;
     }
 
-    public Config withAttribute(String key, String value) {
+    public Config<T> withAttribute(String key, String value) {
         attributes.put(key, value);
         return this;
     }
 
-    public Config withAttribute(String key) {
+    public Config<T> withAttribute(String key) {
         return withAttribute("");
     }
 
-    public Config appendAttribute(String key, String value) {
+    public Config<T> appendAttribute(String key, String value) {
         String v = attributes.get(key);
         if (v!=null) {
             attributes.put(key, Joiner.on(" ").join(v, value));
@@ -150,7 +150,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return this;
     }
 
-    public Config appendCss(String css) {
+    public Config<T> appendCss(String css) {
         appendAttribute(CLASS, css);
         return this;
     }
@@ -163,7 +163,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return ImmutableMap.copyOf(options);
     }
 
-    public Config withOption(String key, Object value) {
+    public Config<T> withOption(String key, Object value) {
         options.put(key, value);
         return this;
     }
@@ -177,7 +177,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return pluginName;
     }
 
-    public Config<T> withMarkupId(String markupId) {
+    public Config<T> injectMarkupId(String markupId) {
         withOption("markupId", markupId);
         return this;
     }
@@ -206,7 +206,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return wrapHtmlOutput;
     }
 
-    public Config withWrappedHtmlOutput() {
+    public Config<T> withWrappedHtmlOutput() {
         wrapHtmlOutput = true;
         return this;
     }
@@ -226,12 +226,12 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return initiallyVisible;
     }
 
-    public Config initiallyVisible(boolean vis) {
+    public Config<T> initiallyVisible(boolean vis) {
         this.initiallyVisible = vis;
         return this;
     }
 
-    public Config withParent(GroupConfig groupConfig) {
+    public Config<T> withParent(GroupConfig groupConfig) {
         this.parent = groupConfig;
         return this;
     }
@@ -247,20 +247,20 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     // these methods assume you are using a checkbox/radio button which has only stores boolean values.
     //  for more control about which values are shown when, use other methods.
-    public Config withDependents(String... dependents) {
+    public Config<T> withDependents(String... dependents) {
         return withDependents(Lists.newArrayList(dependents));
     }
 
-    public Config withDependents(List<String> dependents) {
+    public Config<T> withDependents(List<String> dependents) {
         this.dependents.put(Boolean.TRUE, dependents);
         return this;
     }
     // -----------------
 
-
-    public Config withDependentsFor(Object key, String... dependents) {
+    public Config<T> withDependentsFor(Object key, String... dependents) {
         this.dependents.put(key, Lists.newArrayList(dependents));
         return this;
     }
+
 }
 

@@ -13,6 +13,12 @@ public abstract class GroupConfig<T extends Component & HasConfig> extends Confi
     private boolean renderBodyOnly = false;
     private List<Config> configs = Lists.newArrayList();
     private @IncludeInJson String title;
+    private String templateLayout;
+    private String templateModel;
+
+
+
+
 
     public GroupConfig(@Nonnull String name) {
         super(name, WidgetTypeEnum.CONTAINER);
@@ -102,4 +108,16 @@ public abstract class GroupConfig<T extends Component & HasConfig> extends Confi
         return result;
     }
 
+    public Config<T> withTemplate(String template) {
+        this.templateLayout = template;
+        return this;
+    }
+
+    public String getTemplateLayout() {
+        return templateLayout;
+    }
+
+    public Config<T> injectTemplateId(String templateId) {
+        return withOption("templateId", templateId);
+    }
 }

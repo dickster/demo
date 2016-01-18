@@ -18,11 +18,11 @@
             </ul>
         </div>
 
-        <div wicket:id="container" class="template-data tab-pane container active">
+        <!--this tells template engine to put its layout element here...-->
+        <div wicket:id="container" class="template-model tab-pane container active">
             <div wicket:id="panel"/>
+            <div wicket:id="template" class="template-layout"></div>
         </div>
-        <!--this tells template engine to put its stuff here...-->
-        <div class="inner-template"/>
         <!--TODO : DD implement blank slate-->
     </form>
 </wicket:panel>

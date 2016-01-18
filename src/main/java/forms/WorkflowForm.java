@@ -32,9 +32,6 @@ import javax.inject.Inject;
 
 public class WorkflowForm extends Panel implements HasConfig {
 
-    // this calls layout and initializes all widgets.
-    private static final JavaScriptResourceReference WORKFLOW_JS = new JavaScriptResourceReference(Resource.class, "workflow.js");
-
     private @Inject Toolkit toolkit;
     private @Inject WfNavigator wfNavigator;
 
@@ -44,7 +41,6 @@ public class WorkflowForm extends Panel implements HasConfig {
     private FeedbackPanel feedback;
     private FormConfig formConfig;
     private AbstractDefaultAjaxBehavior historyMaker;
-    private Template template;
 
     public WorkflowForm(@Nonnull String id, @Nonnull FormConfig config) {
         super(id);
@@ -127,7 +123,7 @@ public class WorkflowForm extends Panel implements HasConfig {
         form = new Form("form");
         form.setOutputMarkupId(true);
         form.add(new Div("content", formConfig).setRenderBodyOnly(false));
-        form.add(template = new Template("template", formConfig.getTemplate()));
+        form.add(new Template("template", formConfig));
         addOrReplace(form);
     }
 
@@ -135,8 +131,6 @@ public class WorkflowForm extends Panel implements HasConfig {
         update(formConfig);
         target.add(form);
     }
-
-
 
     private Theme getTheme() {
         return toolkit.getTheme();
@@ -149,7 +143,6 @@ public class WorkflowForm extends Panel implements HasConfig {
         for (HeaderItem item:getTheme().getHeaderItems()) {
             response.render(item);
         }
-        response.render(JavaScriptReferenceHeaderItem.forReference(WORKFLOW_JS));
     }
 
     public Form getForm() {

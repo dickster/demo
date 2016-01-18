@@ -4,6 +4,7 @@ package forms.widgets;
 import demo.FeedbackListener;
 import demo.FeedbackState;
 import demo.ISection;
+import forms.Template;
 import forms.Workflow;
 import forms.model.WfCompoundPropertyModel;
 import forms.spring.WfNavigator;
@@ -166,6 +167,7 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
             }
         };
         container.add(panel);
+        container.add(new Template("template", config));
         return container;
     }
 

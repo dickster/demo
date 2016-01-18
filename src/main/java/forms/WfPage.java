@@ -13,6 +13,7 @@ import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
+
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -30,10 +31,8 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     private static final CssResourceReference BOOTSTRAP_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap.min.css");
     private static final JavaScriptResourceReference JQUERY_UI_JS = new JavaScriptResourceReference(Resource.class, "jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js");
     private static final CssResourceReference JQUERY_UI_CSS = new CssResourceReference(Resource.class, "jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css");
-    private static final JavaScriptResourceReference SELECT_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-multiselect.js");
-    private static final CssResourceReference SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-select.css");
-    private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/typeahead.bundle.js");
-    private static final JavaScriptResourceReference LAYOUTDEF_JS = new JavaScriptResourceReference(Resource.class, "layoutDef.js");
+    private static final JavaScriptResourceReference WORKFLOW_JS = new JavaScriptResourceReference(Resource.class, "workflow.js");
+    private static final JavaScriptResourceReference LAYOUT_JS = new JavaScriptResourceReference(Resource.class, "layout.js");
 
     private static final String INIT = "workflow.init();";
     private static final String FORM_ID = "form";
@@ -89,8 +88,9 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
         response.render(CssHeaderItem.forReference(JQUERY_UI_CSS));
         response.render(JavaScriptReferenceHeaderItem.forReference(BOOTSTRAP_JS));
         response.render(CssHeaderItem.forReference(BOOTSTRAP_CSS));
-        response.render(JavaScriptReferenceHeaderItem.forReference(LAYOUTDEF_JS));
         response.render(OnDomReadyHeaderItem.forScript(INIT));
+        response.render(JavaScriptReferenceHeaderItem.forReference(WORKFLOW_JS));
+        response.render(JavaScriptReferenceHeaderItem.forReference(LAYOUT_JS));
     }
 
     public IModel<?> getSubHeader() {

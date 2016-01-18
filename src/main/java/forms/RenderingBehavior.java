@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdProvider {
 
-    // should shorten the .js name to reduce size of payload.    wf.widget(%s) ??
+    // TODO : should shorten the .js name to reduce size of payload.    wf.widget(%s) ??
     private static final String INIT_WIDGET_JS = "workflow.initWidget(%s);";
 
     private @Inject ConfigGson gson;
@@ -45,10 +45,9 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
         Config config = getConfig(component);
 
         // this is our chance to inject/alter a bunch of stuff that we send to the browser.
-
         // inject the markup id (need to do this everytime 'cause it's always changing).
         // the .js code will typically need this to find the element.
-        config.withMarkupId(component.getMarkupId());
+        config.injectMarkupId(component.getMarkupId());
 
         String js = String.format(INIT_WIDGET_JS, gson.toJson(config));
         response.render(OnDomReadyHeaderItem.forScript(js));

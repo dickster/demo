@@ -8,7 +8,6 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
     private IFormValidator validator;
     private FeedbackPanelConfig feedbackConfig;
-    private String template;
     private @IncludeInJson String url; //historyCallbackUrl;
 
     public FormConfig(String name) {
@@ -44,13 +43,5 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
         throw new UnsupportedOperationException("you shouldn't be adding ajax behaviors to the form...add them to the contained components directly please and thank you.");
     }
 
-    public FormConfig<T> withTemplate(String template) {
-        this.template = template;
-        return this;
-    }
-
-    public String getTemplate() {
-        return template;
-    }
 
 }

@@ -26,6 +26,14 @@ public class Name implements Serializable {
     List<String> nickNames = Lists.newArrayList();
     private boolean inverse = false;
 
+    public Name(String john, String doe) {
+        addFirst(john);
+        addLast(doe);
+    }
+
+    public Name() {
+    }
+
 //    @Override
 //    public String toString() {
 //        // CAVEAT : important not to change this. used by wicket models.
@@ -205,7 +213,7 @@ public class Name implements Serializable {
     }
 
     public void addNickName(String name) {
-        this.nickNames.add(name.substring(1, name.length()-1));
+        this.nickNames.add(name.substring(1, name.length() - 1));
     }
 
     public void addTitle(String name) {

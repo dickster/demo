@@ -1,14 +1,18 @@
 /*for debugging only*/
 .template-source {
-    outline:1px dotted aliceblue;
+    /*outline:1px dotted aliceblue;*/
 }
 
 [data-template].unreferenced-template {
-    display:inline-block !important;
+    display:inline-block;
 }
 
-[data-template] {
-    display:none !important;
+.template-source [data-template] {
+    display:none;
+}
+
+[data-template].template-source {
+    display:block;
 }
 
 .push {

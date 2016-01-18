@@ -1,63 +1,37 @@
 <wicket:panel>
 
-    <!--<a data-template="foo">hello there</a>-->
-
     <div class="container"><a class="pull-right" href="http://www.google.com">Click here to Google!</a></div>
 
-    <div data-template="names" class="template-source section">
-        <div class="row">
-            <div class="col-md-3">
-                <label data-template="label.first">First</label>
-            </div>
-            <div class="col-md-3">
-                <label data-template="label.middle">Middle</label>
-            </div>
-            <div class="col-md-3">
-                <label data-template="label.last">Last</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <input type="text" data-template="first" class="form-control">
-            </div>
-            <div class="col-md-3">
-                <input type="text" data-template="middle" class="form-control">
-            </div>
-            <div class="col-md-3">
-                <input type="text" data-template="last" class="form-control">
-            </div>
-        </div>
-    </div>
-
+    <div data-tmpl="names" data-tmp-file="_names" class="section"/>
 
     <p></p>
     <hr>
     <div class="row">
         <div class="col-md-12">
-            <label data-template="label.vehicleType"/>
+            <label data-tmpl="label.vehicleType"/>
         </div>
         <div class="col-md-3">
-            <input type="text" data-template="vehicle.type" class="form-control"/>
+            <input type="text" data-tmpl="vehicle.type" class="form-control"/>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-2">
-            <label data-template="label.paymentMethod" class="">payment method</label>
+            <label data-tmpl="label.paymentMethod" class="">payment method</label>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <select data-template="payment.method" class=""></select>
+            <select data-tmpl="payment.method" class=""></select>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <div data-template="label.one">hello</div>
-            <div data-template="label.two">world</div>
-            <div data-template="label.three">three</div>
+            <div data-tmpl="label.one">hello</div>
+            <div data-tmpl="label.two">world</div>
+            <div data-tmpl="label.three">three</div>
         </div>
     </div>
 
@@ -65,28 +39,28 @@
     <hr>
     <div class="row">
         <div class="col-md-1">
-            <label data-template="label.age" class="">age</label>
+            <label data-tmpl="label.age" class="">age</label>
         </div>
         <div class="col-md-3">
-            <label data-template="label.occupation" class="">occupation</label>
+            <label data-tmpl="label.occupation" class="">occupation</label>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-1">
-            <input type="text" data-template="insured.age" class="form-control"/>
+            <input type="text" data-tmpl="insured.age" class="form-control"/>
         </div>
         <div class="col-md-3">
-            <input type="text" data-template="insured.occupation" class="form-control"/>
+            <input type="text" data-tmpl="insured.occupation" class="form-control"/>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <label data-template="label.address">address</label>
+            <label data-tmpl="label.address">address</label>
         </div>
         <div class="col-md-8">
-            <input type="text" data-template="insured.address"/>
+            <input type="text" data-tmpl="insured.address"/>
         </div>
     </div>
 
@@ -97,8 +71,8 @@
     <div class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
             <div class="row">
-                <input type="button" class="btn btn-primary btn-submit" data-template="button.next" value="next">
-                <input type="button" class="btn btn-primary btn-submit" data-template="button.cancel" value="next">
+                <input type="button" class="btn btn-primary btn-submit" data-tmpl="button.next" value="next">
+                <input type="button" class="btn btn-primary btn-submit" data-tmpl="button.cancel" value="next">
             </div>
         </div>
     </div>

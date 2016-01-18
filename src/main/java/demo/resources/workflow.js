@@ -12,85 +12,14 @@ var workflow = function() {
         window.history.pushState({name:state, time:new Date()}, "ignored title", state );
     }
 
-    function validateTemplateElement($t, $original) {
-        // TODO : only do this in debug mode??
-        if ($t.prop('tagName')!=$original.prop('tagName')) {
-            console.log("Warning: your template uses different tag types for " + $t.attr('data-template') +
-                ".  One is a " + $t.prop('tagName') + " while the other is " + $original.prop('tagName'));
-            // this may cause the template to look different when it's populated for realsy.  it's best to use the same types.
-        }
-    }
-
-    function templateElement($raw, $templ) {
-        $raw.insertAfter($templ);
-        var subTemplate = $templ.find('[data-template]');
-        if (subTemplate.length>0) {
-            $raw.find('.inner-template').replaceWith($templ);
-            layoutWithTemplate($raw);  // just use template() function?
-            $templ.removeAttr('data-template');  // need to do this to force it to show due to !important styling.
-            return;
-        } else {
-            $raw.addClass($templ.attr('class'));
-            validateTemplateElement($templ, $raw);
-        };
-    }
-
-    var template = function($template_source, $template_data) {
-        // find matching data-tempate= X =data-wf values.   copy the data-wf element over next to the template.
-        $template_source.find('[data-template]').each(function(i,t) {
-            var id = t.getAttribute('data-template');
-            var $raw = $template_data.find('[data-wf="'+ id +'"]');
-            var $templ = $(t);
-
-            // now copy the original into the template.
-            if ($raw.length>0) {
-                templateElement($raw, $templ);
-            }
-            else {
-                console.log("WARNING : you have " + id + " in your template but can't find it in your form. it will be ignored.");
-                //$templ.addClass('unreferenced-template');
-            }
-
-        });
-
-    }
-
-    var layoutWithTemplate = function($el) {
-        $el.find('.template-source').each(function(index,tmpl) {
-            var $template = $(tmpl);
-            var $data = $template.prev('.template-data');
-            template($template, $data);
-        });
-
-        // just for debugging reasons, mark any unused elements as "untemplated".
-        $el.find('.template-data [data-wf]').each(function(index, data) {
-            console.log("WARNING: " + data.getAttribute('data-wf') + " is not in template");
-//            $(data).addClass('not-in-template');
-        });
-    }
-
-    var updateLayout = function($components) {
-        updateCss($components);
-        layoutWithTemplate($components);
-        console.log('updating layout for ' + $components.attr('id') + ' : ' + $components.attr('data-wf'));
-    }
-
-    var updateCss = function($components) {
-        $components.each(function(i,el) {
-            var $el = $(el);
-            var clss = $el.prev('[data-template]').attr('class');
-            $el.addClass(clss);
-        });
-    }
-
     var init = function() {
         Wicket.Event.subscribe('/ajax/call/complete', function(jqEvent, attributes, jqXHR, errorThrown, textStatus) {
-            // look at attributes.  get id.  layout($elWithId);
+            // at the end of all ajax calls, relayout components.
             var $components = $(jqXHR.responseXML.documentElement.children).filter("component").map(
                 function(i,e) {
                     return document.getElementById(e.id);
                 });
-            updateLayout($components);
+            workflow.layout.updateTemplateCss($components);
         });
 
         window.onpopstate = function(event) {
@@ -156,8 +85,7 @@ var workflow = function() {
                     console.log("error launching plugin " + config.pluginName + err);
                 }
 
-                // TODO : all widgets should update layouts.
-
+                workflow.layout.init($widget, config);
             };
 
             return {
@@ -167,6 +95,8 @@ var workflow = function() {
 
 
         }; // ------- /widget ---------
+
+
 
     return {
         initWidget : initWidget,

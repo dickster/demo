@@ -3,6 +3,7 @@ package forms;
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Closeables;
+import forms.widgets.config.GroupConfig;
 import org.apache.wicket.markup.Markup;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.springframework.core.io.ClassPathResource;
@@ -18,14 +19,20 @@ public class Template extends Panel {
 
     private String source;
     private static final String TEMPLATE_BASE = "demo/resources/templates/";
+    private GroupConfig config;
 
-    // usage note : you must decorate this with class="template-source" and the previous element (which contains all
-    // the elements mapped out in the template) must be class="template-data".  if not, the .js will not find it.
-    public Template(String id, String source) {
+    public Template(String id, GroupConfig config) {
         super(id);
         setOutputMarkupId(true);
         setRenderBodyOnly(false);
         this.source = normalize(source);
+        this.config = config;
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
+        config.injectTemplateId(getMarkupId());
     }
 
     @Override
@@ -47,6 +54,7 @@ public class Template extends Panel {
         }
         return source;
     }
+
     @Override
     public Markup getAssociatedMarkup() {
         try {
