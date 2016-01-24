@@ -4,6 +4,7 @@ import forms.spring.WfNavigator;
 import forms.widgets.config.Config;
 import forms.widgets.config.GroupConfig;
 import forms.widgets.config.HasConfig;
+import forms.widgets.config.HasTemplate;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -12,7 +13,7 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
 // rename this to....? DIV? BasicPanel, Container, ?? dunno.
-public class Div extends Panel implements HasConfig {
+public class Div extends Panel implements HasConfig, HasTemplate {
 
     private @Inject WfNavigator wfNavigator;
 
@@ -41,5 +42,10 @@ public class Div extends Panel implements HasConfig {
     @Override
     public Config getConfig() {
         return config;
+    }
+
+    @Override
+    public String getTemplateId() {
+        throw new UnsupportedOperationException("TODO : need to implement this");
     }
 }

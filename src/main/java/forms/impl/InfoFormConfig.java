@@ -36,19 +36,21 @@ public class InfoFormConfig extends FormConfig {
 
         // TODO : add section handler!
         with(new SectionPanelConfig("names")
-                    .withAtLeastOne()
-                    .withMax(4)
-                    .withAddTooltip("Add Person")
-                    .withTitleForNewValues("New Person")
-                    .withTitleInputs("first", "last")
-                    .withConfigs(
-                            new LabelConfig("label.first"),
-                            new TextFieldConfig("first"),
-                            new LabelConfig("label.middle"),
-                            new TextFieldConfig("middle"),
-                            new LabelConfig("label.last"),
-                            new TextFieldConfig("last"))
-                    .withTitle("Drivers"));
+
+                .withAtLeastOne()
+                .withMax(4)
+                .withAddTooltip("Add Person")
+                .withTitleForNewValues("New Person")
+                .withTitleInputs("first", "last")
+                .withConfigs(
+                        new LabelConfig("label.first"),
+                        new TextFieldConfig("first"),
+                        new LabelConfig("label.middle"),
+                        new TextFieldConfig("middle"),
+                        new LabelConfig("label.last"),
+                        new TextFieldConfig("last"))
+                .withTemplate("_names")
+                .withTitle("Drivers"));
 
 //        withConfig(new LabelConfig("label.address"));  // not in template.
 

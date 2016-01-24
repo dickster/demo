@@ -3,7 +3,7 @@
 // TODO : rename this to shorten strings...make js output smaller.
 // e.g. wf.init(); instead of workflow.initWidget();
 
-var workflow = function() {
+var wf = function() {
 
     var url = "?";
 
@@ -19,31 +19,28 @@ var workflow = function() {
                 function(i,e) {
                     return document.getElementById(e.id);
                 });
-            workflow.layout.updateTemplateCss($components);
+            wf.layout.update($components);
         });
 
         window.onpopstate = function(event) {
             var u = url + "&state=" + window.history.state.name;
             Wicket.Ajax.get({u:u});
         };
-        //CAVEAT : it is assumed that this will be called after all .initWidget() calls for a regular page load.
-        // if not, it may impact the layout...it's best to do layout after all elements have sorted themselves out.
-
-        updateLayout($('body'));
 
         var state = $('#state').val();
         history.replaceState({name:state,time:new Date()}, "huh", state);
     }
 
-    var initWidget = function(config) {
-        var w = widget(config);
+    var widget = function(config) {
+        var w = _widget(config);
         w.addDependents();
         w.initializePlugin();
+        w.layout();
     }
 
 
 
-        function widget(conf) {
+        function _widget(conf) {
             var config= conf;
             var $widget = $('#'+config.options.markupId);
 
@@ -66,8 +63,13 @@ var workflow = function() {
                 $widget.trigger('change');
             };
 
+            var layout = function() {
+                wf.layout.init($widget, config.options);
+            }
+
             var initializePlugin = function() {
-                // THESE ARE HACKS AND WILL BE WRITTEN AS JQUERY UI PLUGINS.
+                // THESE ARE HACKS AND NEED TO BE WRITTEN AS JQUERY UI PLUGINS.
+                // e.g. $('#foo').address();
                 if ( config.type=="ADDRESS") {
                     config.id = '#'+config.options.markupId;
                     easy.address.create(config);
@@ -85,10 +87,10 @@ var workflow = function() {
                     console.log("error launching plugin " + config.pluginName + err);
                 }
 
-                workflow.layout.init($widget, config);
             };
 
             return {
+                layout : layout,
                 addDependents : addDependents,
                 initializePlugin : initializePlugin
             }
@@ -99,7 +101,7 @@ var workflow = function() {
 
 
     return {
-        initWidget : initWidget,
+        widget : widget,
         init : init,
         pushHistory : pushHistory
     };

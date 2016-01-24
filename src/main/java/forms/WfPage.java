@@ -34,7 +34,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     private static final JavaScriptResourceReference WORKFLOW_JS = new JavaScriptResourceReference(Resource.class, "workflow.js");
     private static final JavaScriptResourceReference LAYOUT_JS = new JavaScriptResourceReference(Resource.class, "layout.js");
 
-    private static final String INIT = "workflow.init();";
+    private static final String INIT = "wf.init();";
     private static final String FORM_ID = "form";
 
     private FormBasedWorkflow workflow;

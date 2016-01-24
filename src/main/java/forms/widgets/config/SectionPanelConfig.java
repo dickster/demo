@@ -17,7 +17,6 @@ public class SectionPanelConfig extends GroupConfig<SectionPanel> {
     public boolean collapsed;
     public int current = 0;
     public int min=1, max = Integer.MAX_VALUE;
-    private String template = null;
 
     public SectionPanelConfig(@Nonnull String name) {
         super(name, WidgetTypeEnum.SECTION);
@@ -62,12 +61,4 @@ public class SectionPanelConfig extends GroupConfig<SectionPanel> {
         return (String) getOptions().get(TITLEFOR_NEW_VALUES);
     }
 
-    public String getTemplate() {
-        return template;
-    }
-
-    public SectionPanelConfig withTemplate(String template) {
-        this.template = template;
-        return this;
-    }
 }

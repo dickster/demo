@@ -2,17 +2,12 @@ package demo;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 import java.util.Stack;
-import java.util.StringTokenizer;
 
 public class Name implements Serializable {
     List<String> salutation = Lists.newArrayList();
@@ -224,8 +219,13 @@ public class Name implements Serializable {
         this.inverse = inverse;
     }
 
+
     @Override
     public String toString() {
+        return getFirst() + " " + getLast();
+    }
+
+    public String toDebugString() {
         StringBuilder builder = new StringBuilder("Name->");
         if (!salutation.isEmpty()) builder.append("  salutation :" + salutation);
         if (!first.isEmpty()) builder.append("  first :" + first);

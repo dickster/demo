@@ -8,13 +8,12 @@ import org.apache.wicket.Component;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public abstract class GroupConfig<T extends Component & HasConfig> extends Config<T> {
+public abstract class GroupConfig<T extends Component & HasConfig & HasTemplate> extends Config<T> {
 
     private boolean renderBodyOnly = false;
     private List<Config> configs = Lists.newArrayList();
     private @IncludeInJson String title;
-    private String templateLayout;
-    private String templateModel;
+    private String template;
 
 
 
@@ -86,16 +85,6 @@ public abstract class GroupConfig<T extends Component & HasConfig> extends Confi
     @Override
     public abstract T create(String id);
 
-    public Config getConfigWithName(@Nonnull String name) {
-        List<Config> c = getConfigsDeep();
-        for (Config config:c) {
-            if (name.equals(config.getId())) {
-                return config;
-            }
-        }
-        throw new IllegalArgumentException("can't find config with name " + name);
-    }
-
     private List<Config> getConfigsDeep() {
         List<Config> result = Lists.newArrayList();
         result.add(this);
@@ -108,16 +97,17 @@ public abstract class GroupConfig<T extends Component & HasConfig> extends Confi
         return result;
     }
 
-    public Config<T> withTemplate(String template) {
-        this.templateLayout = template;
+    public GroupConfig<T> withTemplate(String template) {
+        this.template = template;
         return this;
     }
 
-    public String getTemplateLayout() {
-        return templateLayout;
+    public String getTemplate() {
+        return template;
     }
 
-    public Config<T> injectTemplateId(String templateId) {
-        return withOption("templateId", templateId);
+    public GroupConfig<T> injectTemplateId(String templateId) {
+        withOption("templateId", templateId);
+        return this;
     }
 }

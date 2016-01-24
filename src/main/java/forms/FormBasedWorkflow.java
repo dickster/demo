@@ -58,7 +58,7 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
     protected void updateFormViaAjax(WfSubmitEvent event) {
         WorkflowForm form = event.getForm().findParent(WorkflowForm.class);
         updateFormViaAjax(form, event.getTarget());
-        event.getTarget().appendJavaScript("workflow.pushHistory();");
+        event.getTarget().appendJavaScript("wf.pushHistory();");
     }
 
     protected void updateFormViaAjax(WorkflowForm form, AjaxRequestTarget target) {

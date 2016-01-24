@@ -1,19 +1,14 @@
 package forms;
 
 import com.google.common.base.Preconditions;
-import demo.resources.Resource;
 import forms.spring.WfNavigator;
 import forms.util.WfUtil;
-import forms.widgets.config.Config;
-import forms.widgets.config.FeedbackPanelConfig;
-import forms.widgets.config.FormConfig;
-import forms.widgets.config.HasConfig;
+import forms.widgets.config.*;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.HiddenField;
@@ -24,13 +19,12 @@ import org.apache.wicket.markup.renderStrategy.DeepChildFirstVisitor;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.cycle.RequestCycle;
-import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.util.visit.IVisit;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
-public class WorkflowForm extends Panel implements HasConfig {
+public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
 
     private @Inject Toolkit toolkit;
     private @Inject WfNavigator wfNavigator;
@@ -41,12 +35,13 @@ public class WorkflowForm extends Panel implements HasConfig {
     private FeedbackPanel feedback;
     private FormConfig formConfig;
     private AbstractDefaultAjaxBehavior historyMaker;
+    private Template template;
 
     public WorkflowForm(@Nonnull String id, @Nonnull FormConfig config) {
         super(id);
         withConfig(config);
         setOutputMarkupId(true);
-        add(new RenderingBehavior());
+        add(new RenderingBehavior());  // should this be a prototype bean???
 
         setupHistory();
 
@@ -122,8 +117,8 @@ public class WorkflowForm extends Panel implements HasConfig {
     private void update(FormConfig formConfig) {
         form = new Form("form");
         form.setOutputMarkupId(true);
-        form.add(new Div("content", formConfig).setRenderBodyOnly(false));
-        form.add(new Template("template", formConfig));
+        form.add(new Div("content", formConfig).setRenderBodyOnly(true));
+        form.add(template =new Template("template", formConfig));
         addOrReplace(form);
     }
 
@@ -173,6 +168,11 @@ public class WorkflowForm extends Panel implements HasConfig {
             }
         });
         return visitorKludge;
+    }
+
+    @Override
+    public String getTemplateId() {
+        return template.getMarkupId();
     }
 
     @Override

@@ -4,11 +4,7 @@ import forms.Div;
 import forms.Toolkit;
 import forms.Workflow;
 import forms.spring.WfNavigator;
-import forms.widgets.config.Config;
-import forms.widgets.config.DialogConfig;
-import forms.widgets.config.DialogSubmitButtonConfig;
-import forms.widgets.config.HasConfig;
-import forms.util.WfUtil;
+import forms.widgets.config.*;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.behavior.AttributeAppender;
@@ -21,7 +17,10 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import javax.inject.Inject;
 
-public class Dialog extends Panel implements HasConfig {
+// TODO : redo this whole dialog stuff from start...it's broken completely.
+// need to build the dialog as needed (can't do it when page rendered because it will
+//  cause bound input fields to exist which will screw up the model).
+public class Dialog extends Panel implements HasConfig, HasTemplate {
 
     private @Inject WfNavigator wfNavigator;
 
@@ -89,4 +88,10 @@ public class Dialog extends Panel implements HasConfig {
 //        form.setVisible(false);
         return this;
     }
+
+    @Override
+    public String getTemplateId() {
+        throw new UnsupportedOperationException("TODO : need to implement this");
+    }
+
 }

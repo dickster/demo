@@ -1,17 +1,17 @@
 /*for debugging only*/
-.template-source {
+.template-model {
     /*outline:1px dotted aliceblue;*/
 }
 
-[data-template].unreferenced-template {
+[data-tmpl].unreferenced-template {
     display:inline-block;
 }
 
-.template-source [data-template] {
+.template-layout [data-tmpl] {
     display:none;
 }
 
-[data-template].template-source {
+[data-tmpl].template-model {
     display:block;
 }
 
@@ -31,7 +31,7 @@
 
 
 .unreferenced-template:after {
-    content:'\a cant find the template : ' attr(data-template);
+    content:'\a cant find the template : ' attr(data-tmpl);
     white-space:pre;
 }
 

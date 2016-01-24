@@ -6,6 +6,7 @@ import forms.Workflow;
 import forms.spring.WfNavigator;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
+import forms.widgets.config.HasTemplate;
 import forms.widgets.config.ListConfig;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.repeater.RepeatingView;
@@ -17,7 +18,7 @@ import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.List;
 
-public class OrderedList extends RepeatingView implements HasConfig {
+public class OrderedList extends RepeatingView implements HasConfig, HasTemplate {
 
     private @Inject WfNavigator wfNavigator;
 
@@ -60,6 +61,11 @@ public class OrderedList extends RepeatingView implements HasConfig {
             size = Array.getLength(getDefaultModelObject());
         }
         return size;
+    }
+
+    @Override
+    public String getTemplateId() {
+        throw new UnsupportedOperationException("TODO : need to implement this");
     }
 
     class ListPanel extends RepeatingView {

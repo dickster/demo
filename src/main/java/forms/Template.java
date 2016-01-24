@@ -5,6 +5,7 @@ import com.google.common.io.CharStreams;
 import com.google.common.io.Closeables;
 import forms.widgets.config.GroupConfig;
 import org.apache.wicket.markup.Markup;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.springframework.core.io.ClassPathResource;
 
@@ -19,20 +20,17 @@ public class Template extends Panel {
 
     private String source;
     private static final String TEMPLATE_BASE = "demo/resources/templates/";
-    private GroupConfig config;
 
     public Template(String id, GroupConfig config) {
         super(id);
         setOutputMarkupId(true);
         setRenderBodyOnly(false);
-        this.source = normalize(source);
-        this.config = config;
+        this.source = normalize(config.getTemplate());
     }
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        config.injectTemplateId(getMarkupId());
     }
 
     @Override
@@ -59,7 +57,8 @@ public class Template extends Panel {
     public Markup getAssociatedMarkup() {
         try {
             if (source==null) {
-                return Markup.of("<wicket:panel><div class='raw-content'>empty default template</div></wicket:panel>");
+                // this should never happen!  if source==null, setVisible(false).
+                throw  new IllegalStateException("attempting to render an null/empty template.");
             }
             InputStream stream = new ClassPathResource(getFullPath()).getInputStream();
             String content = CharStreams.toString(new InputStreamReader(stream, Charsets.UTF_8));
@@ -67,11 +66,16 @@ public class Template extends Panel {
             return Markup.of(content);
         } catch (IOException e) {
             e.printStackTrace();  // TODO : how to handle
-            return Markup.of("<wicket:panel><div class='raw-content template-error'>error reading markup for "+getFullPath()+"</div></wicket:panel>");
+            return Markup.of("<wicket:panel><div class='template-error'>error reading markup for "+getFullPath()+"</div></wicket:panel>");
         }
     }
 
     private String getFullPath() {
         return TEMPLATE_BASE+source;
+    }
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
     }
 }
