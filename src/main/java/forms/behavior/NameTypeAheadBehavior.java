@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import forms.FormBasedWorkflow;
 import forms.model.GenericInsuranceObject;
+import forms.model.Name;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Set;
@@ -21,10 +22,10 @@ public class NameTypeAheadBehavior extends TypeAheadBehavior {
         FormBasedWorkflow<GenericInsuranceObject> workflow = (FormBasedWorkflow<GenericInsuranceObject>) getWorkflow();
         GenericInsuranceObject obj = workflow.getObject();
         Set<Result> result = Sets.newHashSet();
-            for (demo.Name name: obj.getNames()) {
-            if (StringUtils.isNotBlank(name.getLast()))result.add(new Result(name.getLast()));
-            if (StringUtils.isNotBlank(name.getFirst()))result.add(new Result(name.getFirst()));
-            if (StringUtils.isNotBlank(name.getMiddle())) result.add(new Result(name.getMiddle()));
+            for (Name name: obj.getNames()) {
+            if (StringUtils.isNotBlank(name.last)) result.add(new Result(name.last));
+            if (StringUtils.isNotBlank(name.first)) result.add(new Result(name.first));
+            if (StringUtils.isNotBlank(name.middle)) result.add(new Result(name.middle));
         }
         return new Gson().toJson(result);
     }

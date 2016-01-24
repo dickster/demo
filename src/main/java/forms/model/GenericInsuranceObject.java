@@ -3,7 +3,7 @@ package forms.model;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import demo.Address;
-import demo.Name;
+
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,15 +16,15 @@ public class GenericInsuranceObject implements Serializable {
     //  temp, misc, ai, acord & errors or whatever you like.
 
     private Errors errors = new Errors();
-    private demo.Name name = new demo.Name("","");
+    private Name name = new Name("","");
     private Insured insured = new Insured();
     private List<Vehicle> vehicles = Lists.newArrayList();
     private Vehicle vehicle = new Vehicle();
     private Payment payment = new Payment();
-    private List<demo.Name> names = Lists.newArrayList(
-                                new demo.Name("john", "doe"),
-                                new demo.Name("susy", "jones"),
-                                new demo.Name("bob", "smith")
+    private List<Name> names = Lists.newArrayList(
+                                new Name("john", "doe"),
+                                new Name("susy", "jones"),
+                                new Name("bob", "smith")
                             );
 
     @Override
