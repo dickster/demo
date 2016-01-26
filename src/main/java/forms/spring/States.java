@@ -1,24 +1,36 @@
 package forms.spring;
 
-import forms.impl.ConfirmationState;
-import forms.impl.InfoState;
-import forms.impl.PaymentState;
-import forms.impl.PizzaState1;
-import forms.impl.PizzaState2;
-import forms.impl.ReferState;
-import forms.impl.RejectedState;
-import forms.impl.State1;
-import forms.impl.StateA;
-import forms.impl.StateAx;
-import forms.impl.StateAy;
-import forms.impl.StateB;
-import forms.impl.StateC;
-import forms.impl.StateError;
+import forms.impl.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class States {
+
+    @Bean
+    public DemoState1 demoState1() {
+        return new DemoState1();
+    }
+
+    @Bean
+    public DemoState2 demoState2() {
+        return new DemoState2();
+    }
+
+    @Bean
+    public DemoState3 demoState3() {
+        return new DemoState3();
+    }
+
+    @Bean
+    public DemoState4 demoState4() {
+        return new DemoState4();
+    }
+
+    @Bean
+    public DemoState5 demoState5() {
+        return new DemoState5();
+    }
 
     @Bean
     public InfoState infoState() {

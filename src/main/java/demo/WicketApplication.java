@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forms.StartingPoint;
 import forms.WfPage;
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.markup.head.HeaderItem;
@@ -36,8 +37,8 @@ public class WicketApplication extends WebApplication {
     }
 
     public Class getHomePage() {
-        return TransactionsPage.class;
-        //return StartingPoint.class;
+//        return TransactionsPage.class;
+        return StartingPoint.class;
 //          return KeysPage.class;
 //        return GridstackPage.class;
         //return HomePage.class;

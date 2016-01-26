@@ -30,6 +30,7 @@ wf.layout = function() {
             // now copy the original into the template.
             if ($source.length>0) {  // really, there should only be one?  assert($dw.length=1)
                  $source.insertAfter($target);
+                 $target.hide();
                  $source.addClass($target.attr('class'));
                  validateType($source, $target);
             }

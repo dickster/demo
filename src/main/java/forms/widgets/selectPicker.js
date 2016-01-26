@@ -1,5 +1,4 @@
 
-// NOTE : where should i package this???
 var easy = easy ? easy : {};
 easy.selectPicker = (function() {
 

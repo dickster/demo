@@ -55,7 +55,7 @@ public class StartingPoint extends WebPage {
                 .add(new AjaxSubmitLink("simple") {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                        setResponsePage(new WfPage("test", obj));
+                        setResponsePage(new WfPage("demo", obj));
                     }
                 })
                 .add(new AjaxSubmitLink("order") {

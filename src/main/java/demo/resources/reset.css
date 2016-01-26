@@ -7,9 +7,25 @@
     display:inline-block;
 }
 
-.template-layout [data-tmpl] {
-    display:none;
+.template-layout input[data-tmpl],
+.template-layout select[data-tmpl] {
+    background-image: repeating-linear-gradient(
+        45deg, #ffbc66, #ff9c00 1px, transparent 1px, transparent 4px
+    );
+    background-size: 6px 6px;
 }
+
+.template-layout label[data-tmpl] {
+    background: #ffbc66;
+    opacity: 0.5;
+    outline: 1px dotted #a9a9a9;
+}
+
+.template-layout [data-tmpl]:after {
+    content:'\a cant find model for template: ' attr(data-tmpl);
+    white-space:pre;
+}
+
 
 [data-tmpl].template-model {
     display:block;
@@ -30,16 +46,16 @@
 }
 
 
-.unreferenced-template:after {
-    content:'\a cant find the template : ' attr(data-tmpl);
-    white-space:pre;
-}
+/*.unreferenced-template:after {*/
+    /*content:'\a cant find model for template: ' attr(data-tmpl);*/
+    /*white-space:pre;*/
+/*}*/
 
-.unreferenced-template {
-    color: #336;
-    background: #f4f4f4;
-    outline: 1px dashed #ddd;
-}
+/*.unreferenced-template {*/
+    /*color: #336;*/
+    /*background: #f4f4f4;*/
+    /*outline: 1px dashed #ddd;*/
+/*}*/
 
 /* in form but not in template.*/
 .not-in-template {

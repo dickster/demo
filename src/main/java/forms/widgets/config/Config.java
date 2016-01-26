@@ -92,6 +92,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     }
 
     // ALIAS for withId();
+    @Deprecated
     public Config<T> name(String name) {
         return withId(name);
     }
@@ -145,7 +146,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
             attributes.put(key, Joiner.on(" ").join(v, value));
         }
         else {
-            attributes.put(key, v);
+            attributes.put(key, value);
         }
         return this;
     }

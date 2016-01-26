@@ -36,7 +36,6 @@ public class InfoFormConfig extends FormConfig {
 
         // TODO : add section handler!
         with(new SectionPanelConfig("names")
-
                 .withAtLeastOne()
                 .withMax(4)
                 .withAddTooltip("Add Person")

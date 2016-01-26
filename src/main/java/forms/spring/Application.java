@@ -7,6 +7,7 @@ import forms.Theme;
 import forms.Toolkit;
 import forms.WfFactory;
 import forms.WidgetFactory;
+import forms.impl.DemoWorkflow;
 import forms.widgets.config.Config;
 import forms.impl.CommercialWorkflow;
 import forms.impl.PizzaWorkflow;
@@ -51,11 +52,19 @@ public class Application {
         return new LabelFormatter();
     }
 
+
+
     @Bean
     @Scope("prototype")
     public CommercialWorkflow commercialWorkflow() {
         CommercialWorkflow workflow = new CommercialWorkflow();
         return workflow;
+    }
+
+    @Bean
+    @Scope("prototype")
+    public DemoWorkflow demoWorkflow() {
+        return new DemoWorkflow();
     }
 
     @Bean

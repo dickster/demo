@@ -5,6 +5,7 @@ import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.SelectPickerConfig;
 import org.apache.wicket.Application;
+import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
