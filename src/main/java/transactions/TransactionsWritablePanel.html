@@ -1,0 +1,75 @@
+<wicket:panel>
+    <div class="container">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span> <i class="fa fa-database fa-2x"></i> </span>
+                <h3 style="display:inline;">Transactions</h3>
+            </div>
+            <div class="panel-body">
+                <form wicket:id="toolbar" class="form-inline">
+                    <select wicket:id="when" class="form-control"/>
+                    <input wicket:id="transId" type="text" placeholder="transaction #" class="form-control"/>
+                    <input wicket:id="refNum" type="text" placeholder="reference #" class="form-control"/>
+                </form>
+            </div>
+            <table class="table">
+                <caption></caption>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Transaction Id</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Date Created</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr wicket:id="transactions">
+                    <th wicket:id="ref" scope="row"/>
+                    <td>
+                        <a wicket:id="trans"><span wicket:id="label"/></a>
+                    </td>
+                    <td wicket:id="type"/>
+                    <td wicket:id="status"/>
+                    <td wicket:id="created"/>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--TODO : fix inline styling.-->
+        <div style="height:56px; margin-top:-25px; margin-bottom:30px;">
+            <ul class="pagination pull-right">
+                <li wicket:id="navigator">
+                    <a wicket:id="pageLink">
+                        <span wicket:id="pageNumber"></span>
+                    </a>
+                 </li>
+            </ul>
+        </div>
+
+        <div class="panel panel-default" style="min-height:200px;">
+            <div class="panel-heading">
+                <span><i class="fa fa-info-circle fa-2x"></i></span>
+                <h3 style="display:inline;">Details</h3>
+            </div>
+            <table wicket:id="detailsContainer" class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Msgs</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr wicket:id="details">
+                    <th wicket:id="name" scope="row"/>
+                    <td wicket:id="status"/>
+                    <td wicket:id="msgs"/>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</wicket:panel>
