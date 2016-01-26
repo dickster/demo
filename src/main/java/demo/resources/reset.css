@@ -1,34 +1,33 @@
-/*for debugging only*/
-.template-model {
-    /*outline:1px dotted aliceblue;*/
+
+.template-model.hasErrors {
+    background:#fafad2;
+    outline:2px dotted #2f4f4f;
+}
+.template-model.hasErrors:after {
+    content: 'this form has fields that you have not included in your template';
+    font-size:10px;
+    font-style:italic;
 }
 
-[data-tmpl].unreferenced-template {
-    display:inline-block;
+/* in form but not in template.*/
+.not-in-template {
+    background:#fee;
+    color:#aaa;
+    outline:1px solid #dbb;
+    padding:5px;
 }
 
-.template-layout input[data-tmpl],
-.template-layout select[data-tmpl] {
+
+
+select.unreferenced,
+input.unreferenced,
+.unreferenced {
     background-image: repeating-linear-gradient(
         45deg, #ffbc66, #ff9c00 1px, transparent 1px, transparent 4px
     );
     background-size: 6px 6px;
-}
-
-.template-layout label[data-tmpl] {
-    background: #ffbc66;
     opacity: 0.5;
     outline: 1px dotted #a9a9a9;
-}
-
-.template-layout [data-tmpl]:after {
-    content:'\a cant find model for template: ' attr(data-tmpl);
-    white-space:pre;
-}
-
-
-[data-tmpl].template-model {
-    display:block;
 }
 
 .push {
@@ -43,43 +42,6 @@
     position:fixed;
     top:20px;
     right:20px;
-}
-
-
-/*.unreferenced-template:after {*/
-    /*content:'\a cant find model for template: ' attr(data-tmpl);*/
-    /*white-space:pre;*/
-/*}*/
-
-/*.unreferenced-template {*/
-    /*color: #336;*/
-    /*background: #f4f4f4;*/
-    /*outline: 1px dashed #ddd;*/
-/*}*/
-
-/* in form but not in template.*/
-.not-in-template {
-    background:#fee;
-    color:#aaa;
-    outline:1px solid #dbb;
-}
-
-.not-in-template:after {
-    content: '\a"' attr(data-wf) '" is not found in template';
-    white-space:pre;
-}
-
-/* in template but not in form*/
-.undefined {
-    color:#b88;
-}
-
-.undefined:after {
-    color:#aaa;
-    font-style:italic;
-    font-family:"courier new";
-    font-size:10px;
-    content:'<--in template but not in form';
 }
 
 .feedbackPanel { display: inline-block;}

@@ -39,18 +39,41 @@ wf.layout = function() {
                 $(target).addClass('unresolved-template');
             }
         });
-        validate($model);
+        validate($model, $template);
     }
 
-    function validate($model) {
+    // TODO : only do this in debug mode
+    function validate($model, $template) {
         // at this point, *all* of the elements should be moved from $model DIV into the template DIV.
         // .: we can assume that any remaining ones do NOT have a matching template element   (<span data-tmpl=xx>)
         // we will log this and add a class to each to aid in debugging.
+        var hasErrors = false;
         $model.find('[data-wf]').each(function(index, data) {
-                console.log("WARNING: " + data.getAttribute('data-wf') + " is not in template");
-                $(data).addClass('not-in-template');
+                hasErrors = true;
+                var msg = "WARNING: '" + data.getAttribute('data-wf') + "' is in the form but not in template";
+                $(data)
+                    .attr('data-toggle','tooltip')
+                    .attr('title', msg)
+                    .addClass('not-in-template');
             }
         );
+        if (hasErrors) {
+            $model.addClass('hasErrors');
+        }
+        // also, if there are any visible template elements left, that means they haven't been matched up
+        // with the model. (if they were, they would have been hidden when resolved).
+        // .: we will mark them as invalid to help debugging.
+        var hasErrors = false;
+        $template.find('[data-tmpl]:visible').each(function(index, tmpl) {
+                var msg = "WARNING: '" + tmpl.getAttribute('data-tmpl') + "' exists in the template but is not in the form.";
+                $(tmpl)
+                    .attr('data-toggle','tooltip')
+                    .attr('data-placement','right')
+                    .attr('title', msg)
+                    .addClass('unreferenced');
+            }
+        );
+        $('[data-toggle="tooltip"]').tooltip();
     }
 
     function validateType($a, $b) {
