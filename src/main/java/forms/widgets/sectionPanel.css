@@ -8,7 +8,8 @@
 }
 
 .tab-pane.active.container {
-    margin-top:10px;
+    padding-top:10px;
+    padding-bottom:10px;
 }
 
 .nav-tabs .tab-x {
@@ -28,7 +29,6 @@
 
 .nav-tabs li.active a span {
     color:#333;
-    font-weight: bold;
 }
 
 .nav-tabs li a span {
@@ -42,6 +42,7 @@
 
 .tab-header {
     float: left;
+    font-size:18px;
     margin-top: 13px;
     max-width: 13em;
     min-width: 7em;

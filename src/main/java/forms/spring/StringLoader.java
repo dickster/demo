@@ -13,6 +13,8 @@ public class StringLoader {
                     .put("label.paymentMethod", "payment method")
                     .put("label.bogus", "blah")
                     .put("label.names", "my name is {1}, {0}.")
+                    .put("label.year", "year")
+                    .put("label.model", "model")
                     .put("label.age", "age")
                     .put("label.middle", "middle")
                     .put("label.address", "address")

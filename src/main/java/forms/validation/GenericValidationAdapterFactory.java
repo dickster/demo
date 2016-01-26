@@ -97,7 +97,7 @@ public class GenericValidationAdapterFactory implements IValidationAdapters<Gene
                     }
 
                     @Override public int getYear() {
-                        return input.getVehicle().year;
+                        return new Integer(input.getVehicle().year);
                     }
 
                     @Override public int getNumberOfAccidents() {

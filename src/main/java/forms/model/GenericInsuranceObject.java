@@ -18,7 +18,7 @@ public class GenericInsuranceObject implements Serializable {
     private Errors errors = new Errors();
     private Name name = new Name("","");
     private Insured insured = new Insured();
-    private List<Vehicle> vehicles = Lists.newArrayList();
+    private List<Vehicle> vehicles = Lists.newArrayList(new Vehicle("Ford", "1997", "Bronco"));
     private Vehicle vehicle = new Vehicle();
     private Payment payment = new Payment();
     private List<Name> names = Lists.newArrayList(
@@ -82,6 +82,7 @@ public class GenericInsuranceObject implements Serializable {
 
     public class Insured implements Serializable {
         public String country;
+        public String previous;
         public int accidents = 2;
         public String drinks = "coke";
         public String salutation;
@@ -143,22 +144,6 @@ public class GenericInsuranceObject implements Serializable {
                     "pool='" + pool + '\'' +
                     ", roofType='" + roofType + '\'' +
                     '}';
-        }
-    }
-
-    public class Vehicle implements Serializable {
-        public String type;
-        public int year;
-
-        @Override
-        public String toString() {
-            return "Vehicle{" +
-                    "type='" + type + '\'' +
-                    '}';
-        }
-
-        public String getType() {
-            return type;
         }
     }
 

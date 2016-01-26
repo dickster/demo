@@ -38,6 +38,13 @@ public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
         return this;
     }
 
+    public SelectPickerConfig withSearchingAllowed() {
+        withAttribute("data-live-search","true");
+        return this;
+    }
+
+
+
     @Override
     public SelectPicker<T> create(String id) {
         return new SelectPicker<T>(id, this);

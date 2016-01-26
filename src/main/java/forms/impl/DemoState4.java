@@ -10,16 +10,16 @@ import javax.inject.Inject;
 
 public class DemoState4 extends WfFormState {
 
-    private @Inject DemoState2 demoState2;
+    private @Inject DemoState5 demoState5;
 
     public DemoState4() {
-        super(new Demo1FormConfig());
+        super(new Demo4FormConfig());
     }
 
     @Override
     @Nonnull public WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
         if (event.is("next")) {
-            return demoState2;
+            return demoState5;
         }
         return unhandledEvent(workflow,event);
     }
