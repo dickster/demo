@@ -8,7 +8,7 @@ public class Demo4FormConfig extends FormConfig {
 
     public Demo4FormConfig() {
         super("demo4");
-        withTitle("Validation Examples");
+        withTitle("Section Panels");
         addConfigs();
     }
 

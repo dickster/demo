@@ -63,7 +63,6 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
 
         add(new DebugBar("debugBar"));
 
-        add(new Label("subheader", getSubHeader()));
     }
 
     private WorkflowForm getWorkflowForm() {
@@ -91,10 +90,6 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
         response.render(OnDomReadyHeaderItem.forScript(INIT));
         response.render(JavaScriptReferenceHeaderItem.forReference(WORKFLOW_JS));
         response.render(JavaScriptReferenceHeaderItem.forReference(LAYOUT_JS));
-    }
-
-    public IModel<?> getSubHeader() {
-        return Model.of(getWorkflowForm().getSubHeader());
     }
 
     @Subscribe

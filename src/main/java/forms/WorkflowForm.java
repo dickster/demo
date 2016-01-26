@@ -10,12 +10,14 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.HiddenField;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.renderStrategy.DeepChildFirstVisitor;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.cycle.RequestCycle;
@@ -47,10 +49,15 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
 
         // placeholder to be replaced based on formConfig.
         add(new WebMarkupContainer("form").add(new WebMarkupContainer("content")));
+        add(new Label("subheader", getSubHeader()));
     }
 
-    public String getSubHeader() {
-        return formConfig.getTitle();
+    public IModel<?> getSubHeader() {
+        return new Model<String>() {
+            @Override public String getObject() {
+                return formConfig.getTitle();
+            }
+        };
     }
 
     private void setupHistory() {
