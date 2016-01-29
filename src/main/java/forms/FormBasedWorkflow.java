@@ -34,7 +34,7 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
         refreshForm(event);
     }
 
-    private void refreshForm(WfDebugEvent event) {
+    private void refreshForm(WfEvent event) {
         WorkflowForm form = event.getComponent().findParent(WorkflowForm.class);
         updateFormViaAjax(form, event.getTarget());
     }
@@ -43,8 +43,8 @@ public abstract class FormBasedWorkflow<T> extends Workflow<T, WfFormState> {
     public void onValidation(WfValidationEvent event) {
     }
 
-    @Subscribe  //hmmm....i don't think i need this.
-    public void onAjax(WfAjaxEvent event) {
+    @Override
+    void onSubmitError(WfSubmitErrorEvent event) throws WorkflowException {
 
     }
 

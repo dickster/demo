@@ -50,9 +50,10 @@ wf.layout = function() {
         var hasErrors = false;
         $model.find('[data-wf]').each(function(index, data) {
                 hasErrors = true;
-                var msg = "WARNING: '" + data.getAttribute('data-wf') + "' is in the form but not in template";
+                var msg = "WARNING: data-wf='" + data.getAttribute('data-wf') + "' is in the form but NOT in template";
                 $(data)
                     .attr('data-toggle','tooltip')
+//                    .attr('data-placement', 'left')
                     .attr('title', msg)
                     .addClass('not-in-template');
             }
@@ -65,9 +66,10 @@ wf.layout = function() {
         // .: we will mark them as invalid to help debugging.
         var hasErrors = false;
         $template.find('[data-tmpl]:visible').each(function(index, tmpl) {
-                var msg = "WARNING: '" + tmpl.getAttribute('data-tmpl') + "' exists in the template but is not in the form.";
+                var msg = "WARNING: data-tmpl='" + tmpl.getAttribute('data-tmpl') + "' exists in the template but is NOT in the form.";
                 $(tmpl)
                     .attr('data-toggle','tooltip')
+//                    .attr('data-placement', 'left')
                     .attr('data-placement','right')
                     .attr('title', msg)
                     .addClass('unreferenced');

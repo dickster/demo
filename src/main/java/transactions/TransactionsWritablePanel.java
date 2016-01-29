@@ -31,11 +31,10 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.joda.time.LocalDate;
+import transactions.model.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 /**
@@ -43,61 +42,57 @@ import java.util.UUID;
  */
 public class TransactionsWritablePanel extends Panel {
 
-    private final PageableListView<Transaction> transactionsView;
+    private final PageableListView<CoreTransactionDTO> transactionsView;
 
     enum DateFilterEnum {
-        TODAY(0),
-        YESTERDAY(-1,0),
-        LAST_10_DAYS(-10),
-        LAST_30_DAYS(-30),
-        All();
+        TODAY("Today", 0),
+        YESTERDAY("Yesterday", -1,0),
+        LAST_10_DAYS("Last 10 Days", -10),
+        LAST_30_DAYS("Last 30 Days", -30),
+        All("All");
 
-        private int to;
-        private int from;
+        private Integer to;
+        private Integer from;
+        private String label;
 
-        DateFilterEnum(int from) {
-            this(from,-1);
+        DateFilterEnum(String label, int from) {
+            this(label, from, null);
         }
-        DateFilterEnum(int from, int to) {
+
+        DateFilterEnum(String label) {
+            this(label, null, null);
+        }
+
+        DateFilterEnum(String label, Integer from, Integer to) {
+            this.label = label;
             this.from = from;
             this.to = to;
         }
 
-        DateFilterEnum() {
-            this.from = -1;
-            this.to = -1;
-        }
-
         public LocalDate getFrom() {
-            if (from ==-1) return null;
+            if (from == null) return null;
             return new LocalDate().plusDays(from);
         }
         public LocalDate getTo() {
-            if (to ==-1) return null;
+            if (to ==null) return null;
             return new LocalDate().plusDays(to);
         }
 
         @Override
         public String toString() {
-            return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, super.toString());
+            return label!=null ? label :
+                    CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, super.toString());
         }
     };
 
 
     private final WebMarkupContainer detailsContainer;
 
-    /** temporary variables.  delete after hooked up to real data source */
-    private int ref = 1;
-    private int msgNum = 1;
-    private List<Transaction> filteredTransactions = Lists.newArrayList();
-    /** ----------------------------------------------------- */
-
-
     private DateFilterEnum when = DateFilterEnum.All;
-    private Transaction transaction = null;
+    private CoreTransactionDTO transaction = null;
     private String refNum;
-    private String transId;
-    private List<Transaction> transactions = createTransactions();
+    private Integer transId;
+    private List<CoreTransactionDTO> transactions = createTransactions();
 
     /**
      * DOCUMENT: Constructs ...
@@ -114,27 +109,27 @@ public class TransactionsWritablePanel extends Panel {
                         .add(newFilteringBehavior()))
                 .add(new TextField<String>("refNum", new PropertyModel(this, "refNum"))
                         .add(newFilteringBehavior()))
-                .add(new TextField<String>("transId", new PropertyModel(this, "transId"))
+                .add(new TextField<Integer>("transId", new PropertyModel(this, "transId"))
                         .add(newFilteringBehavior()))
         );
 
-        add(transactionsView = new PageableListView<Transaction>("transactions", getTransactionsModel(), 6) {
+        add(transactionsView = new PageableListView<CoreTransactionDTO>("transactions", getTransactionsModel(), 6) {
             @Override
-            protected void populateItem(ListItem<Transaction> item) {
-                final IModel<Transaction> model = item.getModel();
-                item.add(new Label("ref", new PropertyModel(model, "referenceNumber")));
-                AjaxLink link = new AjaxLink("trans") {
+            protected void populateItem(ListItem<CoreTransactionDTO> item) {
+                final IModel<CoreTransactionDTO> model = item.getModel();
+                item.add(new Label("id", new PropertyModel(model, "id")));
+                AjaxLink link = new AjaxLink("ref") {
                     @Override
                     public void onClick(AjaxRequestTarget target) {
                         transaction = model.getObject();
                         target.add(detailsContainer);
                     }
                 };
-                link.add(new Label("label", new PropertyModel(model, "transactionId")));
+                link.add(new Label("label", new PropertyModel(model, "transactionReferenceCode")));
                 item.add(link);
-                item.add(new Label("type", new PropertyModel(model, "type")));
+                item.add(new Label("type", new PropertyModel(model, "transactionTypeId.id")));
                 item.add(new Label("status", new PropertyModel(model, "status")));
-                item.add(new Label("created", new PropertyModel(model, "created")));
+                item.add(new Label("created", new PropertyModel(model, "creationDate")));
             }
 
         });
@@ -142,13 +137,13 @@ public class TransactionsWritablePanel extends Panel {
 
         detailsContainer = new WebMarkupContainer("detailsContainer");
         add(detailsContainer.setOutputMarkupId(true));
-        detailsContainer.add(new ListView<Step>("details", getSteps()) {
+        detailsContainer.add(new ListView<CoreStepDTO>("details", getStepsModel()) {
             @Override
-            protected void populateItem(ListItem<Step> item) {
-                IModel<Step> model = item.getModel();
-                item.add(new Label("name", new PropertyModel(model, "name")));
-                item.add(new Label("status", new PropertyModel(model, "status")));
-                item.add(new Label("msgs", new PropertyModel(model, "messages")));
+            protected void populateItem(ListItem<CoreStepDTO> item) {
+                IModel<CoreStepDTO> model = item.getModel();
+                item.add(new Label("name", new PropertyModel(model, "operation")));
+                item.add(new Label("status", new PropertyModel(model, "resultId.name")));
+                item.add(new Label("msgs", new PropertyModel(model, "coreMessageCollection")));
             }
         });
     }
@@ -162,46 +157,48 @@ public class TransactionsWritablePanel extends Panel {
         };
     }
 
-    private IModel<? extends List<Step>> getSteps() {
+    // replace this with step model...
+    private IModel<? extends List<CoreStepDTO>> getStepsModel() {
         return new Model() {
             @Override
             public Serializable getObject() {
-                ArrayList<Step> result = (transaction==null) ? new ArrayList<Step>() : (ArrayList<Step>) transaction.steps;
+                ArrayList<CoreStepDTO> result = (transaction==null) ? new ArrayList<CoreStepDTO>() : Lists.newArrayList(transaction.getCoreStepCollection());
                 System.out.println(result);
                 return result;
             }
         };
     }
 
-    private IModel<? extends List<? extends Transaction>> getTransactionsModel() {
-        return new Model<ArrayList<Transaction>>() {
+    // replace this with
+    private IModel<? extends List<? extends CoreTransactionDTO>> getTransactionsModel() {
+        return new Model<ArrayList<CoreTransactionDTO>>() {
             @Override
-            public ArrayList<Transaction> getObject() {
+            public ArrayList<CoreTransactionDTO> getObject() {
                 return getTransactions(when.getFrom(), when.getTo(), transId, refNum);
             }
         };
     }
 
     // TODO : replace this with DB call.
-    private ArrayList<Transaction> getTransactions(final LocalDate from, final LocalDate to, final String transId, final String refNum) {
+    private ArrayList<CoreTransactionDTO> getTransactions(final LocalDate from, final LocalDate to, final Integer transId, final String refNum) {
         // stub : implement getTransactions(from, to, transId, refNum);
         // need to get total number of results.
-        Predicate<Transaction> predicate = new Predicate<Transaction>() {
-            @Override public boolean apply(Transaction transaction) {
-                boolean after = (from==null) ? true : transaction.created.isAfter(from);
-                boolean before = (to==null) ? true : transaction.created.isBefore(to);
-                boolean tid = transId==null ? true : transaction.transactionId.toLowerCase().contains(transId.toLowerCase());
-                boolean ref = refNum==null ? true : transaction.referenceNumber.equalsIgnoreCase(refNum);
+        Predicate<CoreTransactionDTO> predicate = new Predicate<CoreTransactionDTO>() {
+            @Override public boolean apply(CoreTransactionDTO transaction) {
+                boolean after = (from==null) ? true : transaction.getCreationDate().after(from.toDate());
+                boolean before = (to==null) ? true : transaction.getCreationDate().before(to.toDate());
+                boolean tid = transId==null ? true : transaction.getTransactionTypeId().getId().equals(transId);
+                boolean ref = refNum==null ? true : transaction.getTransactionReferenceCode().contains(refNum);
                 return after && before && tid && ref;
             }
         };
         return Lists.newArrayList(Iterables.filter(transactions, predicate));
     }
 
-    private List<Transaction> createTransactions() {
-        List<Transaction> result = Lists.newArrayList();
+    private List<CoreTransactionDTO> createTransactions() {
+        List<CoreTransactionDTO> result = Lists.newArrayList();
         for (int i=0; i<52; i++) {
-            result.add(new Transaction());
+            result.add(new CoreTransactionDTO());
         }
         return result;
     }
@@ -209,49 +206,6 @@ public class TransactionsWritablePanel extends Panel {
     @Override
     protected void onInitialize() {
         super.onInitialize(); 
-    }
-
-    public class Transaction implements Serializable {
-        public String referenceNumber;
-        public String transactionId;
-        public String type;
-        public String status;
-        public LocalDate created;
-        public List<Step> steps = Lists.newArrayList();
-
-        private List<String> types = Lists.newArrayList("Auto", "Hab", "Commercial");
-        private List<String> statuses = Lists.newArrayList("Abandoned", "Success", "Failed");
-
-        public Transaction() {
-            int seed = (int) (40*Math.random());
-            transactionId = UUID.randomUUID().toString();
-            referenceNumber = "" + ref++;
-            type = types.get(seed%types.size());
-            status = statuses.get(seed%statuses.size());
-            created = new LocalDate().minusDays(seed);
-
-            for (int i=0;i<1+seed%4;i++) {
-                steps.add(new Step());
-            }
-        }
-    }
-
-    public class Step implements Serializable {
-        public String name;
-        public String status;
-        public List<String> messages = Lists.newArrayList();
-
-        private List<String> names = Lists.newArrayList("persPolicyAddReq", "showPolicy", "submitPolicy", "showDetails");
-        private List<String> statuses = Lists.newArrayList("Abandoned", "Success", "Failed");
-
-        public Step() {
-            int seed = (int) (100*Math.random());
-            name = names.get(seed%names.size());
-            for (int i =0; i< seed%4; i++) {
-                messages.add("this is message " + msgNum++);
-            }
-            status = statuses.get(seed%statuses.size());
-        }
     }
 
 }

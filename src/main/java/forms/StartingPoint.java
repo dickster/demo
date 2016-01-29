@@ -5,6 +5,7 @@ import demo.resources.Resource;
 import forms.impl.PizzaModel;
 import forms.model.GenericInsuranceObject;
 import forms.util.IHello;
+import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.head.CssHeaderItem;
@@ -39,6 +40,7 @@ public class StartingPoint extends WebPage {
 
     private boolean customWidgets;
     private boolean invalidData = false;
+    private String language = "english";
 
     public StartingPoint() {
         super(new PageParameters());
@@ -47,14 +49,17 @@ public class StartingPoint extends WebPage {
 
         final GenericInsuranceObject obj = new GenericInsuranceObject();
         List<String> countries = Lists.newArrayList("Canada", "USA", "Mexico");
+        List<String> languages = Lists.newArrayList("english", "french");
 
         add(new Form("form")
+                .add(new DropDownChoice<String>("language", new PropertyModel(this, "language"), languages))
                 .add(new DropDownChoice<String>("country", new PropertyModel(obj, "insured.country"), countries))
                 .add(new CheckBox("customTheme", new PropertyModel(toolkit, "customTheme")))
                 .add(new CheckBox("customWidgets", new PropertyModel(this, "customWidgets")))
                 .add(new AjaxSubmitLink("simple") {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                        Session.get().setAttribute("language", language);
                         setResponsePage(new WfPage("demo", obj));
                     }
                 })
@@ -64,7 +69,6 @@ public class StartingPoint extends WebPage {
                         setResponsePage(new WfPage("pizza", new PizzaModel()));
                     }
                 }));
-
     }
 
     @Override

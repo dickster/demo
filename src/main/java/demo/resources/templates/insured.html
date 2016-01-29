@@ -1,24 +1,22 @@
 <wicket:panel>
     <div class="row">
         <div class="col-md-3">
-            <label data-tmpl="label.first">First</label>
+            <div class="col-group">
+                <label data-tmpl="label.first">First</label>
+                <input type="text" data-tmpl="first" class="form-control">
+            </div>
         </div>
         <div class="col-md-3">
+            <div class="col-group">
             <label data-tmpl="label.middle">Middle</label>
-        </div>
-        <div class="col-md-3">
-            <label data-tmpl="label.last">Last</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <input type="text" data-tmpl="first" class="form-control">
-        </div>
-        <div class="col-md-3">
             <input type="text" data-tmpl="middle" class="form-control">
+            </div>
         </div>
         <div class="col-md-3">
+            <div class="col-group">
+            <label data-tmpl="label.last">Last</label>
             <input type="text" data-tmpl="last" class="form-control">
+            </div>
         </div>
     </div>
 

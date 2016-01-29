@@ -65,8 +65,7 @@ public class Template extends Panel {
             Closeables.closeQuietly(stream);
             return Markup.of(content);
         } catch (IOException e) {
-            e.printStackTrace();  // TODO : how to handle
-            return Markup.of("<wicket:panel><div class='template-error'>error reading markup for "+getFullPath()+"</div></wicket:panel>");
+            throw new WorkflowException(e);
         }
     }
 

@@ -34,7 +34,6 @@ $(function() {
                     msg.text('This is not a valid credit card number');
                 }
                 msg.append(button);
-
             }
 
 
@@ -49,7 +48,7 @@ $(function() {
 
 
 
-//
+
 //4000 0000 0000 0002
 //4026 0000 0000 0002
 //5018 0000 0009

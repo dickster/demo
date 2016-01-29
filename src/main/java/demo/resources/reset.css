@@ -11,6 +11,8 @@
 
 /* in form but not in template.*/
 .not-in-template {
+    min-width:30px;
+    min-height:25px;
     background:#fee;
     color:#aaa;
     outline:1px solid #dbb;
@@ -66,3 +68,8 @@ form .row > [class*="col-"] {
 .form-group {margin-bottom:1%!important;}
 
 .form-inline .form-control  {margin-bottom:2%;}
+
+.alert i.fa {
+    float:left;
+    display:inline-block;
+}

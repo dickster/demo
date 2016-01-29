@@ -61,6 +61,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     }
 
     @Subscribe void onSubmitError(WfSubmitErrorEvent event) throws WorkflowException {
+        System.out.println("submit error : " + event.getName());
     }
 
     @Subscribe

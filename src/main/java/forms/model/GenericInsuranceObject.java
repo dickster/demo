@@ -18,7 +18,7 @@ public class GenericInsuranceObject implements Serializable {
     private Errors errors = new Errors();
     private Name name = new Name("","");
     private Insured insured = new Insured();
-    private List<Vehicle> vehicles = Lists.newArrayList(new Vehicle("Ford", "1997", "Bronco"));
+    private List<Vehicle> vehicles = Lists.newArrayList(new Vehicle().withTestData());
     private Vehicle vehicle = new Vehicle();
     private Payment payment = new Payment();
     private List<Name> names = Lists.newArrayList(
@@ -70,7 +70,7 @@ public class GenericInsuranceObject implements Serializable {
     public Payment getPayment() { return payment; }
 
     public class Payment implements Serializable {
-        public String cc;
+        public String cc = "4000 0000 0000 0002";
         private String securityCode;
         public String expiry;
         public String method;

@@ -2,24 +2,37 @@
 
     <div class="row">
         <div class="col-md-3">
-            <label data-tmpl="label.vehicleType">First</label>
+            <div class="col-group">
+                <label data-tmpl="label.vehicleType">First</label>
+                <select type="text" data-tmpl="type"/>
+            </div>
         </div>
         <div class="col-md-3">
-            <label data-tmpl="label.year">Middle</label>
+            <div class="col-group">
+                <label data-tmpl="label.year">Middle</label>
+                <input type="text" data-tmpl="year" class="form-control">
+            </div>
         </div>
         <div class="col-md-3">
-            <label data-tmpl="label.model">Last</label>
+            <div class="col-group">
+                <label data-tmpl="label.model">Last</label>
+                <input type="text" data-tmpl="model" class="form-control">
+            </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-3">
-            <select type="text" data-tmpl="type"/>
+            <div class="col-group">
+                <label data-tmpl="label.vin">Vin</label>
+                <input type="text" data-tmpl="vin" class="form-control"/>
+            </div>
         </div>
         <div class="col-md-3">
-            <input type="text" data-tmpl="year" class="form-control">
-        </div>
-        <div class="col-md-3">
-            <input type="text" data-tmpl="model" class="form-control">
+            <div class="col-group">
+                <label data-tmpl="label.color">Colour</label>
+                <input type="text" data-tmpl="color" class="form-control">
+            </div>
         </div>
     </div>
 

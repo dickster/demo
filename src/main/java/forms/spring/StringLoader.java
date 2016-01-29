@@ -1,21 +1,32 @@
 package forms.spring;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import org.apache.wicket.Session;
 
+import javax.inject.Inject;
+import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 public class StringLoader {
-    //just a temp stash for strings... this really should be in db somewhere.
-    static final Map<String, String> STRINGS =
+
+    //just a temp stash for strings... this will be in db somewhere.
+    static final Map<String, String> ENGLISH =
             new ImmutableMap.Builder<String, String>()
                     .put("label.reject", "we currently do not do business in your country.")
                     .put("label.thanks", "thank you for your payment of...")
                     .put("label.paymentMethod", "payment method")
+                    .put("label.email", "email")
+                    .put("label.phone", "phone")
                     .put("label.bogus", "blah")
                     .put("label.names", "my name is {1}, {0}.")
                     .put("label.year", "year")
                     .put("label.model", "model")
                     .put("label.age", "age")
+                    .put("label.vin", "vin")
+                    .put("label.color", "color")
                     .put("label.middle", "middle")
                     .put("label.address", "address")
                     .put("label.country", "country")
@@ -40,10 +51,25 @@ public class StringLoader {
                     .put("button.submit", "submit")
             .build();
 
+    private Map<String, String> FRENCH = Maps.newHashMap();
+
+    public StringLoader() {
+        int i = 0;
+        List<String> prefixes = Lists.newArrayList("Le ","La ", "L'", "Une ", "C'est une ", "Par ");
+        for (String key:ENGLISH.keySet()) {
+            String englishValue = ENGLISH.get(key);
+            FRENCH.put(key, prefixes.get(i)+englishValue);
+            i = (i+1)%prefixes.size();
+        }
+    }
+
     public String get(String key) {
-        // it will probably have to be prototype bean that has sessionBean injected into to access user & locale.
-        String value = STRINGS.get(key);
-        return value==null ? unresolved(key) : value;
+        Session session = Session.get();
+        String language = (String) session.getAttribute("language");
+        String result = (language != null && "french".equalsIgnoreCase(language.toString()))
+                ? FRENCH.get(key)
+                : ENGLISH.get(key);
+        return result==null ? unresolved(key) : result;
     }
 
     private String unresolved(String key) {

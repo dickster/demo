@@ -9,6 +9,7 @@ public class Demo4FormConfig extends FormConfig {
         super("demo4");
         withTitle("Section Panels");
         addConfigs();
+        withTemplate("demo4");
     }
 
     private void addConfigs() {
@@ -41,6 +42,10 @@ public class Demo4FormConfig extends FormConfig {
                                 .withOptions(Lists.newArrayList("Ford", "GM", "Chrysler", "BMW", "Volkswagen", "Hyundai", "Honda", "Toyota", "Subaru", "Kia", "Mercedes", "Tesla", "Smart")),
                         new LabelConfig("label.year"),
                         new TextFieldConfig("year"),
+                        new LabelConfig("label.vin"),
+                        new TextFieldConfig("vin"),
+                        new LabelConfig("label.color"),
+                        new TextFieldConfig("color"),
                         new LabelConfig("label.model"),
                         new TextFieldConfig("model")
                         )

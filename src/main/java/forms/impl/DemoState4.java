@@ -21,6 +21,12 @@ public class DemoState4 extends WfFormState {
         if (event.is("next")) {
             return demoState5;
         }
-        return unhandledEvent(workflow,event);
+        if (event.is("cancel")) {
+            workflow.end();
+            return this;
+        }
+        else {
+            return unhandledEvent(workflow,event);
+        }
     }
 }

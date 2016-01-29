@@ -15,6 +15,10 @@ public class WorkflowException extends RuntimeException {
         super(message);
     }
 
+    public WorkflowException(Throwable t) {
+        this(t.getMessage(), t);
+    }
+
     public WorkflowException(String message, Throwable cause) {
         super(message, cause);
     }

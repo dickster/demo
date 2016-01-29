@@ -1,9 +1,6 @@
 package forms.impl;
 
-import forms.FormBasedWorkflow;
-import forms.WfFormState;
-import forms.WfState;
-import forms.WidgetFactory;
+import forms.*;
 import forms.model.GenericInsuranceObject;
 import forms.model.WfCompoundPropertyModel;
 
@@ -19,6 +16,11 @@ public class DemoWorkflow  extends FormBasedWorkflow<GenericInsuranceObject> {
     @Override
     public WfFormState getStartingState() {
         return demoState1;
+    }
+
+    @Override
+    public void end() {
+        updatePage(new StartingPoint());
     }
 
     @Nonnull

@@ -1,0 +1,95 @@
+<wicket:panel>
+
+
+  <div class="container">
+
+      <div class="row">
+          <div class="col-md-3">
+              <div class="col-group">
+                  <label data-tmpl="label.email"/>
+                  <input type="text" data-tmpl="insured.contact.email" class="form-control"/>
+              </div>
+          </div>
+          <div class="col-md-3">
+              <div class="col-group">
+                  <label data-tmpl="label.phone"/>
+                  <input type="text" data-tmpl="insured.contact.phone" class="form-control"/>
+              </div>
+          </div>
+          <div class="pull-right col-md-6">
+              <div class="checkbox" style="margin-top:20px;">
+                  <label>
+                      <input data-tmpl="insured.notifyMe" type="checkbox">
+                  </label>
+              </div>
+          </div>
+      </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="checkbox">
+                <label>
+                    <input data-tmpl="insured.smokes" type="checkbox">
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="col-group">
+                <label data-tmpl="label.paymentMethod"/>
+                <select data-tmpl="payment.method" class=""/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="col-group">
+                <label data-tmpl="label.ccNumber"/>
+                <select data-tmpl="payment.cc" class="form-control"/>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="col-group">
+                <label data-tmpl="label.ccExpiry"/>
+                <select data-tmpl="payment.expiry" class="form-control"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="col-group">
+                <label data-tmpl="label.ccSecurity"/>
+                <select data-tmpl="payment.securityCode" class="form-control"/>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="col-group">
+                <label data-tmpl="label.paymentFrequency"/>
+                <select data-tmpl="payment.frequency" class=""/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <p><i><small>*note : valid cc#'s = {4000 0000 0000 0002,  4026 0000 0000 0002,  5100 0000 0000 0008,  6011 0000 0000 0004} </small></i></p>
+    </div>
+
+      <!--in order to compensate for footer-->
+    <p class="push"></p>
+
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <input type="button" class="btn btn-primary btn-submit" data-tmpl="button.next" value="next">
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+</wicket:panel>
