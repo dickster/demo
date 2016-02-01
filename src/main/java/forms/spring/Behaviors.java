@@ -1,9 +1,8 @@
 package forms.spring;
 
 import forms.RenderingBehavior;
-import forms.behavior.AgeOccupationAjaxBehavior;
-import forms.behavior.NameTypeAheadBehavior;
-import forms.behavior.VehicleTypeAheadBehavior;
+import forms.behavior.*;
+import forms.widgets.config.PhoneNumberConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -15,7 +14,6 @@ public class Behaviors {
     public BehaviorFactory behaviorFactory() {
         return new BehaviorFactory();
     }
-
 
     // NOTE : *all* behaviors MUST be of Scope("prototype")!!
     //   e.g. @Bean @Scope("prototype") public Foo foo() {...}
@@ -38,6 +36,16 @@ public class Behaviors {
     @Bean @Scope("prototype")
     public VehicleTypeAheadBehavior vehicleTypeAheadBehavior() {
         return new VehicleTypeAheadBehavior();
+    }
+
+    @Bean @Scope("prototype")
+    public EmailAjaxBehavior emailAjaxBehavior() {
+        return new EmailAjaxBehavior();
+    }
+
+    @Bean @Scope("prototype")
+    public PhoneNumberAjaxBehavior phoneNumberAjaxBehavior() {
+        return new PhoneNumberAjaxBehavior();
     }
 
 }

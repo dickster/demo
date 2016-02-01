@@ -1,17 +1,18 @@
 package forms.widgets.config;
 
 import forms.WidgetTypeEnum;
-import forms.widgets.CheckBox_;
+import forms.widgets.WfCheckBox;
 
-public class CheckBoxConfig extends FormComponentConfig<CheckBox_> {
+public class CheckBoxConfig extends FormComponentConfig<WfCheckBox> {
 
-    private String label;
+    private @IncludeInJson String label;
 
     public CheckBoxConfig(String property, String label) {
         super(property, WidgetTypeEnum.CHECKBOX);
         this.label = label;
         removeCss("form-control");
         withCss("checkbox");
+        withWrappedHtmlOutput();
     }
 
     public String getLabel() {
@@ -19,7 +20,7 @@ public class CheckBoxConfig extends FormComponentConfig<CheckBox_> {
     }
 
     @Override
-    public CheckBox_ create(String id) {
-        return new CheckBox_(id, this);
+    public WfCheckBox create(String id) {
+        return new WfCheckBox(id, this);
     }
 }

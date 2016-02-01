@@ -25,7 +25,7 @@ public enum WidgetTypeEnum {
     FEEDBACK(),
     CREDIT_CARD("creditCard"),
     LIST(),
-    TAB_PANEL();
+    TAB_PANEL(), PHONE_NUMBER();
 
     String pluginName;
 

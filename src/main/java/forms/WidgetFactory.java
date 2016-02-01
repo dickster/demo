@@ -60,7 +60,7 @@ public abstract class WidgetFactory implements Serializable {
     }
 
     protected void setMetaData(Component component, Config config) {
-        component.setOutputMarkupId(true);
+        component.setOutputMarkupPlaceholderTag(true);
     }
 
     private void addValidators(FormComponent fc, FormComponentConfig<?> config) {
@@ -73,8 +73,8 @@ public abstract class WidgetFactory implements Serializable {
     }
 
     private final void addBehaviors(Component component, Config<?> config) {
-        for (String handlerName:config.getBehaviors()) {
-            component.add(behaviorFactory.create(handlerName));
+        for (String behaviorName:config.getBehaviors()) {
+            component.add(behaviorFactory.create(behaviorName));
         }
     }
 

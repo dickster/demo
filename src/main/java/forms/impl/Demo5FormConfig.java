@@ -17,10 +17,15 @@ public class Demo5FormConfig extends FormConfig {
     private void addConfigs() {
         with(new LabelConfig("label.email"));
         with(new TextFieldConfig("insured.contact.email")
-                    .addValidator(EmailAddressValidator.getInstance()));
+                .addValidator(EmailAddressValidator.getInstance())
+                .withBehavior("emailAjaxBehavior")
+            );
 
         with(new LabelConfig("label.phone"));
-        with(new TextFieldConfig("insured.contact.phone").required());
+        with(new PhoneNumberConfig("insured.contact.phone")
+                .required()
+                .withBehavior("phoneNumberAjaxBehavior"));
+
 
         withConfig(new CheckBoxConfig("insured.notifyMe", "Notify me when my policy is about to expire."));
 

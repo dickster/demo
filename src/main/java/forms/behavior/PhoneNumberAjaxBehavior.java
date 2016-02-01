@@ -11,7 +11,7 @@ import org.apache.wicket.model.IModel;
 public class PhoneNumberAjaxBehavior extends WfAjaxBehavior {
 
     public PhoneNumberAjaxBehavior() {
-        super("inputchange");
+        super();
     }
 
     public PhoneNumberAjaxBehavior(String event) {
@@ -22,9 +22,10 @@ public class PhoneNumberAjaxBehavior extends WfAjaxBehavior {
     protected void onUpdate(AjaxRequestTarget target) {
         WorkflowForm workflowForm = getWorkflowForm();
         String value = getComponent().getDefaultModelObjectAsString();
-        boolean visible = value!=null && value.trim().startsWith("416");
+        boolean visible = value!=null && value.trim().contains("(416)");
         Component phoneCoverage = workflowForm.getWfComponent("insured.smokes");
         phoneCoverage.setVisible(visible);
+        target.add(phoneCoverage);
     }
 
 }

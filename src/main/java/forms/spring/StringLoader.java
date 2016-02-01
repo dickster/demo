@@ -55,7 +55,7 @@ public class StringLoader {
 
     public StringLoader() {
         int i = 0;
-        List<String> prefixes = Lists.newArrayList("Le ","La ", "L'", "Une ", "C'est une ", "Par ");
+        List<String> prefixes = Lists.newArrayList("Le ","La ", "L'", "Une ", "C'est une ", "Par ", "De ", "Elle ", "Ils ");
         for (String key:ENGLISH.keySet()) {
             String englishValue = ENGLISH.get(key);
             FRENCH.put(key, prefixes.get(i)+englishValue);
