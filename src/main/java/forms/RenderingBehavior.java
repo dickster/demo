@@ -8,20 +8,27 @@ import forms.widgets.config.GroupConfig;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.HasTemplate;
 import org.apache.wicket.Component;
+import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.ajax.IAjaxRegionMarkupIdProvider;
 import org.apache.wicket.behavior.Behavior;
+import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
+import org.apache.wicket.markup.transformer.AbstractOutputTransformerContainer;
+import org.apache.wicket.protocol.http.BufferedWebResponse;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 import javax.inject.Inject;
 import java.util.Map;
 
 public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdProvider {
 
-    // TODO : should shorten the .js name to reduce size of payload.    wf.widget(%s) ??
     private static final String INIT_WIDGET_JS = "wf.widget(%s);";
 
+    // TODO : allow extensions to this...
+    // for example, additional business logic that will be delegated to.
+    // e.g. a beforeRender logic that hides/shows component depending on model value.
     private @Inject ConfigGson gson;
 
     @Override
@@ -30,14 +37,16 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
         addAttributes(component, tag);
     }
 
+
+
     private void addAttributes(Component component, ComponentTag tag) {
-        Config config = getConfig(component);
-        Map<String, String> attributes = config.getAttributes();
-        for (String key:attributes.keySet()) {
-            tag.getAttributes().put(key, attributes.get(key));
-        }
         if (!needsToBeWrapped(component)) {
             // this should EITHER be put on component markup OR it's wrapped parent's markup. (not both).
+            Config config = getConfig(component);
+            Map<String, String> attributes = config.getAttributes();
+            for (String key:attributes.keySet()) {
+                tag.getAttributes().put(key, attributes.get(key));
+            }
             tag.getAttributes().put("data-wf", getDataWf(component));
         }
     }
@@ -80,8 +89,24 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
 
     public void beforeRender(Component c) {
         if (needsToBeWrapped(c)) {
-            c.getResponse().write("<div id='" + getWrappedId(c) + "' data-wf='" + getDataWf(c) + "'>");
+            String div = String.format("<div id='%s' data-wf='%s' %s>",
+                    getWrappedId(c),
+                    getDataWf(c),
+                    getWrappedAttributes(c));
+            c.getResponse().write(div);
         }
+    }
+
+    private String getWrappedAttributes(Component c) {
+        StringBuilder builder = new StringBuilder();
+        Config config = getConfig(c);
+        Map<String, String> attrs = config.getAttributes();
+        for (String attr:attrs.keySet()) {
+            String value = attrs.get(attr);
+            builder.append(attr + "='" );
+            builder.append(value+"' ");
+        }
+        return builder.toString();
     }
 
     private String getDataWf(Component c) {
@@ -94,10 +119,40 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
         return getConfig(c).isWrapHtmlOutput();
     }
 
+
+
+//    @Override
+//    public void afterRender(final Component component)
+//    {
+//        final RequestCycle requestCycle = RequestCycle.get();
+//
+//        try
+//        {
+//            BufferedWebResponse tempResponse = (BufferedWebResponse)requestCycle.getResponse();
+//
+//            // Transform the data
+//            CharSequence output = transform(component, tempResponse.getText());
+//            originalResponse.write(output);
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new WicketRuntimeException("Error while transforming the output of component: " +
+//                    component, ex);
+//        }
+//        finally
+//        {
+//            // Restore the original response object
+//            requestCycle.setResponse(originalResponse);
+//        }
+//    }
+
+
     public void afterRender(Component c) {
         if (needsToBeWrapped(c)) {
             c.getResponse().write("</div>");
         }
+        // hack...hook to reset this so it's only used once.
+       // getConfig(c).resetInitiallyHidden();
     }
 
     @Override
@@ -107,6 +162,13 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
     }
 
     private String getWrappedId(Component component) {
-        return component.getMarkupId()+"_w";
+        return component.getMarkupId()+"_wf";
     }
+
+//    @Override
+//    public CharSequence transform(Component component, CharSequence output) throws Exception {
+//        // TODO : allow for transformations of html...
+//        // eg. adding attributes, placeholder stuff?
+//        return output;
+//    }
 }

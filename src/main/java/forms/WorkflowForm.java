@@ -1,6 +1,7 @@
 package forms;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 import forms.spring.WfNavigator;
 import forms.util.WfUtil;
 import forms.widgets.config.*;
@@ -14,6 +15,8 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.HiddenField;
 import org.apache.wicket.markup.html.form.validation.IFormValidator;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.renderStrategy.DeepChildFirstVisitor;
@@ -25,37 +28,41 @@ import org.apache.wicket.util.visit.IVisit;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
 
     private @Inject Toolkit toolkit;
     private @Inject WfNavigator wfNavigator;
 
-    private Component visitorKludge;
-
     private Form form;
     private FeedbackPanel feedback;
-    private FormConfig formConfig;
     private AbstractDefaultAjaxBehavior historyMaker;
     private Template template;
+    private ListView content;
+    private WfFormState state;
+    private Component visitorKludge;
 
-    public WorkflowForm(@Nonnull String id, @Nonnull FormConfig config) {
+
+    public WorkflowForm(@Nonnull String id, @Nonnull WfFormState state) {
         super(id);
-        withConfig(config);
+        this.state = state;
         setOutputMarkupId(true);
         add(new RenderingBehavior());  // should this be a prototype bean???
-
         setupHistory();
 
         // placeholder to be replaced based on formConfig.
         add(new WebMarkupContainer("form").add(new WebMarkupContainer("content")));
         add(new Label("subheader", getSubHeader()));
+
+        update(getFormConfig());
     }
 
     public IModel<?> getSubHeader() {
         return new Model<String>() {
             @Override public String getObject() {
-                return formConfig.getTitle();
+                return getFormConfig().getTitle();
             }
         };
     }
@@ -87,13 +94,8 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
         });
     }
 
-    private FormBasedWorkflow getWorkflow() {
-        return (FormBasedWorkflow) wfNavigator.getWorkflow(this);
-    }
-
-    public WorkflowForm withConfig(FormConfig config) {
-        this.formConfig = config;
-        return this;
+    private FormBasedWorkflow<?> getWorkflow() {
+        return (FormBasedWorkflow<?>) wfNavigator.getWorkflow(this);
     }
 
     public WorkflowForm withFormValidator(IFormValidator validator) {
@@ -103,30 +105,40 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
 
     @Override
     protected void onInitialize() {
-        Preconditions.checkNotNull(formConfig);
         super.onInitialize();
         getWorkflow().register(this);
         add(createFeedbackPanel());
-        update(formConfig);
         getTheme().apply(form);
     }
 
     private Component createFeedbackPanel() {
-        FeedbackPanelConfig config = formConfig.getFeedbackConfig();
-        if (config==null) {
+        FeedbackPanelConfig feedbackConfig = getFormConfig().getFeedbackConfig();
+        if (feedbackConfig==null) {
             System.out.println("WARNING : using default feedback panel. you probably should supply your own. ");
-            config = new FeedbackPanelConfig();
+            feedbackConfig = new FeedbackPanelConfig();
         }
-        Component panel = getWorkflow().createWidget(config.getId(), config);
+        Component panel = getWorkflow().createWidget(feedbackConfig.getId(), feedbackConfig);
         return panel;
     }
 
     private void update(FormConfig formConfig) {
         form = new Form("form");
         form.setOutputMarkupId(true);
-        form.add(new Div("content", formConfig).setRenderBodyOnly(true));
-        form.add(template =new Template("template", formConfig));
+        form.add(content());
+        form.add(template = new Template("template", formConfig));
         addOrReplace(form);
+    }
+
+    private Component content() {
+        content = new ListView<Config>("content", getFormConfig().getConfigs()) {
+            @Override
+            protected void populateItem(ListItem<Config> item) {
+                Config c = item.getModelObject();
+                Component component = getWorkflow().createWidget("el", c);
+                item.add(component).setRenderBodyOnly(true);
+            }
+        }.setReuseItems(true);
+        return content;
     }
 
     public void update(FormConfig formConfig, AjaxRequestTarget target) {
@@ -152,14 +164,16 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
     }
 
     public FormConfig getFormConfig() {
-        return formConfig;
+        return state.getFormConfig();
     }
 
     public Component getWfComponent(final String id) {
+        // TODO : should cache this??
+
         // argh...because the visitor doesn't support generics we have to work around getting a return value.
         // suggest : make a copy that supports generics = EZDeepChildFirstVisitor<Component, Component>();
         visitorKludge = null;   // unfortunately, can't use a local var for this...boo!
-        visitChildren(Component.class, new DeepChildFirstVisitor() {
+        content.visitChildren(Component.class, new DeepChildFirstVisitor() {
             @Override
             public void component(Component component, IVisit<Void> visit) {
                 String n = WfUtil.getComponentId(component);
@@ -184,7 +198,9 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
 
     @Override
     public Config getConfig() {
-        return formConfig;
+        return state.getFormConfig();
     }
+
+
 
 }

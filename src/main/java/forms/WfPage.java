@@ -37,7 +37,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     private static final String INIT = "wf.init();";
     private static final String FORM_ID = "form";
 
-    private FormBasedWorkflow workflow;
+    private FormBasedWorkflow<?> workflow;
     private @Inject WfFactory wfFactory;
 
     public WfPage(PageParameters params) {
@@ -59,7 +59,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
         }
         this.workflow.initialize();
         setDefaultModel(workflow.getModel());
-        add(workflow.createForm(FORM_ID, workflow.getCurrentFormConfig()));
+        add(workflow.createForm(FORM_ID, workflow.getCurrentState()));
 
         add(new DebugBar("debugBar"));
 

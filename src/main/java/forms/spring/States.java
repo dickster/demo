@@ -33,6 +33,11 @@ public class States {
     }
 
     @Bean
+    public DemoState6 demoState6() {
+        return new DemoState6();
+    }
+
+    @Bean
     public InfoState infoState() {
         return new InfoState();
     }

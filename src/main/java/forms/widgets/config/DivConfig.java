@@ -12,7 +12,8 @@ public class DivConfig extends GroupConfig<Div> {
 
     @Override
     public Div create(String id) {
-        return new Div(id, this);
+          throw new UnsupportedOperationException("don't create these via widget factory.");
+        //return new Div(id, this);
     }
 
 }

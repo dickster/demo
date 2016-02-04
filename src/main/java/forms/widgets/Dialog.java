@@ -43,7 +43,7 @@ public class Dialog extends Panel implements HasConfig, HasTemplate {
         super.onInitialize();
         add(new Label("title", config.getTitle()));
         add(form = new Form("form")
-                .add(new Div("contents", config))
+//                .add(new Div("contents", config))
                 .add(new ListView<DialogSubmitButtonConfig>("buttons", config.getButtons()) {
                     @Override
                     protected void populateItem(ListItem<DialogSubmitButtonConfig> item) {

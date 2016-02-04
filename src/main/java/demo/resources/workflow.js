@@ -1,8 +1,4 @@
 
-
-// TODO : rename this to shorten strings...make js output smaller.
-// e.g. wf.init(); instead of workflow.initWidget();
-
 var wf = function() {
 
     var url = "?";
@@ -18,7 +14,7 @@ var wf = function() {
             var $components = $(jqXHR.responseXML.documentElement.children).filter("component").map(
                 function(i,e) {
                     return document.getElementById(e.id);
-                });
+                })
             wf.layout.update($components);
         });
 
@@ -35,14 +31,23 @@ var wf = function() {
         var w = _widget(config);
         w.addDependents();
         w.initializePlugin();
+        w.setVisibility();
         w.layout();
     }
 
-
+        //  ----------- WIDGET obj ----------------
 
         function _widget(conf) {
             var config= conf;
             var $widget = $('#'+config.options.markupId);
+            // this will typically be the widget itself.  but it may be a wrapping container.
+            var $containedWidget = $widget.closest('[data-wf]');
+
+            var setVisibility = function() {
+//                if (config.hideInitially) {
+//                    $containedWidget.hide();
+//                }
+            };
 
             var addDependents = function() {
                 if (!config.dependents) return;
@@ -67,7 +72,7 @@ var wf = function() {
                 wf.layout.init($widget, config.options);
             }
 
-            var initializePlugin = function() {
+            var applyPlugin = function() {
                 // THESE ARE HACKS AND NEED TO BE WRITTEN AS JQUERY UI PLUGINS.
                 // e.g. $('#foo').address();
                 if ( config.type=="ADDRESS") {
@@ -90,9 +95,10 @@ var wf = function() {
             };
 
             return {
+                setVisibility : setVisibility,
                 layout : layout,
                 addDependents : addDependents,
-                initializePlugin : initializePlugin
+                initializePlugin : applyPlugin
             }
 
 

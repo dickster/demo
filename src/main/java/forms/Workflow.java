@@ -9,6 +9,7 @@ import com.google.common.eventbus.Subscribe;
 import forms.model.WfCompoundPropertyModel;
 import forms.validation.ValidationResult;
 import forms.widgets.config.Config;
+import forms.widgets.config.HasConfig;
 import org.apache.wicket.Component;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanNameAware;
@@ -51,7 +52,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         Preconditions.checkState(context != null);
         init(); // allow implementation specific initialization.
         started = true;
-        changeState(getStartingState());
+        setState(getStartingState());
         return this;
     }
 
@@ -83,7 +84,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     @Subscribe
     public final void onSubmit(@Nonnull WfSubmitEvent event) throws WorkflowException {
         try {
-            clearErrors();
+            reset();
             S nextState = (S) getCurrentState().handleEvent(this, event);
             changeState(nextState, event);
         } catch (Throwable t) {
@@ -91,8 +92,8 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         }
     }
 
-    protected void clearErrors() {
-        //
+    protected void reset() {
+        // your chance to clear any session stuff like errors, msgs, state values.
     }
 
     public void addValidationErrors(ValidationResult<?> result) {
@@ -111,17 +112,19 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         // override to handle validation errors.
     }
 
-    protected void changeState(S nextState, WfSubmitEvent event) {
-        changeState(nextState);
+    protected final void changeState(S nextState, WfSubmitEvent event) {
+        setState(nextState);
+        onChangeState(nextState, event);
     }
 
-    protected final boolean changeState(S nextState) {
+    protected abstract void onChangeState(S nextState, WfSubmitEvent event);
+
+    protected final boolean setState(S nextState) {
         if (nextState.equals(getCurrentState())) {
             return false;
         }
         validate(nextState);
         setCurrentState(nextState);
-        nextState.enter();
         statesVisited.put(getCurrentStateName(), getCurrentState());
         return true;
     }
@@ -219,10 +222,9 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         return currentState.getStateName();
     }
 
-    public Component createWidget(String id, Config config) {
-        Component widget = getWidgetFactory().createWidget(id, config);
+    public <T extends Component & HasConfig> T createWidget(String id, Config config) {
+        T widget = getWidgetFactory().createWidget(id, config);
         register(widget);
-
         return widget;
     }
 }

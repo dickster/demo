@@ -1,9 +1,7 @@
 package forms.impl;
 
-import forms.WfFormState;
-import forms.WfState;
-import forms.WfSubmitEvent;
-import forms.Workflow;
+import forms.*;
+import org.apache.wicket.Component;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;

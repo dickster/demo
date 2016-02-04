@@ -23,13 +23,14 @@ public class Demo5FormConfig extends FormConfig {
 
         with(new LabelConfig("label.phone"));
         with(new PhoneNumberConfig("insured.contact.phone")
-                .required()
                 .withBehavior("phoneNumberAjaxBehavior"));
 
 
-        withConfig(new CheckBoxConfig("insured.notifyMe", "Notify me when my policy is about to expire."));
+        withConfig(new CheckBoxConfig("insured.notifyMe", "Notify me when my policy is about to expire.")
+                    .initiallyHidden());
 
-        withConfig(new CheckBoxConfig("insured.smokes", "I wish to apply for extra 416 coverage"));
+        withConfig(new CheckBoxConfig("insured.smokes", "I wish to apply for extra 416 coverage")
+                    .initiallyHidden());
 
         with(new LabelConfig("label.paymentMethod"));
         withConfig(new SelectPickerConfig("payment.method")

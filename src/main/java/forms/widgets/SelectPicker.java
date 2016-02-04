@@ -31,6 +31,7 @@ public class SelectPicker<T> extends DropDownChoice<T> implements HasConfig {
     @Override
     protected void onComponentTag(ComponentTag tag) {
         tag.setName("select");
+        tag.getAttributes().put("class", "form-control");
         super.onComponentTag(tag);
     }
 

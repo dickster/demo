@@ -2,8 +2,11 @@ package forms;
 
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.Serializable;
 
+// TODO : i should just collapse Workflow & FormBasedWorkflow into one thing.
+//   no use in trying to separate out wicket layer.
 public class WfState implements Serializable {
 
     private String name;
@@ -20,7 +23,6 @@ public class WfState implements Serializable {
     public String getName() {
         return name==null ? getClass().getSimpleName() : name;
     }
-
 
     public @Nonnull WfState handleError(Workflow workflow, WfSubmitEvent event) {
         return this;
@@ -58,8 +60,8 @@ public class WfState implements Serializable {
     }
 
 
-    public void enter() {
+    public void enter(Workflow workflow, WorkflowForm components) {
         // override this if you want to do something when entering state.
-        // for example, you might want to hide/show some fields depending on incoming m
+        // for example, you might want to hide/show some fields depending on incoming model
     }
 }

@@ -64,7 +64,7 @@ public class TestWorkflow extends FormBasedWorkflow<GenericInsuranceObject> {
     }
 
     @Override
-    protected void clearErrors() {
+    protected void reset() {
         getObject().clearErrors();
     }
 

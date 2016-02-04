@@ -7,6 +7,8 @@ import org.apache.wicket.model.CompoundPropertyModel;
 // model that bases on component workflow id instead of wicket id.
 public class WfCompoundPropertyModel<T> extends CompoundPropertyModel<T> {
 
+    // TODO : add constructor for model as opposed to object.
+
     public WfCompoundPropertyModel(T object) {
         super(object);
     }

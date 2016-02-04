@@ -1,42 +1,59 @@
 package forms;
 
+import com.google.common.collect.Maps;
 import forms.spring.WfNavigator;
 import forms.widgets.config.Config;
 import forms.widgets.config.GroupConfig;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.HasTemplate;
+import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import java.util.Map;
 
-// rename this to....? DIV? BasicPanel, Container, ?? dunno.
-public class Div extends Panel implements HasConfig, HasTemplate {
+// rename this to....? DIV? BasicPanel, Container, ?? dunno.  FormContent??
+// just move all this into WorkflowForm for now.
+public abstract class Div extends Panel implements HasConfig, HasTemplate {
 
     private @Inject WfNavigator wfNavigator;
 
     private GroupConfig config;
+    private Map<String, Component> contents = Maps.newHashMap();
 
     public Div(String id, @Nonnull GroupConfig config) {
         super(id);
         this.config = config;
-        setVisible(config.isInitialyVisibile());
+        setVisible(config.isInitialyVisible());
         setOutputMarkupPlaceholderTag(true);
+        add(new ListView<Config>("div", config.getConfigs()) {
+            @Override
+            protected void populateItem(ListItem<Config> item) {
+                Config c = item.getModelObject();
+                Component component = createWidget("el", c);
+                register(component, c);
+                item.add(component).setRenderBodyOnly(true);
+            }
+        }.setReuseItems(true));
+
     }
+
+    protected abstract Component createWidget(String el, Config c);
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        final Workflow workflow = wfNavigator.getWorkflow(this);
-        add(new ListView<Config>("div", config.getConfigs()) {
-            @Override
-            protected void populateItem(ListItem<Config> item) {
-                item.add(workflow.createWidget("el", item.getModelObject()));
-                item.setRenderBodyOnly(true);
-            }
-        }.setReuseItems(true));
+    }
+
+    private void register(Component component, Config c) {
+        contents.put(c.getId(), component);
+    }
+
+    public Component getWfComponent(String id) {
+        return contents.get(id);
     }
 
     @Override

@@ -28,7 +28,8 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     private GroupConfig parent;
     private Set<String> behaviors = Sets.newHashSet();
     private boolean wrapHtmlOutput = false;
-    private boolean initiallyVisible = true;
+
+    private @IncludeInJson Boolean hideInitially = null;
 
     // this is injected by the framework...don't set this yourself.
 //    private @IncludeInJson String templateId;
@@ -132,6 +133,7 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     }
 
     public Config<T> withAttribute(String key, String value) {
+        // TODO : should log if i'm overwriting attribute.
         attributes.put(key, value);
         return this;
     }
@@ -223,12 +225,12 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     // CAVEAT : if you use this, and you update the component via ajax, then you probably want to
     // call setOutputMarkupPlaceholderTag(true);
-    public boolean isInitialyVisibile() {
-        return initiallyVisible;
+    public boolean isInitialyVisible() {
+        return !hideInitially;
     }
 
-    public Config<T> initiallyVisible(boolean vis) {
-        this.initiallyVisible = vis;
+    public Config<T> initiallyHidden() {
+        this.hideInitially = true;
         return this;
     }
 
@@ -263,5 +265,8 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return this;
     }
 
+    public void resetInitiallyHidden() {
+        hideInitially = null;
+    }
 }
 

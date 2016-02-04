@@ -18,7 +18,7 @@ public class FormConfig<T> extends GroupConfig<WorkflowForm> {
 
     @Override
     public WorkflowForm create(String id) {
-        return new WorkflowForm(id, this);
+        throw new UnsupportedOperationException("you should never create the top level workflow component through the widget factory.");
     }
 
     public IFormValidator getValidator() {
