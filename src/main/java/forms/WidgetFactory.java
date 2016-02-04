@@ -51,6 +51,9 @@ public abstract class WidgetFactory implements Serializable {
     }
 
     protected void setVisibility(Component component, Config config) {
+//        if (!config.isInitialyVisible()) {
+//            component.setVisible(false);
+//        }
     }
 
     protected void addRenderingBehavior(Component c) {

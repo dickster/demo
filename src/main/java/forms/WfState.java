@@ -28,7 +28,7 @@ public class WfState implements Serializable {
         return this;
     }
 
-    public @Nonnull WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
+    public @Nonnull WfState onEvent(Workflow workflow, WfSubmitEvent event) {
         // typically something like...
         // switch ( Event.valueOf(event.getId()) ) {
         //    case SUBMIT : doThis();
@@ -60,8 +60,9 @@ public class WfState implements Serializable {
     }
 
 
-    public void enter(Workflow workflow, WorkflowForm components) {
+    public void onEnter(Workflow workflow) {
         // override this if you want to do something when entering state.
         // for example, you might want to hide/show some fields depending on incoming model
+        System.out.println("entering state " + getClass().getSimpleName());
     }
 }

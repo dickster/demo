@@ -22,7 +22,7 @@ public class StateA extends WfFormState {
 
     @Nonnull
     @Override
-    public WfFormState handleEvent(Workflow workflow, WfSubmitEvent event) {
+    public WfFormState onEvent(Workflow workflow, WfSubmitEvent event) {
 //        try {
 //            Thread.sleep(1200);
 //        } catch (InterruptedException e) {

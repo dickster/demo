@@ -19,7 +19,7 @@ public class StateAx extends WfFormState{
 
     @Nonnull
     @Override
-    public WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
+    public WfState onEvent(Workflow workflow, WfSubmitEvent event) {
         if ("next".equals(event.getName())) {
             return stateAy;
         }

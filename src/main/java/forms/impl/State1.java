@@ -20,7 +20,7 @@ public class State1 extends WfFormState {
 
     @Nonnull
     @Override
-    public WfFormState handleEvent(Workflow workflow, WfSubmitEvent event) {
+    public WfFormState onEvent(Workflow workflow, WfSubmitEvent event) {
         if ("next".equals(event.getName())) {
             return stateA;
         }

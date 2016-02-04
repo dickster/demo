@@ -14,7 +14,7 @@ public class PizzaState2 extends WfFormState {
 
     @Nonnull
     @Override
-    public WfFormState handleEvent(Workflow workflow, WfSubmitEvent event) {
+    public WfFormState onEvent(Workflow workflow, WfSubmitEvent event) {
         if ("Thanks, Come again".equals(event.getName())) {
             workflow.end();
         }

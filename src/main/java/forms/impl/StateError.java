@@ -18,7 +18,7 @@ public class StateError extends WfFormState {
 
     @Nonnull
     @Override
-    public WfFormState handleEvent(Workflow workflow, WfSubmitEvent event) {
+    public WfFormState onEvent(Workflow workflow, WfSubmitEvent event) {
         if ("ok".equals(event.getName())) {
             return stateA;
         }

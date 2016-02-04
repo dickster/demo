@@ -85,7 +85,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     public final void onSubmit(@Nonnull WfSubmitEvent event) throws WorkflowException {
         try {
             reset();
-            S nextState = (S) getCurrentState().handleEvent(this, event);
+            S nextState = (S) getCurrentState().onEvent(this, event);
             changeState(nextState, event);
         } catch (Throwable t) {
             throw new WorkflowException("workflow failed when handling event", event, t);
@@ -126,6 +126,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         validate(nextState);
         setCurrentState(nextState);
         statesVisited.put(getCurrentStateName(), getCurrentState());
+        nextState.onEnter(this);
         return true;
     }
 

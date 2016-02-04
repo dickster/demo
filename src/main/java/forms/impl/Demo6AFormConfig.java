@@ -4,9 +4,9 @@ import com.google.common.collect.Lists;
 import forms.widgets.config.*;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
 
-public class Demo6FormConfig extends FormConfig {
+public class Demo6AFormConfig extends FormConfig {
 
-    public Demo6FormConfig() {
+    public Demo6AFormConfig() {
         super("demo6");
         withTitle("Validations");
         addConfigs();
@@ -14,8 +14,7 @@ public class Demo6FormConfig extends FormConfig {
     }
 
     private void addConfigs() {
-        with(new LabelConfig("label.usesCC"));
-        with(new LabelConfig("label.usesCash"));
+        with(new LabelConfig("label.usesCC").withId("label").withTagName("p"));
 
         with(new LabelConfig("label.email" ));
         with(new LabelConfig("email", "insured.contact.email"));

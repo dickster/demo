@@ -35,7 +35,8 @@ public class Label2 extends Label implements HasConfig {
 
     @Override
     protected void onComponentTag(ComponentTag tag) {
-        tag.setName("label");
+        // TODO : should make this a config option.
+        tag.setName(config.getTagName());
         super.onComponentTag(tag);
     }
 

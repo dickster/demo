@@ -20,6 +20,8 @@ public class StringLoader {
                     .put("label.paymentMethod", "payment method")
                     .put("label.email", "email")
                     .put("label.phone", "phone")
+                    .put("label.usesCC", "you use a credit card.")
+                    .put("label.usesCash", "thank you for using cash.")
                     .put("label.bogus", "blah")
                     .put("label.names", "my name is {1}, {0}.")
                     .put("label.year", "year")

@@ -15,7 +15,7 @@ public class RejectedState extends WfFormState {
 
     @Nonnull
     @Override
-    public WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
+    public WfState onEvent(Workflow workflow, WfSubmitEvent event) {
         if (event.is("ok")) {
             workflow.end();
         }

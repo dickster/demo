@@ -18,7 +18,7 @@ public class PaymentState extends WfFormState {
 
     @Nonnull
     @Override
-    public WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
+    public WfState onEvent(Workflow workflow, WfSubmitEvent event) {
         if (event.is("next")) {
             return confirmationState;
         }

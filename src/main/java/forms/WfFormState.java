@@ -1,5 +1,6 @@
 package forms;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import forms.spring.WfAjaxBehavior;
 import forms.widgets.config.FormConfig;
@@ -11,8 +12,12 @@ import java.util.List;
 // i.e. WfFormState<DemoWorkflow> extends WfState....
 public abstract class WfFormState extends WfState {
 
-    private FormConfig formConfig;
+    protected FormConfig formConfig;
 //    private List<WfAjaxBehavior> handlers = Lists.newArrayList();
+
+    public WfFormState() {
+        super();
+    }
 
     public WfFormState(@Nonnull FormConfig formConfig) {
         super();
@@ -20,6 +25,7 @@ public abstract class WfFormState extends WfState {
     }
 
     public @Nonnull FormConfig getFormConfig() {
+        Preconditions.checkState(formConfig!=null, "you can't have a form state without a form configuration.");
         return formConfig;
     }
 

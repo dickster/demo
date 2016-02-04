@@ -14,7 +14,7 @@ public class StateC extends WfFormState {
 
     @Nonnull
     @Override
-    public WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
+    public WfState onEvent(Workflow workflow, WfSubmitEvent event) {
         if ("ok".equals(event.getName())) {
             workflow.end();
         }

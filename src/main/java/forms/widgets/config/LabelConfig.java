@@ -15,11 +15,12 @@ public class LabelConfig extends Config<Label2> {
 
     public LabelConfig(String id) {
         super(id, WidgetTypeEnum.LABEL);
+        withTagName("label");
     }
 
     // new LabelConfig("hello", "name.first");
     public LabelConfig(String id, String property) {
-        super(property, WidgetTypeEnum.LABEL);
+        this(property);
         withId(id);
         useParentModel = true;  //otherwise, will assume property is a string resource key.
     }

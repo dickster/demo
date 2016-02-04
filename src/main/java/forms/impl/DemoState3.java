@@ -15,7 +15,7 @@ public class DemoState3 extends WfFormState {
     }
 
     @Override
-    @Nonnull public WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
+    @Nonnull public WfState onEvent(Workflow workflow, WfSubmitEvent event) {
         if (event.is("next")) {
             return demoState4;
         }

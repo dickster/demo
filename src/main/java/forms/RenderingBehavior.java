@@ -119,40 +119,10 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
         return getConfig(c).isWrapHtmlOutput();
     }
 
-
-
-//    @Override
-//    public void afterRender(final Component component)
-//    {
-//        final RequestCycle requestCycle = RequestCycle.get();
-//
-//        try
-//        {
-//            BufferedWebResponse tempResponse = (BufferedWebResponse)requestCycle.getResponse();
-//
-//            // Transform the data
-//            CharSequence output = transform(component, tempResponse.getText());
-//            originalResponse.write(output);
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new WicketRuntimeException("Error while transforming the output of component: " +
-//                    component, ex);
-//        }
-//        finally
-//        {
-//            // Restore the original response object
-//            requestCycle.setResponse(originalResponse);
-//        }
-//    }
-
-
     public void afterRender(Component c) {
         if (needsToBeWrapped(c)) {
             c.getResponse().write("</div>");
         }
-        // hack...hook to reset this so it's only used once.
-       // getConfig(c).resetInitiallyHidden();
     }
 
     @Override

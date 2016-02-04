@@ -27,7 +27,7 @@ public class InfoState extends WfFormState {
 
     @Nonnull
     @Override
-    public WfState handleEvent(Workflow workflow, WfSubmitEvent event) {
+    public WfState onEvent(Workflow workflow, WfSubmitEvent event) {
         if (event.is("next")) {
             ValidationResult<String> result = addressValidation.validate(workflow.getObject());
             if (!result.isSuccess()) {
