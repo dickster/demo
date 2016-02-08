@@ -51,9 +51,7 @@ public abstract class WidgetFactory implements Serializable {
     }
 
     protected void setVisibility(Component component, Config config) {
-//        if (!config.isInitialyVisible()) {
-//            component.setVisible(false);
-//        }
+        component.setVisible(!config.isInitialyHidden());
     }
 
     protected void addRenderingBehavior(Component c) {
@@ -68,7 +66,10 @@ public abstract class WidgetFactory implements Serializable {
     }
 
     protected void setMetaData(Component component, Config config) {
-        component.setOutputMarkupPlaceholderTag(true);
+        if (component.getOutputMarkupPlaceholderTag()) {
+            System.out.println("WARNING: all workflow widgets have custom placeholder renderers attached. Setting 'outputPlaceholderTag' for component " + component.getId() + " is being ignored/overridden!");
+        }
+        component.setOutputMarkupPlaceholderTag(false);
     }
 
     private void addValidators(FormComponent fc, FormComponentConfig<?> config) {

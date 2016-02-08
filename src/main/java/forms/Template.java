@@ -47,8 +47,8 @@ public class Template extends Panel {
             source = source.substring(TEMPLATE_BASE.length());
         }
         if (!source.endsWith(".html") && source.indexOf('.')==-1) {
+            System.out.println("WARNING : assuming you want to load an .html template file. i.e. [" + source +".html] as opposed to ["+source+"]");
             source = source+".html";
-            System.out.println("WARNING : assuming you want to load an .html file.  adding extension implicitly to " + source);
         }
         return source;
     }

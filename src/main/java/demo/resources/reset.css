@@ -73,3 +73,9 @@ form .row > [class*="col-"] {
     float:left;
     display:inline-block;
 }
+
+.section .tab-pane,
+.section .nav-tabs li.active a {
+    background: #f4faff;
+}
+

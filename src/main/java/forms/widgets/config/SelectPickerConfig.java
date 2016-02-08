@@ -3,11 +3,12 @@ package forms.widgets.config;
 import forms.WidgetTypeEnum;
 import forms.spring.SelectOptionsProvider;
 import forms.widgets.SelectPicker;
+import forms.widgets.SelectPicker2;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
+public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker2> {
 
     // TODO : should this be transient or serializable?
     // make this the name of a spring bean.
@@ -15,7 +16,7 @@ public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
 
     public SelectPickerConfig(@Nonnull String property) {
         super(property, WidgetTypeEnum.SELECT);
-        withWrappedHtmlOutput();
+        //withWrappedHtmlOutput();
         //appendCss("form-control");
     }
 
@@ -38,16 +39,18 @@ public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
         return this;
     }
 
+    // NOTE : you could just as easily include this in the template. that would be lighter weight
+    // that the java approach but much more difficult to migrate/fix/debug etc...
+    // e.g. template = <select data-tmpl="foobar" data-live-search="true"/>
     public SelectPickerConfig withSearchingAllowed() {
         withAttribute("data-live-search","true");
         return this;
     }
 
 
-
     @Override
-    public SelectPicker<T> create(String id) {
-        return new SelectPicker<T>(id, this);
+    public SelectPicker2<T> create(String id) {
+        return new SelectPicker2<T>(id, this);
     }
 
 }

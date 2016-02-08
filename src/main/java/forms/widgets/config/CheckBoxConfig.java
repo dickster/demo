@@ -12,7 +12,7 @@ public class CheckBoxConfig extends FormComponentConfig<WfCheckBox> {
         this.label = label;
         removeCss("form-control");
         withCss("checkbox");
-        withWrappedHtmlOutput();
+        //withWrappedHtmlOutput();
     }
 
     public String getLabel() {

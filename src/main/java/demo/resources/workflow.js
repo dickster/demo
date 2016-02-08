@@ -31,7 +31,6 @@ var wf = function() {
         var w = _widget(config);
         w.addDependents();
         w.initializePlugin();
-        w.setVisibility();
         w.layout();
     }
 
@@ -42,12 +41,6 @@ var wf = function() {
             var $widget = $('#'+config.options.markupId);
             // this will typically be the widget itself.  but it may be a wrapping container.
             var $containedWidget = $widget.closest('[data-wf]');
-
-            var setVisibility = function() {
-//                if (config.hideInitially) {
-//                    $containedWidget.hide();
-//                }
-            };
 
             var addDependents = function() {
                 if (!config.dependents) return;
@@ -95,7 +88,6 @@ var wf = function() {
             };
 
             return {
-                setVisibility : setVisibility,
                 layout : layout,
                 addDependents : addDependents,
                 initializePlugin : applyPlugin

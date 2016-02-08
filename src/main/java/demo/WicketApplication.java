@@ -68,6 +68,7 @@ this.getMarkupSettings().setStripWicketTags(true);
                 throw new RuntimeException("Unknown ConfigurationType: " + this.getConfigurationType());
         }
 
+        getComponentOnAfterRenderListeners().add(new PlaceholderRenderer());
         getComponentInstantiationListeners().add(new SpringComponentInjector(this));
                 //        if (getConfigurationType().equals(RuntimeConfigurationType.DEPLOYMENT)) {
         addBundle();

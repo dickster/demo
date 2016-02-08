@@ -40,8 +40,6 @@ public class Label2 extends Label implements HasConfig {
         super.onComponentTag(tag);
     }
 
-
-
     public LabelFormatter getFormatter() {
         String formatterName = config.getFormatter();
         if (StringUtils.isNotBlank(formatterName)) {

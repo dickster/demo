@@ -19,6 +19,7 @@ import java.io.Serializable;
 
 public class WfUtil implements Serializable {
 
+    // gets the "workflow id", not to be confused with wicket id.
     public static @Nullable String getComponentId(@Nonnull Component component) {
         if (component instanceof HasConfig) {
             return ((HasConfig)component).getConfig().getId();
@@ -29,6 +30,7 @@ public class WfUtil implements Serializable {
     public static String getComponentFullProperty(@Nonnull Component component) {
         if (component instanceof HasConfig) {
             // check meta data...
+            // TODO : don't need this prefix stuff anymore.
             String prefix = component.getMetaData(WidgetFactory.MODEL_PREFIX);
             String property = ((HasConfig) component).getConfig().getProperty();
             return Joiner.on('.').skipNulls().join(prefix, property);

@@ -226,8 +226,8 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
 
     // CAVEAT : if you use this, and you update the component via ajax, then you probably want to
     // call setOutputMarkupPlaceholderTag(true);
-    public boolean isInitialyVisible() {
-        return !hideInitially;
+    public Boolean isInitialyHidden() {
+        return Boolean.TRUE.equals(hideInitially);
     }
 
     public Config<T> initiallyHidden() {

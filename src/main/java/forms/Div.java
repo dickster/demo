@@ -27,7 +27,7 @@ public abstract class Div extends Panel implements HasConfig, HasTemplate {
     public Div(String id, @Nonnull GroupConfig config) {
         super(id);
         this.config = config;
-        setVisible(config.isInitialyVisible());
+        setVisible(config.isInitialyHidden());
         setOutputMarkupPlaceholderTag(true);
         add(new ListView<Config>("div", config.getConfigs()) {
             @Override

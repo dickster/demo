@@ -34,10 +34,9 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
     @Override
     public void onComponentTag(Component component, ComponentTag tag) {
         super.onComponentTag(component, tag);
+        component.setOutputMarkupPlaceholderTag(false);
         addAttributes(component, tag);
     }
-
-
 
     private void addAttributes(Component component, ComponentTag tag) {
         if (!needsToBeWrapped(component)) {

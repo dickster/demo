@@ -86,7 +86,7 @@ public class GenericInsuranceObject implements Serializable {
         public int accidents = 2;
         public String drinks = "coke";
         public String salutation;
-        public boolean smokes = true;
+        public Boolean smokes = true;
         public String phone, occupation, cc="123123123";
         public int age = 55;
         public boolean notifyMe = false;
@@ -125,6 +125,14 @@ public class GenericInsuranceObject implements Serializable {
 
         public int getAge() {
             return age;
+        }
+
+        public void setSmokes(Boolean smokes) {
+            this.smokes = smokes;
+        }
+
+        public void setNotifyMe(boolean notifyMe) {
+            this.notifyMe = notifyMe;
         }
     }
 

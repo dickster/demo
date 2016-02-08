@@ -10,17 +10,25 @@ import org.apache.wicket.markup.MarkupStream;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.FormComponentPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.PropertyModel;
 
-public class WfCheckBox extends CheckBox implements HasConfig {
+public class WfCheckBox extends FormComponentPanel<Boolean> implements HasConfig {
     private final CheckBoxConfig config;
+    private CheckBox checkbox;
+
+// TODO CONFIRM that i can add ajax behaviors to panels.
+// otherwise i will need a "getFormComponent" method to find underlying Comp.
+private Boolean foo;
 
     public WfCheckBox(String id, CheckBoxConfig config) {
         super(id);
+        add(checkbox = new CheckBox("checkbox"));
+        add(new Label("label", config.getLabel()));
+        // need to set model here...??
         this.config = config;
-        setOutputMarkupId(true);
-        // TODO : add javascript that will render a label in bootstrap friendly form.
     }
 
     @Override
@@ -28,22 +36,48 @@ public class WfCheckBox extends CheckBox implements HasConfig {
         super.renderHead(response);
     }
 
-    @Override
-    protected void onComponentTag(ComponentTag tag) {
-        tag.setName("input");
-        tag.getAttributes().put("type", "checkbox");
-        super.onComponentTag(tag);
-    }
 
     @Override
-    public void onComponentTagBody(MarkupStream markupStream, ComponentTag openTag) {
-        super.onComponentTagBody(markupStream, openTag);
-        getResponse().write(config.getLabel());
+    protected void convertInput() {
+        setConvertedInput(checkbox.getModelObject());
     }
+
+
+
+    @Override
+    public void updateModel() {
+        setModelObject(getConvertedInput());
+    }
+
+    //    @Override
+//    public void onComponentTagBody(MarkupStream markupStream, ComponentTag openTag) {
+//        super.onComponentTagBody(markupStream, openTag);
+//        getResponse().write(config.getLabel());
+//    }
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
+//        checkbox.setModel(new PropertyModel<Boolean>(this, "foo"));
+        checkbox.setModel(getParentModel());
+    }
+
+
+    private IModel<Boolean> getParentModel() {
+        final IModel<Boolean> model = getModel();
+        return new IModel<Boolean>() {
+            @Override public Boolean getObject() {
+                    return getModel().getObject();
+            }
+
+            @Override public void setObject(Boolean b) {
+                getModel().setObject(b);
+            }
+
+            @Override public void detach() {
+                getModel().detach();
+            }
+        };
     }
 
     @Override

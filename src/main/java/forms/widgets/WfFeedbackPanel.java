@@ -15,7 +15,6 @@ public class WfFeedbackPanel extends FeedbackPanel implements HasConfig {
     public WfFeedbackPanel(String id, FeedbackPanelConfig config) {
         super(id);
         this.config = config;
-        setOutputMarkupPlaceholderTag(true);
     }
 
     @Override
