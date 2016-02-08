@@ -52,7 +52,9 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     // TODO : allow this to be customizable. for example, a simple json-friendly Object.  no map required.
     // template out construction of options & allow overrides for withOption()?
     private @IncludeInJson final Map<String, Object> options = Maps.newHashMap();  // a place to store custom options.
+
     private String tagName = null;
+    private @IncludeInJson String selector;
 
     public Config(@Nonnull String property, @Nonnull String type, String pluginName) {
         Preconditions.checkNotNull(property);
@@ -278,5 +280,11 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         this.tagName = tagName;
         return this;
     }
+
+    public Config withSelector(String selector) {
+        this.selector =  selector;
+        return this;
+    }
+
 }
 

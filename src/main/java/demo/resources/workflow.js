@@ -39,14 +39,14 @@ var wf = function() {
         function _widget(conf) {
             var config= conf;
             var $widget = $('#'+config.options.markupId);
-            // this will typically be the widget itself.  but it may be a wrapping container.
-            var $containedWidget = $widget.closest('[data-wf]');
+            var $component = config.selector ? $widget.find(config.selector) : $widget;
+            //TODO : assert component.size()==1
 
             var addDependents = function() {
                 if (!config.dependents) return;
                 // add change listener...show dependents when true.  (& trigger change on this?).
-                $widget.on('change', function(e) {
-                    var val = $widget.val();
+                $component.on('change', function(e) {
+                    var val = $component.val();
                     for (var key in config.dependents){
                         for (var i=0;i<config.dependents[key].length;i++){
                             var d = config.dependents[key][i];
@@ -79,7 +79,7 @@ var wf = function() {
 
                 console.log('about to initialize widget ' + config.id + ' with plugin ' + config.pluginName + ' and options ' + JSON.stringify(config.options));
                 try {
-                    $widget[config.pluginName](config.options);
+                    $component[config.pluginName](config.options);
                 }
                 catch (err) {
                     console.log("error launching plugin " + config.pluginName + err);

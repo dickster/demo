@@ -23,6 +23,10 @@ public class Name implements Serializable {
         this.last = last;
     }
 
+    public void setSalutation(String salutation) {
+        this.salutation = salutation;
+    }
+
     @Override
     public String toString() {
         return Joiner.on(" ").skipNulls().join(first, middle, last);

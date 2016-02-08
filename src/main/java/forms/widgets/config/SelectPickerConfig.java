@@ -18,6 +18,7 @@ public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker2> {
         super(property, WidgetTypeEnum.SELECT);
         //withWrappedHtmlOutput();
         //appendCss("form-control");
+        withSelector("select");
     }
 
     public SelectOptionsProvider<T> getOptionsService() {

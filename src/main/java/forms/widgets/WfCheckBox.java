@@ -39,26 +39,12 @@ private Boolean foo;
 
     @Override
     protected void convertInput() {
-        setConvertedInput(checkbox.getModelObject());
+        setConvertedInput(checkbox.getConvertedInput());
     }
-
-
-
-    @Override
-    public void updateModel() {
-        setModelObject(getConvertedInput());
-    }
-
-    //    @Override
-//    public void onComponentTagBody(MarkupStream markupStream, ComponentTag openTag) {
-//        super.onComponentTagBody(markupStream, openTag);
-//        getResponse().write(config.getLabel());
-//    }
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
-//        checkbox.setModel(new PropertyModel<Boolean>(this, "foo"));
         checkbox.setModel(getParentModel());
     }
 

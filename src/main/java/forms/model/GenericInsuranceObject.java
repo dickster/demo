@@ -76,6 +76,10 @@ public class GenericInsuranceObject implements Serializable {
         public String method;
         public String frequency;
         public BigDecimal total = new BigDecimal(1932.34);
+
+        public void setMethod(String method) {
+            this.method = method;
+        }
     }
 
 

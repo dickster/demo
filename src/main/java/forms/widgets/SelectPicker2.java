@@ -1,6 +1,7 @@
 package forms.widgets;
 
 import demo.resources.Resource;
+import forms.spring.SelectOptionsProvider;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.SelectPickerConfig;
@@ -17,6 +18,8 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
+import java.util.List;
+
 
 public class SelectPicker2<T> extends FormComponentPanel<T> implements HasConfig {
 
@@ -30,7 +33,7 @@ public class SelectPicker2<T> extends FormComponentPanel<T> implements HasConfig
         super(id);
 
         // TODO : refactor this...make internal class.
-        add(select = new SelectPicker("select", config));
+        add(select = new SelectPicker("select", config.getOptionsService()));
 
         setRenderBodyOnly(false);
         setOutputMarkupId(true);
@@ -57,6 +60,17 @@ public class SelectPicker2<T> extends FormComponentPanel<T> implements HasConfig
         select.setModel(getParentModel());
     }
 
+    @Override
+    protected void convertInput() {
+        setConvertedInput((T) select.getConvertedInput());
+    }
+
+    @Override
+    protected void onModelChanged() {
+        super.onModelChanged();
+        System.out.println("model changed");
+    }
+
     // refactor this into class = FormComponentDelegateModel() or whatever you want to call it.
     // this same code will be used by all FormComponentPanel extending classes.
     private IModel<T> getParentModel() {
@@ -78,4 +92,15 @@ public class SelectPicker2<T> extends FormComponentPanel<T> implements HasConfig
             }
         };
     }
+
+
+    class SelectPicker<T> extends DropDownChoice<T> {
+
+        public SelectPicker(String id, SelectOptionsProvider provider) {
+            super(id, provider.getOptions());
+        }
+
+    }
+
+
 }
