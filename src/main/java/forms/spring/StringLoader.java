@@ -45,6 +45,14 @@ public class StringLoader {
                     .put("label.paymentFrequency", "paymentFrequency")
                     .put("label.hello", "hello")
                     .put("label.world", "world")
+                    .put("label.yes", "Yes")
+                    .put("label.no", "No")
+
+
+                    .put("question.convicted", "have you been convicted in the last 5 years?")
+                    .put("question.cancelled", "has your insurance ever been cancelled?")
+                    .put("question.accident", "have you had an accident in last 5 years")
+
                     .put("button.next", "next")
                     .put("button.cancel", "cancel")
                     .put("button.finished", "finished")

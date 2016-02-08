@@ -94,6 +94,9 @@ public class GenericInsuranceObject implements Serializable {
         public String phone, occupation, cc="123123123";
         public int age = 55;
         public boolean notifyMe = false;
+        public Boolean q1;
+        public Boolean q2;
+        public Boolean q3;
         public Dwelling dwelling = new Dwelling();
         public Address address = new Address();
         public String address2;

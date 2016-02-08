@@ -14,6 +14,15 @@ public class Demo1FormConfig extends FormConfig {
     private void addConfigs() {
         withConfig(new CheckBoxConfig("insured.smokes", "i have read the terms of agreement"));
 
+        with(new LabelConfig("question.convicted"));
+        with(new YesNoConfig("insured.q1"));
+
+        with(new LabelConfig("question.cancelled"));
+        with(new YesNoConfig("insured.q2"));
+
+        with(new LabelConfig("question.accident"));
+        with(new YesNoConfig("insured.q3"));
+
         withConfig(new SelectPickerConfig<String>("name.salutation")
                 .withOptions(Lists.newArrayList("Mr.", "Mrs.", "Ms", "Dr.")));
 

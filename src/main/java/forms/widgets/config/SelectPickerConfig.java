@@ -3,12 +3,11 @@ package forms.widgets.config;
 import forms.WidgetTypeEnum;
 import forms.spring.SelectOptionsProvider;
 import forms.widgets.SelectPicker;
-import forms.widgets.SelectPicker2;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker2> {
+public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
 
     // TODO : should this be transient or serializable?
     // make this the name of a spring bean.
@@ -50,8 +49,8 @@ public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker2> {
 
 
     @Override
-    public SelectPicker2<T> create(String id) {
-        return new SelectPicker2<T>(id, this);
+    public SelectPicker<T> create(String id) {
+        return new SelectPicker<T>(id, this);
     }
 
 }
