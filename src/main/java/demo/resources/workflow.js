@@ -82,7 +82,7 @@ var wf = function() {
                     $component[config.pluginName](config.options);
                 }
                 catch (err) {
-                    console.log("error launching plugin " + config.pluginName + err);
+                    console.log("Error : plugin [" + config.pluginName + "] failed. -->  " +  err);
                 }
 
             };
