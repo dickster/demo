@@ -46,3 +46,7 @@ form.custom {
     padding:50px;
     font-size:30px;
 }
+
+.yesno label.active {
+    background:aliceblue;
+}

@@ -19,6 +19,7 @@ import java.util.List;
 public class CustomTheme extends DefaultTheme {
 
     private static final ResourceReference CSS = new CssResourceReference(Resource.class,"custom.css");
+    private static final CssResourceReference BOOTSTRAP_METRO_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-metro.css");
 
     @Override
     public String getCssClass() {
@@ -48,7 +49,8 @@ public class CustomTheme extends DefaultTheme {
 
     @Nonnull
     public List<? extends HeaderItem> getCustomHeaderItems() {
-        return Lists.newArrayList(CssHeaderItem.forReference(CSS));
+        return Lists.newArrayList(CssHeaderItem.forReference(CSS),
+                CssHeaderItem.forReference(BOOTSTRAP_METRO_CSS));
     }
 
     public void apply(Component component) {

@@ -3,7 +3,6 @@ package forms;
 import forms.spring.BehaviorFactory;
 import forms.widgets.config.Config;
 import forms.widgets.config.FormComponentConfig;
-import forms.widgets.config.HasConfig;
 import org.apache.wicket.Component;
 import org.apache.wicket.MetaDataKey;
 import org.apache.wicket.markup.html.form.FormComponent;
@@ -28,11 +27,11 @@ public abstract class WidgetFactory implements Serializable {
     }
 
     @Nonnull
-    public abstract <T extends Component & HasConfig> T create(String id, Config config);
+    public abstract Component create(String id, Config config);
 
-    /*package protected*/ <T extends Component & HasConfig> T createWidget(String id, Config config, String... prefix) {
+    /*package protected*/ Component createWidget(String id, Config config, String... prefix) {
         preCreate(config);
-        T component = create(id, config);
+        Component component = create(id, config);
         postCreate(component, config);
         return component;
     }
