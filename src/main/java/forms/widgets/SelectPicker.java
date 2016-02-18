@@ -1,7 +1,7 @@
 package forms.widgets;
 
 import demo.resources.Resource;
-import forms.spring.SelectOptionsProvider;
+import forms.model.ParentModel;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.SelectPickerConfig;
@@ -11,7 +11,6 @@ import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.FormComponentPanel;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
@@ -52,42 +51,12 @@ public class SelectPicker<T> extends FormComponentPanel<T> implements HasConfig 
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        dropDownChoice.setModel(getParentModel());
+        dropDownChoice.setModel(new ParentModel(this));
     }
 
     @Override
     protected void convertInput() {
         setConvertedInput((T) dropDownChoice.getConvertedInput());
-    }
-
-    @Override
-    protected void onModelChanged() {
-        super.onModelChanged();
-        System.out.println("model changed");
-    }
-
-
-
-    // refactor this into class = FormComponentDelegateModel() or whatever you want to call it.
-    // this same code will be used by all FormComponentPanel extending classes.
-    private IModel<T> getParentModel() {
-
-        return new IModel<T>() {
-            @Override
-            public T getObject() {
-                return forms.widgets.SelectPicker.this.getModel().getObject();
-            }
-
-            @Override
-            public void setObject(T value) {
-                forms.widgets.SelectPicker.this.getModel().setObject(value);
-            }
-
-            @Override
-            public void detach() {
-                forms.widgets.SelectPicker.this.getModel().detach();
-            }
-        };
     }
 
 }

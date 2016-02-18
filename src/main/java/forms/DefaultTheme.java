@@ -29,6 +29,12 @@ public class DefaultTheme implements Theme {
     // name
     // default locale, settings.
 
+    private static final JavaScriptResourceReference JQUERY_UI_JS = new JavaScriptResourceReference(Resource.class, "jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js");
+    private static final CssResourceReference JQUERY_UI_CSS = new CssResourceReference(Resource.class, "jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css");
+
+    private static final JavaScriptResourceReference BOOTSTRAP_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap.min.js");
+    private static final CssResourceReference BOOTSTRAP_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap.min.css");
+
     private static final CssResourceReference BRAND_CSS = new CssResourceReference(Resource.class,"brand.css");
 
     private static final CssResourceReference RESET_CSS = new CssResourceReference(Resource.class,"reset.css");
@@ -85,7 +91,13 @@ public class DefaultTheme implements Theme {
     @Nonnull
     protected /*final*/ List<HeaderItem> getCoreHeaderItems() {
         return Lists.newArrayList(getBodyClassHeaderItem(),
+                JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()),
+                JavaScriptHeaderItem.forReference(JQUERY_UI_JS),
+                CssHeaderItem.forReference(JQUERY_UI_CSS),
+                JavaScriptHeaderItem.forReference(BOOTSTRAP_JS),
+                CssHeaderItem.forReference(BOOTSTRAP_CSS),
                 CssHeaderItem.forReference(RESET_CSS),
+                // TODO : these should be moved to inside appropriate components.
                 JavaScriptHeaderItem.forReference(DELAYEDEVENT_JS),
                 JavaScriptHeaderItem.forReference(CREDITCARD_VALIDATOR_JS),
                 JavaScriptHeaderItem.forReference(CREDITCARD_JS),

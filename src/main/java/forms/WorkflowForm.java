@@ -1,7 +1,5 @@
 package forms;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 import forms.spring.WfNavigator;
 import forms.util.WfUtil;
 import forms.widgets.config.*;
@@ -28,8 +26,6 @@ import org.apache.wicket.util.visit.IVisit;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import java.util.HashMap;
-import java.util.Map;
 
 public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
 

@@ -1,20 +1,18 @@
 package forms.widgets.config;
 
 import forms.WidgetTypeEnum;
-import forms.widgets.TextField2;
+import forms.widgets.WfTextField;
 
-public class TextFieldConfig<T> extends FormComponentConfig<TextField2<T>> {
-
-    private String typeAheadBehavior;
+public class TextFieldConfig<T> extends FormComponentConfig<WfTextField<T>> {
 
     public TextFieldConfig(String property) {
-        super(property, WidgetTypeEnum.TYPEAHEAD);
+        super(property, WidgetTypeEnum.TEXT_FIELD);
     }
 
     @Override
-    public TextField2 create(String id) {
+    public WfTextField create(String id) {
         // TODO : this should be automated. if widgetTypeEnum knows class of widget.
-        return new TextField2<T>(id, this);
+        return new WfTextField<T>(id, this);
     }
 
     public TextFieldConfig withPrefix(String prefix) {

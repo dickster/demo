@@ -9,7 +9,6 @@ import com.google.common.eventbus.Subscribe;
 import forms.model.WfCompoundPropertyModel;
 import forms.validation.ValidationResult;
 import forms.widgets.config.Config;
-import forms.widgets.config.HasConfig;
 import org.apache.wicket.Component;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanNameAware;
@@ -232,8 +231,8 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         return currentState.getStateName();
     }
 
-    public <T extends Component & HasConfig> T createWidget(String id, Config config) {
-        T widget = getWidgetFactory().createWidget(id, config);
+    public Component createWidget(String id, Config config) {
+        Component widget = getWidgetFactory().createWidget(id, config);
         register(widget);
         return widget;
     }

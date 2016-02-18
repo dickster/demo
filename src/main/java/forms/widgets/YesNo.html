@@ -1,13 +1,13 @@
 <wicket:panel>
-    <div wicket:id="group">
-
-        <div class="btn-group" data-toggle="buttons">
+             <!--TODO : instead of adding class here, just pass an optional javascript value to style. -->
+    <div wicket:id="group" >
+        <div class="yesno btn-group" data-toggle="buttons">
             <label class="btn btn-default">
-                <input wicket:id="yes" type="radio">
+                <input wicket:id="yes" name="yn" type="radio">
                 Yes
             </label>
             <label class="btn btn-default">
-                <input wicket:id="no" type="radio">
+                <input wicket:id="no" name="yn" type="radio">
                 No
             </label>
         </div>
