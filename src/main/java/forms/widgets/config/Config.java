@@ -7,9 +7,11 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.gson.annotations.Expose;
 import forms.HasWorkflow;
 import forms.WidgetTypeEnum;
 import forms.Workflow;
+import forms.util.ConfigGson;
 import org.apache.wicket.Component;
 
 import javax.annotation.Nonnull;
@@ -20,22 +22,19 @@ import java.util.Set;
 
 // DB NOTE : these entities should be "detached" after they are read.
 // you would never want to update these...only in editor.
-public abstract class Config<T extends Component & HasConfig> implements Serializable {
+public class Config<T extends Component & HasConfig> implements Serializable {
 
     private static final String CLASS = "class";
     private static final String PLUGIN_NA = "n/a";
 
-    private GroupConfig parent;
+    // use for serialization methods only....
+    public transient String _class = getClass().getSimpleName();
+
     private Set<String> behaviors = Sets.newHashSet();
-    private boolean wrapHtmlOutput = false;
+    private Boolean wrapHtmlOutput;
 
-    private @IncludeInJson Boolean hideInitially = null;
-
-    // this is injected by the framework...don't set this yourself.
-//    private @IncludeInJson String templateId;
-
-    private @IncludeInJson Map<Object, List<String>> dependents = Maps.newHashMap();
-
+    private @Expose Boolean hideInitially = null;
+    private @Expose Map<Object, List<String>> dependents = Maps.newHashMap();
 
     // because two components can have the same property, we need two values.
     // ID which is (developer enforced) unique across the form, and property.
@@ -43,18 +42,23 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     // values like "country1" & "country2".
     // Id's must be unique because in the DOM, this is the
     // value we use to find them.  (stuffed into data-wf attribute)
-    private @IncludeInJson String id;
-    private @IncludeInJson final String property;
-    private @IncludeInJson final Map<String, String> attributes = Maps.newHashMap();
+    private @Expose String id;
+    private @Expose String property;
+    private @Expose final Map<String, String> attributes = Maps.newHashMap();
 
-    private @IncludeInJson final String type;
-    private @IncludeInJson final String pluginName;
+    private @Expose String type;
+    private @Expose String pluginName;
     // TODO : allow this to be customizable. for example, a simple json-friendly Object.  no map required.
     // template out construction of options & allow overrides for withOption()?
-    private @IncludeInJson final Map<String, Object> options = Maps.newHashMap();  // a place to store custom options.
+    // convert this to JsonObject..withOptions(JsonObject opts)
+    private @Expose final Map<String, Object> options = Maps.newHashMap();  // a place to store custom options.
 
     private String tagName = null;
-    private @IncludeInJson String selector;
+    private @Expose String selector;
+
+    protected Config() {
+        // for serialization purposes only.
+    }
 
     public Config(@Nonnull String property, @Nonnull String type, String pluginName) {
         Preconditions.checkNotNull(property);
@@ -188,7 +192,11 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return this;
     }
 
-    public abstract T create(String id);
+    public T create(String id) {
+        // note : i can't make this abstract for serialization reasons.
+        // need to be able to instantiate this class.
+        throw new UnsupportedOperationException("override this method!");
+    }
 
     public void validate() {
         // override this if you want a chance to ensure your data is good before creating.
@@ -237,15 +245,6 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
         return this;
     }
 
-    public Config<T> withParent(GroupConfig groupConfig) {
-        this.parent = groupConfig;
-        return this;
-    }
-
-    public GroupConfig getParent() {
-        return parent;
-    }
-
     public Component validateAndCreate(String id) {
         validate();
         return create(id);
@@ -284,6 +283,13 @@ public abstract class Config<T extends Component & HasConfig> implements Seriali
     public Config withSelector(String selector) {
         this.selector =  selector;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        // TODO : temporary way to generate string.
+        // remove dependency on gson!
+        return new ConfigGson().forSerialization().toJson(this);
     }
 
 }

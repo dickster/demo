@@ -9,6 +9,7 @@ import org.apache.wicket.MetaDataKey;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.validation.IValidator;
+import org.apache.wicket.validation.validator.EmailAddressValidator;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -73,12 +74,21 @@ public abstract class WidgetFactory implements Serializable {
     }
 
     private void addValidators(FormComponent fc, FormComponentConfig<?> config) {
-        for (IValidator<?> validator:config.getValidators()) {
-            fc.add(validator);
+        for (String validator:config.getValidators()) {
+            fc.add(resolveValidator(validator));
         }
         if (config.isRequired()) {
             fc.setRequired(true);
         }
+    }
+
+    private IValidator resolveValidator(String validator) {
+        if ("email".equalsIgnoreCase(validator)) {
+            return EmailAddressValidator.getInstance();
+        }
+        // TODO : check spring bean @config for validator with given name.
+        // hard coded for now.
+        throw new UnsupportedOperationException("can't resolve validator " + validator);
     }
 
     private final void addBehaviors(Component component, Config<?> config) {

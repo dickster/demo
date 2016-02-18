@@ -20,6 +20,15 @@ import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Map;
 
+
+/** localization.   // underlying prob = need a central place to change form.
+ * changing text en mass.  e.g. change "submit" to "next".
+ * styling and layout not controlled.
+ * BA can't preview the complete form.  testing more difficult/less isolated.
+ * form & workflow should be more tightly coupled with underlying model.
+ *  (not in different projects).
+ */
+
 public abstract class Workflow<T, S extends WfState> extends EventBus implements Serializable, BeanNameAware {
 
     private @Inject BeanFactory beanFactory;

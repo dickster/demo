@@ -11,7 +11,7 @@ import java.util.List;
 
 public abstract class FormComponentConfig<T extends Component & HasConfig> extends Config<T> {
 
-    private List<IValidator> validators = Lists.newArrayList();
+    private List<String> validators = Lists.newArrayList();
     private boolean required;
 
     public FormComponentConfig(@Nonnull String property, @Nonnull String type, String pluginName) {
@@ -22,12 +22,12 @@ public abstract class FormComponentConfig<T extends Component & HasConfig> exten
         this(property, type.toString(), type.getPluginName());
     }
 
-    public FormComponentConfig addValidator(IValidator<?> validator) {
+    public FormComponentConfig addValidator(String validator) {
         validators.add(validator);
         return this;
     }
 
-    public List<IValidator> getValidators() {
+    public List<String> getValidators() {
         return ImmutableList.copyOf(validators);
     }
 

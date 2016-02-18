@@ -2,6 +2,7 @@ package forms.widgets.config;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.gson.annotations.Expose;
 import forms.WidgetTypeEnum;
 import org.apache.wicket.Component;
 
@@ -10,13 +11,9 @@ import java.util.List;
 
 public abstract class GroupConfig<T extends Component & HasConfig & HasTemplate> extends Config<T> {
 
-    private boolean renderBodyOnly = false;
     private List<Config> configs = Lists.newArrayList();
-    private @IncludeInJson String title;
+    private @Expose String title;
     private String template;
-
-
-
 
 
     public GroupConfig(@Nonnull String name) {
@@ -45,15 +42,6 @@ public abstract class GroupConfig<T extends Component & HasConfig & HasTemplate>
         return WidgetTypeEnum.GROUP.toString();
     }
 
-    public Boolean getRenderBodyOnly() {
-        return renderBodyOnly;
-    }
-
-    public GroupConfig withRenderBodyOnly(Boolean renderBodyOnly) {
-        this.renderBodyOnly = renderBodyOnly;
-        return this;
-    }
-
     public GroupConfig withConfigs(Config... configs) {
         return withConfigs(Lists.newArrayList(configs));
     }
@@ -64,7 +52,7 @@ public abstract class GroupConfig<T extends Component & HasConfig & HasTemplate>
     }
 
     public GroupConfig withConfig(Config config) {
-        configs.add(config.withParent(this));
+        configs.add(config);
         return this;
     }
     public GroupConfig withConfig(Config config, int index) {

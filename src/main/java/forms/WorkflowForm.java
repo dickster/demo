@@ -44,7 +44,6 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
     private WfFormState state;
     private Component visitorKludge;
 
-
     public WorkflowForm(@Nonnull String id, @Nonnull WfFormState state) {
         super(id);
         this.state = state;

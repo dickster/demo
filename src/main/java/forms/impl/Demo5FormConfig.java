@@ -17,7 +17,7 @@ public class Demo5FormConfig extends FormConfig {
     private void addConfigs() {
         with(new LabelConfig("label.email"));
         with(new TextFieldConfig("insured.contact.email")
-                .addValidator(EmailAddressValidator.getInstance())
+                .addValidator("email")
                 .withBehavior("emailAjaxBehavior")
             );
 

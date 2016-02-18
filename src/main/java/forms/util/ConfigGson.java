@@ -1,29 +1,31 @@
 package forms.util;
 
 import com.google.gson.*;
-import forms.widgets.config.IncludeInJson;
+import forms.widgets.config.*;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ConfigGson implements Serializable {
 
     public ConfigGson() {
     }
 
-    public Gson getGson() {
-        ExclusionStrategy skipUnexposedFieldsStrategy = new ExclusionStrategy() {
-            @Override public boolean shouldSkipField(FieldAttributes f) {
-                IncludeInJson include = f.getAnnotation(IncludeInJson.class);
-                return include==null || include.value()==false;
-            }
-            @Override public boolean shouldSkipClass(Class<?> clazz) {
-                return false;
-            }
-        };
+    /**
+     * when rendering, we only want to serialize the data that the .js side
+     * needs. this means only stuff annotated with @Expose.
+     */
+    public Gson forRendering() {
+
+        // TODO : blargh.  these skip...Strategy's don't work with adapterFactory (used for polymorphic support).
+        //   not sure why. everything works when i do not include the skipLists.
+        // but when i use it, the "_class" field doesn't get serialized.
+        // i suspect the underlying use of array.add(context.serialize(blah)) doesn't take into account the
+        //  type factory code??
 
         JsonSerializer<List<?>> skipEmptyLists = new JsonSerializer<List<?>>() {
             @Override
@@ -41,6 +43,22 @@ public class ConfigGson implements Serializable {
                 return array;
             }
 
+        };
+        JsonSerializer<Set<?>> skipEmptySets = new JsonSerializer<Set<?>>() {
+            @Override
+            public @Nullable JsonElement serialize(Set <?> src, Type typeOfSrc, JsonSerializationContext context) {
+                if (src == null || src.isEmpty())
+                    return null;
+
+                JsonArray array = new JsonArray();
+
+                for (Object child : src) {
+                    JsonElement element = context.serialize(child);
+                    array.add(element);
+                }
+
+                return array;
+            }
 
         };
         JsonSerializer<Map<?,?>> skipEmptyMaps = new JsonSerializer<Map<?,?>>() {
@@ -61,15 +79,32 @@ public class ConfigGson implements Serializable {
 
 
         };
+
         return new GsonBuilder()
-                // should skip null values in maps too!
+                .excludeFieldsWithoutExposeAnnotation()
+                .registerTypeHierarchyAdapter(Set.class,skipEmptySets)
                 .registerTypeHierarchyAdapter(Map.class,skipEmptyMaps)
-                .registerTypeHierarchyAdapter(List.class,skipEmptyLists)
-                .addSerializationExclusionStrategy(skipUnexposedFieldsStrategy)
+                .registerTypeHierarchyAdapter(List.class, skipEmptyLists)
                 .create();
     }
 
-    public String toJson(Object src) {
-        return getGson().toJson(src);
+
+    public Gson forSerialization() {
+        RuntimeTypeAdapterFactory<Config> configAdapter =
+                RuntimeTypeAdapterFactory.of(Config.class, "_class")
+                        .registerSubtype(FormConfig.class)
+                        .registerSubtype(GroupConfig.class)
+                        .registerSubtype(CheckBoxConfig.class)
+                        .registerSubtype(YesNoConfig.class)
+                        .registerSubtype(LabelConfig.class)
+                        .registerSubtype(FeedbackPanelConfig.class)
+                        .registerSubtype(SelectPickerConfig.class)
+                        .registerSubtype(TextFieldConfig.class)
+                        .registerSubtype(ButtonConfig.class);
+
+        return new GsonBuilder()
+                .registerTypeAdapterFactory(configAdapter)
+                .create();
     }
+
 }

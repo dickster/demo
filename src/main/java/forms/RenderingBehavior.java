@@ -61,7 +61,7 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
 
         injectTemplateId(component, config, response);
 
-        String js = String.format(INIT_WIDGET_JS, gson.toJson(config));
+        String js = String.format(INIT_WIDGET_JS, gson.forRendering().toJson(config));
         response.render(OnDomReadyHeaderItem.forScript(js));
     }
 

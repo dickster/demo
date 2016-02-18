@@ -25,7 +25,7 @@ public class FormBConfig extends FormConfig {
                 .withConfig(new LabelConfig("Email"))
                 .withConfig(new TextFieldConfig("insured.contact.email")
                                 .required()
-                                .addValidator(EmailAddressValidator.getInstance()))
+                                .addValidator("email"))
                 .withConfig(new CheckBoxConfig("insured.notifyMe", "email me when policy is about to expire.")));
         with(new ButtonConfig("next"));
     }

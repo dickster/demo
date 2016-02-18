@@ -1,11 +1,12 @@
 package forms.widgets.config;
 
+import com.google.gson.annotations.Expose;
 import forms.WidgetTypeEnum;
 import forms.widgets.WfCheckBox;
 
 public class CheckBoxConfig extends FormComponentConfig<WfCheckBox> {
 
-    private @IncludeInJson String label;
+    private @Expose String label;
 
     public CheckBoxConfig(String property, String label) {
         super(property, WidgetTypeEnum.CHECKBOX);

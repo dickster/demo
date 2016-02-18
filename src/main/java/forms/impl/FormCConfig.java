@@ -12,7 +12,6 @@ public class FormCConfig extends FormConfig {
     public FormCConfig() {
         super("FORM-C");
         withTitle("Form C");
-        withRenderBodyOnly(true);
         addConfigs();
     }
 
