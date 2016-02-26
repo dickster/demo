@@ -4,7 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forms.StartingPoint;
+import forms.SelectPickerPage;
 import forms.WfPage;
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.markup.head.HeaderItem;
@@ -18,7 +18,6 @@ import org.apache.wicket.request.Response;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.time.Duration;
-import transactions.TransactionsPage;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -37,8 +36,9 @@ public class WicketApplication extends WebApplication {
     }
 
     public Class getHomePage() {
+        return SelectPickerPage.class;
 //        return TransactionsPage.class;
-        return StartingPoint.class;
+//        return StartingPoint.class;
 //          return KeysPage.class;
 //        return GridstackPage.class;
         //return HomePage.class;

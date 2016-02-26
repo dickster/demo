@@ -1,62 +1,56 @@
 package forms.widgets;
 
+import com.google.gson.Gson;
 import demo.resources.Resource;
-import forms.model.ParentModel;
-import forms.widgets.config.Config;
-import forms.widgets.config.HasConfig;
-import forms.widgets.config.SelectPickerConfig;
+import forms.widgets.config.SelectConfig;
 import org.apache.wicket.Application;
+import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.DropDownChoice;
-import org.apache.wicket.markup.html.form.FormComponentPanel;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
+import java.util.Map;
 
-public class SelectPicker<T> extends FormComponentPanel<T> implements HasConfig {
+public class BootstrapSelectPicker<T> extends DropDownChoice<T> {
 
+    private static final String INIT = "easy.selectPicker.init('%s',%s)";
+
+    private static final JavaScriptResourceReference JS = new JavaScriptResourceReference(Resource.class, "selectPicker.js");
     private static final JavaScriptResourceReference SELECT_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-select.min.js");
     private static final CssResourceReference SELECT_CSS = new CssResourceReference(Resource.class, "bootstrap-3.1.1-dist/css/bootstrap-select.css");
 
-    private Config config;
-    private final DropDownChoice<T> dropDownChoice;
+    private SelectConfig config;
 
-    public SelectPicker(String id, SelectPickerConfig config) {
-        super(id);
-
-        // TODO : refactor this...make internal class.
-        add(dropDownChoice = new DropDownChoice("select", config.getOptionsProvider().getOptions()));
-
-        setRenderBodyOnly(false);
+    public BootstrapSelectPicker(String id, SelectConfig config) {
+        super(id, config.getChoicesProvider().getChoices());
         setOutputMarkupId(true);
         this.config = config;
+        setNullValid(false);
+    }
+
+    @Override
+    protected void onComponentTag(ComponentTag tag) {
+        super.onComponentTag(tag);
+        Map<String,String> attrs = config.getAttributes();
+        for (String attr: attrs.keySet()) {
+            tag.getAttributes().put(attr, attrs.get(attr) );
+        }
     }
 
     @Override
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
-        // TODO : remove this.  should be assumed included by application.
         response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
         response.render(JavaScriptHeaderItem.forReference(SELECT_JS));
+        response.render(JavaScriptHeaderItem.forReference(JS));
         response.render(CssHeaderItem.forReference(SELECT_CSS));
-    }
-
-    @Override
-    public Config getConfig() {
-        return config;
-    }
-
-    @Override
-    protected void onInitialize() {
-        super.onInitialize();
-        dropDownChoice.setModel(new ParentModel(this));
-    }
-
-    @Override
-    protected void convertInput() {
-        setConvertedInput((T) dropDownChoice.getConvertedInput());
+        String options = new Gson().toJson(config.getOptions());
+        String x = String.format(INIT, getMarkupId(), options);
+        response.render(OnDomReadyHeaderItem.forScript(x));
     }
 
 }

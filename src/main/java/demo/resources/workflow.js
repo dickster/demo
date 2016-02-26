@@ -18,6 +18,7 @@ var wf = function() {
             wf.layout.update($components);
         });
 
+        // TODO : check this date stuff...it used to work but doesn't anymore.
         window.onpopstate = function(event) {
             var u = url + "&state=" + window.history.state.name;
             Wicket.Ajax.get({u:u});

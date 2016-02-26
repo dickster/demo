@@ -9,7 +9,11 @@ import com.google.common.eventbus.Subscribe;
 import forms.model.WfCompoundPropertyModel;
 import forms.validation.ValidationResult;
 import forms.widgets.config.Config;
+import forms.widgets.config.FormConfig;
 import org.apache.wicket.Component;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.request.cycle.RequestCycle;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanNameAware;
 
@@ -28,16 +32,16 @@ import java.util.Map;
  *  (not in different projects).
  */
 
-public abstract class Workflow<T, S extends WfState> extends EventBus implements Serializable, BeanNameAware {
+public abstract class Workflow<T> extends EventBus implements Serializable, BeanNameAware {
 
     private @Inject BeanFactory beanFactory;
 
     // used for history (back/fwd buttons)
-    protected transient Map<String, S> statesVisited = Maps.newHashMap();
+    protected transient Map<String, WfFormState> statesVisited = Maps.newHashMap();
 
     private Map<String, Object> context = Maps.newHashMap();
     private WfCompoundPropertyModel<T> model;
-    private S currentState;
+    private WfFormState currentState;
     private boolean ended = false;
     private boolean started = false;
     private String beanName;
@@ -56,7 +60,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         this.beanName = name;
     }
 
-    public final Workflow<T,S> initialize() {
+    public final Workflow<T> initialize() {
         Preconditions.checkState(context != null);
         init(); // allow implementation specific initialization.
         started = true;
@@ -67,16 +71,6 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     protected void init() {
         // override if you want....extension point for impl stuff here.
         // do prevals here...
-    }
-
-    @Subscribe void onSubmitError(WfSubmitErrorEvent event) throws WorkflowException {
-        System.out.println("submit error : " + event.getName());
-    }
-
-    @Subscribe
-    public void onDebug(@Nonnull WfDebugEvent event) {
-        ; //  override this if you want to handle debug events.
-        // should assert that you only get these in debug mode!!!
     }
 
     @Subscribe
@@ -93,7 +87,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
     public final void onSubmit(@Nonnull WfSubmitEvent event) throws WorkflowException {
         try {
             reset();
-            S nextState = (S) getCurrentState().onEvent(this, event);
+            WfFormState nextState =  (WfFormState)getCurrentState().onEvent(this, event);
             changeState(nextState, event);
         } catch (Throwable t) {
             throw new WorkflowException("workflow failed when handling event", event, t);
@@ -115,19 +109,12 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         throw new UnsupportedOperationException("you need to implement this method in order to support error handling (and clearErrors() too!)");
     }
 
-    @Subscribe
-    public void onValidation(WfValidationEvent event) throws WorkflowException {
-        // override to handle validation errors.
-    }
-
-    protected final void changeState(S nextState, WfSubmitEvent event) {
+    protected final void changeState(WfFormState nextState, WfSubmitEvent event) {
         setState(nextState);
         onChangeState(nextState, event);
     }
 
-    protected abstract void onChangeState(S nextState, WfSubmitEvent event);
-
-    protected final boolean setState(S nextState) {
+    protected final boolean setState(WfFormState nextState) {
         if (nextState.equals(getCurrentState())) {
             return false;
         }
@@ -138,7 +125,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         return true;
     }
 
-    protected void validate(S nextState) {
+    protected void validate(WfFormState nextState) {
         Preconditions.checkArgument(nextState != null, "can't have a null state for workflow.");
     }
 
@@ -169,7 +156,7 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         return (W) this;
     }
 
-    public abstract S getStartingState();
+    public abstract WfFormState getStartingState();
 
     public <T extends Workflow> T restoreContext(Map<String, Object> context) {
         this.context = context;
@@ -218,11 +205,11 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         return started;
     }
 
-    protected final S getCurrentState() {
+    protected final WfFormState getCurrentState() {
         return currentState;
     }
 
-    public void setCurrentState(S state) {
+    public void setCurrentState(WfFormState state) {
         this.currentState = state;
         statesVisited.put(getCurrentStateName(), currentState);
     }
@@ -236,4 +223,72 @@ public abstract class Workflow<T, S extends WfState> extends EventBus implements
         register(widget);
         return widget;
     }
+
+    public FormConfig getCurrentFormConfig() {
+        return getCurrentState().getFormConfig();
+    }
+
+    @Subscribe
+    public void onDebug(@Nonnull WfDebugEvent event) {
+        refreshForm(event);
+    }
+
+    private void refreshForm(WfEvent event) {
+        WorkflowForm form = getWorkflowForm(event.getComponent());
+        updateFormViaAjax(form, event.getTarget());
+    }
+
+    public WorkflowForm getWorkflowForm(Component component) {
+        return component.findParent(WorkflowForm.class);
+    }
+
+    @Subscribe
+    public void onValidation(WfValidationEvent event) {
+    }
+
+    @Subscribe
+    public void onSubmitError(WfSubmitErrorEvent event) throws WorkflowException {
+    }
+
+    protected void onChangeState(WfFormState nextState, WfSubmitEvent event) {
+        updateFormViaAjax(event);
+    }
+
+    protected void updateFormViaAjax(WfSubmitEvent event) {
+        WorkflowForm form = event.getForm().findParent(WorkflowForm.class);
+        updateFormViaAjax(form, event.getTarget());
+        event.getTarget().appendJavaScript("wf.pushHistory();");
+    }
+
+    protected void updateFormViaAjax(WorkflowForm form, AjaxRequestTarget target) {
+        WorkflowForm newForm = createForm(form.getId(), getCurrentState());
+        form.replaceWith(newForm);
+        target.add(newForm);
+    }
+
+    protected void updatePage(WebPage page) {
+        RequestCycle requestCycle = RequestCycle.get();
+        if (requestCycle!=null) {
+            requestCycle.setResponsePage(page);
+        } else {
+            System.out.println("your workflow is redirecting to a page without a request cycle?  huh???");
+        }
+    }
+
+    public WorkflowForm createForm(String id, WfFormState state) {
+        return new WorkflowForm(id, state);
+    }
+
+    public void gotoState(String state, AjaxRequestTarget target, WorkflowForm form) {
+        // note that we don't allow user to go to states that he hasn't been in.
+        // that means if you paste in a history generated url after session expires you will probably bomb here....
+        // not sure how to handle it gracefully...just go to starting state? or any visitedState?
+        Preconditions.checkState(statesVisited.get(state) != null, " can't go to state " + state + " because you haven't been to it yet? {" + statesVisited.keySet() + "}");
+        setState(statesVisited.get(state));
+        updateFormViaAjax(form, target);
+    }
+
+
+
+
 }

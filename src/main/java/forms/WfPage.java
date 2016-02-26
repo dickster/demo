@@ -25,7 +25,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     private static final String INIT = "wf.init();";
     private static final String FORM_ID = "form";
 
-    private FormBasedWorkflow<?> workflow;
+    private Workflow<?> workflow;
     private @Inject WfFactory wfFactory;
 
     public WfPage(PageParameters params) {

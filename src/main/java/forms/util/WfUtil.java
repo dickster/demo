@@ -5,10 +5,13 @@ import forms.WfPage;
 import forms.WidgetFactory;
 import forms.Workflow;
 import forms.WorkflowForm;
+import forms.widgets.WfAjaxLink;
 import forms.widgets.config.HasConfig;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
+import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
@@ -68,4 +71,17 @@ public class WfUtil implements Serializable {
     }
 
 
+    public static String getAjaxIndicatorMarkupId(Component c) {
+       String ajaxIndicatorMarkupId= c.visitParents(MarkupContainer.class, new IVisitor<MarkupContainer, String>() {
+                @Override public void component(MarkupContainer container, IVisit<String> visit) {
+                    if (container instanceof IAjaxIndicatorAware) {
+                        String id = ((IAjaxIndicatorAware)container).getAjaxIndicatorMarkupId();
+                        if (StringUtils.isNotBlank(id)) {
+                            visit.stop(id);
+                        }
+                    }
+                }
+            });
+        return ajaxIndicatorMarkupId;
+    }
 }

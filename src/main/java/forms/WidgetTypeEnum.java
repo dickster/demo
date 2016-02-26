@@ -12,7 +12,7 @@ public enum WidgetTypeEnum {
     RADIO_GROUP(),
     GROUP(),
     SELECT("selectpicker"),
-    DIALOG_BUTTON(),
+    DIALOG_INVOKING_BUTTON(),
     DIALOG(),
     CONTAINER(),
     DIALOG_SUBMIT_BUTTON(),

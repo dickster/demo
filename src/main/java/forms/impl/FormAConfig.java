@@ -3,7 +3,6 @@ package forms.impl;
 import forms.widgets.config.AddressConfig;
 import forms.widgets.config.ButtonConfig;
 import forms.widgets.config.DialogConfig;
-import forms.widgets.config.DialogSubmitButtonConfig;
 import forms.widgets.config.DivConfig;
 import forms.widgets.config.FormConfig;
 import forms.widgets.config.LabelConfig;
@@ -44,18 +43,27 @@ public class FormAConfig extends FormConfig {
 //        with(new ButtonConfig("formC"));
 //        with(new ButtonConfig("formError"));
 
-        DialogConfig dialogConfig = new DialogConfig("myDialog");
+        // how to make model of dialog that references current sectionpanel model?
+        DialogConfig dialog = (DialogConfig) new DialogConfig("dialog")
+          .withSubmitButton("ok label override")
+          .withCancelButton("cancel button override")
+          .with(new LabelConfig("label.email"))
+          .with(new LabelConfig("label.phone"));
+        //  .withSubmittingButton("label")
 
-        dialogConfig
-                .withButtons(new DialogSubmitButtonConfig("ok"),
-                        new DialogSubmitButtonConfig("cancel"),
-                        new DialogSubmitButtonConfig("save"))
-                .withTitle("Hello!")
-                .withConfigs(new LabelConfig("First Name").name("fnlbl"),
-                        new TextFieldConfig("name.first").name("fname"),
-                        new LabelConfig("Last Name").name("lnlbl"),
-                        new TextFieldConfig("name.last").name("lname"));
-        with(dialogConfig);
-        with(dialogConfig.createInvokingButtonConfig("test"));
+//        with(new ButtonConfig("hello").forDialog(dialog));
+        //buttonConfig().forDialog(d);
+
+//        dialogConfig
+//                .withButtons(new DialogSubmitButtonConfig("ok"),
+//                        new DialogSubmitButtonConfig("cancel"),
+//                        new DialogSubmitButtonConfig("save"))
+//                .withTitle("Hello!")
+//                .withConfigs(new LabelConfig("First Name").name("fnlbl"),
+//                        new TextFieldConfig("name.first").name("fname"),
+//                        new LabelConfig("Last Name").name("lnlbl"),
+//                        new TextFieldConfig("name.last").name("lname"));
+//        with(dialogConfig);
+//        with(dialogConfig.createInvokingButtonConfig("test"));
     }
 }

@@ -114,6 +114,7 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
         return WfUtil.getComponentId(c);
     }
 
+    @Deprecated // i don't think i need this anymore.  i can use FormComponentPanel's to accomplish this (with some model shenanigans)
     private boolean needsToBeWrapped(Component c) {
         return getConfig(c).isWrapHtmlOutput();
     }

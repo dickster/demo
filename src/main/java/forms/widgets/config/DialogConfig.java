@@ -7,10 +7,16 @@ import java.util.List;
 
 public class DialogConfig extends GroupConfig<Dialog> {
 
-    private List<DialogSubmitButtonConfig> buttons = Lists.newArrayList();
+    private List<ButtonConfig> buttons = Lists.newArrayList();
 
     public DialogConfig(String id) {
         super(id);
+        appendCss("modal");
+    }
+
+    public DialogConfig fade() {
+        appendCss("fade");
+        return this;
     }
 
     @Override
@@ -18,22 +24,34 @@ public class DialogConfig extends GroupConfig<Dialog> {
         return new Dialog(id, this);
     }
 
-    public DialogConfig withButtons(DialogSubmitButtonConfig... configs) {
-        int i = 0;
-        for (DialogSubmitButtonConfig config:configs) {
-            config.appendCss(i==0 ? "btn-primary" :"btn-default");
-            buttons.add(config);
-            config.setDialogName(getId());
-            i++;
-        }
+    public DialogConfig withButtons(ButtonConfig... configs) {
+        buttons.addAll(Lists.newArrayList(configs));
         return this;
     }
 
-    public List<DialogSubmitButtonConfig> getButtons() {
+    public List<ButtonConfig> getButtons() {
         return buttons;
     }
 
-    public DialogInvokingButtonConfig createInvokingButtonConfig(String id) {
-        return new DialogInvokingButtonConfig(id, this);
+//    public DialogInvokingButtonConfig createInvokingButtonConfig(String id) {
+//        return new DialogInvokingButtonConfig(id, this);
+//    }
+
+    public DialogConfig withSubmitButton(String label) {
+        buttons.add((ButtonConfig) new ButtonConfig(label).withCss("btn btn-primary"));
+        return this;
+    }
+
+    public DialogConfig withOkButton() {
+        return withSubmitButton("label.ok");
+    }
+
+    public DialogConfig withCancelButton(String label) {
+        buttons.add((ButtonConfig) new ButtonConfig(label).withCss("btn btn-default"));
+        return this;
+    }
+
+    public DialogConfig withCancelButton() {
+        return withCancelButton("label.cancel");
     }
 }

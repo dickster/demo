@@ -1,7 +1,7 @@
 package forms.behavior;
 
 import com.google.common.base.Preconditions;
-import forms.FormBasedWorkflow;
+import forms.Workflow;
 import forms.spring.WfNavigator;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
@@ -61,8 +61,8 @@ public abstract class TypeAheadBehavior extends AbstractDefaultAjaxBehavior {
 
     protected abstract String getJson();
 
-    protected FormBasedWorkflow getWorkflow() {
-        return (FormBasedWorkflow) wfNavigator.getWorkflow(getComponent());
+    protected Workflow getWorkflow() {
+        return wfNavigator.getWorkflow(getComponent());
     }
 
     public class Result {

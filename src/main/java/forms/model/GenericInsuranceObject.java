@@ -17,6 +17,7 @@ public class GenericInsuranceObject implements Serializable {
 
     private Errors errors = new Errors();
     private Name name = new Name("","");
+    private Watercraft watercraft = new Watercraft();
     private Insured insured = new Insured();
     private List<Vehicle> vehicles = Lists.newArrayList(new Vehicle().withTestData());
     private Vehicle vehicle = new Vehicle();

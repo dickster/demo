@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Locale;
 
-public class CommercialWorkflow extends FormBasedWorkflow {
+public class CommercialWorkflow extends Workflow {
 
     @Inject @Named("stateA") private WfFormState stateA;
     @Inject @Named("widgetFactory") private WidgetFactory widgetFactory;
@@ -25,7 +25,7 @@ public class CommercialWorkflow extends FormBasedWorkflow {
     }
 
     @Override
-    public WfState getStartingState() {
+    public WfFormState getStartingState() {
         // if (somePreval) return stateB else..
         return stateA;
     }

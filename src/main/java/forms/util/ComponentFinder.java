@@ -6,6 +6,7 @@ import org.apache.wicket.Page;
 import org.apache.wicket.markup.renderStrategy.DeepChildFirstVisitor;
 import org.apache.wicket.util.visit.IVisit;
 
+@Deprecated  // WorkflowForm has this method duplicated.  use it instead.
 public class ComponentFinder<T extends Component> {
 
     private T visitorKludge = null;

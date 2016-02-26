@@ -23,12 +23,12 @@ public class WfFactory implements Serializable {
     public WfFactory() {
     }
 
-    public final FormBasedWorkflow create(String workflowType) {
-        FormBasedWorkflow workflow = createImpl(workflowType);
+    public final Workflow create(String workflowType) {
+        Workflow workflow = createImpl(workflowType);
         return workflow;
     }
 
-    public FormBasedWorkflow createImpl(@Nonnull String workflowType) {
+    public Workflow createImpl(@Nonnull String workflowType) {
         if ("pizza".equals(workflowType)) {
             return pizzaWorkflow;
         } else if ("test".equals(workflowType)) {

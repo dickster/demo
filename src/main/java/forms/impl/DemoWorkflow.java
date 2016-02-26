@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-public class DemoWorkflow  extends FormBasedWorkflow<GenericInsuranceObject> {
+public class DemoWorkflow  extends Workflow<GenericInsuranceObject> {
 
     private @Inject DemoState1 demoState1;
     private @Inject WidgetFactory widgetFactory;

@@ -1,10 +1,13 @@
 package forms.widgets;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import forms.Div;
 import forms.Toolkit;
 import forms.Workflow;
 import forms.spring.WfNavigator;
 import forms.widgets.config.*;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.behavior.AttributeAppender;
@@ -14,8 +17,10 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
 
 import javax.inject.Inject;
+import java.util.List;
 
 // TODO : redo this whole dialog stuff from start...it's broken completely.
 // need to build the dialog as needed (can't do it when page rendered because it will
@@ -32,35 +37,35 @@ public class Dialog extends Panel implements HasConfig, HasTemplate {
     private Component form;
 
     public Dialog(String id, DialogConfig config) {
-        super(id);
+        // if parent is a section panel, then get it's "current model"
+        super(id); // need access to parent model???
         // TODO add options for fade, close button. ajax handlers?
-        setOutputMarkupId(true);
         this.config = config;
     }
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        add(new Label("title", config.getTitle()));
-        add(form = new Form("form")
-//                .add(new Div("contents", config))
-                .add(new ListView<DialogSubmitButtonConfig>("buttons", config.getButtons()) {
-                    @Override
-                    protected void populateItem(ListItem<DialogSubmitButtonConfig> item) {
-                        item.add(createButton("button", item.getModelObject()));
-                        item.setRenderBodyOnly(true);
-                    }
-                }.setReuseItems(true))
-        );
-        add(new AttributeAppender("class", "modal"));
-        add(new AttributeAppender("role", "dialog"));
-    //    form.setVisible(false);
-        form.setOutputMarkupPlaceholderTag(true);
+        String title = config.getTitle();
+        add(new Label("title", title), setVisible(StringUtils.isNotBlank(title)));
+        add(form = new Form("form").add(content()));
+        add(new AttributeAppender("class", config.getCss()));
     }
 
-    protected Component createButton(String id, DialogSubmitButtonConfig buttonConfig) {
-        Workflow workflow = wfNavigator.getWorkflow(this);
-        return workflow.createWidget(id, buttonConfig);
+    private Component content() {
+        ListView<Config> content = new ListView<Config>("content", config.getConfigs()) {
+            @Override
+            protected void populateItem(ListItem<Config> item) {
+                Config c = item.getModelObject();
+                Component component = getWorkflow().createWidget("el", c);
+                item.add(component).setRenderBodyOnly(true);
+            }
+        }.setReuseItems(true);
+        return content;
+    }
+
+    private Workflow getWorkflow() {
+        return wfNavigator.getWorkflow(this);
     }
 
     @Override
@@ -75,8 +80,7 @@ public class Dialog extends Panel implements HasConfig, HasTemplate {
 
     public Dialog show(AjaxRequestTarget target) {
         target.appendJavaScript(String.format(SHOW_JS, getMarkupId()));
-//        target.add(this);
-        form.setVisible(true);
+        target.add(this);
         return this;
     }
 
@@ -84,8 +88,7 @@ public class Dialog extends Panel implements HasConfig, HasTemplate {
     // that way everyone will get a crack at it...who knows what we want to add to target when dialog is closed.
     public Dialog hide(AjaxRequestTarget target) {
         target.appendJavaScript(String.format(HIDE_JS, getMarkupId()));
-//        target.add(this);
-//        form.setVisible(false);
+        target.add(this);
         return this;
     }
 
@@ -93,5 +96,4 @@ public class Dialog extends Panel implements HasConfig, HasTemplate {
     public String getTemplateId() {
         throw new UnsupportedOperationException("TODO : need to implement this");
     }
-
 }

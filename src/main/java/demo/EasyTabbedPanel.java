@@ -56,8 +56,6 @@ public class EasyTabbedPanel<T extends Tab<?>> extends Panel implements Feedback
     private Enum<?> status = FeedbackState.VOID;
     private Component statusIcon;
 
-
-
     public EasyTabbedPanel(final String id, final List<T> data, Model<String> header) {
         super(id);
         setOutputMarkupId(true);

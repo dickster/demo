@@ -4,6 +4,7 @@ import forms.WfSubmitErrorEvent;
 import forms.WfSubmitEvent;
 import forms.spring.StringLoader;
 import forms.spring.WfNavigator;
+import forms.util.WfUtil;
 import forms.widgets.config.ButtonConfig;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
@@ -21,6 +22,7 @@ import org.apache.wicket.util.visit.IVisitor;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 
+// TODO : extend this and make dialog & submit versions of button.
 public class WfButton extends AjaxButton implements IAjaxIndicatorAware, HasConfig {
 
     private @Inject StringLoader stringLoader;
@@ -57,18 +59,7 @@ public class WfButton extends AjaxButton implements IAjaxIndicatorAware, HasConf
     @Override
     public @Nullable String getAjaxIndicatorMarkupId() {
         if (ajaxIndicatorMarkupId==null) {
-            ajaxIndicatorMarkupId="";
-            visitParents(MarkupContainer.class, new IVisitor<MarkupContainer, Object>() {
-                @Override public void component(MarkupContainer container, IVisit<Object> visit) {
-                    if (container instanceof IAjaxIndicatorAware) {
-                        String id = ((IAjaxIndicatorAware)container).getAjaxIndicatorMarkupId();
-                        if (StringUtils.isNotBlank(id)) {
-                            ajaxIndicatorMarkupId = id;
-                            visit.stop();
-                        }
-                    }
-                }
-            });
+            ajaxIndicatorMarkupId= WfUtil.getAjaxIndicatorMarkupId(this);
         }
         return ajaxIndicatorMarkupId;
     }

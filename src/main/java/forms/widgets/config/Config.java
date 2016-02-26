@@ -146,7 +146,7 @@ public class Config<T extends Component & HasConfig> implements Serializable {
     }
 
     public Config<T> withAttribute(String key) {
-        return withAttribute("");
+        return withAttribute(key, "");
     }
 
     public Config<T> appendAttribute(String key, String value) {
@@ -216,6 +216,7 @@ public class Config<T extends Component & HasConfig> implements Serializable {
         return parent.getWorkflow();
     }
 
+    @Deprecated // i don't think i need this anymore.  i can use FormComponentPanel's to accomplish this (with some model shenanigans)
     public boolean isWrapHtmlOutput() {
         return wrapHtmlOutput;
     }
@@ -291,6 +292,12 @@ public class Config<T extends Component & HasConfig> implements Serializable {
         // remove dependency on gson!
         return new ConfigGson().forSerialization().toJson(this);
     }
+
+    protected String getOption(String key) {
+        Object value = options.get(key);
+        return value==null ? null : value.toString();
+    }
+
 
 }
 

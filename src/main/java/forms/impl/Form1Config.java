@@ -1,8 +1,6 @@
 package forms.impl;
 
-import forms.widgets.config.ButtonConfig;
-import forms.widgets.config.FormConfig;
-import forms.widgets.config.LabelConfig;
+import forms.widgets.config.*;
 
 public class Form1Config extends FormConfig {
 
@@ -17,6 +15,21 @@ public class Form1Config extends FormConfig {
     private void addConfigs() {
         with(new LabelConfig("hello"));
         with(new ButtonConfig("next"));
+
+        DialogConfig dialogConfig = (DialogConfig) new DialogConfig("watercraft.additionalInterest")
+                .withOkButton()
+                        //.usingCreateMethod()
+                .withCancelButton()
+                .withConfigs(
+                        new LabelConfig("label.type").withId("wc-type"),
+                        new TextFieldConfig<String>("type"),
+                        new LabelConfig("label.value"),
+                        new TextFieldConfig<String>("value")
+                );
+
+        with(new DialogButtonConfig("label.watercraft")
+                .forDialog(dialogConfig));
+
 //        DivConfig contents = new DivConfig("contents");
 //
 //        contents.withConfig(new LabelConfig("first name"))

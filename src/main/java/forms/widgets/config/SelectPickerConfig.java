@@ -1,10 +1,12 @@
 package forms.widgets.config;
 
+import com.google.common.collect.Lists;
 import forms.WidgetTypeEnum;
 import forms.spring.SelectOptionsProvider;
 import forms.widgets.SelectPicker;
 
 import javax.annotation.Nonnull;
+import javax.swing.*;
 import java.util.List;
 
 public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
@@ -12,6 +14,7 @@ public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
     // TODO : should this be transient or serializable?
     // make this the name of a spring bean.
     private transient SelectOptionsProvider<T> provider;
+    private boolean allowMultiple = false;
 
     public SelectPickerConfig(@Nonnull String property) {
         super(property, WidgetTypeEnum.SELECT);
@@ -20,10 +23,11 @@ public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
         withSelector("select");
     }
 
-    public SelectOptionsProvider<T> getOptionsService() {
+    public SelectOptionsProvider<T> getOptionsProvider() {
         return provider;
     }
 
+    // TODO : rename this to "choices" so it's not confused with other options.
     public SelectPickerConfig withOptions(final List<T> choices) {
         this.provider = new SelectOptionsProvider() {
             @Override
@@ -31,6 +35,22 @@ public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
                 return choices;
             }
         };
+        return this;
+    }
+
+    public SelectPickerConfig withJsOptions(String jsOptions) {
+        // return empty list in wicket...   let .js provide the values.
+        this.provider = new SelectOptionsProvider() {
+            @Override public List getOptions() {
+                return Lists.newArrayList();
+            }
+        };
+        withOption("data", jsOptions);
+        return this;
+    }
+
+    public SelectPickerConfig withTitle(String value) {
+        withOption("title", value);
         return this;
     }
 
@@ -51,6 +71,20 @@ public class SelectPickerConfig<T> extends FormComponentConfig<SelectPicker> {
     @Override
     public SelectPicker<T> create(String id) {
         return new SelectPicker<T>(id, this);
+    }
+
+    public SelectPickerConfig allowMultiple() {
+        this.allowMultiple = true;
+        return this;
+    }
+
+    public boolean allowsMultiple() {
+        return allowMultiple;
+    }
+
+    public SelectPickerConfig<T> allowSearch() {
+        withOption("liveSearch", "true");
+        return this;
     }
 
 }

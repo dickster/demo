@@ -61,6 +61,8 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
 
 
 //---------------------------------------------------------------------------------
+// create a spring bean interface. ISectionHandler.
+//   which has...createBlankSlate(), newTabData(), getTabTitle(T o),
 // TODO : Xstatus, blank slate, one, zero, min/max, Xtooltip configs.
 // Xwrite plugin.  expand/collapse option, XcanAdd?
 // current tab.
@@ -69,7 +71,7 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
 // for blank slate, have the template include an id of element to be used.
 // it must be styled to fit in same size??
 // .: blank slate only works IFF you have template.
-// sketch out SectionHandler interface and refactor this code to use it.   create a default one.
+// sketch out SectionHandler interface and refactor this code to use it.  create a default one.
 //---------------------------------------------------------------------------------
 
     private int currentIndex;
@@ -106,6 +108,9 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
     private void setIndex(int index) {
         this.currentIndex = index;
         // this might be redundant except for calling in onInitialize()?
+
+        // TODO : use listModel = new WfCompoundPropertyModel(getListModel(),"[currentIndex]")
+        // or just panel.setWfProperty("["+currentIndex+]");
         Object obj = getList().get(currentIndex);
         panel.setDefaultModel(new WfCompoundPropertyModel(obj));
     }
@@ -332,6 +337,9 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
     public IModel<List> getListModel() {
         return (IModel<List>) getDefaultModel();
     }
+
+
+
 
     public List getList() {
         return getListModel().getObject();

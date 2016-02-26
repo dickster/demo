@@ -2,10 +2,7 @@ package forms.impl;
 
 import com.google.common.base.Preconditions;
 import com.google.common.eventbus.Subscribe;
-import forms.FormBasedWorkflow;
-import forms.StartingPoint;
-import forms.WfFormState;
-import forms.WidgetFactory;
+import forms.*;
 import forms.model.GenericInsuranceObject;
 import forms.model.WfCompoundPropertyModel;
 import forms.widgets.WfPostalCodeChangedEvent;
@@ -15,7 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Locale;
 
-public class TestWorkflow extends FormBasedWorkflow<GenericInsuranceObject> {
+public class TestWorkflow extends Workflow<GenericInsuranceObject> {
 
     @Inject @Named("infoState") private WfFormState infoState;
     @Inject @Named("rejectedState") private WfFormState rejectedState;

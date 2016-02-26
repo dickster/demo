@@ -89,8 +89,8 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
         });
     }
 
-    private FormBasedWorkflow<?> getWorkflow() {
-        return (FormBasedWorkflow<?>) wfNavigator.getWorkflow(this);
+    private Workflow<?> getWorkflow() {
+        return wfNavigator.getWorkflow(this);
     }
 
     public WorkflowForm withFormValidator(IFormValidator validator) {
