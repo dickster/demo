@@ -10,8 +10,8 @@ public class LabelConfig extends Config<Label2> {
 
     private List<String> data = Lists.newArrayList();
     private String /*name of spring bean*/ formatter;
-    private Boolean useParentModel;
-    private Boolean htmlStrings;
+    private boolean useParentModel;
+    private boolean htmlStrings;
 
     public LabelConfig(String id) {
         super(id, WidgetTypeEnum.LABEL);

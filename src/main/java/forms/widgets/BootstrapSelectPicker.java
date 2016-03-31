@@ -10,6 +10,7 @@ import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.DropDownChoice;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
@@ -30,6 +31,17 @@ public class BootstrapSelectPicker<T> extends DropDownChoice<T> {
         setOutputMarkupId(true);
         this.config = config;
         setNullValid(false);
+    }
+
+    public BootstrapSelectPicker withModel(IModel<T> model) {
+        setDefaultModel(model);
+        return this;
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
+        setNullValid(!config.allowsMultiple());
     }
 
     @Override

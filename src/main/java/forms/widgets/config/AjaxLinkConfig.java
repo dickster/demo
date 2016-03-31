@@ -10,8 +10,6 @@ import javax.annotation.Nonnull;
 
 public abstract class AjaxLinkConfig<T extends WfAjaxLink> extends FormComponentConfig<T> {
 
-    private DialogConfig dialogConfig;
-
     public AjaxLinkConfig(@Nonnull String label) {
         this(label, WidgetTypeEnum.BUTTON);
     }

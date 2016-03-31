@@ -97,6 +97,8 @@ public class ConfigGson implements Serializable {
                         .registerSubtype(CheckBoxConfig.class)
                         .registerSubtype(YesNoConfig.class)
                         .registerSubtype(LabelConfig.class)
+                        .registerSubtype(DialogConfig.class)
+                        .registerSubtype(DialogButtonConfig.class)
                         .registerSubtype(FeedbackPanelConfig.class)
                         .registerSubtype(SelectPickerConfig.class)
                         .registerSubtype(TextFieldConfig.class)

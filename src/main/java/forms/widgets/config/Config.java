@@ -27,11 +27,11 @@ public class Config<T extends Component & HasConfig> implements Serializable {
     private static final String CLASS = "class";
     private static final String PLUGIN_NA = "n/a";
 
-    // use for serialization methods only....
+    // use for serialization methods only...
     public transient String _class = getClass().getSimpleName();
 
     private Set<String> behaviors = Sets.newHashSet();
-    private Boolean wrapHtmlOutput;
+    private boolean wrapHtmlOutput;
 
     private @Expose Boolean hideInitially = null;
     private @Expose Map<Object, List<String>> dependents = Maps.newHashMap();
@@ -63,24 +63,9 @@ public class Config<T extends Component & HasConfig> implements Serializable {
     public Config(@Nonnull String property, @Nonnull String type, String pluginName) {
         Preconditions.checkNotNull(property);
         this.property = property;
-        this.id = makeIdFrom(property); // use property as id by default.
+        this.id = property; // use property as id by default.
         this.type = type;
         this.pluginName = pluginName;
-    }
-
-    private String makeIdFrom(String property) {
-        return property;
-//        // turn acord.policy.insuredOrPrincipal.name.first ---> apin.first
-//        // what about []'s?  need to maintain these?
-//        String[] tokens = property.split("\\.");
-//        if (tokens.length==1) return property;
-//        StringBuilder result = new StringBuilder();
-//        for (int i=0;i<tokens.length-1;i++) {
-//            result.append(tokens[i].toLowerCase().charAt(0));
-//        }
-//        result.append('.');
-//        result.append(tokens[tokens.length - 1]);
-//        return result.toString();
     }
 
     public Config(@Nonnull String property, @Nonnull String type) {
@@ -221,6 +206,7 @@ public class Config<T extends Component & HasConfig> implements Serializable {
         return wrapHtmlOutput;
     }
 
+    @Deprecated
     public Config<T> withWrappedHtmlOutput() {
         wrapHtmlOutput = true;
         return this;

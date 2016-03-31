@@ -6,6 +6,8 @@ import forms.widgets.config.*;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.IMarkupFragment;
+import org.apache.wicket.markup.Markup;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -44,7 +46,7 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
         super(id);
         this.state = state;
         setOutputMarkupId(true);
-        add(new RenderingBehavior());  // should this be a prototype bean???
+        add(new RenderingBehavior());  // TODO : should this be a prototype bean???
         setupHistory();
 
         // placeholder to be replaced based on formConfig.
@@ -52,6 +54,12 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
         add(new Label("subheader", getSubHeader()));
 
         update(getFormConfig());
+    }
+
+
+    @Override
+    public IMarkupFragment getMarkup() {
+        return super.getMarkup();
     }
 
     public IModel<?> getSubHeader() {

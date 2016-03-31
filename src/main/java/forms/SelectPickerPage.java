@@ -4,13 +4,12 @@ import com.google.common.collect.Lists;
 
 import demo.resources.Resource;
 import forms.widgets.BootstrapSelectPicker;
-import forms.widgets.GrenvilleSelectPicker;
 import forms.widgets.config.SelectConfig;
-import forms.widgets.config.SelectPickerConfig;
 import org.apache.wicket.Application;
 import org.apache.wicket.markup.head.*;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
@@ -46,35 +45,45 @@ public class SelectPickerPage extends WebPage {
     public SelectPickerPage(final PageParameters parameters) {
         setDefaultModel(new CompoundPropertyModel(this));
 
-        add(new GrenvilleSelectPicker("fruit",
-                (SelectPickerConfig) new SelectPickerConfig("fruit")
-                        .withOptions(fruits)
+        add(new BootstrapSelectPicker("fruit",
+                new SelectConfig()
+                        .withChoices(fruits)
                         .withTitle("fruits, fruits, fruits")
-                        .withOption("width", "454px")));
+                        .withOption("width", "454px"))
+            .withModel(new PropertyModel(this, "fruit"))
+        );
 //                        .withOption("header", "Les Fruits")));
 
 
-        add(new GrenvilleSelectPicker("veggie",
-                new SelectPickerConfig("veggies")
+        add(new BootstrapSelectPicker("veggie",
+                new SelectConfig()
                         .withTitle("eat your veggies!")
-                        .withJsOptions("jsVeggies")
+                        .withJsChoices("jsVeggies")
+                        .withKeywordSearching()
+                        .withKeysDisplayed()
                                 //.withOptions(veggies)
-                        .allowSearch()));
+                        .allowSearch())
+                .withModel(new PropertyModel(this, "veggie"))
+        );
 
 
-        add(new GrenvilleSelectPicker("meat",
-                (SelectPickerConfig)new SelectPickerConfig("meats")
-                        .withOptions(meats)
+        add(new BootstrapSelectPicker("meat",
+                new SelectConfig()
+                        .withChoices(meats)
                         .allowMultiple()
                         .withOption("actionsBox", true)
                         //.withOption("noneSelectedText", "pick one!")
-                        ));
+                        )
+                .withModel(new PropertyModel(this, "meat"))
+        );
 
         add(new BootstrapSelectPicker<String>("fruit2",
                 new SelectConfig()
                         .withChoices(fruits)
                         .withTitle("fruits, fruits, fruits")
-                        .withOption("header", "The Fruits")));
+                        .withOption("header", "The Fruits"))
+                .withModel(new PropertyModel(this, "fruit2"))
+        );
 
     }
 

@@ -21,8 +21,9 @@ import java.util.Set;
 
 public class SelectConfig<T>  {
 
+    public static final String MULTIPLE_ATTR = "multiple";
+
     private transient SelectChoicesProvider<T> provider;
-    private boolean allowMultiple = false;
     private boolean required;
 
     private String id;
@@ -67,7 +68,7 @@ public class SelectConfig<T>  {
         return this;
     }
 
-    public SelectConfig withJsOptions(String jsOptions) {
+    public SelectConfig withJsChoices(String jsOptions) {
         // return empty list in wicket...   let .js provide the values.
         this.provider = new SelectChoicesProvider() {
             @Override public List getChoices() {
@@ -84,12 +85,12 @@ public class SelectConfig<T>  {
     }
 
     public SelectConfig allowMultiple() {
-        this.allowMultiple = true;
+        withAttribute(MULTIPLE_ATTR,"");
         return this;
     }
 
     public boolean allowsMultiple() {
-        return allowMultiple;
+        return getAttributes().get(MULTIPLE_ATTR)!=null;
     }
 
     public SelectConfig<T> allowSearch() {
@@ -99,5 +100,24 @@ public class SelectConfig<T>  {
 
     public Map<String, String> getAttributes() {
         return attributes;
+    }
+
+    public SelectConfig withKeywordSearching() {
+        withOption("keywordSearch","y");
+        return this;
+    }
+
+    public SelectConfig withKeysDisplayed() {
+        withOption("keysDisplayed","y");
+        return this;
+    }
+
+    public SelectConfig<T> required() {
+        this.required = true;
+        return this;
+    }
+
+    public boolean isRequired() {
+        return required;
     }
 }
