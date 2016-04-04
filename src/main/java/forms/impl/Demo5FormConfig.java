@@ -11,7 +11,7 @@ public class Demo5FormConfig extends FormConfig {
         withTitle("Payment Information");
         withTitle("Ajax & Behavior Examples");
         addConfigs();
-        withTemplate("demo5.html");
+        //withTemplate("demo5.html");
     }
 
     private void addConfigs() {

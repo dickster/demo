@@ -10,7 +10,7 @@ public class ConfirmationFormConfig extends FormConfig {
         super("Confirm-Form");
         addConfigs();
         withTitle("Confirmation");
-        withTemplate("confirmation");
+        //withTemplate("confirmation");
     }
 
     private void addConfigs() {

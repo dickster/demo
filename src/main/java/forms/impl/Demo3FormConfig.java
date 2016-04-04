@@ -9,7 +9,7 @@ public class Demo3FormConfig extends Demo1FormConfig {
         super();
         withId("demo3");
         withTitle("Oops, a bad layout");
-        withTemplate("demo3");
+        //withTemplate("demo3");
     }
 
 }

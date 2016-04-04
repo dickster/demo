@@ -11,6 +11,7 @@ $(function() {
 
             var dependentFields = [];
             $.each(this.options.titleInputs,function(index,input) {
+                // TODO : stop using 'data-wf'!!!
                 var $inputField = $panel.find('[data-wf="'+input+'"]');
                 dependentFields.push($inputField);
                 if ($inputField.length==0) {

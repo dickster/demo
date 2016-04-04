@@ -24,12 +24,14 @@ public class WfUtil implements Serializable {
 
     // gets the "workflow id", not to be confused with wicket id.
     public static @Nullable String getComponentId(@Nonnull Component component) {
+        // TODO : just use wicket id!!
         if (component instanceof HasConfig) {
             return ((HasConfig)component).getConfig().getId();
         }
         return null;
     }
 
+    @Deprecated   // don't need prefixes anymore???
     public static String getComponentFullProperty(@Nonnull Component component) {
         if (component instanceof HasConfig) {
             // check meta data...

@@ -1,3 +1,5 @@
+
+//deprecated.  replace by new template stuff.
 wf.layout = function() {
 
     var init = function($widget, options) {

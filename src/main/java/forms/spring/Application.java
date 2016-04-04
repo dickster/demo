@@ -7,11 +7,8 @@ import forms.Theme;
 import forms.Toolkit;
 import forms.WfFactory;
 import forms.WidgetFactory;
-import forms.impl.DemoWorkflow;
+import forms.impl.*;
 import forms.widgets.config.Config;
-import forms.impl.CommercialWorkflow;
-import forms.impl.PizzaWorkflow;
-import forms.impl.TestWorkflow;
 import org.apache.wicket.Component;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,29 +50,30 @@ public class Application {
     }
 
 
-
-    @Bean
-    @Scope("prototype")
+    @Bean @Scope("prototype")
     public CommercialWorkflow commercialWorkflow() {
         CommercialWorkflow workflow = new CommercialWorkflow();
         return workflow;
     }
 
-    @Bean
-    @Scope("prototype")
+    @Bean @Scope("prototype")
     public DemoWorkflow demoWorkflow() {
         return new DemoWorkflow();
     }
 
-    @Bean
-    @Scope("prototype")
+    @Bean @Scope("prototype")
     public TestWorkflow testWorkflow() {
         TestWorkflow workflow = new TestWorkflow();
         return workflow;
     }
 
-    @Bean
-    @Scope("prototype")
+    @Bean @Scope("prototype")
+    public TemplateWorkflow templateWorkflow() {
+        TemplateWorkflow workflow = new TemplateWorkflow();
+        return workflow;
+    }
+
+    @Bean @Scope("prototype")
     public PizzaWorkflow pizzaWorkflow() {
         PizzaWorkflow workflow = new PizzaWorkflow();
         return workflow;

@@ -10,7 +10,7 @@ public class Demo6AFormConfig extends FormConfig {
         super("demo6");
         withTitle("Validations");
         addConfigs();
-        withTemplate("demo6.html");
+        //withTemplate("demo6.html");
     }
 
     private void addConfigs() {

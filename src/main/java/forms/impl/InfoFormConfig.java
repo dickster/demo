@@ -15,7 +15,7 @@ public class InfoFormConfig extends FormConfig {
         super("INFO_FORM");
         addConfigs();
         withTitle("Client Information");
-        withTemplate("f2.html");  //withTemplate("f1");
+        //withTemplate("f2.html");  //withTemplate("f1");
     }
 
     private void addConfigs() {
@@ -48,7 +48,7 @@ public class InfoFormConfig extends FormConfig {
                         new TextFieldConfig("middle"),
                         new LabelConfig("label.last"),
                         new TextFieldConfig("last"))
-                .withTemplate("_names")
+                //.withTemplate("_names")
                 .withTitle("Drivers"));
 
 //        withConfig(new LabelConfig("label.address"));  // not in template.

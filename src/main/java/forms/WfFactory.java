@@ -1,9 +1,6 @@
 package forms;
 
-import forms.impl.CommercialWorkflow;
-import forms.impl.DemoWorkflow;
-import forms.impl.PizzaWorkflow;
-import forms.impl.TestWorkflow;
+import forms.impl.*;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -17,6 +14,8 @@ public class WfFactory implements Serializable {
     private @Inject CommercialWorkflow commercialWorkflow;
     private @Inject PizzaWorkflow pizzaWorkflow;
     private @Inject TestWorkflow testWorkflow;
+    private @Inject
+    TemplateWorkflow templateWorkflow;
     private @Inject
     DemoWorkflow demoWorkflow;
 
@@ -38,6 +37,9 @@ public class WfFactory implements Serializable {
         }
         else if ("demo".equals(workflowType)) {
             return demoWorkflow;
+        }
+        else if ("template".equals(workflowType)) {
+            return templateWorkflow;
         }
         throw new IllegalArgumentException("workflow type not supported : " + workflowType);
     }

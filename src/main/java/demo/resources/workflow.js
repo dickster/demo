@@ -9,16 +9,7 @@ var wf = function() {
     }
 
     var init = function() {
-        Wicket.Event.subscribe('/ajax/call/complete', function(jqEvent, attributes, jqXHR, errorThrown, textStatus) {
-            // at the end of all ajax calls, relayout components.
-            var $components = $(jqXHR.responseXML.documentElement.children).filter("component").map(
-                function(i,e) {
-                    return document.getElementById(e.id);
-                })
-            wf.layout.update($components);
-        });
-
-        // TODO : check this date stuff...it used to work but doesn't anymore.
+        // TODO : check this back/history stuff...it used to work but doesn't anymore.
         window.onpopstate = function(event) {
             var u = url + "&state=" + window.history.state.name;
             Wicket.Ajax.get({u:u});
@@ -28,11 +19,34 @@ var wf = function() {
         history.replaceState({name:state,time:new Date()}, "huh", state);
     }
 
+
+    // idea!  for dependents, use html to group them.
+    // specify data-dep=="??".  that's the onchange val() of element that controls visibility toggling of slave.
+    //  <div class="dependent">
+    //      <input class="master">
+    //      <input class="slave" data-dep="true">
+    //      <input class="slave" data-dep="false">
+    // </div>
+    //   OR
+    // ----slaves can be divs.
+    //  <div class="dependent">
+    //      <input class="master">
+    //      <div><class="slave" data-dep="apple"><input .../> <label..../> <span.../> etc.. </div>
+    //      <div><class="slave" data-dep="orange"><input .../> <label..../> <span.../> etc.. </div>
+    // </div>
+
+    // .js = $(".dependent").each(function(i,v) {
+    //     var $slaves = $(this).find('.slave');
+    //     $(this).find('.master').change(function(e) {
+    //          var val = $(this).val();
+    //          $slaves.each(function(i,v) {
+    //              $(v).toggle(val===$(v).attr('data-dep'));
+    //          }
+    // }
     var widget = function(config) {
         var w = _widget(config);
         w.addDependents();
         w.initializePlugin();
-        w.layout();
     }
 
         //  ----------- WIDGET obj ----------------
@@ -43,6 +57,7 @@ var wf = function() {
             var $component = config.selector ? $widget.find(config.selector) : $widget;
             //TODO : assert component.size()==1
 
+            // TODO : make sure this works if elements are replaced by ajax (i.e. the event handler still is attached).
             var addDependents = function() {
                 if (!config.dependents) return;
                 // add change listener...show dependents when true.  (& trigger change on this?).
@@ -52,6 +67,9 @@ var wf = function() {
                         for (var i=0;i<config.dependents[key].length;i++){
                             var d = config.dependents[key][i];
                             $('[data-wf="'+d+'"]').toggle(val===key);
+
+                            // TODO : stop using 'data-wf'.   @Deprecate it!!!!
+
                             // TODO : clear value when you hide the value.
                             // if (val!=key) clearInput($('[data-wf="'+d+'"]'));
                         }
@@ -61,10 +79,6 @@ var wf = function() {
                 });
                 $widget.trigger('change');
             };
-
-            var layout = function() {
-                wf.layout.init($widget, config.options);
-            }
 
             var applyPlugin = function() {
                 // THESE ARE HACKS AND NEED TO BE WRITTEN AS JQUERY UI PLUGINS.
@@ -89,7 +103,6 @@ var wf = function() {
             };
 
             return {
-                layout : layout,
                 addDependents : addDependents,
                 initializePlugin : applyPlugin
             }

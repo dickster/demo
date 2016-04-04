@@ -25,7 +25,7 @@ import java.util.List;
 // TODO : redo this whole dialog stuff from start...it's broken completely.
 // need to build the dialog as needed (can't do it when page rendered because it will
 //  cause bound input fields to exist which will screw up the model).
-public class Dialog extends Panel implements HasConfig, HasTemplate {
+public class Dialog extends Panel implements HasConfig {
 
     private @Inject WfNavigator wfNavigator;
 
@@ -92,8 +92,4 @@ public class Dialog extends Panel implements HasConfig, HasTemplate {
         return this;
     }
 
-    @Override
-    public String getTemplateId() {
-        throw new UnsupportedOperationException("TODO : need to implement this");
-    }
 }

@@ -4,20 +4,13 @@ import com.google.common.base.Preconditions;
 import forms.util.ConfigGson;
 import forms.util.WfUtil;
 import forms.widgets.config.Config;
-import forms.widgets.config.GroupConfig;
 import forms.widgets.config.HasConfig;
-import forms.widgets.config.HasTemplate;
 import org.apache.wicket.Component;
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.ajax.IAjaxRegionMarkupIdProvider;
 import org.apache.wicket.behavior.Behavior;
-import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
-import org.apache.wicket.markup.transformer.AbstractOutputTransformerContainer;
-import org.apache.wicket.protocol.http.BufferedWebResponse;
-import org.apache.wicket.request.cycle.RequestCycle;
 
 import javax.inject.Inject;
 import java.util.Map;
@@ -46,7 +39,8 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
             for (String key:attributes.keySet()) {
                 tag.getAttributes().put(key, attributes.get(key));
             }
-            tag.getAttributes().put("data-wf", getDataWf(component));
+            // TODO : do i really need this anymore?  can't i use "name" attribute?
+            //tag.getAttributes().put("data-wf", getDataWf(component));
         }
     }
 
@@ -65,13 +59,14 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
         response.render(OnDomReadyHeaderItem.forScript(js));
     }
 
+    @Deprecated
     private void injectTemplateId(Component component, Config config, IHeaderResponse response) {
-        if (config instanceof GroupConfig) { // i.e. config creates 'HasTemplate' components.
-            // assert component instanceof HasTemplate...
-            String id = ((HasTemplate)component).getTemplateId();
-            GroupConfig groupConfig = (GroupConfig) config;
-            groupConfig.injectTemplateId(id);
-        }
+//        if (config instanceof GroupConfig) { // i.e. config creates 'HasTemplate' components.
+//            // assert component instanceof HasTemplate...
+//            String id = ((HasTemplate)component).getTemplateId();
+//            GroupConfig groupConfig = (GroupConfig) config;
+//            groupConfig.injectTemplateId(id);
+//        }
     }
 
     private Config getConfig(Component component) {
@@ -88,11 +83,11 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
 
     public void beforeRender(Component c) {
         if (needsToBeWrapped(c)) {
-            String div = String.format("<div id='%s' data-wf='%s' %s>",
-                    getWrappedId(c),
-                    getDataWf(c),
-                    getWrappedAttributes(c));
-            c.getResponse().write(div);
+//            String div = String.format("<div id='%s' data-wf='%s' %s>",
+//                    getWrappedId(c),
+//                    getDataWf(c),
+//                    getWrappedAttributes(c));
+//            c.getResponse().write(div);
         }
     }
 
@@ -116,13 +111,15 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
 
     @Deprecated // i don't think i need this anymore.  i can use FormComponentPanel's to accomplish this (with some model shenanigans)
     private boolean needsToBeWrapped(Component c) {
-        return getConfig(c).isWrapHtmlOutput();
+        return false;
+//        return getConfig(c).isWrapHtmlOutput();
     }
 
+
     public void afterRender(Component c) {
-        if (needsToBeWrapped(c)) {
-            c.getResponse().write("</div>");
-        }
+//        if (needsToBeWrapped(c)) {
+//            c.getResponse().write("</div>");
+//        }
     }
 
     @Override

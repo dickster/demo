@@ -9,7 +9,7 @@ public class Demo4FormConfig extends FormConfig {
         super("demo4");
         withTitle("Section Panels");
         addConfigs();
-        withTemplate("demo4");
+        //withTemplate("demo4");
     }
 
     private void addConfigs() {
@@ -26,7 +26,7 @@ public class Demo4FormConfig extends FormConfig {
                         new TextFieldConfig("middle"),
                         new LabelConfig("label.last"),
                         new TextFieldConfig("last"))
-                .withTemplate("insured")
+                //.withTemplate("insured")
                 .withTitle("Insured"));
 
         with(new SectionPanelConfig("vehicles")
@@ -49,7 +49,7 @@ public class Demo4FormConfig extends FormConfig {
                         new LabelConfig("label.model"),
                         new TextFieldConfig("model")
                         )
-                .withTemplate("vehicles")
+                //.withTemplate("vehicles")
                 .withTitle("Vehicles"));
 
         with(new ButtonConfig("button.next"));

@@ -5,7 +5,6 @@ import forms.spring.WfNavigator;
 import forms.widgets.config.Config;
 import forms.widgets.config.GroupConfig;
 import forms.widgets.config.HasConfig;
-import forms.widgets.config.HasTemplate;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
@@ -17,7 +16,8 @@ import java.util.Map;
 
 // rename this to....? DIV? BasicPanel, Container, ?? dunno.  FormContent??
 // just move all this into WorkflowForm for now.
-public abstract class Div extends Panel implements HasConfig, HasTemplate {
+@Deprecated   //replaced by new template code.
+public abstract class Div extends Panel implements HasConfig {
 
     private @Inject WfNavigator wfNavigator;
 
@@ -61,8 +61,4 @@ public abstract class Div extends Panel implements HasConfig, HasTemplate {
         return config;
     }
 
-    @Override
-    public String getTemplateId() {
-        throw new UnsupportedOperationException("TODO : need to implement this");
-    }
 }

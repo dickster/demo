@@ -9,7 +9,7 @@ public class PaymentFormConfig extends FormConfig {
         super("Payment-Form");
         addConfigs();
         withTitle("Payment Information");
-        withTemplate("payment.html");
+        //withTemplate("payment.html");
     }
 
     private void addConfigs() {

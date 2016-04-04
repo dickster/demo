@@ -3,6 +3,7 @@ package forms;
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Closeables;
+import com.google.javascript.jscomp.deps.DepsFileParser;
 import forms.widgets.config.GroupConfig;
 import org.apache.wicket.markup.Markup;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+@Deprecated  // replaced by new template code.
 public class Template extends Panel {
 
     // TODO : add caching for this. maybe (re)use wicket's markupCache or
@@ -25,7 +27,7 @@ public class Template extends Panel {
         super(id);
         setOutputMarkupId(true);
         setRenderBodyOnly(false);
-        this.source = normalize(config.getTemplate());
+        //this.source = normalize(config.getTemplate());
     }
 
     @Override

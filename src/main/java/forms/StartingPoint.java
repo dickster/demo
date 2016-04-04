@@ -60,7 +60,7 @@ public class StartingPoint extends WebPage {
                     @Override
                     protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                         Session.get().setAttribute("language", language);
-                        setResponsePage(new WfPage("demo", obj));
+                        setResponsePage(new WfPage("template", obj));
                     }
                 })
                 .add(new AjaxSubmitLink("order") {

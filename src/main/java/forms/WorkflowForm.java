@@ -1,5 +1,9 @@
 package forms;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.CharStreams;
+import com.google.common.io.Closeables;
+import forms.spring.StringLoader;
 import forms.spring.WfNavigator;
 import forms.util.WfUtil;
 import forms.widgets.config.*;
@@ -25,20 +29,30 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.util.visit.IVisit;
+import org.springframework.core.io.ClassPathResource;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
-public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class WorkflowForm extends Panel implements HasConfig {
 
     private @Inject Toolkit toolkit;
+    private @Inject StringLoader stringLoader;
     private @Inject WfNavigator wfNavigator;
 
     private Form form;
     private FeedbackPanel feedback;
     private AbstractDefaultAjaxBehavior historyMaker;
     private Template template;
-    private ListView content;
+    private WebMarkupContainer content;
     private WfFormState state;
     private Component visitorKludge;
 
@@ -53,14 +67,8 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
         add(new WebMarkupContainer("form").add(new WebMarkupContainer("content")));
         add(new Label("subheader", getSubHeader()));
 
-        update(getFormConfig());
     }
 
-
-    @Override
-    public IMarkupFragment getMarkup() {
-        return super.getMarkup();
-    }
 
     public IModel<?> getSubHeader() {
         return new Model<String>() {
@@ -109,6 +117,7 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
     @Override
     protected void onInitialize() {
         super.onInitialize();
+        update(getFormConfig());
         getWorkflow().register(this);
         add(createFeedbackPanel());
         getTheme().apply(form);
@@ -127,20 +136,19 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
     private void update(FormConfig formConfig) {
         form = new Form("form");
         form.setOutputMarkupId(true);
-        form.add(content());
+        form.add(content = content());
         form.add(template = new Template("template", formConfig));
         addOrReplace(form);
     }
 
-    private Component content() {
-        content = new ListView<Config>("content", getFormConfig().getConfigs()) {
-            @Override
-            protected void populateItem(ListItem<Config> item) {
-                Config c = item.getModelObject();
-                Component component = getWorkflow().createWidget("el", c);
-                item.add(component).setRenderBodyOnly(true);
-            }
-        }.setReuseItems(true);
+    private DynamicMarkup content() {
+        DynamicMarkup content = new DynamicMarkup("content", "template1.html");
+        Workflow<?> workflow = getWorkflow();
+        List<Config> configs = getFormConfig().getConfigs();
+        for (Config c:configs) {
+            Component component = workflow.getWidgetFactory().createWidget(c.getId(), c);
+            content.add(component);
+        }
         return content;
     }
 
@@ -195,15 +203,86 @@ public class WorkflowForm extends Panel implements HasConfig, HasTemplate {
     }
 
     @Override
-    public String getTemplateId() {
-        return template.getMarkupId();
-    }
-
-    @Override
     public Config getConfig() {
         return state.getFormConfig();
     }
 
+
+
+    class DynamicMarkup extends Panel {
+
+        // TODO : add caching for this. maybe (re)use wicket's markupCache or
+        // create my own spring bean based on guava??? private @Inject MarkupCache cache;
+
+        private String source;
+        private static final String TEMPLATE_BASE = "demo/resources/templates/";
+        private StringLoader loader;
+
+        public DynamicMarkup(String id, String template) {
+            super(id);
+            setOutputMarkupId(true);
+            setRenderBodyOnly(false);
+            this.source = normalize(template);
+        }
+
+        private String normalize(String source) {
+            if (source==null) {
+                return null;
+            }
+            source = source.trim();
+            if (source.startsWith(TEMPLATE_BASE)) {
+                source = source.substring(TEMPLATE_BASE.length());
+            }
+            if (!source.endsWith(".html") && source.indexOf('.')==-1) {
+                System.out.println("WARNING : assuming you want to load an .html template file. i.e. [" + source +".html] as opposed to ["+source+"]");
+                source = source+".html";
+            }
+            return source;
+        }
+
+        @Override
+        public Markup getAssociatedMarkup() {
+            try {
+                if (source==null) {
+                    // this should never happen!  if source==null, setVisible(false).
+                    throw  new IllegalStateException("attempting to render an null/empty template.");
+                }
+                InputStream stream = new ClassPathResource(getFullPath()).getInputStream();
+                String content = CharStreams.toString(new InputStreamReader(stream, Charsets.UTF_8));
+                Closeables.closeQuietly(stream);
+                return Markup.of(resolveLabels(content));
+            } catch (IOException e) {
+                throw new WorkflowException(e);
+            }
+        }
+
+        private String resolveLabels(String content) {
+//            if (loader!=null) {
+               // TODO : replace ${label.foo} with values stored in string loader.
+               //  e.g. ${name} --> "derek"
+               // this should be locale sensitive.
+                Pattern pattern = Pattern.compile("\\$\\{(.*?)\\}");
+                Matcher matcher = pattern.matcher(content);
+
+                StringBuffer sb = new StringBuffer();
+                while (matcher.find()) {
+                    String value = matcher.group(1)+"-VALUE";   // use loader to get values.
+                    matcher.appendReplacement(sb, value);
+                }
+  //          }
+            return matcher.appendTail(sb).toString();
+        }
+
+        private String getFullPath() {
+            return TEMPLATE_BASE+source;
+        }
+
+        public DynamicMarkup withLabelResources(StringLoader loader) {
+            this.loader = loader;
+            return this;
+        }
+
+    }
 
 
 }

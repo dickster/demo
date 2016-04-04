@@ -9,11 +9,10 @@ import org.apache.wicket.Component;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public abstract class GroupConfig<T extends Component & HasConfig & HasTemplate> extends Config<T> {
+public abstract class GroupConfig<T extends Component & HasConfig> extends Config<T> {
 
     private List<Config> configs = Lists.newArrayList();
     private @Expose String title;
-    private String template;
 
 
     public GroupConfig(@Nonnull String name) {
@@ -83,15 +82,6 @@ public abstract class GroupConfig<T extends Component & HasConfig & HasTemplate>
             }
         }
         return result;
-    }
-
-    public GroupConfig<T> withTemplate(String template) {
-        this.template = template;
-        return this;
-    }
-
-    public String getTemplate() {
-        return template;
     }
 
     public GroupConfig<T> injectTemplateId(String templateId) {

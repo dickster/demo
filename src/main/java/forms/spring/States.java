@@ -107,4 +107,9 @@ public class States {
         return new StateError();
     }
 
+    @Bean
+    public TemplateState1 s1() {
+        return new TemplateState1();
+    }
+
 }
