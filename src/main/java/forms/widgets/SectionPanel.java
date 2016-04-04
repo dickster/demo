@@ -10,6 +10,7 @@ import forms.spring.WfNavigator;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.SectionPanelConfig;
+import forms.widgets.config.SectionPanelHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
@@ -79,6 +80,8 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
     private Component statusIcon;
     private Component panel;
 
+    private SectionPanelHandler handler;
+
     public SectionPanel(final String id, SectionPanelConfig config) {
         super(id);
         this.config = config;
@@ -95,12 +98,6 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
         this.status = status;
         return this;
     }
-
-//    @Subscribe   TODO : allow for workflow events to be posted.
-//    public void onSectionEvent(WfSectionEvent event) {
-//        event.getStatus();  if (event.is(thisSection))
-//              blah blah blah...
-//    }
 
     private void setIndex(int index) {
         this.currentIndex = index;

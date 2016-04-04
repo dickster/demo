@@ -51,7 +51,6 @@ public class WorkflowForm extends Panel implements HasConfig {
     private Form form;
     private FeedbackPanel feedback;
     private AbstractDefaultAjaxBehavior historyMaker;
-    private Template template;
     private WebMarkupContainer content;
     private WfFormState state;
     private Component visitorKludge;
@@ -137,7 +136,6 @@ public class WorkflowForm extends Panel implements HasConfig {
         form = new Form("form");
         form.setOutputMarkupId(true);
         form.add(content = content());
-        form.add(template = new Template("template", formConfig));
         addOrReplace(form);
     }
 
@@ -187,7 +185,7 @@ public class WorkflowForm extends Panel implements HasConfig {
         content.visitChildren(Component.class, new DeepChildFirstVisitor() {
             @Override
             public void component(Component component, IVisit<Void> visit) {
-                String n = WfUtil.getComponentId(component);
+                String n = component.getId();
                 if (id.equals(n)) {
                     visitorKludge = component;
                     visit.stop();

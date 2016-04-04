@@ -7,7 +7,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 public class WfDebugEvent extends WfEvent<String> {
 
     public WfDebugEvent(AjaxRequestTarget target, Component component) {
-        super(WfUtil.getComponentId(component), target, component);
+        super(component.getPath(), target, component);
     }
 
 }

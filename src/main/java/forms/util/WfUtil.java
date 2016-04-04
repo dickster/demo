@@ -54,7 +54,7 @@ public class WfUtil implements Serializable {
             }
         });
         if (workflow==null) {
-            throw new IllegalStateException("can't find workflow for component " + component.getId() + getComponentId(component));
+            throw new IllegalStateException("can't find workflow for component " + component.getId());
         }
         return workflow;
     }

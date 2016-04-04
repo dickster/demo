@@ -20,7 +20,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
     public static final String WORKFLOW_PARAM = "_workflow_";
 
     private static final JavaScriptResourceReference WORKFLOW_JS = new JavaScriptResourceReference(Resource.class, "workflow.js");
-    private static final JavaScriptResourceReference LAYOUT_JS = new JavaScriptResourceReference(Resource.class, "layout.js");
+//    private static final JavaScriptResourceReference LAYOUT_JS = new JavaScriptResourceReference(Resource.class, "layout.js");
 
     private static final String INIT = "wf.init();";
     private static final String FORM_ID = "form";
@@ -72,7 +72,7 @@ public class WfPage extends WebPage implements HasWorkflow, IAjaxIndicatorAware 
         super.renderHead(response);
         response.render(OnDomReadyHeaderItem.forScript(INIT));
         response.render(JavaScriptReferenceHeaderItem.forReference(WORKFLOW_JS));
-        response.render(JavaScriptReferenceHeaderItem.forReference(LAYOUT_JS));
+  //      response.render(JavaScriptReferenceHeaderItem.forReference(LAYOUT_JS));
     }
 
     @Subscribe

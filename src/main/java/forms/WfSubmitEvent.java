@@ -14,7 +14,7 @@ public class WfSubmitEvent extends WfEvent<String> {
 
 
     public WfSubmitEvent(AjaxRequestTarget target, Component component, Form<?> form) {
-        super(WfUtil.getComponentId(component), target, component);
+        super(component.getPath(), target, component);
         this.form = form;
     }
 

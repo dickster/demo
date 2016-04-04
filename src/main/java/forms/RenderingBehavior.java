@@ -103,11 +103,11 @@ public class RenderingBehavior extends Behavior implements IAjaxRegionMarkupIdPr
         return builder.toString();
     }
 
-    private String getDataWf(Component c) {
-        // TODO : as optimization, i might want not to always spit this out???
-        // it will add significantly to the payload.
-        return WfUtil.getComponentId(c);
-    }
+//    private String getDataWf(Component c) {
+//        // TODO : as optimization, i might want not to always spit this out???
+//        // it will add significantly to the payload.
+//        return WfUtil.getComponentId(c);
+//    }
 
     @Deprecated // i don't think i need this anymore.  i can use FormComponentPanel's to accomplish this (with some model shenanigans)
     private boolean needsToBeWrapped(Component c) {

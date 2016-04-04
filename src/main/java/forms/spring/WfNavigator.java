@@ -25,7 +25,7 @@ public class WfNavigator implements Serializable {
             }
         });
         if (workflow==null) {
-            throw new IllegalStateException("can't find workflow for component " + component.getId() + WfUtil.getComponentId(component));
+            throw new IllegalStateException("can't find workflow for component " + component.getId() + component.getPath());
         }
         return workflow;
     }

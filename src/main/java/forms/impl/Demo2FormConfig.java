@@ -8,7 +8,7 @@ public class Demo2FormConfig extends Demo1FormConfig {
     public Demo2FormConfig() {
         super();
         withId("demo2");
-        withTitle("Same Form but with Layout Template");
+        withTitle("Same Form");
         //withTemplate("demo2");
     }
 
