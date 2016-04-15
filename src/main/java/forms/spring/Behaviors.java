@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class Behaviors {
 
+    // TODO : put this in a factory configuration...only put behaviors here?
+    // can i then put @Scope annotation on whole class?
     @Bean
     public BehaviorFactory behaviorFactory() {
         return new BehaviorFactory();

@@ -16,8 +16,9 @@ public abstract class WfBeanFactory<T> implements Serializable {
     private final String scope;
     private Class<T> clazz;
 
+
     // TODO : make this more liberal with names.
-    // if can't find name, look for name+"Behavior"/"Behaviour"/"AjaxBehavior" etc...
+    // if can't find name, look for name+"Behavior"/"Behaviour"/"AjaxBehavior" etc....
 
     public WfBeanFactory(Class<T> clazz) {
         this(clazz, null);

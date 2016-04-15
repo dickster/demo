@@ -1,6 +1,6 @@
 package forms;
 
-import forms.spring.BehaviorFactory;
+import forms.spring.DynamicInjector;
 import forms.widgets.config.Config;
 import forms.widgets.config.FormComponentConfig;
 import org.apache.wicket.Component;
@@ -20,9 +20,11 @@ public abstract class WidgetFactory implements Serializable {
     // find a better way to do this...check out SectionPanel???
     // set the parent component to have a model with prefix and work from there???
     public static final MetaDataKey<String> MODEL_PREFIX = new MetaDataKey<String>(){};
+
+
     // ----------------------
 
-    private @Inject BehaviorFactory behaviorFactory;
+    private @Inject DynamicInjector injector;
 
     public WidgetFactory(/**user, locale, settings, permissions - get this from session.*/) {
     }
@@ -30,7 +32,8 @@ public abstract class WidgetFactory implements Serializable {
     @Nonnull
     public abstract Component create(String id, Config config);
 
-    /*package protected*/ Component createWidget(String id, Config config, String... prefix) {
+
+    public Component createWidget(String id, Config config, String... prefix) {
         preCreate(config);
         Component component = create(id, config);
         postCreate(component, config);
@@ -46,6 +49,7 @@ public abstract class WidgetFactory implements Serializable {
             setLabel(fc, fcc);
         }
         setVisibility(component, config);
+        injector.inject(component, config);
         addBehaviors(component, config);
         addRenderingBehavior(component);
     }
@@ -72,6 +76,7 @@ public abstract class WidgetFactory implements Serializable {
         component.setOutputMarkupPlaceholderTag(false);
     }
 
+    // should these be spring beans?
     private void addValidators(FormComponent fc, FormComponentConfig<?> config) {
         for (String validator:config.getValidators()) {
             fc.add(resolveValidator(validator));

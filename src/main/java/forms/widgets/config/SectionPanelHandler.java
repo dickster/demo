@@ -1,21 +1,32 @@
 package forms.widgets.config;
 
+import forms.widgets.SectionPanel;
 import org.apache.wicket.markup.Markup;
 
-public class SectionPanelHandler {
+import java.util.List;
 
-    public int getInitialIndex() {
-        return 0;
-    }
+public interface SectionPanelHandler {
 
-    // getMarkup().add(new RawMarkup("<div...."));
-    public Markup getBlankSlate() {
-        return Markup.of("<div>blank slate</div>");
-    }
+    int getInitialIndex();
 
-    public String getTabTitle(Object /* <T> */ obj) {
-        // will i know type of object?? nah.....
-        return obj.toString();
-    }
+    Markup getBlankSlate();
 
+    String getTabTitle(Object  obj);
+
+    // post an event?  every component can listen for it.
+    int deleteTab(List<?> list, int index, int currentIndex);
+
+    Object createNewTabData(Object obj);
+
+    String getTooltip();
+
+    String getName();
+
+    String getIconCss();
+
+    Integer getOrdinal();
+
+    String getHref();
+
+    void initialize(SectionPanel sectionPanel);
 }

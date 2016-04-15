@@ -1,12 +1,16 @@
 package forms.widgets;
 
 
+import com.google.common.base.Preconditions;
 import demo.FeedbackListener;
 import demo.FeedbackState;
 import demo.ISection;
+import forms.DynamicMarkup;
+import forms.WidgetFactory;
 import forms.Workflow;
 import forms.model.WfCompoundPropertyModel;
 import forms.spring.WfNavigator;
+import forms.util.WfUtil;
 import forms.widgets.config.Config;
 import forms.widgets.config.HasConfig;
 import forms.widgets.config.SectionPanelConfig;
@@ -14,6 +18,7 @@ import forms.widgets.config.SectionPanelHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
+import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -22,6 +27,7 @@ import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.feedback.FeedbackMessage;
 import org.apache.wicket.markup.ComponentTag;
+import org.apache.wicket.markup.Markup;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
@@ -39,18 +45,20 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
+import org.apache.wicket.util.visit.IVisit;
+import org.apache.wicket.util.visit.IVisitor;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import java.util.List;
 
-public class SectionPanel<T extends Component> extends Panel implements FeedbackListener, ISection, HasConfig {
+public class SectionPanel<T extends Component> extends Panel implements FeedbackListener, HasConfig {
 
-    private static final String SELECT_LAST_TAB_JS = "$('#%s').tabPanel.selectLastTab()";
-    private static final String BLANK_SLATE_ID = "blankSlate";
-    private static final String TAB_PANEL_INIT = "ez.tabPanel().init(%s)";
-    // change this to jquery ui code.    tabPanel('setStatus', '<value>');
-    private static final String SET_STATUS_JS = "document.getElementById('%s').tabPanel.setStatus('%s');";
+//    private static final String SELECT_LAST_TAB_JS = "$('#%s').tabPanel.selectLastTab()";
+//    private static final String BLANK_SLATE_ID = "blankSlate";
+//    private static final String TAB_PANEL_INIT = "ez.tabPanel().init(%s)";
+//    // change this to jquery ui code.    tabPanel('setStatus', '<value>');
+//    private static final String SET_STATUS_JS = "document.getElementById('%s').tabPanel.setStatus('%s');";
 
 
     private static final JavaScriptHeaderItem TAB_PANEL_JS = JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(SectionPanel.class, "sectionPanel.js"));
@@ -80,13 +88,13 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
     private Component statusIcon;
     private Component panel;
 
-    private SectionPanelHandler handler;
+    private SectionPanelHandler handler = new DefaultSectionHandler();
 
     public SectionPanel(final String id, SectionPanelConfig config) {
         super(id);
         this.config = config;
         this.header = Model.of(config.getTitle());
-        this.currentIndex = 0;
+        this.currentIndex = handler.getInitialIndex();
     }
 
     // this should listen for section panel events and retrieve status from them.
@@ -99,7 +107,7 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
         return this;
     }
 
-    private void setIndex(int index) {
+    protected void setIndex(int index) {
         this.currentIndex = index;
         // this might be redundant except for calling in onInitialize()?
 
@@ -109,10 +117,11 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
         panel.setDefaultModel(new WfCompoundPropertyModel(obj));
     }
 
-
     @Override
     protected void onInitialize() {
         super.onInitialize();
+
+        handler.initialize(this);
 
         Form form = new Form("form");
         add(form);
@@ -158,19 +167,23 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
 
     protected Component createPanel() {
         WebMarkupContainer container = new WebMarkupContainer("container");
-        RepeatingView panel = new RepeatingView("panel") {
-            @Override
-            protected void onInitialize() {
-                super.onInitialize();
-                Workflow workflow = wfNavigator.getWorkflow(this);
-                for (int i=0; i<config.getConfigs().size(); i++) {
-                    Config c = config.getConfigs().get(i);
-                    add(workflow.createWidget(newChildId(), c));
-                }
+
+        MarkupContainer dynMarkup = visitParents(DynamicMarkup.class, new IVisitor<DynamicMarkup, DynamicMarkup>() {
+            @Override public void component(DynamicMarkup object, IVisit<DynamicMarkup> visit) {
+                visit.stop(object);
             }
-        };
-        panel.setRenderBodyOnly(false);
-        container.add(panel);
+        });
+        String fragId = getId()+"Fragment";
+//        Preconditions.checkState(dynMarkup!=null && fragId!=null,"TODO");
+        Fragment frag = new Fragment("panel", fragId, dynMarkup);
+        WidgetFactory widgetFactory = WfUtil.getWorkflow(this).getWidgetFactory();
+        for (Config c:getConfig().getConfigs()) {
+            Component component = widgetFactory.createWidget(c.getId(), c);
+            frag.add(component);
+        }
+        frag.setRenderBodyOnly(false);
+
+        container.add(frag);
         return container;
     }
 
@@ -191,21 +204,10 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
     }
 
     protected void addTab(AjaxRequestTarget target) {
-        getList().add(createNewTabData(getCurrentData()));
+        Object data = handler.createNewTabData(getCurrentData());
+        getList().add(data);
         setIndex(getList().size()-1);
         target.add(SectionPanel.this);
-    }
-
-    // TODO : replace this with a spring bean = "sectionPanelHandler".
-    // it will handle data creation, status, ajax, etc...
-    protected Object createNewTabData(Object data) {
-        try {
-            // TODO : should also look for a new?? method or create?? method.
-            // otherwise lookup data factory. in SectionHandler
-            return data.getClass().newInstance();
-        } catch (Exception e) {
-            throw new IllegalStateException("can't create new tab for class " + data.getClass().getSimpleName());
-        }
     }
 
     protected Object getCurrentData() {
@@ -215,10 +217,10 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
     private Component newDeleteButton(String id, final int index) {
         return new AjaxLink(id) {
             @Override public boolean isVisible() {
-                return getList().size()>1 || !isMandatory();   // if tab is last one and it's a mandatory field then don't show this button.  e.g. can't delete only driver. (but you can delete only conviction).
+                return getList().size()>1 || !isMandatory();   // if tab is last one and it's a mandatory field then don't show this button.  e.g. can't delete only driver. but you can delete only conviction.
             }
             @Override public void onClick(AjaxRequestTarget target) {
-                deleteTab(target, index);
+                setIndex( handler.deleteTab(getList(), index, currentIndex) );
                 target.add(SectionPanel.this);
             }
             @Override protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
@@ -226,13 +228,6 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
 //                attributes.getAjaxCallListeners().add(new AjaxLoadingListener());
             }
         };
-    }
-
-    protected void deleteTab(AjaxRequestTarget target, int index) {
-        getList().remove(index);
-        if (index==currentIndex && getList().size()>0) {
-            setIndex(Math.max(0, index-1));
-        }
     }
 
     protected boolean isMandatory() {
@@ -294,32 +289,26 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
         target.add(statusIcon);
     }
 
-    @Override
-    public String getTooltip() {
-        return getClass().getName();
-    }
+//    @Override
+//    public String getTooltip() {
+//        return handler.getTooltip();;
+//    }
+//
+//    public String getName() {
+//        return getTooltip();
+//    }
+
+//    @Override
+//    public String getIconCss() {
+//        return handler.getIconCss();
+//    }
+
+//    public String getHref() {
+//        return handler.getHref();
+//    }
 
     @Override
-    public String getName() {
-        return getTooltip();
-    }
-
-    @Override
-    public String getIconCss() {
-        return "";
-    }
-
-    @Override
-    public Integer getOrdinal() {
-        return 0;
-    }
-
-    public String getHref() {
-        return "#"+getId();
-    }
-
-    @Override
-    public Config getConfig() {
+    public SectionPanelConfig getConfig() {
         return config;
     }
 
@@ -327,11 +316,12 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
         return (IModel<List>) getDefaultModel();
     }
 
-
-
-
     public List getList() {
         return getListModel().getObject();
+    }
+
+    public int getCurrentIndex() {
+        return currentIndex;
     }
 
     public class AddSectionTab extends Fragment {
@@ -382,7 +372,7 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
 
         public SectionTab(String id, final int index) {
             super(id, "tabFragment", SectionPanel.this);
-            this.label = getList().get(index).toString();
+            this.label = handler.getTabTitle(getList().get(index));
 
             final AjaxSubmitLink titleLink = new AjaxSubmitLink("link") {
                 @Override
@@ -413,6 +403,9 @@ public class SectionPanel<T extends Component> extends Panel implements Feedback
         }
 
     }
+
+
+
 
 }
 

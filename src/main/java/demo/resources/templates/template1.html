@@ -7,15 +7,6 @@
     <div class="row"><h3 class="col-md-2">Hello!</h3></div>
 
     <div class="row">
-        <div class="col-md-3">
-            <label>${label.first}</label>
-        </div>
-        <div class="col-md-3">
-            <label>${label.last}</label>
-        </div>
-    </div>
-
-    <div class="row">
         <div class="col-md-6">
             <div wicket:id="question.convicted"/>
         </div>
@@ -24,8 +15,30 @@
         </div>
     </div>
 
+    <div wicket:id="names"/>
 
 </wicket:panel>
+
+
+
+    <wicket:fragment wicket:id="namesFragment">
+        <div class="row">
+            <div class="col-md-3">
+                <label>${label.first}</label>
+            </div>
+            <div class="col-md-3">
+                <input wicket:id="first">
+            </div>
+            <div class="col-md-3">
+                <label>${label.last}</label>
+            </div>
+            <div class="col-md-3">
+                <input wicket:id="last">
+            </div>
+
+        </div>
+
+    </wicket:fragment>
 
 
 

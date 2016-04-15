@@ -14,7 +14,11 @@ public class Template1FormConfig extends FormConfig {
     private void addConfigs() {
         with(new LabelConfig("question.convicted"));
         with(new YesNoConfig("insured.q1"));
+        with(new SectionPanelConfig("names")
+                .with(new TextFieldConfig<String>("first"))
+                .with(new TextFieldConfig<String>("last"))
+                .withTitle("drivers")
+        );
     }
-
 
 }

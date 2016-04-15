@@ -13,7 +13,7 @@ public class WfCheckBox extends FormComponentPanel<Boolean> implements HasConfig
     private final CheckBoxConfig config;
     private CheckBox checkbox;
 
-    // TODO CONFIRM that i can add ajax behaviors to panels.
+    // TODO : CONFIRM that i can add ajax behaviors to panels.
     // otherwise i will need a "getFormComponent" method to find underlying Comp.
 
     public WfCheckBox(String id, CheckBoxConfig config) {
@@ -22,12 +22,6 @@ public class WfCheckBox extends FormComponentPanel<Boolean> implements HasConfig
         add(new Label("label", config.getLabel()));
         this.config = config;
     }
-
-    @Override
-    public void renderHead(IHeaderResponse response) {
-        super.renderHead(response);
-    }
-
 
     @Override
     protected void convertInput() {

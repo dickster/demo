@@ -2,11 +2,11 @@ package forms.widgets.config;
 
 import com.google.common.collect.Lists;
 import forms.WidgetTypeEnum;
-import forms.widgets.Label2;
+import forms.widgets.WfLabel;
 
 import java.util.List;
 
-public class LabelConfig extends Config<Label2> {
+public class LabelConfig extends Config<WfLabel> {
 
     private List<String> data = Lists.newArrayList();
     private String /*name of spring bean*/ formatter;
@@ -49,8 +49,8 @@ public class LabelConfig extends Config<Label2> {
     }
 
     @Override
-    public Label2 create(String id) {
-        return new Label2(id, this);
+    public WfLabel create(String id) {
+        return new WfLabel(id, this);
     }
 
     public String getFormatter() {

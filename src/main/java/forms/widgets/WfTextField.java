@@ -11,33 +11,11 @@ import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 public class WfTextField<T> extends TextField<T> implements HasConfig<TextFieldConfig<T>> {
 
-    private static final JavaScriptResourceReference TYPEAHEAD_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/bootstrap-typeahead.js");
-    private static final JavaScriptResourceReference BLOODHOUND_JS = new JavaScriptResourceReference(Resource.class, "bootstrap-3.1.1-dist/js/Bloodhound.js");
-
     private TextFieldConfig<T> config;
 
     public WfTextField(String id, TextFieldConfig<T> config) {
         super(id);
         this.config = config;
-    }
-
-    @Override
-    protected void onInitialize() {
-        super.onInitialize();
-    }
-
-    @Override
-    protected void onComponentTag(ComponentTag tag) {
-        tag.setName("input");
-        tag.getAttributes().put("type", "text");
-        super.onComponentTag(tag);
-    }
-
-    @Override
-    public void renderHead(IHeaderResponse response) {
-        super.renderHead(response);
-        response.render(JavaScriptHeaderItem.forReference(TYPEAHEAD_JS));
-        response.render(JavaScriptHeaderItem.forReference(BLOODHOUND_JS));
     }
 
     @Override
