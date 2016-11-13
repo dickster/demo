@@ -98,6 +98,7 @@ public class Name implements Serializable {
 
     public Name addSalutation(String salutation) {
         this.salutation.add(salutation);
+        System.out.println("salutation added " + salutation);
         return this;
     }
 
@@ -222,11 +223,12 @@ public class Name implements Serializable {
 
     @Override
     public String toString() {
-        return getFirst() + " " + getLast();
+        return toDebugString();
+        //return getFirst() + " " + getLast();
     }
 
     public String toDebugString() {
-        StringBuilder builder = new StringBuilder("Name->");
+        StringBuilder builder = new StringBuilder();
         if (!salutation.isEmpty()) builder.append("  salutation :" + salutation);
         if (!first.isEmpty()) builder.append("  first :" + first);
         if (!middle.isEmpty()) builder.append("  middle :" + middle);
@@ -234,7 +236,7 @@ public class Name implements Serializable {
         if (!last.isEmpty()) builder.append("  last :" + last);
         if (!relations.isEmpty()) builder.append("  relations :" + relations);
         if (!titles.isEmpty()) builder.append("  titles:" + titles);
-        builder.append("]\n");
+
         return builder.toString();
     }
 

@@ -1,7 +1,6 @@
 package demo;
 
 import com.google.common.collect.Lists;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,6 +23,17 @@ public class NameParserTest  {
 
 
     List<String> names = Lists.newArrayList(
+            "John I. Doe",
+            "Erica and Shelly Holdings",
+            "    John & Jane Doe",
+            "    John W. Doe and Jane Doe",
+            "    John Doe and Doe, Jane E.",
+            "           Doe, John and Jane",
+            "            Doe, John; Doe, Jane",
+// FIX : allow no first name if salutation is present.            "   Mr. and Mrs. John Doe",
+// FIX : add BBA            "    Hon. Albert James Van Heusen, BBA",
+            "    Dr. Bobbi-Jo Mary Thomas-O'Brien, MD",
+            "    Acres, Jim"  ,
             "Mr. John William Doe Jr., B.Sc",
             "Mr. John William Doe Jr. BSc, PHD",
             "Mr. John William Doe Jr., BSc, DDS",
@@ -48,8 +58,8 @@ public class NameParserTest  {
             "anna maria sanchez vicario",
             "anna 'maria' sanchez vicario",
             "anna maria (sanchez) vicario",
-//            "dR. jekyll + MR hyde",
-//            "tom & jerry ice-cream",
+            "Mr. jekyll",
+           "tom & jerry ice-cream",
             "osama bin laden",
             "osama van der hosen",
             "al la bama",
@@ -72,19 +82,19 @@ public class NameParserTest  {
             "ms kelly st apler",
             "ms t'ariff blah blah",
             // prefixes......
-//            "Prof quentin lawrence and Dr mary-ann ginger 3rd",
-//            "Prof quentin and Dr mary-ann ginger 3rd ph.d",
-//            "tex 'n edna curio ",
-//            "bono + the edge",
+            "Prof quentin lawrence and Dr mary-ann ginger 3rd",
+            "Prof quentin and Dr mary-ann ginger 3rd ph.d",
+            "tex 'n edna curio ",
+            "bono + the edge",
             "larry the edge",
             "derek 'willy' dick",
             "Smith, Mr. John",
             "Francis 'johnson' Q  Doe",
             "Doe, Francis 'johnson' Q ",
             "Doe, Francis Q 'smiley'  ",
-//            "mr and mrs john smith",
-//            "John & sally struthers",
-//            "Mr 'n Mrs Spock 2nd",
+//FIX            "mr and mrs john smith",
+            "John & sally struthers",
+// FIX            "Mr 'n Mrs Spock 2nd",
             "Smith, Mr. John",
             "Doe, Mr. Francis Q (pacman)",
             "Dr. john \"the madman\" de bowery",
@@ -111,11 +121,67 @@ public class NameParserTest  {
             "Zhang Zi-Yi",
             "Asia Aria Maria Vittoria Rossa Argento",
             "Ánna Blah",
-//// TODO: handle characters with accents!
             "Raven-Symoné Christina Pearman",
             "Raven-Symoneé Christina Pearman",
-            "Maureen O'Hara"
+            "Maureen O'Hara"     ,
+
+            "John Doe",
+            "John W. Doe",
+            "John Doe III ",
+            "John W. Doe The 3rd ",
+            "John William Doe Jr. ",
+            "John William Doe Junior ",
+            "Doe, John  ",
+            "Doe, John W. ",
+            "Doe, John W. The 3rd ",
+            "Doe, John William Jr.",
+            "Doe, John William Junior ",
+            "Mr. John Doe ",
+            "Mr. John W. Doe",
+            "Mr. John William Doe ",
+            "John & Jane Doe     ",
+            "John W. Doe and Jane Doe ",
+            "Mr. and Mrs. John Doe",
+            "Estate of John Doe  ",
+            "CloudNine & John W. Doe ",
+            "Cloud9 & John W. Doe ",
+            "John Doe and John's Welding-Shop  ",
+            "John Doe and Jane Doe & XYZ Ltd.   ",
+            "12345 NB Inc. & ABC Corp. & XYZ Ltd. "  // allow for digits in company names only.
+
+
+
+
     );
+
+
+
+        List<String> names2 = Lists.newArrayList(
+                "John Doe",
+            "John W. Doe",
+            "John Doe III ",
+            "John W. Doe The 3rd ",
+            "John William Doe Jr. ",
+            "John William Doe Junior ",
+            "Doe, John  ",
+            "Doe, John W. ",
+            "Doe, John W. The 3rd ",
+            "Doe, John William Jr.",
+            "Doe, John William Junior ",
+            "Mr. John Doe ",
+            "Mr. John W. Doe",
+            "Mr. John William Doe ",
+           "John & Jane Doe     ",
+           "John W. Doe and Jane Doe ",
+            "Mr. and Mrs. John Doe"
+//            "Estate of John Doe  ",
+//            "CloudNine & John W. Doe ",
+//            "Cloud9 & John W. Doe ",
+//            "John Doe and John's Welding-Shop  ",
+//            "John Doe and Jane Doe & XYZ Ltd.   ",
+            //"12345 NB Inc. & ABC Corp. & XYZ Ltd. "
+        );
+
 
 
     @Before
@@ -129,6 +195,17 @@ public class NameParserTest  {
         for (String name:names) {
             result = parser.parseName(name);
             System.out.println(result);
+            System.out.println("");
+        }
+    }
+
+    @Test
+    public void testParseNames() throws Exception {
+        NameResult result;
+        for (String name:names2) {
+            result = parser.parseNames(name);
+            System.out.println(result);
+            System.out.println("");
         }
     }
 }

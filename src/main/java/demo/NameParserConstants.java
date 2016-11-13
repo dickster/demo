@@ -79,17 +79,17 @@ public interface NameParserConstants {
   /** RegularExpression Id. */
   int STE = 38;
   /** RegularExpression Id. */
-  int THE = 39;
+  int VAN_DER = 39;
   /** RegularExpression Id. */
-  int VAN_DER = 40;
+  int VAN = 40;
   /** RegularExpression Id. */
-  int VAN = 41;
+  int VAN_DEN = 41;
   /** RegularExpression Id. */
-  int VAN_DEN = 42;
+  int VEL = 42;
   /** RegularExpression Id. */
-  int VEL = 43;
+  int VON = 43;
   /** RegularExpression Id. */
-  int VON = 44;
+  int THE = 44;
   /** RegularExpression Id. */
   int ROMAN_NUMERALS = 45;
   /** RegularExpression Id. */
@@ -97,35 +97,37 @@ public interface NameParserConstants {
   /** RegularExpression Id. */
   int THIRD = 47;
   /** RegularExpression Id. */
-  int LLB = 48;
+  int FOURTH = 48;
   /** RegularExpression Id. */
-  int ESQ = 49;
+  int LLB = 49;
   /** RegularExpression Id. */
-  int JD = 50;
+  int ESQ = 50;
   /** RegularExpression Id. */
-  int PHD = 51;
+  int JD = 51;
   /** RegularExpression Id. */
-  int BSC = 52;
+  int PHD = 52;
   /** RegularExpression Id. */
-  int MD = 53;
+  int BSC = 53;
   /** RegularExpression Id. */
-  int DDS = 54;
+  int MD = 54;
   /** RegularExpression Id. */
-  int DMD = 55;
+  int DDS = 55;
   /** RegularExpression Id. */
-  int CP = 56;
+  int DMD = 56;
   /** RegularExpression Id. */
-  int SENIOR = 57;
+  int CP = 57;
   /** RegularExpression Id. */
-  int JUNIOR = 58;
+  int SENIOR = 58;
   /** RegularExpression Id. */
-  int QUOTED_NICK_NAME = 59;
+  int JUNIOR = 59;
   /** RegularExpression Id. */
-  int SINGLE_QUOTED_NICK_NAME = 60;
+  int QUOTED_NICK_NAME = 60;
   /** RegularExpression Id. */
-  int PAREN_NICK_NAME = 61;
+  int SINGLE_QUOTED_NICK_NAME = 61;
   /** RegularExpression Id. */
-  int NAME = 62;
+  int PAREN_NICK_NAME = 62;
+  /** RegularExpression Id. */
+  int NAME = 63;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -171,15 +173,16 @@ public interface NameParserConstants {
     "\"san\"",
     "\"st\"",
     "\"ste\"",
-    "\"the\"",
     "\"van der\"",
     "\"van\"",
     "\"van den\"",
     "\"vel\"",
     "\"von\"",
+    "\"the\"",
     "<ROMAN_NUMERALS>",
-    "\"2nd\"",
-    "\"3rd\"",
+    "<SECOND>",
+    "<THIRD>",
+    "<FOURTH>",
     "<LLB>",
     "<ESQ>",
     "<JD>",

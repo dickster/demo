@@ -6,30 +6,10 @@ options
     IGNORE_CASE=true;
     USER_TOKEN_MANAGER=false;
     USER_CHAR_STREAM=false;
+//    DEBUG_PARSER=true;
+//    DEBUG_LOOKAHEAD=true;
+//    DEBUG_TOKEN_MANAGER=true;
 }
-
-
-//TestData td[] = { new TestData("Henry \"Hank\" J. Fasthoff IV", "Henry", "\"Hank\" J.", "Fasthoff"),
-//        new TestData("April A. (Caminez) Bentley", "April", "A. (Caminez)", "Bentley"),
-//        new TestData("fff lll", "fff", "", "lll"),
-//        new TestData("fff mmmmm lll", "fff", "mmmmm", "lll"),
-//        new TestData("fff mmm1      mm2 lll", "fff", "mmm1 mm2", "lll"),
-//        new TestData("Mr. Dr. Tom Jones", "Tom", "", "Jones"),
-//        new TestData("Robert P. Bethea Jr.", "Robert", "P.", "Bethea"),
-//        new TestData("Charles P. Adams, Jr.", "Charles", "P.", "Adams"),
-//        new TestData("B. Herbert Boatner, Jr.", "B.", "Herbert", "Boatner"),
-//        new TestData("Bernard H. Booth IV", "Bernard", "H.", "Booth"),
-//        new TestData("F. Laurens \"Larry\" Brock", "F.", "Laurens \"Larry\"", "Brock"),
-//        new TestData("Chris A. D'Amour", "Chris", "A.", "D'Amour") };
-
-//        "md", "cpa" };
-//        this.prefixes = Arrays.asList(
-//        "bar", "ben", "bin", "da", "dal",
-//        "de la", "de", "del", "der", "di", "ibn", "la", "le",
-//        "san", "st", "ste", "van", "van der", "van den", "vel",
-//        "von" );
-
-
 
 PARSER_BEGIN(NameParser)
 package demo;
@@ -47,13 +27,56 @@ public class NameParser {
         this(new ByteArrayInputStream("".getBytes()));
     }
 
+
+
+// TODO : refactor this splitting crap code.   use another .jj file?
+    public NameResult parseNames(String text) {
+        List<String> result = Lists.newArrayList(text);
+        result = split(result,"and");
+        result = split(result, "[+]");
+        result = split(result,"&");
+        result = split(result,"'n");
+        result = split(result,";",false);
+        if (result.size()>1) System.out.println(text + " : broken down into names --> " + result);
+        NameResult nameResult = new NameResult();
+         init();
+        for (String name:result) {
+            try {
+               System.out.print("parsing single name: ");
+                nameResult = parseName(name);
+                names.push(new Name());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        nameResult.collate();
+        return nameResult;
+    }
+
+    private List<String> split(List<String> names, String regex, boolean whitespace) {
+        if (whitespace) regex = "\\s+"+regex+"\\s+";
+        List<String> result = Lists.newArrayList();
+        for (String name:names) {
+            result.addAll(Lists.newArrayList(name.split(regex)));
+        }
+        return result;
+    }
+
+    private List<String> split(List<String> names, String regex) {
+        return split(names, regex, true);
+    }
+
+
+
     // use this method...don't call parse() directly!
     // because need to re-init variables and reset input.
     public NameResult parseName(String text) throws ParseException, TokenMgrError {
-        System.out.print("parsing..." + text + " : " + "\n  ");
-        init();
+        text = text.trim();
+        System.out.print("parsing..." + text);
+
         ReInit(new StringReader(text));
         _$$parse();
+        System.out.println("!");
         return names.collate();
     }
 
@@ -116,16 +139,17 @@ TOKEN:
     <SAN:"san"> |
     <ST:"st"> |
     <STE:"ste"> |
-    <THE:"the"> |
     <VAN_DER:"van der"> |
     <VAN:"van"> |
     <VAN_DEN:"van den"> |
     <VEL:"vel"> |
     <VON:"von"> |
+    <THE:"the"> |
     // suffixes
     <ROMAN_NUMERALS:(["m","c","d","l","i","x","v"])+> |
-    <SECOND:"2nd"> |
-    <THIRD:"3rd"> |
+    <SECOND:"2nd"|"second"> |
+    <THIRD:"3rd"|"third"> |
+    <FOURTH:"4th"|"fourth"> |
     <LLB:"ll"(".")?"b"> |
     <ESQ:"esquire"|"esq"(".")?> |
     <JD:"jd"|"j.d."> |
@@ -138,9 +162,8 @@ TOKEN:
     <SENIOR:"sr"(".")?|"senior"> |
     <JUNIOR:"jr"(".")?|"junior">
 }
-// TODO:refactor nick_name.
+
 TOKEN : {
-// TODO : allow for brackets around nickname.
     <QUOTED_NICK_NAME: "\"" (~["\""])+ "\"" > |
     <SINGLE_QUOTED_NICK_NAME: "'" (~["\""])+ "'" > |
     <PAREN_NICK_NAME: "(" (~[")"])+ ")" > |
@@ -163,13 +186,27 @@ void _$$parse() : {}
 
 void lastName() : {getName().setInverse(true);}
 {
-    (namePrefix())? nameRoot()
+    LOOKAHEAD(namePrefix())
+        namePrefix() nameRoot() |
+        nameRoot()
 }
 
 void longName() : {}
 {
-    (salutation())* (name())+ ((<COMMA>)? relation())? (<COMMA>)? (title() (<COMMA>)?)*
+    LOOKAHEAD(salutation())
+        (salutation()) ((name())+ ( relation())? (<COMMA>)? (title() (<COMMA>)?)*)?  |
+        (name())+ ( relation())? (<COMMA>)? (title() (<COMMA>)?)*
 }
+
+
+
+void restOfName() : {}
+{
+    (name())+ (relation())? ((<COMMA>)? (title())*)
+}
+
+
+
 
 void and() : {} {
     (<AND>)  {
@@ -185,7 +222,9 @@ void salutation() : {}
 }
 
 void relation() : {} {
-    (<SECOND>|<THIRD>|<SENIOR>|<JUNIOR>|<ROMAN_NUMERALS>) {getName().addRelation(token.image);}
+    (((<THE>)?(<SECOND>|<THIRD>|<FOURTH>))
+        |<SENIOR>|<JUNIOR>|<ROMAN_NUMERALS>)
+        {getName().addRelation(token.image);}
 }
 
 void title() : {} {
@@ -205,7 +244,7 @@ void nameRoot() : {}
 
 void namePrefix() : {}
 {
-    (<BAR>|<BEN>|<BIN>|<BINTI>|<BINTE>|<DA>|<DAL>|<DE>|<DELA>|<DE_LA>|<DER>|<DI>|<IBN>|<LA>|<L_APOST>|<LE>|<MAC>|<MC>|<OH>|<SAN>|<ST>|<STE>|<THE>|<VAN_DER>|<VAN>|<VAN_DEN>|<VEL>|<VON>)
+    (<BAR>|<BEN>|<BIN>|<BINTI>|<BINTE>|<DA>|<DAL>|<DE>|<DELA>|<DE_LA>|<DER>|<DI>|<IBN>|<LA>|<L_APOST>|<LE>|<MAC>|<MC>|<OH>|<SAN>|<ST>|<STE>|<VAN_DER>|<VAN>|<VAN_DEN>|<VEL>|<VON>)
         { getName().pushPrefix(token.image); }
 }
 
