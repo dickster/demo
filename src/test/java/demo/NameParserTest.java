@@ -148,39 +148,52 @@ public class NameParserTest  {
             "John Doe and John's Welding-Shop  ",
             "John Doe and Jane Doe & XYZ Ltd.   ",
             "12345 NB Inc. & ABC Corp. & XYZ Ltd. "  // allow for digits in company names only.
-
-
-
-
     );
 
 
 
         List<String> names2 = Lists.newArrayList(
-                "John Doe",
-            "John W. Doe",
-            "John Doe III ",
-            "John W. Doe The 3rd ",
-            "John William Doe Jr. ",
-            "John William Doe Junior ",
-            "Doe, John  ",
-            "Doe, John W. ",
-            "Doe, John W. The 3rd ",
-            "Doe, John William Jr.",
-            "Doe, John William Junior ",
-            "Mr. John Doe ",
-            "Mr. John W. Doe",
-            "Mr. John William Doe ",
-           "John & Jane Doe     ",
-           "John W. Doe and Jane Doe ",
-            "Mr. and Mrs. John Doe"
+                "Estate of Jw asdf fdsa",
+                "xyz foo ltd",
+                "xyz foo ltd. co.",
+                "xyz foo inc",
+                "xyz foo inc.",
+                "xyz foo corp",
+                "xyz foo corp.",
+                "xyz foo co",
+                "12323 Co",
+                "234 Corp",
+                "ZZZ Co.",
+                "AAA Corp.",
+                "Estate of Jw asdf fdsa",
+//                "John Doe",
+//            "John W. Doe",
+//            "John Doe III ",
+//            "John W. Doe The 3rd ",
+//            "John William Doe Jr. ",
+//            "John William Doe Junior ",
+//            "Doe, John  ",
+//            "Doe, John W. ",
+//            "Doe, John W. The 3rd ",
+//            "Doe, John William Jr.",
+//            "Doe, John William Junior ",
+//            "Mr. John Doe ",
+//            "Mr. John W. Doe",
+//            "Mr. John William Doe ",
+//           "John & Jane Doe",
+//           "John W. Doe and Jane Doe ",
+//            "Mr. and Mrs. John Doe" ,
 //            "Estate of John Doe  ",
 //            "CloudNine & John W. Doe ",
 //            "Cloud9 & John W. Doe ",
 //            "John Doe and John's Welding-Shop  ",
 //            "John Doe and Jane Doe & XYZ Ltd.   ",
-            //"12345 NB Inc. & ABC Corp. & XYZ Ltd. "
+            //"12345 NB Inc. & ABC Corp. & XYZ Ltd. ",
+                "Mr. and Mrs. John Doe"
         );
+
+    // companies = <Estate of>, * <INC|LTD|CO|CORP|TM.etc...>
+    // company names can have digits.
 
 
 

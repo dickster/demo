@@ -59,75 +59,85 @@ public interface NameParserConstants {
   /** RegularExpression Id. */
   int DI = 28;
   /** RegularExpression Id. */
-  int IBN = 29;
+  int ESTATE_OF = 29;
   /** RegularExpression Id. */
-  int LA = 30;
+  int IBN = 30;
   /** RegularExpression Id. */
-  int LE = 31;
+  int LA = 31;
   /** RegularExpression Id. */
-  int L_APOST = 32;
+  int LE = 32;
   /** RegularExpression Id. */
-  int MAC = 33;
+  int L_APOST = 33;
   /** RegularExpression Id. */
-  int MC = 34;
+  int MAC = 34;
   /** RegularExpression Id. */
-  int OH = 35;
+  int MC = 35;
   /** RegularExpression Id. */
-  int SAN = 36;
+  int OH = 36;
   /** RegularExpression Id. */
-  int ST = 37;
+  int SAN = 37;
   /** RegularExpression Id. */
-  int STE = 38;
+  int ST = 38;
   /** RegularExpression Id. */
-  int VAN_DER = 39;
+  int STE = 39;
   /** RegularExpression Id. */
-  int VAN = 40;
+  int VAN_DER = 40;
   /** RegularExpression Id. */
-  int VAN_DEN = 41;
+  int VAN = 41;
   /** RegularExpression Id. */
-  int VEL = 42;
+  int VAN_DEN = 42;
   /** RegularExpression Id. */
-  int VON = 43;
+  int VEL = 43;
   /** RegularExpression Id. */
-  int THE = 44;
+  int VON = 44;
   /** RegularExpression Id. */
-  int ROMAN_NUMERALS = 45;
+  int THE = 45;
   /** RegularExpression Id. */
-  int SECOND = 46;
+  int INC = 46;
   /** RegularExpression Id. */
-  int THIRD = 47;
+  int LTD = 47;
   /** RegularExpression Id. */
-  int FOURTH = 48;
+  int CO = 48;
   /** RegularExpression Id. */
-  int LLB = 49;
+  int TM = 49;
   /** RegularExpression Id. */
-  int ESQ = 50;
+  int ROMAN_NUMERALS = 50;
   /** RegularExpression Id. */
-  int JD = 51;
+  int SECOND = 51;
   /** RegularExpression Id. */
-  int PHD = 52;
+  int THIRD = 52;
   /** RegularExpression Id. */
-  int BSC = 53;
+  int FOURTH = 53;
   /** RegularExpression Id. */
-  int MD = 54;
+  int LLB = 54;
   /** RegularExpression Id. */
-  int DDS = 55;
+  int ESQ = 55;
   /** RegularExpression Id. */
-  int DMD = 56;
+  int JD = 56;
   /** RegularExpression Id. */
-  int CP = 57;
+  int PHD = 57;
   /** RegularExpression Id. */
-  int SENIOR = 58;
+  int BSC = 58;
   /** RegularExpression Id. */
-  int JUNIOR = 59;
+  int MD = 59;
   /** RegularExpression Id. */
-  int QUOTED_NICK_NAME = 60;
+  int DDS = 60;
   /** RegularExpression Id. */
-  int SINGLE_QUOTED_NICK_NAME = 61;
+  int DMD = 61;
   /** RegularExpression Id. */
-  int PAREN_NICK_NAME = 62;
+  int CP = 62;
   /** RegularExpression Id. */
-  int NAME = 63;
+  int SENIOR = 63;
+  /** RegularExpression Id. */
+  int JUNIOR = 64;
+  /** RegularExpression Id. */
+  int QUOTED_NICK_NAME = 65;
+  /** RegularExpression Id. */
+  int SINGLE_QUOTED_NICK_NAME = 66;
+  /** RegularExpression Id. */
+  int PAREN_NICK_NAME = 67;
+  /** RegularExpression Id. */
+  int NAME_WITH_NUMBERS = 68;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -163,6 +173,7 @@ public interface NameParserConstants {
     "\"de la\"",
     "\"der\"",
     "\"di\"",
+    "\"estate of\"",
     "\"ibn\"",
     "\"la\"",
     "\"le\"",
@@ -179,6 +190,10 @@ public interface NameParserConstants {
     "\"vel\"",
     "\"von\"",
     "\"the\"",
+    "\"inc\"",
+    "<LTD>",
+    "<CO>",
+    "\"tm\"",
     "<ROMAN_NUMERALS>",
     "<SECOND>",
     "<THIRD>",
@@ -197,7 +212,7 @@ public interface NameParserConstants {
     "<QUOTED_NICK_NAME>",
     "<SINGLE_QUOTED_NICK_NAME>",
     "<PAREN_NICK_NAME>",
-    "<NAME>",
+    "<NAME_WITH_NUMBERS>",
   };
 
 }

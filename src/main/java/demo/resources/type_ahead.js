@@ -29,14 +29,7 @@ $(function() {
             data.initialize();
 
             // Instantiate the Typeahead UI
-            $widget.typeahead({
-                source: function(query, cb) {
-                    data.search(query, cb, cb);
-                },
-                templates: {
-                    empty: '<div class="empty-message">No matches.</div>'
-                }
-            });
+
 
         }
 

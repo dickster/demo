@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Stack;
+import java.util.regex.Pattern;
 
 public class Name implements Serializable {
     List<String> salutation = Lists.newArrayList();
@@ -20,6 +21,11 @@ public class Name implements Serializable {
     Stack<String> prefixes = new Stack<String>();
     List<String> nickNames = Lists.newArrayList();
     private boolean inverse = false;
+    private boolean isCompany = false;
+    private List<String> inc = Lists.newArrayList();
+    private String estate;
+
+    private static Pattern hasNumberPattern = Pattern.compile("([0-9])");
 
     public Name(String john, String doe) {
         addFirst(john);
@@ -98,7 +104,6 @@ public class Name implements Serializable {
 
     public Name addSalutation(String salutation) {
         this.salutation.add(salutation);
-        System.out.println("salutation added " + salutation);
         return this;
     }
 
@@ -139,6 +144,11 @@ public class Name implements Serializable {
         return this;
     }
 
+
+    public Name asCompany() {
+        this.isCompany = true;
+        return this;
+    }
     public boolean isAmbiguous() {
         // note the definition of ambiguous is itself ambiguous.
         // if you have two last names then it *could* be ambiguous.
@@ -182,12 +192,18 @@ public class Name implements Serializable {
 
     public void add(String name) {
         // TODO : add ambiguity check. if name = "O" could be prefix?
-        // alternatives add(name);
+        //
+        // e.g. if "Van Den" is prefix and name = "Hooegarden" is passed,
+        //  then concatenate them into single "Van Den Hooegarden" last name.
         if (!prefixes.isEmpty()) {
             names.add(prefixes.pop() + " " + name);
         }
         else {
             names.add(name);
+        }
+
+        if( hasNumberPattern.matcher(name).find() ) {
+            isCompany = true;
         }
     }
 
@@ -227,8 +243,16 @@ public class Name implements Serializable {
         //return getFirst() + " " + getLast();
     }
 
+    public void addInc(String s) {
+        inc.add(s)  ;
+
+    }
+    public void setEstate(String s) {
+        this.estate = s;
+    }
+
     public String toDebugString() {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder(isCompany() ? "Company" : "");
         if (!salutation.isEmpty()) builder.append("  salutation :" + salutation);
         if (!first.isEmpty()) builder.append("  first :" + first);
         if (!middle.isEmpty()) builder.append("  middle :" + middle);
@@ -236,8 +260,11 @@ public class Name implements Serializable {
         if (!last.isEmpty()) builder.append("  last :" + last);
         if (!relations.isEmpty()) builder.append("  relations :" + relations);
         if (!titles.isEmpty()) builder.append("  titles:" + titles);
-
+        if (!inc.isEmpty()) builder.append(" inc: " + inc);
         return builder.toString();
     }
 
+    public boolean isCompany() {
+        return isCompany;
+    }
 }

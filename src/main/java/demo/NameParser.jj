@@ -6,9 +6,9 @@ options
     IGNORE_CASE=true;
     USER_TOKEN_MANAGER=false;
     USER_CHAR_STREAM=false;
-//    DEBUG_PARSER=true;
-//    DEBUG_LOOKAHEAD=true;
-//    DEBUG_TOKEN_MANAGER=true;
+    DEBUG_PARSER=true;
+   // DEBUG_LOOKAHEAD=true;
+    DEBUG_TOKEN_MANAGER=true;
 }
 
 PARSER_BEGIN(NameParser)
@@ -42,7 +42,7 @@ public class NameParser {
          init();
         for (String name:result) {
             try {
-               System.out.print("parsing single name: ");
+               System.out.print("parsing single name: " + name);
                 nameResult = parseName(name);
                 names.push(new Name());
             } catch (ParseException e) {
@@ -72,8 +72,6 @@ public class NameParser {
     // because need to re-init variables and reset input.
     public NameResult parseName(String text) throws ParseException, TokenMgrError {
         text = text.trim();
-        System.out.print("parsing..." + text);
-
         ReInit(new StringReader(text));
         _$$parse();
         System.out.println("!");
@@ -87,6 +85,10 @@ public class NameParser {
 
     public Name getName() {
         return names.peek();
+    }
+
+    public Name getCompanyName() {
+        return getName().asCompany();
     }
 
 }
@@ -129,6 +131,7 @@ TOKEN:
     <DE_LA:"de la"> |
     <DER:"der"> |
     <DI:"di"> |
+    <ESTATE_OF:"estate of"> |
     <IBN:"ibn"> |
     <LA:"la"> |
     <LE:"le"> |
@@ -146,6 +149,10 @@ TOKEN:
     <VON:"von"> |
     <THE:"the"> |
     // suffixes
+    <INC:"inc"(".")?> |
+    <LTD:"ltd"(".")?> |
+    <CO:"co"("rp")?(".")?> |
+    <TM:"tm"> |
     <ROMAN_NUMERALS:(["m","c","d","l","i","x","v"])+> |
     <SECOND:"2nd"|"second"> |
     <THIRD:"3rd"|"third"> |
@@ -168,8 +175,10 @@ TOKEN : {
     <SINGLE_QUOTED_NICK_NAME: "'" (~["\""])+ "'" > |
     <PAREN_NICK_NAME: "(" (~[")"])+ ")" > |
 // TODO : make sure i have all accent chars.
-    <NAME : (["\u00e0"-"\u0466"]|
-     ["a"-"z","-","'","."])+ >
+//    <NAME : (["\u00e0"-"\u0466"]|
+//     ["a"-"z","-","'","."])+ >  |
+     <NAME_WITH_NUMBERS : (["\u00e0"-"\u0466"]|
+          ["a"-"z","0"-"9","-","'","."])+ >
 }
 
 void end() : {}
@@ -182,7 +191,9 @@ void _$$parse() : {}
     LOOKAHEAD(lastName() <COMMA>)
         lastName() <COMMA> longName() end() |
         longName() end()
+
 }
+
 
 void lastName() : {getName().setInverse(true);}
 {
@@ -190,6 +201,7 @@ void lastName() : {getName().setInverse(true);}
         namePrefix() nameRoot() |
         nameRoot()
 }
+
 
 void longName() : {}
 {
@@ -217,8 +229,8 @@ void and() : {} {
 
 void salutation() : {}
 {
-    (<HON>|<MR>|<MRS>|<MISS>|<MS>|<SIR>|<MADAM>|<ATTY>|<DOCTOR>|<PROF>)
-     {getName().addSalutation(token.image);}
+    (<ESTATE_OF>|<HON>|<MR>|<MRS>|<MISS>|<MS>|<SIR>|<MADAM>|<ATTY>|<DOCTOR>|<PROF>)
+        {getName().addSalutation(token.image);}
 }
 
 void relation() : {} {
@@ -227,8 +239,10 @@ void relation() : {} {
         {getName().addRelation(token.image);}
 }
 
-void title() : {} {
-    (<LLB>|<DDS>|<DMD>|<ESQ>|<JD>|<BSC>|<PHD>|<MD>|<CP>){getName().addTitle(token.image);}
+void title() : {}
+{
+// TODO : determine if corporation depending on if ltd, corp, etc...
+    (<INC>|<CO>|<LTD>|<TM>|<LLB>|<DDS>|<DMD>|<ESQ>|<JD>|<BSC>|<PHD>|<MD>|<CP>){getName().addTitle(token.image);}
 }
 
 void name() : {}
@@ -239,7 +253,7 @@ void name() : {}
 
 void nameRoot() : {}
 {
-    (<NAME>) { getName().add(token.image); }
+    (<NAME_WITH_NUMBERS>) { getName().add(token.image); }
 }
 
 void namePrefix() : {}
@@ -253,6 +267,14 @@ void nickName() : {}
 {
     (<SINGLE_QUOTED_NICK_NAME>|<QUOTED_NICK_NAME>|<PAREN_NICK_NAME>) { getName().addNickName(token.image); }
 }
+
+
+
+void companyName() : {}
+{
+    (<NAME_WITH_NUMBERS>) { getCompanyName().add(token.image); }
+}
+
 
 
 
